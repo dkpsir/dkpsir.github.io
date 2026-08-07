@@ -1,111 +1,114 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>D. Kiran Prasad</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D. Kiran Prasad | Educational Portal</title>
 <style>
-
-body{
-font-family:Arial;
-margin:0;
-background:#f2f2f2;
-}
-
-header{
-background:#003366;
-color:white;
-padding:25px;
-text-align:center;
-}
-
-nav{
-background:white;
-padding:20px;
-text-align:center;
-}
-
-nav a{
-text-decoration:none;
-font-size:20px;
-margin:20px;
-font-weight:bold;
-color:#003366;
-}
-
-section{
-max-width:1000px;
-margin:auto;
-padding:30px;
-}
-
-.card{
-background:white;
-padding:20px;
-margin-bottom:20px;
-border-radius:8px;
-box-shadow:0px 0px 8px lightgray;
-}
-
-footer{
-background:#003366;
-color:white;
-padding:15px;
-text-align:center;
-}
-
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Segoe UI,Arial,sans-serif;background:#f5f7fb;color:#333}
+header{background:linear-gradient(135deg,#003366,#005fa3);color:#fff;padding:40px 20px;text-align:center}
+header h1{font-size:42px;margin-bottom:10px}
+header p{font-size:20px}
+nav{background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.15);position:sticky;top:0}
+nav ul{display:flex;justify-content:center;flex-wrap:wrap;list-style:none}
+nav li{padding:18px 25px}
+nav a{text-decoration:none;color:#003366;font-weight:bold}
+nav a:hover{color:#0099ff}
+.hero{padding:60px 20px;text-align:center;background:#fff}
+.hero h2{font-size:34px;color:#003366;margin-bottom:20px}
+.hero p{max-width:900px;margin:auto;font-size:18px;line-height:1.8}
+.section-title{text-align:center;margin:50px 0 25px;font-size:32px;color:#003366}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:25px;padding:0 40px 60px}
+.card{background:#fff;border-radius:12px;padding:30px;box-shadow:0 4px 15px rgba(0,0,0,.1);text-align:center;transition:.3s}
+.card:hover{transform:translateY(-6px)}
+.card h3{color:#003366;margin-bottom:15px}
+.card p{margin-bottom:20px;line-height:1.6}
+.button{display:inline-block;background:#003366;color:#fff;padding:10px 22px;border-radius:6px;text-decoration:none}
+.button:hover{background:#005fa3}
+.stats{display:flex;justify-content:center;flex-wrap:wrap;background:#003366;color:#fff;padding:50px 20px}
+.stat{margin:20px 40px;text-align:center}
+.stat h2{font-size:40px}
+.updates{padding:60px;background:#fff}
+.updates ul{max-width:900px;margin:auto;font-size:18px;line-height:2}
+footer{background:#001b33;color:#fff;padding:25px;text-align:center}
+@media(max-width:768px){header h1{font-size:30px}.hero h2{font-size:26px}}
 </style>
-
 </head>
-
 <body>
-
 <header>
-
 <h1>D. KIRAN PRASAD</h1>
-
-<h3>Lecture Videos & Learning Resources</h3>
-
+<p>Educational Portal | Lecture Videos | Projects | Notes | Assignments</p>
 </header>
 
 <nav>
-
-<a href="#">Deep Learning</a>
-
-<a href="#">Soft Computing</a>
-
-<a href="#">Python</a>
-
-<a href="#">CAD</a>
-
-<a href="#">MECHANICS OF SOLIDS</a>
-
+<ul>
+<li><a href="#">Home</a></li>
+<li><a href="#">Deep Learning</a></li>
+<li><a href="#">Soft Computing</a></li>
+<li><a href="#">Python</a></li>
+<li><a href="#">CAD</a></li>
+<li><a href="#">NPTEL</a></li>
+<li><a href="#">Contact</a></li>
+</ul>
 </nav>
 
-<section>
-
-<div class="card">
-
-<h2>Welcome</h2>
-
+<section class="hero">
+<h2>Welcome to My Academic Resource Portal</h2>
 <p>
-Welcome to my educational website.
-Here you will find topic-wise lecture videos,
-notes, PPTs and learning resources.
+This website provides topic-wise lecture videos, project demonstrations,
+Python source codes, datasets, PPT presentations, downloadable notes,
+and learning resources for engineering students.
 </p>
+</section>
 
+<h2 class="section-title">Subjects</h2>
+
+<div class="cards">
+<div class="card">
+<h3>Deep Learning</h3>
+<p>Lecture videos, notes, projects, datasets and Python implementations.</p>
+<a class="button" href="#">Open</a>
 </div>
 
+<div class="card">
+<h3>Soft Computing</h3>
+<p>ANN, Fuzzy Logic, Genetic Algorithms and Optimization Techniques.</p>
+<a class="button" href="#">Open</a>
+</div>
+
+<div class="card">
+<h3>Python Programming</h3>
+<p>Programs, exercises, practice problems and complete source code.</p>
+<a class="button" href="#">Open</a>
+</div>
+
+<div class="card">
+<h3>CAD</h3>
+<p>Engineering Drawing, AutoCAD concepts and interactive simulations.</p>
+<a class="button" href="#">Open</a>
+</div>
+</div>
+
+<div class="stats">
+<div class="stat"><h2>100+</h2><p>Lecture Videos</p></div>
+<div class="stat"><h2>50+</h2><p>Projects</p></div>
+<div class="stat"><h2>500+</h2><p>Learning Resources</p></div>
+</div>
+
+<section class="updates">
+<h2 class="section-title">Latest Updates</h2>
+<ul>
+<li>✔ Customer Churn Prediction Project (Coming Soon)</li>
+<li>✔ Deep Learning Notes</li>
+<li>✔ Python Source Codes</li>
+<li>✔ Project Datasets</li>
+<li>✔ Excel Prediction Templates</li>
+</ul>
 </section>
 
 <footer>
-
-© 2026 D. Kiran Prasad
-
+© 2026 D. Kiran Prasad | Educational Website
 </footer>
-
 </body>
-
 </html>
