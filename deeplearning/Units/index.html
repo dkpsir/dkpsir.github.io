@@ -33,7 +33,70 @@ header p{
     font-size:20px;
     margin-top:10px;
 }
+.top-navbar{
 
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:70px;
+    background:#003366;
+    color:white;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:0 25px;
+    box-sizing:border-box;
+
+    z-index:9999;
+    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+
+}
+
+.nav-left{
+
+    flex:1;
+
+}
+
+.nav-center{
+
+    flex:2;
+    text-align:center;
+    font-size:28px;
+    font-weight:bold;
+
+}
+
+.nav-right{
+
+    flex:1;
+    text-align:right;
+
+}
+
+.top-navbar a{
+
+    color:white;
+    text-decoration:none;
+    font-size:18px;
+    font-weight:bold;
+
+}
+
+.top-navbar a:hover{
+
+    color:#ffcc00;
+
+}
+
+body{
+
+    padding-top:90px;
+
+}
 .container{
     width:92%;
     max-width:1300px;
@@ -128,7 +191,20 @@ footer{
 </head>
 
 <body>
+<div class="top-navbar">
 
+    <div class="nav-left">
+        <a href="../index.html">🏠 Home</a>
+    </div>
+
+    <div class="nav-center">
+        📘 Deep Learning Learning Materials
+    </div>
+
+    <div class="nav-right">
+    </div>
+
+</div>
 <header>
 
 <h1>Deep Learning</h1>
