@@ -266,13 +266,47 @@ footer{
     padding:18px;
 
 }
+/* ================= Reading Progress Bar ================= */
 
+#progress-container{
+
+    position:fixed;
+
+    top:100px;      /* Just below the navigation bar */
+
+    left:0;
+
+    width:100%;
+
+    height:4px;
+
+    background:#d9d9d9;
+
+    z-index:9998;
+
+}
+
+#progress-bar{
+
+    width:0%;
+
+    height:100%;
+
+    background:#1e88e5;
+
+    transition:width 0.15s linear;
+
+}
 </style>
 
 </head>
 
 <body>
+<div id="progress-container">
 
+    <div id="progress-bar"></div>
+
+</div>
 <div class="top-navbar">
 
     <div class="nav-left">
@@ -538,7 +572,22 @@ y = f(x) = │
 © 2026 D. Kiran Prasad
 
 </footer>
+<script>
 
+window.onscroll = function(){
+
+    let scrollTop = document.documentElement.scrollTop;
+
+    let scrollHeight = document.documentElement.scrollHeight -
+                       document.documentElement.clientHeight;
+
+    let progress = (scrollTop / scrollHeight) * 100;
+
+    document.getElementById("progress-bar").style.width = progress + "%";
+
+};
+
+</script>
 </body>
 
 </html>
