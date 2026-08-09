@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Loop Syntax</title>
+<style>
+body{font-family:'Segoe UI',Arial,sans-serif;background:#eef4fb;margin:20px}
+.banner{
+background:#0b3c75;color:#fff;text-align:center;
+font-size:42px;font-weight:bold;padding:18px;border-radius:12px;
+margin-bottom:22px}
+.syntax{
+background:#fff;border:3px solid #123b7a;border-radius:14px;
+padding:25px;text-align:center;font-family:Consolas,monospace;
+font-size:40px;line-height:1.8;
+}
+.purple{color:#7b1fa2;font-weight:bold}
+.green{color:#188038;font-weight:bold}
+.blue{color:#1565c0;font-weight:bold}
+.red{color:#d32f2f;font-weight:bold}
+.grid{
+display:grid;
+grid-template-columns:repeat(6,1fr);
+gap:15px;
+margin-top:25px}
+.box{
+background:#fff;
+border-radius:10px;
+padding:15px;
+text-align:center;
+box-shadow:0 2px 8px rgba(0,0,0,.12);
+font-size:20px;
+}
+.k{border-top:6px solid #7b1fa2}
+.g{border-top:6px solid #188038}
+.b{border-top:6px solid #1565c0}
+.r{border-top:6px solid #d32f2f}
+.example{
+margin-top:30px;
+display:grid;
+grid-template-columns:2fr 1fr;
+gap:20px}
+pre{
+margin:0;
+background:#fff;
+border:2px solid #999;
+border-radius:10px;
+padding:18px;
+font-family:Consolas,monospace;
+font-size:30px;
+line-height:1.6;
+}
+table{
+width:100%;
+border-collapse:collapse;
+background:#fff}
+th,td{border:1px solid #bbb;padding:12px;text-align:center;font-size:22px}
+th{background:#0b3c75;color:#fff}
+.note{
+margin-top:25px;
+background:#fff8dc;
+border-left:6px solid orange;
+padding:14px;
+font-size:20px}
+</style>
+</head>
+<body>
+
+<div class="banner">FOR LOOP SYNTAX</div>
+
+<div class="syntax">
+<span class="purple">for</span>
+<span class="green">variable</span>
+<span class="blue">in</span>
+range(<span class="red">start</span>, <span class="red">stop</span>, <span class="red">step</span>):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue">statement(s)</span>
+</div>
+
+<div class="grid">
+<div class="box k"><b>for</b><br>Keyword</div>
+<div class="box g"><b>variable</b><br>Loop Variable</div>
+<div class="box b"><b>in</b><br>Keyword</div>
+<div class="box r"><b>start</b><br>Optional<br>(Default = 0)</div>
+<div class="box r"><b>stop</b><br>Mandatory<br>(Excluded)</div>
+<div class="box r"><b>step</b><br>Optional<br>(Default = 1)</div>
+</div>
+
+<div class="example">
+<pre>for i in range(1, 11, 2):
+    print(i)</pre>
+
+<table>
+<tr><th colspan="2">Example Values</th></tr>
+<tr><td>Start</td><td>1</td></tr>
+<tr><td>Stop</td><td>10</td></tr>
+<tr><td>Step</td><td>2</td></tr>
+</table>
+</div>
+
+<div class="note">
+<b>Note:</b> The <b>stop</b> value is <b>not included</b> in the generated sequence. The statements inside the loop must be properly indented.
+</div>
+
+</body>
+</html>

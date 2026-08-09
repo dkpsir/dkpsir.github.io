@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Python List Operations Visualizer (Step Debugger)</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f4f8fc;margin:20px}
+h2{text-align:center;color:#0b4a8b}
+.container{display:flex;gap:20px}
+.left,.right{flex:1}
+pre{background:#1e1e1e;color:#ddd;padding:10px;border-radius:6px;margin:0;line-height:1.0;font-size:13px;overflow-x:auto}
+.line{display:block;padding:2px 4px;margin:0;}
+.active{background:#ffeb3b;color:#000;font-weight:bold}
+.controls{margin:15px 0;background:#e2edf8;padding:12px;border-radius:6px;border:1px solid #0b4a8b}
+.control-group{margin-bottom:8px}
+label{font-weight:bold;margin-right:8px}
+select{padding:6px;font-size:14px}
+button{padding:8px 16px;font-size:15px;margin-right:5px;cursor:pointer;background:#0b4a8b;color:white;border:none;border-radius:4px}
+button:hover{background:#1f4e79}
+button:disabled{background:#aaa;cursor:not-allowed}
+
+/* List & Variables Inspection Boxes */
+.inspect-box{background:white;padding:10px;border-radius:6px;border:1px solid #0b4a8b;margin-bottom:12px}
+.inspect-title{font-weight:bold;color:#0b4a8b;margin-bottom:6px;font-size:14px}
+.list-items-container{display:flex;gap:8px;flex-wrap:wrap}
+.list-item-box{display:flex;flex-direction:column;align-items:center;background:#dcecff;border:1px solid #1f4e79;border-radius:4px;padding:4px 8px}
+.list-item-val{font-weight:bold;font-size:13px;color:#000}
+.list-item-idx{font-size:10px;color:#555;margin-top:2px}
+
+.var-table{width:100%;border-collapse:collapse;font-size:12px;background:white}
+.var-table th, .var-table td{border:1px solid #ccc;padding:4px 8px;text-align:left}
+.var-table th{background:#f0f0f0}
+
+#terminal{font-family:monospace;background:#000;color:#00ff00;padding:12px;border-radius:6px;margin-top:12px;min-height:120px;white-space:pre-wrap;font-size:13px}
+</style>
+</head>
+<body>
+
+<h2>Python List Operations Visualizer (Step Debugger)</h2>
+
+<div class="container">
+<div class="left">
+
+<!-- Variable Watch Window -->
+<div class="inspect-box">
+<div class="inspect-title">Variables Watch Window</div>
+<table class="var-table">
+<tr><th>Variable</th><th>Value</th></tr>
+<tr><td>fruits</td><td id="var-fruits">["Apple", "Banana", "Cherry"]</td></tr>
+<tr><td>op_choice</td><td id="var-choice">None</td></tr>
+<tr><td>item / idx</td><td id="var-params">None</td></tr>
+</table>
+</div>
+
+<!-- Live Memory Box -->
+<div class="inspect-box">
+<div class="inspect-title">List Memory (`fruits`)</div>
+<div id="list-container" class="list-items-container"></div>
+</div>
+
+<div class="controls">
+<div style="margin-bottom:10px;">
+<button id="btn-start" onclick="startDebugging()">Start Debugger</button>
+<button id="btn-next" onclick="stepNext()" disabled style="background:#2e7d32;">Step Next ➔</button>
+<button onclick="resetAll()" style="background:#d32f2f;">Reset</button>
+</div>
+<small style="color:#555;">Click <b>Start Debugger</b> to begin line-by-line debugging. The program will pause to prompt for user inputs when required.</small>
+</div>
+
+<h3>Terminal Console Output</h3>
+<div id="terminal">> Debugger Ready. Click 'Start Debugger'...</div>
+</div>
+
+<div class="right">
+<pre id="code">
+<span id="l1" class="line">fruits = ["Apple", "Banana", "Cherry"]</span>
+<span id="l2" class="line">print("Current List:", fruits)</span>
+<span id="l3" class="line">print("1-Append 2-Pop 3-Insert 4-Remove 5-Len")</span>
+<span id="l4" class="line">choice = int(input("Enter Choice (1-5): "))</span>
+<span id="l5" class="line">if choice == 1:</span>
+<span id="l6" class="line">    item = input("Enter item to append: ")</span>
+<span id="l7" class="line">    fruits.append(item)</span>
+<span id="l8" class="line">elif choice == 2:</span>
+<span id="l9" class="line">    idx = int(input("Enter index to pop: "))</span>
+<span id="l10" class="line">    removed = fruits.pop(idx)</span>
+<span id="l11" class="line">    print("Popped item:", removed)</span>
+<span id="l12" class="line">elif choice == 3:</span>
+<span id="l13" class="line">    idx = int(input("Enter index: "))</span>
+<span id="l14" class="line">    item = input("Enter item: ")</span>
+<span id="l15" class="line">    fruits.insert(idx, item)</span>
+<span id="l16" class="line">elif choice == 4:</span>
+<span id="l17" class="line">    item = input("Enter item to remove: ")</span>
+<span id="l18" class="line">    if item in fruits:</span>
+<span id="l19" class="line">        fruits.remove(item)</span>
+<span id="l20" class="line">    else:</span>
+<span id="l21" class="line">        print("Item not found!")</span>
+<span id="l22" class="line">elif choice == 5:</span>
+<span id="l23" class="line">    print("Length of list is:", len(fruits))</span>
+<span id="l24" class="line">print("Final List:", fruits)</span>
+</pre>
+</div>
+</div>
+
+<script>
+let fruits = ["Apple", "Banana", "Cherry"];
+let choice = null;
+let itemVal = null;
+let idxVal = null;
+let removedVal = null;
+
+let stepQueue = [];
+let currentStep = 0;
+
+function renderListMemory() {
+    let container = document.getElementById("list-container");
+    container.innerHTML = "";
+    if (fruits.length === 0) {
+        container.innerHTML = "<i style='color:#777;'>[ Empty List ]</i>";
+    } else {
+        fruits.forEach((val, i) => {
+            let box = document.createElement("div");
+            box.className = "list-item-box";
+            box.innerHTML = `<span class="list-item-val">"${val}"</span><span class="list-item-idx">[${i}]</span>`;
+            container.appendChild(box);
+        });
+    }
+    updateWatchWindow();
+}
+
+function updateWatchWindow() {
+    document.getElementById("var-fruits").innerText = JSON.stringify(fruits);
+    document.getElementById("var-choice").innerText = choice !== null ? choice : "None";
+    
+    let paramsText = [];
+    if (itemVal !== null) paramsText.push(`item="${itemVal}"`);
+    if (idxVal !== null) paramsText.push(`idx=${idxVal}`);
+    if (removedVal !== null) paramsText.push(`removed="${removedVal}"`);
+    
+    document.getElementById("var-params").innerText = paramsText.length > 0 ? paramsText.join(", ") : "None";
+}
+
+function clearHL() {
+    document.querySelectorAll('.line').forEach(x => x.classList.remove('active'));
+}
+
+function hl(id) {
+    clearHL();
+    if(id) {
+        let el = document.getElementById(id);
+        if(el) el.classList.add('active');
+    }
+}
+
+function appendTerminal(text) {
+    let term = document.getElementById("terminal");
+    term.innerHTML += text + "\n";
+}
+
+function startDebugging() {
+    resetAll();
+    document.getElementById("terminal").innerHTML = "";
+    document.getElementById("btn-start").disabled = true;
+    document.getElementById("btn-next").disabled = false;
+    
+    stepQueue = [
+        { line: "l1", action: () => { fruits = ["Apple", "Banana", "Cherry"]; renderListMemory(); } },
+        { line: "l2", action: () => appendTerminal(`Current List: ${JSON.stringify(fruits)}`) },
+        { line: "l3", action: () => appendTerminal("1-Append 2-Pop 3-Insert 4-Remove 5-Len") },
+        { 
+            line: "l4", 
+            action: () => { 
+                let inputRes = prompt("Enter Choice (1-5):", "4");
+                choice = parseInt(inputRes);
+                appendTerminal(`Enter Choice (1-5): ${inputRes}`);
+                updateWatchWindow();
+                buildConditionalSteps();
+            } 
+        }
+    ];
+
+    currentStep = 0;
+    stepNext();
+}
+
+function buildConditionalSteps() {
+    if (choice === 1) {
+        stepQueue.push(
+            { line: "l5", action: () => {} },
+            { 
+                line: "l6", 
+                action: () => { 
+                    itemVal = prompt("Enter item to append:", "Dragonfruit") || "Dragonfruit";
+                    appendTerminal(`Enter item to append: ${itemVal}`);
+                    updateWatchWindow();
+                } 
+            },
+            { 
+                line: "l7", 
+                action: () => { 
+                    fruits.push(itemVal); 
+                    renderListMemory(); 
+                } 
+            }
+        );
+    } else if (choice === 2) {
+        stepQueue.push(
+            { line: "l5", action: () => {} },
+            { line: "l8", action: () => {} },
+            { 
+                line: "l9", 
+                action: () => { 
+                    idxVal = parseInt(prompt("Enter index to pop:", "1") || "0");
+                    appendTerminal(`Enter index to pop: ${idxVal}`);
+                    updateWatchWindow();
+                } 
+            },
+            { 
+                line: "l10", 
+                action: () => { 
+                    if(idxVal >= 0 && idxVal < fruits.length) {
+                        removedVal = fruits.splice(idxVal, 1)[0];
+                        renderListMemory();
+                    } else {
+                        appendTerminal("IndexError: pop index out of range");
+                    }
+                } 
+            },
+            { line: "l11", action: () => { if(removedVal) appendTerminal(`Popped item: ${removedVal}`); } }
+        );
+    } else if (choice === 3) {
+        stepQueue.push(
+            { line: "l5", action: () => {} },
+            { line: "l8", action: () => {} },
+            { line: "l12", action: () => {} },
+            { 
+                line: "l13", 
+                action: () => { 
+                    idxVal = parseInt(prompt("Enter index:", "1") || "0");
+                    appendTerminal(`Enter index: ${idxVal}`);
+                    updateWatchWindow();
+                } 
+            },
+            { 
+                line: "l14", 
+                action: () => { 
+                    itemVal = prompt("Enter item:", "Mango") || "Mango";
+                    appendTerminal(`Enter item: ${itemVal}`);
+                    updateWatchWindow();
+                } 
+            },
+            { 
+                line: "l15", 
+                action: () => { 
+                    fruits.splice(idxVal, 0, itemVal);
+                    renderListMemory();
+                } 
+            }
+        );
+    } else if (choice === 4) {
+        stepQueue.push(
+            { line: "l5", action: () => {} },
+            { line: "l8", action: () => {} },
+            { line: "l12", action: () => {} },
+            { line: "l16", action: () => {} },
+            { 
+                line: "l17", 
+                action: () => { 
+                    itemVal = prompt("Enter item to remove:", "Banana") || "Banana";
+                    appendTerminal(`Enter item to remove: ${itemVal}`);
+                    updateWatchWindow();
+                } 
+            },
+            { 
+                line: "l18", 
+                action: () => {
+                    // Check dynamically at line 18 execution time
+                    let remainingSteps = [];
+                    if (fruits.includes(itemVal)) {
+                        remainingSteps.push({ 
+                            line: "l19", 
+                            action: () => { 
+                                let removeIdx = fruits.indexOf(itemVal);
+                                fruits.splice(removeIdx, 1);
+                                renderListMemory();
+                            } 
+                        });
+                    } else {
+                        remainingSteps.push(
+                            { line: "l20", action: () => {} },
+                            { line: "l21", action: () => appendTerminal("Item not found!") }
+                        );
+                    }
+                    // Append line 24 to the end of remaining steps
+                    remainingSteps.push({ line: "l24", action: () => appendTerminal(`Final List: ${JSON.stringify(fruits)}`) });
+                    
+                    // Replace queue from current step onwards with correct path
+                    stepQueue = stepQueue.slice(0, currentStep).concat(remainingSteps);
+                } 
+            }
+        );
+    } else if (choice === 5) {
+        stepQueue.push(
+            { line: "l5", action: () => {} },
+            { line: "l8", action: () => {} },
+            { line: "l12", action: () => {} },
+            { line: "l16", action: () => {} },
+            { line: "l22", action: () => {} },
+            { line: "l23", action: () => appendTerminal(`Length of list is: ${fruits.length}`) }
+        );
+    }
+
+    // Default line 24 append for choices 1, 2, 3, 5
+    if (choice !== 4) {
+        stepQueue.push(
+            { line: "l24", action: () => appendTerminal(`Final List: ${JSON.stringify(fruits)}`) }
+        );
+    }
+}
+
+function stepNext() {
+    if (currentStep < stepQueue.length) {
+        let step = stepQueue[currentStep];
+        hl(step.line);
+        currentStep++; // Increment before action so dynamically spliced queues align properly
+        step.action();
+    } else {
+        clearHL();
+        appendTerminal("\n--- Execution Finished ---");
+        document.getElementById("btn-next").disabled = true;
+        document.getElementById("btn-start").disabled = false;
+    }
+}
+
+function resetAll() {
+    fruits = ["Apple", "Banana", "Cherry"];
+    choice = null;
+    itemVal = null;
+    idxVal = null;
+    removedVal = null;
+    currentStep = 0;
+    stepQueue = [];
+    clearHL();
+    renderListMemory();
+    document.getElementById("btn-start").disabled = false;
+    document.getElementById("btn-next").disabled = true;
+    document.getElementById("terminal").innerHTML = "> Reset done. Press 'Start Debugger' to run.";
+}
+
+renderListMemory();
+</script>
+
+</body>
+</html>

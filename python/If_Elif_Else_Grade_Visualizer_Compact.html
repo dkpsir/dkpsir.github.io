@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>If-Elif-Else Grade Visualizer</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f4f8fc;margin:20px}
+h2{text-align:center;color:#0b4a8b}
+.container{display:flex;gap:20px}
+.left,.right{flex:1}
+table{border-collapse:collapse;width:100%;background:white}
+th,td{border:1px solid #555;padding:8px;text-align:center}
+th{background:#dcecff}
+pre{background:#1e1e1e;color:#ddd;padding:10px;border-radius:6px;margin:0;;line-height:1.15;font-size:13px}
+.line{display:block;padding:0px 4px;margin:0;}
+.active{background:#ffeb3b;color:#000;font-weight:bold}
+.controls{margin:15px 0}
+input{padding:8px;font-size:16px;width:120px}
+button{padding:8px 16px;font-size:16px;margin-left:10px}
+#out{font-size:22px;font-weight:bold;color:#006400;margin-top:20px}
+</style>
+</head>
+<body>
+<h2>if - elif - else : Grade Evaluation</h2>
+
+<div class="container">
+<div class="left">
+<table>
+<tr><th>Range in which the marks fall</th><th>Grade</th></tr>
+<tr><td>90 & above</td><td>S</td></tr>
+<tr><td>80 - 89</td><td>A</td></tr>
+<tr><td>70 - 79</td><td>B</td></tr>
+<tr><td>60 - 69</td><td>C</td></tr>
+<tr><td>50 - 59</td><td>D</td></tr>
+<tr><td>40 - 49</td><td>E</td></tr>
+<tr><td>&lt; 40</td><td>F</td></tr>
+</table>
+
+<div class="controls">
+Marks:
+<input type="number" id="marks" min="0" max="100">
+<button onclick="start()">Start</button>
+<button onclick="nextStep()">Next</button>
+</div>
+
+<div id="out"></div>
+</div>
+
+<div class="right">
+<pre id="code">
+<span id="l1" class="line">marks = int(input("Enter Marks: "))</span>
+<span id="l2" class="line">if marks >= 90:</span>
+<span id="l3" class="line">    print("Grade = S")</span>
+<span id="l4" class="line">elif marks >= 80:</span>
+<span id="l5" class="line">    print("Grade = A")</span>
+<span id="l6" class="line">elif marks >= 70:</span>
+<span id="l7" class="line">    print("Grade = B")</span>
+<span id="l8" class="line">elif marks >= 60:</span>
+<span id="l9" class="line">    print("Grade = C")</span>
+<span id="l10" class="line">elif marks >= 50:</span>
+<span id="l11" class="line">    print("Grade = D")</span>
+<span id="l12" class="line">elif marks >= 40:</span>
+<span id="l13" class="line">    print("Grade = E")</span>
+<span id="l14" class="line">else:</span>
+<span id="l15" class="line">    print("Grade = F")</span>
+</pre>
+</div>
+</div>
+
+<script>
+let seq=[],idx=0,result="";
+function clearHL(){document.querySelectorAll('.line').forEach(x=>x.classList.remove('active'));}
+function hl(id){clearHL();document.getElementById(id).classList.add('active');}
+function start(){
+ let m=parseInt(document.getElementById("marks").value);
+ if(isNaN(m)){alert("Enter marks");return;}
+ seq=["l1"];
+ if(m>=90){seq.push("l2","l3");result="Grade = S";}
+ else if(m>=80){seq.push("l2","l4","l5");result="Grade = A";}
+ else if(m>=70){seq.push("l2","l4","l6","l7");result="Grade = B";}
+ else if(m>=60){seq.push("l2","l4","l6","l8","l9");result="Grade = C";}
+ else if(m>=50){seq.push("l2","l4","l6","l8","l10","l11");result="Grade = D";}
+ else if(m>=40){seq.push("l2","l4","l6","l8","l10","l12","l13");result="Grade = E";}
+ else{seq.push("l2","l4","l6","l8","l10","l12","l14","l15");result="Grade = F";}
+ idx=0; document.getElementById("out").innerHTML="";
+ nextStep();
+}
+function nextStep(){
+ if(idx<seq.length){
+   hl(seq[idx]);
+   idx++;
+   if(idx===seq.length){
+      setTimeout(()=>{document.getElementById("out").innerHTML="Output: <b>"+result+"</b>";},400);
+   }
+ }
+}
+</script>
+</body>
+</html>

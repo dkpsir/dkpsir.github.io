@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>If-Else Statement in Python</title>
+<style>
+body{font-family:'Segoe UI',Arial,sans-serif;background:#eef3f8;margin:20px}
+.banner{
+background:#0b3c75;color:#fff;text-align:center;
+font-size:42px;font-weight:bold;padding:18px;border-radius:12px;
+margin-bottom:20px}
+.grid{display:grid;grid-template-columns:1fr 2fr 1fr;gap:18px;align-items:start}
+.box{
+background:#fff;border:2px solid #cfd8dc;border-radius:10px;padding:15px;
+box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.smalltitle{
+display:inline-block;background:#0b3c75;color:#fff;
+padding:6px 16px;border-radius:6px;font-size:22px;
+margin-bottom:10px}
+.code{
+font-family:Consolas,monospace;
+font-size:30px;
+line-height:1.7;
+background:#fafcff;
+padding:18px;
+border:2px solid #bbb;
+border-radius:10px;
+}
+.purple{color:#6a1b9a;font-weight:bold}
+.green{color:#0a7d2c;font-weight:bold}
+.red{color:#c62828;font-weight:bold}
+.blue{color:#1565c0;font-weight:bold}
+.note{
+margin-top:25px;background:#fff8dc;border-left:6px solid orange;
+padding:14px;font-size:20px}
+.example{
+margin-top:25px}
+pre{
+font-family:Consolas,monospace;
+font-size:28px;
+background:#fff;
+border:2px solid #b0bec5;
+border-radius:10px;
+padding:18px;
+margin:0}
+h3{margin:0 0 10px 0;color:#0b3c75}
+</style>
+</head>
+<body>
+
+<div class="banner">IF - ELSE STATEMENT IN PYTHON</div>
+
+<div class="grid">
+
+<div class="box">
+<h3>Keywords</h3>
+<p><span class="purple"><b>if</b></span> : Starts the decision making statement.</p>
+<p><span class="purple"><b>else</b></span> : Executes when the condition is False.</p>
+</div>
+
+<div class="box">
+<div class="smalltitle">SYNTAX</div>
+<div class="code">
+<span class="purple">if</span> condition<span class="red">:</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="green">statement(s)</span><br><br>
+<span class="purple">else</span><span class="red">:</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="green">statement(s)</span>
+</div>
+</div>
+
+<div class="box">
+<h3>Explanation</h3>
+<p><span class="green"><b>Condition</b></span> : Evaluates to <b>True</b> or <b>False</b>.</p>
+<p><span class="red"><b>:</b></span> Begins the indented block.</p>
+<p><span class="blue"><b>Indentation</b></span> defines the block of code.</p>
+</div>
+
+<div class="box example" style="grid-column:1 / span 3;">
+<div class="smalltitle">EXAMPLE</div>
+<pre>age = 20
+
+if age >= 18:
+    print("Eligible to Vote")
+else:
+    print("Not Eligible to Vote")</pre>
+</div>
+
+</div>
+
+<div class="note">
+<b>Note:</b> Indentation is mandatory in Python. It defines the block of code under <b>if</b> and <b>else</b>.
+</div>
+
+</body>
+</html>

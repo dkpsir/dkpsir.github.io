@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For Loop Visualizer V1.1</title>
+<style>
+body{font-family:Arial;background:#f4f8fc;margin:0;padding:30px}
+.container{display:flex;justify-content:center;gap:40px;align-items:flex-start}
+.main{text-align:center;flex:1}
+.side{width:280px;background:#fff;border:2px solid #bbb;border-radius:12px;padding:20px;font-size:24px;box-shadow:0 2px 6px #ccc}
+.side h2{margin-top:0;color:#0b5394}
+.item{margin:18px 0}
+.code{display:inline-block;background:#222;color:#fff;padding:15px 25px;border-radius:10px;font-size:28px;font-family:Consolas}
+#iteration{font-size:34px;margin-top:20px}
+#value{font-size:180px;font-weight:bold;color:#0b5394;opacity:0;transition:opacity .9s ease;margin:25px}
+button{font-size:22px;padding:10px 25px;margin:10px}
+#box{width:80%;height:24px;border:2px solid #666;border-radius:14px;margin:25px auto;overflow:hidden}
+#bar{width:0;height:100%;background:#4CAF50;transition:width .8s}
+#status{font-size:24px;color:#006400}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="main">
+<h1>Python For Loop Visualizer</h1>
+<div class="code">for i in range(2, 20, 3):</div>
+<div id="iteration">Iteration : 0 / 6</div>
+<div id="value">-</div>
+<button id="next">▶ Next</button>
+<button id="reset">↺ Reset</button>
+<div id="box"><div id="bar"></div></div>
+<div id="status">Press Next to Start</div>
+</div>
+
+<div class="side">
+<h2>Loop Parameters</h2>
+<div class="item"><b>Starting Value of i :</b><br>2</div>
+<div class="item"><b>Ending Value :</b><br>19</div>
+<div class="item"><b>Step Size :</b><br>3</div>
+<div class="item"><b>Values Generated :</b><br>2, 5, 8, 11, 14, 17</div>
+</div>
+</div>
+
+<script>
+const vals=[2,5,8,11,14,17];
+let idx=-1;
+function next(){
+ if(idx>=vals.length-1){document.getElementById('status').textContent='Loop Completed!';return;}
+ idx++;
+ let v=document.getElementById('value');
+ v.style.opacity=0;
+ setTimeout(()=>{
+   v.textContent=vals[idx];
+   v.style.opacity=1;
+   document.getElementById('iteration').textContent='Iteration : '+(idx+1)+' / '+vals.length;
+   document.getElementById('bar').style.width=((idx+1)/vals.length*100)+'%';
+   document.getElementById('status').textContent='Current i = '+vals[idx];
+ },500);
+}
+function reset(){
+ idx=-1;
+ document.getElementById('value').style.opacity=0;
+ document.getElementById('value').textContent='-';
+ document.getElementById('iteration').textContent='Iteration : 0 / 6';
+ document.getElementById('bar').style.width='0%';
+ document.getElementById('status').textContent='Press Next to Start';
+}
+next.onclick=next;
+document.getElementById('next').addEventListener('click',next);
+document.getElementById('reset').addEventListener('click',reset);
+</script>
+</body>
+</html>

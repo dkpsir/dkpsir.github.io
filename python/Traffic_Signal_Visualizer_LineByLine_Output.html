@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Traffic Signal Step Visualizer</title>
+<style>
+body{font-family:Arial;background:#f4f8fc;margin:18px}
+h2{text-align:center;color:#0b4a8b}
+.container{display:flex;gap:18px}
+.left,.right{flex:1}
+table{border-collapse:collapse;width:100%;background:#fff}
+th,td{border:1px solid #555;padding:8px;text-align:center}
+th{background:#dcecff}
+input{padding:8px;font-size:16px;width:140px}
+button{padding:8px 14px;font-size:15px;margin-left:8px}
+pre{background:#1e1e1e;color:#ddd;padding:10px;border-radius:6px;line-height:1.15;font-size:13px}
+.line{display:block;padding:0 4px}
+.active{background:#ffeb3b;color:#000;font-weight:bold}
+#out{margin-top:15px;font-size:20px;color:green;font-weight:bold;
+background:#fff;border:1px solid #999;padding:10px;min-height:90px}
+</style>
+</head>
+<body>
+<h2>if - elif - else : Traffic Signal Visualizer</h2>
+<div class="container">
+<div class="left">
+<table>
+<tr><th>Traffic Signal</th><th>Action</th></tr>
+<tr><td>Green</td><td>Start the vehicle</td></tr>
+<tr><td>Yellow</td><td>Slow down</td></tr>
+<tr><td>Red</td><td>Stop the vehicle</td></tr>
+</table><br>
+Signal:
+<input id="sig" placeholder="Red / Yellow / Green">
+<button onclick="start()">Start</button>
+<button onclick="nextStep()">Next</button>
+<div id="out"></div>
+</div>
+
+<div class="right">
+<pre>
+<span id="l1" class="line">signal = input("Enter Traffic Signal: ")</span>
+<span id="l2" class="line">if signal.lower() == "green":</span>
+<span id="l3" class="line">    print("Signal : GREEN")</span>
+<span id="l4" class="line">    print("Action : Start the vehicle.")</span>
+<span id="l5" class="line">    print("Drive carefully.")</span>
+<span id="l6" class="line">elif signal.lower() == "yellow":</span>
+<span id="l7" class="line">    print("Signal : YELLOW")</span>
+<span id="l8" class="line">    print("Action : Slow down.")</span>
+<span id="l9" class="line">    print("Be ready to stop.")</span>
+<span id="l10" class="line">else:</span>
+<span id="l11" class="line">    print("Signal : RED")</span>
+<span id="l12" class="line">    print("Action : Stop the vehicle.")</span>
+<span id="l13" class="line">    print("Wait until the signal turns Green.")</span>
+</pre>
+</div>
+</div>
+
+<script>
+let steps=[],i=0;
+function clr(){document.querySelectorAll(".line").forEach(x=>x.classList.remove("active"));}
+function hi(id){clr();document.getElementById(id).classList.add("active");}
+function add(msg){let d=document.getElementById("out");d.innerHTML += msg+"<br>";}
+
+function start(){
+ let s=document.getElementById("sig").value.trim().toLowerCase();
+ if(!s){alert("Enter Red, Yellow or Green");return;}
+ document.getElementById("out").innerHTML="";
+ steps=[{l:"l1"}];
+ if(s==="green"){
+   steps.push({l:"l2"});
+   steps.push({l:"l3",o:"Signal : GREEN"});
+   steps.push({l:"l4",o:"Action : Start the vehicle."});
+   steps.push({l:"l5",o:"Drive carefully."});
+ }else if(s==="yellow"){
+   steps.push({l:"l2"});
+   steps.push({l:"l6"});
+   steps.push({l:"l7",o:"Signal : YELLOW"});
+   steps.push({l:"l8",o:"Action : Slow down."});
+   steps.push({l:"l9",o:"Be ready to stop."});
+ }else{
+   steps.push({l:"l2"});
+   steps.push({l:"l6"});
+   steps.push({l:"l10"});
+   steps.push({l:"l11",o:"Signal : RED"});
+   steps.push({l:"l12",o:"Action : Stop the vehicle."});
+   steps.push({l:"l13",o:"Wait until the signal turns Green."});
+ }
+ i=0;
+ nextStep();
+}
+
+function nextStep(){
+ if(i>=steps.length)return;
+ let st=steps[i];
+ hi(st.l);
+ if(st.o){add(st.o);}
+ i++;
+}
+</script>
+</body>
+</html>

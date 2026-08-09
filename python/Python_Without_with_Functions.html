@@ -1,0 +1,93 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<title>Without vs With Functions</title>
+<style>
+body{margin:20px;font-family:Segoe UI;background:#eef3f8}
+h1{background:#0b3c75;color:white;padding:14px;text-align:center;border-radius:8px}
+.grid{display:grid;grid-template-columns:40% 60%;gap:16px}
+.panel{background:white;border:1px solid #bbb;border-radius:8px;padding:10px}
+h2{text-align:center;color:#0b3c75;margin:0 0 10px}
+pre{font:15px/1.15 Consolas,monospace;white-space:pre-wrap;margin:0}
+</style></head><body>
+<h1>WITHOUT FUNCTIONS &nbsp;&nbsp;&nbsp; VS &nbsp;&nbsp;&nbsp; WITH FUNCTIONS</h1>
+<div class="grid">
+<div class="panel"><h2>WITHOUT FUNCTIONS</h2><pre># Calculation for First Pair
+length = float(input("Enter Length : "))
+breadth = float(input("Enter Breadth : "))
+area = length * breadth
+perimeter = 2 * (length + breadth)
+moment_of_inertia = (breadth * (length ** 3)) / 12
+print("Area =", area)
+print("Perimeter =", perimeter)
+print("Moment of Inertia =", moment_of_inertia)
+
+# Calculation for Second Pair
+length = float(input("Enter Length : "))
+breadth = float(input("Enter Breadth : "))
+area = length * breadth
+perimeter = 2 * (length + breadth)
+moment_of_inertia = (breadth * (length ** 3)) / 12
+print("Area =", area)
+print("Perimeter =", perimeter)
+print("Moment of Inertia =", moment_of_inertia)
+
+# Calculation for Third Pair
+length = float(input("Enter Length : "))
+breadth = float(input("Enter Breadth : "))
+area = length * breadth
+perimeter = 2 * (length + breadth)
+moment_of_inertia = (breadth * (length ** 3)) / 12
+print("Area =", area)
+print("Perimeter =", perimeter)
+print("Moment of Inertia =", moment_of_inertia)
+
+# Calculation for Fourth Pair
+length = float(input("Enter Length : "))
+breadth = float(input("Enter Breadth : "))
+area = length * breadth
+perimeter = 2 * (length + breadth)
+moment_of_inertia = (breadth * (length ** 3)) / 12
+print("Area =", area)
+print("Perimeter =", perimeter)
+print("Moment of Inertia =", moment_of_inertia)
+
+# Calculation for Fifth Pair
+length = float(input("Enter Length : "))
+breadth = float(input("Enter Breadth : "))
+area = length * breadth
+perimeter = 2 * (length + breadth)
+moment_of_inertia = (breadth * (length ** 3)) / 12
+print("Area =", area)
+print("Perimeter =", perimeter)
+print("Moment of Inertia =", moment_of_inertia)
+</pre></div>
+<div class="panel"><h2>WITH FUNCTIONS</h2><pre>def get_input():
+    length = float(input("Enter Length : "))
+    breadth = float(input("Enter Breadth : "))
+    return length, breadth
+def area(length, breadth):
+    return length * breadth
+def perimeter(length, breadth):
+    return 2 * (length + breadth)
+def moment_of_inertia(length, breadth):
+    return (breadth * (length ** 3)) / 12
+def display(a, p, m):
+    print("Area =", a)
+    print("Perimeter =", p)
+    print("Moment of Inertia =", m)
+# Calculation for First Pair
+length, breadth = get_input()
+display(area(length, breadth),perimeter(length, breadth),moment_of_inertia(length, breadth))
+# Calculation for Second Pair
+length, breadth = get_input()
+display(area(length, breadth),perimeter(length, breadth),moment_of_inertia(length, breadth))
+# Calculation for Third Pair
+length, breadth = get_input()
+display(area(length, breadth),perimeter(length, breadth),moment_of_inertia(length, breadth))
+# Calculation for Fourth Pair
+length, breadth = get_input()
+display(area(length, breadth),perimeter(length, breadth),moment_of_inertia(length, breadth))
+# Calculation for Fifth Pair
+length, breadth = get_input()
+display(area(length, breadth),perimeter(length, breadth),moment_of_inertia(length, breadth))
+</pre></div>
+</div></body></html>

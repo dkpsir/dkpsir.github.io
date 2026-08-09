@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<title>Function Visualizer V2</title>
+<style>
+body{font-family:Segoe UI,Arial;background:#eef3f8;margin:20px}
+h2{margin-top:0}
+.wrap{display:flex;gap:18px}
+.panel{background:#fff;border-radius:8px;box-shadow:0 0 6px #bbb;padding:15px}
+.left{width:34%}.right{flex:1}
+button{padding:8px 18px;margin-right:8px}
+input{width:120px}
+table{border-collapse:collapse;width:100%}
+th,td{border:1px solid #bbb;padding:5px}
+.code{font:22px Consolas,monospace;line-height:1.6}
+.line{padding:2px 8px;border-radius:4px;white-space:pre}
+.active{background:#fff176}
+.kw{color:#005cc5;font-weight:bold}
+.fn{color:#22863a;font-weight:bold}
+.ret{color:#6f42c1;font-weight:bold}
+.pr{color:#005cc5}
+.str{color:#a31515}
+.stack,.out{border:1px solid #bbb;padding:8px;background:#f5f5ff;min-height:50px}
+.out{background:#111;color:#00ff66}
+</style></head>
+<body>
+<h2>Python Function Visualizer - Version 2</h2>
+<button onclick="start()">Start</button><button onclick="nextStep()">Next</button><button onclick="resetAll()">Reset</button>
+<div class="wrap">
+<div class="panel left">
+<b>Input</b><br><br>
+Length <input id=l value=10><br><br>
+Breadth <input id=b value=5><br><br>
+<b>Variables</b>
+<table>
+<tr><th>Variable</th><th>Value</th></tr>
+<tr><td>length</td><td id=vlen></td></tr>
+<tr><td>breadth</td><td id=vbr></td></tr>
+<tr><td>l (local)</td><td id=vl></td></tr>
+<tr><td>b (local)</td><td id=vb></td></tr>
+<tr><td>area (local)</td><td id=va></td></tr>
+<tr><td>perimeter (local)</td><td id=vp></td></tr>
+<tr><td>res_area</td><td id=vra></td></tr>
+<tr><td>res_peri</td><td id=vrp></td></tr>
+</table><br>
+<b>Call Stack</b>
+<div id=stack class=stack>Main()</div><br>
+<b>Output</b>
+<div id=out class=out></div>
+</div>
+<div class="panel right">
+<div class=code id=code></div>
+</div></div>
+<script>
+const prog=[
+`<span class=kw>def</span> <span class=fn>area</span>(l, b):`,
+`    area = l * b`,
+`    <span class=ret>return</span> area`,
+``,
+`<span class=kw>def</span> <span class=fn>perimeter</span>(l, b):`,
+`    peri = 2 * (l + b)`,
+`    <span class=ret>return</span> peri`,
+``,
+`<span class=kw>def</span> <span class=fn>display</span>(a, p):`,
+`    <span class=pr>print</span>(<span class=str>"Area ="</span>, a, <span class=str>"Perimeter ="</span>, p)`,
+``,
+`length = int(input())`,
+`breadth = int(input())`,
+`res_area = area(length, breadth)`,
+`res_peri = perimeter(length, breadth)`,
+`display(res_area, res_peri)`
+];
+const c=document.getElementById("code");
+prog.forEach((x,i)=>{let d=document.createElement("div");d.className="line";d.id="ln"+i;d.innerHTML=x;c.appendChild(d);});
+let s=-1,L,B,A,P,RA,RP;
+function hi(i){document.querySelectorAll(".line").forEach(e=>e.classList.remove("active"));if(i>=0)document.getElementById("ln"+i).classList.add("active");}
+function resetAll(){s=-1;["vlen","vbr","vl","vb","va","vp","vra","vrp"].forEach(id=>window[id].textContent="");stack.innerHTML="Main()";out.textContent="";hi(-1);}
+function start(){resetAll();s=0;nextStep();}
+function nextStep(){
+switch(s){
+case 0:hi(11);L=parseInt(l.value);vlen.textContent=L;break;
+case 1:hi(12);B=parseInt(b.value);vbr.textContent=B;break;
+case 2:hi(13);stack.innerHTML="Main()<br>↓<br>area()";break;
+case 3:hi(0);vl.textContent=L;vb.textContent=B;break;
+case 4:hi(1);A=L*B;va.textContent=A;break;
+case 5:hi(2);break;
+case 6:hi(13);RA=A;vra.textContent=RA;vl.textContent="";vb.textContent="";va.textContent="";stack.innerHTML="Main()";break;
+case 7:hi(14);stack.innerHTML="Main()<br>↓<br>perimeter()";break;
+case 8:hi(4);vl.textContent=L;vb.textContent=B;break;
+case 9:hi(5);P=2*(L+B);vp.textContent=P;break;
+case 10:hi(6);break;
+case 11:hi(14);RP=P;vrp.textContent=RP;vl.textContent="";vb.textContent="";vp.textContent="";stack.innerHTML="Main()";break;
+case 12:hi(15);stack.innerHTML="Main()<br>↓<br>display()";break;
+case 13:hi(8);break;
+case 14:hi(9);out.textContent=">>> Area = "+RA+" Perimeter = "+RP;break;
+case 15:stack.innerHTML="Main()";hi(-1);break;
+default:return;
+}
+s++;
+}
+</script></body></html>

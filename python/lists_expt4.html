@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Steel Grade Classification Visualizer</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f4f8fc;margin:20px}
+h2{text-align:center;color:#0b4a8b}
+.container{display:flex;gap:20px}
+.left,.right{flex:1}
+table{border-collapse:collapse;width:100%;background:white;margin-bottom:15px}
+th,td{border:1px solid #555;padding:8px;text-align:center}
+th{background:#dcecff}
+pre{background:#1e1e1e;color:#ddd;padding:10px;border-radius:6px;margin:0;line-height:1.0;font-size:13px;overflow-x:auto}
+.line{display:block;padding:0px 4px;margin:0;}
+.active{background:#ffeb3b;color:#000;font-weight:bold}
+.controls{margin:15px 0;background:#e2edf8;padding:12px;border-radius:6px;border:1px solid #0b4a8b}
+.control-group{margin-bottom:8px}
+label{font-weight:bold;margin-right:8px}
+input, select{padding:6px;font-size:14px}
+button{padding:8px 16px;font-size:15px;margin-left:5px;cursor:pointer;background:#0b4a8b;color:white;border:none;border-radius:4px}
+button:hover{background:#1f4e79}
+#terminal{font-family:monospace;background:#000;color:#00ff00;padding:12px;border-radius:6px;margin-top:15px;min-height:120px;white-space:pre-wrap;font-size:13px}
+</style>
+</head>
+<body>
+
+<h2>Classification of Steel Grades Using Lists</h2>
+
+<div class="container">
+<div class="left">
+<div class="controls">
+<div class="control-group">
+<label>Action Choice:</label>
+<select id="choice" onchange="toggleInputs()">
+<option value="1">1 - Add Steel Grade</option>
+<option value="2">2 - Delete Steel Grade</option>
+<option value="3">3 - Invalid Choice</option>
+</select>
+</div>
+
+<div id="add-inputs" class="control-group">
+<input type="text" id="add-grade" placeholder="Grade (e.g. AISI 304)" value="AISI 304">
+<input type="text" id="add-type" placeholder="Type (e.g. Stainless)" value="Stainless Steel">
+<input type="text" id="add-app" placeholder="Application (e.g. Kitchenware)" value="Kitchenware">
+</div>
+
+<div id="del-inputs" class="control-group" style="display:none;">
+<input type="text" id="del-grade" placeholder="Grade to Delete" value="AISI 1045">
+</div>
+
+<div style="margin-top:10px;">
+<button onclick="start()">Start Execution</button>
+<button onclick="nextStep()">Next Line</button>
+</div>
+</div>
+
+<h3>Terminal Output</h3>
+<div id="terminal">> Press 'Start Execution' to begin...</div>
+</div>
+
+<div class="right">
+<pre id="code">
+<span id="l1" class="line">def display(steel_grade, steel_type, applications):</span>
+<span id="l2" class="line">    for i in range(len(steel_grade)):</span>
+<span id="l3" class="line">        print(i+1,". Steel Grade :", steel_grade[i],"Steel Type  :", steel_type[i],"Application :", applications[i])</span>
+<span id="l6" class="line">steel_grade = ["AISI 1018", "AISI 1045", "AISI 1095"]</span>
+<span id="l7" class="line">steel_type = ["Low Carbon Steel", "Medium Carbon Steel", "High Carbon Steel"]</span>
+<span id="l8" class="line">applications = ["Bolts and Shafts", "Gears", "Springs"]</span>
+<span id="l11" class="line">display(steel_grade, steel_type, applications)</span>
+<span id="l12" class="line">choice = int(input("\nEnter your choice (1-Add, 2-Delete): "))</span>
+<span id="l13" class="line">if choice == 1:</span>
+<span id="l14" class="line">    g = input("Enter Steel Grade : ")</span>
+<span id="l15" class="line">    s = input("Enter Steel Type : ")</span>
+<span id="l16" class="line">    a = input("Enter Application : ")</span>
+<span id="l17" class="line">    steel_grade.append(g)</span>
+<span id="l18" class="line">    steel_type.append(s)</span>
+<span id="l19" class="line">    applications.append(a)</span>
+<span id="l20" class="line">    display(steel_grade, steel_type, applications)</span>
+<span id="l21" class="line">elif choice == 2:</span>
+<span id="l22" class="line">    grade = input("Enter Steel Grade to Delete : ")</span>
+<span id="l23" class="line">    if grade in steel_grade:</span>
+<span id="l24" class="line">        index = steel_grade.index(grade)</span>
+<span id="l25" class="line">        steel_grade.pop(index)</span>
+<span id="l26" class="line">        steel_type.pop(index)</span>
+<span id="l27" class="line">        applications.pop(index)</span>
+<span id="l28" class="line">        display(steel_grade, steel_type, applications)</span>
+<span id="l29" class="line">    else:</span>
+<span id="l30" class="line">        print("\nSteel Grade Not Found.")</span>
+<span id="l31" class="line">else:</span>
+<span id="l32" class="line">    print("\nInvalid Choice.")</span>
+</pre>
+</div>
+</div>
+
+<script>
+let executionSteps = [];
+let stepIdx = 0;
+
+function toggleInputs() {
+    let choice = document.getElementById("choice").value;
+    document.getElementById("add-inputs").style.display = (choice === "1") ? "block" : "none";
+    document.getElementById("del-inputs").style.display = (choice === "2") ? "block" : "none";
+}
+
+function clearHL() {
+    document.querySelectorAll('.line').forEach(x => x.classList.remove('active'));
+}
+
+function hl(id) {
+    clearHL();
+    if(id) {
+        let el = document.getElementById(id);
+        if(el) el.classList.add('active');
+    }
+}
+
+function appendTerminal(text) {
+    let term = document.getElementById("terminal");
+    term.innerHTML += text + "\n";
+}
+
+// Dynamically retrieves current values from the array references at execution time
+function buildDisplaySequence(gradesRef, typesRef, appsRef) {
+    let steps = [
+        { line: "l1", action: () => {} }
+    ];
+    // Evaluate loop bounds dynamically when step runs
+    steps.push({
+        line: "l2", 
+        action: () => {} 
+    });
+
+    // Create execution steps dynamically based on current list length
+    for (let i = 0; i < gradesRef.length; i++) {
+        steps.push({ line: "l2", action: () => {} });
+        steps.push({ 
+            line: "l3", 
+            action: ((idx) => () => appendTerminal(`${idx+1} . Steel Grade : ${gradesRef[idx]} Steel Type  : ${typesRef[idx]} Application : ${appsRef[idx]}`))(i)
+        });
+    }
+    return steps;
+}
+
+function start() {
+    let choiceVal = parseInt(document.getElementById("choice").value);
+    document.getElementById("terminal").innerHTML = "";
+    stepIdx = 0;
+    
+    let s_grade = ["AISI 1018", "AISI 1045", "AISI 1095"];
+    let s_type = ["Low Carbon Steel", "Medium Carbon Steel", "High Carbon Steel"];
+    let s_app = ["Bolts and Shafts", "Gears", "Springs"];
+
+    executionSteps = [
+        { line: "l6", action: () => {} },
+        { line: "l7", action: () => {} },
+        { line: "l8", action: () => {} },
+        { line: "l11", action: () => {} },
+        ...buildDisplaySequence(s_grade, s_type, s_app),
+        { line: "l12", action: () => appendTerminal(`\nEnter your choice (1-Add, 2-Delete): ${choiceVal}`)},
+        { line: "l13", action: () => {} }
+    ];
+
+    if (choiceVal === 1) {
+        let g = document.getElementById("add-grade").value || "AISI 304";
+        let s = document.getElementById("add-type").value || "Stainless Steel";
+        let a = document.getElementById("add-app").value || "Kitchenware";
+
+        executionSteps.push(
+            { line: "l14", action: () => appendTerminal(`Enter Steel Grade : ${g}`) },
+            { line: "l15", action: () => appendTerminal(`Enter Steel Type : ${s}`) },
+            { line: "l16", action: () => appendTerminal(`Enter Application : ${a}`) },
+            { line: "l17", action: () => s_grade.push(g) },
+            { line: "l18", action: () => s_type.push(s) },
+            { line: "l19", action: () => s_app.push(a) },
+            { line: "l20", action: () => {} },
+            // Re-generate steps with updated list items included
+            { line: "l1", action: () => {} },
+            { line: "l2", action: () => {} },
+            { line: "l3", action: () => appendTerminal(`1 . Steel Grade : ${s_grade[0]} Steel Type  : ${s_type[0]} Application : ${s_app[0]}`) },
+            { line: "l2", action: () => {} },
+            { line: "l3", action: () => appendTerminal(`2 . Steel Grade : ${s_grade[1]} Steel Type  : ${s_type[1]} Application : ${s_app[1]}`) },
+            { line: "l2", action: () => {} },
+            { line: "l3", action: () => appendTerminal(`3 . Steel Grade : ${s_grade[2]} Steel Type  : ${s_type[2]} Application : ${s_app[2]}`) },
+            { line: "l2", action: () => {} },
+            { line: "l3", action: () => appendTerminal(`4 . Steel Grade : ${s_grade[3]} Steel Type  : ${s_type[3]} Application : ${s_app[3]}`) }
+        );
+    } else if (choiceVal === 2) {
+        let delGrade = document.getElementById("del-grade").value || "AISI 1045";
+        executionSteps.push(
+            { line: "l21", action: () => {} },
+            { line: "l22", action: () => appendTerminal(`Enter Steel Grade to Delete : ${delGrade}`) },
+            { line: "l23", action: () => {} }
+        );
+
+        if (s_grade.includes(delGrade)) {
+            let idx = s_grade.indexOf(delGrade);
+            executionSteps.push(
+                { line: "l24", action: () => {} },
+                { line: "l25", action: () => s_grade.splice(idx, 1) },
+                { line: "l26", action: () => s_type.splice(idx, 1) },
+                { line: "l27", action: () => s_app.splice(idx, 1) },
+                { line: "l28", action: () => {} },
+                { line: "l1", action: () => {} },
+                { line: "l2", action: () => {} },
+                { line: "l3", action: () => appendTerminal(`1 . Steel Grade : ${s_grade[0]} Steel Type  : ${s_type[0]} Application : ${s_app[0]}`) },
+                { line: "l2", action: () => {} },
+                { line: "l3", action: () => appendTerminal(`2 . Steel Grade : ${s_grade[1]} Steel Type  : ${s_type[1]} Application : ${s_app[1]}`) }
+            );
+        } else {
+            executionSteps.push(
+                { line: "l29", action: () => {} },
+                { line: "l30", action: () => appendTerminal("\nSteel Grade Not Found.") }
+            );
+        }
+    } else {
+        executionSteps.push(
+            { line: "l21", action: () => {} },
+            { line: "l31", action: () => {} },
+            { line: "l32", action: () => appendTerminal("\nInvalid Choice.") }
+        );
+    }
+
+    nextStep();
+}
+
+function nextStep() {
+    if (stepIdx < executionSteps.length) {
+        let step = executionSteps[stepIdx];
+        hl(step.line);
+        step.action();
+        stepIdx++;
+    } else {
+        clearHL();
+        appendTerminal("\n--- Execution Complete ---");
+    }
+}
+</script>
+
+</body>
+</html>

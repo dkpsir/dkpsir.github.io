@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>While Loop Password Visualizer</title>
+
+<style>
+
+body{
+    margin:20px;
+    font-family:Arial;
+    background:#eef5fc;
+}
+
+h2{
+    text-align:center;
+    color:#0b4a8b;
+}
+
+.container{
+    display:flex;
+    gap:20px;
+}
+
+.left{
+    width:45%;
+}
+
+.right{
+    width:55%;
+}
+
+table{
+    border-collapse:collapse;
+    width:100%;
+    background:white;
+}
+
+table th,table td{
+    border:1px solid gray;
+    padding:8px;
+}
+
+th{
+    background:#d9ebff;
+}
+
+input{
+    padding:8px;
+    font-size:18px;
+    width:220px;
+}
+
+button{
+    padding:8px 16px;
+    font-size:17px;
+    margin:4px;
+}
+
+#console{
+    margin-top:15px;
+    background:white;
+    border:1px solid gray;
+    min-height:120px;
+    padding:10px;
+    font-size:20px;
+}
+
+#variables{
+    margin-top:15px;
+    background:white;
+    border:1px solid gray;
+    padding:10px;
+}
+
+pre{
+    background:#1e1e1e;
+    color:white;
+    padding:12px;
+    border-radius:8px;
+    font-size:18px;
+    margin:0;
+    line-height:1.2;
+}
+
+.line{
+    display:block;
+    padding:2px 6px;
+    margin:0;
+}
+
+.active{
+    background:yellow;
+    color:black;
+    font-weight:bold;
+}
+
+/* Executed lines should look normal */
+.executed{
+    background:transparent;
+    color:white;
+    font-weight:normal;
+}
+</style>
+
+</head>
+
+<body>
+
+<h2>while + if-else + break : Password Verification</h2>
+
+<div class="container">
+
+<div class="left">
+
+<table>
+
+<tr>
+<th>Password</th>
+<th>Output</th>
+</tr>
+
+<tr>
+<td>python</td>
+<td>Access Granted</td>
+</tr>
+
+<tr>
+<td>Anything Else</td>
+<td>Incorrect Password</td>
+</tr>
+
+</table>
+
+<br>
+
+Password :
+
+<input type="text" id="password">
+
+<br><br>
+
+<button onclick="startProgram()">Start</button>
+
+<button onclick="nextStep()">Next</button>
+
+<button onclick="resetProgram()">Reset</button>
+
+<hr>
+
+<h3>Iteration :
+<span id="iteration">1</span>
+</h3>
+
+<div id="variables">
+
+<b>Current Variable</b>
+
+<hr>
+
+password =
+<span id="varPassword">---</span>
+
+</div>
+
+<div id="console">
+
+Program Not Started
+
+</div>
+
+</div>
+
+<div class="right">
+
+<pre>
+<pre>
+
+<span id="l1" class="line">while True:</span>
+
+<span id="l2" class="line">    password = input("Enter Password : ")</span>
+
+<span id="l4" class="line">    if password == "python":</span>
+
+<span id="l5" class="line">        print("Access Granted")</span>
+
+<span id="l6" class="line">        break</span>
+
+<span id="l7" class="line">    else:</span>
+
+<span id="l8" class="line">        print("Incorrect Password")</span>
+
+</pre>
+
+</pre>
+
+</div>
+
+</div>
+
+<script>
+
+let iteration=1;
+
+let step=0;
+
+let started=false;
+
+let waitingForInput=false;
+
+let programEnded=false;
+
+let password="";
+
+function clearHighlight(){
+
+document.querySelectorAll(".line").forEach(function(x){
+
+x.classList.remove("active");
+
+});
+
+}
+
+function markExecuted(id){
+
+document.getElementById(id).classList.add("executed");
+
+}
+
+function highlight(id){
+
+clearHighlight();
+
+document.getElementById(id).classList.add("active");
+
+}
+
+function consolePrint(msg){
+
+document.getElementById("console").innerHTML=msg;
+
+}
+
+function updateVariable(){
+
+document.getElementById("varPassword").innerHTML=password;
+
+}
+function startProgram(){
+
+    if(programEnded){
+        return;
+    }
+
+    started=true;
+    step=1;
+    consolePrint("Click Next to begin execution.");
+}
+
+function nextStep(){
+
+    if(!started){
+        alert("Click Start first.");
+        return;
+    }
+
+    if(programEnded){
+        return;
+    }
+
+    switch(step){
+
+        //------------------------------------------------
+        // while True:
+        //------------------------------------------------
+
+        case 1:
+
+            highlight("l1");
+            step=2;
+
+        break;
+
+        //------------------------------------------------
+        // password=input()
+        //------------------------------------------------
+
+        case 2:
+
+            highlight("l2");
+
+            document.getElementById("password").disabled=false;
+            document.getElementById("password").focus();
+
+            waitingForInput=true;
+
+            consolePrint("Enter password in the input box, then click Next.");
+
+            step=3;
+
+        break;
+
+        //------------------------------------------------
+        // Read input
+        //------------------------------------------------
+
+        case 3:
+
+            if(waitingForInput){
+
+                password=document.getElementById("password").value;
+
+                if(password==""){
+
+                    alert("Enter Password.");
+
+                    return;
+
+                }
+
+                waitingForInput=false;
+
+                updateVariable();
+
+                document.getElementById("password").disabled=true;
+
+            }
+
+            markExecuted("l2");
+
+            highlight("l4");
+
+            step=4;
+
+        break;
+
+        //------------------------------------------------
+        // if condition
+        //------------------------------------------------
+
+        case 4:
+
+            if(password=="python"){
+
+                markExecuted("l4");
+
+                highlight("l5");
+
+                step=5;
+
+            }
+
+            else{
+
+                markExecuted("l4");
+
+                highlight("l7");
+
+                step=8;
+
+            }
+
+        break;
+
+        //------------------------------------------------
+        // print access granted
+        //------------------------------------------------
+
+        case 5:
+
+            markExecuted("l5");
+
+            consolePrint("Access Granted");
+
+            highlight("l6");
+
+            step=6;
+
+        break;
+
+        //------------------------------------------------
+        // break
+        //------------------------------------------------
+
+        case 6:
+
+            markExecuted("l6");
+
+            consolePrint("Access Granted<br><br>break executed.<br>Program Ends.");
+
+            programEnded=true;
+
+            clearHighlight();
+
+        break;
+
+        //------------------------------------------------
+        // else
+        //------------------------------------------------
+
+        case 8:
+
+            markExecuted("l7");
+
+            highlight("l8");
+
+            step=9;
+
+        break;
+
+        //------------------------------------------------
+        // print incorrect
+        //------------------------------------------------
+
+        case 9:
+
+            markExecuted("l8");
+
+            consolePrint("Incorrect Password");
+
+            step=10;
+
+        break;
+        //------------------------------------------------
+        // Return to while True
+        //------------------------------------------------
+
+        case 10:
+
+            iteration++;
+
+            document.getElementById("iteration").innerHTML=iteration;
+
+            document.getElementById("password").disabled=false;
+
+            document.getElementById("password").value="";
+
+            password="";
+
+            updateVariable();
+
+            document.getElementById("password").focus();
+
+            consolePrint("Loop repeats. Enter a new password and click Next.");
+
+            // Remove previous highlights
+            document.querySelectorAll(".line").forEach(function(x){
+                x.classList.remove("active");
+                x.classList.remove("executed");
+            });
+
+            // Start next iteration from while
+            step=1;
+
+        break;
+
+    }
+
+}
+
+function resetProgram(){
+
+    iteration=1;
+    step=0;
+
+    started=false;
+    waitingForInput=false;
+    programEnded=false;
+
+    password="";
+
+    document.getElementById("iteration").innerHTML="1";
+
+    document.getElementById("password").disabled=false;
+    document.getElementById("password").value="";
+
+    updateVariable();
+
+    consolePrint("Program Not Started");
+
+    document.querySelectorAll(".line").forEach(function(x){
+
+        x.classList.remove("active");
+        x.classList.remove("executed");
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
