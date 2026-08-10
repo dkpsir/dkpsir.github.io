@@ -62,11 +62,77 @@ background:#fff8dc;
 border-left:6px solid orange;
 padding:14px;
 font-size:20px}
+/* ---------- Top Navigation ---------- */
+
+.top-nav{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    background:#0b3c75;
+    color:#fff;
+
+    padding:12px 22px;
+
+    margin:-20px -20px 22px -20px;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.18);
+}
+
+.top-nav a{
+    color:#fff;
+    text-decoration:none;
+
+    font-size:22px;
+    font-weight:700;
+
+    padding:8px 14px;
+    border-radius:8px;
+}
+
+.top-nav a:hover{
+    background:rgba(255,255,255,.15);
+}
+
+.top-nav .nav-title{
+    font-size:25px;
+    font-weight:700;
+}
+
+@media (max-width:700px){
+
+    .top-nav a{
+        font-size:18px;
+    }
+
+    .top-nav .nav-title{
+        font-size:20px;
+    }
+
+}
 </style>
 </head>
 <body>
 
-<div class="banner">FOR LOOP SYNTAX</div>
+<div class="top-nav">
+
+    <a href="../../index.html">
+        🏠 Home
+    </a>
+
+    <div class="nav-title">
+        FOR loop Syntax
+    </div>
+
+    <a href="../index.html">
+        ⬅ Back to Python
+    </a>
+
+</div>
 
 <div class="syntax">
 <span class="purple">for</span>
