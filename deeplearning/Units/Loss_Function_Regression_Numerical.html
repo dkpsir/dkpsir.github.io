@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Numerical Problem - Loss Function Calculation</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f7fb;
+    color:#222;
+    line-height:1.6;
+}
+
+.top-nav{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    min-height:72px;
+    padding:12px 24px;
+    background:linear-gradient(135deg,#003366,#0066cc);
+    color:white;
+    box-shadow:0 3px 10px rgba(0,0,0,.20);
+}
+
+.top-nav a{
+    color:white;
+    text-decoration:none;
+    font-size:20px;
+    font-weight:700;
+    padding:8px 14px;
+    border-radius:7px;
+}
+
+.top-nav a:hover{
+    background:rgba(255,255,255,.15);
+}
+
+.nav-title{
+    font-size:25px;
+    font-weight:700;
+    text-align:center;
+}
+
+.container{
+    width:min(1150px,94%);
+    margin:35px auto 60px;
+}
+
+.topic-heading{
+    font-size:32px;
+    color:#003366;
+    border-left:7px solid #0066cc;
+    padding-left:14px;
+    margin:0 0 25px;
+}
+
+.card{
+    background:white;
+    padding:28px;
+    margin:28px 0;
+    border-radius:12px;
+    box-shadow:0 5px 16px rgba(0,0,0,.10);
+}
+
+.card h2{
+    color:#003366;
+    margin-top:0;
+}
+
+.problem-box{
+    background:#eef6ff;
+    border:2px solid #0066cc;
+    border-radius:10px;
+    padding:20px;
+    font-size:18px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin:20px 0;
+    background:white;
+    font-size:17px;
+}
+
+th{
+    background:#003366;
+    color:white;
+    padding:12px;
+    border:1px solid #555;
+    text-align:center;
+}
+
+td{
+    padding:11px;
+    border:1px solid #555;
+    text-align:center;
+}
+
+tr:nth-child(even){
+    background:#f7fbff;
+}
+
+.equation{
+    background:#f8f8f8;
+    border-left:5px solid #0066cc;
+    padding:14px 18px;
+    margin:15px 0;
+    text-align:center;
+    font-size:21px;
+    font-family:"Times New Roman",serif;
+}
+
+.answer{
+    background:#e9f8ee;
+    border:2px solid #249447;
+    border-radius:9px;
+    padding:15px 20px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.final-table td:last-child{
+    font-weight:bold;
+    color:#003366;
+}
+
+.important{
+    background:#fff8df;
+    border-left:5px solid #e0a400;
+    padding:16px 20px;
+    margin-top:20px;
+}
+
+.bottom-nav{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    margin-top:40px;
+}
+
+.btn{
+    display:inline-block;
+    padding:11px 18px;
+    background:#003366;
+    color:white;
+    text-decoration:none;
+    border-radius:7px;
+    font-weight:bold;
+}
+
+.btn:hover{
+    background:#0066cc;
+}
+
+@media(max-width:700px){
+    .top-nav{
+        padding:10px 12px;
+    }
+    .top-nav a{
+        font-size:15px;
+        padding:6px 8px;
+    }
+    .nav-title{
+        font-size:18px;
+    }
+    .container{
+        width:96%;
+    }
+    .card{
+        padding:18px;
+    }
+    table{
+        font-size:14px;
+    }
+    th,td{
+        padding:7px 5px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+
+
+<div class="container">
+
+    <h1 class="topic-heading">Loss Function Calculation — Regression</h1>
+
+    <div class="card">
+        <h2>Numerical Problem</h2>
+
+        <div class="problem-box">
+            A regression model predicts the output for <b>5 samples</b> as shown below.
+            Calculate:
+            <ol>
+                <li><b>Mean Absolute Error (MAE)</b></li>
+                <li><b>Sum of Squared Errors (SSE)</b></li>
+                <li><b>Mean Squared Error (MSE)</b></li>
+            </ol>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Sample</th>
+                    <th>Actual Value<br>y</th>
+                    <th>Predicted Value<br>ŷ</th>
+                    <th>Error<br>y − ŷ</th>
+                    <th>|y − ŷ|</th>
+                    <th>(y − ŷ)²</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>10</td><td>9</td><td>1</td><td>1</td><td>1</td></tr>
+                <tr><td>2</td><td>12</td><td>14</td><td>−2</td><td>2</td><td>4</td></tr>
+                <tr><td>3</td><td>15</td><td>13</td><td>2</td><td>2</td><td>4</td></tr>
+                <tr><td>4</td><td>18</td><td>20</td><td>−2</td><td>2</td><td>4</td></tr>
+                <tr><td>5</td><td>20</td><td>17</td><td>3</td><td>3</td><td>9</td></tr>
+                <tr>
+                    <td><b>Total</b></td><td></td><td></td><td></td>
+                    <td><b>10</b></td><td><b>22</b></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>Step 1: Mean Absolute Error (MAE)</h2>
+
+        <p>MAE is the average of the absolute errors.</p>
+
+        <div class="equation">
+            MAE = (1/n) Σ |yᵢ − ŷᵢ|
+        </div>
+
+        <p>From the table:</p>
+
+        <div class="equation">
+            Σ |yᵢ − ŷᵢ| = 10
+        </div>
+
+        <div class="equation">
+            n = 5
+        </div>
+
+        <div class="equation">
+            MAE = 10 / 5 = <b>2</b>
+        </div>
+
+        <div class="answer">
+            MAE = 2.0
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Step 2: Sum of Squared Errors (SSE)</h2>
+
+        <p>SSE is the total of the squared errors.</p>
+
+        <div class="equation">
+            SSE = Σ (yᵢ − ŷᵢ)²
+        </div>
+
+        <div class="equation">
+            SSE = 1 + 4 + 4 + 4 + 9
+        </div>
+
+        <div class="equation">
+            SSE = <b>22</b>
+        </div>
+
+        <div class="answer">
+            SSE = 22
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Step 3: Mean Squared Error (MSE)</h2>
+
+        <p>MSE is the average of the squared errors.</p>
+
+        <div class="equation">
+            MSE = (1/n) Σ (yᵢ − ŷᵢ)²
+        </div>
+
+        <div class="equation">
+            MSE = SSE / n
+        </div>
+
+        <div class="equation">
+            MSE = 22 / 5 = <b>4.4</b>
+        </div>
+
+        <div class="answer">
+            MSE = 4.4
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Final Answer</h2>
+
+        <table class="final-table">
+            <thead>
+                <tr>
+                    <th>Loss Function</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Mean Absolute Error (MAE)</td><td>2.0</td></tr>
+                <tr><td>Sum of Squared Errors (SSE)</td><td>22</td></tr>
+                <tr><td>Mean Squared Error (MSE)</td><td>4.4</td></tr>
+            </tbody>
+        </table>
+
+        <div class="important">
+            <b>Important:</b><br>
+            MAE → average magnitude of error<br>
+            SSE → total squared error<br>
+            MSE → average squared error
+        </div>
+    </div>
+
+    
+
+</div>
+
+</body>
+</html>

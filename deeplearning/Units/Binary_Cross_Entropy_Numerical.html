@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Numerical Problem - Binary Cross Entropy</title><style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f4f7fb;color:#222;line-height:1.6}
+.top-nav{position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;min-height:72px;padding:12px 24px;background:linear-gradient(135deg,#003366,#0066cc);color:#fff;box-shadow:0 3px 10px rgba(0,0,0,.2)}
+.top-nav a{color:#fff;text-decoration:none;font-size:20px;font-weight:700;padding:8px 14px;border-radius:7px}
+.top-nav a:hover{background:rgba(255,255,255,.15)}
+.nav-title{font-size:25px;font-weight:700;text-align:center}
+.container{width:min(1150px,94%);margin:35px auto 60px}
+.topic-heading{font-size:32px;color:#003366;border-left:7px solid #0066cc;padding-left:14px;margin:0 0 25px}
+.card{background:#fff;padding:28px;margin:28px 0;border-radius:12px;box-shadow:0 5px 16px rgba(0,0,0,.10)}
+.card h2{color:#003366;margin-top:0}
+.problem-box{background:#eef6ff;border:2px solid #0066cc;border-radius:10px;padding:20px;font-size:18px}
+table{width:100%;border-collapse:collapse;margin:20px 0;background:#fff;font-size:17px}
+th{background:#003366;color:#fff;padding:12px;border:1px solid #555;text-align:center}
+td{padding:11px;border:1px solid #555;text-align:center}
+tr:nth-child(even){background:#f7fbff}
+.equation{background:#f8f8f8;border-left:5px solid #0066cc;padding:14px 18px;margin:15px 0;text-align:center;font-size:21px;font-family:"Times New Roman",serif}
+.answer{background:#e9f8ee;border:2px solid #249447;border-radius:9px;padding:15px 20px;font-size:20px;font-weight:bold}
+.important{background:#fff8df;border-left:5px solid #e0a400;padding:16px 20px;margin-top:20px}
+.bottom-nav{display:flex;justify-content:space-between;gap:15px;margin-top:40px}
+.btn{display:inline-block;padding:11px 18px;background:#003366;color:#fff;text-decoration:none;border-radius:7px;font-weight:bold}
+.btn:hover{background:#0066cc}
+@media(max-width:700px){.top-nav{padding:10px 12px}.top-nav a{font-size:15px;padding:6px 8px}.nav-title{font-size:18px}.container{width:96%}.card{padding:18px}table{font-size:14px}th,td{padding:7px 5px}}
+</style></head>
+<body>
+<div class="top-nav"><a href="../index.html">🏠 Home</a><div class="nav-title">Deep Learning — Numerical Problem</div><a href="index.html">⬅ Back to Unit 2</a></div>
+<div class="container">
+<h1 class="topic-heading">Binary Cross Entropy (BCE) — Numerical Problem</h1>
+<div class="card"><h2>Problem</h2><div class="problem-box">An email classifier predicts the probability that each email is <b>Spam (1)</b>. Calculate the <b>Binary Cross Entropy (BCE)</b> for the 5 samples and determine the <b>mean BCE loss</b>.</div>
+<table><tr><th>Email</th><th>Actual y</th><th>Predicted Probability p</th><th>Component Loss</th></tr><tr><td>E1</td><td>1</td><td>0.90</td><td>-log(0.90) = 0.1054</td></tr>
+<tr><td>E2</td><td>0</td><td>0.20</td><td>-log(0.20) = 0.2231</td></tr>
+<tr><td>E3</td><td>1</td><td>0.60</td><td>-log(0.60) = 0.5108</td></tr>
+<tr><td>E4</td><td>0</td><td>0.05</td><td>-log(0.05) = 0.0513</td></tr>
+<tr><td>E5</td><td>1</td><td>0.30</td><td>-log(0.30) = 1.2040</td></tr>
+
+<tr><td><b>Total</b></td><td></td><td></td><td><b>2.0946</b></td></tr></table></div>
+<div class="card"><h2>Step 1: Binary Cross Entropy Formula</h2>
+<div class="equation">L = −[y log(p) + (1−y) log(1−p)]</div>
+<p>For each sample, only the probability assigned to the actual class contributes to the loss.</p></div>
+<div class="card"><h2>Step 2: Calculate Individual Losses</h2>
+<p><b>E1:</b> y=1, p=0.90</p><div class="equation">L₁ = −log(0.90) = 0.1053</div>
+<p><b>E2:</b> y=0, p=0.20</p><div class="equation">L₂ = −log(0.80) = 0.2231</div>
+<p><b>E3:</b> y=1, p=0.60</p><div class="equation">L₃ = −log(0.60) = 0.5108</div>
+<p><b>E4:</b> y=0, p=0.05</p><div class="equation">L₄ = −log(0.95) = 0.0513</div>
+<p><b>E5:</b> y=1, p=0.30</p><div class="equation">L₅ = −log(0.30) = 1.2040</div></div>
+<div class="card"><h2>Step 3: Total and Mean BCE</h2>
+<div class="equation">Total BCE = 0.1053 + 0.2231 + 0.5108 + 0.0513 + 1.2040 = <b>2.0945</b></div>
+<div class="equation">Mean BCE = 2.0945 / 5 = <b>0.4189</b></div>
+<div class="answer">Final Mean BCE Loss = 0.4189</div>
+<div class="important"><b>Physical meaning of the final loss:</b><br>
+The mean BCE of 0.4189 represents the model's average penalty for the probability predictions made for these 5 emails. A value closer to <b>0</b> indicates predictions that are more confident and correct; larger values indicate poorer probability predictions, especially when the model is confidently wrong.</div>
+</div>
+<div class="bottom-nav"><a class="btn" href="index.html">⬅ Back to Unit 2</a><a class="btn" href="../index.html">🏠 Home</a></div>
+</div></body></html>

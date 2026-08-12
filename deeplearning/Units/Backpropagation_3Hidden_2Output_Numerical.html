@@ -1,0 +1,39 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Backpropagation 3-3-2 Numerical</title><style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f4f7fb;color:#222;line-height:1.6}
+.top-nav{position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;min-height:72px;padding:12px 24px;background:linear-gradient(135deg,#003366,#0066cc);color:#fff;box-shadow:0 3px 10px rgba(0,0,0,.2)}
+.top-nav a{color:#fff;text-decoration:none;font-size:20px;font-weight:700;padding:8px 14px;border-radius:7px}
+.top-nav a:hover{background:rgba(255,255,255,.15)}
+.nav-title{font-size:25px;font-weight:700;text-align:center}
+.container{width:min(1150px,94%);margin:35px auto 60px}
+.topic-heading{font-size:32px;color:#003366;border-left:7px solid #0066cc;padding-left:14px;margin:0 0 25px}
+.card{background:#fff;padding:28px;margin:28px 0;border-radius:12px;box-shadow:0 5px 16px rgba(0,0,0,.10)}
+.card h2{color:#003366;margin-top:0}
+.card h3{color:#00508c}
+.problem-box{background:#eef6ff;border:2px solid #0066cc;border-radius:10px;padding:20px;font-size:18px}
+.equation{background:#f8f8f8;border-left:5px solid #0066cc;padding:14px 18px;margin:15px 0;text-align:center;font-size:20px;font-family:"Times New Roman",serif;overflow-x:auto}
+.answer{background:#e9f8ee;border:2px solid #249447;border-radius:9px;padding:15px 20px;font-size:20px;font-weight:bold}
+.important{background:#fff8df;border-left:5px solid #e0a400;padding:18px 20px;margin-top:20px}
+table{width:100%;border-collapse:collapse;margin:20px 0;background:#fff;font-size:16px}
+th{background:#003366;color:#fff;padding:11px;border:1px solid #555;text-align:center}
+td{padding:9px;border:1px solid #555;text-align:center}
+tr:nth-child(even){background:#f7fbff}
+.network{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin:20px 0}
+.layer{border:2px solid #0066cc;border-radius:10px;padding:12px 18px;background:#eef6ff;text-align:center;font-weight:bold}
+.neurons{font-family:"Courier New",monospace;font-size:17px;margin-top:6px}
+.bottom-nav{display:flex;justify-content:space-between;gap:15px;margin-top:40px}
+.btn{display:inline-block;padding:11px 18px;background:#003366;color:#fff;text-decoration:none;border-radius:7px;font-weight:bold}
+.btn:hover{background:#0066cc}
+@media(max-width:700px){.top-nav{padding:10px 12px}.top-nav a{font-size:15px;padding:6px 8px}.nav-title{font-size:18px}.container{width:96%}.card{padding:18px}table{font-size:13px}th,td{padding:6px 4px}}
+</style></head><body>
+<div class="container"><h1 class="topic-heading">Backpropagation — 3 Hidden Neurons, 2 Outputs</h1>
+<div class="card"><h2>Problem Statement</h2><div class="problem-box">Consider a network with <b>3 input neurons → 3 hidden neurons → 2 output neurons</b>. Use sigmoid activation throughout and perform one complete backpropagation update.</div>
+<div class="network"><div class="layer">Input<br><span class="neurons">[1,1,1]</span></div><b>→</b><div class="layer">Hidden<br><span class="neurons">H₁,H₂,H₃</span></div><b>→</b><div class="layer">Output<br><span class="neurons">O₁,O₂</span></div></div>
+<table><tr><th>Quantity</th><th>Value</th></tr><tr><td>Input</td><td>[1,1,1]</td></tr><tr><td>Target</td><td>[1,0]</td></tr><tr><td>Activation</td><td>Sigmoid</td></tr><tr><td>Learning rate</td><td>0.1</td></tr><tr><td>All initial weights</td><td>0.5</td></tr><tr><td>All initial biases</td><td>0</td></tr></table><div class="equation">L = ½[(y₁−ŷ₁)²+(y₂−ŷ₂)²]</div></div>
+<div class="card"><h2>Step 1: Forward Pass — Hidden Layer</h2><div class="equation">z₁=z₂=z₃=0.5(1)+0.5(1)+0.5(1)=1.5</div><div class="equation">a₁=a₂=a₃=σ(1.5)=<b>0.817574</b></div></div>
+<div class="card"><h2>Step 2: Forward Pass — Output Layer</h2><div class="equation">z₄=z₅=0.5(a₁+a₂+a₃)=<b>1.226362</b></div><div class="equation">ŷ₁=ŷ₂=<b>0.773181</b></div><div class="equation">L=½[(1−ŷ₁)²+(0−ŷ₂)²]=<b>0.324628</b></div></div>
+<div class="card"><h2>Step 3: Output Layer Deltas</h2><div class="equation">δ₄=(ŷ₁−1)ŷ₁(1−ŷ₁)=<b>-0.039778</b></div><div class="equation">δ₅=(ŷ₂−0)ŷ₂(1−ŷ₂)=<b>0.135594</b></div>
+<table><tr><th>Output weight</th><th>Gradient</th><th>Updated weight</th></tr><tr><td>w<sub>1,1</sub></td><td>-0.032521</td><td>0.503252</td></tr><tr><td>w<sub>1,2</sub></td><td>-0.032521</td><td>0.503252</td></tr><tr><td>w<sub>1,3</sub></td><td>-0.032521</td><td>0.503252</td></tr><tr><td>w<sub>2,1</sub></td><td>0.110858</td><td>0.488914</td></tr><tr><td>w<sub>2,2</sub></td><td>0.110858</td><td>0.488914</td></tr><tr><td>w<sub>2,3</sub></td><td>0.110858</td><td>0.488914</td></tr></table></div>
+<div class="card"><h2>Step 4: Hidden Layer Deltas</h2><div class="equation">δ1 = [δ₄w₄,1 + δ₅w₅,1]a1(1−a1) = <b>0.007145</b></div><div class="equation">δ2 = [δ₄w₄,2 + δ₅w₅,2]a2(1−a2) = <b>0.007145</b></div><div class="equation">δ3 = [δ₄w₄,3 + δ₅w₅,3]a3(1−a3) = <b>0.007145</b></div></div>
+<div class="card"><h2>Step 5: Update Hidden-Layer Weights and Biases</h2><table><tr><th>Parameter group</th><th>Gradient</th><th>Updated value</th></tr><tr><td>H1 weights</td><td>0.007145, 0.007145, 0.007145</td><td>0.499285, 0.499285, 0.499285</td></tr><tr><td>H2 weights</td><td>0.007145, 0.007145, 0.007145</td><td>0.499285, 0.499285, 0.499285</td></tr><tr><td>H3 weights</td><td>0.007145, 0.007145, 0.007145</td><td>0.499285, 0.499285, 0.499285</td></tr><tr><td>Hidden biases</td><td>0.007145, 0.007145, 0.007145</td><td>-0.000715, -0.000715, -0.000715</td></tr><tr><td>Output biases</td><td>-0.039778, 0.135594</td><td>0.003978, -0.013559</td></tr></table></div>
+<div class="card"><h2>Step 6: New Loss</h2><div class="equation">New outputs = [<b>0.775159</b>, <b>0.765843</b>]</div><div class="equation">New loss = <b>0.318535</b></div><div class="answer">Loss: 0.324628 → 0.318535</div><div class="important"><b>Meaning:</b> With two output neurons, backpropagation computes a separate output error for each output and then combines their contributions when propagating error into the hidden layer.</div></div>

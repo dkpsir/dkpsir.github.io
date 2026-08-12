@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Unit 1 - Deep Learning</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Segoe UI,Arial,sans-serif;
+    background:#f4f7fc;
+    color:#333;
+}
+
+header{
+    background:linear-gradient(135deg,#003366,#0066cc);
+    color:white;
+    text-align:center;
+    padding:30px;
+}
+
+header h1{
+    margin:0;
+    font-size:38px;
+}
+
+header p{
+    margin-top:8px;
+    font-size:20px;
+}
+
+.container{
+    width:92%;
+    max-width:1200px;
+    margin:30px auto;
+}
+
+.image{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.image img{
+    width:100%;
+    max-width:1050px;
+    height:auto;
+    display:block;
+    margin:auto;
+    border-radius:8px;
+    box-shadow:0 4px 12px rgba(0,0,0,.18);
+}
+ .two-column{
+
+    display:flex;
+    gap:30px;
+    align-items:flex-start;
+    margin-bottom:30px;
+
+}
+
+.left-column{
+
+    flex:2;
+
+}
+
+.right-column{
+
+    flex:1;
+    text-align:center;
+
+}
+
+.right-column img{
+
+    width:100%;
+    max-width:380px;
+    border-radius:8px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.18);
+
+}
+
+h3{
+
+    color:#003366;
+    font-size:26px;
+    margin-top:25px;
+
+}
+
+p,li{
+
+    font-size:20px;
+    line-height:1.8;
+
+}
+
+.formula-box{
+
+    background:#f8f9fa;
+    border-left:6px solid #0066cc;
+    padding:15px 20px;
+    margin:20px 0;
+    font-size:24px;
+    font-family:"Cambria Math","Times New Roman",serif;
+
+}
+
+hr{
+
+    margin:35px 0;
+
+}
+
+/* ---------- Buttons ---------- */
+
+.buttons{
+
+    text-align:center;
+    margin-top:30px;
+
+}
+
+.btn{
+
+    display:inline-block;
+    text-decoration:none;
+    background:#0066cc;
+    color:white;
+    padding:12px 22px;
+    margin:8px;
+    border-radius:6px;
+    font-weight:bold;
+
+}
+
+.btn:hover{
+
+    background:#004c99;
+
+}
+
+footer{
+
+    margin-top:40px;
+    background:#003366;
+    color:white;
+    text-align:center;
+    padding:18px;
+
+}
+/* ================= Reading Progress Bar ================= */
+
+#progress-container{
+
+    position:fixed;
+
+    top:72px;           /* Same as navbar height */
+
+    left:0;
+
+    width:100%;
+
+    height:8px;
+
+    background:#d0d0d0;
+
+    z-index:9999;
+
+}
+
+#progress-bar{
+
+    width:0%;
+
+    height:100%;
+
+    background:#d32f2f;;     /* Bright Red */
+
+    transition:width 0.15s linear;
+
+}
+.opt-table{
+
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+    font-size:18px;
+    background:white;
+    border:2px solid #000;          /* Outer Border */
+
+}
+
+.opt-table th{
+
+    background:#003366;
+    color:white;
+    padding:14px;
+    text-align:center;
+    border:1.5px solid #000;        /* Header Borders */
+
+}
+
+.opt-table td{
+
+    padding:14px;
+    border:1.5px solid #000;        /* Cell Borders */
+    vertical-align:middle;
+
+}
+
+.opt-table tbody tr:nth-child(even){
+
+    background:#f8fbff;
+
+}
+
+.opt-table tbody tr:hover{
+
+    background:#fff9db;
+    transition:.3s;
+
+}
+
+.yes{
+
+    color:#008000;
+    font-weight:bold;
+    text-align:center;
+
+}
+
+.no{
+
+    color:#d00000;
+    font-weight:bold;
+    text-align:center;
+
+}
+.opt-table{
+    border:2px solid #000;
+}
+
+.opt-table th,
+.opt-table td{
+    border:1px solid #555;
+}
+
+/* ---------- Fixed Top Navigation ---------- */
+
+.top-navbar{
+    position:sticky;
+    top:0;
+    z-index:10000;
+
+    min-height:72px;
+    box-sizing:border-box;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    background:linear-gradient(135deg,#003366,#0066cc);
+    color:white;
+
+    padding:12px 24px;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.20);
+}
+
+.top-navbar a{
+    color:white;
+    text-decoration:none;
+    font-size:21px;
+    font-weight:700;
+    padding:8px 12px;
+    border-radius:6px;
+}
+
+.top-navbar a:hover{
+    background:rgba(255,255,255,.15);
+}
+
+.nav-left,
+.nav-center,
+.nav-right{
+    display:flex;
+    align-items:center;
+}
+
+.nav-center{
+    font-size:26px;
+    font-weight:700;
+    text-align:center;
+}
+
+.nav-right{
+    justify-content:flex-end;
+}
+
+@media (max-width:800px){
+    .top-navbar{
+        padding:10px 14px;
+    }
+
+    .top-navbar a{
+        font-size:17px;
+    }
+
+    .nav-center{
+        font-size:20px;
+    }
+}
+
+@media (max-width:600px){
+    .nav-center{
+        font-size:17px;
+    }
+
+    .top-navbar a{
+        font-size:15px;
+        padding:6px 8px;
+    }
+}
+
+
+/* ---------- Numerical Problem Buttons ---------- */
+.num-btn{
+    display:inline-block;
+    margin:12px 6px 4px 0;
+    padding:9px 16px;
+    background:#e67e22;
+    color:white;
+    text-decoration:none;
+    border-radius:6px;
+    font-size:16px;
+    font-weight:700;
+    cursor:pointer;
+    border:0;
+}
+.num-btn:hover{background:#ca6413}
+.num-area{text-align:center;margin-top:12px}
+
+</style>
+
+</head>
+
+<body>
+<div id="progress-container">
+
+    <div id="progress-bar"></div>
+
+</div>
+<div class="top-navbar">
+
+    <div class="nav-left">
+        <a href="../index.html">🏠 Home</a>
+    </div>
+
+    <div class="nav-center">
+        UNIT 2 : Better Training of Neural Networks
+    </div>
+
+    <div class="nav-right">
+        <a href="index.html">Deep Learning Home ➜</a>
+</div>
+
+</div>
+
+
+<div class="container">
+
+<div class="card">
+
+<h2 class="topic-heading">2.1 Loss Functions</h2>
+
+<div class="image">
+<img src="images/unit2_image1.webp"
+     alt="Loss Functions">
+</div>
+
+<div class="num-area"><button class="num-btn" onclick="openNumerical('Loss_Function_Regression_Numerical.html')">🧮 Numerical _ Loss Functions for Regression</button></div>
+<div class="num-area"><button class="num-btn" onclick="openNumerical('Categorical_Cross_Entropy_Numerical.html')">🧮 Numerical _ Loss Functions for Classification</button></div>
+
+
+
+<!-- ========================================================= -->
+<!-- 2.5 Optimization -->
+<!-- ========================================================= -->
+
+<h2 class="topic-heading">2.2 Optimization</h2>
+
+<div class="card">
+
+
+<p>
+Optimization is the process of finding the best values of
+<b>weights</b> and <b>biases</b> that minimize the
+<b>loss function</b> during neural network training.
+The objective is to reduce the prediction error and improve the
+model's prediction accuracy.
+</p>
+
+<ul>
+
+<li>Training begins with randomly initialized weights and biases.</li>
+
+<li>The optimizer updates the weights and biases to reduce the loss.</li>
+
+<li>The process is repeated until the loss reaches a minimum or converges.</li>
+
+<li>Lower loss indicates better prediction accuracy.</li>
+
+<li>Optimization enables neural networks to learn efficiently.</li>
+
+</ul>
+
+<div class="image">
+
+<img src="images/unit2_image2.webp"
+     alt="Optimization Visualization">
+
+</div>
+
+<h3>Key Observations</h3>
+
+<ul>
+
+<li>The <b>3D Loss Surface</b> represents the loss function.</li>
+
+<li>The <b>yellow arrows</b> indicate the optimization path.</li>
+
+<li>The <b>lowest point</b> represents the minimum loss.</li>
+
+<li>The <b>Contour Plot</b> provides the top view of the optimization process.</li>
+
+<li>The optimizer continuously updates the parameters to move towards the minimum loss.</li>
+
+</ul>
+
+</div>
+
+
+
+<!-- ========================================================= -->
+<!-- 2.6 Classification of Optimization Techniques -->
+<!-- ========================================================= -->
+
+
+<div class="card">
+
+<h3>Classification of Optimization Techniques</h3>
+
+<table class="opt-table">
+
+<thead>
+
+<tr>
+
+<th>Category</th>
+
+<th>Algorithms</th>
+
+<th>Learning Rate Behavior</th>
+
+<th>Direction Improvement</th>
+
+<th>Remarks</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td><b>Fixed Learning Rate Methods</b></td>
+
+<td>2.3 Gradient Descent</td>
+
+<td>Single constant α</td>
+
+<td class="no">❌ No</td>
+
+<td>Same step size for all parameters</td>
+
+</tr>
+
+<tr>
+
+<td><b>Adaptive Learning Rate Methods</b></td>
+
+<td>
+AdaGrad<br>
+RMSProp<br>
+AdaDelta
+</td>
+
+<td>Adaptive α</td>
+
+<td class="no">❌ No</td>
+
+<td>Learning rate adjusts automatically</td>
+
+</tr>
+
+<tr>
+
+<td><b>Momentum-Based Methods</b></td>
+
+<td>Nesterov Accelerated Gradient (NAG)</td>
+
+<td>Single α (global)</td>
+
+<td class="yes">✅ Yes</td>
+
+<td>Faster and smoother convergence</td>
+
+</tr>
+
+<tr>
+
+<td><b>Adaptive + Momentum Methods</b></td>
+
+<td>Adam</td>
+
+<td>Adaptive α</td>
+
+<td class="yes">✅ Yes</td>
+
+<td>Combines adaptivity and momentum</td>
+
+</tr>
+
+</tbody>
+
+</table>
+<h3>Key Observations</h3>
+
+<ul>
+
+<li><b>Gradient Descent</b> uses a fixed learning rate.</li>
+
+<li><b>AdaGrad</b>, <b>RMSProp</b> and <b>AdaDelta</b> automatically adjust the learning rate.</li>
+
+<li><b>Nesterov Accelerated Gradient (NAG)</b> improves the search direction using momentum.</li>
+
+<li><b>Adam</b> combines adaptive learning rate with momentum for faster and stable convergence.</li>
+
+<li>Adaptive optimization methods generally converge faster than fixed learning rate methods.</li>
+
+</ul>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h2 class="topic-heading">2.3 Gradient Descent</h2>
+
+<div class="image">
+<img src="images/unit2_image3.webp"
+     alt="Gradient Descent">
+</div>
+
+
+<div class="num-area"><button class="num-btn" onclick="openNumerical('01_Gradient_Descent_Numerical.html')">🧮 Numerical _ Gradient Descent</button></div>
+<div class="num-area"><button class="num-btn" onclick="openNumerical('Three_Types_Gradient_Descent_Numerical.html')">🧮 Numerical _ Three Types of Gradient Descent</button></div>
+
+
+
+
+
+<div class="card">
+
+<h2 class="topic-heading">2.4 Adaptive Gradient (AdaGrad)</h2>
+
+<div class="image">
+<img src="images/unit2_image4.webp"
+     alt="Adaptive Gradient(ADAGRAD)">
+</div>
+
+<div class="num-area"><button class="num-btn" onclick="openNumerical('02_AdaGrad_Numerical.html')">🧮 Numerical _ AdaGrad_Numerical</button></div>
+
+
+<div class="card">
+
+<h2 class="topic-heading">2.5 Root Mean Square Propagation(RMS Prop)</h2>
+
+<div class="image">
+<img src="images/unit2_image5.webp"
+     alt="Root Mean Square Propagation(RMS Prop)">
+</div>
+
+<div class="num-area"><button class="num-btn" onclick="openNumerical('03_RMSProp_Numerical.html')">🧮 Numerical _ RMSProp_Numerical</button></div>
+
+
+
+<div class="card">
+
+<h2 class="topic-heading">2.6 Adaptive Delta(Adadelta)</h2>
+
+<div class="image">
+<img src="images/unit2_image6.webp"
+     alt="Adaptive Delta(Adadelta)">
+</div>
+
+<div class="num-area"><button class="num-btn" onclick="openNumerical('04_AdaDelta_Numerical.html')">🧮 Numerical _ AdaDelta_Numerical</button></div>
+
+
+
+
+<div class="card">
+
+<h2 class="topic-heading">2.7 Nesterov Accelarated Gradient(NAG)</h2>
+
+<div class="image">
+<img src="images/unit2_image7.webp"
+     alt="Nesterov Accelarated Gradient(NAG)">
+</div>
+<div class="num-area"><button class="num-btn" onclick="openNumerical('NAG_Numerical_Problem.html')">🧮 Numerical _ NAG</button></div>
+
+
+
+
+<div class="card">
+
+<h2 class="topic-heading">2.8 Adaptive Moment Estimatin(ADAM)</h2>
+
+<div class="image">
+<img src="images/unit2_image8.webp"
+     alt="Adaptive Moment Estimatin(ADAM)">
+</div>
+<div class="num-area"><button class="num-btn" onclick="openNumerical('05_Adam_Numerical.html')">🧮 Numerical _ Adam_Numerical</button></div>
+
+
+<div class="card">
+
+<h2 class="topic-heading">2.9 Regularisation Techniques</h2>
+
+<div class="image">
+<img src="images/unit2_image9.webp"
+     alt="Regularisation Techniques">
+
+
+
+<img src="images/unit2_image10.webp"
+     alt="Regularisation Techniques">
+<div class="num-area"><button class="num-btn" onclick="openNumerical('Regularisation_L1_L2_ElasticNet.html')">🧮 Numerical _ Regularisation_L1_L2_ElasticNet</button></div>
+<img src="images/unit2_image11.webp"
+     alt="Regularisation Techniques">
+<img src="images/unit2_image12.webp"
+     alt="Regularisation Techniques">
+<div class="num-area"><button class="num-btn" onclick="openNumerical('Dropout_Complete_Numerical.html')">🧮 Numerical _ Dropout_Complete</button></div>
+</div>
+
+
+
+
+<div class="card">
+
+<h2 class="topic-heading">2.10 Batch Normalisation</h2>
+
+<div class="image">
+<img src="images/unit2_image13.webp"
+     alt="Batch Normalisation">
+</div>
+<div class="num-area"><button class="num-btn" onclick="openNumerical('Batch_Normalisation_Complete_Numerical.html')">🧮 Numerical _ Batch_Normalisation</button></div>
+
+
+
+
+<h2 class="topic-heading">2.11 Saddle Point Problem</h2>
+
+<div class="image">
+<img src="images/unit2_image14.webp"
+     alt="Saddle Point Problem">
+</div>
+
+<h2 class="topic-heading">2.12 Greedy Layer Wise Technique</h2>
+
+<div class="image">
+<img src="images/unit2_image15.webp"
+     alt="Greedy Layer Wise Technique">
+</div>
+
+<h2 class="topic-heading">2.13 Back Propagation</h2>
+
+<div class="image">
+<img src="images/unit2_image16.webp"
+     alt="Back Propagation">
+<img src="images/unit2_image17.webp"
+     alt="Back Propagation">
+</div>
+<div class="num-area"><button class="num-btn" onclick="openNumerical('Backpropagation_2Hidden_1Output_Numerical.html')">🧮 Numerical _ Backpropagation_2Hidden_1Output</button></div>
+<div class="num-area"><button class="num-btn" onclick="openNumerical('Backpropagation_TwoHiddenLayers_Numerical.html')">🧮 Numerical _ Backpropagation_TwoHiddenLayers</button></div>
+<div class="num-area"><button class="num-btn" onclick="openNumerical('Backpropagation_3Hidden_2Output_Numerical.html')">🧮 Numerical _ Backpropagation_3Hidden_2Output</button></div>
+
+<div class="buttons">
+
+<a class="btn" href="index.html">⬅ Back to Deep Learning</a>
+
+<a class="btn" href="unit2.html">Next Unit ➜</a>
+
+<a class="btn" href="../index.html">🏠 Home</a>
+
+</div>
+
+</div>
+
+<footer>
+
+© 2026 D. Kiran Prasad
+
+</footer>
+<script>
+
+window.onscroll = function(){
+
+    let scrollTop = document.documentElement.scrollTop;
+
+    let scrollHeight = document.documentElement.scrollHeight -
+                       document.documentElement.clientHeight;
+
+    let progress = (scrollTop / scrollHeight) * 100;
+
+    document.getElementById("progress-bar").style.width = progress + "%";
+
+};
+
+
+function openNumerical(fileName){
+    const w = 1000, h = 750;
+    const left = Math.max(0, (screen.width - w) / 2);
+    const top = Math.max(0, (screen.height - h) / 2);
+    window.open(
+        fileName,
+        "numericalWindow",
+        "width="+w+",height="+h+",left="+left+",top="+top+
+        ",resizable=yes,scrollbars=yes"
+    );
+}
+
+</script>
+</body>
+
+</html>

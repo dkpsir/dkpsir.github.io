@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Batch Normalisation - Numerical Problem</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f4f7fb;color:#222;line-height:1.6}
+.top-nav{position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;min-height:72px;padding:12px 24px;background:linear-gradient(135deg,#003366,#0066cc);color:#fff;box-shadow:0 3px 10px rgba(0,0,0,.20)}
+.top-nav a{color:#fff;text-decoration:none;font-size:20px;font-weight:700;padding:8px 14px;border-radius:7px}
+.top-nav a:hover{background:rgba(255,255,255,.15)}
+.nav-title{font-size:25px;font-weight:700;text-align:center}
+.container{width:min(1150px,94%);margin:35px auto 60px}
+.topic-heading{font-size:32px;color:#003366;border-left:7px solid #0066cc;padding-left:14px;margin:0 0 25px}
+.card{background:#fff;padding:28px;margin:28px 0;border-radius:12px;box-shadow:0 5px 16px rgba(0,0,0,.10)}
+.card h2{color:#003366;margin-top:0}
+.card h3{color:#00508c}
+.problem-box{background:#eef6ff;border:2px solid #0066cc;border-radius:10px;padding:20px;font-size:18px}
+.equation{background:#f8f8f8;border-left:5px solid #0066cc;padding:14px 18px;margin:15px 0;text-align:center;font-size:21px;font-family:"Times New Roman",serif}
+.answer{background:#e9f8ee;border:2px solid #249447;border-radius:9px;padding:15px 20px;font-size:20px;font-weight:bold}
+.important{background:#fff8df;border-left:5px solid #e0a400;padding:18px 20px;margin-top:20px}
+table{width:100%;border-collapse:collapse;margin:20px 0;background:#fff;font-size:17px}
+th{background:#003366;color:#fff;padding:12px;border:1px solid #555;text-align:center}
+td{padding:11px;border:1px solid #555;text-align:center}
+tr:nth-child(even){background:#f7fbff}
+.bottom-nav{display:flex;justify-content:space-between;gap:15px;margin-top:40px}
+.btn{display:inline-block;padding:11px 18px;background:#003366;color:#fff;text-decoration:none;border-radius:7px;font-weight:bold}
+.btn:hover{background:#0066cc}
+@media(max-width:700px){.top-nav{padding:10px 12px}.top-nav a{font-size:15px;padding:6px 8px}.nav-title{font-size:18px}.container{width:96%}.card{padding:18px}table{font-size:14px}th,td{padding:7px 5px}}
+</style>
+</head>
+<body>
+
+
+
+<div class="container">
+
+<h1 class="topic-heading">Batch Normalisation — Complete Numerical Problem</h1>
+
+<div class="card">
+<h2>Problem Statement</h2>
+
+<div class="problem-box">
+Consider the outputs of a neuron for a mini-batch of <b>5 samples</b>:
+<div class="equation">x = [2, 4, 6, 8, 10]</div>
+
+Calculate the Batch Normalisation output for each sample and finally verify that the
+<b>mean after normalisation is 0</b> and the <b>variance is 1</b>.
+
+<br><br>
+Assume:
+<div class="equation">γ = 1, &nbsp;&nbsp; β = 0, &nbsp;&nbsp; ε = 0</div>
+</div>
+</div>
+
+<div class="card">
+<h2>Step 1: Calculate Batch Mean</h2>
+
+<div class="equation">
+μ<sub>B</sub> = (1/m) Σx<sub>i</sub>
+</div>
+
+<div class="equation">
+μ<sub>B</sub> = (2 + 4 + 6 + 8 + 10) / 5
+</div>
+
+<div class="equation">
+μ<sub>B</sub> = <b>6</b>
+</div>
+
+<div class="answer">Batch Mean = 6</div>
+</div>
+
+<div class="card">
+<h2>Step 2: Calculate Deviations from Mean</h2>
+
+<table>
+<tr>
+<th>Sample</th>
+<th>x<sub>i</sub></th>
+<th>x<sub>i</sub> − μ<sub>B</sub></th>
+</tr>
+<tr><td>1</td><td>2</td><td>−4</td></tr>
+<tr><td>2</td><td>4</td><td>−2</td></tr>
+<tr><td>3</td><td>6</td><td>0</td></tr>
+<tr><td>4</td><td>8</td><td>2</td></tr>
+<tr><td>5</td><td>10</td><td>4</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h2>Step 3: Square the Deviations</h2>
+
+<table>
+<tr>
+<th>Sample</th>
+<th>x<sub>i</sub> − μ<sub>B</sub></th>
+<th>(x<sub>i</sub> − μ<sub>B</sub>)²</th>
+</tr>
+<tr><td>1</td><td>−4</td><td>16</td></tr>
+<tr><td>2</td><td>−2</td><td>4</td></tr>
+<tr><td>3</td><td>0</td><td>0</td></tr>
+<tr><td>4</td><td>2</td><td>4</td></tr>
+<tr><td>5</td><td>4</td><td>16</td></tr>
+<tr><tr><td colspan="2"><b>Total</b></td><td><b>40</b></td></tr>
+</table>
+</div>
+
+<div class="card">
+<h2>Step 4: Calculate Batch Variance</h2>
+
+<p>Batch Normalisation uses the variance of the current mini-batch:</p>
+
+<div class="equation">
+σ<sub>B</sub>² = (1/m) Σ(x<sub>i</sub> − μ<sub>B</sub>)²
+</div>
+
+<div class="equation">
+σ<sub>B</sub>² = 40 / 5 = <b>8</b>
+</div>
+
+<div class="answer">Batch Variance = 8</div>
+</div>
+
+<div class="card">
+<h2>Step 5: Calculate Standard Deviation</h2>
+
+<div class="equation">
+σ<sub>B</sub> = √8 = <b>2.8284</b>
+</div>
+</div>
+
+<div class="card">
+<h2>Step 6: Normalise Each Activation</h2>
+
+<div class="equation">
+x̂<sub>i</sub> = (x<sub>i</sub> − μ<sub>B</sub>) / √(σ<sub>B</sub>² + ε)
+</div>
+
+Since ε = 0:
+
+<table>
+<tr>
+<th>Sample</th>
+<th>x<sub>i</sub></th>
+<th>x<sub>i</sub> − μ<sub>B</sub></th>
+<th>x̂<sub>i</sub></th>
+</tr>
+<tr><td>1</td><td>2</td><td>−4</td><td>−1.4142</td></tr>
+<tr><td>2</td><td>4</td><td>−2</td><td>−0.7071</td></tr>
+<tr><td>3</td><td>6</td><td>0</td><td>0</td></tr>
+<tr><td>4</td><td>8</td><td>2</td><td>0.7071</td></tr>
+<tr><td>5</td><td>10</td><td>4</td><td>1.4142</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h2>Step 7: Apply Scale and Shift</h2>
+
+<div class="equation">
+y<sub>i</sub> = γx̂<sub>i</sub> + β
+</div>
+
+<p>Given:</p>
+
+<div class="equation">
+γ = 1, &nbsp;&nbsp; β = 0
+</div>
+
+Therefore:</p>
+
+<div class="equation">
+y<sub>i</sub> = x̂<sub>i</sub>
+</div>
+
+<div class="equation">
+Final output = <b>[−1.4142, −0.7071, 0, 0.7071, 1.4142]</b>
+</div>
+</div>
+
+<div class="card">
+<h2>Step 8: Verify Mean After Normalisation</h2>
+
+<div class="equation">
+μ<sub>new</sub> =
+(−1.4142 − 0.7071 + 0 + 0.7071 + 1.4142) / 5
+</div>
+
+<div class="equation">
+μ<sub>new</sub> = <b>0</b>
+</div>
+
+<div class="answer">Mean after normalisation = 0</div>
+</div>
+
+<div class="card">
+<h2>Step 9: Verify Variance After Normalisation</h2>
+
+<p>Squared normalised values are approximately:</p>
+
+<div class="equation">
+[2, 0.5, 0, 0.5, 2]
+</div>
+
+<div class="equation">
+σ<sub>new</sub>² = (2 + 0.5 + 0 + 0.5 + 2) / 5
+</div>
+
+<div class="equation">
+σ<sub>new</sub>² = 5 / 5 = <b>1</b>
+</div>
+
+<div class="answer">Variance after normalisation = 1</div>
+</div>
+
+<div class="card">
+<h2>Final Result</h2>
+
+<table>
+<tr>
+<th>Quantity</th>
+<th>Before Normalisation</th>
+<th>After Normalisation</th>
+</tr>
+<tr>
+<td>Mean</td>
+<td>6</td>
+<td><b>0</b></td>
+</tr>
+<tr>
+<td>Variance</td>
+<td>8</td>
+<td><b>1</b></td>
+</tr>
+<tr>
+<td>Standard Deviation</td>
+<td>2.8284</td>
+<td><b>1</b></td>
+</tr>
+</table>
+
+<div class="answer">
+Final verification: Mean = 0 &nbsp;&nbsp; | &nbsp;&nbsp; Variance = 1
+</div>
+
+<div class="important">
+<b>Physical meaning:</b><br>
+Batch Normalisation centres the activations of the current mini-batch around zero and scales their
+spread so that the normalised activations have unit variance. The learnable parameters γ and β can
+later scale and shift this normalised output when required by the network.
+</div>
+</div>
+
+
+
+</div>
+</body>
+</html>

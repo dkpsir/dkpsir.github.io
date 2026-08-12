@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Backpropagation 2-2-2-1 Numerical</title><style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f4f7fb;color:#222;line-height:1.6}
+.top-nav{position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;min-height:72px;padding:12px 24px;background:linear-gradient(135deg,#003366,#0066cc);color:#fff;box-shadow:0 3px 10px rgba(0,0,0,.2)}
+.top-nav a{color:#fff;text-decoration:none;font-size:20px;font-weight:700;padding:8px 14px;border-radius:7px}
+.top-nav a:hover{background:rgba(255,255,255,.15)}
+.nav-title{font-size:25px;font-weight:700;text-align:center}
+.container{width:min(1150px,94%);margin:35px auto 60px}
+.topic-heading{font-size:32px;color:#003366;border-left:7px solid #0066cc;padding-left:14px;margin:0 0 25px}
+.card{background:#fff;padding:28px;margin:28px 0;border-radius:12px;box-shadow:0 5px 16px rgba(0,0,0,.10)}
+.card h2{color:#003366;margin-top:0}
+.card h3{color:#00508c}
+.problem-box{background:#eef6ff;border:2px solid #0066cc;border-radius:10px;padding:20px;font-size:18px}
+.equation{background:#f8f8f8;border-left:5px solid #0066cc;padding:14px 18px;margin:15px 0;text-align:center;font-size:20px;font-family:"Times New Roman",serif;overflow-x:auto}
+.answer{background:#e9f8ee;border:2px solid #249447;border-radius:9px;padding:15px 20px;font-size:20px;font-weight:bold}
+.important{background:#fff8df;border-left:5px solid #e0a400;padding:18px 20px;margin-top:20px}
+table{width:100%;border-collapse:collapse;margin:20px 0;background:#fff;font-size:16px}
+th{background:#003366;color:#fff;padding:11px;border:1px solid #555;text-align:center}
+td{padding:9px;border:1px solid #555;text-align:center}
+tr:nth-child(even){background:#f7fbff}
+.network{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin:20px 0}
+.layer{border:2px solid #0066cc;border-radius:10px;padding:12px 18px;background:#eef6ff;text-align:center;font-weight:bold}
+.neurons{font-family:"Courier New",monospace;font-size:17px;margin-top:6px}
+.bottom-nav{display:flex;justify-content:space-between;gap:15px;margin-top:40px}
+.btn{display:inline-block;padding:11px 18px;background:#003366;color:#fff;text-decoration:none;border-radius:7px;font-weight:bold}
+.btn:hover{background:#0066cc}
+@media(max-width:700px){.top-nav{padding:10px 12px}.top-nav a{font-size:15px;padding:6px 8px}.nav-title{font-size:18px}.container{width:96%}.card{padding:18px}table{font-size:13px}th,td{padding:6px 4px}}
+</style></head><body>
+<div class="container"><h1 class="topic-heading">Backpropagation — Two Hidden Layers</h1>
+<div class="card"><h2>Problem Statement</h2><div class="problem-box">Consider a network with <b>2 input neurons → 2 neurons in Hidden Layer 1 → 2 neurons in Hidden Layer 2 → 1 output neuron</b>. Use sigmoid activation in every layer and perform one complete backpropagation update through both hidden layers.</div>
+<div class="network"><div class="layer">Input<br><span class="neurons">[1,1]</span></div><b>→</b><div class="layer">Hidden 1<br><span class="neurons">H₁,H₂</span></div><b>→</b><div class="layer">Hidden 2<br><span class="neurons">H₃,H₄</span></div><b>→</b><div class="layer">Output<br><span class="neurons">O₁</span></div></div>
+<table><tr><th>Quantity</th><th>Value</th></tr><tr><td>Input</td><td>[1,1]</td></tr><tr><td>Target</td><td>1</td></tr><tr><td>Activation</td><td>Sigmoid</td></tr><tr><td>Learning rate</td><td>0.1</td></tr><tr><td>All initial weights</td><td>0.5</td></tr><tr><td>All initial biases</td><td>0</td></tr></table><div class="equation">L = ½(y−ŷ)²</div></div>
+<div class="card"><h2>Step 1: Forward Pass — Hidden Layer 1</h2><div class="equation">z₁=z₂=0.5(1)+0.5(1)=1</div><div class="equation">a₁=a₂=σ(1)=<b>0.731059</b></div></div>
+<div class="card"><h2>Step 2: Forward Pass — Hidden Layer 2</h2><div class="equation">z₃=z₄=0.5a₁+0.5a₂=<b>0.731059</b></div><div class="equation">a₃=a₄=σ(z)=<b>0.675038</b></div></div>
+<div class="card"><h2>Step 3: Forward Pass — Output</h2><div class="equation">z₅=0.5a₃+0.5a₄=<b>0.675038</b></div><div class="equation">ŷ=σ(z₅)=<b>0.662630</b></div><div class="equation">L=½(1−0.662630)²=<b>0.056909</b></div></div>
+<div class="card"><h2>Step 4: Output Layer Delta</h2><div class="equation">δ₅=(ŷ−y)ŷ(1−ŷ)=<b>-0.075419</b></div><div class="equation">∂L/∂w₅₃=δ₅a₃=<b>-0.050911</b></div><div class="equation">∂L/∂w₅₄=δ₅a₄=<b>-0.050911</b></div></div>
+<div class="card"><h2>Step 5: Backpropagate to Hidden Layer 2</h2><div class="equation">δ3=δ₅w₅,3a3(1−a3) = <b>-0.008272</b></div><div class="equation">δ4=δ₅w₅,4a4(1−a4) = <b>-0.008272</b></div></div>
+<div class="card"><h2>Step 6: Backpropagate to Hidden Layer 1</h2><div class="equation">δ1=[δ₃w₃,1+δ₄w₄,1]a1(1−a1) = <b>-0.001626</b></div><div class="equation">δ2=[δ₃w₃,2+δ₄w₄,2]a2(1−a2) = <b>-0.001626</b></div></div>
+<div class="card"><h2>Step 7: Update Parameters</h2>
+<table><tr><th>Layer</th><th>Gradient information</th><th>Updated parameters</th></tr>
+<tr><td>Output weights</td><td>-0.050911, -0.050911</td><td>0.505091, 0.505091</td></tr>
+<tr><td>Output bias</td><td>-0.075419</td><td>0.007542</td></tr>
+<tr><td>Hidden 2 weights</td><td>-0.006047, -0.006047, -0.006047, -0.006047</td><td>0.500605, 0.500605, 0.500605, 0.500605</td></tr>
+<tr><td>Hidden 2 biases</td><td>-0.008272, -0.008272</td><td>0.000827, 0.000827</td></tr>
+<tr><td>Hidden 1 weights</td><td>-0.001626, -0.001626, -0.001626, -0.001626</td><td>0.500163, 0.500163, 0.500163, 0.500163</td></tr>
+<tr><td>Hidden 1 biases</td><td>-0.001626, -0.001626</td><td>0.000163, 0.000163</td></tr>
+</table></div>
+<div class="card"><h2>Step 8: Check New Loss</h2><div class="equation">New output ŷ = <b>0.665934</b></div><div class="equation">New loss = ½(1−0.665934)² = <b>0.055800</b></div><div class="answer">Loss: 0.056909 → 0.055800</div><div class="important"><b>Meaning:</b> In a deeper network, the error is propagated backward layer by layer. The output error first determines the output-layer update, then the error is propagated through Hidden Layer 2 and finally Hidden Layer 1.</div></div>

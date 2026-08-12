@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>L1 L2 Elastic Net - Numerical Problem</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f4f7fb;color:#000;line-height:1.6} p,li,td{color:#000}
+.top-nav{position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;min-height:72px;padding:12px 24px;background:linear-gradient(135deg,#003366,#0066cc);color:#fff;box-shadow:0 3px 10px rgba(0,0,0,.20)}
+.top-nav a{color:#fff;text-decoration:none;font-size:20px;font-weight:700;padding:8px 14px;border-radius:7px}
+.top-nav a:hover{background:rgba(255,255,255,.15)}
+.nav-title{font-size:25px;font-weight:700;text-align:center}
+.container{width:min(1150px,94%);margin:35px auto 60px}
+.topic-heading{font-size:32px;color:#003366;border-left:7px solid #0066cc;padding-left:14px;margin:0 0 25px}
+.card{background:#fff;padding:28px;margin:28px 0;border-radius:12px;box-shadow:0 5px 16px rgba(0,0,0,.10)}
+.card h2{color:#003366;margin-top:0}
+.card h3{color:#00508c}
+.problem-box{background:#eef6ff;color:#000 !important;border:2px solid #0066cc;border-radius:10px;padding:20px;font-size:18px} .problem-box p,.problem-box b{color:#000 !important}
+.equation{color:#000;background:#f8f8f8;border-left:5px solid #0066cc;padding:14px 18px;margin:15px 0;text-align:center;font-size:21px;font-family:"Times New Roman",serif}
+.answer{background:#e9f8ee;color:#000 !important;border:2px solid #249447;border-radius:9px;padding:15px 20px;font-size:20px;font-weight:bold} .answer b{color:#000 !important}
+.important{background:#fff8df;color:#000 !important;border-left:5px solid #e0a400;padding:18px 20px;margin-top:20px} .important b{color:#000 !important}
+.compare{background:#f1f7ff;border:1px solid #9bbfe5;border-radius:8px;padding:16px}
+table{width:100%;border-collapse:collapse;margin:20px 0;background:#fff;font-size:17px}
+th{background:#003366;color:#fff;padding:12px;border:1px solid #555;text-align:center}
+td{padding:11px;border:1px solid #555;text-align:center}
+tr:nth-child(even){background:#f7fbff}
+.bottom-nav{display:flex;justify-content:space-between;gap:15px;margin-top:40px}
+.btn{display:inline-block;padding:11px 18px;background:#003366;color:#fff;text-decoration:none;border-radius:7px;font-weight:bold}
+.btn:hover{background:#0066cc}
+@media(max-width:700px){.top-nav{padding:10px 12px}.top-nav a{font-size:15px;padding:6px 8px}.nav-title{font-size:18px}.container{width:96%}.card{padding:18px}table{font-size:14px}th,td{padding:7px 5px}}
+</style>
+</head>
+<body>
+<div class="top-nav">
+
+
+<div class="container">
+<h1 class="topic-heading">Regularisation — L1, L2 and Elastic Net</h1>
+
+<div class="card">
+<h2>Numerical Problem</h2>
+<div class="problem-box">
+Consider the regression model
+<div class="equation">ŷ = wx + b</div>
+with the following three training samples. Calculate the loss <b>without regularisation</b> and then calculate the objective value <b>with L1, L2 and Elastic Net regularisation</b>.
+</div>
+
+<table>
+<tr><th>Sample</th><th>x</th><th>Actual y</th><th>Prediction ŷ</th><th>Error y−ŷ</th><th>Error²</th></tr>
+<tr><td>1</td><td>1</td><td>2</td><td>1.5</td><td>0.5</td><td>0.25</td></tr>
+<tr><td>2</td><td>2</td><td>4</td><td>3.0</td><td>1.0</td><td>1.00</td></tr>
+<tr><td>3</td><td>3</td><td>6</td><td>4.5</td><td>1.5</td><td>2.25</td></tr>
+<tr><tr><td colspan="3"><b>Given model parameters</b></td><td colspan="3"><b>w = 1.5, b = 0</b></td></tr>
+</table>
+
+<div class="equation">MSE = (1/n) Σ(y−ŷ)²</div>
+<div class="equation">λ = 0.1 &nbsp;&nbsp; for L1 and L2</div>
+<div class="equation">λ₁ = 0.1, &nbsp; λ₂ = 0.1 &nbsp;&nbsp; for Elastic Net</div>
+</div>
+
+<div class="card">
+<h2>Step 1: Loss Without Regularisation</h2>
+<div class="equation">MSE = (0.25 + 1.00 + 2.25) / 3</div>
+<div class="equation">MSE = 3.50 / 3 = <b>1.1667</b></div>
+<div class="answer">Loss without regularisation = 1.1667</div>
+<div class="important"><b>Physical meaning:</b> This is the average squared prediction error of the model when no penalty is imposed on the weights.</div>
+</div>
+
+<div class="card">
+<h2>Step 2: L1 Regularisation</h2>
+<p>L1 adds a penalty proportional to the absolute value of the weight.</p>
+<div class="equation">L<sub>L1</sub> = MSE + λ|w|</div>
+<div class="equation">Penalty = 0.1|1.5| = <b>0.15</b></div>
+<div class="equation">L<sub>L1</sub> = 1.1667 + 0.15 = <b>1.3167</b></div>
+<div class="answer">L1 Objective = 1.3167</div>
+<div class="important"><b>Physical meaning:</b> The model now pays an additional cost for having a non-zero weight. L1 encourages some weights to become exactly zero, producing a sparse model.</div>
+</div>
+
+<div class="card">
+<h2>Step 3: L2 Regularisation</h2>
+<p>L2 adds a penalty proportional to the square of the weight.</p>
+<div class="equation">L<sub>L2</sub> = MSE + λw²</div>
+<div class="equation">Penalty = 0.1(1.5)² = 0.1(2.25) = <b>0.225</b></div>
+<div class="equation">L<sub>L2</sub> = 1.1667 + 0.225 = <b>1.3917</b></div>
+<div class="answer">L2 Objective = 1.3917</div>
+<div class="important"><b>Physical meaning:</b> Larger weights receive a larger penalty. L2 therefore encourages weights to become smaller and usually keeps them non-zero.</div>
+</div>
+
+<div class="card">
+<h2>Step 4: Elastic Net Regularisation</h2>
+<p>Elastic Net combines L1 and L2 penalties.</p>
+<div class="equation">L<sub>EN</sub> = MSE + λ₁|w| + λ₂w²</div>
+<div class="equation">L1 penalty = 0.1(1.5) = <b>0.15</b></div>
+<div class="equation">L2 penalty = 0.1(1.5)² = <b>0.225</b></div>
+<div class="equation">L<sub>EN</sub> = 1.1667 + 0.15 + 0.225 = <b>1.5417</b></div>
+<div class="answer">Elastic Net Objective = 1.5417</div>
+<div class="important"><b>Physical meaning:</b> Elastic Net simultaneously applies the sparsity tendency of L1 and the weight-shrinking tendency of L2.</div>
+</div>
+
+<div class="card">
+<h2>Final Comparison</h2>
+<table>
+<tr><th>Case</th><th>Prediction Loss (MSE)</th><th>Regularisation Penalty</th><th>Total Objective</th></tr>
+<tr><td>Without regularisation</td><td>1.1667</td><td>0</td><td><b>1.1667</b></td></tr>
+<tr><td>L1</td><td>1.1667</td><td>0.1500</td><td><b>1.3167</b></td></tr>
+<tr><td>L2</td><td>1.1667</td><td>0.2250</td><td><b>1.3917</b></td></tr>
+<tr><td>Elastic Net</td><td>1.1667</td><td>0.3750</td><td><b>1.5417</b></td></tr>
+</table>
+<div class="important">
+<b>Important:</b> A higher regularised objective here does not mean the regularised model is worse.
+The objective intentionally includes a penalty for model complexity. During training, the optimizer balances
+prediction error against the regularisation penalty to reduce overfitting.
+</div>
+</div>
+
+</div>
+</body></html>

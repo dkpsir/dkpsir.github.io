@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Dropout - Complete Numerical Problem</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f4f7fb;color:#222;line-height:1.6}
+.top-nav{position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;min-height:72px;padding:12px 24px;background:linear-gradient(135deg,#003366,#0066cc);color:#fff;box-shadow:0 3px 10px rgba(0,0,0,.20)}
+.top-nav a{color:#fff;text-decoration:none;font-size:20px;font-weight:700;padding:8px 14px;border-radius:7px}
+.top-nav a:hover{background:rgba(255,255,255,.15)}
+.nav-title{font-size:25px;font-weight:700;text-align:center}
+.container{width:min(1150px,94%);margin:35px auto 60px}
+.topic-heading{font-size:32px;color:#003366;border-left:7px solid #0066cc;padding-left:14px;margin:0 0 25px}
+.card{background:#fff;padding:28px;margin:28px 0;border-radius:12px;box-shadow:0 5px 16px rgba(0,0,0,.10)}
+.card h2{color:#003366;margin-top:0}
+.card h3{color:#00508c}
+.problem-box{background:#eef6ff;border:2px solid #0066cc;border-radius:10px;padding:20px;font-size:18px}
+.equation{background:#f8f8f8;border-left:5px solid #0066cc;padding:14px 18px;margin:15px 0;text-align:center;font-size:21px;font-family:"Times New Roman",serif}
+.answer{background:#e9f8ee;border:2px solid #249447;border-radius:9px;padding:15px 20px;font-size:20px;font-weight:bold}
+.important{background:#fff8df;border-left:5px solid #e0a400;padding:18px 20px;margin-top:20px}
+.compare{background:#f1f7ff;border:1px solid #9bbfe5;border-radius:8px;padding:16px}
+table{width:100%;border-collapse:collapse;margin:20px 0;background:#fff;font-size:17px}
+th{background:#003366;color:#fff;padding:12px;border:1px solid #555;text-align:center}
+td{padding:11px;border:1px solid #555;text-align:center}
+tr:nth-child(even){background:#f7fbff}
+.bottom-nav{display:flex;justify-content:space-between;gap:15px;margin-top:40px}
+.btn{display:inline-block;padding:11px 18px;background:#003366;color:#fff;text-decoration:none;border-radius:7px;font-weight:bold}
+.btn:hover{background:#0066cc}
+@media(max-width:700px){.top-nav{padding:10px 12px}.top-nav a{font-size:15px;padding:6px 8px}.nav-title{font-size:18px}.container{width:96%}.card{padding:18px}table{font-size:14px}th,td{padding:7px 5px}}
+
+.network{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;margin:20px 0}
+.layer{border:2px solid #0066cc;border-radius:10px;padding:14px 18px;background:#eef6ff;text-align:center;font-weight:bold}
+.neurons{font-family:"Courier New",monospace;font-size:18px;margin-top:8px}
+.dropped{text-decoration:line-through;opacity:.45}
+</style>
+</head>
+<body>
+
+
+<div class="container">
+<h1 class="topic-heading">Dropout — Complete Numerical Problem</h1>
+
+<div class="card">
+<h2>Problem Statement</h2>
+<div class="problem-box">
+A hidden layer contains <b>5 neurons</b> with outputs:
+<div class="equation">a = [2, 4, 6, 8, 10]</div>
+During training, use a <b>dropout probability p = 0.20</b>.
+Calculate:
+<ol>
+<li>Keep probability</li>
+<li>Inverse probability scaling factor</li>
+<li>A possible dropout mask</li>
+<li>The output after dropout and inverted scaling</li>
+<li>The mean activation before and after dropout</li>
+<li>The expected activation and explain why inverted dropout preserves the expected value</li>
+</ol>
+</div>
+</div>
+
+<div class="card">
+<h2>Step 1: Choose Dropout Probability</h2>
+<div class="equation">p = 0.20</div>
+<p>Therefore, 20% of neurons are expected to be dropped during a training iteration.</p>
+</div>
+
+<div class="card">
+<h2>Step 2: Calculate Keep Probability</h2>
+<div class="equation">q = 1 − p</div>
+<div class="equation">q = 1 − 0.20 = <b>0.80</b></div>
+<p>Thus, the probability that a neuron is retained is 80%.</p>
+</div>
+
+<div class="card">
+<h2>Step 3: Calculate Inverse Probability Scaling</h2>
+<div class="equation">Inverse scaling factor = 1/q</div>
+<div class="equation">1/0.80 = <b>1.25</b></div>
+<p>Every retained activation is multiplied by 1.25 during training.</p>
+</div>
+
+<div class="card">
+<h2>Step 4: Apply a Possible Dropout Mask</h2>
+<p>One possible random dropout mask is:</p>
+<div class="equation">m = [1, 0, 1, 1, 0]</div>
+<p>Here, neurons 2 and 5 are dropped in this particular training iteration.</p>
+
+<div class="network">
+<div class="layer">Before Dropout<div class="neurons">[2, 4, 6, 8, 10]</div></div>
+<div>→</div>
+<div class="layer">Mask<div class="neurons">[1, 0, 1, 1, 0]</div></div>
+<div>→</div>
+<div class="layer">After Mask<div class="neurons">[2, 0, 6, 8, 0]</div></div>
+</div>
+</div>
+
+<div class="card">
+<h2>Step 5: Apply Inverted Dropout Scaling</h2>
+<div class="equation">a′ᵢ = (mᵢaᵢ)/q</div>
+
+<table>
+<tr><th>Neuron</th><th>Original a</th><th>Mask m</th><th>After Mask</th><th>After Scaling</th></tr>
+<tr><td>1</td><td>2</td><td>1</td><td>2</td><td>2/0.8 = <b>2.5</b></td></tr>
+<tr><td>2</td><td>4</td><td>0</td><td>0</td><td><b>0</b></td></tr>
+<tr><td>3</td><td>6</td><td>1</td><td>6</td><td>6/0.8 = <b>7.5</b></td></tr>
+<tr><td>4</td><td>8</td><td>1</td><td>8</td><td>8/0.8 = <b>10</b></td></tr>
+<tr><td>5</td><td>10</td><td>0</td><td>0</td><td><b>0</b></td></tr>
+</table>
+
+<div class="equation">Final training activation = <b>[2.5, 0, 7.5, 10, 0]</b></div>
+</div>
+
+<div class="card">
+<h2>Step 6: Mean Activation Before and After Dropout</h2>
+
+<p>Before dropout:</p>
+<div class="equation">Mean = (2+4+6+8+10)/5 = <b>6</b></div>
+
+<p>For the particular mask above, after inverted dropout:</p>
+<div class="equation">Mean = (2.5+0+7.5+10+0)/5 = <b>4</b></div>
+
+<p>The mean for one particular random mask does not have to equal the original mean.</p>
+</div>
+
+<div class="card">
+<h2>Step 7: Expected Activation</h2>
+
+<p>For one neuron with activation a, the expected output after inverted dropout is:</p>
+
+<div class="equation">E[a′] = q(a/q) + p(0)</div>
+
+<div class="equation">E[a′] = a</div>
+
+<p>For example, for the neuron whose original activation is 8:</p>
+
+<div class="equation">E[a′] = 0.80(8/0.80) + 0.20(0)</div>
+<div class="equation">E[a′] = 8</div>
+
+<div class="answer">Expected activation is preserved by inverted dropout.</div>
+
+<div class="important">
+<b>Physical meaning:</b> Dropout deliberately removes a random subset of neurons during training so that the network does not depend too strongly on particular neurons. Inverted scaling compensates for the removed activations so that the expected activation magnitude remains approximately unchanged.
+</div>
+</div>
+
+<div class="card">
+<h2>Step 8: During Testing / Inference</h2>
+<p>Dropout is switched <b>OFF</b>.</p>
+
+<div class="network">
+<div class="layer">Training<div class="neurons">Random neurons dropped<br>+ scaling</div></div>
+<div>→</div>
+<div class="layer">Testing<div class="neurons">All neurons active<br>No dropout</div></div>
+</div>
+
+<p>Because inverted dropout scaling was already applied during training, no additional scaling is required during inference.</p>
+</div>
+
+<div class="card">
+<h2>Final Interpretation</h2>
+<table>
+<tr><th>Quantity</th><th>Value</th></tr>
+<tr><td>Dropout probability p</td><td><b>0.20</b></td></tr>
+<tr><td>Keep probability q</td><td><b>0.80</b></td></tr>
+<tr><td>Inverse scaling factor 1/q</td><td><b>1.25</b></td></tr>
+<tr><td>One possible mask</td><td><b>[1, 0, 1, 1, 0]</b></td></tr>
+<tr><td>Output after dropout + scaling</td><td><b>[2.5, 0, 7.5, 10, 0]</b></td></tr>
+</table>
+
+<div class="important">
+<b>Important:</b> The dropout mask is random. Therefore, another training iteration can produce a different mask and a different instantaneous output. The key property is that inverted dropout preserves the expected activation.
+</div>
+</div>
+
+</div>
+</body></html>
