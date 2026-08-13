@@ -4,8 +4,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
 
-<title>Unit 2 - Deep Learning</title>
+<title>Unit 1 - Deep Learning</title>
 
 <style>
 
@@ -345,6 +346,87 @@ footer{
 .num-btn:hover{background:#ca6413}
 .num-area{text-align:center;margin-top:12px}
 
+
+.gd-demo{margin:30px 0 35px;padding:22px;background:#fff;border:1px solid #d5dce5;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,.10)}
+.gd-demo h3{text-align:center;color:#003366;margin-top:0;margin-bottom:20px}
+.gd-demo-row{
+    display:flex;
+    gap:15px;
+    align-items:stretch;
+}
+
+.gd-plot{
+    flex:1;
+    min-width:0;
+    height:400px;
+}
+
+.gd-table-container{
+    flex:0 0 250px;
+    max-height:400px;
+    overflow-y:auto;
+}
+.gd-controls{text-align:center;margin:14px 0}
+.gd-controls button{padding:9px 16px;margin:5px;border:0;border-radius:6px;background:#0066cc;color:#fff;font-weight:700;cursor:pointer}
+.gd-controls button:hover{background:#004c99}
+.gd-table{width:100%;border-collapse:collapse;margin-top:12px;background:#fff;font-size:16px}
+.gd-table th,.gd-table td{border:1px solid #555;padding:8px 10px;text-align:center}
+.gd-table th{background:#003366;color:#fff}
+@media(max-width:800px){
+    .gd-demo-row{
+        flex-direction:column;
+    }
+
+    .gd-plot{
+        height:350px;
+    }
+
+    .gd-table-container{
+        flex:none;
+        width:100%;
+        max-height:250px;
+    }
+}
+
+
+/* ---------- Training vs Testing Loss Animation ---------- */
+.loss-animation{
+    margin:32px 0 35px;
+    padding:22px;
+    background:#fff;
+    border:1px solid #d5dce5;
+    border-radius:10px;
+    box-shadow:0 4px 12px rgba(0,0,0,.10);
+}
+.loss-animation h3{
+    text-align:center;
+    color:#003366;
+    margin-top:0;
+    margin-bottom:14px;
+}
+.loss-description{
+    font-size:19px;
+    line-height:1.7;
+    margin:8px 10px;
+}
+.loss-description b{color:#003366}
+.loss-canvas{
+    display:block;
+    width:100%;
+    max-width:900px;
+    height:auto;
+    margin:18px auto 8px;
+    border:1px solid #222;
+    background:#fff;
+}
+.loss-legend{
+    text-align:center;
+    font-size:17px;
+    margin:8px 0 4px;
+}
+.loss-legend .training{color:#D32F2F;font-weight:bold;margin-right:25px}
+.loss-legend .testing{color:#1565C0;font-weight:bold}
+
 </style>
 
 </head>
@@ -381,6 +463,26 @@ footer{
 <div class="image">
 <img src="images/unit2_image1.webp"
      alt="Loss Functions">
+</div>
+
+
+<div class="loss-animation">
+<h3>Training Loss and Testing Loss During Training</h3>
+
+<div class="loss-description">
+<p><b>Training loss</b> is the error calculated using the training data. It generally decreases as the neural network learns from the training examples.</p>
+
+<p><b>Testing loss</b> is the error calculated using data that was not used for training. It shows how well the trained model generalizes to unseen data.</p>
+
+<p>As the <b>number of epochs increases</b>, both losses generally decrease at first. After a certain point, training loss may continue to decrease while testing loss starts to increase. This indicates <b>overfitting</b>.</p>
+</div>
+
+<canvas id="lossCurveCanvas" class="loss-canvas" width="900" height="550"></canvas>
+
+<div class="loss-legend">
+<span class="training">● Training Loss</span>
+<span class="testing">● Testing Loss</span>
+</div>
 </div>
 
 <div class="num-area"><button class="num-btn" onclick="openNumerical('Loss_Function_Regression_Numerical.html')">🧮 Numerical _ Loss Functions for Regression</button></div>
@@ -424,6 +526,38 @@ model's prediction accuracy.
 <img src="images/unit2_image2.webp"
      alt="Optimization Visualization">
 
+</div>
+
+
+<div class="gd-demo">
+<h3>Gradient Descent Demonstration</h3>
+<div class="gd-demo-row">
+
+    <div id="gd-plot3d" class="gd-plot"></div>
+
+    <div id="gd-plot2d" class="gd-plot"></div>
+
+    <div class="gd-table-container">
+        <table class="gd-table">
+            <thead>
+                <tr>
+                    <th>Epoch</th>
+                    <th>x</th>
+                    <th>y</th>
+                    <th>Loss</th>
+                </tr>
+            </thead>
+            <tbody id="gd-tb"></tbody>
+        </table>
+    </div>
+
+</div>
+
+<div class="gd-controls">
+    <button onclick="gdPrevStep()">Previous</button>
+    <button onclick="gdNextStep()">Next Iteration</button>
+    <button onclick="gdResetDemo()">Reset</button>
+</div>
 </div>
 
 <h3>Key Observations</h3>
@@ -749,6 +883,236 @@ function openNumerical(fileName){
 }
 
 </script>
+
+<script>
+const gdPath=[[0.9,0.8],[0.75,0.67],[0.60,0.54],[0.48,0.42],[0.38,0.33],[0.30,0.26],[0.23,0.20],[0.17,0.15],[0.12,0.10],[0.08,0.07],[0.05,0.04],[0.03,0.02],[0.01,0.01],[0,0]];
+let gdStep=0,gdCamera=null,gdX=[],gdY=[],gdZ=[];
+for(let i=-1;i<=1.001;i+=0.05){
+ let zr=[],xr=[],yr=[];
+ for(let j=-1;j<=1.001;j+=0.05){xr.push(j);yr.push(i);zr.push(i*i+j*j);}
+ gdX.push(xr);gdY.push(yr);gdZ.push(zr);
+}
+function gdUpdateTable(){
+ let tb=document.getElementById("gd-tb");tb.innerHTML="";
+ for(let i=0;i<=gdStep;i++){
+  let X=gdPath[i][0],Y=gdPath[i][1];
+  tb.innerHTML+=`<tr><td>${i+1}</td><td>${X.toFixed(2)}</td><td>${Y.toFixed(2)}</td><td>${(X*X+Y*Y).toFixed(4)}</td></tr>`;
+ }
+}
+function gdDraw3D(){
+ let px=[],py=[],pz=[];
+ for(let i=0;i<=gdStep;i++){px.push(gdPath[i][0]);py.push(gdPath[i][1]);pz.push(gdPath[i][0]**2+gdPath[i][1]**2+0.02);}
+ let data=[
+ {type:'surface',x:gdX,y:gdY,z:gdZ,colorscale:'Jet',showscale:false},
+ {type:'scatter3d',mode:'lines+markers',x:px,y:py,z:pz,line:{color:'blue',width:8},marker:{color:'red',size:5}}
+ ];
+ let layout={margin:{l:0,r:0,b:0,t:0},scene:{xaxis:{title:'x'},yaxis:{title:'y'},zaxis:{title:'Loss'}}};
+ if(gdCamera)layout.scene.camera=gdCamera;
+ Plotly.react("gd-plot3d",data,layout,{displayModeBar:true});
+}
+function gdDraw2D(){
+ let px=[],py=[];
+ for(let i=0;i<=gdStep;i++){px.push(gdPath[i][0]);py.push(gdPath[i][1]);}
+ let contour={z:gdZ,x:gdX[0],y:gdY.map(r=>r[0]),type:'contour',colorscale:'Greys',contours:{coloring:'lines'},showscale:false};
+ let trail={type:'scatter',mode:'lines+markers',x:px,y:py,line:{color:'blue',width:3},marker:{color:'red',size:8}};
+ Plotly.react("gd-plot2d",[contour,trail],{margin:{l:50,r:20,b:50,t:20},xaxis:{title:'x',range:[-1,1]},yaxis:{title:'y',range:[-1,1],scaleanchor:'x'}},{displayModeBar:false});
+}
+function gdRedraw(){gdDraw3D();gdDraw2D();gdUpdateTable();}
+function gdNextStep(){if(gdStep<gdPath.length-1){gdStep++;gdRedraw();}}
+function gdPrevStep(){if(gdStep>0){gdStep--;gdRedraw();}}
+function gdResetDemo(){gdStep=0;gdRedraw();}
+window.addEventListener("load",function(){
+ Plotly.newPlot("gd-plot3d",[],{}).then(g=>{
+  g.on('plotly_relayout',e=>{if(e["scene.camera"])gdCamera=e["scene.camera"];});
+  gdRedraw();
+ });
+});
+</script>
+
+
+<script>
+/* ---------- Training vs Testing Loss Animation ---------- */
+(function(){
+
+const canvas=document.getElementById("lossCurveCanvas");
+if(!canvas) return;
+
+const ctx=canvas.getContext("2d");
+
+const L=85,R=850,T=45,B=490;
+const N=100,MAX=10;
+
+let trainingLoss=[];
+let testingLoss=[];
+
+for(let e=0;e<N;e++){
+
+    /* Training loss: continuously decreases */
+    let train=8.6*Math.exp(-0.045*e)+0.20;
+    trainingLoss.push(train);
+
+    /* Testing loss: starts slightly above training loss,
+       decreases initially, then rises gradually after the optimum */
+    let test=9.6*Math.exp(-0.055*e)+0.95;
+
+    if(e>55){
+        test+=0.0035*Math.pow(e-55,2);
+    }
+
+    testingLoss.push(test);
+}
+
+let optimalEpoch=0;
+for(let i=1;i<N;i++){
+    if(testingLoss[i]<testingLoss[optimalEpoch]){
+        optimalEpoch=i;
+    }
+}
+
+function xPos(epoch){
+    return L+(R-L)*(epoch/(N-1));
+}
+
+function yPos(value){
+    return B-(B-T)*(value/MAX);
+}
+
+function drawAxes(){
+
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    ctx.strokeStyle="#111";
+    ctx.lineWidth=3;
+
+    ctx.beginPath();
+    ctx.moveTo(L,T);
+    ctx.lineTo(L,B);
+    ctx.lineTo(R,B);
+    ctx.stroke();
+
+    ctx.fillStyle="#000";
+    ctx.font="20px Times New Roman";
+
+    ctx.fillText("Epochs",445,530);
+
+    ctx.save();
+    ctx.translate(25,295);
+    ctx.rotate(-Math.PI/2);
+    ctx.fillText("Loss",0,0);
+    ctx.restore();
+
+    ctx.lineWidth=1;
+    ctx.strokeStyle="#dddddd";
+
+    for(let i=1;i<=5;i++){
+        let y=B-(B-T)*i/5;
+        ctx.beginPath();
+        ctx.moveTo(L,y);
+        ctx.lineTo(R,y);
+        ctx.stroke();
+    }
+
+    for(let i=1;i<=5;i++){
+        let x=L+(R-L)*i/5;
+        ctx.beginPath();
+        ctx.moveTo(x,T);
+        ctx.lineTo(x,B);
+        ctx.stroke();
+    }
+}
+
+function drawCurve(data,color,visibleEpoch){
+
+    ctx.strokeStyle=color;
+    ctx.lineWidth=4;
+    ctx.beginPath();
+
+    for(let i=0;i<visibleEpoch;i++){
+        let x=xPos(i);
+        let y=yPos(data[i]);
+
+        if(i===0) ctx.moveTo(x,y);
+        else ctx.lineTo(x,y);
+    }
+
+    ctx.stroke();
+}
+
+function drawOptimalLine(){
+
+    let x=xPos(optimalEpoch);
+
+    ctx.strokeStyle="#555";
+    ctx.lineWidth=2;
+    ctx.setLineDash([9,7]);
+
+    ctx.beginPath();
+    ctx.moveTo(x,T+70);
+    ctx.lineTo(x,B);
+    ctx.stroke();
+
+    ctx.setLineDash([]);
+
+    ctx.fillStyle="#000";
+    ctx.font="bold 17px Arial";
+    ctx.textAlign="center";
+
+    ctx.fillText("Optimal",x,T+25);
+    ctx.fillText("training",x,T+47);
+    ctx.fillText("point",x,T+69);
+
+    ctx.textAlign="left";
+}
+
+function drawCurveLabels(){
+
+    ctx.font="bold 17px Arial";
+
+    /* Testing loss label */
+    ctx.fillStyle="#1565C0";
+    let tx=xPos(84);
+    let ty=yPos(testingLoss[84]);
+
+    ctx.save();
+    ctx.translate(tx-5,ty-12);
+    ctx.rotate(-0.25);
+    ctx.fillText("Testing loss",0,0);
+    ctx.restore();
+
+    /* Training loss label above the curve */
+    ctx.fillStyle="#D32F2F";
+    let rx=xPos(72);
+    let ry=yPos(trainingLoss[72]);
+    ctx.fillText("Training loss",rx,ry-12);
+}
+
+let visibleEpoch=1;
+
+function animateLoss(){
+
+    drawAxes();
+
+    drawCurve(testingLoss,"#1565C0",visibleEpoch);
+    drawCurve(trainingLoss,"#D32F2F",visibleEpoch);
+
+    if(visibleEpoch>optimalEpoch+8){
+        drawOptimalLine();
+        drawCurveLabels();
+    }
+
+    if(visibleEpoch<N){
+        visibleEpoch++;
+        setTimeout(function(){
+            requestAnimationFrame(animateLoss);
+        },45);
+    }
+}
+
+animateLoss();
+
+})();
+</script>
+
 </body>
 
 </html>
