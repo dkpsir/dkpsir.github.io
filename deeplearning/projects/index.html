@@ -3,98 +3,754 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Deep Learning Projects</title>
+
 <style>
-body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:#f4f7fc}
-header{background:linear-gradient(135deg,#003366,#0066cc);color:#fff;padding:35px;text-align:center}
-.container{width:92%;max-width:1100px;margin:30px auto}
-.card{background:#fff;padding:25px;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,.12);margin-bottom:25px}
-h2{color:#003366}
-table{width:100%;border-collapse:collapse}
-th{background:#003366;color:#fff;padding:12px}
-td{padding:12px;border-bottom:1px solid #ddd}
-tr:hover{background:#eef5ff}
-a{text-decoration:none;color:#0066cc;font-weight:bold}
-.buttons{margin-top:25px;display:flex;gap:15px;flex-wrap:wrap}
-.btn{display:inline-block;background:#0066cc;color:#fff !important;padding:10px 18px;border-radius:6px;text-decoration:none}
-.btn:hover{background:#004c99}
-footer{background:#003366;color:#fff;text-align:center;padding:15px;margin-top:40px}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI",Arial,sans-serif;
+}
+
+body{
+    background:#f3f7fc;
+    color:#222;
+}
+
+/* ---------- TOP HEADER ---------- */
+
+header{
+    background:linear-gradient(135deg,#003b73,#0875c9);
+    color:white;
+    padding:28px 20px;
+    text-align:center;
+    box-shadow:0 3px 10px rgba(0,0,0,0.15);
+}
+
+header h1{
+    font-size:32px;
+    margin-bottom:7px;
+}
+
+header p{
+    font-size:17px;
+}
+
+/* ---------- NAVIGATION BUTTONS ---------- */
+
+.navigation{
+    width:92%;
+    max-width:1150px;
+    margin:18px auto 0;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.nav-btn{
+    display:inline-block;
+    background:#075ea8;
+    color:white;
+    text-decoration:none;
+
+    padding:10px 20px;
+    border-radius:7px;
+
+    font-size:16px;
+    font-weight:600;
+
+    transition:0.2s;
+}
+
+.nav-btn:hover{
+    background:#003f75;
+    transform:translateY(-1px);
+}
+
+/* ---------- MAIN CONTAINER ---------- */
+
+.container{
+    width:92%;
+    max-width:1150px;
+    margin:25px auto 40px;
+}
+
+/* ---------- PROJECT CARD ---------- */
+
+.project-card{
+    background:white;
+    border-radius:14px;
+    padding:28px;
+
+    margin-bottom:28px;
+
+    box-shadow:0 5px 16px rgba(0,0,0,0.10);
+
+    border-left:6px solid #0875c9;
+}
+
+.project-title{
+    color:#003b73;
+    font-size:26px;
+    margin-bottom:20px;
+    font-weight:700;
+}
+
+/* ---------- EXPANDABLE SECTIONS ---------- */
+
+.info-box{
+    border:1px solid #d5e0eb;
+    border-radius:9px;
+
+    margin-bottom:12px;
+
+    overflow:hidden;
+}
+
+.info-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:15px 18px;
+
+    background:#eef6ff;
+
+    cursor:pointer;
+
+    font-size:18px;
+    font-weight:650;
+
+    color:#073b70;
+}
+
+.info-header:hover{
+    background:#e2f0ff;
+}
+
+.plus{
+    width:30px;
+    height:30px;
+
+    border-radius:50%;
+
+    background:#0875c9;
+    color:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:23px;
+    font-weight:bold;
+
+    flex-shrink:0;
+}
+
+.info-content{
+    display:none;
+
+    padding:16px 22px;
+
+    background:#ffffff;
+
+    border-top:1px solid #dce5ee;
+
+    font-size:17px;
+
+    line-height:1.65;
+}
+
+.info-content.show{
+    display:block;
+}
+
+.info-content ul{
+    padding-left:25px;
+}
+
+.info-content li{
+    margin-bottom:7px;
+}
+
+/* ---------- RESOURCES ---------- */
+
+.resources{
+    margin-top:25px;
+
+    padding:20px;
+
+    background:#f7fbff;
+
+    border-radius:10px;
+
+    border:1px solid #d8e6f2;
+}
+
+.resources h3{
+    color:#003b73;
+    margin-bottom:15px;
+    font-size:21px;
+}
+
+.resource-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.resource-btn{
+    display:inline-block;
+
+    background:#0875c9;
+    color:white;
+
+    padding:10px 17px;
+
+    border-radius:7px;
+
+    text-decoration:none;
+
+    font-weight:600;
+    font-size:15px;
+
+    transition:0.2s;
+}
+
+.resource-btn:hover{
+    background:#004f8d;
+    transform:translateY(-1px);
+}
+
+/* ---------- ADDITIONAL PROJECT PLACEHOLDER ---------- */
+
+.project-number{
+    color:#0875c9;
+    font-size:18px;
+    margin-bottom:5px;
+    font-weight:700;
+}
+
+/* ---------- FOOTER ---------- */
+
+footer{
+    background:#003b73;
+    color:white;
+
+    text-align:center;
+
+    padding:18px;
+
+    margin-top:40px;
+
+    font-size:14px;
+}
+
+/* ---------- MOBILE ---------- */
+
+@media(max-width:700px){
+
+    header h1{
+        font-size:25px;
+    }
+
+    header p{
+        font-size:15px;
+    }
+
+    .navigation{
+        flex-direction:column;
+        gap:10px;
+    }
+
+    .nav-btn{
+        width:100%;
+        text-align:center;
+    }
+
+    .project-card{
+        padding:18px;
+    }
+
+    .project-title{
+        font-size:22px;
+    }
+
+    .info-header{
+        font-size:16px;
+    }
+
+    .resource-buttons{
+        flex-direction:column;
+    }
+
+    .resource-btn{
+        text-align:center;
+    }
+
+}
+
 </style>
 </head>
+
+
 <body>
 
+
+<!-- ========================================================= -->
+<!-- HEADER -->
+<!-- ========================================================= -->
+
 <header>
-<h1>Deep Learning Projects</h1>
-<p>Real-World Applications using Deep Learning Algorithms</p>
+
+    <h1>Deep Learning Projects</h1>
+
+    <p>
+        Real-World Applications using Deep Learning Algorithms
+    </p>
+
 </header>
 
+
+<!-- ========================================================= -->
+<!-- TOP NAVIGATION -->
+<!-- ========================================================= -->
+
+<div class="navigation">
+
+    <a href="../../index.html" class="nav-btn">
+        🏠 Home
+    </a>
+
+    <a href="../index.html" class="nav-btn">
+        🧠 Deep Learning Home
+    </a>
+
+</div>
+
+
+<!-- ========================================================= -->
+<!-- MAIN CONTENT -->
+<!-- ========================================================= -->
+
 <div class="container">
-<div class="card">
-<h2>Project List</h2>
 
-<table>
-<tr>
-<th>No.</th>
-<th>Project Title</th>
-<th>Algorithm</th>
-<th>Difficulty</th>
-</tr>
 
-<tr>
-<td>1</td>
-<td><a href="customer-churn/index.html">Customer Churn Prediction</a></td>
-<td>Artificial Neural Network (ANN)</td>
-<td>⭐⭐</td>
-</tr>
+<!-- ========================================================= -->
+<!-- PROJECT 1 -->
+<!-- ========================================================= -->
 
-<tr>
-<td>2</td>
-<td>House Price Prediction</td>
-<td>Artificial Neural Network (ANN)</td>
-<td>⭐⭐</td>
-</tr>
+<div class="project-card">
 
-<tr>
-<td>3</td>
-<td>Handwritten Digit Recognition</td>
-<td>Convolutional Neural Network (CNN)</td>
-<td>⭐⭐⭐</td>
-</tr>
+    <div class="project-number">
+        PROJECT 1
+    </div>
 
-<tr>
-<td>4</td>
-<td>Cat vs Dog Classification</td>
-<td>Convolutional Neural Network (CNN)</td>
-<td>⭐⭐⭐</td>
-</tr>
+    <div class="project-title">
+        Customer Churn Prediction Using Artificial Neural Network
+    </div>
 
-<tr>
-<td>5</td>
-<td>Sentiment Analysis</td>
-<td>LSTM</td>
-<td>⭐⭐⭐⭐</td>
-</tr>
 
-<tr>
-<td>6</td>
-<td>Machine Translation</td>
-<td>Transformer</td>
-<td>⭐⭐⭐⭐⭐</td>
-</tr>
+    <!-- ----------------------------------------------------- -->
+    <!-- 1. PROJECT OBJECTIVE AND DATASET -->
+    <!-- ----------------------------------------------------- -->
 
-</table>
+    <div class="info-box">
 
-<div class="buttons">
-<a class="btn" href="../index.html">← Back to Deep Learning</a>
-<a class="btn" href="../../index.html">🏠 Back to Home</a>
+        <div class="info-header" onclick="toggleSection(this)">
+
+            <span>
+                1. Project Objective &amp; Dataset
+            </span>
+
+            <span class="plus">+</span>
+
+        </div>
+
+        <div class="info-content">
+
+            <ul>
+
+                <li>
+                    The objective of the project is to predict whether
+                    a telecom customer is likely to <b>churn</b> or stay.
+                </li>
+
+                <li>
+                    The project uses the
+                    <b>Telco Customer Churn Dataset</b>.
+                </li>
+
+                <li>
+                    The dataset contains <b>7,043 customer records</b>
+                    with 21 original features.
+                </li>
+
+                <li>
+                    Customer information includes demographic,
+                    account, service and payment-related details.
+                </li>
+
+                <li>
+                    The target variable is <b>Churn</b>, indicating
+                    whether the customer left the service.
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+
+    <!-- ----------------------------------------------------- -->
+    <!-- 2. DATA PREPROCESSING -->
+    <!-- ----------------------------------------------------- -->
+
+    <div class="info-box">
+
+        <div class="info-header" onclick="toggleSection(this)">
+
+            <span>
+                2. Data Preprocessing &amp; Analysis
+            </span>
+
+            <span class="plus">+</span>
+
+        </div>
+
+        <div class="info-content">
+
+            <ul>
+
+                <li>
+                    Unnecessary customer identification information
+                    is removed.
+                </li>
+
+                <li>
+                    Missing and inconsistent values are handled.
+                </li>
+
+                <li>
+                    Categorical variables are converted into
+                    numerical form.
+                </li>
+
+                <li>
+                    Yes/No variables are encoded as numerical values
+                    and multi-category variables are one-hot encoded.
+                </li>
+
+                <li>
+                    Numerical features are scaled before training
+                    the neural network.
+                </li>
+
+                <li>
+                    Exploratory analysis is performed to study
+                    customer churn and important customer attributes.
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+
+    <!-- ----------------------------------------------------- -->
+    <!-- 3. ANN MODEL -->
+    <!-- ----------------------------------------------------- -->
+
+    <div class="info-box">
+
+        <div class="info-header" onclick="toggleSection(this)">
+
+            <span>
+                3. ANN Model Development
+            </span>
+
+            <span class="plus">+</span>
+
+        </div>
+
+        <div class="info-content">
+
+            <ul>
+
+                <li>
+                    The processed customer data is used to develop
+                    an <b>Artificial Neural Network (ANN)</b>.
+                </li>
+
+                <li>
+                    The network uses <b>26 input features</b>.
+                </li>
+
+                <li>
+                    Hidden layers use the <b>ReLU</b> activation function.
+                </li>
+
+                <li>
+                    The output layer contains one neuron with
+                    <b>Sigmoid</b> activation for binary classification.
+                </li>
+
+                <li>
+                    <b>Adam</b> is used as the optimizer.
+                </li>
+
+                <li>
+                    <b>Binary Cross-Entropy</b> is used as the loss function.
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+
+    <!-- ----------------------------------------------------- -->
+    <!-- 4. EVALUATION -->
+    <!-- ----------------------------------------------------- -->
+
+    <div class="info-box">
+
+        <div class="info-header" onclick="toggleSection(this)">
+
+            <span>
+                4. Model Evaluation &amp; Comparison
+            </span>
+
+            <span class="plus">+</span>
+
+        </div>
+
+        <div class="info-content">
+
+            <ul>
+
+                <li>
+                    The ANN model is evaluated using classification
+                    performance measures.
+                </li>
+
+                <li>
+                    Accuracy and classification report are used
+                    to evaluate the model.
+                </li>
+
+                <li>
+                    A confusion matrix is used to analyze correct
+                    and incorrect predictions.
+                </li>
+
+                <li>
+                    ANN performance is compared with other machine
+                    learning models.
+                </li>
+
+                <li>
+                    The comparison includes Logistic Regression,
+                    Random Forest and Support Vector Machine (SVM).
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+
+    <!-- ----------------------------------------------------- -->
+    <!-- 5. NEW CUSTOMER PREDICTION -->
+    <!-- ----------------------------------------------------- -->
+
+    <div class="info-box">
+
+        <div class="info-header" onclick="toggleSection(this)">
+
+            <span>
+                5. Prediction for New Customers
+            </span>
+
+            <span class="plus">+</span>
+
+        </div>
+
+        <div class="info-content">
+
+            <ul>
+
+                <li>
+                    New customer data is processed using the same
+                    preprocessing procedure used during training.
+                </li>
+
+                <li>
+                    The trained ANN predicts the probability of
+                    customer churn.
+                </li>
+
+                <li>
+                    A probability threshold of <b>0.5</b> is used
+                    for the final churn decision.
+                </li>
+
+                <li>
+                    Customers can therefore be classified as
+                    <b>Churn</b> or <b>Not Churn</b>.
+                </li>
+
+                <li>
+                    The predicted results can be saved for
+                    further analysis.
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+
+    <!-- ===================================================== -->
+    <!-- PROJECT RESOURCES -->
+    <!-- ===================================================== -->
+
+    <div class="resources">
+
+        <h3>📚 Project Resources</h3>
+
+        <div class="resource-buttons">
+
+            <!-- Replace # with your actual notebook/code link -->
+
+            <a href="#" class="resource-btn">
+                📥 Python Code
+            </a>
+
+
+            <!-- Kaggle Dataset -->
+
+            <a
+                href="https://www.kaggle.com/datasets/blastchar/telco-customer-churn"
+                class="resource-btn"
+                target="_blank"
+            >
+                📊 Dataset – Kaggle
+            </a>
+
+
+            <!-- Replace # with actual new customer data link -->
+
+            <a href="#" class="resource-btn">
+                📥 New Customer Data
+            </a>
+
+
+            <!-- Replace # with actual PPT link -->
+
+            <a href="#" class="resource-btn">
+                📑 Project Presentation
+            </a>
+
+        </div>
+
+    </div>
+
+
 </div>
 
+
+<!-- ========================================================= -->
+<!-- FUTURE PROJECTS CAN BE ADDED HERE -->
+<!-- ========================================================= -->
+
+<!--
+
+<div class="project-card">
+
+    <div class="project-number">
+        PROJECT 2
+    </div>
+
+    <div class="project-title">
+        Project Title
+    </div>
+
+    ...same structure...
+
 </div>
+
+-->
+
+
 </div>
+
+
+<!-- ========================================================= -->
+<!-- BOTTOM NAVIGATION -->
+<!-- ========================================================= -->
+
+<div class="navigation">
+
+    <a href="../../index.html" class="nav-btn">
+        🏠 Home
+    </a>
+
+    <a href="../index.html" class="nav-btn">
+        🧠 Deep Learning Home
+    </a>
+
+</div>
+
+
+<!-- ========================================================= -->
+<!-- FOOTER -->
+<!-- ========================================================= -->
 
 <footer>
-© 2026 D. Kiran Prasad | Deep Learning Projects
+
+    © 2026 D. Kiran Prasad | Deep Learning Projects
+
 </footer>
+
+
+<!-- ========================================================= -->
+<!-- JAVASCRIPT -->
+<!-- ========================================================= -->
+
+<script>
+
+function toggleSection(header){
+
+    const content = header.nextElementSibling;
+    const plus = header.querySelector(".plus");
+
+    if(content.classList.contains("show")){
+
+        content.classList.remove("show");
+        plus.textContent = "+";
+
+    }
+    else{
+
+        content.classList.add("show");
+        plus.textContent = "−";
+
+    }
+
+}
+
+</script>
+
 
 </body>
 </html>
