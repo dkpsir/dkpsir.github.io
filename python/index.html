@@ -166,6 +166,21 @@ a:hover{color:#d32f2f}
 </div>
 </aside>
 </div>
+<script>
+document.addEventListener("contextmenu", e => e.preventDefault());
 
+document.addEventListener("keydown", e => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "p") {
+        e.preventDefault();
+        alert("Printing is disabled.");
+    }
+});
+</script>
+
+<style>
+@media print {
+    body { display:none !important; }
+}
+</style>
 </body>
 </html>
