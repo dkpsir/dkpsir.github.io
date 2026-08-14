@@ -95,6 +95,16 @@ footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:1
     margin:12px auto 16px auto;
     border-radius:6px;
 }
+
+/* Essay solution layout improvements */
+.essay-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start;margin-top:6px}
+.essay-column{min-width:0}
+.calc-label{font-weight:600;color:#173b5c;margin:8px 0 3px 2px;font-size:16px}
+.essay .equation{padding:7px 10px;margin:7px 0;line-height:1.3}
+.essay .solution{line-height:1.3}
+.essay .solution p{margin:5px 0 8px}
+.essay .solution .answer{margin-top:10px}
+@media(max-width:850px){.essay-grid{grid-template-columns:1fr;gap:8px}}
 </style>
 </head>
 
@@ -245,76 +255,59 @@ footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:1
                 <span class="qplus">+</span>
             </button>
             <div class="solution">
-
-                <img src="../images/p1image.webp"
-                     alt="Stepped bar under axial pull"
-                     class="solution-image">
-
+                <img src="../images/p1image.webp" alt="Stepped bar under axial pull" class="solution-image">
                 <b>Given:</b>
-                <div class="equation">
-                \[
+                <div class="equation">\[
                 \begin{aligned}
                 P&=120,000\ \text{N}\\
                 L_1&=250\ \text{mm},&d_1&=30\ \text{mm}\\
                 L_2&=350\ \text{mm},&d_2&=20\ \text{mm}\\
                 L_3&=200\ \text{mm},&d_3&=25\ \text{mm}\\
                 E&=200,000\ \text{N/mm}^2
-                \end{aligned}
-                \]
+                \end{aligned}\]</div>
+                <div class="essay-grid">
+                    <div class="essay-column">
+                        <b>Part I – First portion:</b>
+                        <div class="calc-label">Cross-sectional Area, \(A_1\)</div>
+                        <div class="equation">\[A_1=\frac{\pi}{4}(30)^2=706.86\ \text{mm}^2\]</div>
+                        <div class="calc-label">Stress in Part I, \(\sigma_1\)</div>
+                        <div class="equation">\[\sigma_1=\frac{P}{A_1}=\frac{120000}{706.86}=169.80\ \text{N/mm}^2\]</div>
+                        <div class="calc-label">Longitudinal Strain, \(\varepsilon_1\)</div>
+                        <div class="equation">\[\varepsilon_1=\frac{\sigma_1}{E}=\frac{169.80}{200000}=8.490\times10^{-4}\]</div>
+                        <div class="calc-label">Extension of Part I, \(\delta L_1\)</div>
+                        <div class="equation">\[\delta L_1=\frac{PL_1}{EA_1}=\frac{120000(250)}{200000(706.86)}=0.2122\ \text{mm}\]</div>
+                        <b>Part II – Second portion:</b>
+                        <div class="calc-label">Cross-sectional Area, \(A_2\)</div>
+                        <div class="equation">\[A_2=\frac{\pi}{4}(20)^2=314.16\ \text{mm}^2\]</div>
+                        <div class="calc-label">Stress in Part II, \(\sigma_2\)</div>
+                        <div class="equation">\[\sigma_2=\frac{P}{A_2}=\frac{120000}{314.16}=381.97\ \text{N/mm}^2\]</div>
+                        <div class="calc-label">Longitudinal Strain, \(\varepsilon_2\)</div>
+                        <div class="equation">\[\varepsilon_2=\frac{\sigma_2}{E}=\frac{381.97}{200000}=1.910\times10^{-3}\]</div>
+                        <div class="calc-label">Extension of Part II, \(\delta L_2\)</div>
+                        <div class="equation">\[\delta L_2=\frac{PL_2}{EA_2}=\frac{120000(350)}{200000(314.16)}=0.6685\ \text{mm}\]</div>
+                    </div>
+                    <div class="essay-column">
+                        <b>Part III – Third portion:</b>
+                        <div class="calc-label">Cross-sectional Area, \(A_3\)</div>
+                        <div class="equation">\[A_3=\frac{\pi}{4}(25)^2=490.87\ \text{mm}^2\]</div>
+                        <div class="calc-label">Stress in Part III, \(\sigma_3\)</div>
+                        <div class="equation">\[\sigma_3=\frac{P}{A_3}=\frac{120000}{490.87}=244.46\ \text{N/mm}^2\]</div>
+                        <div class="calc-label">Longitudinal Strain, \(\varepsilon_3\)</div>
+                        <div class="equation">\[\varepsilon_3=\frac{\sigma_3}{E}=\frac{244.46}{200000}=1.222\times10^{-3}\]</div>
+                        <div class="calc-label">Extension of Part III, \(\delta L_3\)</div>
+                        <div class="equation">\[\delta L_3=\frac{PL_3}{EA_3}=\frac{120000(200)}{200000(490.87)}=0.2445\ \text{mm}\]</div>
+                        <b>Total Extension of the Bar:</b>
+                        <div class="calc-label">Total Extension, \(\delta L\)</div>
+                        <div class="equation">\[
+                        \begin{aligned}
+                        \delta L&=\delta L_1+\delta L_2+\delta L_3\\
+                        &=0.2122+0.6685+0.2445\\
+                        &=\boxed{1.1252\ \text{mm}}
+                        \end{aligned}\]</div>
+                    </div>
                 </div>
-
-                <b>Part I:</b>
-                <div class="equation">
-                \[
-                \begin{aligned}
-                A_1&=\frac{\pi}{4}(30)^2=706.86\ \text{mm}^2\\
-                \sigma_1&=\frac{120000}{706.86}=169.80\ \text{N/mm}^2\\
-                \varepsilon_1&=\frac{169.80}{200000}=8.490\times10^{-4}\\
-                \delta L_1&=\frac{120000(250)}{200000(706.86)}
-                =0.2122\ \text{mm}
-                \end{aligned}
-                \]
-                </div>
-
-                <b>Part II:</b>
-                <div class="equation">
-                \[
-                \begin{aligned}
-                A_2&=\frac{\pi}{4}(20)^2=314.16\ \text{mm}^2\\
-                \sigma_2&=\frac{120000}{314.16}=381.97\ \text{N/mm}^2\\
-                \varepsilon_2&=\frac{381.97}{200000}=1.910\times10^{-3}\\
-                \delta L_2&=\frac{120000(350)}{200000(314.16)}
-                =0.6685\ \text{mm}
-                \end{aligned}
-                \]
-                </div>
-
-                <b>Part III:</b>
-                <div class="equation">
-                \[
-                \begin{aligned}
-                A_3&=\frac{\pi}{4}(25)^2=490.87\ \text{mm}^2\\
-                \sigma_3&=\frac{120000}{490.87}=244.46\ \text{N/mm}^2\\
-                \varepsilon_3&=\frac{244.46}{200000}=1.222\times10^{-3}\\
-                \delta L_3&=\frac{120000(200)}{200000(490.87)}
-                =0.2445\ \text{mm}
-                \end{aligned}
-                \]
-                </div>
-
-                <b>Total extension:</b>
-                <div class="equation">
-                \[
-                \begin{aligned}
-                \delta L
-                &=\delta L_1+\delta L_2+\delta L_3\\
-                &=0.2122+0.6685+0.2445\\
-                &=\boxed{1.1252\ \text{mm}}
-                \end{aligned}
-                \]
-                </div>
+            </div>
         </div>
-
 
         <!-- LONG 2 -->
         <div class="question-box">
@@ -323,64 +316,50 @@ footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:1
                 <span>A steel rod of 20 mm diameter and 200 mm length is subjected to a 20 kN tensile force. The extension is found to be 0.53 mm and the decrease in diameter is equal to 0.0022 mm. Determine: (i) Young's modulus of elasticity, (ii) Change in volume, and (iii) Poisson's ratio.</span>
                 <span class="qplus">+</span>
             </button>
-
             <div class="solution">
                 <b>Given:</b>
-                <div class="equation">
-                \[
+                <div class="equation">\[
                 \begin{aligned}
                 d&=20\ \text{mm},&L&=200\ \text{mm}\\
                 P&=20,000\ \text{N},&\delta L&=0.53\ \text{mm}\\
                 \delta d&=0.0022\ \text{mm}
-                \end{aligned}
-                \]
-                </div>
-
-                <b>(i) Young's Modulus:</b>
-                <div class="equation">
-                \[
-                \begin{aligned}
-                A&=\frac{\pi}{4}(20)^2=314.16\ \text{mm}^2\\
-                E&=\frac{PL}{A\delta L}\\
-                &=\frac{20000(200)}{314.16(0.53)}\\
-                &=\boxed{24,024.10\ \text{N/mm}^2}
-                \end{aligned}
-                \]
-                </div>
-
-                <b>(ii) Change in Volume:</b>
-                <div class="equation">
-                \[
-                \begin{aligned}
-                V_i&=\frac{\pi}{4}d^2L
-                =\frac{\pi}{4}(20)^2(200)
-                =62831.85\ \text{mm}^3\\
-                L_f&=200+0.53=200.53\ \text{mm}\\
-                d_f&=20-0.0022=19.9978\ \text{mm}\\
-                V_f&=\frac{\pi}{4}(19.9978)^2(200.53)\\
-                &=62984.49\ \text{mm}^3\\
-                \Delta V&=V_f-V_i\\
-                &=\boxed{152.64\ \text{mm}^3}
-                \end{aligned}
-                \]
-                </div>
-
-                <b>(iii) Poisson's Ratio:</b>
-                <div class="equation">
-                \[
-                \begin{aligned}
-                \varepsilon_{\text{long}}
-                &=\frac{0.53}{200}=2.65\times10^{-3}\\
-                \varepsilon_{\text{lat}}
-                &=-\frac{0.0022}{20}=-1.10\times10^{-4}\\
-                \mu&=-\frac{\varepsilon_{\text{lat}}}{\varepsilon_{\text{long}}}\\
-                &=\boxed{0.0415}
-                \end{aligned}
-                \]
+                \end{aligned}\]</div>
+                <div class="essay-grid">
+                    <div class="essay-column">
+                        <b>(i) Young's Modulus:</b>
+                        <div class="calc-label">Cross-sectional Area, \(A\)</div>
+                        <div class="equation">\[A=\frac{\pi}{4}(20)^2=314.16\ \text{mm}^2\]</div>
+                        <div class="calc-label">Young's Modulus, \(E\)</div>
+                        <div class="equation">\[
+                        \begin{aligned}
+                        E&=\frac{PL}{A\delta L}\\
+                        &=\frac{20000(200)}{314.16(0.53)}\\
+                        &=\boxed{24,024.10\ \text{N/mm}^2}
+                        \end{aligned}\]</div>
+                        <b>(ii) Change in Volume:</b>
+                        <div class="calc-label">Initial Volume, \(V_i\)</div>
+                        <div class="equation">\[V_i=\frac{\pi}{4}d^2L=\frac{\pi}{4}(20)^2(200)=62831.85\ \text{mm}^3\]</div>
+                        <div class="calc-label">Final Length, \(L_f\)</div>
+                        <div class="equation">\[L_f=200+0.53=200.53\ \text{mm}\]</div>
+                        <div class="calc-label">Final Diameter, \(d_f\)</div>
+                        <div class="equation">\[d_f=20-0.0022=19.9978\ \text{mm}\]</div>
+                        <div class="calc-label">Final Volume, \(V_f\)</div>
+                        <div class="equation">\[V_f=\frac{\pi}{4}(19.9978)^2(200.53)=62984.49\ \text{mm}^3\]</div>
+                        <div class="calc-label">Change in Volume, \(\Delta V\)</div>
+                        <div class="equation">\[\Delta V=V_f-V_i=\boxed{152.64\ \text{mm}^3}\]</div>
+                    </div>
+                    <div class="essay-column">
+                        <b>(iii) Poisson's Ratio:</b>
+                        <div class="calc-label">Longitudinal Strain, \(\varepsilon_{\text{long}}\)</div>
+                        <div class="equation">\[\varepsilon_{\text{long}}=\frac{\delta L}{L}=\frac{0.53}{200}=2.65\times10^{-3}\]</div>
+                        <div class="calc-label">Lateral Strain, \(\varepsilon_{\text{lat}}\)</div>
+                        <div class="equation">\[\varepsilon_{\text{lat}}=-\frac{\delta d}{d}=-\frac{0.0022}{20}=-1.10\times10^{-4}\]</div>
+                        <div class="calc-label">Poisson's Ratio, \(\mu\)</div>
+                        <div class="equation">\[\mu=-\frac{\varepsilon_{\text{lat}}}{\varepsilon_{\text{long}}}=\boxed{0.0415}\]</div>
+                    </div>
                 </div>
             </div>
         </div>
-
 
         <!-- LONG 3 -->
         <div class="question-box">
@@ -389,81 +368,50 @@ footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:1
                 <span>A specimen of steel 20 mm diameter with a gauge length of 200 mm is tested to destruction. It has an extension of 0.25 mm under a load of 80 kN and the load at elastic limit is 102 kN. The maximum load is 130 kN. The total extension at fracture is 56 mm and diameter at neck is 15 mm. Find: (i) Stress at elastic limit, (ii) Young's modulus, (iii) Percentage elongation, (iv) Percentage reduction in area, and (v) Ultimate tensile stress.</span>
                 <span class="qplus">+</span>
             </button>
-
             <div class="solution">
                 <b>Given:</b>
-                <div class="equation">
-                \[
+                <div class="equation">\[
                 \begin{aligned}
                 d&=20\ \text{mm},&L&=200\ \text{mm}\\
                 P&=80,000\ \text{N},&\delta L&=0.25\ \text{mm}\\
                 P_{\text{elas}}&=102,000\ \text{N}\\
                 P_{\max}&=130,000\ \text{N}\\
                 L_{\text{extension}}&=56\ \text{mm},&d_{\text{neck}}&=15\ \text{mm}
-                \end{aligned}
-                \]
-                </div>
-
-                <b>(i) Stress at elastic limit:</b>
-                <div class="equation">
-                \[
-                \begin{aligned}
-                A_0&=\frac{\pi}{4}(20)^2=314.16\ \text{mm}^2\\
-                \sigma_{\text{elastic}}
-                &=\frac{102000}{314.16}\\
-                &=\boxed{324.68\ \text{N/mm}^2}
-                \end{aligned}
-                \]
-                </div>
-
-                <b>(ii) Young's Modulus:</b>
-                <div class="equation">
-                \[
-                \begin{aligned}
-                E&=\frac{PL}{A_0\delta L}\\
-                &=\frac{80000(200)}{314.16(0.25)}\\
-                &=\boxed{203,718.82\ \text{N/mm}^2}
-                \end{aligned}
-                \]
-                </div>
-
-                <b>(iii) Percentage elongation:</b>
-                <div class="equation">
-                \[
-                \begin{aligned}
-                L_f&=200+56=256\ \text{mm}\\
-                \%\text{ elongation}
-                &=\frac{256-200}{200}\times100\\
-                &=\boxed{28\%}
-                \end{aligned}
-                \]
-                </div>
-
-                <b>(iv) Percentage reduction in area:</b>
-                <div class="equation">
-                \[
-                \begin{aligned}
-                A_f&=\frac{\pi}{4}(15)^2\\
-                \%\text{ reduction}
-                &=\frac{A_0-A_f}{A_0}\times100\\
-                &=\boxed{43.75\%}
-                \end{aligned}
-                \]
-                </div>
-
-                <b>(v) Ultimate tensile stress:</b>
-                <div class="equation">
-                \[
-                \begin{aligned}
-                \sigma_{\text{ult}}
-                &=\frac{130000}{314.16}\\
-                &=\boxed{413.80\ \text{N/mm}^2}
-                \end{aligned}
-                \]
+                \end{aligned}\]</div>
+                <div class="essay-grid">
+                    <div class="essay-column">
+                        <b>(i) Stress at elastic limit:</b>
+                        <div class="calc-label">Original Cross-sectional Area, \(A_0\)</div>
+                        <div class="equation">\[A_0=\frac{\pi}{4}(20)^2=314.16\ \text{mm}^2\]</div>
+                        <div class="calc-label">Stress at Elastic Limit, \(\sigma_{\text{elastic}}\)</div>
+                        <div class="equation">\[\sigma_{\text{elastic}}=\frac{P_{\text{elas}}}{A_0}=\frac{102000}{314.16}=\boxed{324.68\ \text{N/mm}^2}\]</div>
+                        <b>(ii) Young's Modulus:</b>
+                        <div class="calc-label">Young's Modulus, \(E\)</div>
+                        <div class="equation">\[
+                        \begin{aligned}
+                        E&=\frac{PL}{A_0\delta L}\\
+                        &=\frac{80000(200)}{314.16(0.25)}\\
+                        &=\boxed{203,718.82\ \text{N/mm}^2}
+                        \end{aligned}\]</div>
+                        <b>(iii) Percentage Elongation:</b>
+                        <div class="calc-label">Final Gauge Length, \(L_f\)</div>
+                        <div class="equation">\[L_f=200+56=256\ \text{mm}\]</div>
+                        <div class="calc-label">Percentage Elongation</div>
+                        <div class="equation">\[\%\text{ elongation}=\frac{L_f-L}{L}\times100=\frac{256-200}{200}\times100=\boxed{28\%}\]</div>
+                    </div>
+                    <div class="essay-column">
+                        <b>(iv) Percentage Reduction in Area:</b>
+                        <div class="calc-label">Neck Area, \(A_f\)</div>
+                        <div class="equation">\[A_f=\frac{\pi}{4}(15)^2\]</div>
+                        <div class="calc-label">Percentage Reduction in Area</div>
+                        <div class="equation">\[\%\text{ reduction}=\frac{A_0-A_f}{A_0}\times100=\boxed{43.75\%}\]</div>
+                        <b>(v) Ultimate Tensile Stress:</b>
+                        <div class="calc-label">Ultimate Tensile Stress, \(\sigma_{\text{ult}}\)</div>
+                        <div class="equation">\[\sigma_{\text{ult}}=\frac{P_{\max}}{A_0}=\frac{130000}{314.16}=\boxed{413.80\ \text{N/mm}^2}\]</div>
+                    </div>
                 </div>
             </div>
         </div>
-
 
         <!-- LONG 4 -->
         <div class="question-box">
@@ -472,61 +420,47 @@ footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:1
                 <span>The modulus of rigidity for a material is \(0.5\times10^5\ \text{N/mm}^2\). A 10 mm diameter and 300 mm long rod of the material is subjected to an axial pull of 10 kN. The changes in diameter and length are 0.00015 mm and 0.015 mm respectively. Calculate Poisson's ratio and bulk modulus of elasticity.</span>
                 <span class="qplus">+</span>
             </button>
-
             <div class="solution">
                 <b>Given:</b>
-                <div class="equation">
-                \[
+                <div class="equation">\[
                 \begin{aligned}
                 G&=0.5\times10^5\ \text{N/mm}^2\\
                 d&=10\ \text{mm},&L&=300\ \text{mm}\\
                 P&=10,000\ \text{N}\\
-                \delta d&=0.00015\ \text{mm},&
-                \delta L&=0.015\ \text{mm}
-                \end{aligned}
-                \]
-                </div>
-
-                <b>Poisson's ratio:</b>
-                <div class="equation">
-                \[
-                \begin{aligned}
-                \varepsilon_{\text{lat}}
-                &=\frac{0.00015}{10}=0.000015\\
-                \varepsilon_{\text{long}}
-                &=\frac{0.015}{300}=0.00005\\
-                \mu
-                &=\frac{0.000015}{0.00005}\\
-                &=\boxed{0.3}
-                \end{aligned}
-                \]
-                </div>
-
-                <b>Young's Modulus:</b>
-                <div class="equation">
-                \[
-                \begin{aligned}
-                E&=2G(1+\mu)\\
-                &=2(0.5\times10^5)(1+0.3)\\
-                &=\boxed{1.3\times10^5\ \text{N/mm}^2}
-                \end{aligned}
-                \]
-                </div>
-
-                <b>Bulk Modulus:</b>
-                <div class="equation">
-                \[
-                \begin{aligned}
-                K&=\frac{E}{3(1-2\mu)}\\
-                &=\frac{1.3\times10^5}{3(1-2(0.3))}\\
-                &=\frac{130000}{1.2}\\
-                &=\boxed{108333.33\ \text{N/mm}^2}
-                \end{aligned}
-                \]
+                \delta d&=0.00015\ \text{mm},&\delta L&=0.015\ \text{mm}
+                \end{aligned}\]</div>
+                <div class="essay-grid">
+                    <div class="essay-column">
+                        <b>Poisson's Ratio:</b>
+                        <div class="calc-label">Lateral Strain, \(\varepsilon_{\text{lat}}\)</div>
+                        <div class="equation">\[\varepsilon_{\text{lat}}=\frac{\delta d}{d}=\frac{0.00015}{10}=0.000015\]</div>
+                        <div class="calc-label">Longitudinal Strain, \(\varepsilon_{\text{long}}\)</div>
+                        <div class="equation">\[\varepsilon_{\text{long}}=\frac{\delta L}{L}=\frac{0.015}{300}=0.00005\]</div>
+                        <div class="calc-label">Poisson's Ratio, \(\mu\)</div>
+                        <div class="equation">\[\mu=\frac{\varepsilon_{\text{lat}}}{\varepsilon_{\text{long}}}=\boxed{0.3}\]</div>
+                        <b>Young's Modulus:</b>
+                        <div class="calc-label">Young's Modulus, \(E\)</div>
+                        <div class="equation">\[
+                        \begin{aligned}
+                        E&=2G(1+\mu)\\
+                        &=2(0.5\times10^5)(1+0.3)\\
+                        &=\boxed{1.3\times10^5\ \text{N/mm}^2}
+                        \end{aligned}\]</div>
+                    </div>
+                    <div class="essay-column">
+                        <b>Bulk Modulus:</b>
+                        <div class="calc-label">Bulk Modulus of Elasticity, \(K\)</div>
+                        <div class="equation">\[
+                        \begin{aligned}
+                        K&=\frac{E}{3(1-2\mu)}\\
+                        &=\frac{1.3\times10^5}{3(1-2(0.3))}\\
+                        &=\frac{130000}{1.2}\\
+                        &=\boxed{108333.33\ \text{N/mm}^2}
+                        \end{aligned}\]</div>
+                    </div>
                 </div>
             </div>
         </div>
-
 
         <!-- LONG 5 -->
         <div class="question-box">
@@ -535,99 +469,39 @@ footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:1
                 <span>Define strain energy and derive the expression for strain energy stored in a material subjected to a tensile load. Also derive the expression for strain energy in terms of stress, Young's modulus and volume of the material.</span>
                 <span class="qplus">+</span>
             </button>
-
             <div class="solution">
                 <p><b>Derivation:</b></p>
-
-                <p>
-                    Consider a gradually applied tensile load \(P\) producing an extension
-                    \(\delta L\). The load-extension graph is a straight line for an
-                    elastically loaded material.
-                </p>
-
-                <img src="../images/strain_energy.webp"
-                     alt="Strain energy from load-extension graph"
-                     class="strain-energy-image">
-
-                <div class="equation">
-                \[
-                SE=\text{Area under the load-extension graph}
-                \]
-                </div>
-
-                <div class="equation">
-                \[
+                <p>Consider a gradually applied tensile load \(P\) producing an extension \(\delta L\). The load-extension graph is a straight line for an elastically loaded material.</p>
+                <img src="../images/strain_energy.webp" alt="Strain energy from load-extension graph" class="strain-energy-image">
+                <div class="calc-label">Strain Energy, \(SE\)</div>
+                <div class="equation">\[SE=\text{Area under the load-extension graph}\]</div>
+                <div class="equation">\[SE=\frac{1}{2}P\delta L\]</div>
+                <div class="calc-label">Stress, \(\sigma\), and Load, \(P\)</div>
+                <div class="equation">\[\sigma=\frac{P}{A}\quad\Rightarrow\quad P=\sigma A\]</div>
+                <div class="calc-label">Extension, \(\delta L\)</div>
+                <div class="equation">\[
                 \begin{aligned}
-                SE
-                &=\frac{1}{2}P\delta L
-                \end{aligned}
-                \]
-                </div>
-
-                <p>We know that</p>
-
-                <div class="equation">
-                \[
-                \sigma=\frac{P}{A}
-                \quad\Rightarrow\quad
-                P=\sigma A
-                \]
-                </div>
-
-                Also,
-
-                <div class="equation">
-                \[
-                \begin{aligned}
-                \delta L
-                &=\frac{PL}{EA}\\
+                \delta L&=\frac{PL}{EA}\\
                 &=\frac{\sigma AL}{EA}\\
                 &=\frac{\sigma L}{E}
-                \end{aligned}
-                \]
-                </div>
-
-                Substituting \(P=\sigma A\) and
-                \(\delta L=\frac{\sigma L}{E}\),
-
-                <div class="equation">
-                \[
+                \end{aligned}\]</div>
+                <p>Substituting \(P=\sigma A\) and \(\delta L=\frac{\sigma L}{E}\),</p>
+                <div class="calc-label">Strain Energy in terms of Stress</div>
+                <div class="equation">\[
                 \begin{aligned}
-                SE
-                &=\frac{1}{2}(\sigma A)
-                  \left(\frac{\sigma L}{E}\right)\\
+                SE&=\frac{1}{2}(\sigma A)\left(\frac{\sigma L}{E}\right)\\
                 &=\frac{\sigma^2AL}{2E}
-                \end{aligned}
-                \]
-                </div>
-
-                Since \(AL\) is the volume \(V\),
-
-                <div class="equation">
-                \[
-                \boxed{
-                SE=\frac{\sigma^2V}{2E}
-                }
-                \]
-                </div>
-
-                Therefore, strain energy stored in a tensile member is:
-
-                <div class="equation">
-                \[
-                \boxed{
-                SE=\frac{P^2L}{2AE}
-                =\frac{\sigma^2}{2E}V
-                }
-                \]
-                </div>
-
-                <div class="answer">
-                    Final expression:
-                    \(\boxed{SE=\dfrac{\sigma^2V}{2E}}\)
-                </div>
+                \end{aligned}\]</div>
+                <p>Since \(AL\) is the volume \(V\),</p>
+                <div class="calc-label">Strain Energy in terms of Stress, Modulus and Volume</div>
+                <div class="equation">\[\boxed{SE=\frac{\sigma^2V}{2E}}\]</div>
+                <p>Therefore, strain energy stored in a tensile member is:</p>
+                <div class="calc-label">Final Expression for Strain Energy</div>
+                <div class="equation">\[\boxed{SE=\frac{P^2L}{2AE}=\frac{\sigma^2}{2E}V}\]</div>
+                <div class="answer">Final expression: \(\boxed{SE=\dfrac{\sigma^2V}{2E}}\)</div>
             </div>
         </div>
+
 
     </div>
 </div>
