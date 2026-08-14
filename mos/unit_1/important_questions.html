@@ -57,6 +57,27 @@ footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:1
  .container{width:96%}.section{padding:15px}
  .question-header{font-size:15px}.solution{font-size:15px}
 }
+.pdf-download{
+    background:#fff;
+    border:1px solid #e2caca;
+    border-left:5px solid #d00000;
+    border-radius:8px;
+    padding:12px 16px;
+    margin-bottom:18px;
+    font-size:17px;
+    font-weight:600;
+    color:#d00000;
+}
+.pdf-download a{
+    color:#0645ad;
+    text-decoration:underline;
+    font-weight:700;
+    margin-left:6px;
+}
+.pdf-download a:hover{
+    color:#b00000;
+}
+
 .solution-image {
     display: block;
     width: 75%;
@@ -64,6 +85,15 @@ footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:1
     height: auto;
     margin: 10px auto 15px auto;
     border-radius: 6px;
+}
+
+.strain-energy-image{
+    display:block;
+    width:55%;
+    max-width:500px;
+    height:auto;
+    margin:12px auto 16px auto;
+    border-radius:6px;
 }
 </style>
 </head>
@@ -210,14 +240,12 @@ footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:1
                 <span>A straight bar 80 cm long consists of three portions. The first 25 cm length is of 30 mm diameter, the middle 35 cm length is of 20 mm diameter, and the remaining 20 cm length is of 25 mm diameter. If it is subjected to an axial pull of 120 kN, find the total extension of the bar. Find also the stresses, strains and changes in length of different portions. Take \(E=200,000\ \text{N/mm}^2\).</span>
                 <span class="qplus">+</span>
             </button>
-            <div class="answer">
+            <div class="solution">
 
                 <img src="../images/p1image.webp"
-                alt="Stepped bar under axial pull"
-                 class="solution-image">
+                     alt="Stepped bar under axial pull"
+                     class="solution-image">
 
-            <strong>Given:</strong>
-            <div class="solution">
                 <b>Given:</b>
                 <div class="equation">
                 \[
@@ -281,7 +309,6 @@ footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:1
                 \end{aligned}
                 \]
                 </div>
-            </div>
         </div>
 
 
@@ -513,6 +540,10 @@ footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:1
                     \(\delta L\). The load-extension graph is a straight line for an
                     elastically loaded material.
                 </p>
+
+                <img src="../images/strain_energy.webp"
+                     alt="Strain energy from load-extension graph"
+                     class="strain-energy-image">
 
                 <div class="equation">
                 \[
