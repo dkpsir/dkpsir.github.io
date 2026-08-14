@@ -1,1 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mechanics of Solids</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI",Arial,sans-serif;
+}
+
+body{
+    background:#eef3f8;
+    color:#222;
+}
+
+/* Header */
+header{
+    background:linear-gradient(135deg,#063b70,#0878c9);
+    color:white;
+    padding:22px 20px;
+    text-align:center;
+    position:relative;
+    box-shadow:0 3px 10px rgba(0,0,0,.15);
+}
+
+header h1{
+    font-size:30px;
+    margin-bottom:6px;
+}
+
+header p{
+    font-size:16px;
+}
+
+/* Back to main website */
+.home-link{
+    position:absolute;
+    left:22px;
+    top:22px;
+}
+
+.home-link a{
+    color:white;
+    text-decoration:none;
+    font-size:16px;
+    font-weight:600;
+}
+
+.home-link a:hover{
+    text-decoration:underline;
+}
+
+/* Main */
+.container{
+    width:94%;
+    max-width:1350px;
+    margin:28px auto 40px;
+}
+
+/* Course description */
+.description{
+    background:white;
+    border-radius:12px;
+    padding:24px 28px;
+    box-shadow:0 4px 14px rgba(0,0,0,.10);
+    margin-bottom:28px;
+    border-left:5px solid #0878c9;
+}
+
+.description h2{
+    color:#063b70;
+    font-size:23px;
+    margin-bottom:12px;
+}
+
+.description p{
+    font-size:17px;
+    line-height:1.7;
+    text-align:justify;
+}
+
+/* Unit grid */
+.units{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:14px;
+}
+
+.unit{
+    background:white;
+    border-radius:11px;
+    overflow:hidden;
+    box-shadow:0 4px 13px rgba(0,0,0,.10);
+    border:1px solid #d7e1eb;
+    min-width:0;
+}
+
+.unit-title{
+    background:#075b99;
+    color:white;
+    text-align:center;
+    padding:15px 8px;
+    font-size:18px;
+    font-weight:700;
+}
+
+.topic{
+    min-height:74px;
+    padding:12px 12px 8px;
+    text-align:center;
+    color:#444;
+    font-size:14px;
+    line-height:1.45;
+    background:#f8fbfe;
+    border-bottom:1px solid #e1e8ef;
+}
+
+.links{
+    padding:12px;
+}
+
+.links a{
+    display:block;
+    text-decoration:none;
+    background:#eef6ff;
+    color:#075b99;
+    border:1px solid #c9ddec;
+    border-radius:7px;
+    padding:9px 7px;
+    margin-bottom:8px;
+    text-align:center;
+    font-size:14px;
+    font-weight:600;
+    transition:.2s;
+}
+
+.links a:last-child{
+    margin-bottom:0;
+}
+
+.links a:hover{
+    background:#0878c9;
+    color:white;
+}
+
+/* Bottom */
+footer{
+    background:#063b70;
+    color:white;
+    text-align:center;
+    padding:16px;
+    font-size:14px;
+}
+
+/* Responsive */
+@media(max-width:1050px){
+    .units{
+        grid-template-columns:repeat(3,1fr);
+    }
+}
+
+@media(max-width:700px){
+    header h1{
+        font-size:24px;
+    }
+
+    .home-link{
+        position:static;
+        text-align:left;
+        margin-bottom:10px;
+    }
+
+    .units{
+        grid-template-columns:1fr;
+    }
+
+    .description{
+        padding:20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="home-link">
+        <a href="../index.html">🏠 Home</a>
+    </div>
+
+    <h1>MECHANICS OF SOLIDS</h1>
+    <p>Course Learning Portal</p>
+
+</header>
+
+
+<div class="container">
+
+    <!-- Course Description -->
+    <section class="description">
+
+        <h2>About the Course</h2>
+
+        <p>
+            Mechanics of Solids is a fundamental course that deals with the
+            behaviour of solid materials subjected to different types of
+            loading. The course develops an understanding of stress and
+            strain and their relationship with the deformation and strength
+            of engineering members. It covers the analysis of shear force
+            and bending moment, bending and shear stresses, deflections of
+            beams, torsion of shafts, columns and struts, and stresses in
+            thin and thick cylinders. The concepts are supported through
+            numerical problems and important questions to help students
+            understand the theory and apply it to engineering situations.
+        </p>
+
+    </section>
+
+
+    <!-- Units -->
+    <section class="units">
+
+
+        <!-- UNIT 1 -->
+        <div class="unit">
+
+            <div class="unit-title">
+                UNIT 1
+            </div>
+
+            <div class="topic">
+                Stress and Strain
+            </div>
+
+            <div class="links">
+
+                <a href="unit_1/theory.html">
+                    📘 Theory
+                </a>
+
+                <a href="unit_1/problems.html">
+                    📝 Problems
+                </a>
+
+                <a href="unit_1/important_questions.html">
+                    ⭐ Important Questions
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- UNIT 2 -->
+        <div class="unit">
+
+            <div class="unit-title">
+                UNIT 2
+            </div>
+
+            <div class="topic">
+                Shear Force and Bending Moment
+            </div>
+
+            <div class="links">
+
+                <a href="unit_2/theory.html">
+                    📘 Theory
+                </a>
+
+                <a href="unit_2/problems.html">
+                    📝 Problems
+                </a>
+
+                <a href="unit_2/important_questions.html">
+                    ⭐ Important Questions
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- UNIT 3 -->
+        <div class="unit">
+
+            <div class="unit-title">
+                UNIT 3
+            </div>
+
+            <div class="topic">
+                Bending and Shear Stresses
+            </div>
+
+            <div class="links">
+
+                <a href="unit_3/theory.html">
+                    📘 Theory
+                </a>
+
+                <a href="unit_3/problems.html">
+                    📝 Problems
+                </a>
+
+                <a href="unit_3/important_questions.html">
+                    ⭐ Important Questions
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- UNIT 4 -->
+        <div class="unit">
+
+            <div class="unit-title">
+                UNIT 4
+            </div>
+
+            <div class="topic">
+                Deflections of Beams
+            </div>
+
+            <div class="links">
+
+                <a href="unit_4/theory.html">
+                    📘 Theory
+                </a>
+
+                <a href="unit_4/problems.html">
+                    📝 Problems
+                </a>
+
+                <a href="unit_4/important_questions.html">
+                    ⭐ Important Questions
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- UNIT 5 -->
+        <div class="unit">
+
+            <div class="unit-title">
+                UNIT 5
+            </div>
+
+            <div class="topic">
+                Torsion, Columns and Struts,<br>
+                Thin and Thick Cylinders
+            </div>
+
+            <div class="links">
+
+                <a href="unit_5/theory.html">
+                    📘 Theory
+                </a>
+
+                <a href="unit_5/problems.html">
+                    📝 Problems
+                </a>
+
+                <a href="unit_5/important_questions.html">
+                    ⭐ Important Questions
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<footer>
+    © 2026 D. Kiran Prasad
+</footer>
+
+</body>
+</html>
 
