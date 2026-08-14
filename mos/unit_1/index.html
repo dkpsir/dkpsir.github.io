@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 1 - Important Questions with Solutions | Mechanics of Solids</title>
+
+<script>
+window.MathJax = {
+    tex: {
+        inlineMath: [['\\(','\\)']],
+        displayMath: [['\\[','\\]']]
+    },
+    svg: { fontCache: 'global' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",Arial,sans-serif}
+body{background:#eef3f8;color:#222}
+header{background:linear-gradient(135deg,#063b70,#0878c9);color:white;padding:20px; text-align:center;position:relative;box-shadow:0 3px 10px rgba(0,0,0,.15)}
+header h1{font-size:28px;margin-bottom:5px}
+header p{font-size:16px}
+.home-link{position:absolute;left:22px;top:20px}
+.mos-link{position:absolute;right:22px;top:20px}
+.home-link a,.mos-link a{color:white;text-decoration:none;font-weight:600;font-size:16px}
+.home-link a:hover,.mos-link a:hover{text-decoration:underline}
+.container{width:94%;max-width:1150px;margin:25px auto 40px}
+.section{background:white;border-radius:13px;box-shadow:0 4px 15px rgba(0,0,0,.10);padding:22px;margin-bottom:25px}
+.section-title{display:flex;align-items:center;justify-content:space-between;background:#075b99;color:white;border-radius:8px;padding:13px 18px;cursor:pointer;font-size:21px;font-weight:700}
+.section-title .plus{width:30px;height:30px;border-radius:50%;background:white;color:#075b99;display:flex;align-items:center;justify-content:center;font-size:23px;line-height:1;flex-shrink:0}
+.questions{display:none;margin-top:14px}
+.questions.show{display:block}
+.question-box{border:1px solid #d4e1ec;border-radius:8px;margin-bottom:11px;overflow:hidden;background:#f8fbff}
+.question-header{width:100%;border:0;background:#f8fbff;color:#173b5c;padding:14px 15px;display:flex;align-items:flex-start;gap:12px;text-align:left;font-size:17px;line-height:1.55;font-weight:600;cursor:pointer}
+.question-header:hover{background:#edf6ff}
+.qno{min-width:30px;height:30px;border-radius:50%;background:#0878c9;color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+.qplus{margin-left:auto;min-width:28px;height:28px;border-radius:50%;background:#0878c9;color:white;display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:400}
+.solution{display:none;background:white;padding:18px 22px 22px;border-top:1px solid #dbe6ef;font-size:16px;line-height:1.65}
+.solution.show{display:block}
+.short-solution{font-size:17px}
+.equation{background:#fbfdff;border-left:4px solid #5b7fa3;border-radius:6px;padding:9px 14px;margin:12px 0;overflow-x:auto}
+.equation .mjx-container{margin:0!important}
+.answer{background:#eaf8ef;border:1px solid #54a56b;border-radius:8px;padding:11px 15px;margin-top:13px;font-size:17px;font-weight:700;color:#17632d}
+.essay .question-box{background:#fffaf0;border-left:4px solid #d59b16}
+.essay .question-header{background:#fffaf0}
+.essay .qno{background:#c88c08}
+.essay .qplus{background:#c88c08}
+.final{background:#fff8df;border:2px solid #e1b52c;border-radius:10px;padding:18px;margin-top:16px}
+.final h3{margin-bottom:8px;color:#765500}
+footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:14px}
+@media(max-width:700px){
+ header h1{font-size:23px}
+ .home-link,.mos-link{position:static;text-align:left;margin-bottom:7px}
+ header{text-align:center}
+ .container{width:96%}.section{padding:15px}
+ .question-header{font-size:15px}.solution{font-size:15px}
+}
+</style>
+</head>
+
+<body>
+<header>
+    <div class="home-link"><a href="../../index.html">🏠 Back to Domain Home</a></div>
+    <div class="mos-link"><a href="../index.html">📚 Back to MOS Home</a></div>
+    <h1>MECHANICS OF SOLIDS</h1>
+    <p>UNIT 1 – Important Questions with Solutions</p>
+</header>
+
+<div class="container">
+
+<!-- SHORT ANSWERS -->
+<div class="section">
+    <div class="section-title" onclick="toggleSection(this)">
+        <span>Short Answer Questions – 2 Marks</span>
+        <span class="plus">+</span>
+    </div>
+
+    <div class="questions">
+
+        <div class="question-box">
+            <button class="question-header" onclick="toggleQuestion(this)">
+                <span class="qno">1</span>
+                <span>What are temperature stresses? Write the expression for thermal stress in a constrained material.</span>
+                <span class="qplus">+</span>
+            </button>
+            <div class="solution short-solution">
+                Temperature stress is the stress developed in a material when its free expansion or contraction due to a change in temperature is prevented.
+                <div class="equation">\[\boxed{\sigma=E\alpha\Delta T}\]</div>
+                where \(E\) is Young's modulus, \(\alpha\) is the coefficient of thermal expansion and \(\Delta T\) is the temperature change.
+            </div>
+        </div>
+
+        <div class="question-box">
+            <button class="question-header" onclick="toggleQuestion(this)">
+                <span class="qno">2</span>
+                <span>Define strength and ductility.</span>
+                <span class="qplus">+</span>
+            </button>
+            <div class="solution short-solution">
+                <b>Strength:</b> The ability of a material to withstand an applied load without failure.<br>
+                <b>Ductility:</b> The ability of a material to undergo considerable plastic deformation before fracture.
+            </div>
+        </div>
+
+        <div class="question-box">
+            <button class="question-header" onclick="toggleQuestion(this)">
+                <span class="qno">3</span>
+                <span>Define the following terms: (i) Resilience (ii) Impact loading.</span>
+                <span class="qplus">+</span>
+            </button>
+            <div class="solution short-solution">
+                <b>Resilience:</b> The capacity of a material to absorb energy within its elastic limit and release it when the load is removed.<br>
+                <b>Impact loading:</b> A load applied suddenly to a body, producing a high rate of deformation and stress.
+            </div>
+        </div>
+
+        <div class="question-box">
+            <button class="question-header" onclick="toggleQuestion(this)">
+                <span class="qno">4</span>
+                <span>Define a composite bar.</span>
+                <span class="qplus">+</span>
+            </button>
+            <div class="solution short-solution">
+                A composite bar is a bar made of two or more different materials rigidly connected together so that they act together under load.
+            </div>
+        </div>
+
+        <div class="question-box">
+            <button class="question-header" onclick="toggleQuestion(this)">
+                <span class="qno">5</span>
+                <span>Define strain energy and write the formula for strain energy stored in a material under tensile load.</span>
+                <span class="qplus">+</span>
+            </button>
+            <div class="solution short-solution">
+                Strain energy is the energy stored in a body due to deformation when an external load is applied.
+                <div class="equation">\[\boxed{SE=\frac{1}{2}P\delta L}\]</div>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <button class="question-header" onclick="toggleQuestion(this)">
+                <span class="qno">6</span>
+                <span>Define stress and strain. Also, write the SI units of stress and strain.</span>
+                <span class="qplus">+</span>
+            </button>
+            <div class="solution short-solution">
+                <b>Stress:</b> Internal resisting force developed per unit cross-sectional area.
+                <div class="equation">\[\boxed{\sigma=\frac{P}{A}}\]</div>
+                SI unit of stress: <b>Pa (N/m²)</b>.<br>
+                <b>Strain:</b> Deformation per unit original dimension.
+                <div class="equation">\[\boxed{\varepsilon=\frac{\delta L}{L}}\]</div>
+                Strain is <b>dimensionless</b> and has no SI unit.
+            </div>
+        </div>
+
+        <div class="question-box">
+            <button class="question-header" onclick="toggleQuestion(this)">
+                <span class="qno">7</span>
+                <span>Define proof resilience and modulus of resilience.</span>
+                <span class="qplus">+</span>
+            </button>
+            <div class="solution short-solution">
+                <b>Proof resilience:</b> The maximum strain energy stored in a body up to the elastic limit.<br>
+                <b>Modulus of resilience:</b> Proof resilience per unit volume of the material.
+                <div class="equation">\[\boxed{\text{Modulus of resilience}=\frac{\text{Proof resilience}}{\text{Volume}}}\]</div>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <button class="question-header" onclick="toggleQuestion(this)">
+                <span class="qno">8</span>
+                <span>Define the following terms: (i) Thermal stress (ii) Thermal strain.</span>
+                <span class="qplus">+</span>
+            </button>
+            <div class="solution short-solution">
+                <b>Thermal stress:</b> Stress developed due to prevented thermal expansion or contraction.
+                <div class="equation">\[\boxed{\sigma=E\alpha\Delta T}\]</div>
+                <b>Thermal strain:</b> Free strain produced in a material due to a change in temperature.
+                <div class="equation">\[\boxed{\varepsilon_T=\alpha\Delta T}\]</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- LONG ANSWERS -->
+<div class="section essay">
+    <div class="section-title" onclick="toggleSection(this)">
+        <span>Essay / Long Answer Questions</span>
+        <span class="plus">+</span>
+    </div>
+
+    <div class="questions">
+
+        <!-- LONG 1 -->
+        <div class="question-box">
+            <button class="question-header" onclick="toggleQuestion(this)">
+                <span class="qno">1</span>
+                <span>A straight bar 80 cm long consists of three portions. The first 25 cm length is of 30 mm diameter, the middle 35 cm length is of 20 mm diameter, and the remaining 20 cm length is of 25 mm diameter. If it is subjected to an axial pull of 120 kN, find the total extension of the bar. Find also the stresses, strains and changes in length of different portions. Take \(E=200,000\ \text{N/mm}^2\).</span>
+                <span class="qplus">+</span>
+            </button>
+
+            <div class="solution">
+                <b>Given:</b>
+                <div class="equation">
+                \[
+                \begin{aligned}
+                P&=120,000\ \text{N}\\
+                L_1&=250\ \text{mm},&d_1&=30\ \text{mm}\\
+                L_2&=350\ \text{mm},&d_2&=20\ \text{mm}\\
+                L_3&=200\ \text{mm},&d_3&=25\ \text{mm}\\
+                E&=200,000\ \text{N/mm}^2
+                \end{aligned}
+                \]
+                </div>
+
+                <b>Part I:</b>
+                <div class="equation">
+                \[
+                \begin{aligned}
+                A_1&=\frac{\pi}{4}(30)^2=706.86\ \text{mm}^2\\
+                \sigma_1&=\frac{120000}{706.86}=169.80\ \text{N/mm}^2\\
+                \varepsilon_1&=\frac{169.80}{200000}=8.490\times10^{-4}\\
+                \delta L_1&=\frac{120000(250)}{200000(706.86)}
+                =0.2122\ \text{mm}
+                \end{aligned}
+                \]
+                </div>
+
+                <b>Part II:</b>
+                <div class="equation">
+                \[
+                \begin{aligned}
+                A_2&=\frac{\pi}{4}(20)^2=314.16\ \text{mm}^2\\
+                \sigma_2&=\frac{120000}{314.16}=381.97\ \text{N/mm}^2\\
+                \varepsilon_2&=\frac{381.97}{200000}=1.910\times10^{-3}\\
+                \delta L_2&=\frac{120000(350)}{200000(314.16)}
+                =0.6685\ \text{mm}
+                \end{aligned}
+                \]
+                </div>
+
+                <b>Part III:</b>
+                <div class="equation">
+                \[
+                \begin{aligned}
+                A_3&=\frac{\pi}{4}(25)^2=490.87\ \text{mm}^2\\
+                \sigma_3&=\frac{120000}{490.87}=244.46\ \text{N/mm}^2\\
+                \varepsilon_3&=\frac{244.46}{200000}=1.222\times10^{-3}\\
+                \delta L_3&=\frac{120000(200)}{200000(490.87)}
+                =0.2445\ \text{mm}
+                \end{aligned}
+                \]
+                </div>
+
+                <b>Total extension:</b>
+                <div class="equation">
+                \[
+                \begin{aligned}
+                \delta L
+                &=\delta L_1+\delta L_2+\delta L_3\\
+                &=0.2122+0.6685+0.2445\\
+                &=\boxed{1.1252\ \text{mm}}
+                \end{aligned}
+                \]
+                </div>
+            </div>
+        </div>
+
+
+        <!-- LONG 2 -->
+        <div class="question-box">
+            <button class="question-header" onclick="toggleQuestion(this)">
+                <span class="qno">2</span>
+                <span>A steel rod of 20 mm diameter and 200 mm length is subjected to a 20 kN tensile force. The extension is found to be 0.53 mm and the decrease in diameter is equal to 0.0022 mm. Determine: (i) Young's modulus of elasticity, (ii) Change in volume, and (iii) Poisson's ratio.</span>
+                <span class="qplus">+</span>
+            </button>
+
+            <div class="solution">
+                <b>Given:</b>
+                <div class="equation">
+                \[
+                \begin{aligned}
+                d&=20\ \text{mm},&L&=200\ \text{mm}\\
+                P&=20,000\ \text{N},&\delta L&=0.53\ \text{mm}\\
+                \delta d&=0.0022\ \text{mm}
+                \end{aligned}
+                \]
+                </div>
+
+                <b>(i) Young's Modulus:</b>
+                <div class="equation">
+                \[
+                \begin{aligned}
+                A&=\frac{\pi}{4}(20)^2=314.16\ \text{mm}^2\\
+                E&=\frac{PL}{A\delta L}\\
+                &=\frac{20000(200)}{314.16(0.53)}\\
+                &=\boxed{24,024.10\ \text{N/mm}^2}
+                \end{aligned}
+                \]
+                </div>
+
+                <b>(ii) Change in Volume:</b>
+                <div class="equation">
+                \[
+                \begin{aligned}
+                V_i&=\frac{\pi}{4}d^2L
+                =\frac{\pi}{4}(20)^2(200)
+                =62831.85\ \text{mm}^3\\
+                L_f&=200+0.53=200.53\ \text{mm}\\
+                d_f&=20-0.0022=19.9978\ \text{mm}\\
+                V_f&=\frac{\pi}{4}(19.9978)^2(200.53)\\
+                &=62984.49\ \text{mm}^3\\
+                \Delta V&=V_f-V_i\\
+                &=\boxed{152.64\ \text{mm}^3}
+                \end{aligned}
+                \]
+                </div>
+
+                <b>(iii) Poisson's Ratio:</b>
+                <div class="equation">
+                \[
+                \begin{aligned}
+                \varepsilon_{\text{long}}
+                &=\frac{0.53}{200}=2.65\times10^{-3}\\
+                \varepsilon_{\text{lat}}
+                &=-\frac{0.0022}{20}=-1.10\times10^{-4}\\
+                \mu&=-\frac{\varepsilon_{\text{lat}}}{\varepsilon_{\text{long}}}\\
+                &=\boxed{0.0415}
+                \end{aligned}
+                \]
+                </div>
+            </div>
+        </div>
+
+
+        <!-- LONG 3 -->
+        <div class="question-box">
+            <button class="question-header" onclick="toggleQuestion(this)">
+                <span class="qno">3</span>
+                <span>A specimen of steel 20 mm diameter with a gauge length of 200 mm is tested to destruction. It has an extension of 0.25 mm under a load of 80 kN and the load at elastic limit is 102 kN. The maximum load is 130 kN. The total extension at fracture is 56 mm and diameter at neck is 15 mm. Find: (i) Stress at elastic limit, (ii) Young's modulus, (iii) Percentage elongation, (iv) Percentage reduction in area, and (v) Ultimate tensile stress.</span>
+                <span class="qplus">+</span>
+            </button>
+
+            <div class="solution">
+                <b>Given:</b>
+                <div class="equation">
+                \[
+                \begin{aligned}
+                d&=20\ \text{mm},&L&=200\ \text{mm}\\
+                P&=80,000\ \text{N},&\delta L&=0.25\ \text{mm}\\
+                P_{\text{elas}}&=102,000\ \text{N}\\
+                P_{\max}&=130,000\ \text{N}\\
+                L_{\text{extension}}&=56\ \text{mm},&d_{\text{neck}}&=15\ \text{mm}
+                \end{aligned}
+                \]
+                </div>
+
+                <b>(i) Stress at elastic limit:</b>
+                <div class="equation">
+                \[
+                \begin{aligned}
+                A_0&=\frac{\pi}{4}(20)^2=314.16\ \text{mm}^2\\
+                \sigma_{\text{elastic}}
+                &=\frac{102000}{314.16}\\
+                &=\boxed{324.68\ \text{N/mm}^2}
+                \end{aligned}
+                \]
+                </div>
+
+                <b>(ii) Young's Modulus:</b>
+                <div class="equation">
+                \[
+                \begin{aligned}
+                E&=\frac{PL}{A_0\delta L}\\
+                &=\frac{80000(200)}{314.16(0.25)}\\
+                &=\boxed{203,718.82\ \text{N/mm}^2}
+                \end{aligned}
+                \]
+                </div>
+
+                <b>(iii) Percentage elongation:</b>
+                <div class="equation">
+                \[
+                \begin{aligned}
+                L_f&=200+56=256\ \text{mm}\\
+                \%\text{ elongation}
+                &=\frac{256-200}{200}\times100\\
+                &=\boxed{28\%}
+                \end{aligned}
+                \]
+                </div>
+
+                <b>(iv) Percentage reduction in area:</b>
+                <div class="equation">
+                \[
+                \begin{aligned}
+                A_f&=\frac{\pi}{4}(15)^2\\
+                \%\text{ reduction}
+                &=\frac{A_0-A_f}{A_0}\times100\\
+                &=\boxed{43.75\%}
+                \end{aligned}
+                \]
+                </div>
+
+                <b>(v) Ultimate tensile stress:</b>
+                <div class="equation">
+                \[
+                \begin{aligned}
+                \sigma_{\text{ult}}
+                &=\frac{130000}{314.16}\\
+                &=\boxed{413.80\ \text{N/mm}^2}
+                \end{aligned}
+                \]
+                </div>
+            </div>
+        </div>
+
+
+        <!-- LONG 4 -->
+        <div class="question-box">
+            <button class="question-header" onclick="toggleQuestion(this)">
+                <span class="qno">4</span>
+                <span>The modulus of rigidity for a material is \(0.5\times10^5\ \text{N/mm}^2\). A 10 mm diameter and 300 mm long rod of the material is subjected to an axial pull of 10 kN. The changes in diameter and length are 0.00015 mm and 0.015 mm respectively. Calculate Poisson's ratio and bulk modulus of elasticity.</span>
+                <span class="qplus">+</span>
+            </button>
+
+            <div class="solution">
+                <b>Given:</b>
+                <div class="equation">
+                \[
+                \begin{aligned}
+                G&=0.5\times10^5\ \text{N/mm}^2\\
+                d&=10\ \text{mm},&L&=300\ \text{mm}\\
+                P&=10,000\ \text{N}\\
+                \delta d&=0.00015\ \text{mm},&
+                \delta L&=0.015\ \text{mm}
+                \end{aligned}
+                \]
+                </div>
+
+                <b>Poisson's ratio:</b>
+                <div class="equation">
+                \[
+                \begin{aligned}
+                \varepsilon_{\text{lat}}
+                &=\frac{0.00015}{10}=0.000015\\
+                \varepsilon_{\text{long}}
+                &=\frac{0.015}{300}=0.00005\\
+                \mu
+                &=\frac{0.000015}{0.00005}\\
+                &=\boxed{0.3}
+                \end{aligned}
+                \]
+                </div>
+
+                <b>Young's Modulus:</b>
+                <div class="equation">
+                \[
+                \begin{aligned}
+                E&=2G(1+\mu)\\
+                &=2(0.5\times10^5)(1+0.3)\\
+                &=\boxed{1.3\times10^5\ \text{N/mm}^2}
+                \end{aligned}
+                \]
+                </div>
+
+                <b>Bulk Modulus:</b>
+                <div class="equation">
+                \[
+                \begin{aligned}
+                K&=\frac{E}{3(1-2\mu)}\\
+                &=\frac{1.3\times10^5}{3(1-2(0.3))}\\
+                &=\frac{130000}{1.2}\\
+                &=\boxed{108333.33\ \text{N/mm}^2}
+                \end{aligned}
+                \]
+                </div>
+            </div>
+        </div>
+
+
+        <!-- LONG 5 -->
+        <div class="question-box">
+            <button class="question-header" onclick="toggleQuestion(this)">
+                <span class="qno">5</span>
+                <span>Define strain energy and derive the expression for strain energy stored in a material subjected to a tensile load. Also derive the expression for strain energy in terms of stress, Young's modulus and volume of the material.</span>
+                <span class="qplus">+</span>
+            </button>
+
+            <div class="solution">
+                <p><b>Derivation:</b></p>
+
+                <p>
+                    Consider a gradually applied tensile load \(P\) producing an extension
+                    \(\delta L\). The load-extension graph is a straight line for an
+                    elastically loaded material.
+                </p>
+
+                <div class="equation">
+                \[
+                SE=\text{Area under the load-extension graph}
+                \]
+                </div>
+
+                <div class="equation">
+                \[
+                \begin{aligned}
+                SE
+                &=\frac{1}{2}P\delta L
+                \end{aligned}
+                \]
+                </div>
+
+                <p>We know that</p>
+
+                <div class="equation">
+                \[
+                \sigma=\frac{P}{A}
+                \quad\Rightarrow\quad
+                P=\sigma A
+                \]
+                </div>
+
+                Also,
+
+                <div class="equation">
+                \[
+                \begin{aligned}
+                \delta L
+                &=\frac{PL}{EA}\\
+                &=\frac{\sigma AL}{EA}\\
+                &=\frac{\sigma L}{E}
+                \end{aligned}
+                \]
+                </div>
+
+                Substituting \(P=\sigma A\) and
+                \(\delta L=\frac{\sigma L}{E}\),
+
+                <div class="equation">
+                \[
+                \begin{aligned}
+                SE
+                &=\frac{1}{2}(\sigma A)
+                  \left(\frac{\sigma L}{E}\right)\\
+                &=\frac{\sigma^2AL}{2E}
+                \end{aligned}
+                \]
+                </div>
+
+                Since \(AL\) is the volume \(V\),
+
+                <div class="equation">
+                \[
+                \boxed{
+                SE=\frac{\sigma^2V}{2E}
+                }
+                \]
+                </div>
+
+                Therefore, strain energy stored in a tensile member is:
+
+                <div class="equation">
+                \[
+                \boxed{
+                SE=\frac{P^2L}{2AE}
+                =\frac{\sigma^2}{2E}V
+                }
+                \]
+                </div>
+
+                <div class="answer">
+                    Final expression:
+                    \(\boxed{SE=\dfrac{\sigma^2V}{2E}}\)
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</div>
+
+<footer>
+    © 2026 D. Kiran Prasad | Mechanics of Solids
+</footer>
+
+<script>
+function toggleSection(title){
+    const questions=title.nextElementSibling;
+    const plus=title.querySelector(".plus");
+
+    if(questions.classList.contains("show")){
+        questions.classList.remove("show");
+        plus.textContent="+";
+    }else{
+        questions.classList.add("show");
+        plus.textContent="−";
+    }
+}
+
+function toggleQuestion(button){
+    const solution=button.nextElementSibling;
+    const plus=button.querySelector(".qplus");
+
+    if(solution.classList.contains("show")){
+        solution.classList.remove("show");
+        plus.textContent="+";
+    }else{
+        solution.classList.add("show");
+        plus.textContent="−";
+        if(window.MathJax){
+            MathJax.typesetPromise([solution]);
+        }
+    }
+}
+</script>
+
+</body>
+</html>
