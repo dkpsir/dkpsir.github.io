@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Loop - Programs with Explanation</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#eef4f9;color:#111;font-family:"Segoe UI",Arial,sans-serif}
+.header{
+    background:linear-gradient(90deg,#0b477d,#087cc1);
+    color:#fff;padding:18px 22px;
+    display:grid;grid-template-columns:1fr 2fr 1fr;align-items:center
+}
+.header a{color:#fff;text-decoration:none;font-weight:700;font-size:16px}
+.header a:hover{text-decoration:underline}
+.header h1{margin:0;text-align:center;font-size:29px}
+.main-home{text-align:right}
+.container{width:94%;max-width:1450px;margin:24px auto}
+.intro{
+    background:#fff;border-radius:12px;padding:18px 22px;
+    margin-bottom:20px;box-shadow:0 4px 18px rgba(0,0,0,.10);
+    border-left:6px solid #075b99
+}
+.intro h2{margin:0 0 6px;color:#075b99}
+.intro p{margin:0;font-size:16px;color:#4d5d6a}
+.card{
+    background:#fff;border-radius:12px;padding:22px;
+    margin-bottom:20px;box-shadow:0 4px 18px rgba(0,0,0,.09)
+}
+.card h2{
+    margin:0 0 18px;color:#075b99;font-size:22px;
+    border-left:6px solid #075b99;padding-left:12px
+}
+.program{
+    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:22px
+}
+.program-box{
+    background:#f7f9fb;border:1px solid #d4dee8;
+    border-radius:9px;padding:17px
+}
+.program-box h3{margin:0 0 12px;color:#244f70;font-size:18px}
+pre{
+    margin:0;white-space:pre-wrap;overflow:auto;
+    font:15.5px/1.6 Consolas,"Courier New",monospace
+}
+.explanation{
+    background:#fffaf0;border-left:5px solid #d99a00;
+    border-radius:5px;padding:15px 17px;
+    font-size:16px;line-height:1.65
+}
+.output{
+    margin-top:14px;background:#f0f8f3;
+    border-left:5px solid #31865d;padding:12px 15px;
+    font:700 15px/1.55 Consolas,"Courier New",monospace;
+    white-space:pre-wrap
+}
+.footer{
+    background:#063b70;color:#fff;text-align:center;padding:13px;
+    margin-top:30px
+}
+@media(max-width:900px){
+    .header{grid-template-columns:1fr;gap:8px;text-align:center}
+    .main-home{text-align:center}
+    .program{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+    <div><a href="../index.html">← Python Home</a></div>
+    <h1>FOR LOOP - PROGRAMS</h1>
+    <div class="main-home"><a href="../../index.html">Main Home →</a></div>
+</header>
+
+<main class="container">
+
+<section class="intro">
+    <h2>Frequently Used For Loop Programs</h2>
+    <p>
+        Programs with clear explanations and sample outputs.
+    </p>
+</section>
+
+
+<section class="card">
+<h2>Program 1 – Print Numbers from 1 to n</h2>
+<div class="program">
+<div class="program-box">
+<h3>Python Program</h3>
+<pre>n = int(input("Enter n: "))
+
+for i in range(1, n + 1):
+    print(i)</pre>
+</div>
+<div class="program-box">
+<h3>Explanation</h3>
+<div class="explanation">
+If the user enters <b>5</b>, the expression
+<b>range(1, n + 1)</b> becomes <b>range(1, 6)</b>.
+Therefore, <b>i</b> takes the values 1, 2, 3, 4 and 5.
+The value 6 is not included because the stop value of
+<b>range()</b> is excluded.
+<div class="output">Output:
+1
+2
+3
+4
+5</div>
+</div>
+</div>
+</div>
+</section>
+
+
+<section class="card">
+<h2>Program 2 – Sum of Numbers from 1 to n</h2>
+<div class="program">
+<div class="program-box">
+<h3>Python Program</h3>
+<pre>n = int(input("Enter n: "))
+
+s = 0
+
+for i in range(1, n + 1):
+    s = s + i
+
+print("Sum =", s)</pre>
+</div>
+<div class="program-box">
+<h3>Explanation</h3>
+<div class="explanation">
+The variable <b>s</b> is an <b>accumulator</b>. It starts with 0.
+During every iteration, the current value of <b>i</b> is added to <b>s</b>.
+<br><br>
+For <b>n = 5</b>:<br>
+s = 0 → 1 → 3 → 6 → 10 → 15.
+<div class="output">Output:
+Sum = 15</div>
+</div>
+</div>
+</div>
+</section>
+
+
+<section class="card">
+<h2>Program 3 – Sum of Even Numbers from 1 to n</h2>
+<div class="program">
+<div class="program-box">
+<h3>Python Program</h3>
+<pre>n = int(input("Enter n: "))
+
+s = 0
+
+for i in range(1, n + 1):
+    if i % 2 == 0:
+        s = s + i
+
+print("Sum of even numbers =", s)</pre>
+</div>
+<div class="program-box">
+<h3>Explanation</h3>
+<div class="explanation">
+The loop generates every number from 1 to <b>n</b>.
+The condition <b>i % 2 == 0</b> checks whether the current number is even.
+Only even numbers are added to <b>s</b>.
+<br><br>
+For <b>n = 10</b>, the selected numbers are 2, 4, 6, 8 and 10.
+<div class="output">Output:
+Sum of even numbers = 30</div>
+</div>
+</div>
+</div>
+</section>
+
+
+<section class="card">
+<h2>Program 4 – Multiplication Table</h2>
+<div class="program">
+<div class="program-box">
+<h3>Python Program</h3>
+<pre>n = int(input("Enter a number: "))
+
+for i in range(1, 11):
+    print(n, "x", i, "=", n * i)</pre>
+</div>
+<div class="program-box">
+<h3>Explanation</h3>
+<div class="explanation">
+The loop runs 10 times because <b>range(1, 11)</b> generates values
+from 1 to 10. In each iteration, the entered number <b>n</b> is
+multiplied by the current value of <b>i</b>.
+<br><br>
+For <b>n = 5</b>, the program generates the multiplication table from
+5 × 1 through 5 × 10.
+<div class="output">Output:
+5 x 1 = 5
+5 x 2 = 10
+5 x 3 = 15
+...
+5 x 10 = 50</div>
+</div>
+</div>
+</div>
+</section>
+
+
+<section class="card">
+<h2>Program 5 – Factorial of a Number</h2>
+<div class="program">
+<div class="program-box">
+<h3>Python Program</h3>
+<pre>n = int(input("Enter n: "))
+
+fact = 1
+
+for i in range(1, n + 1):
+    fact = fact * i
+
+print("Factorial =", fact)</pre>
+</div>
+<div class="program-box">
+<h3>Explanation</h3>
+<div class="explanation">
+Factorial of <b>n</b> is the product of all positive integers from
+1 to <b>n</b>.
+The variable <b>fact</b> stores the running product and starts from 1.
+<br><br>
+For <b>n = 5</b>:<br>
+1 × 2 × 3 × 4 × 5 = 120.
+<div class="output">Output:
+Factorial = 120</div>
+</div>
+</div>
+</div>
+</section>
+
+
+<section class="card">
+<h2>Program 6 – Count Numbers Divisible by 3</h2>
+<div class="program">
+<div class="program-box">
+<h3>Python Program</h3>
+<pre>n = int(input("Enter n: "))
+
+count = 0
+
+for i in range(1, n + 1):
+    if i % 3 == 0:
+        count = count + 1
+
+print("Count =", count)</pre>
+</div>
+<div class="program-box">
+<h3>Explanation</h3>
+<div class="explanation">
+The loop checks every number from 1 to <b>n</b>.
+The condition <b>i % 3 == 0</b> is true when the number is exactly
+divisible by 3. Whenever it is true, the counter is increased by 1.
+<br><br>
+For <b>n = 10</b>, the numbers are 3, 6 and 9.
+<div class="output">Output:
+Count = 3</div>
+</div>
+</div>
+</div>
+</section>
+
+
+<section class="card">
+<h2>Program 7 – Find Factors of a Number</h2>
+<div class="program">
+<div class="program-box">
+<h3>Python Program</h3>
+<pre>n = int(input("Enter n: "))
+
+print("Factors are:")
+
+for i in range(1, n + 1):
+    if n % i == 0:
+        print(i)</pre>
+</div>
+<div class="program-box">
+<h3>Explanation</h3>
+<div class="explanation">
+A factor is a number that divides another number exactly, leaving
+remainder zero.
+The loop checks every value from 1 to <b>n</b>.
+The condition <b>n % i == 0</b> identifies the factors.
+<br><br>
+For <b>n = 12</b>, the factors are 1, 2, 3, 4, 6 and 12.
+<div class="output">Output:
+Factors are:
+1
+2
+3
+4
+6
+12</div>
+</div>
+</div>
+</div>
+</section>
+
+
+<section class="card">
+<h2>Program 8 – Check Whether a Number is Prime</h2>
+<div class="program">
+<div class="program-box">
+<h3>Python Program</h3>
+<pre>n = int(input("Enter n: "))
+
+count = 0
+
+for i in range(1, n + 1):
+    if n % i == 0:
+        count = count + 1
+
+if count == 2:
+    print("Prime")
+else:
+    print("Not Prime")</pre>
+</div>
+<div class="program-box">
+<h3>Explanation</h3>
+<div class="explanation">
+A prime number has exactly <b>two factors</b>: 1 and the number itself.
+The loop counts how many values from 1 to <b>n</b> divide <b>n</b>
+exactly.
+<br><br>
+For <b>n = 7</b>, only 1 and 7 are factors. Therefore, the count is 2
+and the number is prime.
+For a number such as 12, the count is greater than 2, so it is not prime.
+<div class="output">For n = 7:
+Prime</div>
+</div>
+</div>
+</div>
+</section>
+
+
+<section class="card">
+<h2>Program 9 – Sum of Digits of a Number</h2>
+<div class="program">
+<div class="program-box">
+<h3>Python Program</h3>
+<pre>n = int(input("Enter n: "))
+
+temp = n
+digits = 0
+
+while temp > 0:
+    digits = digits + 1
+    temp = temp // 10
+
+s = 0
+temp = n
+
+for i in range(digits):
+    digit = temp % 10
+    s = s + digit
+    temp = temp // 10
+
+print("Sum of digits =", s)</pre>
+</div>
+<div class="program-box">
+<h3>Explanation</h3>
+<div class="explanation">
+First, the program determines the number of digits. The <b>for loop</b>
+then runs exactly that many times.
+<br><br>
+In each iteration, <b>temp % 10</b> extracts the last digit and
+<b>temp // 10</b> removes the last digit.
+<br><br>
+For <b>1234</b>, the extracted digits are 4, 3, 2 and 1.
+Therefore, 4 + 3 + 2 + 1 = 10.
+<div class="output">Output:
+Sum of digits = 10</div>
+</div>
+</div>
+</div>
+</section>
+
+
+<section class="card">
+<h2>Program 10 – Star Pattern</h2>
+<div class="program">
+<div class="program-box">
+<h3>Python Program</h3>
+<pre>n = int(input("Enter number of rows: "))
+
+for i in range(1, n + 1):
+    for j in range(i):
+        print("*", end="")
+    print()</pre>
+</div>
+<div class="program-box">
+<h3>Explanation</h3>
+<div class="explanation">
+This program uses <b>nested for loops</b>.
+The outer loop controls the number of rows, while the inner loop controls
+the number of stars in each row.
+<br><br>
+For <b>n = 5</b>:<br>
+Row 1 → 1 star<br>
+Row 2 → 2 stars<br>
+Row 3 → 3 stars<br>
+Row 4 → 4 stars<br>
+Row 5 → 5 stars.
+<div class="output">Output:
+*
+**
+***
+****
+*****</div>
+</div>
+</div>
+</div>
+</section>
+
+</main>
+
+<footer>© 2026 D. Kiran Prasad | Python Programming</footer>
+
+<script>
+/* Printing / context-menu restrictions intentionally retained for now. */
+document.addEventListener("contextmenu",function(e){e.preventDefault();});
+document.addEventListener("keydown",function(e){
+    if((e.ctrlKey || e.metaKey) && e.key.toLowerCase()==="p"){
+        e.preventDefault();
+        alert("Printing is disabled.");
+    }
+});
+</script>
+<style>@media print{body{display:none!important;}}</style>
+
+</body>
+</html>
