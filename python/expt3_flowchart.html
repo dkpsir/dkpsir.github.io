@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experiment 3 - Determination of Stresses and Strains - Flow Chart</title>
+<style>
+*{box-sizing:border-box}
+body{
+    margin:0;
+    background:#eef4f9;
+    color:#111;
+    font-family:Arial,Helvetica,sans-serif;
+}
+.header{position:relative;background:linear-gradient(90deg,#0b477d,#087cc1);color:#fff;padding:28px 20px;text-align:center}
+.header h1{margin:0;font-size:30px}
+.header p{margin:7px 0 0;font-size:18px}
+.header-nav{position:absolute;left:24px;right:24px;top:18px;display:flex;justify-content:space-between}
+.header-nav a{color:#fff;text-decoration:none;font-weight:700;font-size:16px}
+.header-nav a:hover{text-decoration:underline}
+.container{width:94%;max-width:1250px;margin:24px auto}
+.card{
+    background:#fff;
+    border-radius:12px;
+    padding:22px;
+    margin-bottom:22px;
+    box-shadow:0 3px 15px rgba(0,0,0,.08);
+}
+.title{
+    background:#0b5b94;
+    color:#fff;
+    padding:13px 18px;
+    border-radius:8px;
+    font-size:21px;
+    font-weight:700;
+    margin-bottom:20px;
+}
+.flow{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:7px;
+}
+.node{
+    width:min(650px,90%);
+    padding:13px 18px;
+    text-align:center;
+    border:2px solid #17679f;
+    border-radius:9px;
+    background:#f7fbff;
+    color:#073f6c;
+    font-weight:700;
+}
+.node.start,.node.end{
+    width:220px;
+    border-radius:28px;
+    background:#0b5b94;
+    color:#fff;
+}
+.node.calc{
+    background:#eef7ee;
+    border-color:#4c9b5b;
+    color:#245d2c;
+}
+.node.cond{
+    background:#fff8df;
+    border-color:#d89a00;
+    color:#5a4100;
+}
+.arrow{
+    color:#0b5b94;
+    font-size:25px;
+    line-height:20px;
+    font-weight:700;
+}
+.eq{
+    display:block;
+    margin-top:6px;
+    font-family:"Courier New",monospace;
+    font-weight:600;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+}
+th,td{
+    border:1px solid #c8d6e2;
+    padding:12px 14px;
+    text-align:left;
+    vertical-align:top;
+}
+th{
+    background:#0b5b94;
+    color:#fff;
+    font-size:16px;
+}
+tr:nth-child(even){background:#f7fafc}
+code{
+    background:#eef3f7;
+    color:#063f6c;
+    padding:3px 5px;
+    border-radius:4px;
+    font-family:"Courier New",monospace;
+}
+.program{
+    background:#1e1e1e;
+    color:#ddd;
+    border-radius:8px;
+    padding:17px;
+    overflow:auto;
+    font:15px/1.55 Consolas,"Courier New",monospace;
+    white-space:pre;
+}
+.note{
+    background:#fff8df;
+    border-left:5px solid #d89a00;
+    padding:13px 16px;
+    margin-top:18px;
+    line-height:1.5;
+}
+footer{
+    background:#0b477d;
+    color:#fff;
+    text-align:center;
+    padding:13px;
+    margin-top:25px;
+}
+@media(max-width:700px){
+    .header h1{font-size:24px}
+    .container{width:96%}
+    .card{padding:14px}
+    th,td{padding:9px;font-size:14px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="header-nav">
+        <a href="index.html">← Python Home</a>
+        <a href="../index.html">Main Home →</a>
+    </div>
+    <h1>PYTHON PROGRAMMING LAB</h1>
+    <p>Experiment 3 – Determination of Stresses and Strains for Uniform Bar</p>
+</header>
+
+<main class="container">
+
+<section class="card">
+    <div class="title">Experiment 3 – Flow Chart</div>
+
+    <div class="flow">
+
+        <div class="node start">START</div>
+        <div class="arrow">↓</div>
+
+        <div class="node calc">
+            Define Helper Functions:<br>
+            <code>display()</code>, <code>stress()</code>, <code>longitudinal_strain()</code>, <code>lateral_strain()</code>
+        </div>
+        <div class="arrow">↓</div>
+
+        <div class="node cond">
+            Start <code>while True</code> Loop<br>
+            Display Menu & Input Choice (1-Circular, 2-Rectangular, 3-Exit)
+        </div>
+        <div class="arrow">↓</div>
+
+        <div class="node cond">
+            Is Choice == 1?
+        </div>
+        <div class="arrow">↓ (Yes)</div>
+
+        <div class="node calc">
+            Call <code>circular_section()</code><br>
+            Input d, L, P, E, Δd → Calculate Area, σ, ε_long, ε_lat → Call <code>display()</code>
+        </div>
+        <div class="arrow">↓ (No)</div>
+
+        <div class="node cond">
+            Is Choice == 2?
+        </div>
+        <div class="arrow">↓ (Yes)</div>
+
+        <div class="node calc">
+            Call <code>rectangular_section()</code><br>
+            Input b, t, L, P, E, Δb → Calculate Area, σ, ε_long, ε_lat → Call <code>display()</code>
+        </div>
+        <div class="arrow">↓ (No)</div>
+
+        <div class="node cond">
+            Is Choice == 3?
+        </div>
+        <div class="arrow">↓ (Yes)</div>
+
+        <div class="node">
+            Print "Program Terminated" & Break Loop
+        </div>
+        <div class="arrow">↓</div>
+
+        <div class="node cond">
+            Input <code>again</code> ("Do you want to calculate another structure? Y/N")<br>
+            If <code>again != 'Y'</code>, Print "Thank You" & Break
+        </div>
+        <div class="arrow">↓</div>
+
+        <div class="node end">END</div>
+
+    </div>
+</section>
+
+<section class="card">
+    <div class="title">Python Program – Line-by-Line Explanation</div>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width:48%">Python Statement</th>
+                <th style="width:15%">Purpose</th>
+                <th>What it does</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td><code>import math</code></td>
+                <td>Library Import</td>
+                <td>Imports Python's mathematical module to utilize standard constants like <code>math.pi</code>.</td>
+            </tr>
+
+            <!-- display function -->
+            <tr>
+                <td><code>def display(area, stress_value, long_strain, lat_strain):</code></td>
+                <td>Function Header</td>
+                <td>Defines the function to display formatted calculated parameters.</td>
+            </tr>
+            <tr>
+                <td><code>print("\n----------- RESULTS -----------")</code></td>
+                <td>Output</td>
+                <td>Prints the heading for the output section.</td>
+            </tr>
+            <tr>
+                <td><code>print("Area =", round(area, 2), "mm²")</code></td>
+                <td>Output</td>
+                <td>Prints the calculated cross-sectional area rounded to 2 decimal places in mm².</td>
+            </tr>
+            <tr>
+                <td><code>print("Stress =", round(stress_value, 2), "N/mm²")</code></td>
+                <td>Output</td>
+                <td>Prints the calculated stress value rounded to 2 decimal places in N/mm².</td>
+            </tr>
+            <tr>
+                <td><code>print("Longitudinal Strain =", round(long_strain, 6))</code></td>
+                <td>Output</td>
+                <td>Prints the calculated longitudinal strain rounded to 6 decimal places.</td>
+            </tr>
+            <tr>
+                <td><code>print("Lateral Strain =", round(lat_strain, 6))</code></td>
+                <td>Output</td>
+                <td>Prints the calculated lateral strain rounded to 6 decimal places.</td>
+            </tr>
+
+            <!-- stress function -->
+            <tr>
+                <td><code>def stress(load, area):</code></td>
+                <td>Function Header</td>
+                <td>Defines the function to calculate stress given load and area.</td>
+            </tr>
+            <tr>
+                <td><code>sigma = load / area</code></td>
+                <td>Calculation</td>
+                <td>Calculates stress ($\sigma = P / A$) by dividing tensile load by area.</td>
+            </tr>
+            <tr>
+                <td><code>return sigma</code></td>
+                <td>Return</td>
+                <td>Returns the calculated stress value to the calling program.</td>
+            </tr>
+
+            <!-- longitudinal_strain function -->
+            <tr>
+                <td><code>def longitudinal_strain(load, length, area, young_modulus):</code></td>
+                <td>Function Header</td>
+                <td>Defines the function to calculate longitudinal strain.</td>
+            </tr>
+            <tr>
+                <td><code>long_strain = (load * length) / (area * young_modulus)</code></td>
+                <td>Calculation</td>
+                <td>Calculates axial strain using Hooke's Law ($\varepsilon_{long} = \frac{PL}{AE}$).</td>
+            </tr>
+            <tr>
+                <td><code>return long_strain</code></td>
+                <td>Return</td>
+                <td>Returns the calculated longitudinal strain to the calling statement.</td>
+            </tr>
+
+            <!-- lateral_strain function -->
+            <tr>
+                <td><code>def lateral_strain(change, original):</code></td>
+                <td>Function Header</td>
+                <td>Defines the function to calculate lateral strain.</td>
+            </tr>
+            <tr>
+                <td><code>lat_strain = change / original</code></td>
+                <td>Calculation</td>
+                <td>Calculates lateral strain as the ratio of dimensional change to original dimension.</td>
+            </tr>
+            <tr>
+                <td><code>return lat_strain</code></td>
+                <td>Return</td>
+                <td>Returns the calculated lateral strain value.</td>
+            </tr>
+
+            <!-- circular_section function -->
+            <tr>
+                <td><code>def circular_section():</code></td>
+                <td>Function Header</td>
+                <td>Defines the function handling inputs and calculations for circular bars.</td>
+            </tr>
+            <tr>
+                <td><code>print("\nCIRCULAR CROSS SECTION")</code></td>
+                <td>Output</td>
+                <td>Displays the header for the circular cross-section calculations.</td>
+            </tr>
+            <tr>
+                <td><code>d = float(input("Enter Diameter (mm): "))</code></td>
+                <td>Input</td>
+                <td>Prompts for and accepts the diameter of the circular bar in mm.</td>
+            </tr>
+            <tr>
+                <td><code>L = float(input("Enter Length (mm): "))</code></td>
+                <td>Input</td>
+                <td>Prompts for and accepts the total length of the bar in mm.</td>
+            </tr>
+            <tr>
+                <td><code>P = float(input("Enter Tensile Load (N): "))</code></td>
+                <td>Input</td>
+                <td>Prompts for and accepts the tensile load acting on the bar in Newtons.</td>
+            </tr>
+            <tr>
+                <td><code>E = float(input("Enter Young's Modulus (N/mm²): "))</code></td>
+                <td>Input</td>
+                <td>Prompts for and accepts the Young's Modulus of the material in N/mm².</td>
+            </tr>
+            <tr>
+                <td><code>delta_d = float(input("Enter Change in Diameter (mm): "))</code></td>
+                <td>Input</td>
+                <td>Prompts for and accepts the lateral deformation (change in diameter) in mm.</td>
+            </tr>
+            <tr>
+                <td><code>area = math.pi * d * d / 4</code></td>
+                <td>Calculation</td>
+                <td>Calculates the cross-sectional area of the circular bar ($A = \frac{\pi d^2}{4}$).</td>
+            </tr>
+            <tr>
+                <td><code>s = stress(P, area)</code></td>
+                <td>Function Call</td>
+                <td>Calls the <code>stress()</code> function to calculate normal stress.</td>
+            </tr>
+            <tr>
+                <td><code>long_strain = longitudinal_strain(P, L, area, E)</code></td>
+                <td>Function Call</td>
+                <td>Calls <code>longitudinal_strain()</code> to compute axial strain.</td>
+            </tr>
+            <tr>
+                <td><code>lat_strain = lateral_strain(delta_d, d)</code></td>
+                <td>Function Call</td>
+                <td>Calls <code>lateral_strain()</code> to compute lateral strain.</td>
+            </tr>
+            <tr>
+                <td><code>display(area, s, long_strain, lat_strain)</code></td>
+                <td>Function Call</td>
+                <td>Calls <code>display()</code> to print all four calculated results.</td>
+            </tr>
+
+            <!-- rectangular_section function -->
+            <tr>
+                <td><code>def rectangular_section():</code></td>
+                <td>Function Header</td>
+                <td>Defines the function handling inputs and calculations for rectangular bars.</td>
+            </tr>
+            <tr>
+                <td><code>print("\nRECTANGULAR CROSS SECTION")</code></td>
+                <td>Output</td>
+                <td>Displays the header for rectangular cross-section calculations.</td>
+            </tr>
+            <tr>
+                <td><code>b = float(input("Enter Width (mm): "))</code></td>
+                <td>Input</td>
+                <td>Prompts for and accepts the width of the rectangular bar in mm.</td>
+            </tr>
+            <tr>
+                <td><code>t = float(input("Enter Thickness (mm): "))</code></td>
+                <td>Input</td>
+                <td>Prompts for and accepts the thickness of the rectangular bar in mm.</td>
+            </tr>
+            <tr>
+                <td><code>L = float(input("Enter Length (mm): "))</code></td>
+                <td>Input</td>
+                <td>Prompts for and accepts the length of the bar in mm.</td>
+            </tr>
+            <tr>
+                <td><code>P = float(input("Enter Tensile Load (N): "))</code></td>
+                <td>Input</td>
+                <td>Prompts for and accepts the tensile load in Newtons.</td>
+            </tr>
+            <tr>
+                <td><code>E = float(input("Enter Young's Modulus (N/mm²): "))</code></td>
+                <td>Input</td>
+                <td>Prompts for and accepts Young's Modulus in N/mm².</td>
+            </tr>
+            <tr>
+                <td><code>delta_b = float(input("Enter Change in Width (mm): "))</code></td>
+                <td>Input</td>
+                <td>Prompts for and accepts the change in width in mm.</td>
+            </tr>
+            <tr>
+                <td><code>area = b * t</code></td>
+                <td>Calculation</td>
+                <td>Calculates cross-sectional area of rectangular bar ($A = b \times t$).</td>
+            </tr>
+            <tr>
+                <td><code>s = stress(P, area)</code></td>
+                <td>Function Call</td>
+                <td>Calls <code>stress()</code> function to compute normal stress.</td>
+            </tr>
+            <tr>
+                <td><code>long_strain = longitudinal_strain(P, L, area, E)</code></td>
+                <td>Function Call</td>
+                <td>Calls <code>longitudinal_strain()</code> to compute axial strain.</td>
+            </tr>
+            <tr>
+                <td><code>lat_strain = lateral_strain(delta_b, b)</code></td>
+                <td>Function Call</td>
+                <td>Calls <code>lateral_strain()</code> to compute lateral strain.</td>
+            </tr>
+            <tr>
+                <td><code>display(area, s, long_strain, lat_strain)</code></td>
+                <td>Function Call</td>
+                <td>Calls <code>display()</code> function to display the output results.</td>
+            </tr>
+
+            <!-- Main program loop -->
+            <tr>
+                <td><code>while True:</code></td>
+                <td>Loop Control</td>
+                <td>Starts an infinite loop to run menu options repeatedly.</td>
+            </tr>
+            <tr>
+                <td><code>print("\nSTRESS AND STRAIN CALCULATOR")</code><br>
+                    <code>print("1. Circular Cross Section")</code><br>
+                    <code>print("2. Rectangular Cross Section")</code><br>
+                    <code>print("3. Exit")</code></td>
+                <td>Output</td>
+                <td>Displays the interactive selection menu.</td>
+            </tr>
+            <tr>
+                <td><code>choice = int(input("Enter your choice (1, 2 or 3): "))</code></td>
+                <td>Input</td>
+                <td>Accepts and converts menu selection to an integer.</td>
+            </tr>
+            <tr>
+                <td><code>if choice == 1: circular_section()</code></td>
+                <td>Conditional</td>
+                <td>Executes the circular cross-section calculations if user inputs 1.</td>
+            </tr>
+            <tr>
+                <td><code>elif choice == 2: rectangular_section()</code></td>
+                <td>Conditional</td>
+                <td>Executes rectangular cross-section calculations if user inputs 2.</td>
+            </tr>
+            <tr>
+                <td><code>elif choice == 3: print("\nProgram Terminated."); break</code></td>
+                <td>Conditional</td>
+                <td>Prints termination message and breaks out of loop if user inputs 3.</td>
+            </tr>
+            <tr>
+                <td><code>else: print("\nInvalid Choice.")</code></td>
+                <td>Output / Exception</td>
+                <td>Displays error message when choice is not 1, 2, or 3.</td>
+            </tr>
+            <tr>
+                <td><code>again = input("\nDo you want to calculate another structure? (Y/N): ")</code></td>
+                <td>Input</td>
+                <td>Prompts the user whether to continue testing another section.</td>
+            </tr>
+            <tr>
+                <td><code>if again.upper() != "Y": print("\nThank You."); break</code></td>
+                <td>Loop Control</td>
+                <td>Converts input to uppercase and terminates loop if input is not 'Y'.</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <div class="note">
+        <b>Concept used:</b> Modular programming using <b>user-defined functions</b> (passing parameters and returning values) and interactive user control flow via <b>while loops</b> and conditional statements.
+    </div>
+</section>
+
+<section class="card">
+    <div class="title">Complete Python Program</div>
+
+<pre class="program"># Program: Stress and Strain Calculator Using Functions and While Loop
+import math
+
+# Function to Display Results
+def display(area, stress_value, long_strain, lat_strain):
+    print("\n----------- RESULTS -----------")
+    print("Area =", round(area, 2), "mm²")
+    print("Stress =", round(stress_value, 2), "N/mm²")
+    print("Longitudinal Strain =", round(long_strain, 6))
+    print("Lateral Strain =", round(lat_strain, 6))
+
+# Function to Calculate Stress
+def stress(load, area):
+    sigma = load / area
+    return sigma
+
+# Function to Calculate Longitudinal Strain
+def longitudinal_strain(load, length, area, young_modulus):
+    long_strain = (load * length) / (area * young_modulus)
+    return long_strain
+
+# Function to Calculate Lateral Strain
+def lateral_strain(change, original):
+    lat_strain = change / original
+    return lat_strain
+
+# Function for Circular Cross Section
+def circular_section():
+    print("\nCIRCULAR CROSS SECTION")
+    d = float(input("Enter Diameter (mm): "))
+    L = float(input("Enter Length (mm): "))
+    P = float(input("Enter Tensile Load (N): "))
+    E = float(input("Enter Young's Modulus (N/mm²): "))
+    delta_d = float(input("Enter Change in Diameter (mm): "))
+    
+    area = math.pi * d * d / 4
+    s = stress(P, area)
+    long_strain = longitudinal_strain(P, L, area, E)
+    lat_strain = lateral_strain(delta_d, d)
+    
+    display(area, s, long_strain, lat_strain)
+
+# Function for Rectangular Cross Section
+def rectangular_section():
+    print("\nRECTANGULAR CROSS SECTION")
+    b = float(input("Enter Width (mm): "))
+    t = float(input("Enter Thickness (mm): "))
+    L = float(input("Enter Length (mm): "))
+    P = float(input("Enter Tensile Load (N): "))
+    E = float(input("Enter Young's Modulus (N/mm²): "))
+    delta_b = float(input("Enter Change in Width (mm): "))
+    
+    area = b * t
+    s = stress(P, area)
+    long_strain = longitudinal_strain(P, L, area, E)
+    lat_strain = lateral_strain(delta_b, b)
+    
+    display(area, s, long_strain, lat_strain)
+
+# Main Program
+while True:
+    print("\nSTRESS AND STRAIN CALCULATOR")
+    print("1. Circular Cross Section")
+    print("2. Rectangular Cross Section")
+    print("3. Exit")
+    
+    choice = int(input("Enter your choice (1, 2 or 3): "))
+    
+    if choice == 1:
+        circular_section()
+    elif choice == 2:
+        rectangular_section()
+    elif choice == 3:
+        print("\nProgram Terminated.")
+        break
+    else:
+        print("\nInvalid Choice.")
+    
+    again = input("\nDo you want to calculate another structure? (Y/N): ")
+    if again.upper() != "Y":
+        print("\nThank You.")
+        break</pre>
+</section>
+
+</main>
+
+<footer>© 2026 D. Kiran Prasad | Python Experiments</footer>
+
+</body>
+</html>
