@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experiment 1 - Reactions at Supports - Flow Chart</title>
+<style>
+*{box-sizing:border-box}
+body{
+    margin:0;
+    background:#eef4f9;
+    color:#111;
+    font-family:Arial,Helvetica,sans-serif;
+}
+.header{
+    background:linear-gradient(90deg,#0b477d,#087cc1);
+    color:#fff;
+    padding:22px 20px;
+    text-align:center;
+}
+.header h1{margin:0;font-size:30px}
+.header p{margin:7px 0 0;font-size:18px}
+.nav{
+    background:#fff;
+    padding:12px 5%;
+    display:flex;
+    justify-content:space-between;
+    box-shadow:0 2px 8px rgba(0,0,0,.12);
+}
+.nav a{color:#075b99;text-decoration:none;font-weight:700}
+.nav a:hover{text-decoration:underline}
+.container{width:94%;max-width:1250px;margin:24px auto}
+.card{
+    background:#fff;
+    border-radius:12px;
+    padding:22px;
+    margin-bottom:22px;
+    box-shadow:0 3px 15px rgba(0,0,0,.08);
+}
+.title{
+    background:#0b5b94;
+    color:#fff;
+    padding:13px 18px;
+    border-radius:8px;
+    font-size:21px;
+    font-weight:700;
+    margin-bottom:20px;
+}
+.flow{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:7px;
+}
+.node{
+    width:min(650px,90%);
+    padding:13px 18px;
+    text-align:center;
+    border:2px solid #17679f;
+    border-radius:9px;
+    background:#f7fbff;
+    color:#073f6c;
+    font-weight:700;
+}
+.node.start,.node.end{
+    width:220px;
+    border-radius:28px;
+    background:#0b5b94;
+    color:#fff;
+}
+.node.calc{
+    background:#eef7ee;
+    border-color:#4c9b5b;
+    color:#245d2c;
+}
+.arrow{
+    color:#0b5b94;
+    font-size:25px;
+    line-height:20px;
+    font-weight:700;
+}
+.eq{
+    display:block;
+    margin-top:6px;
+    font-family:"Courier New",monospace;
+    font-weight:600;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+}
+th,td{
+    border:1px solid #c8d6e2;
+    padding:12px 14px;
+    text-align:left;
+    vertical-align:top;
+}
+th{
+    background:#0b5b94;
+    color:#fff;
+    font-size:16px;
+}
+tr:nth-child(even){background:#f7fafc}
+code{
+    background:#eef3f7;
+    color:#063f6c;
+    padding:3px 5px;
+    border-radius:4px;
+    font-family:"Courier New",monospace;
+}
+.program{
+    background:#1e1e1e;
+    color:#ddd;
+    border-radius:8px;
+    padding:17px;
+    overflow:auto;
+    font:15px/1.55 Consolas,"Courier New",monospace;
+    white-space:pre;
+}
+.note{
+    background:#fff8df;
+    border-left:5px solid #d89a00;
+    padding:13px 16px;
+    margin-top:18px;
+    line-height:1.5;
+}
+footer{
+    background:#0b477d;
+    color:#fff;
+    text-align:center;
+    padding:13px;
+    margin-top:25px;
+}
+@media(max-width:700px){
+    .header h1{font-size:24px}
+    .container{width:96%}
+    .card{padding:14px}
+    th,td{padding:9px;font-size:14px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <h1>MECHANICS OF SOLIDS</h1>
+    <p>Experiment 1 – Reactions at Supports of a Simply Supported Beam</p>
+</header>
+
+<nav class="nav">
+    <a href="index.html">← Python Home</a>
+    <a href="../index.html">Main Home →</a>
+</nav>
+
+<main class="container">
+
+<section class="card">
+    <div class="title">Experiment 1 – Flow Chart</div>
+
+    <div class="flow">
+
+        <div class="node start">START</div>
+        <div class="arrow">↓</div>
+
+        <div class="node">
+            Input Beam Span
+            <span class="eq">L (m)</span>
+        </div>
+        <div class="arrow">↓</div>
+
+        <div class="node">
+            Input Three Point Loads
+            <span class="eq">P₁, P₂, P₃ (kN)</span>
+        </div>
+        <div class="arrow">↓</div>
+
+        <div class="node">
+            Input Positions of Loads from Left Support A
+            <span class="eq">a₁, a₂, a₃ (m)</span>
+        </div>
+        <div class="arrow">↓</div>
+
+        <div class="node calc">
+            Calculate Right Support Reaction
+            <span class="eq">RB = (P₁a₁ + P₂a₂ + P₃a₃) / L</span>
+        </div>
+        <div class="arrow">↓</div>
+
+        <div class="node calc">
+            Calculate Left Support Reaction
+            <span class="eq">RA = P₁ + P₂ + P₃ − RB</span>
+        </div>
+        <div class="arrow">↓</div>
+
+        <div class="node">
+            Display Support Reactions
+            <span class="eq">RA and RB</span>
+        </div>
+        <div class="arrow">↓</div>
+
+        <div class="node end">END</div>
+
+    </div>
+</section>
+
+<section class="card">
+    <div class="title">Python Program – Line-by-Line Explanation</div>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width:42%">Python Statement</th>
+                <th style="width:20%">Purpose</th>
+                <th>What it does</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td><code>L = float(input("Enter the span of the beam (m): "))</code></td>
+                <td>Input</td>
+                <td>Accepts the beam span from the user and converts the entered value into a floating-point number.</td>
+            </tr>
+
+            <tr>
+                <td><code>P1 = float(input("Enter First Point Load P1 (kN): "))</code></td>
+                <td>Input</td>
+                <td>Accepts the first point load acting on the beam in kN.</td>
+            </tr>
+
+            <tr>
+                <td><code>P2 = float(input("Enter Second Point Load P2 (kN): "))</code></td>
+                <td>Input</td>
+                <td>Accepts the second point load acting on the beam in kN.</td>
+            </tr>
+
+            <tr>
+                <td><code>P3 = float(input("Enter Third Point Load P3 (kN): "))</code></td>
+                <td>Input</td>
+                <td>Accepts the third point load acting on the beam in kN.</td>
+            </tr>
+
+            <tr>
+                <td><code>a1 = float(input("Enter distance of P1 from Left Support A (m): "))</code></td>
+                <td>Input</td>
+                <td>Accepts the distance of the first point load P1 from the left support A.</td>
+            </tr>
+
+            <tr>
+                <td><code>a2 = float(input("Enter distance of P2 from Left Support A (m): "))</code></td>
+                <td>Input</td>
+                <td>Accepts the distance of the second point load P2 from the left support A.</td>
+            </tr>
+
+            <tr>
+                <td><code>a3 = float(input("Enter distance of P3 from Left Support A (m): "))</code></td>
+                <td>Input</td>
+                <td>Accepts the distance of the third point load P3 from the left support A.</td>
+            </tr>
+
+            <tr>
+                <td><code>RB = (P1 * a1 + P2 * a2 + P3 * a3) / L</code></td>
+                <td>Calculation</td>
+                <td>Calculates the reaction at the right support B by taking moments about the left support A.</td>
+            </tr>
+
+            <tr>
+                <td><code>RA = P1 + P2 + P3 - RB</code></td>
+                <td>Calculation</td>
+                <td>Calculates the reaction at the left support A using vertical force equilibrium.</td>
+            </tr>
+
+            <tr>
+                <td><code>print("\n----- REACTIONS AT SUPPORTS -----")</code></td>
+                <td>Output</td>
+                <td>Prints a heading to identify the support reaction results.</td>
+            </tr>
+
+            <tr>
+                <td><code>print("Reaction at Left Support (RA) =", round(RA, 2), "kN")</code></td>
+                <td>Output</td>
+                <td>Displays the calculated reaction at the left support A, rounded to two decimal places.</td>
+            </tr>
+
+            <tr>
+                <td><code>print("Reaction at Right Support (RB) =", round(RB, 2), "kN")</code></td>
+                <td>Output</td>
+                <td>Displays the calculated reaction at the right support B, rounded to two decimal places.</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <div class="note">
+        <b>Concept used:</b> The program determines the two support reactions using
+        moment equilibrium about support A and vertical force equilibrium.
+    </div>
+</section>
+
+<section class="card">
+    <div class="title">Complete Python Program</div>
+
+<pre class="program"># Program to calculate reactions of a simply supported beam
+# carrying three point loads
+
+# Input beam span
+L = float(input("Enter the span of the beam (m): "))
+
+# Input point loads
+P1 = float(input("Enter First Point Load P1 (kN): "))
+P2 = float(input("Enter Second Point Load P2 (kN): "))
+P3 = float(input("Enter Third Point Load P3 (kN): "))
+
+# Input distances from left support A
+a1 = float(input("Enter distance of P1 from Left Support A (m): "))
+a2 = float(input("Enter distance of P2 from Left Support A (m): "))
+a3 = float(input("Enter distance of P3 from Left Support A (m): "))
+
+# Calculate reactions
+RB = (P1 * a1 + P2 * a2 + P3 * a3) / L
+RA = P1 + P2 + P3 - RB
+
+# Display results
+print("\n------ REACTIONS AT SUPPORTS ------")
+print("Reaction at Left Support (RA) =", round(RA, 2), "kN")
+print("Reaction at Right Support (RB) =", round(RB, 2), "kN")</pre>
+</section>
+
+</main>
+
+<footer>© 2026 D. Kiran Prasad | Python Experiments</footer>
+
+</body>
+</html>
