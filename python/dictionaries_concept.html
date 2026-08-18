@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dictionaries</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#eef4f9;color:#111;font-family:"Segoe UI",Arial,sans-serif}
+.header{background:linear-gradient(90deg,#0b477d,#087cc1);color:#fff;padding:18px 22px;display:grid;grid-template-columns:1fr 2fr 1fr;align-items:center}
+.header a{color:#fff;text-decoration:none;font-weight:700;font-size:16px}.header a:hover{text-decoration:underline}
+.header h1{margin:0;text-align:center;font-size:30px}.main-home{text-align:right}
+.container{width:94%;max-width:1450px;margin:24px auto}
+.card{background:#fff;border-radius:12px;padding:24px;margin-bottom:22px;box-shadow:0 4px 18px rgba(0,0,0,.10)}
+.card h2{margin:0 0 18px;color:#075b99;font-size:24px;border-left:6px solid #075b99;padding-left:12px}
+.card h3{color:#075b99;margin-top:22px}.theory{font-size:17px;line-height:1.65}
+.highlight,.note{background:#fff8df;border-left:5px solid #d99a00;padding:14px 18px;margin:16px 0;line-height:1.6}
+.syntax-title{text-align:center;color:#075b99;font-size:25px;font-weight:700;margin-bottom:20px}
+.syntax-box{width:92%;margin:25px auto;background:#fff9df;border:2px solid #d7b54a;border-radius:8px;padding:20px;text-align:center;font:700 22px Consolas,"Courier New",monospace;color:#064ea8}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px}.program-box{background:#f7f9fb;border:1px solid #d4dee8;border-radius:9px;padding:18px;overflow:auto}
+.program-box h3{margin:0 0 12px;color:#244f70}pre{margin:0;font:16px/1.6 Consolas,"Courier New",monospace;white-space:pre-wrap}
+.output{color:#d65b00;font:700 16px/1.55 Consolas,"Courier New",monospace;white-space:pre-wrap}
+table{width:100%;border-collapse:collapse}th{background:#24577f;color:#fff;padding:13px;text-align:left;font-size:17px}
+td{border:1px solid #ccd7e2;padding:13px;vertical-align:top;font-size:16px;line-height:1.55}tr:nth-child(even){background:#f7faff}
+.code{display:inline-block;background:#f3f7fc;border:1px solid #b7d0ef;border-radius:7px;padding:5px 8px;font:15px Consolas,"Courier New",monospace;color:#064ea8}
+ul{line-height:1.7;font-size:17px}footer{background:#063b70;color:#fff;text-align:center;padding:13px}
+@media(max-width:950px){.header{grid-template-columns:1fr;gap:8px;text-align:center}.main-home{text-align:center}.two-col{grid-template-columns:1fr}}
+@media(max-width:600px){.container{width:94%}.card{padding:17px}.header h1{font-size:25px}.syntax-box{width:100%;font-size:18px}}
+</style>
+</head>
+<body>
+<header class="header"><div><a href="../index.html">← Python Home</a></div><h1>DICTIONARIES</h1><div class="main-home"><a href="../../index.html">Main Home →</a></div></header>
+<main class="container">
+
+<section class="card"><h2>1. Basic Theory</h2><div class="theory">
+<p>A <b>dictionary</b> is a collection of data stored in <b>key-value pairs</b>. Each key is associated with a corresponding value.</p>
+<div class="highlight"><b>Basic idea:</b><br>Key → Value</div>
+<p>Dictionaries are useful when data needs to be stored and accessed using a meaningful key instead of a numerical index.</p>
+<div class="syntax-title">Creating a Dictionary</div>
+<div class="syntax-box">dictionary_name = {key1: value1, key2: value2, ...}</div>
+<p>Dictionaries are written using <b>curly braces { }</b>. Each key and value are separated by a colon <b>:</b>, and pairs are separated by commas.</p>
+</div></section>
+
+<section class="card"><h2>2. Key and Value</h2><div class="two-col">
+<div class="program-box"><h3>Example</h3><pre>student = {
+    "name": "Ravi",
+    "age": 20,
+    "branch": "CSE"
+}</pre></div>
+<div class="note"><b>Explanation:</b><br><b>"name"</b> → key; <b>"Ravi"</b> → value<br><b>"age"</b> → key; <b>20</b> → value<br><b>"branch"</b> → key; <b>"CSE"</b> → value.<br><br>The key is used to access its corresponding value.</div>
+</div></section>
+
+<section class="card"><h2>3. Accessing Dictionary Values</h2><div class="two-col">
+<div class="program-box"><h3>Python Program</h3><pre>student = {
+    "name": "Ravi",
+    "age": 20,
+    "branch": "CSE"
+}
+
+print(student["name"])
+print(student["age"])</pre></div>
+<div class="note"><b>Explanation:</b><br>Dictionary values are accessed using their <b>keys</b>.<br><br><span class="code">student["name"]</span> gives the value associated with <b>"name"</b>.<br><span class="code">student["age"]</span> gives the value associated with <b>"age"</b>.<div class="output">Output:
+Ravi
+20</div></div>
+</div></section>
+
+<section class="card"><h2>4. Adding and Modifying Dictionary Items</h2><div class="two-col">
+<div class="program-box"><h3>Python Program</h3><pre>student = {
+    "name": "Ravi",
+    "age": 20
+}
+
+student["age"] = 21
+student["branch"] = "CSE"
+
+print(student)</pre></div>
+<div class="note"><b>Explanation:</b><br>If the key already exists, assigning a new value <b>modifies</b> the existing value. If the key does not exist, a new key-value pair is added.<div class="output">Output:
+{'name': 'Ravi', 'age': 21, 'branch': 'CSE'}</div></div>
+</div></section>
+
+<section class="card"><h2>5. Dictionary Properties</h2><table><thead><tr><th>Property</th><th>Explanation</th></tr></thead><tbody>
+<tr><td>Key-Value pairs</td><td>Data is stored as <b>key: value</b> pairs.</td></tr>
+<tr><td>Keys</td><td>Keys identify and access values. Keys must be unique.</td></tr>
+<tr><td>Values</td><td>Values can be of different data types.</td></tr>
+<tr><td>Mutable</td><td>Dictionary items can be added, modified or removed.</td></tr>
+<tr><td>Access</td><td>Values are accessed using keys rather than numerical indexes.</td></tr>
+<tr><td>Curly braces</td><td>Dictionaries are represented using <b>{ }</b>.</td></tr>
+</tbody></table></section>
+
+<section class="card"><h2>6. Useful Dictionary Operations</h2><table><thead><tr><th>Operation</th><th>Example</th><th>Purpose</th></tr></thead><tbody>
+<tr><td>Access value</td><td><span class="code">student["name"]</span></td><td>Get the value associated with a key.</td></tr>
+<tr><td>Modify value</td><td><span class="code">student["age"] = 21</span></td><td>Change an existing value.</td></tr>
+<tr><td>Add item</td><td><span class="code">student["branch"] = "CSE"</span></td><td>Add a new key-value pair.</td></tr>
+<tr><td>Length</td><td><span class="code">len(student)</span></td><td>Find the number of key-value pairs.</td></tr>
+<tr><td>Membership</td><td><span class="code">"age" in student</span></td><td>Check whether a key exists.</td></tr>
+<tr><td>Loop through keys</td><td><span class="code">for key in student:</span></td><td>Process dictionary keys one by one.</td></tr>
+</tbody></table></section>
+
+<section class="card"><h2>7. Looping Through a Dictionary</h2><div class="two-col">
+<div class="program-box"><h3>Python Program</h3><pre>student = {
+    "name": "Ravi",
+    "age": 20,
+    "branch": "CSE"
+}
+
+for key in student:
+    print(key, student[key])</pre></div>
+<div class="note"><b>Explanation:</b><br>The <b>for loop</b> goes through dictionary keys one by one. <span class="code">student[key]</span> gives the value associated with the current key.<div class="output">Output:
+name Ravi
+age 20
+branch CSE</div></div>
+</div></section>
+
+<section class="card"><h2>8. Frequently Used General Programs</h2>
+
+<h3>Program 1 – Store and Display Student Details</h3><div class="two-col">
+<div class="program-box"><h3>Python Program</h3><pre>student = {
+    "name": "Anil",
+    "roll": 101,
+    "branch": "CSE",
+    "age": 20
+}
+
+print("Name:", student["name"])
+print("Roll:", student["roll"])
+print("Branch:", student["branch"])
+print("Age:", student["age"])</pre></div>
+<div class="note"><b>Explanation:</b><br>The dictionary stores related student details using meaningful keys. Each value is accessed through its corresponding key.<div class="output">Output:
+Name: Anil
+Roll: 101
+Branch: CSE
+Age: 20</div></div></div>
+
+<h3>Program 2 – Calculate Total and Average Marks</h3><div class="two-col">
+<div class="program-box"><h3>Python Program</h3><pre>marks = {
+    "Maths": 80,
+    "Physics": 75,
+    "Python": 90
+}
+
+total = 0
+
+for subject in marks:
+    total = total + marks[subject]
+
+average = total / len(marks)
+
+print("Total =", total)
+print("Average =", average)</pre></div>
+<div class="note"><b>Explanation:</b><br>The subject names are keys and the marks are values. The loop adds each mark to <b>total</b>. Then the total is divided by the number of subjects.<div class="output">Output:
+Total = 245
+Average = 81.66666666666667</div></div></div>
+
+<h3>Program 3 – Find the Highest Mark</h3><div class="two-col">
+<div class="program-box"><h3>Python Program</h3><pre>marks = {
+    "Maths": 80,
+    "Physics": 75,
+    "Python": 90
+}
+
+highest = 0
+subject = ""
+
+for name in marks:
+    if marks[name] > highest:
+        highest = marks[name]
+        subject = name
+
+print("Highest mark =", highest)
+print("Subject =", subject)</pre></div>
+<div class="note"><b>Explanation:</b><br><b>highest</b> stores the largest mark found so far. Each current mark is compared with it. When a larger value is found, both <b>highest</b> and <b>subject</b> are updated.<div class="output">Output:
+Highest mark = 90
+Subject = Python</div></div></div>
+
+<h3>Program 4 – Count Values Greater Than a Given Number</h3><div class="two-col">
+<div class="program-box"><h3>Python Program</h3><pre>marks = {
+    "A": 72,
+    "B": 85,
+    "C": 64,
+    "D": 91
+}
+
+count = 0
+
+for name in marks:
+    if marks[name] > 75:
+        count = count + 1
+
+print("Count =", count)</pre></div>
+<div class="note"><b>Explanation:</b><br>The loop checks each dictionary value. If the value is greater than 75, the counter is increased. Here, 85 and 91 satisfy the condition.<div class="output">Output:
+Count = 2</div></div></div>
+
+<h3>Program 5 – Search for a Key</h3><div class="two-col">
+<div class="program-box"><h3>Python Program</h3><pre>student = {
+    "name": "Ravi",
+    "age": 20,
+    "branch": "CSE"
+}
+
+key = input("Enter key: ")
+
+if key in student:
+    print("Key Found")
+    print("Value =", student[key])
+else:
+    print("Key Not Found")</pre></div>
+<div class="note"><b>Explanation:</b><br>The <b>in</b> operator checks whether the entered key exists. If it exists, its corresponding value is accessed using <span class="code">student[key]</span>.<div class="output">Sample Input:
+age
+
+Output:
+Key Found
+Value = 20</div></div></div>
+
+</section>
+
+<section class="card"><h2>9. Dictionary vs List vs Tuple</h2><table><thead><tr><th>Feature</th><th>List</th><th>Tuple</th><th>Dictionary</th></tr></thead><tbody>
+<tr><td>Notation</td><td><span class="code">[ ]</span></td><td><span class="code">( )</span></td><td><span class="code">{ }</span></td></tr>
+<tr><td>Stores</td><td>Values/items</td><td>Values/items</td><td>Key-value pairs</td></tr>
+<tr><td>Access</td><td>Index</td><td>Index</td><td>Key</td></tr>
+<tr><td>Mutable</td><td>Yes</td><td>No</td><td>Yes</td></tr>
+<tr><td>Typical use</td><td>Changeable collection</td><td>Fixed collection</td><td>Related data identified by keys</td></tr>
+</tbody></table></section>
+
+<section class="card"><h2>10. Important Points to Remember</h2>
+<ul>
+<li>A dictionary stores data as <b>key-value pairs</b>.</li>
+<li>Dictionaries use curly braces <b>{ }</b>.</li>
+<li>Values are accessed using their keys.</li>
+<li>Dictionary keys must be unique.</li>
+<li>Dictionaries are mutable.</li>
+<li>An existing value can be changed by assigning a new value to its key.</li>
+<li>A new key-value pair is created when a new key is assigned.</li>
+<li><b>len()</b> gives the number of key-value pairs.</li>
+<li>The <b>in</b> operator checks whether a key exists.</li>
+<li>A <b>for loop</b> can process dictionary keys and values.</li>
+</ul></section>
+
+</main>
+<footer>© 2026 D. Kiran Prasad | Python Programming</footer>
+<script>
+document.addEventListener("contextmenu",function(e){e.preventDefault();});
+document.addEventListener("keydown",function(e){
+if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="p"){e.preventDefault();alert("Printing is disabled.");}
+});
+</script>
+<style>@media print{body{display:none!important;}}</style>
+</body>
+</html>
