@@ -12,23 +12,12 @@ body{
     color:#111;
     font-family:Arial,Helvetica,sans-serif;
 }
-.header{
-    background:linear-gradient(90deg,#0b477d,#087cc1);
-    color:#fff;
-    padding:22px 20px;
-    text-align:center;
-}
+.header{position:relative;background:linear-gradient(90deg,#0b477d,#087cc1);color:#fff;padding:28px 20px;text-align:center}
 .header h1{margin:0;font-size:30px}
 .header p{margin:7px 0 0;font-size:18px}
-.nav{
-    background:#fff;
-    padding:12px 5%;
-    display:flex;
-    justify-content:space-between;
-    box-shadow:0 2px 8px rgba(0,0,0,.12);
-}
-.nav a{color:#075b99;text-decoration:none;font-weight:700}
-.nav a:hover{text-decoration:underline}
+.header-nav{position:absolute;left:24px;right:24px;top:18px;display:flex;justify-content:space-between}
+.header-nav a{color:#fff;text-decoration:none;font-weight:700;font-size:16px}
+.header-nav a:hover{text-decoration:underline}
 .container{width:94%;max-width:1250px;margin:24px auto}
 .card{
     background:#fff;
@@ -144,14 +133,13 @@ footer{
 <body>
 
 <header class="header">
-    <h1>MECHANICS OF SOLIDS</h1>
+    <div class="header-nav">
+        <a href="index.html">← Python Home</a>
+        <a href="../index.html">Main Home →</a>
+    </div>
+    <h1>PYTHON PROGRAMMING LAB</h1>
     <p>Experiment 1 – Reactions at Supports of a Simply Supported Beam</p>
 </header>
-
-<nav class="nav">
-    <a href="index.html">← Python Home</a>
-    <a href="../index.html">Main Home →</a>
-</nav>
 
 <main class="container">
 
@@ -210,8 +198,8 @@ footer{
     <table>
         <thead>
             <tr>
-                <th style="width:42%">Python Statement</th>
-                <th style="width:20%">Purpose</th>
+                <th style="width:48%">Python Statement</th>
+                <th style="width:15%">Purpose</th>
                 <th>What it does</th>
             </tr>
         </thead>
