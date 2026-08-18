@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experiment 5 - Material Data Base Using Dictionary - Flow Chart</title>
+<style>
+*{box-sizing:border-box}
+body{
+    margin:0;
+    background:#eef4f9;
+    color:#111;
+    font-family:Arial,Helvetica,sans-serif;
+}
+.header{position:relative;background:linear-gradient(90deg,#0b477d,#087cc1);color:#fff;padding:28px 20px;text-align:center}
+.header h1{margin:0;font-size:30px}
+.header p{margin:7px 0 0;font-size:18px}
+.header-nav{position:absolute;left:24px;right:24px;top:18px;display:flex;justify-content:space-between}
+.header-nav a{color:#fff;text-decoration:none;font-weight:700;font-size:16px}
+.header-nav a:hover{text-decoration:underline}
+.container{width:94%;max-width:1250px;margin:24px auto}
+.card{
+    background:#fff;
+    border-radius:12px;
+    padding:22px;
+    margin-bottom:22px;
+    box-shadow:0 3px 15px rgba(0,0,0,.08);
+}
+.title{
+    background:#0b5b94;
+    color:#fff;
+    padding:13px 18px;
+    border-radius:8px;
+    font-size:21px;
+    font-weight:700;
+    margin-bottom:20px;
+}
+.flow{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:7px;
+}
+.node{
+    width:min(650px,90%);
+    padding:13px 18px;
+    text-align:center;
+    border:2px solid #17679f;
+    border-radius:9px;
+    background:#f7fbff;
+    color:#073f6c;
+    font-weight:700;
+}
+.node.start,.node.end{
+    width:220px;
+    border-radius:28px;
+    background:#0b5b94;
+    color:#fff;
+}
+.node.calc{
+    background:#eef7ee;
+    border-color:#4c9b5b;
+    color:#245d2c;
+}
+.node.cond{
+    background:#fff8df;
+    border-color:#d89a00;
+    color:#5a4100;
+}
+.arrow{
+    color:#0b5b94;
+    font-size:25px;
+    line-height:20px;
+    font-weight:700;
+}
+.eq{
+    display:block;
+    margin-top:6px;
+    font-family:"Courier New",monospace;
+    font-weight:600;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+}
+th,td{
+    border:1px solid #c8d6e2;
+    padding:12px 14px;
+    text-align:left;
+    vertical-align:top;
+}
+th{
+    background:#0b5b94;
+    color:#fff;
+    font-size:16px;
+}
+tr:nth-child(even){background:#f7fafc}
+code{
+    background:#eef3f7;
+    color:#063f6c;
+    padding:3px 5px;
+    border-radius:4px;
+    font-family:"Courier New",monospace;
+}
+.program{
+    background:#1e1e1e;
+    color:#ddd;
+    border-radius:8px;
+    padding:17px;
+    overflow:auto;
+    font:15px/1.55 Consolas,"Courier New",monospace;
+    white-space:pre;
+}
+.note{
+    background:#fff8df;
+    border-left:5px solid #d89a00;
+    padding:13px 16px;
+    margin-top:18px;
+    line-height:1.5;
+}
+footer{
+    background:#0b477d;
+    color:#fff;
+    text-align:center;
+    padding:13px;
+    margin-top:25px;
+}
+@media(max-width:700px){
+    .header h1{font-size:24px}
+    .container{width:96%}
+    .card{padding:14px}
+    th,td{padding:9px;font-size:14px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="header-nav">
+        <a href="index.html">← Python Home</a>
+        <a href="../index.html">Main Home →</a>
+    </div>
+    <h1>PYTHON PROGRAMMING LAB</h1>
+    <p>Experiment 5 – Material Data Base Using Dictionary</p>
+</header>
+
+<main class="container">
+
+<section class="card">
+    <div class="title">Experiment 5 – Flow Chart</div>
+
+    <div class="flow">
+
+        <div class="node start">START</div>
+        <div class="arrow">↓</div>
+
+        <div class="node calc">
+            Define Functions:<br>
+            <code>display(material)</code>, <code>add_property(material)</code>, <code>delete_property(material)</code>
+        </div>
+        <div class="arrow">↓</div>
+
+        <div class="node">
+            Initialize Dictionary <code>material</code> with Default Properties
+        </div>
+        <div class="arrow">↓</div>
+
+        <div class="node">
+            Call <code>display(material)</code> to Show Existing Properties
+        </div>
+        <div class="arrow">↓</div>
+
+        <div class="node">
+            Input User Choice
+            <span class="eq">choice (1 - Add, 2 - Delete)</span>
+        </div>
+        <div class="arrow">↓</div>
+
+        <div class="node cond">
+            Is <code>choice == 1</code>?
+        </div>
+        <div class="arrow">↓ (Yes)</div>
+
+        <div class="node calc">
+            Call <code>add_property(material)</code> → Input Key/Value & Update Dictionary → Call <code>display(material)</code>
+        </div>
+        <div class="arrow">↓ (No)</div>
+
+        <div class="node cond">
+            Is <code>choice == 2</code>?
+        </div>
+        <div class="arrow">↓ (Yes)</div>
+
+        <div class="node calc">
+            Call <code>delete_property(material)</code> → Input Key → Check & Delete via <code>del</code> → Call <code>display(material)</code>
+        </div>
+        <div class="arrow">↓</div>
+
+        <div class="node end">END</div>
+
+    </div>
+</section>
+
+<section class="card">
+    <div class="title">Python Program – Line-by-Line Explanation</div>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width:48%">Python Statement</th>
+                <th style="width:15%">Purpose</th>
+                <th>What it does</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td><code>def display(material):</code></td>
+                <td>Function Definition</td>
+                <td>Defines a function to iterate over and print all key-value pairs stored in the material dictionary.</td>
+            </tr>
+
+            <tr>
+                <td><code>for key, value in material.items():</code></td>
+                <td>Loop Control</td>
+                <td>Iterates through each key-value pair in the dictionary using the <code>items()</code> method.</td>
+            </tr>
+
+            <tr>
+                <td><code>print(key, ":", value)</code></td>
+                <td>Output</td>
+                <td>Displays the property name (key) alongside its associated value.</td>
+            </tr>
+
+            <tr>
+                <td><code>def add_property(material):</code></td>
+                <td>Function Definition</td>
+                <td>Defines a helper function to prompt the user and add or update a key-value entry in the dictionary.</td>
+            </tr>
+
+            <tr>
+                <td><code>key = input("Enter property name : ")</code></td>
+                <td>Input</td>
+                <td>Prompts the user to enter a new property name string.</td>
+            </tr>
+
+            <tr>
+                <td><code>value = input("Enter property value : ")</code></td>
+                <td>Input</td>
+                <td>Prompts the user to enter the corresponding property value.</td>
+            </tr>
+
+            <tr>
+                <td><code>material[key] = value</code></td>
+                <td>Data Manipulation</td>
+                <td>Adds the new key-value pair into the dictionary (or updates it if the key already exists).</td>
+            </tr>
+
+            <tr>
+                <td><code>def delete_property(material):</code></td>
+                <td>Function Definition</td>
+                <td>Defines a function to remove a specified property key from the material dictionary.</td>
+            </tr>
+
+            <tr>
+                <td><code>key = input("Enter property to delete : ")</code></td>
+                <td>Input</td>
+                <td>Prompts the user to enter the key name to be removed from the dictionary.</td>
+            </tr>
+
+            <tr>
+                <td><code>if key in material:</code></td>
+                <td>Search</td>
+                <td>Checks whether the specified key exists within the <code>material</code> dictionary.</td>
+            </tr>
+
+            <tr>
+                <td><code>del material[key]</code></td>
+                <td>Data Manipulation</td>
+                <td>Deletes the key-value pair corresponding to <code>key</code> using the <code>del</code> statement.</td>
+            </tr>
+
+            <tr>
+                <td><code>else: print("Property Not Found.")</code></td>
+                <td>Output / Exception</td>
+                <td>Displays an error message if the key specified by the user does not exist in the dictionary.</td>
+            </tr>
+
+            <tr>
+                <td><code>material = { ... }</code></td>
+                <td>Initialization</td>
+                <td>Initializes a dictionary containing properties of "Mild Steel" like density, hardness, Young's modulus, and Poisson's ratio.</td>
+            </tr>
+
+            <tr>
+                <td><code>display(material)</code></td>
+                <td>Function Call</td>
+                <td>Calls the function to display the initial key-value contents of the material database.</td>
+            </tr>
+
+            <tr>
+                <td><code>choice = int(input("\nEnter your choice (1-Add, 2-Delete): "))</code></td>
+                <td>Input</td>
+                <td>Prompts the user for a choice integer (1 to add a property, 2 to delete a property).</td>
+            </tr>
+
+            <tr>
+                <td><code>if choice == 1:</code></td>
+                <td>Conditional</td>
+                <td>Executes addition logic by calling <code>add_property()</code> and then <code>display()</code>.</td>
+            </tr>
+
+            <tr>
+                <td><code>elif choice == 2:</code></td>
+                <td>Conditional</td>
+                <td>Executes deletion logic by calling <code>delete_property()</code> and then <code>display()</code>.</td>
+            </tr>
+
+            <tr>
+                <td><code>else: print("Invalid Choice.")</code></td>
+                <td>Output / Exception</td>
+                <td>Displays an error message if the input choice is neither 1 nor 2.</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <div class="note">
+        <b>Concept used:</b> The program utilizes <b>Python Dictionaries</b> (key-value mapping) and operations like dictionary indexing, <code>.items()</code> iteration, membership testing (<code>in</code>), and the <code>del</code> statement to dynamic manage material database properties.
+    </div>
+</section>
+
+<section class="card">
+    <div class="title">Complete Python Program</div>
+
+<pre class="program"># Experiment 5: Material Data Base Using Dictionary
+
+def display(material):
+    for key, value in material.items():
+        print(key, ":", value)
+
+def add_property(material):
+    key = input("Enter property name : ")
+    value = input("Enter property value : ")
+    material[key] = value
+
+def delete_property(material):
+    key = input("Enter property to delete : ")
+    if key in material:
+        del material[key]
+    else:
+        print("Property Not Found.")
+
+material = {
+    "name": "Mild Steel",
+    "density": 7850,
+    "hardness": 150,
+    "youngs_modulus": 200000,
+    "poisson_ratio": 0.30
+}
+
+display(material)
+
+choice = int(input("\nEnter your choice (1-Add, 2-Delete): "))
+
+if choice == 1:
+    add_property(material)
+    display(material)
+elif choice == 2:
+    delete_property(material)
+    display(material)
+else:
+    print("Invalid Choice.")</pre>
+</section>
+
+</main>
+
+<footer>© 2026 D. Kiran Prasad | Python Experiments</footer>
+
+</body>
+</html>
