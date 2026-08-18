@@ -1,33 +1,352 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF Viewer</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        html, body {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background-color: #525659;
-        }
-        object {
-            width: 100%;
-            height: 100%;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lists and Tuples</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#eef4f9;color:#111;font-family:"Segoe UI",Arial,sans-serif}
+.header{background:linear-gradient(90deg,#0b477d,#087cc1);color:#fff;padding:18px 22px;display:grid;grid-template-columns:1fr 2fr 1fr;align-items:center}
+.header a{color:#fff;text-decoration:none;font-weight:700;font-size:16px}
+.header a:hover{text-decoration:underline}
+.header h1{margin:0;text-align:center;font-size:30px}
+.main-home{text-align:right}
+.container{width:94%;max-width:1450px;margin:24px auto}
+.card{background:#fff;border-radius:12px;padding:24px;margin-bottom:22px;box-shadow:0 4px 18px rgba(0,0,0,.10)}
+.card h2{margin:0 0 18px;color:#075b99;font-size:24px;border-left:6px solid #075b99;padding-left:12px}
+.card h3{color:#075b99;margin-top:22px}
+.theory{font-size:17px;line-height:1.65}
+.highlight,.note{background:#fff8df;border-left:5px solid #d99a00;padding:14px 18px;margin:16px 0;line-height:1.6}
+.syntax-title{text-align:center;color:#075b99;font-size:25px;font-weight:700;margin-bottom:20px}
+.syntax-box{width:92%;margin:25px auto;background:#fff9df;border:2px solid #d7b54a;border-radius:8px;padding:20px;text-align:center;font:700 22px Consolas,"Courier New",monospace;color:#064ea8}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.program-box{background:#f7f9fb;border:1px solid #d4dee8;border-radius:9px;padding:18px;overflow:auto}
+.program-box h3{margin:0 0 12px;color:#244f70}
+pre{margin:0;font:16px/1.6 Consolas,"Courier New",monospace;white-space:pre-wrap}
+.output{color:#d65b00;font:700 16px/1.55 Consolas,"Courier New",monospace;white-space:pre-wrap}
+table{width:100%;border-collapse:collapse}
+th{background:#24577f;color:#fff;padding:13px;text-align:left;font-size:17px}
+td{border:1px solid #ccd7e2;padding:13px;vertical-align:top;font-size:16px;line-height:1.55}
+tr:nth-child(even){background:#f7faff}
+.code{display:inline-block;background:#f3f7fc;border:1px solid #b7d0ef;border-radius:7px;padding:5px 8px;font:15px Consolas,"Courier New",monospace;color:#064ea8}
+ul{line-height:1.7;font-size:17px}
+footer{background:#063b70;color:#fff;text-align:center;padding:13px}
+@media(max-width:950px){.header{grid-template-columns:1fr;gap:8px;text-align:center}.main-home{text-align:center}.two-col{grid-template-columns:1fr}}
+@media(max-width:600px){.container{width:94%}.card{padding:17px}.header h1{font-size:25px}.syntax-box{width:100%;font-size:18px}}
+</style>
 </head>
 <body>
 
-    <object 
-        data="lists_theory.pdf#toolbar=0&navpanes=0&scrollbar=1" 
-        type="application/pdf">
-    </object>
+<header class="header">
+<div><a href="../index.html">← Python Home</a></div>
+<h1>LISTS AND TUPLES</h1>
+<div class="main-home"><a href="../../index.html">Main Home →</a></div>
+</header>
+
+<main class="container">
+
+<section class="card">
+<h2>1. Basic Theory – Lists</h2>
+<div class="theory">
+<p>A <b>list</b> is an ordered collection of items in Python. A list can contain multiple values in a single variable.</p>
+<div class="syntax-title">Creating a List</div>
+<div class="syntax-box">list_name = [item1, item2, item3, ...]</div>
+<p>Lists are written using <b>square brackets [ ]</b>. List elements are accessed using their index, starting from <b>0</b>.</p>
+</div>
+
+<div class="two-col">
+<div class="program-box"><h3>Example</h3><pre>marks = [75, 82, 68, 91]</pre></div>
+<div class="note"><b>Index positions:</b><br>
+marks[0] → 75<br>
+marks[1] → 82<br>
+marks[2] → 68<br>
+marks[3] → 91
+</div>
+</div>
+</section>
+
+<section class="card">
+<h2>2. Basic Theory – Tuples</h2>
+<div class="theory">
+<p>A <b>tuple</b> is also an ordered collection of items. Like a list, tuple elements are accessed using indexes.</p>
+<div class="syntax-title">Creating a Tuple</div>
+<div class="syntax-box">tuple_name = (item1, item2, item3, ...)</div>
+<p>Tuples are generally written using <b>parentheses ( )</b>.</p>
+<div class="highlight"><b>Important:</b> A tuple is <b>immutable</b>. After a tuple is created, its elements cannot be changed, added or removed.</div>
+</div>
+</section>
+
+<section class="card">
+<h2>3. List vs Tuple – Differences</h2>
+<table>
+<thead>
+<tr><th>Feature</th><th>List</th><th>Tuple</th></tr>
+</thead>
+<tbody>
+<tr><td>Notation</td><td><span class="code">[ ]</span></td><td><span class="code">( )</span></td></tr>
+<tr><td>Example</td><td><span class="code">[10, 20, 30]</span></td><td><span class="code">(10, 20, 30)</span></td></tr>
+<tr><td>Ordered</td><td>Yes</td><td>Yes</td></tr>
+<tr><td>Indexed</td><td>Yes</td><td>Yes</td></tr>
+<tr><td>Mutable</td><td><b>Yes</b> – elements can be changed</td><td><b>No</b> – elements cannot be changed</td></tr>
+<tr><td>Add / remove elements</td><td>Possible</td><td>Not possible directly</td></tr>
+<tr><td>Typical use</td><td>Data that may need modification</td><td>Data that should remain unchanged</td></tr>
+</tbody>
+</table>
+
+<div class="note">
+<b>Easy way to remember:</b> List → flexible/changeable. Tuple → fixed/unchangeable.
+</div>
+</section>
+
+<section class="card">
+<h2>4. Creating and Accessing Elements</h2>
+<div class="two-col">
+<div class="program-box">
+<h3>List</h3>
+<pre>numbers = [10, 20, 30, 40]
+
+print(numbers[0])
+print(numbers[2])
+print(numbers[-1])</pre>
+</div>
+<div class="program-box">
+<h3>Tuple</h3>
+<pre>numbers = (10, 20, 30, 40)
+
+print(numbers[0])
+print(numbers[2])
+print(numbers[-1])</pre>
+</div>
+</div>
+<div class="note">
+Both lists and tuples support indexing. Positive indexing starts from <b>0</b>, while negative indexing starts from the last element using <b>-1</b>.
+</div>
+</section>
+
+<section class="card">
+<h2>5. Modifying a List</h2>
+<div class="two-col">
+<div class="program-box">
+<h3>Python Program</h3>
+<pre>numbers = [10, 20, 30]
+
+numbers[1] = 25
+
+print(numbers)</pre>
+</div>
+<div class="note">
+<b>Explanation:</b><br>
+Lists are mutable. Therefore, the element at index 1 can be changed from 20 to 25.
+<div class="output">Output:
+[10, 25, 30]</div>
+</div>
+</div>
+</section>
+
+<section class="card">
+<h2>6. Tuple Cannot Be Modified</h2>
+<div class="two-col">
+<div class="program-box">
+<h3>Example</h3>
+<pre>numbers = (10, 20, 30)
+
+numbers[1] = 25</pre>
+</div>
+<div class="note">
+<b>Explanation:</b><br>
+A tuple is immutable. Therefore, trying to change an existing tuple element produces an error.
+<br><br>
+The important concept is not the exact error message, but the fact that <b>tuple elements cannot be modified</b>.
+</div>
+</div>
+</section>
+
+<section class="card">
+<h2>7. Common Operations on Lists and Tuples</h2>
+<table>
+<thead><tr><th>Operation</th><th>List Example</th><th>Tuple Example</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td>Access</td><td><span class="code">a[0]</span></td><td><span class="code">a[0]</span></td><td>Access an element</td></tr>
+<tr><td>Length</td><td><span class="code">len(a)</span></td><td><span class="code">len(a)</span></td><td>Number of elements</td></tr>
+<tr><td>Membership</td><td><span class="code">20 in a</span></td><td><span class="code">20 in a</span></td><td>Check whether an item exists</td></tr>
+<tr><td>Loop</td><td><span class="code">for x in a:</span></td><td><span class="code">for x in a:</span></td><td>Process each element</td></tr>
+<tr><td>Change element</td><td><span class="code">a[0] = 100</span></td><td>Not allowed</td><td>Modify an element</td></tr>
+</tbody>
+</table>
+</section>
+
+<section class="card">
+<h2>8. Frequently Used General Programs</h2>
+
+<h3>Program 1 – Find the Sum of List Elements</h3>
+<div class="two-col">
+<div class="program-box">
+<h3>Python Program</h3>
+<pre>numbers = [10, 20, 30, 40, 50]
+
+s = 0
+
+for x in numbers:
+    s = s + x
+
+print("Sum =", s)</pre>
+</div>
+<div class="note">
+<b>Explanation:</b><br>
+The <b>for loop</b> visits each element of the list one by one.
+The variable <b>s</b> stores the running total.
+<br><br>
+10 + 20 + 30 + 40 + 50 = 150.
+<div class="output">Output:
+Sum = 150</div>
+</div>
+</div>
+
+<h3>Program 2 – Find the Largest Element in a List</h3>
+<div class="two-col">
+<div class="program-box">
+<h3>Python Program</h3>
+<pre>numbers = [25, 12, 48, 7, 36]
+
+largest = numbers[0]
+
+for x in numbers:
+    if x > largest:
+        largest = x
+
+print("Largest =", largest)</pre>
+</div>
+<div class="note">
+<b>Explanation:</b><br>
+Initially, the first element is assumed to be the largest.
+The loop compares every element with the current largest value.
+Whenever a larger value is found, <b>largest</b> is updated.
+<div class="output">Output:
+Largest = 48</div>
+</div>
+</div>
+
+<h3>Program 3 – Count Even and Odd Numbers in a List</h3>
+<div class="two-col">
+<div class="program-box">
+<h3>Python Program</h3>
+<pre>numbers = [12, 7, 18, 5, 20, 9]
+
+even = 0
+odd = 0
+
+for x in numbers:
+    if x % 2 == 0:
+        even = even + 1
+    else:
+        odd = odd + 1
+
+print("Even =", even)
+print("Odd =", odd)</pre>
+</div>
+<div class="note">
+<b>Explanation:</b><br>
+The loop checks each element. If the remainder after division by 2 is zero,
+the even counter is increased; otherwise, the odd counter is increased.
+<div class="output">Output:
+Even = 3
+Odd = 3</div>
+</div>
+</div>
+
+<h3>Program 4 – Find the Average of Tuple Elements</h3>
+<div class="two-col">
+<div class="program-box">
+<h3>Python Program</h3>
+<pre>marks = (70, 80, 65, 85, 90)
+
+s = 0
+
+for x in marks:
+    s = s + x
+
+average = s / len(marks)
+
+print("Average =", average)</pre>
+</div>
+<div class="note">
+<b>Explanation:</b><br>
+The loop calculates the total of all tuple elements.
+<b>len(marks)</b> gives the number of elements.
+The average is calculated as:
+<br><br>
+<b>Average = Sum / Number of elements</b>.
+<div class="output">Output:
+Average = 78.0</div>
+</div>
+</div>
+
+<h3>Program 5 – Search for an Element</h3>
+<div class="two-col">
+<div class="program-box">
+<h3>Python Program</h3>
+<pre>numbers = [10, 25, 30, 45, 50]
+
+key = int(input("Enter number: "))
+
+found = False
+
+for x in numbers:
+    if x == key:
+        found = True
+        break
+
+if found:
+    print("Found")
+else:
+    print("Not Found")</pre>
+</div>
+<div class="note">
+<b>Explanation:</b><br>
+The program checks each list element against the value entered by the user.
+If a matching value is found, <b>found</b> becomes True and
+<b>break</b> stops the loop.
+<br><br>
+For input <b>30</b>, the value is present in the list.
+<div class="output">Output:
+Found</div>
+</div>
+</div>
+
+</section>
+
+<section class="card">
+<h2>9. Important Points to Remember</h2>
+<ul>
+<li>A list is an ordered and mutable collection.</li>
+<li>A tuple is an ordered and immutable collection.</li>
+<li>Both lists and tuples use indexing starting from 0.</li>
+<li>Lists are written using square brackets <b>[ ]</b>.</li>
+<li>Tuples are commonly written using parentheses <b>( )</b>.</li>
+<li>Elements of a list can be modified.</li>
+<li>Elements of a tuple cannot be modified.</li>
+<li>Both can be processed using a <b>for loop</b>.</li>
+<li><b>len()</b> can be used to find the number of elements.</li>
+<li>Use a list when the collection may need to change; use a tuple when the data should remain fixed.</li>
+</ul>
+</section>
+
+</main>
+
+<footer>© 2026 D. Kiran Prasad | Python Programming</footer>
+
+<script>
+/* Printing / context-menu restrictions intentionally retained for now. */
+document.addEventListener("contextmenu",function(e){e.preventDefault();});
+document.addEventListener("keydown",function(e){
+    if((e.ctrlKey || e.metaKey) && e.key.toLowerCase()==="p"){
+        e.preventDefault();
+        alert("Printing is disabled.");
+    }
+});
+</script>
+<style>@media print{body{display:none!important;}}</style>
 
 </body>
 </html>
