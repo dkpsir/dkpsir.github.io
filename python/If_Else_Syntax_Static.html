@@ -2,94 +2,849 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>If-Else Statement in Python</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>If - Else Statements</title>
+
 <style>
-body{font-family:'Segoe UI',Arial,sans-serif;background:#eef3f8;margin:20px}
-.banner{
-background:#0b3c75;color:#fff;text-align:center;
-font-size:42px;font-weight:bold;padding:18px;border-radius:12px;
-margin-bottom:20px}
-.grid{display:grid;grid-template-columns:1fr 2fr 1fr;gap:18px;align-items:start}
-.box{
-background:#fff;border:2px solid #cfd8dc;border-radius:10px;padding:15px;
-box-shadow:0 2px 8px rgba(0,0,0,.1)}
-.smalltitle{
-display:inline-block;background:#0b3c75;color:#fff;
-padding:6px 16px;border-radius:6px;font-size:22px;
-margin-bottom:10px}
-.code{
-font-family:Consolas,monospace;
-font-size:30px;
-line-height:1.7;
-background:#fafcff;
-padding:18px;
-border:2px solid #bbb;
-border-radius:10px;
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    background:#eef4f9;
+    color:#111;
+    font-family:"Segoe UI",Arial,sans-serif;
 }
-.purple{color:#6a1b9a;font-weight:bold}
-.green{color:#0a7d2c;font-weight:bold}
-.red{color:#c62828;font-weight:bold}
-.blue{color:#1565c0;font-weight:bold}
-.note{
-margin-top:25px;background:#fff8dc;border-left:6px solid orange;
-padding:14px;font-size:20px}
-.example{
-margin-top:25px}
+
+.header{
+    background:linear-gradient(90deg,#0b477d,#087cc1);
+    color:#fff;
+    padding:18px 22px;
+    display:grid;
+    grid-template-columns:1fr 2fr 1fr;
+    align-items:center;
+}
+
+.header a{
+    color:#fff;
+    text-decoration:none;
+    font-weight:700;
+    font-size:16px;
+}
+
+.header a:hover{text-decoration:underline}
+
+.header h1{
+    margin:0;
+    text-align:center;
+    font-size:30px;
+}
+
+.main-home{text-align:right}
+
+.container{
+    width:94%;
+    max-width:1450px;
+    margin:24px auto;
+}
+
+.card{
+    background:#fff;
+    border-radius:12px;
+    padding:24px;
+    margin-bottom:22px;
+    box-shadow:0 4px 18px rgba(0,0,0,.10);
+}
+
+.card h2{
+    margin:0 0 18px;
+    color:#075b99;
+    font-size:24px;
+    border-left:6px solid #075b99;
+    padding-left:12px;
+}
+
+.card h3{
+    color:#075b99;
+    margin-top:22px;
+}
+
+.theory{
+    font-size:17px;
+    line-height:1.65;
+}
+
+.highlight,.note{
+    background:#fff8df;
+    border-left:5px solid #d99a00;
+    padding:14px 18px;
+    margin:16px 0;
+    line-height:1.6;
+}
+
+.syntax-title{
+    text-align:center;
+    color:#075b99;
+    font-size:25px;
+    font-weight:700;
+    margin-bottom:20px;
+}
+
+.syntax-box{
+    width:92%;
+    margin:30px auto;
+    background:#fff9df;
+    border:2px solid #d7b54a;
+    border-radius:8px;
+    padding:20px;
+    text-align:center;
+    font:700 24px Consolas,"Courier New",monospace;
+    color:#064ea8;
+}
+
+.keyword{color:#c20d0d}
+.variable{color:#177c35}
+.condition{color:#7a159c}
+.string{color:#b85c00}
+
+.explain-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.explain{
+    border:2px solid #c8d5e3;
+    border-radius:9px;
+    padding:14px;
+    text-align:center;
+    background:#fbfdff;
+}
+
+.term{
+    font:700 18px Consolas,"Courier New",monospace;
+    color:#075b99;
+    margin-bottom:7px;
+}
+
+.explain p{
+    margin:0;
+    font-size:15px;
+    line-height:1.45;
+}
+
+.table-wrap{overflow-x:auto}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:900px;
+}
+
+th{
+    background:#24577f;
+    color:#fff;
+    font-size:19px;
+    padding:14px;
+    text-align:left;
+}
+
+td{
+    border:1px solid #ccd7e2;
+    padding:14px;
+    vertical-align:middle;
+    font-size:16px;
+    line-height:1.5;
+}
+
+tr:nth-child(even){background:#f7faff}
+
+.code{
+    display:inline-block;
+    background:#f3f7fc;
+    border:1px solid #b7d0ef;
+    border-radius:7px;
+    padding:7px 10px;
+    font:16px Consolas,"Courier New",monospace;
+    color:#064ea8;
+    white-space:pre-wrap;
+}
+
+.output{
+    color:#d65b00;
+    font:700 16px Consolas,"Courier New",monospace;
+    white-space:pre-wrap;
+}
+
+.flow{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin:20px 0;
+}
+
+.flow-box{
+    background:#eaf4fc;
+    border:2px solid #75a9d2;
+    border-radius:8px;
+    padding:12px 18px;
+    font-weight:700;
+    color:#075b99;
+}
+
+.arrow{
+    font-size:24px;
+    color:#075b99;
+}
+
+.two-col{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.code-block{
+    background:#f7f9fb;
+    border:1px solid #d4dee8;
+    border-radius:9px;
+    padding:18px;
+    overflow:auto;
+}
+
 pre{
-font-family:Consolas,monospace;
-font-size:28px;
-background:#fff;
-border:2px solid #b0bec5;
-border-radius:10px;
-padding:18px;
-margin:0}
-h3{margin:0 0 10px 0;color:#0b3c75}
+    margin:0;
+    font:16px/1.6 Consolas,"Courier New",monospace;
+}
+
+ul{
+    line-height:1.7;
+    font-size:17px;
+}
+
+footer{
+    background:#063b70;
+    color:#fff;
+    text-align:center;
+    padding:13px;
+}
+
+@media(max-width:900px){
+    .header{
+        grid-template-columns:1fr;
+        gap:8px;
+        text-align:center;
+    }
+    .main-home{text-align:center}
+    .explain-grid,.two-col{grid-template-columns:1fr}
+}
+
+@media(max-width:600px){
+    .container{width:94%}
+    .card{padding:17px}
+    .header h1{font-size:25px}
+    .syntax-box{width:100%;font-size:19px}
+}
 </style>
 </head>
+
 <body>
 
-<div class="banner">IF - ELSE STATEMENT IN PYTHON</div>
+<header class="header">
+    <div>
+        <a href="../index.html">← Python Home</a>
+    </div>
 
-<div class="grid">
+    <h1>IF - ELSE STATEMENTS</h1>
 
-<div class="box">
-<h3>Keywords</h3>
-<p><span class="purple"><b>if</b></span> : Starts the decision making statement.</p>
-<p><span class="purple"><b>else</b></span> : Executes when the condition is False.</p>
+    <div class="main-home">
+        <a href="../../index.html">Main Home →</a>
+    </div>
+</header>
+
+<main class="container">
+
+<!-- 1 -->
+<section class="card">
+<h2>1. Basic Theory of Decision Making</h2>
+
+<div class="theory">
+<p>
+In a Python program, <b>decision making</b> means selecting an action
+depending on whether a condition is true or false.
+</p>
+
+<div class="flow">
+<div class="flow-box">Input</div>
+<div class="arrow">→</div>
+<div class="flow-box">Condition</div>
+<div class="arrow">→</div>
+<div class="flow-box">Decision</div>
+<div class="arrow">→</div>
+<div class="flow-box">Action</div>
 </div>
 
-<div class="box">
-<div class="smalltitle">SYNTAX</div>
-<div class="code">
-<span class="purple">if</span> condition<span class="red">:</span><br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="green">statement(s)</span><br><br>
-<span class="purple">else</span><span class="red">:</span><br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="green">statement(s)</span>
+<p>
+For example, a program may check whether a student has passed, whether a
+number is positive, or whether a person is eligible to vote.
+</p>
+
+<div class="highlight">
+<b>Basic idea:</b><br>
+Condition → If condition is True, execute the required statements.
 </div>
 </div>
+</section>
 
-<div class="box">
-<h3>Explanation</h3>
-<p><span class="green"><b>Condition</b></span> : Evaluates to <b>True</b> or <b>False</b>.</p>
-<p><span class="red"><b>:</b></span> Begins the indented block.</p>
-<p><span class="blue"><b>Indentation</b></span> defines the block of code.</p>
+
+<!-- 2 -->
+<section class="card">
+<h2>2. Boolean Conditions</h2>
+
+<div class="theory">
+<p>
+A <b>condition</b> is an expression whose result is either
+<b>True</b> or <b>False</b>. Python uses the Boolean data type for these
+two logical values.
+</p>
 </div>
 
-<div class="box example" style="grid-column:1 / span 3;">
-<div class="smalltitle">EXAMPLE</div>
-<pre>age = 20
-
-if age >= 18:
-    print("Eligible to Vote")
-else:
-    print("Not Eligible to Vote")</pre>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Condition</th><th>Example Value</th><th>Result</th></tr>
+</thead>
+<tbody>
+<tr><td><span class="code">10 &gt; 5</span></td><td>10 and 5</td><td class="output">True</td></tr>
+<tr><td><span class="code">10 &lt; 5</span></td><td>10 and 5</td><td class="output">False</td></tr>
+<tr><td><span class="code">10 == 10</span></td><td>10 and 10</td><td class="output">True</td></tr>
+<tr><td><span class="code">10 != 10</span></td><td>10 and 10</td><td class="output">False</td></tr>
+<tr><td><span class="code">age &gt;= 18</span></td><td>age = 20</td><td class="output">True</td></tr>
+</tbody>
+</table>
 </div>
+</section>
 
+
+<!-- 3 -->
+<section class="card">
+<h2>3. Comparison Operators</h2>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Operator</th><th>Meaning</th><th>Example</th><th>Result</th></tr>
+</thead>
+<tbody>
+<tr><td><span class="code">&gt;</span></td><td>Greater than</td><td><span class="code">8 &gt; 5</span></td><td class="output">True</td></tr>
+<tr><td><span class="code">&lt;</span></td><td>Less than</td><td><span class="code">3 &lt; 5</span></td><td class="output">True</td></tr>
+<tr><td><span class="code">&gt;=</span></td><td>Greater than or equal to</td><td><span class="code">5 &gt;= 5</span></td><td class="output">True</td></tr>
+<tr><td><span class="code">&lt;=</span></td><td>Less than or equal to</td><td><span class="code">4 &lt;= 5</span></td><td class="output">True</td></tr>
+<tr><td><span class="code">==</span></td><td>Equal to</td><td><span class="code">5 == 5</span></td><td class="output">True</td></tr>
+<tr><td><span class="code">!=</span></td><td>Not equal to</td><td><span class="code">5 != 3</span></td><td class="output">True</td></tr>
+</tbody>
+</table>
 </div>
 
 <div class="note">
-<b>Note:</b> Indentation is mandatory in Python. It defines the block of code under <b>if</b> and <b>else</b>.
+<b>Important:</b> <span class="code">=</span> is the assignment operator,
+whereas <span class="code">==</span> is the comparison operator.
 </div>
+</section>
+
+
+<!-- 4 -->
+<section class="card">
+<h2>4. Logical Operators</h2>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Operator</th><th>Meaning</th><th>Example</th><th>Result</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="code">and</span></td>
+<td>True only when both conditions are True.</td>
+<td><span class="code">age &gt;= 18 and age &lt;= 60</span></td>
+<td class="output">True / False</td>
+</tr>
+<tr>
+<td><span class="code">or</span></td>
+<td>True when at least one condition is True.</td>
+<td><span class="code">x == 0 or x == 1</span></td>
+<td class="output">True / False</td>
+</tr>
+<tr>
+<td><span class="code">not</span></td>
+<td>Reverses a Boolean result.</td>
+<td><span class="code">not(x &gt; 5)</span></td>
+<td class="output">True / False</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+
+
+<!-- 5 -->
+<section class="card">
+<h2>5. if Statement</h2>
+
+<div class="syntax-title">General Syntax</div>
+
+<div class="syntax-box">
+<span class="keyword">if</span> <span class="condition">condition</span>:
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">statement</span>
+</div>
+
+<div class="explain-grid">
+<div class="explain">
+<div class="term">if</div>
+<p>Python keyword used to begin a conditional statement.</p>
+</div>
+<div class="explain">
+<div class="term">condition</div>
+<p>Expression that produces True or False.</p>
+</div>
+<div class="explain">
+<div class="term">:</div>
+<p>Colon indicates the beginning of the indented block.</p>
+</div>
+</div>
+
+<h3>Example</h3>
+
+<div class="code-block">
+<pre>age = 20
+
+if age >= 18:
+    print("Eligible to vote")</pre>
+</div>
+
+<p class="output">Output: Eligible to vote</p>
+</section>
+
+
+<!-- 6 -->
+<section class="card">
+<h2>6. Indentation in Python</h2>
+
+<div class="theory">
+<p>
+Python uses <b>indentation</b> to identify the statements belonging to a
+conditional block. Statements inside the <span class="code">if</span> block
+must be indented consistently.
+</p>
+</div>
+
+<div class="two-col">
+<div>
+<h3>Correct</h3>
+<div class="code-block">
+<pre>age = 20
+
+if age >= 18:
+    print("Eligible")</pre>
+</div>
+</div>
+
+<div>
+<h3>Incorrect</h3>
+<div class="code-block">
+<pre>age = 20
+
+if age >= 18:
+print("Eligible")</pre>
+</div>
+</div>
+</div>
+</section>
+
+
+<!-- 7 -->
+<section class="card">
+<h2>7. if - else Statement</h2>
+
+<div class="syntax-title">General Syntax</div>
+
+<div class="syntax-box">
+<span class="keyword">if</span> <span class="condition">condition</span>:
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">statement 1</span>
+<br>
+<span class="keyword">else</span>:
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">statement 2</span>
+</div>
+
+<div class="theory">
+<p>
+The <span class="code">if</span> block executes when the condition is True.
+If the condition is False, the <span class="code">else</span> block executes.
+</p>
+</div>
+
+<h3>Example</h3>
+
+<div class="code-block">
+<pre>number = 7
+
+if number % 2 == 0:
+    print("Even")
+else:
+    print("Odd")</pre>
+</div>
+
+<p class="output">Output: Odd</p>
+</section>
+
+
+<!-- 8 -->
+<section class="card">
+<h2>8. if - elif - else Statement</h2>
+
+<div class="syntax-title">General Syntax</div>
+
+<div class="syntax-box">
+<span class="keyword">if</span> <span class="condition">condition 1</span>:
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">statement 1</span>
+<br>
+<span class="keyword">elif</span> <span class="condition">condition 2</span>:
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">statement 2</span>
+<br>
+<span class="keyword">else</span>:
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">statement 3</span>
+</div>
+
+<div class="note">
+Python checks the conditions from top to bottom. Once a True condition is
+found, its block is executed and the remaining conditions are skipped.
+</div>
+
+<h3>Example – Grade</h3>
+
+<div class="code-block">
+<pre>marks = 76
+
+if marks >= 90:
+    print("A")
+elif marks >= 75:
+    print("B")
+elif marks >= 60:
+    print("C")
+else:
+    print("D")</pre>
+</div>
+
+<p class="output">Output: B</p>
+</section>
+
+
+<!-- 9 -->
+<section class="card">
+<h2>9. Nested if Statement</h2>
+
+<div class="theory">
+<p>
+A <b>nested if</b> means placing one <span class="code">if</span> statement
+inside another <span class="code">if</span> statement.
+</p>
+</div>
+
+<div class="syntax-box">
+<span class="keyword">if</span> <span class="condition">condition 1</span>:
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> <span class="condition">condition 2</span>:
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">statement</span>
+</div>
+
+<h3>Example</h3>
+
+<div class="code-block">
+<pre>age = 20
+has_id = True
+
+if age >= 18:
+    if has_id:
+        print("Entry permitted")</pre>
+</div>
+
+<p class="output">Output: Entry permitted</p>
+</section>
+
+
+<!-- 10 -->
+<section class="card">
+<h2>10. Multiple Conditions</h2>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Example</th><th>Meaning</th><th>Sample Result</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="code">age >= 18 and age <= 60</span></td>
+<td>Both conditions must be True.</td>
+<td class="output">True for age = 25</td>
+</tr>
+<tr>
+<td><span class="code">day == "Sat" or day == "Sun"</span></td>
+<td>At least one condition must be True.</td>
+<td class="output">True for day = "Sun"</td>
+</tr>
+<tr>
+<td><span class="code">not(x > 10)</span></td>
+<td>Reverses the condition.</td>
+<td class="output">True for x = 5</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+
+
+<!-- 11 -->
+<section class="card">
+<h2>11. Conditional Expression / Ternary Operator</h2>
+
+<div class="syntax-title">General Syntax</div>
+
+<div class="syntax-box">
+<span class="variable">value1</span>
+<span class="keyword">if</span>
+<span class="condition">condition</span>
+<span class="keyword">else</span>
+<span class="variable">value2</span>
+</div>
+
+<h3>Example</h3>
+
+<div class="code-block">
+<pre>age = 20
+
+result = "Adult" if age >= 18 else "Minor"
+
+print(result)</pre>
+</div>
+
+<p class="output">Output: Adult</p>
+
+<div class="note">
+Use a conditional expression for a simple two-way decision. For complex
+decisions, the normal <span class="code">if - elif - else</span> structure is
+usually clearer.
+</div>
+</section>
+
+
+<!-- 12 -->
+<section class="card">
+<h2>12. range() Function – Supporting Concept</h2>
+
+<div class="theory">
+<p>
+The <b>range()</b> function generates a sequence of integer values. It is
+particularly useful with <b>for</b> loops. It can also be combined with
+<span class="code">if</span> to check conditions for a sequence of values.
+</p>
+</div>
+
+<div class="syntax-title">General Syntax</div>
+
+<div class="syntax-box">
+<span class="keyword">range</span>(stop)
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+<span class="keyword">range</span>(start, stop)
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+<span class="keyword">range</span>(start, stop, step)
+</div>
+
+<div class="note">
+<b>Important:</b> The <b>stop</b> value is not included in the generated
+sequence.
+</div>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Syntax / Example</th><th>Description</th><th>Output</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="code">range(5)</span></td>
+<td>Starts from 0 and stops before 5.</td>
+<td class="output">0 1 2 3 4</td>
+</tr>
+<tr>
+<td><span class="code">range(2, 6)</span></td>
+<td>Starts at 2 and stops before 6.</td>
+<td class="output">2 3 4 5</td>
+</tr>
+<tr>
+<td><span class="code">range(1, 10, 2)</span></td>
+<td>Starts at 1 and increases by 2.</td>
+<td class="output">1 3 5 7 9</td>
+</tr>
+<tr>
+<td><span class="code">range(10, 0, -2)</span></td>
+<td>Counts backward by 2.</td>
+<td class="output">10 8 6 4 2</td>
+</tr>
+<tr>
+<td><span class="code">for i in range(5):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)</span></td>
+<td>Prints the values generated by range.</td>
+<td class="output">0<br>1<br>2<br>3<br>4</td>
+</tr>
+<tr>
+<td><span class="code">for i in range(1, 6):<br>&nbsp;&nbsp;&nbsp;&nbsp;if i % 2 == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(i)</span></td>
+<td>Uses an if condition with values generated by range.</td>
+<td class="output">2<br>4</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="note">
+The complete <b>range()</b> concept and detailed examples can be covered
+with the <b>for Loop</b> topic, where it is used extensively.
+</div>
+</section>
+
+
+<!-- 13 -->
+<section class="card">
+<h2>13. General Python Examples</h2>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Program</th><th>Sample Input</th><th>Output</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="code">n = int(input("Enter number: "))<br>if n > 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Positive")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Not positive")</span></td>
+<td>8</td>
+<td class="output">Positive</td>
+</tr>
+<tr>
+<td><span class="code">n = int(input("Enter number: "))<br>if n % 2 == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Even")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Odd")</span></td>
+<td>12</td>
+<td class="output">Even</td>
+</tr>
+<tr>
+<td><span class="code">age = int(input("Enter age: "))<br>if age >= 18:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Eligible")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Not eligible")</span></td>
+<td>20</td>
+<td class="output">Eligible</td>
+</tr>
+<tr>
+<td><span class="code">a = int(input("Enter a: "))<br>b = int(input("Enter b: "))<br>if a > b:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("a is larger")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("b is larger")</span></td>
+<td>15, 10</td>
+<td class="output">a is larger</td>
+</tr>
+<tr>
+<td><span class="code">marks = int(input("Enter marks: "))<br>if marks >= 75:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Distinction")<br>elif marks >= 60:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("First Class")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Other")</span></td>
+<td>82</td>
+<td class="output">Distinction</td>
+</tr>
+<tr>
+<td><span class="code">x = int(input("Enter x: "))<br>if x % 3 == 0 and x % 5 == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Divisible by both")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Not divisible by both")</span></td>
+<td>30</td>
+<td class="output">Divisible by both</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+
+
+<!-- 14 -->
+<section class="card">
+<h2>14. Common Mistakes</h2>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Mistake</th><th>Incorrect</th><th>Correct</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>Using assignment instead of comparison</td>
+<td><span class="code">if x = 10:</span></td>
+<td><span class="code">if x == 10:</span></td>
+</tr>
+<tr>
+<td>Missing colon</td>
+<td><span class="code">if x &gt; 5</span></td>
+<td><span class="code">if x &gt; 5:</span></td>
+</tr>
+<tr>
+<td>Incorrect indentation</td>
+<td><span class="code">if x &gt; 5:<br>print(x)</span></td>
+<td><span class="code">if x &gt; 5:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(x)</span></td>
+</tr>
+<tr>
+<td>Wrong condition order</td>
+<td>Checking a broad condition before a more specific one.</td>
+<td>Arrange conditions from appropriate specific/broad cases.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+
+
+<!-- 15 -->
+<section class="card">
+<h2>15. Important Points to Remember</h2>
+
+<ul>
+<li>Decision making allows a program to select an action based on a condition.</li>
+<li>A condition produces either <b>True</b> or <b>False</b>.</li>
+<li>Use comparison operators to compare values.</li>
+<li>Use <b>and</b>, <b>or</b> and <b>not</b> to combine or modify conditions.</li>
+<li><b>if</b> is used for one-way decision making.</li>
+<li><b>if - else</b> is used for two-way decision making.</li>
+<li><b>if - elif - else</b> is used for multiple alternatives.</li>
+<li>Python uses indentation to define a block of statements.</li>
+<li>Use <b>==</b> for comparison, not <b>=</b>.</li>
+<li>The <b>range()</b> stop value is excluded.</li>
+<li>Use nested <b>if</b> only when a decision genuinely depends on another decision.</li>
+</ul>
+</section>
+
+</main>
+
+<footer>
+© 2026 D. Kiran Prasad | Python Programming
+</footer>
+
+<script>
+/* Printing / context-menu restrictions intentionally retained.
+   They can be removed later. */
+document.addEventListener("contextmenu",function(e){
+    e.preventDefault();
+});
+
+document.addEventListener("keydown",function(e){
+    if((e.ctrlKey || e.metaKey) && e.key.toLowerCase()==="p"){
+        e.preventDefault();
+        alert("Printing is disabled.");
+    }
+});
+</script>
+
+<style>
+@media print{
+    body{display:none !important;}
+}
+</style>
 
 </body>
 </html>
