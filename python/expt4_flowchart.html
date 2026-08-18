@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Experiment 4 - Classification of Steel Grades - Flow Chart</title>
+<title>Experiment 4 - Torsion of Circular Shafts - Flow Chart & Code</title>
 <style>
 *{box-sizing:border-box}
 body{
@@ -18,13 +18,28 @@ body{
 .header-nav{position:absolute;left:24px;right:24px;top:18px;display:flex;justify-content:space-between}
 .header-nav a{color:#fff;text-decoration:none;font-weight:700;font-size:16px}
 .header-nav a:hover{text-decoration:underline}
-.container{width:94%;max-width:1250px;margin:24px auto}
+.container{width:96%;max-width:1400px;margin:24px auto}
+
+/* Side-by-Side Split Container */
+.split-row{
+    display:flex;
+    gap:20px;
+    align-items:stretch;
+    margin-bottom:22px;
+}
+.flow-col{
+    flex:0 0 55%; /* Flowchart takes ~55% width */
+}
+.code-col{
+    flex:0 0 45%; /* Python Code takes ~45% width */
+}
+
 .card{
     background:#fff;
     border-radius:12px;
     padding:22px;
-    margin-bottom:22px;
     box-shadow:0 3px 15px rgba(0,0,0,.08);
+    height:100%;
 }
 .title{
     background:#0b5b94;
@@ -42,17 +57,19 @@ body{
     gap:7px;
 }
 .node{
-    width:min(650px,90%);
-    padding:13px 18px;
+    width:100%;
+    max-width:500px;
+    padding:11px 14px;
     text-align:center;
     border:2px solid #17679f;
     border-radius:9px;
     background:#f7fbff;
     color:#073f6c;
     font-weight:700;
+    font-size:14px;
 }
 .node.start,.node.end{
-    width:220px;
+    width:180px;
     border-radius:28px;
     background:#0b5b94;
     color:#fff;
@@ -62,20 +79,15 @@ body{
     border-color:#4c9b5b;
     color:#245d2c;
 }
-.node.cond{
-    background:#fff8df;
-    border-color:#d89a00;
-    color:#5a4100;
-}
 .arrow{
     color:#0b5b94;
-    font-size:25px;
-    line-height:20px;
+    font-size:22px;
+    line-height:18px;
     font-weight:700;
 }
 .eq{
     display:block;
-    margin-top:6px;
+    margin-top:4px;
     font-family:"Courier New",monospace;
     font-weight:600;
 }
@@ -109,8 +121,9 @@ code{
     border-radius:8px;
     padding:17px;
     overflow:auto;
-    font:15px/1.55 Consolas,"Courier New",monospace;
+    font:14px/1.5 Consolas,"Courier New",monospace;
     white-space:pre;
+    height:calc(100% - 60px);
 }
 .note{
     background:#fff8df;
@@ -126,7 +139,15 @@ footer{
     padding:13px;
     margin-top:25px;
 }
-@media(max-width:700px){
+
+/* Mobile Responsiveness */
+@media(max-width:900px){
+    .split-row{
+        flex-direction:column;
+    }
+    .flow-col, .code-col{
+        flex:0 0 100%;
+    }
     .header h1{font-size:24px}
     .container{width:96%}
     .card{padding:14px}
@@ -139,245 +160,179 @@ footer{
 
 <header class="header">
     <div class="header-nav">
-        <a href="index.html">← Python Home</a>
-        <a href="../index.html">Main Home →</a>
+        <a href="expt3.html">← Expt 3</a>
+        <a href="index.html">Main Home →</a>
     </div>
     <h1>PYTHON PROGRAMMING LAB</h1>
-    <p>Experiment 4 – Classification of Steel Grades Using Lists</p>
+    <p>Experiment 4 – Torsion and Angle of Twist in Circular Shafts</p>
 </header>
 
 <main class="container">
 
-<section class="card">
-    <div class="title">Experiment 4 – Flow Chart</div>
+    <!-- Side-by-Side Split Container -->
+    <div class="split-row">
+        
+        <!-- Left Side: Flowchart (~55%) -->
+        <div class="flow-col">
+            <section class="card">
+                <div class="title">Experiment 4 – Flow Chart</div>
 
-    <div class="flow">
+                <div class="flow">
+                    <div class="node start">START</div>
+                    <div class="arrow">↓</div>
 
-        <div class="node start">START</div>
-        <div class="arrow">↓</div>
+                    <div class="node">
+                        Select Shaft Type
+                        <span class="eq">1: Solid Shaft, 2: Hollow Shaft</span>
+                    </div>
+                    <div class="arrow">↓</div>
 
-        <div class="node calc">
-            Define Function <code>display(steel_grade, steel_type, applications)</code>
+                    <div class="node">
+                        Input Shaft Dimensions & Properties
+                        <span class="eq">d or (d_o, d_i) (mm), L (m), T (kN·m), G (GPa)</span>
+                    </div>
+                    <div class="arrow">↓</div>
+
+                    <div class="node calc">
+                        Calculate Polar Moment of Inertia (J)
+                        <span class="eq">Solid: J = (π · d⁴) / 32</span>
+                        <span class="eq">Hollow: J = π · (d_o⁴ − d_i⁴) / 32</span>
+                    </div>
+                    <div class="arrow">↓</div>
+
+                    <div class="node calc">
+                        Calculate Shear Stress & Twist Angle
+                        <span class="eq">τ_max = (T · R) / J</span>
+                        <span class="eq">θ = (T · L) / (G · J)</span>
+                    </div>
+                    <div class="arrow">↓</div>
+
+                    <div class="node">
+                        Display Results
+                        <span class="eq">J (mm⁴), τ_max (MPa), θ (rad & degrees)</span>
+                    </div>
+                    <div class="arrow">↓</div>
+
+                    <div class="node end">END</div>
+                </div>
+            </section>
         </div>
-        <div class="arrow">↓</div>
 
-        <div class="node">
-            Initialize Lists: <code>steel_grade</code>, <code>steel_type</code>, <code>applications</code>
-        </div>
-        <div class="arrow">↓</div>
+        <!-- Right Side: Python Code (~45%) -->
+        <div class="code-col">
+            <section class="card">
+                <div class="title">Complete Python Program</div>
 
-        <div class="node">
-            Call <code>display()</code> to Show Existing Steel Details
-        </div>
-        <div class="arrow">↓</div>
+<pre class="program">import math
 
-        <div class="node">
-            Input User Choice
-            <span class="eq">choice (1 - Add, 2 - Delete)</span>
-        </div>
-        <div class="arrow">↓</div>
+# Program to calculate Torsion and Twist Angle of Shafts
 
-        <div class="node cond">
-            Is <code>choice == 1</code>?
-        </div>
-        <div class="arrow">↓ (Yes)</div>
+print("--- TORSION CALCULATOR FOR CIRCULAR SHAFTS ---")
+print("1. Solid Shaft")
+print("2. Hollow Shaft")
 
-        <div class="node calc">
-            Input Grade, Type, Application & Append to Lists, then Call <code>display()</code>
-        </div>
-        <div class="arrow">↓ (No)</div>
+choice = int(input("Select Shaft Type (1 or 2): "))
 
-        <div class="node cond">
-            Is <code>choice == 2</code>?
-        </div>
-        <div class="arrow">↓ (Yes)</div>
+# Input Torque, Length, and Modulus of Rigidity
+T_kNm = float(input("Enter Transmitted Torque T (kN·m): "))
+L_m = float(input("Enter Length of Shaft L (m): "))
+G_GPa = float(input("Enter Shear Modulus G (GPa): "))
 
-        <div class="node calc">
-            Input Grade to Delete → Check Existence → Pop Index from Lists & Call <code>display()</code>
-        </div>
-        <div class="arrow">↓</div>
-
-        <div class="node end">END</div>
-
-    </div>
-</section>
-
-<section class="card">
-    <div class="title">Python Program – Line-by-Line Explanation</div>
-
-    <table>
-        <thead>
-            <tr>
-                <th style="width:48%">Python Statement</th>
-                <th style="width:15%">Purpose</th>
-                <th>What it does</th>
-            </tr>
-        </thead>
-        <tbody>
-
-            <tr>
-                <td><code>def display(steel_grade, steel_type, applications):</code></td>
-                <td>Function Definition</td>
-                <td>Defines a function to iterate and display the parallel list items side by side.</td>
-            </tr>
-
-            <tr>
-                <td><code>for i in range(len(steel_grade)):</code></td>
-                <td>Loop Control</td>
-                <td>Loops through the indices of the steel list from index 0 to the total number of items minus 1.</td>
-            </tr>
-
-            <tr>
-                <td><code>print(i+1,". Steel Grade :", steel_grade[i],"Steel Type :", steel_type[i],"Application :", applications[i])</code></td>
-                <td>Output</td>
-                <td>Prints formatted information showing the 1-based index, steel grade, type, and application.</td>
-            </tr>
-
-            <tr>
-                <td><code>steel_grade = ["AISI 1018", "AISI 1045", "AISI 1095"]</code></td>
-                <td>Initialization</td>
-                <td>Initializes a list storing standard steel grade designations.</td>
-            </tr>
-
-            <tr>
-                <td><code>steel_type = ["Low Carbon Steel", "Medium Carbon Steel", "High Carbon Steel"]</code></td>
-                <td>Initialization</td>
-                <td>Initializes a list storing corresponding classifications/types of steel.</td>
-            </tr>
-
-            <tr>
-                <td><code>applications = ["Bolts and Shafts", "Gears", "Springs"]</code></td>
-                <td>Initialization</td>
-                <td>Initializes a list storing corresponding industrial applications for each grade.</td>
-            </tr>
-
-            <tr>
-                <td><code>display(steel_grade, steel_type, applications)</code></td>
-                <td>Function Call</td>
-                <td>Invokes the custom function to display the initial table of steel details.</td>
-            </tr>
-
-            <tr>
-                <td><code>choice = int(input("\nEnter your choice (1-Add, 2-Delete): "))</code></td>
-                <td>Input</td>
-                <td>Accepts user input as an integer to determine whether to add or remove an entry.</td>
-            </tr>
-
-            <tr>
-                <td><code>if choice == 1:</code></td>
-                <td>Conditional</td>
-                <td>Executes the block for inserting a new steel entry if choice is equal to 1.</td>
-            </tr>
-
-            <tr>
-                <td><code>g = input("Enter Steel Grade : ")</code><br>
-                    <code>s = input("Enter Steel Type : ")</code><br>
-                    <code>a = input("Enter Application : ")</code></td>
-                <td>Input</td>
-                <td>Prompts the user to enter new details for steel grade, type, and application.</td>
-            </tr>
-
-            <tr>
-                <td><code>steel_grade.append(g)</code><br>
-                    <code>steel_type.append(s)</code><br>
-                    <code>applications.append(a)</code></td>
-                <td>Data Manipulation</td>
-                <td>Appends the new user-provided values to the end of their respective parallel lists.</td>
-            </tr>
-
-            <tr>
-                <td><code>elif choice == 2:</code></td>
-                <td>Conditional</td>
-                <td>Executes the block for deleting an entry if choice is equal to 2.</td>
-            </tr>
-
-            <tr>
-                <td><code>grade = input("Enter Steel Grade to Delete : ")</code></td>
-                <td>Input</td>
-                <td>Prompts the user for the specific steel grade string to search and delete.</td>
-            </tr>
-
-            <tr>
-                <td><code>if grade in steel_grade:</code></td>
-                <td>Search</td>
-                <td>Checks if the entered grade exists within the <code>steel_grade</code> list.</td>
-            </tr>
-
-            <tr>
-                <td><code>index = steel_grade.index(grade)</code></td>
-                <td>Search</td>
-                <td>Finds the index location of the specified grade string in the list.</td>
-            </tr>
-
-            <tr>
-                <td><code>steel_grade.pop(index)</code><br>
-                    <code>steel_type.pop(index)</code><br>
-                    <code>applications.pop(index)</code></td>
-                <td>Data Manipulation</td>
-                <td>Removes elements at the specified index from all three parallel lists to maintain alignment.</td>
-            </tr>
-
-            <tr>
-                <td><code>else: print("\nSteel Grade Not Found.")</code></td>
-                <td>Output / Exception</td>
-                <td>Displays an error message if the input steel grade is not present in the list.</td>
-            </tr>
-
-            <tr>
-                <td><code>else: print("\nInvalid Choice.")</code></td>
-                <td>Output / Exception</td>
-                <td>Displays an error message if the user enters any choice other than 1 or 2.</td>
-            </tr>
-
-        </tbody>
-    </table>
-
-    <div class="note">
-        <b>Concept used:</b> The program uses <b>parallel lists</b> in Python along with list operations like <code>append()</code>, <code>index()</code>, and <code>pop()</code> to dynamically manage tabular data.
-    </div>
-</section>
-
-<section class="card">
-    <div class="title">Complete Python Program</div>
-
-<pre class="program"># Experiment 4: Classification of Steel Grades Using Lists
-def display(steel_grade, steel_type, applications):
-    for i in range(len(steel_grade)):
-        print(i+1,". Steel Grade :", steel_grade[i],"Steel Type :", steel_type[i],"Application :", applications[i])
-
-# Main Program
-steel_grade = ["AISI 1018", "AISI 1045", "AISI 1095"]
-steel_type = ["Low Carbon Steel", "Medium Carbon Steel", "High Carbon Steel"]
-applications = ["Bolts and Shafts", "Gears", "Springs"]
-
-# Display Existing Steel Details
-display(steel_grade, steel_type, applications)
-
-choice = int(input("\nEnter your choice (1-Add, 2-Delete): "))
+# Unit Conversions
+T_Nmm = T_kNm * 1e6     # kN·m to N·mm
+L_mm = L_m * 1000        # m to mm
+G_Nmm2 = G_GPa * 1000    # GPa to N/mm²
 
 if choice == 1:
-    g = input("Enter Steel Grade : ")
-    s = input("Enter Steel Type : ")
-    a = input("Enter Application : ")
-    steel_grade.append(g)
-    steel_type.append(s)
-    applications.append(a)
-    display(steel_grade, steel_type, applications)
-
+    d = float(input("Enter Diameter d (mm): "))
+    J = (math.pi * (d ** 4)) / 32
+    R = d / 2
+    shaft_type = "Solid Shaft"
 elif choice == 2:
-    grade = input("Enter Steel Grade to Delete : ")
-    if grade in steel_grade:
-        index = steel_grade.index(grade)
-        steel_grade.pop(index)
-        steel_type.pop(index)
-        applications.pop(index)
-        display(steel_grade, steel_type, applications)
-    else:
-        print("\nSteel Grade Not Found.")
-
+    do = float(input("Enter Outer Diameter d_o (mm): "))
+    di = float(input("Enter Inner Diameter d_i (mm): "))
+    J = (math.pi * (do ** 4 - di ** 4)) / 32
+    R = do / 2
+    shaft_type = "Hollow Shaft"
 else:
-    print("\nInvalid Choice.")</pre>
-</section>
+    print("Invalid Selection!")
+    exit()
+
+# Calculate Shear Stress (tau) and Angle of Twist (theta)
+tau_max = (T_Nmm * R) / J           # N/mm² or MPa
+theta_rad = (T_Nmm * L_mm) / (G_Nmm2 * J) # radians
+theta_deg = math.degrees(theta_rad) # degrees
+
+# Display Results
+print(f"\n------ RESULTS ({shaft_type.upper()}) ------")
+print(f"Polar Moment of Inertia (J): {J:.2f} mm⁴")
+print(f"Max Shear Stress (τ_max)   : {tau_max:.2f} MPa")
+print(f"Angle of Twist (θ)        : {theta_rad:.6f} rad ({theta_deg:.4f}°)")</pre>
+            </section>
+        </div>
+
+    </div>
+
+    <!-- Line-by-Line Explanation Table -->
+    <section class="card" style="margin-bottom:22px;">
+        <div class="title">Python Program – Line-by-Line Explanation</div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:48%">Python Statement</th>
+                    <th style="width:15%">Purpose</th>
+                    <th>What it does</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>import math</code></td>
+                    <td>Import</td>
+                    <td>Imports the math module to access <code>math.pi</code> and trigonometric angle conversion functions.</td>
+                </tr>
+                <tr>
+                    <td><code>T_Nmm = T_kNm * 1e6</code></td>
+                    <td>Conversion</td>
+                    <td>Converts torque from $\text{kN}\cdot\text{m}$ to $\text{N}\cdot\text{mm}$ ($1\text{ kN}\cdot\text{m} = 10^6\text{ N}\cdot\text{mm}$).</td>
+                </tr>
+                <tr>
+                    <td><code>G_Nmm2 = G_GPa * 1000</code></td>
+                    <td>Conversion</td>
+                    <td>Converts Modulus of Rigidity from $\text{GPa}$ to $\text{N/mm}^2$ ($1\text{ GPa} = 1000\text{ N/mm}^2$).</td>
+                </tr>
+                <tr>
+                    <td><code>J = (math.pi * (d ** 4)) / 32</code></td>
+                    <td>Calculation</td>
+                    <td>Computes Polar Moment of Inertia for a solid shaft: $J = \frac{\pi d^4}{32}$.</td>
+                </tr>
+                <tr>
+                    <td><code>J = (math.pi * (do ** 4 - di ** 4)) / 32</code></td>
+                    <td>Calculation</td>
+                    <td>Computes Polar Moment of Inertia for a hollow shaft: $J = \frac{\pi(d_o^4 - d_i^4)}{32}$.</td>
+                </tr>
+                <tr>
+                    <td><code>tau_max = (T_Nmm * R) / J</code></td>
+                    <td>Calculation</td>
+                    <td>Calculates maximum shear stress at outer radius using torsion formula: $\tau_{\max} = \frac{T \cdot R}{J}$.</td>
+                </tr>
+                <tr>
+                    <td><code>theta_rad = (T_Nmm * L_mm) / (G_Nmm2 * J)</code></td>
+                    <td>Calculation</td>
+                    <td>Computes angle of twist in radians using elastic torsion equation: $\theta = \frac{T \cdot L}{G \cdot J}$.</td>
+                </tr>
+                <tr>
+                    <td><code>theta_deg = math.degrees(theta_rad)</code></td>
+                    <td>Conversion</td>
+                    <td>Converts twist angle from radians to degrees ($\text{deg} = \text{rad} \times \frac{180}{\pi}$).</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="note">
+            <b>Torsion Theory:</b> According to the elastic torsion equation $\frac{T}{J} = \frac{\tau}{R} = \frac{G \cdot \theta}{L}$, maximum shear stress occurs at the outermost layer ($R = d/2$ or $R = d_o/2$).
+        </div>
+    </section>
 
 </main>
 
