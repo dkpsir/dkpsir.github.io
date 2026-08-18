@@ -4,177 +4,997 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Python Learning Portal</title>
+
 <style>
 *{box-sizing:border-box}
-body{font-family:Segoe UI,Arial,sans-serif;background:#eef3f8;margin:0;color:#222}
-h1{background:#0b3c75;color:white;padding:18px;text-align:center;border-radius:0 0 10px 10px;margin:0 0 22px}
+
+:root{
+    --navy:#0b3c75;
+    --blue:#1769aa;
+    --blue2:#eaf4fc;
+    --border:#d5e0ea;
+    --text:#1d2a36;
+    --muted:#667685;
+    --green:#247a52;
+    --green-bg:#edf8f2;
+    --orange:#a85f12;
+    --orange-bg:#fff6e9;
+    --bg:#eef3f8;
+    --white:#fff;
+}
+
+body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Segoe UI",Arial,sans-serif;
+}
+
+/* ---------- HEADER ---------- */
+
 .top-bar{
-    background:#0b3c75;
-    color:white;
-    display:flex;
+    background:var(--navy);
+    color:#fff;
+    min-height:72px;
+    padding:10px 22px;
+    display:grid;
+    grid-template-columns:180px 1fr 220px;
     align-items:center;
-    justify-content:space-between;
-    padding:10px 18px;
-    margin:0 0 22px;
-    min-height:52px;
-    border-radius:0 0 8px 8px;
+    gap:15px;
 }
+
 .home-button{
-    color:white;
+    color:#fff;
     text-decoration:none;
-    font-weight:bold;
+    font-weight:700;
     font-size:16px;
-    padding:6px 10px;
-    min-width:90px;
 }
-.home-button:hover{color:#ffd966}
+
+.home-button:hover{text-decoration:underline}
+
 .page-title{
-    font-size:24px;
-    font-weight:bold;
     text-align:center;
+    font-size:28px;
+    font-weight:700;
+    letter-spacing:.3px;
 }
+
 .developer{
-    font-size:14px;
-    line-height:1.35;
     text-align:right;
-    min-width:150px;
+    font-size:13px;
+    line-height:1.35;
 }
-.portal{width:98%;margin:0 auto 25px;display:grid;grid-template-columns:2fr 1fr;gap:18px;align-items:start}
-.concepts-panel,.experiments-panel{background:white;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,.15);padding:14px}
-.panel-title{background:#1f4e79;color:white;text-align:center;font-size:22px;font-weight:bold;padding:12px;border-radius:7px;margin-bottom:12px}
-.concept-table{width:100%;border-collapse:collapse;table-layout:fixed;background:white;font-size:18px}
-.concept-table td{border:1px solid #ccc;padding:14px;vertical-align:top;width:33.333%;min-height:150px}
-.section{font-weight:bold;font-size:22px;color:#0b3c75}
-a{display:block;text-decoration:none;color:#0b57d0;padding:6px 0;font-weight:600}
-a:hover{color:#d32f2f}
-.empty{color:#999;text-align:center;font-style:italic;min-height:110px;padding-top:35px}
-.experiments-panel{position:sticky;top:12px}
-.experiment-tile{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid #c9d3df;border-left:6px solid #1f4e79;background:#f7faff;border-radius:7px;padding:11px 14px;margin-bottom:9px;min-height:52px}
-.experiment-title{font-weight:700;color:#173f68;font-size:17px}
-.experiment-tile a{display:inline-block;margin:0;padding:5px 10px;border-radius:5px;background:#e8f0fa;color:#0b57d0;font-size:15px;white-space:nowrap}
-.note{width:96%;margin:0 auto 25px;padding:12px;background:#fff8dc;border-left:6px solid orange;font-size:18px}
-@media(max-width:900px){
-    .top-bar{flex-wrap:wrap;gap:6px}
-    .page-title{order:2;width:100%;font-size:22px}
-    .home-button{order:1}
-    .developer{order:3;margin-left:auto}
-.portal{grid-template-columns:1fr}.experiments-panel{position:static}}
-@media(max-width:650px){.concept-table{font-size:16px}.concept-table td{padding:9px}.section{font-size:19px}}
+
+/* ---------- PAGE ---------- */
+
+.page{
+    width:96%;
+    max-width:1500px;
+    margin:22px auto 35px;
+}
+
+.intro{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:16px 20px;
+    margin-bottom:18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+}
+
+.intro-text h2{
+    margin:0 0 4px;
+    color:var(--navy);
+    font-size:22px;
+}
+
+.intro-text p{
+    margin:0;
+    color:var(--muted);
+    font-size:15px;
+}
+
+.resource-key{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+}
+
+.key{
+    padding:7px 11px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:700;
+    white-space:nowrap;
+}
+
+.key.concept{background:var(--blue2);color:var(--blue)}
+.key.visual{background:var(--green-bg);color:var(--green)}
+.key.tricky{background:var(--orange-bg);color:var(--orange)}
+
+/* ---------- TWO COLUMN AREA ---------- */
+
+.portal{
+    display:grid;
+    grid-template-columns:minmax(0,2.15fr) minmax(300px,.85fr);
+    gap:20px;
+    align-items:start;
+}
+
+.panel{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:12px;
+    overflow:hidden;
+}
+
+.panel-header{
+    background:var(--navy);
+    color:#fff;
+    padding:13px 18px;
+}
+
+.panel-header h2{
+    margin:0;
+    font-size:21px;
+}
+
+.panel-header p{
+    margin:3px 0 0;
+    font-size:13px;
+    opacity:.9;
+}
+
+/* ---------- CONCEPT CARDS ---------- */
+
+.concepts-list{
+    padding:14px;
+}
+
+.concept-card{
+    border:1px solid var(--border);
+    border-radius:10px;
+    margin-bottom:13px;
+    overflow:hidden;
+    background:#fff;
+}
+
+.concept-card:last-child{margin-bottom:0}
+
+.concept-title{
+    background:#f5f9fd;
+    border-bottom:1px solid var(--border);
+    padding:12px 15px;
+    color:var(--navy);
+    font-size:20px;
+    font-weight:700;
+}
+
+.resources{
+    padding:12px 15px 14px;
+}
+
+.resource-row{
+    display:flex;
+    align-items:flex-start;
+    gap:13px;
+    padding:8px 0;
+}
+
+.resource-row + .resource-row{
+    border-top:1px dashed #dbe3ea;
+}
+
+.resource-label{
+    flex:0 0 145px;
+    font-weight:700;
+    font-size:14px;
+    padding-top:6px;
+}
+
+.resource-label.concept-label{color:var(--blue)}
+.resource-label.visual-label{color:var(--green)}
+.resource-label.tricky-label{color:var(--orange)}
+
+.resource-links{
+    flex:1;
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.resource-link{
+    display:inline-flex;
+    align-items:center;
+    text-decoration:none;
+    border:1px solid var(--border);
+    background:#fafcfe;
+    color:#175b91;
+    border-radius:6px;
+    padding:7px 10px;
+    font-size:14px;
+    font-weight:600;
+    transition:.15s;
+}
+
+.resource-link:hover{
+    background:var(--blue2);
+    border-color:#a9c8e2;
+}
+
+.resource-link.visual{
+    color:var(--green);
+    background:#fbfefc;
+}
+
+.resource-link.visual:hover{
+    background:var(--green-bg);
+    border-color:#b7ddc9;
+}
+
+.resource-link.tricky{
+    color:var(--orange);
+    background:#fffdfa;
+}
+
+.resource-link.tricky:hover{
+    background:var(--orange-bg);
+    border-color:#e7c99f;
+}
+
+.coming-soon{
+    color:#8a98a4;
+    font-size:13px;
+    font-style:italic;
+    padding-top:7px;
+}
+
+/* ---------- EXPERIMENTS ---------- */
+
+.experiments-panel{
+    position:sticky;
+    top:12px;
+}
+
+.experiments-list{
+    padding:12px;
+}
+
+.experiment-card{
+    border:1px solid var(--border);
+    border-radius:9px;
+    padding:12px;
+    margin-bottom:10px;
+    background:#fbfdff;
+}
+
+.experiment-card:last-child{margin-bottom:0}
+
+.experiment-heading{
+    display:flex;
+    align-items:flex-start;
+    gap:9px;
+}
+
+.exp-number{
+    flex:0 0 auto;
+    background:var(--navy);
+    color:#fff;
+    border-radius:5px;
+    padding:4px 7px;
+    font-size:12px;
+    font-weight:700;
+}
+
+.experiment-name{
+    color:#173f68;
+    font-weight:700;
+    font-size:15px;
+    line-height:1.35;
+}
+
+.experiment-actions{
+    display:flex;
+    gap:7px;
+    margin-top:10px;
+    padding-left:0;
+}
+
+.exp-link{
+    flex:1;
+    text-align:center;
+    text-decoration:none;
+    border-radius:6px;
+    padding:7px 5px;
+    font-size:13px;
+    font-weight:700;
+    border:1px solid var(--border);
+}
+
+.exp-link.manual{
+    color:#8a5518;
+    background:var(--orange-bg);
+}
+
+.exp-link.visual{
+    color:var(--green);
+    background:var(--green-bg);
+}
+
+.exp-link:hover{
+    filter:brightness(.96);
+}
+
+.exp-link.disabled{
+    color:#8c98a2;
+    background:#f4f6f8;
+    cursor:default;
+}
+
+/* ---------- FOOTER ---------- */
+
+.footer{
+    text-align:center;
+    color:#71808d;
+    font-size:13px;
+    padding:18px 0 4px;
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media(max-width:950px){
+    .top-bar{
+        grid-template-columns:1fr;
+        text-align:center;
+    }
+    .home-button,.developer{text-align:center}
+    .portal{grid-template-columns:1fr}
+    .experiments-panel{position:static}
+}
+
+@media(max-width:650px){
+    .page{width:94%;margin-top:14px}
+    .intro{display:block}
+    .resource-key{
+        justify-content:flex-start;
+        margin-top:12px;
+    }
+    .resource-row{
+        display:block;
+    }
+    .resource-label{
+        margin-bottom:6px;
+    }
+    .concept-title{font-size:18px}
+}
 </style>
 </head>
+
 <body>
-<div class="top-bar">
-    <a href="../index.html" class="home-button">🏠 Home</a>
+
+<header class="top-bar">
+    <a href="../index.html" class="home-button">🏠 Main Home</a>
+
     <div class="page-title">Python Learning Portal</div>
+
     <div class="developer">
         <div>Developed by:</div>
-        <div>Name 1</div>
-        <div>Name 2</div>
-        <div>Name 3</div>
+        <div>Name 1 · Name 2 · Name 3</div>
     </div>
-</div>
-<div class="portal">
-<section class="concepts-panel">
-<div class="panel-title">Python Concepts</div>
-<table class="concept-table">
-<tr><td>
-<div class="section">input-output functions</div>
-<a href="input_output_functions.html">• input-output functions</a>
-</td><td>
-<tr><td>
-<div class="section">if Statement</div>
-<a href="If_Else_Syntax_Static.html">• If_Else_Syntax</a>
-<a href="If_Else_Age_Visualizer.html">• if - else (Voting Eligibility)</a>
-<a href="Traffic_Signal_Visualizer_LineByLine_Output.html">• Traffic Signal Visualizer</a>
-<a href="If_Elif_Else_Grade_Visualizer_Compact.html">• if - elif - else (Grade)</a>
-</td><td>
-<div class="section">for Loop</div>
-<a href="For_Loop_Syntax_Static.html">• For_Loop_Syntax</a>
-<a href="Python_Range_Function_Static_Table_v2.html">• range() Function</a>
-<a href="For_Loop_Visualizer_Version1_1.html">• for Loop Visualizer</a>
+</header>
 
-<br><br>
-<div class="section">while Loop</div>
-<a href="While_Loop_Syntax_Static.html">• While_Loop_Syntax</a>
-<a href="while loop animation.html">• while loop animation</a>
-</td><td>
-<div class="section">Functions</div>
-<a href="Python_Without_with_Functions.html">• Python_Without_with_Functions</a>
-<a href="Functions_Syntax_Static.html">• Functions_Syntax</a>
-<a href="Function_Visualizer.html">• Function_Visualizer 1</a>
-<a href="Function_Visualizer 2.html">• Function_Visualizer 2</a>
-<a href="Function_Visualizer 3.html">• Function_Visualizer 3</a>
-<a href="experiment3.html">• Experiment 3</a>
-</td></tr>
-<tr><td>
-<div class="section">Lists</div>
-<!-- Add your list links here -->
-<a href="lists_ppt.html">• lists_theory_ppt</a>
-<a href="lists_concept.html">• lists_Visualiser</a>
-<a href="lists_expt4.html">• lists_expt4</a>
-</td><td><div class="empty">Concepts to be added</div></td><td><div class="empty">Concepts to be added</div></td></tr>
-<tr><td><div class="empty">Concepts to be added</div></td><td><div class="empty">Concepts to be added</div></td><td><div class="empty">Concepts to be added</div></td></tr>
-<tr><td><div class="empty">Concepts to be added</div></td><td><div class="empty">Concepts to be added</div></td><td><div class="empty">Concepts to be added</div></td></tr>
-<tr><td><div class="empty">Concepts to be added</div></td><td><div class="empty">Concepts to be added</div></td><td><div class="empty">Concepts to be added</div></td></tr>
-</table>
-</section>
-<aside class="experiments-panel">
-<div class="panel-title">Experiments(Mechanical) with Manuals</div>
-<div class="experiment-tile">
-<div class="experiment-title">Experiment 1(Reactions of Beam)</div>
-<a href="manuals/expt_1.pdf">Download Manual</a>
-</div>
-<div class="experiment-tile">
-<div class="experiment-title">Experiment 2(Work Done)</div>
-<a href="manuals/expt_2.pdf">Download Manual</a>
-</div>
-<div class="experiment-tile">
-<div class="experiment-title">Experiment 3(Stress and Strain of Uniform Bar)</div>
-<a href="manuals/expt_3.pdf">Download Manual</a>
-</div>
-<div class="experiment-tile">
-<div class="experiment-title">Experiment 4(Material Data Base using Lists)</div>
-<a href="manuals/expt_4.pdf">Download Manual</a>
-</div>
-<div class="experiment-tile">
-<div class="experiment-title">Experiment 5(Material Data Base Using Dictionaries)</div>
-<a href="manuals/expt_5.pdf">Download Manual</a>
-</div>
-<div class="experiment-tile">
-<div class="experiment-title">Experiment 6</div>
-<a href="#" onclick="return false;">Manual</a>
-</div>
-<div class="experiment-tile">
-<div class="experiment-title">Experiment 7</div>
-<a href="#" onclick="return false;">Manual</a>
-</div>
-<div class="experiment-tile">
-<div class="experiment-title">Experiment 8</div>
-<a href="#" onclick="return false;">Manual</a>
-</div>
-<div class="experiment-tile">
-<div class="experiment-title">Experiment 9</div>
-<a href="#" onclick="return false;">Manual</a>
-</div>
-<div class="experiment-tile">
-<div class="experiment-title">Experiment 10</div>
-<a href="#" onclick="return false;">Manual</a>
-</div>
-<div class="experiment-tile">
-<div class="experiment-title">Experiment 11</div>
-<a href="#" onclick="return false;">Manual</a>
-</div>
-<div class="experiment-tile">
-<div class="experiment-title">Experiment 12</div>
-<a href="#" onclick="return false;">Manual</a>
-</div>
-</aside>
-</div>
+<main class="page">
+
+    <section class="intro">
+        <div class="intro-text">
+            <h2>Python Concepts &amp; Learning Resources</h2>
+            <p>
+                Learn the concept first, explore it visually, and then test your
+                understanding with tricky programs.
+            </p>
+        </div>
+
+        <div class="resource-key">
+            <span class="key concept">📖 Concept</span>
+            <span class="key visual">👁 Visualiser</span>
+            <span class="key tricky">🧩 Tricky Programs</span>
+        </div>
+    </section>
+
+
+    <div class="portal">
+
+        <!-- ================= PYTHON CONCEPTS ================= -->
+
+        <section class="panel concepts-panel">
+
+            <div class="panel-header">
+                <h2>Python Concepts</h2>
+                <p>Concept → Visualiser → Practice</p>
+            </div>
+
+            <div class="concepts-list">
+
+                <!-- INPUT OUTPUT -->
+
+                <article class="concept-card">
+
+                    <div class="concept-title">
+                        Input - Output Functions
+                    </div>
+
+                    <div class="resources">
+
+                        <div class="resource-row">
+                            <div class="resource-label concept-label">
+                                📖 Concept
+                            </div>
+                            <div class="resource-links">
+                                <a class="resource-link"
+                                   href="input_output_functions.html">
+                                   Open Concept
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="resource-row">
+                            <div class="resource-label visual-label">
+                                👁 Visualisers
+                            </div>
+                            <div class="resource-links">
+                                <span class="coming-soon">
+                                    Visualisers will be added
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="resource-row">
+                            <div class="resource-label tricky-label">
+                                🧩 Tricky Programs
+                            </div>
+                            <div class="resource-links">
+                                <span class="coming-soon">
+                                    Problems &amp; Answers will be added
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </article>
+
+
+                <!-- IF STATEMENT -->
+
+                <article class="concept-card">
+
+                    <div class="concept-title">
+                        If Statement
+                    </div>
+
+                    <div class="resources">
+
+                        <div class="resource-row">
+                            <div class="resource-label concept-label">
+                                📖 Concept
+                            </div>
+
+                            <div class="resource-links">
+                                <a class="resource-link"
+                                   href="If_Else_Syntax_Static.html">
+                                   If - Else Syntax
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="resource-row">
+                            <div class="resource-label visual-label">
+                                👁 Visualisers
+                            </div>
+
+                            <div class="resource-links">
+                                <a class="resource-link visual"
+                                   href="If_Else_Age_Visualizer.html">
+                                   Voting Eligibility
+                                </a>
+
+                                <a class="resource-link visual"
+                                   href="Traffic_Signal_Visualizer_LineByLine_Output.html">
+                                   Traffic Signal
+                                </a>
+
+                                <a class="resource-link visual"
+                                   href="If_Elif_Else_Grade_Visualizer_Compact.html">
+                                   Grade
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="resource-row">
+                            <div class="resource-label tricky-label">
+                                🧩 Tricky Programs
+                            </div>
+
+                            <div class="resource-links">
+                                <span class="coming-soon">
+                                    Problems &amp; Answers will be added
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </article>
+
+
+                <!-- FOR LOOP -->
+
+                <article class="concept-card">
+
+                    <div class="concept-title">
+                        for Loop
+                    </div>
+
+                    <div class="resources">
+
+                        <div class="resource-row">
+                            <div class="resource-label concept-label">
+                                📖 Concept
+                            </div>
+
+                            <div class="resource-links">
+                                <a class="resource-link"
+                                   href="For_Loop_Syntax_Static.html">
+                                   for Loop Syntax
+                                </a>
+
+                                <a class="resource-link"
+                                   href="Python_Range_Function_Static_Table_v2.html">
+                                   range() Function
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="resource-row">
+                            <div class="resource-label visual-label">
+                                👁 Visualisers
+                            </div>
+
+                            <div class="resource-links">
+                                <a class="resource-link visual"
+                                   href="For_Loop_Visualizer_Version1_1.html">
+                                   for Loop Visualiser
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="resource-row">
+                            <div class="resource-label tricky-label">
+                                🧩 Tricky Programs
+                            </div>
+
+                            <div class="resource-links">
+                                <span class="coming-soon">
+                                    Problems &amp; Answers will be added
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </article>
+
+
+                <!-- WHILE LOOP -->
+
+                <article class="concept-card">
+
+                    <div class="concept-title">
+                        while Loop
+                    </div>
+
+                    <div class="resources">
+
+                        <div class="resource-row">
+                            <div class="resource-label concept-label">
+                                📖 Concept
+                            </div>
+
+                            <div class="resource-links">
+                                <a class="resource-link"
+                                   href="While_Loop_Syntax_Static.html">
+                                   while Loop Syntax
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="resource-row">
+                            <div class="resource-label visual-label">
+                                👁 Visualisers
+                            </div>
+
+                            <div class="resource-links">
+                                <a class="resource-link visual"
+                                   href="while%20loop%20animation.html">
+                                   while Loop Animation
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="resource-row">
+                            <div class="resource-label tricky-label">
+                                🧩 Tricky Programs
+                            </div>
+
+                            <div class="resource-links">
+                                <span class="coming-soon">
+                                    Problems &amp; Answers will be added
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </article>
+
+
+                <!-- FUNCTIONS -->
+
+                <article class="concept-card">
+
+                    <div class="concept-title">
+                        Functions
+                    </div>
+
+                    <div class="resources">
+
+                        <div class="resource-row">
+                            <div class="resource-label concept-label">
+                                📖 Concept
+                            </div>
+
+                            <div class="resource-links">
+                                <a class="resource-link"
+                                   href="Python_Without_with_Functions.html">
+                                   Python Without / With Functions
+                                </a>
+
+                                <a class="resource-link"
+                                   href="Functions_Syntax_Static.html">
+                                   Functions Syntax
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="resource-row">
+                            <div class="resource-label visual-label">
+                                👁 Visualisers
+                            </div>
+
+                            <div class="resource-links">
+                                <a class="resource-link visual"
+                                   href="Function_Visualizer.html">
+                                   Visualiser 1
+                                </a>
+
+                                <a class="resource-link visual"
+                                   href="Function_Visualizer%202.html">
+                                   Visualiser 2
+                                </a>
+
+                                <a class="resource-link visual"
+                                   href="Function_Visualizer%203.html">
+                                   Visualiser 3
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="resource-row">
+                            <div class="resource-label tricky-label">
+                                🧩 Tricky Programs
+                            </div>
+
+                            <div class="resource-links">
+                                <span class="coming-soon">
+                                    Problems &amp; Answers will be added
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </article>
+
+
+                <!-- LISTS -->
+
+                <article class="concept-card">
+
+                    <div class="concept-title">
+                        Lists
+                    </div>
+
+                    <div class="resources">
+
+                        <div class="resource-row">
+                            <div class="resource-label concept-label">
+                                📖 Concept
+                            </div>
+
+                            <div class="resource-links">
+                                <a class="resource-link"
+                                   href="lists_ppt.html">
+                                   Lists Theory
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="resource-row">
+                            <div class="resource-label visual-label">
+                                👁 Visualisers
+                            </div>
+
+                            <div class="resource-links">
+                                <a class="resource-link visual"
+                                   href="lists_concept.html">
+                                   Lists Visualiser
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="resource-row">
+                            <div class="resource-label tricky-label">
+                                🧩 Tricky Programs
+                            </div>
+
+                            <div class="resource-links">
+                                <span class="coming-soon">
+                                    Problems &amp; Answers will be added
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </article>
+
+
+                <!-- FUTURE TOPICS -->
+
+                <article class="concept-card">
+
+                    <div class="concept-title">
+                        More Python Concepts
+                    </div>
+
+                    <div class="resources">
+                        <div class="coming-soon">
+                            Additional concepts, visualisers and tricky
+                            programs will be added here.
+                        </div>
+                    </div>
+
+                </article>
+
+            </div>
+        </section>
+
+
+        <!-- ================= EXPERIMENTS ================= -->
+
+        <aside class="panel experiments-panel">
+
+            <div class="panel-header">
+                <h2>⚙ Mechanical Engineering Experiments</h2>
+                <p>Manuals &amp; Interactive Visualisers</p>
+            </div>
+
+            <div class="experiments-list">
+
+                <article class="experiment-card">
+                    <div class="experiment-heading">
+                        <span class="exp-number">EXP 1</span>
+                        <div class="experiment-name">
+                            Reactions of Beam
+                        </div>
+                    </div>
+                    <div class="experiment-actions">
+                        <a class="exp-link manual"
+                           href="manuals/expt_1.pdf">
+                           📄 Manual
+                        </a>
+                        <a class="exp-link visual"
+                           href="#">
+                           👁 Visualiser
+                        </a>
+                    </div>
+                </article>
+
+
+                <article class="experiment-card">
+                    <div class="experiment-heading">
+                        <span class="exp-number">EXP 2</span>
+                        <div class="experiment-name">
+                            Work Done
+                        </div>
+                    </div>
+                    <div class="experiment-actions">
+                        <a class="exp-link manual"
+                           href="manuals/expt_2.pdf">
+                           📄 Manual
+                        </a>
+                        <a class="exp-link visual"
+                           href="#">
+                           👁 Visualiser
+                        </a>
+                    </div>
+                </article>
+
+
+                <article class="experiment-card">
+                    <div class="experiment-heading">
+                        <span class="exp-number">EXP 3</span>
+                        <div class="experiment-name">
+                            Stress and Strain of Uniform Bar
+                        </div>
+                    </div>
+                    <div class="experiment-actions">
+                        <a class="exp-link manual"
+                           href="manuals/expt_3.pdf">
+                           📄 Manual
+                        </a>
+                        <a class="exp-link visual"
+                           href="#">
+                           👁 Visualiser
+                        </a>
+                    </div>
+                </article>
+
+
+                <article class="experiment-card">
+                    <div class="experiment-heading">
+                        <span class="exp-number">EXP 4</span>
+                        <div class="experiment-name">
+                            Material Data Base using Lists
+                        </div>
+                    </div>
+                    <div class="experiment-actions">
+                        <a class="exp-link manual"
+                           href="manuals/expt_4.pdf">
+                           📄 Manual
+                        </a>
+                        <a class="exp-link visual"
+                           href="#">
+                           👁 Visualiser
+                        </a>
+                    </div>
+                </article>
+
+
+                <article class="experiment-card">
+                    <div class="experiment-heading">
+                        <span class="exp-number">EXP 5</span>
+                        <div class="experiment-name">
+                            Material Data Base using Dictionaries
+                        </div>
+                    </div>
+                    <div class="experiment-actions">
+                        <a class="exp-link manual"
+                           href="manuals/expt_5.pdf">
+                           📄 Manual
+                        </a>
+                        <a class="exp-link visual"
+                           href="#">
+                           👁 Visualiser
+                        </a>
+                    </div>
+                </article>
+
+
+                <article class="experiment-card">
+                    <div class="experiment-heading">
+                        <span class="exp-number">EXP 6</span>
+                        <div class="experiment-name">Experiment 6</div>
+                    </div>
+                    <div class="experiment-actions">
+                        <a class="exp-link disabled" href="#">📄 Manual</a>
+                        <a class="exp-link disabled" href="#">👁 Visualiser</a>
+                    </div>
+                </article>
+
+
+                <article class="experiment-card">
+                    <div class="experiment-heading">
+                        <span class="exp-number">EXP 7</span>
+                        <div class="experiment-name">Experiment 7</div>
+                    </div>
+                    <div class="experiment-actions">
+                        <a class="exp-link disabled" href="#">📄 Manual</a>
+                        <a class="exp-link disabled" href="#">👁 Visualiser</a>
+                    </div>
+                </article>
+
+
+                <article class="experiment-card">
+                    <div class="experiment-heading">
+                        <span class="exp-number">EXP 8</span>
+                        <div class="experiment-name">Experiment 8</div>
+                    </div>
+                    <div class="experiment-actions">
+                        <a class="exp-link disabled" href="#">📄 Manual</a>
+                        <a class="exp-link disabled" href="#">👁 Visualiser</a>
+                    </div>
+                </article>
+
+
+                <article class="experiment-card">
+                    <div class="experiment-heading">
+                        <span class="exp-number">EXP 9</span>
+                        <div class="experiment-name">Experiment 9</div>
+                    </div>
+                    <div class="experiment-actions">
+                        <a class="exp-link disabled" href="#">📄 Manual</a>
+                        <a class="exp-link disabled" href="#">👁 Visualiser</a>
+                    </div>
+                </article>
+
+
+                <article class="experiment-card">
+                    <div class="experiment-heading">
+                        <span class="exp-number">EXP 10</span>
+                        <div class="experiment-name">Experiment 10</div>
+                    </div>
+                    <div class="experiment-actions">
+                        <a class="exp-link disabled" href="#">📄 Manual</a>
+                        <a class="exp-link disabled" href="#">👁 Visualiser</a>
+                    </div>
+                </article>
+
+
+                <article class="experiment-card">
+                    <div class="experiment-heading">
+                        <span class="exp-number">EXP 11</span>
+                        <div class="experiment-name">Experiment 11</div>
+                    </div>
+                    <div class="experiment-actions">
+                        <a class="exp-link disabled" href="#">📄 Manual</a>
+                        <a class="exp-link disabled" href="#">👁 Visualiser</a>
+                    </div>
+                </article>
+
+
+                <article class="experiment-card">
+                    <div class="experiment-heading">
+                        <span class="exp-number">EXP 12</span>
+                        <div class="experiment-name">Experiment 12</div>
+                    </div>
+                    <div class="experiment-actions">
+                        <a class="exp-link disabled" href="#">📄 Manual</a>
+                        <a class="exp-link disabled" href="#">👁 Visualiser</a>
+                    </div>
+                </article>
+
+            </div>
+        </aside>
+
+    </div>
+
+    <div class="footer">
+        © 2026 D. Kiran Prasad
+    </div>
+
+</main>
+
+
+<!--
+    PRINT / RIGHT-CLICK RESTRICTIONS ARE INTENTIONALLY RETAINED.
+    They can be removed later when the website is finalized.
+-->
 <script>
-document.addEventListener("contextmenu", e => e.preventDefault());
+document.addEventListener("contextmenu", function(e){
+    e.preventDefault();
+});
 
-document.addEventListener("keydown", e => {
-    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "p") {
+document.addEventListener("keydown", function(e){
+    if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "p"){
         e.preventDefault();
         alert("Printing is disabled.");
     }
@@ -182,9 +1002,10 @@ document.addEventListener("keydown", e => {
 </script>
 
 <style>
-@media print {
-    body { display:none !important; }
+@media print{
+    body{display:none !important;}
 }
 </style>
+
 </body>
 </html>
