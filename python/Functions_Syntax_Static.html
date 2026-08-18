@@ -1,31 +1,454 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>User Defined Functions</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Defined Functions</title>
+
 <style>
-body{font-family:Segoe UI,Arial;background:#eef3f8;margin:20px}
-.banner{background:#0b3c75;color:#fff;text-align:center;font-size:42px;font-weight:bold;padding:18px;border-radius:12px;margin-bottom:20px}
-.card{background:#fff;border:2px solid #cfd8dc;border-radius:12px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.1);margin-bottom:22px}
-.tag{display:inline-block;background:#0b3c75;color:#fff;padding:8px 18px;border-radius:8px;font-size:22px;margin-bottom:15px}
-.code{font-family:Consolas,monospace;font-size:30px;line-height:1.8;background:#fbfcff;border:2px solid #bcc7d4;border-radius:10px;padding:20px}
-.kw{color:#6a1b9a;font-weight:bold}.fn{color:#1565c0}.var{color:#8d6e63}.ret{color:#6a1b9a;font-weight:bold}
-</style></head><body>
-<div class="banner">USER DEFINED FUNCTIONS IN PYTHON</div>
-<div class="card"><div class="tag">FUNCTION WITH RETURN VALUE</div>
-<div class="code">
-<span class="kw">def</span> <span class="fn">function_name</span>(parameter1, parameter2):<br>
-&nbsp;&nbsp;&nbsp;&nbsp;statement(s)<br><br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="ret">return</span> value<br><br>
-<span class="var">result</span> = <span class="fn">function_name</span>(argument1, argument2)
-</div></div>
-<div class="card"><div class="tag">FUNCTION WITH MULTIPLE RETURN VALUES</div>
-<div class="code">
-<span class="kw">def</span> <span class="fn">function_name</span>(parameter1, parameter2):<br>
-&nbsp;&nbsp;&nbsp;&nbsp;statement(s)<br><br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="ret">return</span> value1, value2<br><br>
-<span class="var">result1, result2</span> = <span class="fn">function_name</span>(argument1, argument2)
-</div></div>
-<div class="card"><div class="tag">FUNCTION WITHOUT RETURN VALUE</div>
-<div class="code">
-<span class="kw">def</span> <span class="fn">function_name</span>(parameter1, parameter2):<br>
-&nbsp;&nbsp;&nbsp;&nbsp;statement(s)<br><br>
-<span class="fn">function_name</span>(argument1, argument2)
-</div></div>
-</body></html>
+*{box-sizing:border-box}
+body{
+    margin:0;background:#eef4f9;color:#111;
+    font-family:"Segoe UI",Arial,sans-serif
+}
+.header{
+    background:linear-gradient(90deg,#0b477d,#087cc1);
+    color:#fff;padding:18px 22px;
+    display:grid;grid-template-columns:1fr 2fr 1fr;
+    align-items:center
+}
+.header a{
+    color:#fff;text-decoration:none;
+    font-weight:700;font-size:16px
+}
+.header a:hover{text-decoration:underline}
+.header h1{
+    margin:0;text-align:center;font-size:30px
+}
+.main-home{text-align:right}
+
+.container{
+    width:94%;max-width:1450px;margin:24px auto
+}
+.card{
+    background:#fff;border-radius:12px;
+    padding:24px;margin-bottom:22px;
+    box-shadow:0 4px 18px rgba(0,0,0,.10)
+}
+.card h2{
+    margin:0 0 18px;color:#075b99;font-size:24px;
+    border-left:6px solid #075b99;padding-left:12px
+}
+.theory{
+    font-size:17px;line-height:1.65
+}
+.highlight,.note{
+    background:#fff8df;border-left:5px solid #d99a00;
+    padding:14px 18px;margin:16px 0;line-height:1.6
+}
+.syntax-title{
+    text-align:center;color:#075b99;
+    font-size:25px;font-weight:700;margin-bottom:20px
+}
+.syntax-box{
+    width:92%;margin:25px auto;
+    background:#fff9df;border:2px solid #d7b54a;
+    border-radius:8px;padding:20px;text-align:center;
+    font:700 22px Consolas,"Courier New",monospace;
+    color:#064ea8
+}
+.keyword{color:#c20d0d}
+.variable{color:#177c35}
+.condition{color:#7a159c}
+
+.explain-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    gap:15px
+}
+.explain{
+    border:2px solid #c8d5e3;border-radius:9px;
+    padding:14px;text-align:center;background:#fbfdff
+}
+.term{
+    font:700 18px Consolas,"Courier New",monospace;
+    color:#075b99;margin-bottom:7px
+}
+.explain p{
+    margin:0;font-size:15px;line-height:1.45
+}
+
+.two-col{
+    display:grid;grid-template-columns:1fr 1fr;gap:20px
+}
+.program-box{
+    background:#f7f9fb;border:1px solid #d4dee8;
+    border-radius:9px;padding:18px;overflow:auto
+}
+.program-box h3{
+    margin:0 0 12px;color:#244f70
+}
+pre{
+    margin:0;font:16px/1.6 Consolas,"Courier New",monospace;
+    white-space:pre-wrap
+}
+.output{
+    color:#d65b00;font:700 16px/1.55 Consolas,"Courier New",monospace;
+    white-space:pre-wrap
+}
+table{
+    width:100%;border-collapse:collapse
+}
+th{
+    background:#24577f;color:#fff;
+    padding:13px;text-align:left;font-size:17px
+}
+td{
+    border:1px solid #ccd7e2;
+    padding:13px;vertical-align:top;
+    font-size:16px;line-height:1.55
+}
+tr:nth-child(even){background:#f7faff}
+.code{
+    display:inline-block;background:#f3f7fc;
+    border:1px solid #b7d0ef;border-radius:7px;
+    padding:5px 8px;
+    font:15px Consolas,"Courier New",monospace;
+    color:#064ea8
+}
+footer{
+    background:#063b70;color:#fff;
+    text-align:center;padding:13px
+}
+
+@media(max-width:950px){
+    .header{grid-template-columns:1fr;gap:8px;text-align:center}
+    .main-home{text-align:center}
+    .explain-grid{grid-template-columns:1fr 1fr}
+    .two-col{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+    .container{width:94%}
+    .card{padding:17px}
+    .header h1{font-size:25px}
+    .syntax-box{width:100%;font-size:18px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <div><a href="../index.html">← Python Home</a></div>
+    <h1>USER DEFINED FUNCTIONS</h1>
+    <div class="main-home"><a href="../../index.html">Main Home →</a></div>
+</header>
+
+<main class="container">
+
+<section class="card">
+<h2>1. Basic Theory</h2>
+
+<div class="theory">
+<p>
+A <b>user defined function</b> is a block of Python statements created by
+the programmer to perform a particular task. A function can be called
+whenever that task is required.
+</p>
+
+<div class="highlight">
+<b>Basic idea:</b><br>
+Define the function → Call the function → Execute the function body →
+Get the required result.
+</div>
+
+<p>
+Functions make programs easier to understand, reduce repetition and allow
+a large program to be divided into smaller, manageable parts.
+</p>
+</div>
+</section>
+
+
+<section class="card">
+<h2>2. Defining and Calling a Function</h2>
+
+<div class="syntax-title">General Syntax</div>
+
+<div class="syntax-box">
+<span class="keyword">def</span> <span class="variable">function_name</span>(parameters):
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;statements
+</div>
+
+<div class="theory">
+<p>
+The keyword <b>def</b> is used to define a function. The function name is
+followed by parentheses and a colon. The statements inside the function
+must be indented.
+</p>
+
+<p>
+The function is executed only when it is <b>called</b>.
+</p>
+</div>
+</section>
+
+
+<section class="card">
+<h2>3. Types of Functions Used in This Topic</h2>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Example</th>
+<th>Basic Idea</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Without argument, without return</td>
+<td><span class="code">def greet():</span></td>
+<td>Function receives no value and does not return a result.</td>
+</tr>
+<tr>
+<td>With a single argument</td>
+<td><span class="code">def square(n):</span></td>
+<td>One value is passed to the function.</td>
+</tr>
+<tr>
+<td>With multiple arguments</td>
+<td><span class="code">def add(a,b):</span></td>
+<td>Two or more values can be passed.</td>
+</tr>
+<tr>
+<td>With return value</td>
+<td><span class="code">return result</span></td>
+<td>The function sends a result back to the calling statement.</td>
+</tr>
+<tr>
+<td>With arguments and return</td>
+<td><span class="code">def add(a,b): return a+b</span></td>
+<td>Values are received, processed and a result is returned.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="note">
+<b>Important:</b> <span class="code">print()</span> displays a result,
+whereas <span class="code">return</span> sends a result back to the place
+where the function was called.
+</div>
+</section>
+
+
+<section class="card">
+<h2>4. Frequently Used General Programs</h2>
+
+<p class="theory">
+The following programs demonstrate the main function concepts:
+function without arguments, single and multiple arguments, return values,
+conditional statements and loops.
+</p>
+
+
+<h3>Program 1 – Function Without Argument and Without Return</h3>
+
+<div class="two-col">
+<div class="program-box">
+<h3>Python Program</h3>
+<pre>def greet():
+    print("Hello, welcome to Python")
+
+greet()</pre>
+</div>
+
+<div class="note">
+<b>Explanation:</b><br>
+The function <b>greet()</b> is defined without any arguments.
+Therefore, no value is passed when the function is called.
+<br><br>
+There is also no <b>return</b> statement. The function directly displays
+the message using <b>print()</b>.
+<br><br>
+The statement <b>greet()</b> calls the function and executes its body.
+<div class="output">Output:
+Hello, welcome to Python</div>
+</div>
+</div>
+
+
+<h3>Program 2 – Function with a Single Argument</h3>
+
+<div class="two-col">
+<div class="program-box">
+<h3>Python Program</h3>
+<pre>def square(n):
+    print("Square =", n * n)
+
+square(6)</pre>
+</div>
+
+<div class="note">
+<b>Explanation:</b><br>
+The function <b>square(n)</b> has one parameter, <b>n</b>.
+When <b>square(6)</b> is called, the value 6 is passed to <b>n</b>.
+<br><br>
+The function calculates <b>n × n</b> and directly displays the result.
+There is no return value in this example.
+<div class="output">Output:
+Square = 36</div>
+</div>
+</div>
+
+
+<h3>Program 3 – Function with Multiple Arguments and Return</h3>
+
+<div class="two-col">
+<div class="program-box">
+<h3>Python Program</h3>
+<pre>def add(a, b):
+    return a + b
+
+x = int(input("Enter first number: "))
+y = int(input("Enter second number: "))
+
+result = add(x, y)
+
+print("Sum =", result)</pre>
+</div>
+
+<div class="note">
+<b>Explanation:</b><br>
+The function <b>add(a, b)</b> has two parameters.
+The values entered by the user are passed to the function.
+<br><br>
+The function calculates <b>a + b</b> and uses <b>return</b> to send the
+result back to the calling statement.
+<br><br>
+The returned value is stored in <b>result</b> and then displayed.
+<div class="output">Sample Input:
+10
+20
+
+Output:
+Sum = 30</div>
+</div>
+</div>
+
+
+<h3>Program 4 – Function with Argument and if Condition</h3>
+
+<div class="two-col">
+<div class="program-box">
+<h3>Python Program</h3>
+<pre>def check_even(n):
+    if n % 2 == 0:
+        return "Even"
+    else:
+        return "Odd"
+
+n = int(input("Enter number: "))
+
+result = check_even(n)
+
+print(result)</pre>
+</div>
+
+<div class="note">
+<b>Explanation:</b><br>
+The function receives one value through parameter <b>n</b>.
+Inside the function, an <b>if-else</b> statement checks the remainder
+when <b>n</b> is divided by 2.
+<br><br>
+If the remainder is zero, the function returns <b>"Even"</b>;
+otherwise it returns <b>"Odd"</b>.
+<br><br>
+This demonstrates how a function can contain a decision-making statement
+and return the result.
+<div class="output">Sample Input:
+15
+
+Output:
+Odd</div>
+</div>
+</div>
+
+
+<h3>Program 5 – Function with a Loop and Return</h3>
+
+<div class="two-col">
+<div class="program-box">
+<h3>Python Program</h3>
+<pre>def sum_n(n):
+    s = 0
+
+    for i in range(1, n + 1):
+        s = s + i
+
+    return s
+
+n = int(input("Enter n: "))
+
+result = sum_n(n)
+
+print("Sum =", result)</pre>
+</div>
+
+<div class="note">
+<b>Explanation:</b><br>
+The function <b>sum_n(n)</b> receives one argument.
+Inside the function, a <b>for loop</b> generates values from 1 to n.
+<br><br>
+The variable <b>s</b> acts as an accumulator and stores the running sum.
+After the loop finishes, <b>return s</b> sends the final result back to
+the calling statement.
+<br><br>
+For <b>n = 5</b>, the sum is 1 + 2 + 3 + 4 + 5 = 15.
+<div class="output">Sample Input:
+5
+
+Output:
+Sum = 15</div>
+</div>
+</div>
+
+</section>
+
+
+<section class="card">
+<h2>5. Important Points to Remember</h2>
+
+<ul>
+<li>Use <b>def</b> to define a user defined function.</li>
+<li>A function is executed when it is called.</li>
+<li>Parameters are written in the function definition.</li>
+<li>Arguments are the actual values supplied during a function call.</li>
+<li>A function may have no arguments, one argument or multiple arguments.</li>
+<li>A function may return a value using <b>return</b>.</li>
+<li><b>print()</b> displays a value; <b>return</b> sends a value back to the caller.</li>
+<li>A function can contain <b>if-else</b> statements and loops.</li>
+<li>Using functions helps reduce repeated code and improves program organization.</li>
+</ul>
+</section>
+
+</main>
+
+<footer>© 2026 D. Kiran Prasad | Python Programming</footer>
+
+<script>
+/* Printing / context-menu restrictions intentionally retained for now. */
+document.addEventListener("contextmenu",function(e){e.preventDefault();});
+document.addEventListener("keydown",function(e){
+    if((e.ctrlKey || e.metaKey) && e.key.toLowerCase()==="p"){
+        e.preventDefault();
+        alert("Printing is disabled.");
+    }
+});
+</script>
+<style>@media print{body{display:none!important;}}</style>
+
+</body>
+</html>
