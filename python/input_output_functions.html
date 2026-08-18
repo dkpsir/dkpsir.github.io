@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Input - Output Functions</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#eef4f9;color:#111;font-family:"Segoe UI",Arial,sans-serif}
+
+.header-nav{
+    position:absolute;
+    left:18px;
+    right:18px;
+    top:28px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+.header-nav a{
+    color:#fff;
+    text-decoration:none;
+    font-size:18px;
+    font-weight:700;
+}
+.header-nav a:hover{text-decoration:underline}
+.header{position:relative}
+
+.header{background:linear-gradient(90deg,#0b477d,#087cc1);color:#fff;text-align:center;padding:24px}
+.header h1{margin:0;font-size:34px;padding-top:8px}.header p{margin:7px 0;font-size:18px}
+.container{width:94%;max-width:1450px;margin:26px auto}.card{background:#fff;border-radius:12px;padding:24px;margin-bottom:24px;box-shadow:0 4px 18px #0001}
+h2{color:#075b99;margin:0 0 18px;font-size:25px;border-left:6px solid #075b99;padding-left:12px}
+h3{color:#075b99}.theory{font-size:18px;line-height:1.65}.highlight,.note{background:#fff8df;border-left:5px solid #d99a00;padding:14px 18px;margin:16px 0;line-height:1.6}
+.syntax-title{text-align:center;color:#075b99;font-size:26px;font-weight:700;margin-bottom:22px}
+.syntax-box{width:92%;margin:35px auto;background:#fff9df;border:2px solid #d7b54a;border-radius:8px;padding:22px;text-align:center;font:700 25px Consolas,"Courier New",monospace;color:#064ea8}
+.name{color:#177c35}.operator{color:#7a159c}.keyword{color:#d20c0c}.string{color:#b85c00}
+.explain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.explain{border:2px solid #c8d5e3;border-radius:10px;padding:15px;text-align:center;background:#fbfdff}.term{font:700 19px Consolas;color:#075b99;margin-bottom:8px}.explain p{margin:0;line-height:1.45}
+.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:900px}th{background:#24577f;color:#fff;font-size:20px;padding:15px;text-align:left}td{border:1px solid #ccd7e2;padding:15px;vertical-align:middle;font-size:17px;line-height:1.5}tr:nth-child(even){background:#f7faff}
+.code{display:inline-block;background:#f3f7fc;border:1px solid #b7d0ef;border-radius:8px;padding:8px 12px;font:17px Consolas,"Courier New",monospace;color:#064ea8;white-space:pre-wrap}.output{color:#d65b00;font:700 17px Consolas,"Courier New",monospace;white-space:pre-wrap}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:22px}.code-block{background:#f7f9fb;border:1px solid #d4dee8;border-radius:9px;padding:18px;overflow:auto}pre{margin:0;font:16px/1.6 Consolas,"Courier New",monospace}
+ul{line-height:1.7;font-size:17px}footer{background:#063b70;color:#fff;text-align:center;padding:14px}
+@media(max-width:900px){.explain-grid,.two-col{grid-template-columns:1fr}.syntax-box{width:100%;font-size:20px}}
+</style></head><body>
+<header class="header">
+<div class="header-nav">
+<a href="../index.html">🏠 Python Home</a>
+<a href="../../index.html">🏠 Main Home</a>
+</div>
+<h1>INPUT - OUTPUT FUNCTIONS</h1>
+<p>Python Programming – Basic Concepts</p>
+</header>
+<main class="container">
+
+<section class="card"><h2>1. Basic Theory</h2><div class="theory">
+<p><b>Input</b> means accepting data from the user during program execution. In Python, the <b>input()</b> function is commonly used to receive input from the keyboard.</p>
+<p><b>Output</b> means displaying information, calculated results, messages, or values on the screen. In Python, the <b>print()</b> function is used to display output.</p>
+<div class="highlight"><b>Basic idea:</b><br>Input → Process / Calculation → Output</div>
+<p>In engineering programs, input statements are useful for entering quantities such as beam span, load, distance, diameter, force, pressure and temperature. Output statements display the calculated results.</p>
+</div></section>
+
+<section class="card"><h2>2. input() Function – Syntax</h2><div class="syntax-title">General Syntax</div>
+<div class="syntax-box"><span class="name">variable</span> <span class="operator"> = </span><span class="keyword">input</span>(<span class="string">"prompt message"</span>)</div>
+<div class="explain-grid">
+<div class="explain"><div class="term">variable</div><p>Name used to store the value entered by the user.</p></div>
+<div class="explain"><div class="term">=</div><p>Assignment operator used to store the input in the variable.</p></div>
+<div class="explain"><div class="term">input()</div><p>Built-in function used to accept keyboard input.</p></div>
+<div class="explain"><div class="term">"prompt message"</div><p>Message telling the user what value should be entered.</p></div>
+</div>
+<div class="note"><b>Important:</b> The value returned by <b>input()</b> is normally a <b>string</b>. Use <b>int()</b> or <b>float()</b> when numerical calculations are required.</div></section>
+
+<section class="card"><h2>3. input() Function – Examples</h2><div class="table-wrap"><table><thead><tr><th>Syntax / Example</th><th>Description</th><th>Sample Input</th><th>Stored Value</th></tr></thead><tbody>
+<tr><td><span class="code">name = input("Enter your name: ")</span></td><td>Accepts a name.</td><td>Ravi</td><td class="output">"Ravi"</td></tr>
+<tr><td><span class="code">age = input("Enter age: ")</span></td><td>Accepts age as a string.</td><td>20</td><td class="output">"20"</td></tr>
+<tr><td><span class="code">age = int(input("Enter age: "))</span></td><td>Accepts and converts to integer.</td><td>20</td><td class="output">20</td></tr>
+<tr><td><span class="code">L = float(input("Enter length (m): "))</span></td><td>Accepts a decimal value.</td><td>12.5</td><td class="output">12.5</td></tr>
+<tr><td><span class="code">P = float(input("Enter load (kN): "))</span></td><td>Useful for engineering load input.</td><td>25</td><td class="output">25.0</td></tr>
+<tr><td><span class="code">d = float(input("Enter diameter (mm): "))</span></td><td>Accepts component diameter.</td><td>20</td><td class="output">20.0</td></tr>
+<tr><td><span class="code">choice = int(input("Enter choice: "))</span></td><td>Accepts an integer menu choice.</td><td>2</td><td class="output">2</td></tr>
+</tbody></table></div></section>
+
+<section class="card"><h2>4. Type Conversion with input()</h2><p class="theory">Since <b>input()</b> returns a string, numerical input should be converted before arithmetic operations.</p>
+<div class="table-wrap"><table><thead><tr><th>Function</th><th>Purpose</th><th>Example</th><th>Input</th><th>Stored Value</th></tr></thead><tbody>
+<tr><td><span class="code">input()</span></td><td>Accepts input as string.</td><td><span class="code">x = input("Enter x: ")</span></td><td>25</td><td class="output">"25"</td></tr>
+<tr><td><span class="code">int()</span></td><td>Converts to integer.</td><td><span class="code">x = int(input("Enter x: "))</span></td><td>25</td><td class="output">25</td></tr>
+<tr><td><span class="code">float()</span></td><td>Converts to floating-point value.</td><td><span class="code">x = float(input("Enter x: "))</span></td><td>25.5</td><td class="output">25.5</td></tr>
+</tbody></table></div>
+<div class="note"><b>Example:</b> <span class="code">a = input("Enter first number: ")</span> and <span class="code">b = input("Enter second number: ")</span> keep both values as strings. Convert them before numerical addition.</div></section>
+
+<section class="card"><h2>5. print() Function – Syntax</h2><div class="syntax-title">General Syntax</div>
+<div class="syntax-box"><span class="keyword">print</span>(<span class="argument">value</span>)</div>
+<div class="explain-grid">
+<div class="explain"><div class="term">print()</div><p>Built-in function used to display information.</p></div>
+<div class="explain"><div class="term">value</div><p>Can be a string, number, variable or expression.</p></div>
+<div class="explain"><div class="term">"text"</div><p>Text is written inside quotation marks.</p></div>
+</div></section>
+
+<section class="card"><h2>6. print() Function – Examples</h2><div class="table-wrap"><table><thead><tr><th>Example</th><th>Description</th><th>Output</th></tr></thead><tbody>
+<tr><td><span class="code">print("Hello")</span></td><td>Displays text.</td><td class="output">Hello</td></tr>
+<tr><td><span class="code">print(25)</span></td><td>Displays an integer.</td><td class="output">25</td></tr>
+<tr><td><span class="code">print(25.5)</span></td><td>Displays a floating-point value.</td><td class="output">25.5</td></tr>
+<tr><td><span class="code">x = 10<br>print(x)</span></td><td>Displays a variable.</td><td class="output">10</td></tr>
+<tr><td><span class="code">a = 10<br>b = 20<br>print(a + b)</span></td><td>Displays an expression result.</td><td class="output">30</td></tr>
+<tr><td><span class="code">L = 12<br>print("Length =", L)</span></td><td>Displays text and a variable.</td><td class="output">Length = 12</td></tr>
+<tr><td><span class="code">P = 25<br>print("Load =", P, "kN")</span></td><td>Displays multiple values.</td><td class="output">Load = 25 kN</td></tr>
+<tr><td><span class="code">print("Area =", 50.25)</span></td><td>Displays text and a numerical value.</td><td class="output">Area = 50.25</td></tr>
+</tbody></table></div></section>
+
+<section class="card"><h2>7. Printing Multiple Values</h2><div class="table-wrap"><table><thead><tr><th>Syntax</th><th>Purpose</th><th>Output</th></tr></thead><tbody>
+<tr><td><span class="code">print(a, b, c)</span></td><td>Prints multiple values with spaces.</td><td class="output">10 20 30</td></tr>
+<tr><td><span class="code">print("A =", a, "B =", b)</span></td><td>Combines labels and variables.</td><td class="output">A = 10 B = 20</td></tr>
+<tr><td><span class="code">print(a, b, sep=", ")</span></td><td>Uses comma and space as separator.</td><td class="output">10, 20</td></tr>
+<tr><td><span class="code">print(a, b, sep=" | ")</span></td><td>Uses a custom separator.</td><td class="output">10 | 20</td></tr>
+</tbody></table></div></section>
+
+<section class="card"><h2>8. sep and end in print()</h2>
+<div class="syntax-box"><span class="keyword">print</span>(value1, value2, <span class="argument">sep=" "</span>, <span class="argument">end="
+"</span>)</div>
+<div class="table-wrap"><table><thead><tr><th>Example</th><th>Meaning</th><th>Output</th></tr></thead><tbody>
+<tr><td><span class="code">print(10, 20, 30)</span></td><td>Default separator is a space.</td><td class="output">10 20 30</td></tr>
+<tr><td><span class="code">print(10, 20, 30, sep="-")</span></td><td><b>sep</b> specifies what is placed between values.</td><td class="output">10-20-30</td></tr>
+<tr><td><span class="code">print("Hello", end=" ")<br>print("World")</span></td><td><b>end</b> specifies what is printed at the end.</td><td class="output">Hello World</td></tr>
+<tr><td><span class="code">print("A", end="")<br>print("B")</span></td><td>Prevents the normal line break.</td><td class="output">AB</td></tr>
+</tbody></table></div></section>
+
+<section class="card"><h2>9. Escape Sequences in Output</h2><div class="table-wrap"><table><thead><tr><th>Escape Sequence</th><th>Meaning</th><th>Example</th><th>Output</th></tr></thead><tbody>
+<tr><td><span class="code">\n</span></td><td>New line</td><td><span class="code">print("A\nB")</span></td><td class="output">A<br>B</td></tr>
+<tr><td><span class="code">\t</span></td><td>Tab space</td><td><span class="code">print("A\tB")</span></td><td class="output">A&nbsp;&nbsp;&nbsp;&nbsp;B</td></tr>
+<tr><td><span class="code">\"</span></td><td>Double quotation mark</td><td><span class="code">print("He said \"Hi\"")</span></td><td class="output">He said "Hi"</td></tr>
+<tr><td><span class="code">\\</span></td><td>Backslash</td><td><span class="code">print("C:\\Python")</span></td><td class="output">C:\Python</td></tr>
+</tbody></table></div></section>
+
+
+<section class="card"><h2>10. Formatted Output using f-Strings</h2>
+<div class="syntax-box"><span class="keyword">print</span>(<span class="string">f"Text {variable}"</span>)</div>
+
+<div class="table-wrap"><table>
+<thead><tr><th>Example</th><th>Description</th><th>Output</th></tr></thead>
+<tbody>
+<tr>
+<td><span class="code">name = "Ravi"<br>print(f"Name = {name}")</span></td>
+<td>Inserts the value of a variable into a string.</td>
+<td class="output">Name = Ravi</td>
+</tr>
+<tr>
+<td><span class="code">age = 20<br>print(f"Age = {age}")</span></td>
+<td>Displays an integer variable using an f-string.</td>
+<td class="output">Age = 20</td>
+</tr>
+<tr>
+<td><span class="code">price = 125.6789<br>print(f"Price = {price:.2f}")</span></td>
+<td>Displays a floating-point value with two decimal places.</td>
+<td class="output">Price = 125.68</td>
+</tr>
+<tr>
+<td><span class="code">a = 10<br>b = 20<br>print(f"Sum = {a+b}")</span></td>
+<td>An expression can be placed inside the braces.</td>
+<td class="output">Sum = 30</td>
+</tr>
+<tr>
+<td><span class="code">name = "Anu"<br>marks = 85<br>print(f"{name} scored {marks} marks")</span></td>
+<td>Multiple variables can be included in one output statement.</td>
+<td class="output">Anu scored 85 marks</td>
+</tr>
+<tr>
+<td><span class="code">x = 7<br>print(f"Square = {x*x}")</span></td>
+<td>Calculates an expression while formatting the output.</td>
+<td class="output">Square = 49</td>
+</tr>
+</tbody>
+</table></div>
+
+<div class="note">
+<b>Note:</b> f-strings are especially useful when a program needs to display
+variables and calculated results in a clear and readable format.
+</div>
+</section>
+
+
+<section class="card"><h2>11. General Python Examples – Input and Output</h2>
+
+<div class="table-wrap"><table>
+<thead><tr><th>Program</th><th>Sample Input</th><th>Output</th></tr></thead>
+<tbody>
+<tr>
+<td><span class="code">name = input("Enter your name: ")<br>print("Hello", name)</span></td>
+<td>Ravi</td>
+<td class="output">Hello Ravi</td>
+</tr>
+<tr>
+<td><span class="code">a = int(input("Enter first number: "))<br>b = int(input("Enter second number: "))<br>print("Sum =", a+b)</span></td>
+<td>10<br>20</td>
+<td class="output">Sum = 30</td>
+</tr>
+<tr>
+<td><span class="code">a = int(input("Enter a number: "))<br>print("Square =", a*a)</span></td>
+<td>6</td>
+<td class="output">Square = 36</td>
+</tr>
+<tr>
+<td><span class="code">length = float(input("Enter length: "))<br>width = float(input("Enter width: "))<br>print("Area =", length*width)</span></td>
+<td>5<br>4</td>
+<td class="output">Area = 20.0</td>
+</tr>
+<tr>
+<td><span class="code">c = float(input("Enter temperature in C: "))<br>f = (9/5)*c + 32<br>print("Temperature in F =", f)</span></td>
+<td>25</td>
+<td class="output">Temperature in F = 77.0</td>
+</tr>
+<tr>
+<td><span class="code">n = int(input("Enter a number: "))<br>print("Even =", n % 2 == 0)</span></td>
+<td>12</td>
+<td class="output">Even = True</td>
+</tr>
+<tr>
+<td><span class="code">first = input("Enter first name: ")<br>last = input("Enter last name: ")<br>print("Full name =", first, last)</span></td>
+<td>Ravi<br>Kumar</td>
+<td class="output">Full name = Ravi Kumar</td>
+</tr>
+<tr>
+<td><span class="code">a = float(input("Enter a: "))<br>b = float(input("Enter b: "))<br>print(f"Average = {(a+b)/2:.2f}")</span></td>
+<td>15<br>25</td>
+<td class="output">Average = 20.00</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+
+
+<section class="card"><h2>12. Complete General Example – Student Details</h2>
+
+<div class="two-col">
+<div>
+<h3>Python Program</h3>
+<div class="code-block"><pre>name = input("Enter student name: ")
+age = int(input("Enter age: "))
+marks = float(input("Enter marks: "))
+
+print("\n----- STUDENT DETAILS -----")
+print("Name =", name)
+print("Age =", age)
+print("Marks =", marks)</pre></div>
+</div>
+
+<div>
+<h3>Example Input / Output</h3>
+<div class="code-block"><pre>Enter student name: Ravi
+Enter age: 20
+Enter marks: 86.5
+
+----- STUDENT DETAILS -----
+Name = Ravi
+Age = 20
+Marks = 86.5</pre></div>
+</div>
+</div>
+
+<div class="note">
+<b>Program pattern:</b> First accept the required information using
+<b>input()</b>, convert it to the required data type when necessary, and
+then display the information using <b>print()</b>.
+</div>
+</section>
+
+
+<section class="card"><h2>13. Important Points to Remember</h2><ul>
+<li><b>input()</b> accepts data from the user.</li>
+<li>Input received through <b>input()</b> is normally a string.</li>
+<li>Use <b>int()</b> for integer input and <b>float()</b> for decimal input.</li>
+<li><b>print()</b> displays information and results.</li>
+<li>Multiple values can be displayed using commas inside <b>print()</b>.</li>
+<li><b>sep</b> controls the separator between multiple values.</li>
+<li><b>end</b> controls what is printed at the end of a print statement.</li>
+<li><b>f-strings</b> provide convenient formatted output.</li>
+<li>For engineering programs, always display appropriate units.</li>
+<li>Use formatting such as <b>:.2f</b> when a result should be shown to two decimal places.</li>
+</ul></section>
+
+</main><footer>© 2026 D. Kiran Prasad | Python Programming</footer>
+</body></html>
