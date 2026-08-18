@@ -3,40 +3,156 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Experiment 2 - Thermodynamic Processes - Flow Chart</title>
+<title>Experiment 2 - Shear Force and Bending Moment - Flow Chart & Code</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#eef4f9;color:#111;font-family:Arial,Helvetica,sans-serif}
+body{
+    margin:0;
+    background:#eef4f9;
+    color:#111;
+    font-family:Arial,Helvetica,sans-serif;
+}
 .header{position:relative;background:linear-gradient(90deg,#0b477d,#087cc1);color:#fff;padding:28px 20px;text-align:center}
 .header h1{margin:0;font-size:30px}
 .header p{margin:7px 0 0;font-size:18px}
 .header-nav{position:absolute;left:24px;right:24px;top:18px;display:flex;justify-content:space-between}
 .header-nav a{color:#fff;text-decoration:none;font-weight:700;font-size:16px}
 .header-nav a:hover{text-decoration:underline}
-.container{width:94%;max-width:1300px;margin:24px auto}
-.card{background:#fff;border-radius:12px;padding:22px;margin-bottom:22px;box-shadow:0 3px 15px rgba(0,0,0,.08)}
-.title{background:#0b5b94;color:#fff;padding:13px 18px;border-radius:8px;font-size:21px;font-weight:700;margin-bottom:20px}
-.flow{display:flex;flex-direction:column;align-items:center;gap:7px}
-.node{width:min(650px,90%);padding:13px 18px;text-align:center;border:2px solid #17679f;border-radius:9px;background:#f7fbff;color:#073f6c;font-weight:700}
-.node.start,.node.end{width:220px;border-radius:28px;background:#0b5b94;color:#fff}
-.node.process{background:#eef7ee;border-color:#4c9b5b;color:#245d2c}
-.node.choice{background:#fff8df;border-color:#d59b22;color:#795700}
-.arrow{color:#0b5b94;font-size:25px;line-height:20px;font-weight:700}
-.branch-wrap{width:min(1050px,96%);display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:5px 0}
-.branch{border:2px solid #b9cddd;border-radius:9px;background:#f8fbfd;padding:12px;text-align:center}
-.branch h3{margin:0 0 8px;color:#0b5b94;font-size:17px}
-.branch p{margin:5px 0;font-size:14px;line-height:1.4}
-.eq{display:block;margin-top:6px;font-family:"Courier New",monospace;font-weight:600}
-table{width:100%;border-collapse:collapse;background:#fff;table-layout:fixed}
-th,td{border:1px solid #c8d6e2;padding:11px 13px;text-align:left;vertical-align:top;overflow:hidden}
-th{background:#0b5b94;color:#fff;font-size:16px}
+.container{width:96%;max-width:1400px;margin:24px auto}
+
+/* Side-by-Side Split Container */
+.split-row{
+    display:flex;
+    gap:20px;
+    align-items:stretch;
+    margin-bottom:22px;
+}
+.flow-col{
+    flex:0 0 55%; /* Flowchart takes ~55% width */
+}
+.code-col{
+    flex:0 0 45%; /* Python Code takes ~45% width */
+}
+
+.card{
+    background:#fff;
+    border-radius:12px;
+    padding:22px;
+    box-shadow:0 3px 15px rgba(0,0,0,.08);
+    height:100%;
+}
+.title{
+    background:#0b5b94;
+    color:#fff;
+    padding:13px 18px;
+    border-radius:8px;
+    font-size:21px;
+    font-weight:700;
+    margin-bottom:20px;
+}
+.flow{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:7px;
+}
+.node{
+    width:100%;
+    max-width:500px;
+    padding:11px 14px;
+    text-align:center;
+    border:2px solid #17679f;
+    border-radius:9px;
+    background:#f7fbff;
+    color:#073f6c;
+    font-weight:700;
+    font-size:14px;
+}
+.node.start,.node.end{
+    width:180px;
+    border-radius:28px;
+    background:#0b5b94;
+    color:#fff;
+}
+.node.calc{
+    background:#eef7ee;
+    border-color:#4c9b5b;
+    color:#245d2c;
+}
+.arrow{
+    color:#0b5b94;
+    font-size:22px;
+    line-height:18px;
+    font-weight:700;
+}
+.eq{
+    display:block;
+    margin-top:4px;
+    font-family:"Courier New",monospace;
+    font-weight:600;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+}
+th,td{
+    border:1px solid #c8d6e2;
+    padding:12px 14px;
+    text-align:left;
+    vertical-align:top;
+}
+th{
+    background:#0b5b94;
+    color:#fff;
+    font-size:16px;
+}
 tr:nth-child(even){background:#f7fafc}
-code{background:#eef3f7;color:#063f6c;padding:3px 5px;border-radius:4px;font-family:"Courier New",monospace;white-space:nowrap;font-size:13px}
-.program{background:#1e1e1e;color:#ddd;border-radius:8px;padding:17px;overflow:auto;font:14px/1.5 Consolas,"Courier New",monospace;white-space:pre}
-.note{background:#fff8df;border-left:5px solid #d89a00;padding:13px 16px;margin-top:18px;line-height:1.5}
-footer{background:#0b477d;color:#fff;text-align:center;padding:13px;margin-top:25px}
-@media(max-width:800px){.branch-wrap{grid-template-columns:1fr 1fr}.header h1{font-size:24px}}
-@media(max-width:520px){.branch-wrap{grid-template-columns:1fr}.container{width:96%}.card{padding:14px}th,td{padding:9px;font-size:14px}}
+code{
+    background:#eef3f7;
+    color:#063f6c;
+    padding:3px 5px;
+    border-radius:4px;
+    font-family:"Courier New",monospace;
+}
+.program{
+    background:#1e1e1e;
+    color:#ddd;
+    border-radius:8px;
+    padding:17px;
+    overflow:auto;
+    font:14px/1.5 Consolas,"Courier New",monospace;
+    white-space:pre;
+    height:calc(100% - 60px);
+}
+.note{
+    background:#fff8df;
+    border-left:5px solid #d89a00;
+    padding:13px 16px;
+    margin-top:18px;
+    line-height:1.5;
+}
+footer{
+    background:#0b477d;
+    color:#fff;
+    text-align:center;
+    padding:13px;
+    margin-top:25px;
+}
+
+/* Mobile Responsiveness */
+@media(max-width:900px){
+    .split-row{
+        flex-direction:column;
+    }
+    .flow-col, .code-col{
+        flex:0 0 100%;
+    }
+    .header h1{font-size:24px}
+    .container{width:96%}
+    .card{padding:14px}
+    th,td{padding:9px;font-size:14px}
+}
 </style>
 </head>
 
@@ -44,401 +160,217 @@ footer{background:#0b477d;color:#fff;text-align:center;padding:13px;margin-top:2
 
 <header class="header">
     <div class="header-nav">
-        <a href="index.html">← Python Home</a>
-        <a href="../index.html">Main Home →</a>
+        <a href="expt1.html">← Expt 1</a>
+        <a href="index.html">Main Home →</a>
     </div>
     <h1>PYTHON PROGRAMMING LAB</h1>
-    <p>Experiment 2 – Work Done in Thermodynamic Processes</p>
+    <p>Experiment 2 – Shear Force and Bending Moment of a Simply Supported Beam</p>
 </header>
 
 <main class="container">
 
-<section class="card">
-    <div class="title">Experiment 2 – Flow Chart</div>
+    <!-- Side-by-Side Split Container -->
+    <div class="split-row">
+        
+        <!-- Left Side: Flowchart (~55%) -->
+        <div class="flow-col">
+            <section class="card">
+                <div class="title">Experiment 2 – Flow Chart</div>
 
-    <div class="flow">
+                <div class="flow">
+                    <div class="node start">START</div>
+                    <div class="arrow">↓</div>
 
-        <div class="node start">START</div>
-        <div class="arrow">↓</div>
+                    <div class="node">
+                        Input Beam Span
+                        <span class="eq">L (m)</span>
+                    </div>
+                    <div class="arrow">↓</div>
 
-        <div class="node">
-            Import Required Module
-            <span class="eq">import math</span>
+                    <div class="node">
+                        Input Point Loads & Distances
+                        <span class="eq">P₁, P₂ (kN) and a₁, a₂ (m)</span>
+                    </div>
+                    <div class="arrow">↓</div>
+
+                    <div class="node">
+                        Input UDL Intensity
+                        <span class="eq">w (kN/m)</span>
+                    </div>
+                    <div class="arrow">↓</div>
+
+                    <div class="node calc">
+                        Calculate Support Reactions
+                        <span class="eq">RB = [P₁a₁ + P₂a₂ + w(L²/2)] / L</span>
+                        <span class="eq">RA = P₁ + P₂ + wL − RB</span>
+                    </div>
+                    <div class="arrow">↓</div>
+
+                    <div class="node">
+                        Input Evaluation Distance from Left Support
+                        <span class="eq">x (m)</span>
+                    </div>
+                    <div class="arrow">↓</div>
+
+                    <div class="node calc">
+                        Calculate Shear Force & Bending Moment at x
+                        <span class="eq">SF = RA − Σ(Loads left of x)</span>
+                        <span class="eq">BM = RA·x − Σ(Moments left of x)</span>
+                    </div>
+                    <div class="arrow">↓</div>
+
+                    <div class="node">
+                        Display Results
+                        <span class="eq">RA, RB, SF at x, BM at x</span>
+                    </div>
+                    <div class="arrow">↓</div>
+
+                    <div class="node end">END</div>
+                </div>
+            </section>
         </div>
-        <div class="arrow">↓</div>
 
-        <div class="node">
-            Display Thermodynamic Processes
-            <span class="eq">1. Isobaric &nbsp; 2. Isochoric &nbsp; 3. Isothermal &nbsp; 4. Polytropic</span>
+        <!-- Right Side: Python Code (~45%) -->
+        <div class="code-col">
+            <section class="card">
+                <div class="title">Complete Python Program</div>
+
+<pre class="program"># Program to calculate SF and BM of a simply supported
+# beam carrying Point Loads and UDL
+
+# Input beam span
+L = float(input("Enter length of the beam L (m): "))
+
+# Input point loads and positions
+P1 = float(input("Enter point load P1 (kN): "))
+a1 = float(input("Enter distance of P1 from Left Support A (m): "))
+
+P2 = float(input("Enter point load P2 (kN): "))
+a2 = float(input("Enter distance of P2 from Left Support A (m): "))
+
+# Input UDL
+w = float(input("Enter UDL intensity w (kN/m): "))
+
+# Calculate support reactions
+RB = (P1 * a1 + P2 * a2 + w * (L ** 2) / 2) / L
+RA = P1 + P2 + (w * L) - RB
+
+# Input section x
+x = float(input("\nEnter distance x from Left Support A (m): "))
+
+# Calculate Shear Force (SF) at x
+sf_p1 = P1 if a1 <= x else 0.0
+sf_p2 = P2 if a2 <= x else 0.0
+sf_udl = w * x
+SF_x = RA - (sf_p1 + sf_p2 + sf_udl)
+
+# Calculate Bending Moment (BM) at x
+bm_p1 = P1 * (x - a1) if a1 <= x else 0.0
+bm_p2 = P2 * (x - a2) if a2 <= x else 0.0
+bm_udl = w * (x ** 2) / 2
+BM_x = (RA * x) - (bm_p1 + bm_p2 + bm_udl)
+
+# Display results
+print("\n------ RESULTS SUMMARY ------")
+print("Reaction RA =", round(RA, 2), "kN")
+print("Reaction RB =", round(RB, 2), "kN")
+print(f"Shear Force at x = {x} m:", round(SF_x, 2), "kN")
+print(f"Bending Moment at x = {x} m:", round(BM_x, 2), "kN·m")</pre>
+            </section>
         </div>
-        <div class="arrow">↓</div>
-
-        <div class="node choice">
-            Input User Choice
-            <span class="eq">choice = int(input(...))</span>
-        </div>
-        <div class="arrow">↓</div>
-
-        <div class="branch-wrap">
-
-            <div class="branch">
-                <h3>Choice 1<br>Isobaric</h3>
-                <p>Input P, V₁, V₂</p>
-                <p>Calculate:</p>
-                <p><b>W = P(V₂ − V₁)</b></p>
-                <p>Display Work Done</p>
-            </div>
-
-            <div class="branch">
-                <h3>Choice 2<br>Isochoric</h3>
-                <p>Volume remains constant.</p>
-                <p><b>W = 0 kJ</b></p>
-                <p>Display Work Done</p>
-            </div>
-
-            <div class="branch">
-                <h3>Choice 3<br>Isothermal</h3>
-                <p>Input P₁, P₂, V₁</p>
-                <p>Calculate V₂</p>
-                <p><b>V₂ = (P₁V₁)/P₂</b></p>
-                <p>Calculate Work Done</p>
-            </div>
-
-            <div class="branch">
-                <h3>Choice 4<br>Polytropic</h3>
-                <p>Input P₁, P₂, V₁</p>
-                <p>Use n = i × 0.5</p>
-                <p>For i = 0 to 5</p>
-                <p>Calculate V₂ and W</p>
-                <p>Display table</p>
-            </div>
-
-        </div>
-
-        <div class="arrow">↓</div>
-        <div class="node">
-            Invalid Choice?
-            <span class="eq">If choice is not 1–4 → Display "Invalid Choice"</span>
-        </div>
-        <div class="arrow">↓</div>
-
-        <div class="node end">END</div>
 
     </div>
-</section>
 
-<section class="card">
-    <div class="title">Python Program – Line-by-Line Explanation</div>
+    <!-- Line-by-Line Explanation Table -->
+    <section class="card" style="margin-bottom:22px;">
+        <div class="title">Python Program – Line-by-Line Explanation</div>
 
-    <table>
-        <thead>
-            <tr>
-                <th style="width:55%">Python Statement</th>
-                <th style="width:12%">Purpose</th>
-                <th>What it does</th>
-            </tr>
-        </thead>
-        <tbody>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:48%">Python Statement</th>
+                    <th style="width:15%">Purpose</th>
+                    <th>What it does</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>L = float(input("Enter length of the beam L (m): "))</code></td>
+                    <td>Input</td>
+                    <td>Accepts the overall length/span of the beam in meters.</td>
+                </tr>
+                <tr>
+                    <td><code>P1 = float(input("Enter point load P1 (kN): "))</code></td>
+                    <td>Input</td>
+                    <td>Accepts the magnitude of the first point load P1 in kN.</td>
+                </tr>
+                <tr>
+                    <td><code>a1 = float(input("Enter distance of P1..."))</code></td>
+                    <td>Input</td>
+                    <td>Accepts the distance of point load P1 measured from Left Support A.</td>
+                </tr>
+                <tr>
+                    <td><code>w = float(input("Enter UDL intensity w (kN/m): "))</code></td>
+                    <td>Input</td>
+                    <td>Accepts the uniformly distributed load (UDL) rate across the beam.</td>
+                </tr>
+                <tr>
+                    <td><code>RB = (P1 * a1 + P2 * a2 + w * (L ** 2) / 2) / L</code></td>
+                    <td>Calculation</td>
+                    <td>Computes Right Support reaction RB using moment equilibrium about Left Support A.</td>
+                </tr>
+                <tr>
+                    <td><code>RA = P1 + P2 + (w * L) - RB</code></td>
+                    <td>Calculation</td>
+                    <td>Computes Left Support reaction RA using vertical force equilibrium (ΣFy = 0).</td>
+                </tr>
+                <tr>
+                    <td><code>x = float(input("Enter distance x..."))</code></td>
+                    <td>Input</td>
+                    <td>Accepts the section position x from Support A where SF and BM need to be evaluated.</td>
+                </tr>
+                <tr>
+                    <td><code>sf_p1 = P1 if a1 &lt;= x else 0.0</code></td>
+                    <td>Conditional</td>
+                    <td>Includes load P1 in shear force calculation only if it lies to the left of section x.</td>
+                </tr>
+                <tr>
+                    <td><code>sf_udl = w * x</code></td>
+                    <td>Calculation</td>
+                    <td>Calculates the accumulated force due to UDL up to section x.</td>
+                </tr>
+                <tr>
+                    <td><code>SF_x = RA - (sf_p1 + sf_p2 + sf_udl)</code></td>
+                    <td>Calculation</td>
+                    <td>Calculates the net Shear Force (SF) at section x by subtracting forces acting downward.</td>
+                </tr>
+                <tr>
+                    <td><code>bm_p1 = P1 * (x - a1) if a1 &lt;= x else 0.0</code></td>
+                    <td>Conditional</td>
+                    <td>Calculates bending moment contribution of P1 about section x if a1 ≤ x.</td>
+                </tr>
+                <tr>
+                    <td><code>bm_udl = w * (x ** 2) / 2</code></td>
+                    <td>Calculation</td>
+                    <td>Calculates bending moment contribution of UDL acting to the left of section x.</td>
+                </tr>
+                <tr>
+                    <td><code>BM_x = (RA * x) - (bm_p1 + bm_p2 + bm_udl)</code></td>
+                    <td>Calculation</td>
+                    <td>Calculates net Bending Moment (BM) at section x.</td>
+                </tr>
+                <tr>
+                    <td><code>print(...)</code></td>
+                    <td>Output</td>
+                    <td>Outputs calculated reactions, shear force, and bending moment rounded to 2 decimal places.</td>
+                </tr>
+            </tbody>
+        </table>
 
-            <tr>
-                <td><code>import math</code></td>
-                <td>Module</td>
-                <td>Imports Python's math module so that mathematical functions such as <code>math.log()</code> can be used.</td>
-            </tr>
-
-            <tr>
-                <td><code>print("THERMODYNAMIC PROCESSES")</code></td>
-                <td>Output</td>
-                <td>Displays the heading for the thermodynamic processes.</td>
-            </tr>
-
-            <tr>
-                <td><code>print("1. Isobaric Process")</code></td>
-                <td>Output</td>
-                <td>Displays option 1, the isobaric process.</td>
-            </tr>
-
-            <tr>
-                <td><code>print("2. Isochoric Process")</code></td>
-                <td>Output</td>
-                <td>Displays option 2, the isochoric process.</td>
-            </tr>
-
-            <tr>
-                <td><code>print("3. Isothermal Process")</code></td>
-                <td>Output</td>
-                <td>Displays option 3, the isothermal process.</td>
-            </tr>
-
-            <tr>
-                <td><code>print("4. Polytropic Process")</code></td>
-                <td>Output</td>
-                <td>Displays option 4, the polytropic process.</td>
-            </tr>
-
-            <tr>
-                <td><code>choice = int(input("\nEnter your choice (1-4): "))</code></td>
-                <td>Input</td>
-                <td>Accepts the user's process choice and converts the input into an integer.</td>
-            </tr>
-
-            <tr>
-                <td><code>if choice == 1:</code></td>
-                <td>Decision</td>
-                <td>Checks whether the user selected the isobaric process.</td>
-            </tr>
-
-            <tr>
-                <td><code>P = float(input("Enter Pressure (kPa): "))</code></td>
-                <td>Input</td>
-                <td>Accepts the constant pressure for the isobaric process.</td>
-            </tr>
-
-            <tr>
-                <td><code>V1 = float(input("Enter Initial Volume (m^3): "))</code></td>
-                <td>Input</td>
-                <td>Accepts the initial volume.</td>
-            </tr>
-
-            <tr>
-                <td><code>V2 = float(input("Enter Final Volume (m^3): "))</code></td>
-                <td>Input</td>
-                <td>Accepts the final volume.</td>
-            </tr>
-
-            <tr>
-                <td><code>W = P * (V2 - V1)</code></td>
-                <td>Calculation</td>
-                <td>Calculates work done for the isobaric process.</td>
-            </tr>
-
-            <tr>
-                <td><code>elif choice == 2:</code></td>
-                <td>Decision</td>
-                <td>Checks whether the user selected the isochoric process.</td>
-            </tr>
-
-            <tr>
-                <td><code>print("Volume remains constant.")</code></td>
-                <td>Output</td>
-                <td>Indicates that volume remains constant in an isochoric process.</td>
-            </tr>
-
-            <tr>
-                <td><code>print("Work Done = 0 kJ")</code></td>
-                <td>Output</td>
-                <td>Displays zero work because the volume does not change.</td>
-            </tr>
-
-            <tr>
-                <td><code>elif choice == 3:</code></td>
-                <td>Decision</td>
-                <td>Checks whether the user selected the isothermal process.</td>
-            </tr>
-
-            <tr>
-                <td><code>P1 = float(input("Enter Initial Pressure (kPa): "))</code></td>
-                <td>Input</td>
-                <td>Accepts the initial pressure.</td>
-            </tr>
-
-            <tr>
-                <td><code>P2 = float(input("Enter Final Pressure (kPa): "))</code></td>
-                <td>Input</td>
-                <td>Accepts the final pressure.</td>
-            </tr>
-
-            <tr>
-                <td><code>V1 = float(input("Enter Initial Volume (m^3): "))</code></td>
-                <td>Input</td>
-                <td>Accepts the initial volume.</td>
-            </tr>
-
-            <tr>
-                <td><code>V2 = (P1 * V1) / P2</code></td>
-                <td>Calculation</td>
-                <td>Calculates the final volume using the pressure-volume relation used by the program.</td>
-            </tr>
-
-            <tr>
-                <td><code>W = P1 * V1 * math.log(V2 / V1)</code></td>
-                <td>Calculation</td>
-                <td>Calculates the work done for the isothermal process using the natural logarithm.</td>
-            </tr>
-
-            <tr>
-                <td><code>print("Final Volume =", round(V2,3), "m^3")</code></td>
-                <td>Output</td>
-                <td>Displays the calculated final volume rounded to three decimal places.</td>
-            </tr>
-
-            <tr>
-                <td><code>print("Work Done =", round(W,2), "kJ")</code></td>
-                <td>Output</td>
-                <td>Displays the calculated work done rounded to two decimal places.</td>
-            </tr>
-
-            <tr>
-                <td><code>elif choice == 4:</code></td>
-                <td>Decision</td>
-                <td>Checks whether the user selected the polytropic process.</td>
-            </tr>
-
-            <tr>
-                <td><code>P1 = float(input("Enter Initial Pressure (kPa): "))</code></td>
-                <td>Input</td>
-                <td>Accepts the initial pressure for the polytropic calculation.</td>
-            </tr>
-
-            <tr>
-                <td><code>P2 = float(input("Enter Final Pressure (kPa): "))</code></td>
-                <td>Input</td>
-                <td>Accepts the final pressure.</td>
-            </tr>
-
-            <tr>
-                <td><code>V1 = float(input("Enter Initial Volume (m^3): "))</code></td>
-                <td>Input</td>
-                <td>Accepts the initial volume.</td>
-            </tr>
-
-            <tr>
-                <td><code>for i in range(0, 6):</code></td>
-                <td>Loop</td>
-                <td>Repeats the calculation for values of <code>i</code> from 0 through 5.</td>
-            </tr>
-
-            <tr>
-                <td><code>n = i * 0.5</code></td>
-                <td>Calculation</td>
-                <td>Calculates the value of the polytropic index <code>n</code> for the current iteration.</td>
-            </tr>
-
-            <tr>
-                <td><code>if n == 0:</code></td>
-                <td>Decision</td>
-                <td>Checks the special case where <code>n</code> is zero.</td>
-            </tr>
-
-            <tr>
-                <td><code>print(n, "Isobaric Case")</code></td>
-                <td>Output</td>
-                <td>Labels the corresponding case as isobaric.</td>
-            </tr>
-
-            <tr>
-                <td><code>continue</code></td>
-                <td>Loop Control</td>
-                <td>Skips the remaining statements in the current loop iteration and moves to the next value of <code>i</code>.</td>
-            </tr>
-
-            <tr>
-                <td><code>elif n == 1:</code></td>
-                <td>Decision</td>
-                <td>Checks the special case where <code>n</code> is one.</td>
-            </tr>
-
-            <tr>
-                <td><code>print(n, "Isothermal Case")</code></td>
-                <td>Output</td>
-                <td>Labels the corresponding case as isothermal.</td>
-            </tr>
-
-            <tr>
-                <td><code>V2 = V1 * (P1 / P2) ** (1 / n)</code></td>
-                <td>Calculation</td>
-                <td>Calculates the final volume for the current polytropic index.</td>
-            </tr>
-
-            <tr>
-                <td><code>W = (P2 * V2 - P1 * V1) / (1 - n)</code></td>
-                <td>Calculation</td>
-                <td>Calculates the work done for the current polytropic case.</td>
-            </tr>
-
-            <tr>
-                <td><code>print(round(n,1), "\t", round(V2,3), "\t", round(W,2))</code></td>
-                <td>Output</td>
-                <td>Displays the polytropic index, final volume, and work done in tabular form.</td>
-            </tr>
-
-            <tr>
-                <td><code>else:</code></td>
-                <td>Decision</td>
-                <td>Executes when the entered choice is not 1, 2, 3, or 4.</td>
-            </tr>
-
-            <tr>
-                <td><code>print("Invalid Choice")</code></td>
-                <td>Output</td>
-                <td>Displays a message informing the user that the selected option is invalid.</td>
-            </tr>
-
-        </tbody>
-    </table>
-
-    <div class="note">
-        <b>Python concepts demonstrated:</b>
-        input(), output using print(), type conversion using int() and float(),
-        if-elif-else decision making, the for loop, range(), continue, arithmetic
-        calculations, and use of the math module.
-    </div>
-</section>
-
-<section class="card">
-    <div class="title">Complete Python Program</div>
-
-<pre class="program"># Program to Calculate Work Done in Thermodynamic Processes
-import math
-print("THERMODYNAMIC PROCESSES")
-print("------------------------")
-print("1. Isobaric Process")
-print("2. Isochoric Process")
-print("3. Isothermal Process")
-print("4. Polytropic Process")
-
-choice = int(input("\nEnter your choice (1-4): "))
-
-if choice == 1:
-    P = float(input("Enter Pressure (kPa): "))
-    V1 = float(input("Enter Initial Volume (m^3): "))
-    V2 = float(input("Enter Final Volume (m^3): "))
-    W = P * (V2 - V1)
-    print("Work Done =", round(W,2), "kJ")
-
-elif choice == 2:
-    print("Volume remains constant.")
-    print("Work Done = 0 kJ")
-
-elif choice == 3:
-    P1 = float(input("Enter Initial Pressure (kPa): "))
-    P2 = float(input("Enter Final Pressure (kPa): "))
-    V1 = float(input("Enter Initial Volume (m^3): "))
-    V2 = (P1 * V1) / P2
-    W = P1 * V1 * math.log(V2 / V1)
-    print("Final Volume =", round(V2,3), "m^3")
-    print("Work Done =", round(W,2), "kJ")
-
-elif choice == 4:
-    P1 = float(input("Enter Initial Pressure (kPa): "))
-    P2 = float(input("Enter Final Pressure (kPa): "))
-    V1 = float(input("Enter Initial Volume (m^3): "))
-    print("\n\tFinal Volume\tWork Done")
-    for i in range(0,6):
-        n = i * 0.5
-        if n == 0:
-            print(n, "Isobaric Case")
-            continue
-        elif n == 1:
-            print(n, "Isothermal Case")
-            continue
-        V2 = V1 * (P1 / P2) ** (1 / n)
-        W = (P2 * V2 - P1 * V1) / (1 - n)
-        print(round(n,1), "\t", round(V2,3), "\t", round(W,2))
-
-else:
-    print("Invalid Choice")</pre>
-</section>
+        <div class="note">
+            <b>Concept used:</b> At any section <i>x</i>, Shear Force (SF) is the algebraic sum of all vertical forces to the left of <i>x</i>, and Bending Moment (BM) is the algebraic sum of moments of all forces to the left of <i>x</i>.
+        </div>
+    </section>
 
 </main>
 
