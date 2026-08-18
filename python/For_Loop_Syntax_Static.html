@@ -2,170 +2,370 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For Loop Syntax</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Loop</title>
 <style>
-body{font-family:'Segoe UI',Arial,sans-serif;background:#eef4fb;margin:20px}
-.banner{
-background:#0b3c75;color:#fff;text-align:center;
-font-size:42px;font-weight:bold;padding:18px;border-radius:12px;
-margin-bottom:22px}
-.syntax{
-background:#fff;border:3px solid #123b7a;border-radius:14px;
-padding:25px;text-align:center;font-family:Consolas,monospace;
-font-size:40px;line-height:1.8;
-}
-.purple{color:#7b1fa2;font-weight:bold}
-.green{color:#188038;font-weight:bold}
-.blue{color:#1565c0;font-weight:bold}
-.red{color:#d32f2f;font-weight:bold}
-.grid{
-display:grid;
-grid-template-columns:repeat(6,1fr);
-gap:15px;
-margin-top:25px}
-.box{
-background:#fff;
-border-radius:10px;
-padding:15px;
-text-align:center;
-box-shadow:0 2px 8px rgba(0,0,0,.12);
-font-size:20px;
-}
-.k{border-top:6px solid #7b1fa2}
-.g{border-top:6px solid #188038}
-.b{border-top:6px solid #1565c0}
-.r{border-top:6px solid #d32f2f}
-.example{
-margin-top:30px;
-display:grid;
-grid-template-columns:2fr 1fr;
-gap:20px}
-pre{
-margin:0;
-background:#fff;
-border:2px solid #999;
-border-radius:10px;
-padding:18px;
-font-family:Consolas,monospace;
-font-size:30px;
-line-height:1.6;
-}
-table{
-width:100%;
-border-collapse:collapse;
-background:#fff}
-th,td{border:1px solid #bbb;padding:12px;text-align:center;font-size:22px}
-th{background:#0b3c75;color:#fff}
-.note{
-margin-top:25px;
-background:#fff8dc;
-border-left:6px solid orange;
-padding:14px;
-font-size:20px}
-/* ---------- Top Navigation ---------- */
-
-.top-nav{
-    position:sticky;
-    top:0;
-    z-index:1000;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    background:#0b3c75;
-    color:#fff;
-
-    padding:12px 22px;
-
-    margin:-20px -20px 22px -20px;
-
-    box-shadow:0 3px 10px rgba(0,0,0,.18);
-}
-
-.top-nav a{
-    color:#fff;
-    text-decoration:none;
-
-    font-size:22px;
-    font-weight:700;
-
-    padding:8px 14px;
-    border-radius:8px;
-}
-
-.top-nav a:hover{
-    background:rgba(255,255,255,.15);
-}
-
-.top-nav .nav-title{
-    font-size:25px;
-    font-weight:700;
-}
-
-@media (max-width:700px){
-
-    .top-nav a{
-        font-size:18px;
-    }
-
-    .top-nav .nav-title{
-        font-size:20px;
-    }
-
-}
+*{box-sizing:border-box}
+body{margin:0;background:#eef4f9;color:#111;font-family:"Segoe UI",Arial,sans-serif}
+.header{background:linear-gradient(90deg,#0b477d,#087cc1);color:#fff;padding:18px 22px;display:grid;grid-template-columns:1fr 2fr 1fr;align-items:center}
+.header a{color:#fff;text-decoration:none;font-weight:700;font-size:16px}
+.header a:hover{text-decoration:underline}
+.header h1{margin:0;text-align:center;font-size:30px}
+.main-home{text-align:right}
+.container{width:94%;max-width:1450px;margin:24px auto}
+.card{background:#fff;border-radius:12px;padding:24px;margin-bottom:22px;box-shadow:0 4px 18px rgba(0,0,0,.10)}
+.card h2{margin:0 0 18px;color:#075b99;font-size:24px;border-left:6px solid #075b99;padding-left:12px}
+.theory{font-size:17px;line-height:1.65}
+.highlight,.note{background:#fff8df;border-left:5px solid #d99a00;padding:14px 18px;margin:16px 0;line-height:1.6}
+.syntax-title{text-align:center;color:#075b99;font-size:25px;font-weight:700;margin-bottom:20px}
+.syntax-box{width:92%;margin:30px auto;background:#fff9df;border:2px solid #d7b54a;border-radius:8px;padding:20px;text-align:center;font:700 23px Consolas,"Courier New",monospace;color:#064ea8}
+.keyword{color:#c20d0d}.variable{color:#177c35}.condition{color:#7a159c}
+.explain-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.explain{border:2px solid #c8d5e3;border-radius:9px;padding:14px;text-align:center;background:#fbfdff}
+.term{font:700 18px Consolas,"Courier New",monospace;color:#075b99;margin-bottom:7px}
+.explain p{margin:0;font-size:15px;line-height:1.45}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:850px}
+th{background:#24577f;color:#fff;font-size:19px;padding:14px;text-align:left}
+td{border:1px solid #ccd7e2;padding:14px;vertical-align:middle;font-size:16px;line-height:1.5}
+tr:nth-child(even){background:#f7faff}
+.code{display:inline-block;background:#f3f7fc;border:1px solid #b7d0ef;border-radius:7px;padding:7px 10px;font:16px Consolas,"Courier New",monospace;color:#064ea8;white-space:pre-wrap}
+.output{color:#d65b00;font:700 16px Consolas,"Courier New",monospace;white-space:pre-wrap}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.code-block{background:#f7f9fb;border:1px solid #d4dee8;border-radius:9px;padding:18px;overflow:auto}
+pre{margin:0;font:16px/1.6 Consolas,"Courier New",monospace}
+ul{line-height:1.7;font-size:17px}
+footer{background:#063b70;color:#fff;text-align:center;padding:13px}
+@media(max-width:950px){.header{grid-template-columns:1fr;gap:8px;text-align:center}.main-home{text-align:center}.explain-grid{grid-template-columns:1fr 1fr}.two-col{grid-template-columns:1fr}}
+@media(max-width:600px){.container{width:94%}.card{padding:17px}.header h1{font-size:25px}.syntax-box{width:100%;font-size:18px}}
 </style>
 </head>
 <body>
 
-<div class="top-nav">
+<header class="header">
+<div><a href="../index.html">← Python Home</a></div>
+<h1>FOR LOOP</h1>
+<div class="main-home"><a href="../../index.html">Main Home →</a></div>
+</header>
 
-    <a href="../index.html">
-        🏠 Home
-    </a>
+<main class="container">
 
-    <div class="nav-title">
-        Python Learning Material
-    </div>
+<section class="card">
+<h2>1. Basic Theory</h2>
+<div class="theory">
+<p>
+A <b>for loop</b> is used to execute a block of statements repeatedly for
+each value in a sequence or range of values.
+</p>
+<div class="highlight">
+<b>Basic idea:</b><br>
+Start → Take a value → Execute the statements → Take the next value →
+Repeat → Stop when the sequence is exhausted.
+</div>
+<p>
+The <b>range()</b> function is commonly used with a <b>for</b> loop when
+we want to repeat a statement a specified number of times.
+</p>
+</div>
+</section>
 
-    <a href="index.html">
-        Python HOME
-    </a>
-
+<section class="card">
+<h2>2. for Loop – Syntax</h2>
+<div class="syntax-title">General Syntax</div>
+<div class="syntax-box">
+<span class="keyword">for</span> <span class="variable">variable</span>
+<span class="keyword">in</span> <span class="condition">sequence</span>:
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">statement</span>
 </div>
 
-<div class="syntax">
-<span class="purple">for</span>
-<span class="green">variable</span>
-<span class="blue">in</span>
-range(<span class="red">start</span>, <span class="red">stop</span>, <span class="red">step</span>):<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue">statement(s)</span>
+<div class="explain-grid">
+<div class="explain"><div class="term">for</div><p>Keyword used to start the loop.</p></div>
+<div class="explain"><div class="term">variable</div><p>Receives each value during the iteration.</p></div>
+<div class="explain"><div class="term">in</div><p>Connects the loop variable with the sequence.</p></div>
+<div class="explain"><div class="term">sequence</div><p>Values over which the loop iterates.</p></div>
 </div>
 
-<div class="grid">
-<div class="box k"><b>for</b><br>Keyword</div>
-<div class="box g"><b>variable</b><br>Loop Variable</div>
-<div class="box b"><b>in</b><br>Keyword</div>
-<div class="box r"><b>start</b><br>Optional<br>(Default = 0)</div>
-<div class="box r"><b>stop</b><br>Mandatory<br>(Excluded)</div>
-<div class="box r"><b>step</b><br>Optional<br>(Default = 1)</div>
+<div class="note">
+The statements inside the loop must be <b>indented</b>.
+</div>
+</section>
+
+<section class="card">
+<h2>3. range() Function</h2>
+<div class="syntax-title">Three Common Forms</div>
+<div class="syntax-box">
+range(stop) &nbsp;&nbsp; | &nbsp;&nbsp;
+range(start, stop) &nbsp;&nbsp; | &nbsp;&nbsp;
+range(start, stop, step)
 </div>
 
-<div class="example">
-<pre>for i in range(1, 11, 2):
-    print(i)</pre>
+<div class="note">
+<b>Important:</b> The <b>stop</b> value is not included.
+</div>
 
+<div class="table-wrap">
 <table>
-<tr><th colspan="2">Example Values</th></tr>
-<tr><td>Start</td><td>1</td></tr>
-<tr><td>Stop</td><td>10</td></tr>
-<tr><td>Step</td><td>2</td></tr>
+<thead><tr><th>Example</th><th>Description</th><th>Output</th></tr></thead>
+<tbody>
+<tr><td><span class="code">range(5)</span></td><td>Starts at 0 and stops before 5.</td><td class="output">0 1 2 3 4</td></tr>
+<tr><td><span class="code">range(2, 6)</span></td><td>Starts at 2 and stops before 6.</td><td class="output">2 3 4 5</td></tr>
+<tr><td><span class="code">range(1, 10, 2)</span></td><td>Starts at 1 and increases by 2.</td><td class="output">1 3 5 7 9</td></tr>
+<tr><td><span class="code">range(10, 0, -2)</span></td><td>Counts backward by 2.</td><td class="output">10 8 6 4 2</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section class="card">
+<h2>4. Basic for Loop Examples</h2>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Program</th><th>Purpose</th><th>Output</th></tr></thead>
+<tbody>
+<tr>
+<td><span class="code">for i in range(1, 6):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)</span></td>
+<td>Print numbers from 1 to 5.</td>
+<td class="output">1<br>2<br>3<br>4<br>5</td>
+</tr>
+<tr>
+<td><span class="code">for i in range(10, 0, -1):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)</span></td>
+<td>Print numbers in reverse order.</td>
+<td class="output">10 9 8 ... 1</td>
+</tr>
+<tr>
+<td><span class="code">for i in range(2, 11, 2):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)</span></td>
+<td>Print even numbers.</td>
+<td class="output">2 4 6 8 10</td>
+</tr>
+<tr>
+<td><span class="code">for i in range(1, 11, 2):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)</span></td>
+<td>Print odd numbers.</td>
+<td class="output">1 3 5 7 9</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section class="card">
+<h2>5. for Loop with if Condition</h2>
+<div class="theory">
+<p>
+A <b>for loop</b> can be combined with an <b>if</b> statement to select
+particular values during iteration.
+</p>
+</div>
+
+<div class="code-block">
+<pre>for i in range(1, 11):
+    if i % 3 == 0:
+        print(i)</pre>
+</div>
+<p class="output">Output: 3 6 9</p>
+</section>
+
+<section class="card">
+<h2>6. Nested for Loops</h2>
+<div class="theory">
+<p>
+A <b>nested for loop</b> is a loop placed inside another loop. For every
+iteration of the outer loop, the inner loop executes completely.
+</p>
+</div>
+
+<div class="code-block">
+<pre>for i in range(1, 4):
+    for j in range(1, 4):
+        print(i, j)</pre>
+</div>
+
+<p class="output">Output:<br>
+1 1<br>1 2<br>1 3<br>
+2 1<br>2 2<br>2 3<br>
+3 1<br>3 2<br>3 3
+</p>
+</section>
+
+<section class="card">
+<h2>7. break and continue</h2>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Statement</th><th>Purpose</th><th>Example</th></tr></thead>
+<tbody>
+<tr>
+<td><span class="code">break</span></td>
+<td>Immediately terminates the loop.</td>
+<td><span class="code">if i == 5:<br>&nbsp;&nbsp;&nbsp;&nbsp;break</span></td>
+</tr>
+<tr>
+<td><span class="code">continue</span></td>
+<td>Skips the current iteration and continues with the next iteration.</td>
+<td><span class="code">if i == 5:<br>&nbsp;&nbsp;&nbsp;&nbsp;continue</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section class="card">
+<h2>8. Tricky General Examples – Explanation</h2>
+
+<div class="theory">
+<p>
+These examples are designed to check whether the student can <b>trace a
+for loop step by step</b>. The important skill is not only knowing the
+syntax, but understanding exactly what happens in every iteration.
+</p>
+</div>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>No.</th><th>Program</th><th>Step-by-Step Explanation</th><th>Output</th></tr>
+</thead>
+<tbody>
+
+<tr>
+<td>1</td>
+<td><span class="code">for i in range(1, 6):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if i == 3:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print(i)</span></td>
+<td>
+<b>Step 1:</b> <span class="code">i = 1</span> → condition is False → print 1.<br>
+<b>Step 2:</b> <span class="code">i = 2</span> → condition is False → print 2.<br>
+<b>Step 3:</b> <span class="code">i = 3</span> → condition is True → <b>continue</b> skips the print statement.<br>
+<b>Step 4:</b> <span class="code">i = 4</span> → print 4.<br>
+<b>Step 5:</b> <span class="code">i = 5</span> → print 5.
+</td>
+<td class="output">1<br>2<br>4<br>5</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td><span class="code">for i in range(1, 6):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if i == 3:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print(i)</span></td>
+<td>
+<b>Step 1:</b> <span class="code">i = 1</span> → print 1.<br>
+<b>Step 2:</b> <span class="code">i = 2</span> → print 2.<br>
+<b>Step 3:</b> <span class="code">i = 3</span> → condition is True → <b>break</b> immediately terminates the loop.<br>
+Values 4 and 5 are never processed.
+</td>
+<td class="output">1<br>2</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td><span class="code">s = 0<br>
+for i in range(1, 6):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;s = s + i<br>
+print(s)</span></td>
+<td>
+The variable <b>s</b> stores the running total.<br>
+Start: <span class="code">s = 0</span><br>
+After 1: <span class="code">s = 1</span><br>
+After 2: <span class="code">s = 3</span><br>
+After 3: <span class="code">s = 6</span><br>
+After 4: <span class="code">s = 10</span><br>
+After 5: <span class="code">s = 15</span>
+</td>
+<td class="output">15</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td><span class="code">for i in range(1, 5):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;for j in range(i):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("*", end="")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print()</span></td>
+<td>
+The outer loop controls the number of rows.<br>
+For <span class="code">i = 1</span>, inner loop runs 1 time → one star.<br>
+For <span class="code">i = 2</span>, inner loop runs 2 times → two stars.<br>
+For <span class="code">i = 3</span>, inner loop runs 3 times → three stars.<br>
+For <span class="code">i = 4</span>, inner loop runs 4 times → four stars.
+</td>
+<td class="output">*<br>**<br>***<br>****</td>
+</tr>
+
+<tr>
+<td>5</td>
+<td><span class="code">for i in range(1, 10, 2):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if i &gt; 5:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(i)</span></td>
+<td>
+First identify the values generated by <span class="code">range(1, 10, 2)</span>:<br>
+<span class="code">1, 3, 5, 7, 9</span>.<br>
+Now apply the condition <span class="code">i &gt; 5</span>.<br>
+1, 3 and 5 are rejected; 7 and 9 satisfy the condition.
+</td>
+<td class="output">7<br>9</td>
+</tr>
+
+<tr>
+<td>6</td>
+<td><span class="code">for i in range(1, 4):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;for j in range(1, i + 1):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(j, end=" ")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print()</span></td>
+<td>
+The inner loop limit depends on the outer-loop value.<br>
+For <span class="code">i = 1</span> → <span class="code">j</span> runs from 1 to 1.<br>
+For <span class="code">i = 2</span> → <span class="code">j</span> runs from 1 to 2.<br>
+For <span class="code">i = 3</span> → <span class="code">j</span> runs from 1 to 3.<br>
+Therefore, each row contains one more number than the previous row.
+</td>
+<td class="output">1<br>1 2<br>1 2 3</td>
+</tr>
+
+</tbody>
 </table>
 </div>
 
 <div class="note">
-<b>Note:</b> The <b>stop</b> value is <b>not included</b> in the generated sequence. The statements inside the loop must be properly indented.
+<b>How to solve tricky for-loop questions:</b>
+First write down the values produced by <b>range()</b>. Then trace the
+outer loop one iteration at a time. If there is an <b>if</b>, <b>break</b>,
+or <b>continue</b>, apply it at the exact point where it occurs. For nested
+loops, complete the inner loop for every value of the outer loop.
 </div>
+</section>
+
+<section class="card">
+<h2>9. Important Points to Remember</h2>
+<ul>
+<li>A <b>for loop</b> repeats a block of statements for each value in a sequence.</li>
+<li><b>range()</b> is commonly used to generate integer values for a loop.</li>
+<li>The <b>stop</b> value in <b>range()</b> is excluded.</li>
+<li>The <b>step</b> controls the increment or decrement.</li>
+<li>Loop statements must be properly indented.</li>
+<li>An <b>if</b> statement can be placed inside a for loop.</li>
+<li>A <b>nested for loop</b> contains one loop inside another.</li>
+<li><b>break</b> terminates the loop.</li>
+<li><b>continue</b> skips the current iteration.</li>
+<li>Always trace the values of the loop variable when solving output-based questions.</li>
+</ul>
+</section>
+
+</main>
+
+<footer>© 2026 D. Kiran Prasad | Python Programming</footer>
+
+<script>
+/* Printing / context-menu restrictions intentionally retained for now. */
+document.addEventListener("contextmenu",function(e){e.preventDefault();});
+document.addEventListener("keydown",function(e){
+    if((e.ctrlKey || e.metaKey) && e.key.toLowerCase()==="p"){
+        e.preventDefault();
+        alert("Printing is disabled.");
+    }
+});
+</script>
+<style>@media print{body{display:none!important;}}</style>
 
 </body>
 </html>
