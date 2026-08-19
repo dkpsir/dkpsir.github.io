@@ -49,6 +49,16 @@ ul{line-height:1.7;font-size:17px}footer{background:#063b70;color:#fff;text-alig
 <div class="note"><b>Explanation:</b><br><b>"name"</b> → key; <b>"Ravi"</b> → value<br><b>"age"</b> → key; <b>20</b> → value<br><b>"branch"</b> → key; <b>"CSE"</b> → value.<br><br>The key is used to access its corresponding value.</div>
 </div></section>
 
+<section class="card"><h2>3. Heterogeneous Values</h2><div class="two-col">
+<div class="program-box"><h3>Example</h3><pre>student = {
+    "name": "Anil",
+    "age": 20,
+    "cgpa": 8.6,
+    "passed": True
+}</pre></div>
+<div class="note"><b>Explanation:</b><br>Dictionary values can belong to different data types. In this example, the values are a <b>string</b>, <b>integer</b>, <b>float</b> and <b>Boolean</b>.</div>
+</div></section>
+
 <section class="card"><h2>3. Accessing Dictionary Values</h2><div class="two-col">
 <div class="program-box"><h3>Python Program</h3><pre>student = {
     "name": "Ravi",
@@ -229,12 +239,67 @@ Value = 20</div></div></div>
 
 </section>
 
+<section class="card"><h2>Deleting Dictionary Items – Comparison</h2>
+<table><thead><tr><th>Method</th><th>Example</th><th>Description</th></tr></thead><tbody>
+<tr><td><b>del</b></td><td><span class="code">del student["age"]</span></td><td>Deletes the specified key-value pair.</td></tr>
+<tr><td><b>pop()</b></td><td><span class="code">student.pop("age")</span></td><td>Deletes the specified key-value pair and returns its value.</td></tr>
+<tr><td><b>popitem()</b></td><td><span class="code">student.popitem()</span></td><td>Deletes and returns the last inserted key-value pair.</td></tr>
+<tr><td><b>clear()</b></td><td><span class="code">student.clear()</span></td><td>Removes all key-value pairs from the dictionary.</td></tr>
+</tbody></table></section>
+
+<section class="card"><h2>Additional Dictionary Methods and Concepts</h2>
+<table><thead><tr><th>Dictionary Operation / Concept</th><th>Example Code</th><th>Description</th></tr></thead><tbody>
+<tr><td>Get Value using <b>get()</b></td><td><span class="code">student.get("age")</span></td><td>Returns the value associated with the specified key.</td></tr>
+<tr><td>Get Value with Default</td><td><span class="code">student.get("city", "Not Available")</span></td><td>Returns the value if the key exists; otherwise returns the specified default value.</td></tr>
+<tr><td>Delete using <b>pop()</b></td><td><span class="code">student.pop("age")</span></td><td>Removes the specified key-value pair and returns its value.</td></tr>
+<tr><td>Delete using <b>pop()</b> with Default</td><td><span class="code">student.pop("city", "Not Found")</span></td><td>Removes the key if present; otherwise returns the default value.</td></tr>
+<tr><td>Delete Last Item</td><td><span class="code">student.popitem()</span></td><td>Removes and returns the last inserted key-value pair.</td></tr>
+<tr><td>Update Dictionary</td><td><span class="code">student.update({"age": 21})</span></td><td>Adds new key-value pairs or modifies existing values.</td></tr>
+<tr><td>Create Empty Dictionary</td><td><span class="code">student = {}</span></td><td>Creates an empty dictionary.</td></tr>
+<tr><td>Clear Dictionary</td><td><span class="code">student.clear()</span></td><td>Removes all key-value pairs while keeping the dictionary.</td></tr>
+<tr><td>Copy Dictionary</td><td><span class="code">new_student = student.copy()</span></td><td>Creates a separate copy of the dictionary.</td></tr>
+<tr><td>Check Key</td><td><span class="code">"age" in student</span></td><td>Checks whether the specified key exists.</td></tr>
+<tr><td>Check Key Not Present</td><td><span class="code">"city" not in student</span></td><td>Checks whether the specified key does not exist.</td></tr>
+<tr><td>Get All Keys</td><td><span class="code">student.keys()</span></td><td>Returns all keys in the dictionary.</td></tr>
+<tr><td>Get All Values</td><td><span class="code">student.values()</span></td><td>Returns all values in the dictionary.</td></tr>
+<tr><td>Get All Items</td><td><span class="code">student.items()</span></td><td>Returns all key-value pairs.</td></tr>
+<tr><td>Number of Items</td><td><span class="code">len(student)</span></td><td>Returns the number of key-value pairs.</td></tr>
+<tr><td>Loop through Keys</td><td><span class="code">for key in student:</span></td><td>Processes dictionary keys one by one.</td></tr>
+<tr><td>Loop through Values</td><td><span class="code">for value in student.values():</span></td><td>Processes values one by one.</td></tr>
+<tr><td>Loop through Key and Value</td><td><span class="code">for key, value in student.items():</span></td><td>Processes each key and its corresponding value together.</td></tr>
+<tr><td>List of Dictionaries</td><td><span class="code">students = [student1, student2]</span></td><td>Stores multiple dictionaries inside a list.</td></tr>
+<tr><td>Nested Dictionary</td><td><span class="code">student = {"details": {"name": "Anil"}}</span></td><td>Stores a dictionary inside another dictionary.</td></tr>
+<tr><td>Duplicate Keys</td><td><span class="code">{"age": 20, "age": 21}</span></td><td>Dictionary keys must be unique. If a key is repeated, the later value replaces the earlier value.</td></tr>
+</tbody></table></section>
+
 <section class="card"><h2>10. Dictionary vs List vs Tuple</h2><table><thead><tr><th>Feature</th><th>List</th><th>Tuple</th><th>Dictionary</th></tr></thead><tbody>
 <tr><td>Notation</td><td><span class="code">[ ]</span></td><td><span class="code">( )</span></td><td><span class="code">{ }</span></td></tr>
 <tr><td>Stores</td><td>Values/items</td><td>Values/items</td><td>Key-value pairs</td></tr>
 <tr><td>Access</td><td>Index</td><td>Index</td><td>Key</td></tr>
 <tr><td>Mutable</td><td>Yes</td><td>No</td><td>Yes</td></tr>
 <tr><td>Typical use</td><td>Changeable collection</td><td>Fixed collection</td><td>Related data identified by keys</td></tr>
+</tbody></table></section>
+
+<section class="card"><h2>get() with and without a Default Value</h2><div class="two-col">
+<div class="program-box"><h3>Example</h3><pre>student = {"name": "Anil", "age": 20}
+
+print(student.get("age"))
+print(student.get("city", "Not Available"))</pre></div>
+<div class="note"><b>Explanation:</b><br><span class="code">get("age")</span> returns the value of an existing key. When a key may not exist, a default value can be supplied. Here, <span class="code">"city"</span> is absent, so <b>"Not Available"</b> is returned.</div>
+</div></section>
+
+<section class="card"><h2>Recommended Dictionary Concept Progression</h2>
+<div class="highlight"><b>Basic Concepts:</b> Create → Access → Add → Modify → Delete</div>
+<div class="highlight"><b>Methods:</b> keys() → values() → items() → get() → pop() → popitem() → update() → clear() → copy()</div>
+<div class="highlight"><b>Processing:</b> len() → in / not in → loop through keys → loop through values → loop through key-value pairs</div>
+<div class="highlight"><b>Advanced Structures:</b> List of Dictionaries → Nested Dictionaries</div>
+</section>
+
+<section class="card"><h2>Keys vs Values vs Items</h2>
+<table><thead><tr><th>Method</th><th>Returns</th><th>Example</th></tr></thead><tbody>
+<tr><td><b>keys()</b></td><td>Keys only</td><td><span class="code">student.keys()</span></td></tr>
+<tr><td><b>values()</b></td><td>Values only</td><td><span class="code">student.values()</span></td></tr>
+<tr><td><b>items()</b></td><td>Both key and value</td><td><span class="code">student.items()</span></td></tr>
 </tbody></table></section>
 
 <section class="card"><h2>11. Important Points to Remember</h2>
@@ -249,6 +314,10 @@ Value = 20</div></div></div>
 <li><b>len()</b> gives the number of key-value pairs.</li>
 <li>The <b>in</b> operator checks whether a key exists.</li>
 <li>A <b>for loop</b> can process dictionary keys and values.</li>
+<li>A dictionary <b>item</b> is one complete key-value pair.</li>
+<li>Dictionary values can be <b>heterogeneous</b>, meaning they can have different data types.</li>
+<li><b>del</b>, <b>pop()</b>, <b>popitem()</b> and <b>clear()</b> are different ways of removing dictionary data.</li>
+<li><b>get()</b> can return a default value when a key is not available.</li>
 </ul></section>
 
 </main>
