@@ -77,6 +77,23 @@ print(student)</pre></div>
 {'name': 'Ravi', 'age': 21, 'branch': 'CSE'}</div></div>
 </div></section>
 
+<section class="card"><h2>5. Accessing Both Key and Value</h2><div class="two-col">
+<div class="program-box"><h3>Python Program</h3><pre>student = {
+    "name": "Anil",
+    "roll": 101,
+    "branch": "CSE",
+    "age": 20
+}
+
+for key, value in student.items():
+    print(key, ":", value)</pre></div>
+<div class="note"><b>Explanation:</b><br>The <b>items()</b> method returns both the <b>key</b> and its corresponding <b>value</b> for each dictionary item. The <b>for loop</b> assigns them to the variables <b>key</b> and <b>value</b>.<div class="output">Output:
+name : Anil
+roll : 101
+branch : CSE
+age : 20</div></div>
+</div></section>
+
 <section class="card"><h2>5. Dictionary Properties</h2><table><thead><tr><th>Property</th><th>Explanation</th></tr></thead><tbody>
 <tr><td>Key-Value pairs</td><td>Data is stored as <b>key: value</b> pairs.</td></tr>
 <tr><td>Keys</td><td>Keys identify and access values. Keys must be unique.</td></tr>
@@ -86,7 +103,7 @@ print(student)</pre></div>
 <tr><td>Curly braces</td><td>Dictionaries are represented using <b>{ }</b>.</td></tr>
 </tbody></table></section>
 
-<section class="card"><h2>6. Useful Dictionary Operations</h2><table><thead><tr><th>Operation</th><th>Example</th><th>Purpose</th></tr></thead><tbody>
+<section class="card"><h2>7. Useful Dictionary Operations</h2><table><thead><tr><th>Operation</th><th>Example</th><th>Purpose</th></tr></thead><tbody>
 <tr><td>Access value</td><td><span class="code">student["name"]</span></td><td>Get the value associated with a key.</td></tr>
 <tr><td>Modify value</td><td><span class="code">student["age"] = 21</span></td><td>Change an existing value.</td></tr>
 <tr><td>Add item</td><td><span class="code">student["branch"] = "CSE"</span></td><td>Add a new key-value pair.</td></tr>
@@ -95,7 +112,7 @@ print(student)</pre></div>
 <tr><td>Loop through keys</td><td><span class="code">for key in student:</span></td><td>Process dictionary keys one by one.</td></tr>
 </tbody></table></section>
 
-<section class="card"><h2>7. Looping Through a Dictionary</h2><div class="two-col">
+<section class="card"><h2>8. Looping Through a Dictionary</h2><div class="two-col">
 <div class="program-box"><h3>Python Program</h3><pre>student = {
     "name": "Ravi",
     "age": 20,
@@ -110,7 +127,7 @@ age 20
 branch CSE</div></div>
 </div></section>
 
-<section class="card"><h2>8. Frequently Used General Programs</h2>
+<section class="card"><h2>9. Frequently Used General Programs</h2>
 
 <h3>Program 1 – Store and Display Student Details</h3><div class="two-col">
 <div class="program-box"><h3>Python Program</h3><pre>student = {
@@ -212,7 +229,7 @@ Value = 20</div></div></div>
 
 </section>
 
-<section class="card"><h2>9. Dictionary vs List vs Tuple</h2><table><thead><tr><th>Feature</th><th>List</th><th>Tuple</th><th>Dictionary</th></tr></thead><tbody>
+<section class="card"><h2>10. Dictionary vs List vs Tuple</h2><table><thead><tr><th>Feature</th><th>List</th><th>Tuple</th><th>Dictionary</th></tr></thead><tbody>
 <tr><td>Notation</td><td><span class="code">[ ]</span></td><td><span class="code">( )</span></td><td><span class="code">{ }</span></td></tr>
 <tr><td>Stores</td><td>Values/items</td><td>Values/items</td><td>Key-value pairs</td></tr>
 <tr><td>Access</td><td>Index</td><td>Index</td><td>Key</td></tr>
@@ -220,7 +237,7 @@ Value = 20</div></div></div>
 <tr><td>Typical use</td><td>Changeable collection</td><td>Fixed collection</td><td>Related data identified by keys</td></tr>
 </tbody></table></section>
 
-<section class="card"><h2>10. Important Points to Remember</h2>
+<section class="card"><h2>11. Important Points to Remember</h2>
 <ul>
 <li>A dictionary stores data as <b>key-value pairs</b>.</li>
 <li>Dictionaries use curly braces <b>{ }</b>.</li>
