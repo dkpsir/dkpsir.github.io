@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Strength of Materials — Unit 1 Numerical Problems</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f5f8fc;color:#23384d;font-family:"Segoe UI",Arial,sans-serif;line-height:1.65}
+header{background:linear-gradient(135deg,#073b78,#0b65b1);color:#fff;text-align:center;padding:25px 16px}
+header h1{margin:0;font-size:clamp(24px,4vw,38px)} header p{margin:6px 0 0}
+main{max-width:1150px;margin:22px auto;padding:0 14px}
+.intro{background:#fff;border-left:5px solid #0b66c3;border-radius:10px;padding:16px 20px;margin-bottom:18px;box-shadow:0 2px 8px #173f7012}
+.card{background:#fff;border:1px solid #d8e2ec;border-radius:12px;margin:13px 0;overflow:hidden;box-shadow:0 2px 7px #173f700d}
+.question{width:100%;border:0;background:#fff;color:#b51f1f;text-align:left;padding:17px 18px;display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:17px;line-height:1.55;cursor:pointer}
+.question:hover{background:#fffafa}
+.question b{color:#8f1515}
+.plus{min-width:34px;height:34px;border-radius:50%;background:#096dcc;color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:500}
+.question.open .plus{background:#b51f1f}
+.solution{display:none;border-top:1px solid #e2e9f0;padding:18px 20px 24px;background:#fbfdff}
+.solution.show{display:block}
+.solution-title{font-size:21px;font-weight:800;color:#0b568f;margin:4px 0 14px}
+.eq{margin:14px auto;text-align:center;font-size:19px;white-space:normal;overflow:visible;line-height:1.8}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.15;margin:0 3px;min-width:28px;overflow:visible}
+.frac>span:first-child{border-bottom:1.5px solid #263746;padding:0 5px 2px}
+.frac>span:last-child{padding:2px 5px 0}
+.solution p b{color:#294f70}.final{background:#eaf5ff;border-left:4px solid #0b66c3;padding:10px 13px;border-radius:6px;font-weight:800;color:#0a4d80}
+.figure{max-width:820px;margin:4px auto 18px;padding:8px;background:#fff;border:1px solid #dce6ef;border-radius:9px}
+.figure svg{width:100%;height:auto;display:block}
+footer{text-align:center;color:#667b8e;padding:25px 10px;font-size:13px}
+@media(max-width:650px){.question{font-size:15px;padding:14px}.solution{padding:14px 12px 20px}.eq{font-size:17px}}
+
+.navbar{
+  max-width:1150px;
+  margin:14px auto 0;
+  padding:0 14px;
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+}
+.nav-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  background:#fff;
+  color:#07528f;
+  border:1px solid #c9d8e6;
+  border-radius:8px;
+  padding:9px 16px;
+  font-weight:700;
+  font-size:14px;
+  box-shadow:0 2px 6px #173f7012;
+}
+.nav-btn:hover{background:#eef6ff}
+@media(max-width:650px){
+  .navbar{padding:0 10px}
+  .nav-btn{font-size:13px;padding:8px 11px}
+}
+</style>
+<script>
+function toggle(btn){
+ const box=btn.nextElementSibling;
+ const open=box.classList.toggle("show");
+ btn.classList.toggle("open",open);
+ btn.querySelector(".plus").textContent=open?"−":"+";
+ btn.setAttribute("aria-expanded",open);
+}
+</script>
+</head>
+<body>
+<header>
+<h1>STRENGTH OF MATERIALS — UNIT 1</h1>
+<p>Numerical Problems with Solutions</p>
+</header>
+<nav class="navbar" aria-label="Page navigation">
+  <a class="nav-btn" href="../../index.html">🏠 Back to Home</a>
+  <a class="nav-btn" href="../index.html">📘 Back to MoS Home</a>
+</nav>
+<main>
+<section class="card">
+<button class="question" onclick="toggle(this)" aria-expanded="false">
+<span><b>1.</b> Find the maximum diameter of a steel wire which is used to raise a load of 4000 N, if the stress in the wire is not to exceed 50 N/mm².</span><span class="plus">+</span>
+</button>
+<div class="solution">
+
+<div class="solution-title">Solution</div>
+<p><b>Given:</b> P = 4000 N, σ = 50 N/mm².</p>
+<p><b>Step 1: Stress relation</b></p>
+<div class="eq">σ = <span class="frac"><span>P</span><span>A</span></span></div>
+<div class="eq">50 = <span class="frac"><span>4000</span><span>A</span></span></div>
+<div class="eq">A = <span class="frac"><span>P</span><span>σ</span></span></div>
+<div class="eq">A = <span class="frac"><span>4000</span><span>50</span></span> = 80 mm²</div>
+<p><b>Step 2: Area of circular wire</b></p>
+<div class="eq">A = <span class="frac"><span>πd²</span><span>4</span></span></div>
+<div class="eq">80 = <span class="frac"><span>πd²</span><span>4</span></span></div>
+<div class="eq">d² = <span class="frac"><span>4 × 80</span><span>π</span></span></div>
+<div class="eq">d = √<span class="frac"><span>4 × 80</span><span>π</span></span> = 10.09 mm</div>
+<p class="final">Answer: Maximum diameter, d = 10.09 mm</p>
+</div>
+</section>
+<section class="card">
+<button class="question" onclick="toggle(this)" aria-expanded="false">
+<span><b>2.</b> Find the Young’s Modulus of a brass rod of diameter 25 mm and length 250 mm which is subjected to a tensile load of 50 kN when the extension of the rod is equal to 0.3 mm.</span><span class="plus">+</span>
+</button>
+<div class="solution">
+
+<div class="solution-title">Solution</div>
+<p><b>Given:</b> d = 25 mm, L = 250 mm, P = 50 kN = 50,000 N, δL = 0.3 mm.</p>
+<p><b>Step 1: Cross-sectional area</b></p>
+<div class="eq">A = <span class="frac"><span>πd²</span><span>4</span></span></div>
+<div class="eq">A = <span class="frac"><span>π × 25²</span><span>4</span></span> = 490.87 mm²</div>
+<p><b>Step 2: Stress</b></p>
+<div class="eq">σ = <span class="frac"><span>P</span><span>A</span></span></div>
+<div class="eq">σ = <span class="frac"><span>50,000</span><span>490.87</span></span> = 101.86 N/mm²</div>
+<p><b>Step 3: Longitudinal strain</b></p>
+<div class="eq">ε = <span class="frac"><span>δL</span><span>L</span></span></div>
+<div class="eq">ε = <span class="frac"><span>0.3</span><span>250</span></span> = 0.0012</div>
+<p><b>Step 4: Young’s modulus</b></p>
+<div class="eq">E = <span class="frac"><span>σ</span><span>ε</span></span></div>
+<div class="eq">E = <span class="frac"><span>101.86</span><span>0.0012</span></span> = 84,883 N/mm²</div>
+<p class="final">Answer: E = 84.88 GPa</p>
+</div>
+</section>
+<section class="card">
+<button class="question" onclick="toggle(this)" aria-expanded="false">
+<span><b>3.</b> A steel rod of 20 mm diameter and 200 mm length is subjected to a 20 kN tensile force. The extension is found to be 0.53 mm and the decrease in diameter is equal to 0.0022 mm. Determine: (i) Young’s modulus of elasticity, (ii) Change in volume and (iii) Poisson’s ratio.</span><span class="plus">+</span>
+</button>
+<div class="solution">
+
+<div class="solution-title">Solution</div>
+<p><b>Given:</b> d = 20 mm, L = 200 mm, P = 20 kN = 20,000 N, δL = 0.53 mm, δd = 0.0022 mm.</p>
+<p><b>Step 1: Cross-sectional area</b></p>
+<div class="eq">A = <span class="frac"><span>πd²</span><span>4</span></span></div>
+<div class="eq">A = <span class="frac"><span>π × 20²</span><span>4</span></span> = 314.16 mm²</div>
+<p><b>Step 2: Longitudinal stress</b></p>
+<div class="eq">σ = <span class="frac"><span>P</span><span>A</span></span></div>
+<div class="eq">σ = <span class="frac"><span>20,000</span><span>314.16</span></span> = 63.66 N/mm²</div>
+<p><b>Step 3: Longitudinal strain</b></p>
+<div class="eq">ε = <span class="frac"><span>δL</span><span>L</span></span></div>
+<div class="eq">ε = <span class="frac"><span>0.53</span><span>200</span></span> = 0.00265</div>
+<p><b>Step 4: Young’s modulus</b></p>
+<div class="eq">E = <span class="frac"><span>σ</span><span>ε</span></span></div>
+<div class="eq">E = <span class="frac"><span>63.66</span><span>0.00265</span></span> = 24,023 N/mm²</div>
+<p><b>Step 5: Poisson’s ratio</b></p>
+<div class="eq">ν = −<span class="frac"><span>lateral strain</span><span>longitudinal strain</span></span></div>
+<div class="eq">ν = −<span class="frac"><span>−δd/d</span><span>δL/L</span></span></div>
+<div class="eq">ν = −<span class="frac"><span>−0.0022/20</span><span>0.53/200</span></span> = 0.0415</div>
+<p><b>Step 6: Volumetric strain and change in volume</b></p>
+<div class="eq">ε<sub>v</sub> = ε + 2ε<sub>lat</sub></div>
+<div class="eq">ε<sub>v</sub> = 0.00265 + 2(−0.00011) = 0.00243</div>
+<div class="eq">V = <span class="frac"><span>πd²</span><span>4</span></span>L</div>
+<div class="eq">V = <span class="frac"><span>π × 20²</span><span>4</span></span> × 200 = 62,831.85 mm³</div>
+<div class="eq">ΔV = ε<sub>v</sub>V = 0.00243 × 62,831.85 = 152.58 mm³</div>
+<p class="final">Answers: E = 24.02 GPa; ν = 0.0415; ΔV ≈ 152.58 mm³</p>
+</div>
+</section>
+<section class="card">
+<button class="question" onclick="toggle(this)" aria-expanded="false">
+<span><b>4.</b> A bar of 25 mm diameter is tested in tension. When a load of 60 kN is applied, the extension over a gauge length of 200 mm is 0.12 mm and contraction in diameter is 0.0045 mm. Find Poisson’s ratio and elastic constants E, G and K.</span><span class="plus">+</span>
+</button>
+<div class="solution">
+
+<div class="solution-title">Solution</div>
+<p><b>Given:</b> d = 25 mm, P = 60 kN = 60,000 N, L = 200 mm, δL = 0.12 mm, δd = 0.0045 mm.</p>
+<p><b>Step 1: Area</b></p>
+<div class="eq">A = <span class="frac"><span>πd²</span><span>4</span></span></div>
+<div class="eq">A = <span class="frac"><span>π × 25²</span><span>4</span></span> = 490.87 mm²</div>
+<p><b>Step 2: Stress</b></p>
+<div class="eq">σ = <span class="frac"><span>P</span><span>A</span></span></div>
+<div class="eq">σ = <span class="frac"><span>60,000</span><span>490.87</span></span> = 122.23 N/mm²</div>
+<p><b>Step 3: Longitudinal strain</b></p>
+<div class="eq">ε = <span class="frac"><span>δL</span><span>L</span></span></div>
+<div class="eq">ε = <span class="frac"><span>0.12</span><span>200</span></span> = 0.0006</div>
+<p><b>Step 4: Young’s modulus</b></p>
+<div class="eq">E = <span class="frac"><span>σ</span><span>ε</span></span></div>
+<div class="eq">E = <span class="frac"><span>122.23</span><span>0.0006</span></span> = 203,715 N/mm²</div>
+<p><b>Step 5: Poisson’s ratio</b></p>
+<div class="eq">ν = −<span class="frac"><span>lateral strain</span><span>longitudinal strain</span></span></div>
+<div class="eq">ν = −<span class="frac"><span>−δd/d</span><span>δL/L</span></span></div>
+<div class="eq">ν = −<span class="frac"><span>−0.0045/25</span><span>0.12/200</span></span> = 0.30</div>
+<p><b>Step 6: Rigidity modulus</b></p>
+<div class="eq">G = <span class="frac"><span>E</span><span>2(1 + ν)</span></span></div>
+<div class="eq">G = <span class="frac"><span>203,715</span><span>2(1 + 0.30)</span></span> = 78,352 N/mm²</div>
+<p><b>Step 7: Bulk modulus</b></p>
+<div class="eq">K = <span class="frac"><span>E</span><span>3(1 − 2ν)</span></span></div>
+<div class="eq">K = <span class="frac"><span>203,715</span><span>3(1 − 2 × 0.30)</span></span> = 169,763 N/mm²</div>
+<p class="final">Answers: ν = 0.30; E ≈ 203.7 GPa; G ≈ 78.35 GPa; K ≈ 169.76 GPa</p>
+</div>
+</section>
+<section class="card">
+<button class="question" onclick="toggle(this)" aria-expanded="false">
+<span><b>5.</b> A material has Young’s modulus E = 2.1×10⁵ N/mm² and Poisson’s ratio μ = 0.3. Calculate the rigidity modulus and bulk modulus.</span><span class="plus">+</span>
+</button>
+<div class="solution">
+
+<div class="solution-title">Solution</div>
+<p><b>Given:</b> E = 2.1 × 10⁵ N/mm², ν = 0.3.</p>
+<p><b>Step 1: Rigidity modulus</b></p>
+<div class="eq">G = <span class="frac"><span>E</span><span>2(1 + ν)</span></span></div>
+<div class="eq">G = <span class="frac"><span>2.1 × 10⁵</span><span>2(1 + 0.3)</span></span> = 80,769 N/mm²</div>
+<p><b>Step 2: Bulk modulus</b></p>
+<div class="eq">K = <span class="frac"><span>E</span><span>3(1 − 2ν)</span></span></div>
+<div class="eq">K = <span class="frac"><span>2.1 × 10⁵</span><span>3(1 − 2 × 0.3)</span></span> = 175,000 N/mm²</div>
+<p class="final">Answers: G = 80.77 GPa; K = 175 GPa</p>
+</div>
+</section>
+<section class="card">
+<button class="question" onclick="toggle(this)" aria-expanded="false">
+<span><b>6.</b> A cube of 60 mm × 60 mm × 60 mm is subjected to a pull of 30 kN in three mutually perpendicular directions with the same magnitude. Find the change in volume of the cube due to the external load. Take E = 200 GPa and Poisson’s ratio = 0.33.</span><span class="plus">+</span>
+</button>
+<div class="solution">
+
+<div class="solution-title">Solution</div>
+<p><b>Given:</b> side = 60 mm, P = 30 kN = 30,000 N, E = 200 GPa = 200,000 N/mm², ν = 0.33.</p>
+<p><b>Step 1: Stress in each direction</b></p>
+<div class="eq">A = 60 × 60 = 3,600 mm²</div>
+<div class="eq">σ = <span class="frac"><span>P</span><span>A</span></span></div>
+<div class="eq">σ = <span class="frac"><span>30,000</span><span>3,600</span></span> = 8.333 N/mm²</div>
+<p><b>Step 2: Volumetric strain</b></p>
+<div class="eq">ε<sub>v</sub> = <span class="frac"><span>σ</span><span>E</span></span>(3 − 6ν) = 3<span class="frac"><span>σ</span><span>E</span></span>(1 − 2ν)</div>
+<div class="eq">ε<sub>v</sub> = 3 × <span class="frac"><span>8.333</span><span>200,000</span></span>(1 − 2 × 0.33)</div>
+<div class="eq">ε<sub>v</sub> = 4.25 × 10⁻⁵</div>
+<p><b>Step 3: Change in volume</b></p>
+<div class="eq">V = 60³ = 216,000 mm³</div>
+<div class="eq">ΔV = ε<sub>v</sub>V</div>
+<div class="eq">ΔV = 4.25 × 10⁻⁵ × 216,000 = 9.18 mm³</div>
+<p class="final">Answer: Change in volume, ΔV = 9.18 mm³</p>
+</div>
+</section>
+<section class="card">
+<button class="question" onclick="toggle(this)" aria-expanded="false">
+<span><b>7.</b> The bar shown is subjected to a tensile load of 160 kN. If the stress in the middle portion is limited to 150 N/mm², determine the diameter of the middle portion. Find also the length of the middle portion if the total elongation of the bar is to be 0.2 mm. Young’s modulus is 2.1×10⁵ N/mm².</span><span class="plus">+</span>
+</button>
+<div class="solution">
+<div class="figure">
+<svg viewBox="0 0 900 240" role="img" aria-label="Stepped bar" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <linearGradient id="endGrad7" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a90e2"/><stop offset="100%" stop-color="#185a9d"/></linearGradient>
+  <linearGradient id="midGrad7" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#50c9c3"/><stop offset="100%" stop-color="#96deda"/></linearGradient>
+  <marker id="arrowRed7" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#d9534f"/></marker>
+  <marker id="arrowDim7" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#555555"/></marker>
+</defs>
+<rect x="150" y="80" width="180" height="80" rx="3" fill="url(#endGrad7)" stroke="#0e385f" stroke-width="2"/>
+<rect x="330" y="98" width="240" height="44" rx="2" fill="url(#midGrad7)" stroke="#2d7a75" stroke-width="2"/>
+<rect x="570" y="80" width="180" height="80" rx="3" fill="url(#endGrad7)" stroke="#0e385f" stroke-width="2"/>
+<line x1="150" y1="120" x2="750" y2="120" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.6"/>
+<line x1="80" y1="120" x2="140" y2="120" stroke="#d9534f" stroke-width="3" marker-start="url(#arrowRed7)"/>
+<text x="60" y="126" font-size="18" font-weight="bold" fill="#d9534f" text-anchor="end">P</text>
+<line x1="760" y1="120" x2="820" y2="120" stroke="#d9534f" stroke-width="3" marker-end="url(#arrowRed7)"/>
+<text x="840" y="126" font-size="18" font-weight="bold" fill="#d9534f" text-anchor="start">P</text>
+<line x1="150" y1="50" x2="330" y2="50" stroke="#555" stroke-width="1.5" marker-start="url(#arrowDim7)" marker-end="url(#arrowDim7)"/>
+<line x1="150" y1="42" x2="150" y2="72" stroke="#aaa" stroke-dasharray="2 2"/>
+<line x1="330" y1="42" x2="330" y2="90" stroke="#aaa" stroke-dasharray="2 2"/>
+<text x="240" y="40" text-anchor="middle" font-size="15" font-weight="600" fill="#23384d">L₁, A₁</text>
+<line x1="330" y1="50" x2="570" y2="50" stroke="#555" stroke-width="1.5" marker-start="url(#arrowDim7)" marker-end="url(#arrowDim7)"/>
+<line x1="570" y1="42" x2="570" y2="90" stroke="#aaa" stroke-dasharray="2 2"/>
+<text x="450" y="40" text-anchor="middle" font-size="15" font-weight="600" fill="#23384d">L₂, A₂</text>
+<line x1="570" y1="50" x2="750" y2="50" stroke="#555" stroke-width="1.5" marker-start="url(#arrowDim7)" marker-end="url(#arrowDim7)"/>
+<line x1="750" y1="42" x2="750" y2="72" stroke="#aaa" stroke-dasharray="2 2"/>
+<text x="660" y="40" text-anchor="middle" font-size="15" font-weight="600" fill="#23384d">L₃, A₃</text>
+<text x="240" y="185" text-anchor="middle" font-size="14" font-weight="600" fill="#185a9d">End portion</text>
+<text x="450" y="185" text-anchor="middle" font-size="14" font-weight="600" fill="#2d7a75">Middle portion</text>
+<text x="660" y="185" text-anchor="middle" font-size="14" font-weight="600" fill="#185a9d">End portion</text>
+</svg>
+</div>
+<div class="solution-title">Solution</div>
+<p><b>Given:</b> P = 160 kN = 160,000 N, σ₂ = 150 N/mm², total length = 400 mm, E = 2.1 × 10⁵ N/mm², end diameter d₁ = 60 mm.</p>
+<p><b>Step 1: Area of middle portion</b></p>
+<div class="eq">σ₂ = <span class="frac"><span>P</span><span>A₂</span></span></div>
+<div class="eq">A₂ = <span class="frac"><span>P</span><span>σ₂</span></span></div>
+<div class="eq">A₂ = <span class="frac"><span>160,000</span><span>150</span></span> = 1066.67 mm²</div>
+<p><b>Step 2: Diameter of middle portion</b></p>
+<div class="eq">A₂ = <span class="frac"><span>πd₂²</span><span>4</span></span></div>
+<div class="eq">d₂ = √<span class="frac"><span>4A₂</span><span>π</span></span></div>
+<div class="eq">d₂ = √<span class="frac"><span>4 × 1066.67</span><span>π</span></span> = 36.85 mm</div>
+<p><b>Step 3: Length of middle portion</b></p>
+<p>Let the middle length be L₂. Then the combined length of the two end portions is (400 − L₂) mm.</p>
+<div class="eq">δL = Σ<span class="frac"><span>PL</span><span>AE</span></span></div>
+<div class="eq">0.2 = <span class="frac"><span>160,000</span><span>2.1 × 10⁵</span></span>[<span class="frac"><span>400 − L₂</span><span>A₁</span></span> + <span class="frac"><span>L₂</span><span>A₂</span></span>]</div>
+<div class="eq">A₁ = <span class="frac"><span>π × 60²</span><span>4</span></span> = 2827.43 mm²</div>
+<div class="eq">0.2 = <span class="frac"><span>160,000</span><span>2.1 × 10⁵</span></span>[<span class="frac"><span>400 − L₂</span><span>2827.43</span></span> + <span class="frac"><span>L₂</span><span>1066.67</span></span>]</div>
+<div class="eq">L₂ ≈ 207.30 mm</div>
+<p class="final">Answers: d₂ = 36.85 mm; L₂ ≈ 207.30 mm</p>
+</div>
+</section>
+<section class="card">
+<button class="question" onclick="toggle(this)" aria-expanded="false">
+<span><b>8.</b> A steel rod of diameter 20 mm and length 400 mm is covered by a rigidly connected brass tube of inside diameter 20 mm and outside diameter 40 mm. Find the stresses in the two materials and the deformation, when the composite structure is subjected to a load of 100 kN. E = 200 GPa for steel and 100 GPa for brass.</span><span class="plus">+</span>
+</button>
+<div class="solution">
+<div class="figure">
+<svg viewBox="0 0 900 220" role="img" aria-label="Composite bar" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <linearGradient id="brassGrad8" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f6d365"/><stop offset="100%" stop-color="#fda085"/></linearGradient>
+  <linearGradient id="steelGrad8" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a90e2"/><stop offset="100%" stop-color="#185a9d"/></linearGradient>
+  <linearGradient id="plateGrad8" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7f8c8d"/><stop offset="100%" stop-color="#34495e"/></linearGradient>
+  <marker id="arrowRed8" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#d9534f"/></marker>
+</defs>
+<rect x="220" y="60" width="460" height="100" rx="3" fill="url(#brassGrad8)" stroke="#c0392b" stroke-width="1.5"/>
+<rect x="220" y="85" width="460" height="50" fill="url(#steelGrad8)" stroke="#0e385f" stroke-width="1.5"/>
+<rect x="205" y="50" width="15" height="120" rx="2" fill="url(#plateGrad8)" stroke="#2c3e50" stroke-width="1.5"/>
+<rect x="680" y="50" width="15" height="120" rx="2" fill="url(#plateGrad8)" stroke="#2c3e50" stroke-width="1.5"/>
+<text x="450" y="116" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">Steel Rod (Inner)</text>
+<text x="450" y="77" text-anchor="middle" font-size="14" font-weight="600" fill="#7a2e00">Brass Tube (Outer)</text>
+<text x="450" y="153" text-anchor="middle" font-size="14" font-weight="600" fill="#7a2e00">Brass Tube (Outer)</text>
+<line x1="120" y1="110" x2="195" y2="110" stroke="#d9534f" stroke-width="3" marker-start="url(#arrowRed8)"/>
+<text x="100" y="116" font-size="18" font-weight="bold" fill="#d9534f" text-anchor="end">P</text>
+<line x1="705" y1="110" x2="780" y2="110" stroke="#d9534f" stroke-width="3" marker-end="url(#arrowRed8)"/>
+<text x="800" y="116" font-size="18" font-weight="bold" fill="#d9534f" text-anchor="start">P</text>
+<text x="450" y="32" text-anchor="middle" font-size="15" font-weight="600" fill="#23384d">Rigid End Plates (Equal Extension)</text>
+</svg>
+</div>
+<div class="solution-title">Solution</div>
+<p><b>Given:</b> d<sub>s</sub> = 20 mm, D<sub>o</sub> = 40 mm, D<sub>i</sub> = 20 mm, L = 400 mm, P = 100 kN = 100,000 N, E<sub>s</sub> = 200 GPa, E<sub>b</sub> = 100 GPa.</p>
+<p><b>Step 1: Areas</b></p>
+<div class="eq">A<sub>s</sub> = <span class="frac"><span>πd<sub>s</sub>²</span><span>4</span></span></div>
+<div class="eq">A<sub>s</sub> = <span class="frac"><span>π × 20²</span><span>4</span></span> = 314.16 mm²</div>
+<div class="eq">A<sub>b</sub> = <span class="frac"><span>π(D<sub>o</sub>² − D<sub>i</sub>²)</span><span>4</span></span></div>
+<div class="eq">A<sub>b</sub> = <span class="frac"><span>π(40² − 20²)</span><span>4</span></span> = 942.48 mm²</div>
+<p><b>Step 2: Compatibility</b></p>
+<div class="eq"><span class="frac"><span>σ<sub>s</sub></span><span>E<sub>s</sub></span></span> = <span class="frac"><span>σ<sub>b</sub></span><span>E<sub>b</sub></span></span></div>
+<div class="eq">σ<sub>s</sub> = <span class="frac"><span>E<sub>s</sub></span><span>E<sub>b</sub></span></span>σ<sub>b</sub></div>
+<div class="eq">σ<sub>s</sub> = 2σ<sub>b</sub></div>
+<p><b>Step 3: Equilibrium</b></p>
+<div class="eq">P = σ<sub>s</sub>A<sub>s</sub> + σ<sub>b</sub>A<sub>b</sub></div>
+<div class="eq">100,000 = (2σ<sub>b</sub>)(314.16) + σ<sub>b</sub>(942.48)</div>
+<div class="eq">σ<sub>b</sub> = <span class="frac"><span>100,000</span><span>2(314.16) + 942.48</span></span> = 63.66 N/mm²</div>
+<div class="eq">σ<sub>s</sub> = 2 × 63.66 = 127.32 N/mm²</div>
+<p><b>Step 4: Deformation</b></p>
+<div class="eq">δL = <span class="frac"><span>σ<sub>s</sub>L</span><span>E<sub>s</sub></span></span></div>
+<div class="eq">δL = <span class="frac"><span>127.32 × 400</span><span>200,000</span></span> = 0.2546 mm</div>
+<p class="final">Answers: Steel stress = 127.32 MPa; Brass stress = 63.66 MPa; deformation = 0.2546 mm extension.</p>
+</div>
+</section>
+<section class="card">
+<button class="question" onclick="toggle(this)" aria-expanded="false">
+<span><b>9.</b> Two brass rods and one steel rod together support a load as shown. If the stresses in brass and steel rods are not to exceed 60 N/mm² and 120 N/mm², find the safe load. Eₛ = 2×10⁵ N/mm², Eᵦ = 1×10⁵ N/mm²; steel area = 1500 mm², each brass rod = 1000 mm²; steel length = 170 mm and brass length = 100 mm.</span><span class="plus">+</span>
+</button>
+<div class="solution">
+<div class="figure">
+<svg viewBox="0 0 900 250" role="img" aria-label="Composite bar with different lengths" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <linearGradient id="brassGrad9" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f6d365"/><stop offset="100%" stop-color="#fda085"/></linearGradient>
+  <linearGradient id="steelGrad9" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a90e2"/><stop offset="100%" stop-color="#185a9d"/></linearGradient>
+  <linearGradient id="rigidGrad9" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#434343"/><stop offset="100%" stop-color="#000000"/></linearGradient>
+  <pattern id="hatch9" width="10" height="10" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="0" y2="10" stroke="#888" stroke-width="2"/></pattern>
+  <marker id="arrowRed9" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#d9534f"/></marker>
+</defs>
+<rect x="200" y="10" width="500" height="15" fill="url(#hatch9)" stroke="#555" stroke-width="1"/>
+<line x1="200" y1="25" x2="700" y2="25" stroke="#333" stroke-width="3"/>
+<rect x="260" y="25" width="70" height="110" fill="url(#brassGrad9)" stroke="#c0392b" stroke-width="1.5"/>
+<rect x="415" y="25" width="70" height="170" fill="url(#steelGrad9)" stroke="#0e385f" stroke-width="1.5"/>
+<rect x="570" y="25" width="70" height="110" fill="url(#brassGrad9)" stroke="#c0392b" stroke-width="1.5"/>
+<rect x="220" y="195" width="460" height="18" rx="3" fill="url(#rigidGrad9)"/>
+<text x="450" y="208" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">RIGID CROSSHEAD / PLATE</text>
+<line x1="450" y1="213" x2="450" y2="242" stroke="#d9534f" stroke-width="3.5" marker-end="url(#arrowRed9)"/>
+<text x="470" y="238" font-size="16" font-weight="bold" fill="#d9534f">P</text>
+<text x="295" y="85" text-anchor="middle" font-size="13" font-weight="bold" fill="#7a2e00">Brass<br/>100 mm</text>
+<text x="450" y="115" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">Steel<br/>170 mm</text>
+<text x="605" y="85" text-anchor="middle" font-size="13" font-weight="bold" fill="#7a2e00">Brass<br/>100 mm</text>
+</svg>
+</div>
+<div class="solution-title">Solution</div>
+<p><b>Given:</b> σ<sub>b,max</sub> = 60 N/mm², σ<sub>s,max</sub> = 120 N/mm², E<sub>s</sub> = 2×10⁵ N/mm², E<sub>b</sub> = 1×10⁵ N/mm², A<sub>s</sub> = 1500 mm², A<sub>b</sub> = 1000 mm², L<sub>s</sub> = 170 mm, L<sub>b</sub> = 100 mm.</p>
+<p><b>Step 1: Compatibility</b></p>
+<div class="eq"><span class="frac"><span>σ<sub>s</sub>L<sub>s</sub></span><span>E<sub>s</sub></span></span> = <span class="frac"><span>σ<sub>b</sub>L<sub>b</sub></span><span>E<sub>b</sub></span></span></div>
+<div class="eq">σ<sub>s</sub> = <span class="frac"><span>E<sub>s</sub>L<sub>b</sub></span><span>E<sub>b</sub>L<sub>s</sub></span></span>σ<sub>b</sub></div>
+<div class="eq">σ<sub>s</sub> = <span class="frac"><span>2×10⁵ × 100</span><span>1×10⁵ × 170</span></span>σ<sub>b</sub> = 1.176σ<sub>b</sub></div>
+<p><b>Step 2: Check allowable stresses</b></p>
+<div class="eq">σ<sub>b</sub> = 60 N/mm²</div>
+<div class="eq">σ<sub>s</sub> = 1.176 × 60 = 70.56 N/mm² &lt; 120 N/mm²</div>
+<p>Therefore brass reaches its allowable stress first.</p>
+<p><b>Step 3: Safe load</b></p>
+<div class="eq">P = σ<sub>s</sub>A<sub>s</sub> + σ<sub>b</sub>(2A<sub>b</sub>)</div>
+<div class="eq">P = 70.56 × 1500 + 60 × (2 × 1000)</div>
+<div class="eq">P = 225,840 N = 225.84 kN</div>
+<p class="final">Answer: Safe load = 225.84 kN</p>
+</div>
+</section>
+<section class="card">
+<button class="question" onclick="toggle(this)" aria-expanded="false">
+<span><b>10.</b> A member ABCD is subjected to point loads P₁, P₂, P₃ and P₄ as shown. If P₁ = 45 kN, P₃ = 450 kN and P₄ = 130 kN, determine P₂ necessary for equilibrium and the total elongation. E = 2.1×10⁵ N/mm². Areas are 625, 2500 and 1250 mm² and lengths are 1200, 600 and 900 mm.</span><span class="plus">+</span>
+</button>
+<div class="solution">
+<div class="figure">
+<svg viewBox="0 0 900 240" role="img" aria-label="Axially loaded member ABCD" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <linearGradient id="barGrad10" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e2e8f0"/><stop offset="100%" stop-color="#cbd5e1"/></linearGradient>
+  <marker id="arrowRed10" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#d9534f"/></marker>
+  <marker id="arrowDim10" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#555555"/></marker>
+</defs>
+<rect x="140" y="80" width="620" height="70" rx="4" fill="url(#barGrad10)" stroke="#475569" stroke-width="2"/>
+<line x1="320" y1="80" x2="320" y2="150" stroke="#94a3b8" stroke-dasharray="4 3"/>
+<line x1="520" y1="80" x2="520" y2="150" stroke="#94a3b8" stroke-dasharray="4 3"/>
+<circle cx="140" cy="115" r="5" fill="#1e293b"/><text x="140" y="70" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e293b">A</text>
+<circle cx="320" cy="115" r="5" fill="#1e293b"/><text x="320" y="70" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e293b">B</text>
+<circle cx="520" cy="115" r="5" fill="#1e293b"/><text x="520" y="70" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e293b">C</text>
+<circle cx="760" cy="115" r="5" fill="#1e293b"/><text x="760" y="70" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e293b">D</text>
+<line x1="70" y1="115" x2="135" y2="115" stroke="#d9534f" stroke-width="3" marker-start="url(#arrowRed10)"/>
+<text x="65" y="105" font-size="14" font-weight="bold" fill="#d9534f" text-anchor="end">P₁ = 45 kN</text>
+<line x1="325" y1="115" x2="390" y2="115" stroke="#d9534f" stroke-width="3" marker-end="url(#arrowRed10)"/>
+<text x="355" y="105" font-size="14" font-weight="bold" fill="#d9534f" text-anchor="middle">P₂</text>
+<line x1="455" y1="115" x2="515" y2="115" stroke="#d9534f" stroke-width="3" marker-start="url(#arrowRed10)"/>
+<text x="485" y="105" font-size="14" font-weight="bold" fill="#d9534f" text-anchor="middle">P₃ = 450 kN</text>
+<line x1="765" y1="115" x2="830" y2="115" stroke="#d9534f" stroke-width="3" marker-end="url(#arrowRed10)"/>
+<text x="835" y="105" font-size="14" font-weight="bold" fill="#d9534f" text-anchor="start">P₄ = 130 kN</text>
+<line x1="140" y1="180" x2="320" y2="180" stroke="#555" stroke-width="1.5" marker-start="url(#arrowDim10)" marker-end="url(#arrowDim10)"/>
+<line x1="140" y1="155" x2="140" y2="195" stroke="#aaa" stroke-dasharray="2 2"/>
+<line x1="320" y1="155" x2="320" y2="195" stroke="#aaa" stroke-dasharray="2 2"/>
+<text x="230" y="200" text-anchor="middle" font-size="13" font-weight="600" fill="#334155">AB: 1200 mm</text>
+<line x1="320" y1="180" x2="520" y2="180" stroke="#555" stroke-width="1.5" marker-start="url(#arrowDim10)" marker-end="url(#arrowDim10)"/>
+<line x1="520" y1="155" x2="520" y2="195" stroke="#aaa" stroke-dasharray="2 2"/>
+<text x="420" y="200" text-anchor="middle" font-size="13" font-weight="600" fill="#334155">BC: 600 mm</text>
+<line x1="520" y1="180" x2="760" y2="180" stroke="#555" stroke-width="1.5" marker-start="url(#arrowDim10)" marker-end="url(#arrowDim10)"/>
+<line x1="760" y1="155" x2="760" y2="195" stroke="#aaa" stroke-dasharray="2 2"/>
+<text x="640" y="200" text-anchor="middle" font-size="13" font-weight="600" fill="#334155">CD: 900 mm</text>
+</svg>
+</div>
+<div class="solution-title">Solution</div>
+<p><b>Given:</b> P₁ = 45 kN, P₃ = 450 kN, P₄ = 130 kN, E = 2.1×10⁵ N/mm²; A<sub>AB</sub> = 625 mm², A<sub>BC</sub> = 2500 mm², A<sub>CD</sub> = 1250 mm²; L<sub>AB</sub> = 1200 mm, L<sub>BC</sub> = 600 mm, L<sub>CD</sub> = 900 mm.</p>
+<p><b>Step 1: Equilibrium</b></p>
+<div class="eq">P₁ + P₃ = P₂ + P₄</div>
+<div class="eq">45 + 450 = P₂ + 130</div>
+<div class="eq">P₂ = 365 kN</div>
+<p><b>Step 2: Internal forces</b></p>
+<p>AB = 45 kN tension; BC = 320 kN compression; CD = 130 kN tension.</p>
+<p><b>Step 3: Deformation of each portion</b></p>
+<div class="eq">δL = <span class="frac"><span>PL</span><span>AE</span></span></div>
+<div class="eq">δL<sub>AB</sub> = <span class="frac"><span>45,000 × 1200</span><span>625 × 2.1×10⁵</span></span> = +0.4114 mm</div>
+<div class="eq">δL<sub>BC</sub> = −<span class="frac"><span>320,000 × 600</span><span>2500 × 2.1×10⁵</span></span> = −0.3657 mm</div>
+<div class="eq">δL<sub>CD</sub> = <span class="frac"><span>130,000 × 900</span><span>1250 × 2.1×10⁵</span></span> = +0.4457 mm</div>
+<p><b>Step 4: Total deformation</b></p>
+<div class="eq">δL<sub>total</sub> = δL<sub>AB</sub> + δL<sub>BC</sub> + δL<sub>CD</sub></div>
+<div class="eq">δL<sub>total</sub> = 0.4114 − 0.3657 + 0.4457 = 0.4914 mm</div>
+<p class="final">Answers: P₂ = 365 kN; total elongation = 0.4914 mm</p>
+</div>
+</section>
+<section class="card">
+<button class="question" onclick="toggle(this)" aria-expanded="false">
+<span><b>11.</b> A rod is 2 m long at 10°C. Find the expansion when temperature is raised to 80°C. If expansion is prevented, find the stress induced. Take E = 1.0×10⁵ N/mm² and α = 0.000012/°C.</span><span class="plus">+</span>
+</button>
+<div class="solution">
+<div class="figure">
+<svg viewBox="0 0 900 220" role="img" aria-label="Thermally restrained rod" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <pattern id="wallHatch11" width="10" height="10" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="0" y2="10" stroke="#666" stroke-width="2"/></pattern>
+  <linearGradient id="rodGrad11" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#ff7e5f"/><stop offset="100%" stop-color="#feb47b"/></linearGradient>
+  <marker id="arrowRed11" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#d9534f"/></marker>
+</defs>
+<rect x="110" y="50" width="30" height="120" fill="url(#wallHatch11)" stroke="#333" stroke-width="1.5"/>
+<line x1="140" y1="50" x2="140" y2="170" stroke="#1e293b" stroke-width="3"/>
+<rect x="730" y="50" width="30" height="120" fill="url(#wallHatch11)" stroke="#333" stroke-width="1.5"/>
+<line x1="730" y1="50" x2="730" y2="170" stroke="#1e293b" stroke-width="3"/>
+<rect x="140" y="80" width="590" height="60" rx="3" fill="url(#rodGrad11)" stroke="#d9534f" stroke-width="1.5"/>
+<text x="435" y="115" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">RESTRAINED METAL ROD</text>
+<path d="M 360 45 Q 435 20 510 45" fill="none" stroke="#d9534f" stroke-width="2.5" stroke-dasharray="4 3"/>
+<path d="M 505 40 L 510 45 L 502 48" fill="none" stroke="#d9534f" stroke-width="2.5"/>
+<text x="435" y="20" text-anchor="middle" font-size="15" font-weight="bold" fill="#d9534f">Temperature Increase (ΔT)</text>
+<line x1="190" y1="110" x2="142" y2="110" stroke="#d9534f" stroke-width="3" marker-end="url(#arrowRed11)"/>
+<line x1="680" y1="110" x2="728" y2="110" stroke="#d9534f" stroke-width="3" marker-end="url(#arrowRed11)"/>
+<text x="435" y="195" text-anchor="middle" font-size="14" font-weight="600" fill="#334155">Compressive Reaction Stresses Induced by Rigid Walls</text>
+</svg>
+</div>
+<div class="solution-title">Solution</div>
+<p><b>Given:</b> L = 2 m = 2000 mm, initial temperature = 10°C, final temperature = 80°C, E = 1.0×10⁵ N/mm², α = 0.000012/°C.</p>
+<p><b>Step 1: Temperature rise</b></p>
+<div class="eq">ΔT = T₂ − T₁</div>
+<div class="eq">ΔT = 80 − 10 = 70°C</div>
+<p><b>Step 2: Free thermal expansion</b></p>
+<div class="eq">δL = αΔTL</div>
+<div class="eq">δL = 0.000012 × 70 × 2000 = 1.68 mm</div>
+<p><b>Step 3: Stress when expansion is prevented</b></p>
+<div class="eq">σ = EαΔT</div>
+<div class="eq">σ = 1.0×10⁵ × 0.000012 × 70 = 84 N/mm²</div>
+<p class="final">Answers: Free expansion = 1.68 mm; restrained stress = 84 MPa compressive.</p>
+</div>
+</section>
+<section class="card">
+<button class="question" onclick="toggle(this)" aria-expanded="false">
+<span><b>12.</b> A 200 mm long, stress-free rod at room temperature is held between two immovable rigid walls. The temperature is uniformly raised by 250°C. If E = 200 GPa and α = 1×10⁻⁵/°C, determine the magnitude of the longitudinal stress.</span><span class="plus">+</span>
+</button>
+<div class="solution">
+<div class="figure">
+<svg viewBox="0 0 900 220" role="img" aria-label="Thermally restrained rod" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <pattern id="wallHatch12" width="10" height="10" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="0" y2="10" stroke="#666" stroke-width="2"/></pattern>
+  <linearGradient id="rodGrad12" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#ff7e5f"/><stop offset="100%" stop-color="#feb47b"/></linearGradient>
+  <marker id="arrowRed12" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#d9534f"/></marker>
+</defs>
+<rect x="110" y="50" width="30" height="120" fill="url(#wallHatch12)" stroke="#333" stroke-width="1.5"/>
+<line x1="140" y1="50" x2="140" y2="170" stroke="#1e293b" stroke-width="3"/>
+<rect x="730" y="50" width="30" height="120" fill="url(#wallHatch12)" stroke="#333" stroke-width="1.5"/>
+<line x1="730" y1="50" x2="730" y2="170" stroke="#1e293b" stroke-width="3"/>
+<rect x="140" y="80" width="590" height="60" rx="3" fill="url(#rodGrad12)" stroke="#d9534f" stroke-width="1.5"/>
+<text x="435" y="115" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">RESTRAINED METAL ROD</text>
+<path d="M 360 45 Q 435 20 510 45" fill="none" stroke="#d9534f" stroke-width="2.5" stroke-dasharray="4 3"/>
+<path d="M 505 40 L 510 45 L 502 48" fill="none" stroke="#d9534f" stroke-width="2.5"/>
+<text x="435" y="20" text-anchor="middle" font-size="15" font-weight="bold" fill="#d9534f">Temperature Increase (ΔT)</text>
+<line x1="190" y1="110" x2="142" y2="110" stroke="#d9534f" stroke-width="3" marker-end="url(#arrowRed12)"/>
+<line x1="680" y1="110" x2="728" y2="110" stroke="#d9534f" stroke-width="3" marker-end="url(#arrowRed12)"/>
+<text x="435" y="195" text-anchor="middle" font-size="14" font-weight="600" fill="#334155">Compressive Reaction Stresses Induced by Rigid Walls</text>
+</svg>
+</div>
+<div class="solution-title">Solution</div>
+<p><b>Given:</b> ΔT = 250°C, E = 200 GPa = 200,000 N/mm², α = 1×10⁻⁵/°C.</p>
+<p><b>Step 1: Free thermal strain</b></p>
+<div class="eq">ε<sub>th</sub> = αΔT</div>
+<div class="eq">ε<sub>th</sub> = 1×10⁻⁵ × 250 = 0.0025</div>
+<p><b>Step 2: Thermal stress for complete restraint</b></p>
+<div class="eq">σ = Eε<sub>th</sub></div>
+<div class="eq">σ = 200,000 × 0.0025 = 500 N/mm²</div>
+<p class="final">Answer: σ = 500 MPa compressive</p>
+</div>
+</section>
+<section class="card">
+<button class="question" onclick="toggle(this)" aria-expanded="false">
+<span><b>13.</b> A steel rod of 40 mm diameter is fitted in a copper tube of 60 mm external diameter and 40 mm internal diameter. The assembly is fixed at one end and constrained at the other by a rigid plate. The temperature is raised by 60°C. Find the stresses in steel and copper. Eₛ = 200 GPa, E꜀ = 100 GPa, αₛ = 12×10⁻⁶/°C, α꜀ = 18×10⁻⁶/°C.</span><span class="plus">+</span>
+</button>
+<div class="solution">
+<div class="figure">
+<svg viewBox="0 0 900 220" role="img" aria-label="Composite bar" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <linearGradient id="copperGrad13" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e58e26"/><stop offset="100%" stop-color="#b95b10"/></linearGradient>
+  <linearGradient id="steelGrad13" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a90e2"/><stop offset="100%" stop-color="#185a9d"/></linearGradient>
+  <linearGradient id="plateGrad13" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7f8c8d"/><stop offset="100%" stop-color="#34495e"/></linearGradient>
+  <pattern id="wallHatch13" width="10" height="10" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="0" y2="10" stroke="#666" stroke-width="2"/></pattern>
+</defs>
+<rect x="110" y="40" width="25" height="140" fill="url(#wallHatch13)" stroke="#333" stroke-width="1.5"/>
+<line x1="135" y1="40" x2="135" y2="180" stroke="#1e293b" stroke-width="3"/>
+<rect x="135" y="55" width="550" height="110" rx="3" fill="url(#copperGrad13)" stroke="#8e3e00" stroke-width="1.5"/>
+<rect x="135" y="82" width="550" height="56" fill="url(#steelGrad13)" stroke="#0e385f" stroke-width="1.5"/>
+<rect x="685" y="45" width="18" height="130" rx="2" fill="url(#plateGrad13)" stroke="#2c3e50" stroke-width="1.5"/>
+<text x="410" y="115" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">Steel Rod (Inner)</text>
+<text x="410" y="73" text-anchor="middle" font-size="14" font-weight="600" fill="#ffffff">Copper Tube (Outer)</text>
+<text x="410" y="153" text-anchor="middle" font-size="14" font-weight="600" fill="#ffffff">Copper Tube (Outer)</text>
+<text x="694" y="200" text-anchor="middle" font-size="13" font-weight="bold" fill="#2c3e50">Rigid End Plate</text>
+<path d="M 360 30 Q 410 10 460 30" fill="none" stroke="#d9534f" stroke-width="2.5" stroke-dasharray="4 3"/>
+<path d="M 455 25 L 460 30 L 452 33" fill="none" stroke="#d9534f" stroke-width="2.5"/>
+<text x="410" y="15" text-anchor="middle" font-size="14" font-weight="bold" fill="#d9534f">Temperature Raised ΔT</text>
+</svg>
+</div>
+<div class="solution-title">Solution</div>
+<p><b>Given:</b> d<sub>s</sub> = 40 mm, D<sub>o</sub> = 60 mm, D<sub>i</sub> = 40 mm, ΔT = 60°C, E<sub>s</sub> = 200 GPa = 200,000 N/mm², E<sub>c</sub> = 100 GPa = 100,000 N/mm², α<sub>s</sub> = 12×10⁻⁶/°C, α<sub>c</sub> = 18×10⁻⁶/°C.</p>
+<p><b>Step 1: Areas</b></p>
+<div class="eq">A<sub>s</sub> = <span class="frac"><span>πd<sub>s</sub>²</span><span>4</span></span></div>
+<div class="eq">A<sub>s</sub> = <span class="frac"><span>π × 40²</span><span>4</span></span> = 1256.64 mm²</div>
+<div class="eq">A<sub>c</sub> = <span class="frac"><span>π(D<sub>o</sub>² − D<sub>i</sub>²)</span><span>4</span></span></div>
+<div class="eq">A<sub>c</sub> = <span class="frac"><span>π(60² − 40²)</span><span>4</span></span> = 1570.80 mm²</div>
+<p><b>Step 2: Equilibrium</b></p>
+<div class="eq">σ<sub>s</sub>A<sub>s</sub> + σ<sub>c</sub>A<sub>c</sub> = 0</div>
+<div class="eq">σ<sub>c</sub> = −<span class="frac"><span>A<sub>s</sub></span><span>A<sub>c</sub></span></span>σ<sub>s</sub></div>
+<div class="eq">σ<sub>c</sub> = −<span class="frac"><span>1256.64</span><span>1570.80</span></span>σ<sub>s</sub> = −0.8σ<sub>s</sub></div>
+<p><b>Step 3: Compatibility of total strain</b></p>
+<div class="eq">α<sub>s</sub>ΔT + <span class="frac"><span>σ<sub>s</sub></span><span>E<sub>s</sub></span></span> = α<sub>c</sub>ΔT + <span class="frac"><span>σ<sub>c</sub></span><span>E<sub>c</sub></span></span></div>
+<div class="eq">(α<sub>c</sub> − α<sub>s</sub>)ΔT = <span class="frac"><span>σ<sub>s</sub></span><span>E<sub>s</sub></span></span> − <span class="frac"><span>σ<sub>c</sub></span><span>E<sub>c</sub></span></span></div>
+<div class="eq">(18 − 12)×10⁻⁶ × 60 = <span class="frac"><span>σ<sub>s</sub></span><span>200,000</span></span> + <span class="frac"><span>0.8σ<sub>s</sub></span><span>100,000</span></span></div>
+<div class="eq">σ<sub>s</sub> = <span class="frac"><span>0.00036</span><span>1/200,000 + 0.8/100,000</span></span> = 27.69 N/mm²</div>
+<div class="eq">σ<sub>c</sub> = −0.8 × 27.69 = −22.15 N/mm²</div>
+<p class="final">Answers: Steel stress = 27.69 MPa tension; Copper stress = 22.15 MPa compression.</p>
+</div>
+</section>
+<section class="card">
+<button class="question" onclick="toggle(this)" aria-expanded="false">
+<span><b>14.</b> A steel rod, circular in cross-section, tapers from 3.5 cm diameter to 2.0 cm diameter in a length of 60 cm. Find the increase in length under a pull of 30 kN. Take E = 200 GPa.</span><span class="plus">+</span>
+</button>
+<div class="solution">
+<div class="figure">
+<svg viewBox="0 0 900 240" role="img" aria-label="Tapered circular bar" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <linearGradient id="taperGrad14" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3a7bd5"/><stop offset="100%" stop-color="#3a6073"/></linearGradient>
+  <marker id="arrowRed14" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#d9534f"/></marker>
+  <marker id="arrowDim14" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#555555"/></marker>
+</defs>
+<polygon points="180,50 700,85 700,155 180,190" fill="url(#taperGrad14)" stroke="#1a365d" stroke-width="2"/>
+<ellipse cx="180" cy="120" rx="15" ry="70" fill="#2b4c7e" stroke="#1a365d" stroke-width="1.5"/>
+<ellipse cx="700" cy="120" rx="8" ry="35" fill="#4a779d" stroke="#1a365d" stroke-width="1.5"/>
+<line x1="160" y1="120" x2="720" y2="120" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.5"/>
+<line x1="90" y1="120" x2="170" y2="120" stroke="#d9534f" stroke-width="3" marker-start="url(#arrowRed14)"/>
+<text x="75" y="126" font-size="18" font-weight="bold" fill="#d9534f" text-anchor="end">P</text>
+<line x1="710" y1="120" x2="790" y2="120" stroke="#d9534f" stroke-width="3" marker-end="url(#arrowRed14)"/>
+<text x="805" y="126" font-size="18" font-weight="bold" fill="#d9534f" text-anchor="start">P</text>
+<line x1="150" y1="50" x2="150" y2="190" stroke="#555" stroke-width="1.5" marker-start="url(#arrowDim14)" marker-end="url(#arrowDim14)"/>
+<text x="140" y="125" font-size="14" font-weight="bold" fill="#1a365d" text-anchor="end">d₁ = 35 mm</text>
+<line x1="725" y1="85" x2="725" y2="155" stroke="#555" stroke-width="1.5" marker-start="url(#arrowDim14)" marker-end="url(#arrowDim14)"/>
+<text x="735" y="125" font-size="14" font-weight="bold" fill="#1a365d" text-anchor="start">d₂ = 20 mm</text>
+<line x1="180" y1="210" x2="700" y2="210" stroke="#555" stroke-width="1.5" marker-start="url(#arrowDim14)" marker-end="url(#arrowDim14)"/>
+<line x1="180" y1="195" x2="180" y2="225" stroke="#aaa" stroke-dasharray="2 2"/>
+<line x1="700" y1="160" x2="700" y2="225" stroke="#aaa" stroke-dasharray="2 2"/>
+<text x="440" y="230" text-anchor="middle" font-size="14" font-weight="600" fill="#23384d">Length L = 600 mm</text>
+</svg>
+</div>
+<div class="solution-title">Solution</div>
+<p><b>Given:</b> d₁ = 35 mm, d₂ = 20 mm, L = 600 mm, P = 30 kN = 30,000 N, E = 200 GPa = 200,000 N/mm².</p>
+<p><b>Step 1: Extension of a uniformly tapered circular bar</b></p>
+<div class="eq">δL = <span class="frac"><span>4PL</span><span>πEd₁d₂</span></span></div>
+<p><b>Step 2: Substitution</b></p>
+<div class="eq">δL = <span class="frac"><span>4 × 30,000 × 600</span><span>π × 200,000 × 35 × 20</span></span></div>
+<div class="eq">δL = 0.1637 mm</div>
+<p class="final">Answer: Increase in length, δL ≈ 0.164 mm</p>
+</div>
+</section>
+<section class="card">
+<button class="question" onclick="toggle(this)" aria-expanded="false">
+<span><b>15.</b> A tensile load of 60 kN is gradually applied to a circular bar of 4 cm diameter and 5 m long. If E = 2.0×10⁵ N/mm², determine: (i) stretch in the rod, (ii) stress in the rod, and (iii) strain energy absorbed by the rod.</span><span class="plus">+</span>
+</button>
+<div class="solution">
+<div class="figure">
+<svg viewBox="0 0 900 240" role="img" aria-label="Load–elongation diagram for strain energy" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <linearGradient id="areaGrad15" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4ba2e3" stop-opacity="0.5"/><stop offset="100%" stop-color="#4ba2e3" stop-opacity="0.1"/></linearGradient>
+  <marker id="arrowAxis15" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#1e293b"/></marker>
+</defs>
+<line x1="120" y1="200" x2="780" y2="200" stroke="#1e293b" stroke-width="2.5" marker-end="url(#arrowAxis15)"/>
+<line x1="120" y1="200" x2="120" y2="30" stroke="#1e293b" stroke-width="2.5" marker-end="url(#arrowAxis15)"/>
+<text x="770" y="230" font-size="15" font-weight="bold" fill="#1e293b">Deformation (δ)</text>
+<text x="100" y="30" text-anchor="end" font-size="15" font-weight="bold" fill="#1e293b">Load (P)</text>
+<polygon points="120,200 650,60 650,200" fill="url(#areaGrad15)"/>
+<line x1="120" y1="200" x2="650" y2="60" stroke="#185a9d" stroke-width="3.5"/>
+<line x1="650" y1="60" x2="650" y2="200" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4"/>
+<line x1="120" y1="60" x2="650" y2="60" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4"/>
+<circle cx="650" cy="60" r="5" fill="#185a9d"/>
+<text x="380" y="155" text-anchor="middle" font-size="16" font-weight="bold" fill="#0b568f">Strain Energy (U) = Area under curve</text>
+<text x="380" y="175" text-anchor="middle" font-size="14" font-weight="600" fill="#0b568f">U = ½ × P × δ</text>
+<text x="650" y="220" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">δ</text>
+<text x="105" y="65" text-anchor="end" font-size="14" font-weight="bold" fill="#1e293b">P</text>
+</svg>
+</div>
+<div class="solution-title">Solution</div>
+<p><b>Given:</b> P = 60 kN = 60,000 N, d = 4 cm = 40 mm, L = 5 m = 5000 mm, E = 2.0×10⁵ N/mm².</p>
+<p><b>Step 1: Cross-sectional area</b></p>
+<div class="eq">A = <span class="frac"><span>πd²</span><span>4</span></span></div>
+<div class="eq">A = <span class="frac"><span>π × 40²</span><span>4</span></span> = 1256.64 mm²</div>
+<p><b>Step 2: Stretch</b></p>
+<div class="eq">δL = <span class="frac"><span>PL</span><span>AE</span></span></div>
+<div class="eq">δL = <span class="frac"><span>60,000 × 5000</span><span>1256.64 × 2.0×10⁵</span></span> = 1.194 mm</div>
+<p><b>Step 3: Stress</b></p>
+<div class="eq">σ = <span class="frac"><span>P</span><span>A</span></span></div>
+<div class="eq">σ = <span class="frac"><span>60,000</span><span>1256.64</span></span> = 47.75 N/mm²</div>
+<p><b>Step 4: Strain energy for gradually applied load</b></p>
+<div class="eq">U = <span class="frac"><span>1</span><span>2</span></span>PδL</div>
+<div class="eq">U = <span class="frac"><span>1</span><span>2</span></span> × 60,000 × 1.194 = 35,820 N·mm</div>
+<div class="eq">U = 35.82 J</div>
+<p class="final">Answers: Stretch = 1.194 mm; Stress = 47.75 MPa; Strain energy = 35.82 J.</p>
+</div>
+</section>
+<section class="card">
+<button class="question" onclick="toggle(this)" aria-expanded="false">
+<span><b>16.</b> A steel specimen of 20 mm diameter with a gauge length of 200 mm is tested to destruction. It has an extension of 0.25 mm under a load of 80 kN and the load at elastic limit is 102 kN. The maximum load is 130 kN. The total extension at fracture is 56 mm and diameter at neck is 15 mm. Find: (i) stress at elastic limit, (ii) Young’s modulus, (iii) percentage elongation, (iv) percentage reduction in area, and (v) ultimate tensile stress.</span><span class="plus">+</span>
+</button>
+<div class="solution">
+
+<div class="solution-title">Solution</div>
+<p><b>Given:</b> d₀ = 20 mm, L₀ = 200 mm, extension at 80 kN = 0.25 mm, P<sub>el</sub> = 102 kN, P<sub>max</sub> = 130 kN, extension at fracture = 56 mm, d<sub>f</sub> = 15 mm.</p>
+<p><b>Step 1: Original cross-sectional area</b></p>
+<div class="eq">A₀ = <span class="frac"><span>πd₀²</span><span>4</span></span></div>
+<div class="eq">A₀ = <span class="frac"><span>π × 20²</span><span>4</span></span> = 314.16 mm²</div>
+<p><b>(i) Stress at elastic limit</b></p>
+<div class="eq">σ<sub>el</sub> = <span class="frac"><span>P<sub>el</sub></span><span>A₀</span></span></div>
+<div class="eq">σ<sub>el</sub> = <span class="frac"><span>102,000</span><span>314.16</span></span> = 324.68 MPa</div>
+<p><b>(ii) Young’s modulus</b></p>
+<div class="eq">σ = <span class="frac"><span>P</span><span>A₀</span></span></div>
+<div class="eq">σ = <span class="frac"><span>80,000</span><span>314.16</span></span> = 254.65 MPa</div>
+<div class="eq">ε = <span class="frac"><span>δL</span><span>L₀</span></span></div>
+<div class="eq">ε = <span class="frac"><span>0.25</span><span>200</span></span> = 0.00125</div>
+<div class="eq">E = <span class="frac"><span>σ</span><span>ε</span></span></div>
+<div class="eq">E = <span class="frac"><span>254.65</span><span>0.00125</span></span> = 203,715 MPa = 203.72 GPa</div>
+<p><b>(iii) Percentage elongation</b></p>
+<div class="eq">% elongation = <span class="frac"><span>final extension</span><span>original gauge length</span></span> × 100</div>
+<div class="eq">% elongation = <span class="frac"><span>56</span><span>200</span></span> × 100 = 28%</div>
+<p><b>(iv) Percentage reduction in area</b></p>
+<div class="eq">% reduction in area = <span class="frac"><span>A₀ − A<sub>f</sub></span><span>A₀</span></span> × 100</div>
+<div class="eq">% reduction in area = <span class="frac"><span>d₀² − d<sub>f</sub>²</span><span>d₀²</span></span> × 100</div>
+<div class="eq">% reduction in area = <span class="frac"><span>20² − 15²</span><span>20²</span></span> × 100 = 43.75%</div>
+<p><b>(v) Ultimate tensile stress</b></p>
+<div class="eq">σ<sub>u</sub> = <span class="frac"><span>P<sub>max</sub></span><span>A₀</span></span></div>
+<div class="eq">σ<sub>u</sub> = <span class="frac"><span>130,000</span><span>314.16</span></span> = 413.80 MPa</div>
+<p class="final">Answers: σ<sub>el</sub> = 324.68 MPa; E = 203.72 GPa; % elongation = 28%; % reduction in area = 43.75%; σ<sub>u</sub> = 413.80 MPa.</p>
+</div>
+</section>
+</main>
+<footer>Strength of Materials • Unit 1 • Numerical Problems • Version 4 — Solutions Checked</footer>
+</body>
+</html>
