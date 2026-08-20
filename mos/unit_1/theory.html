@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strength of Materials - Unit 1</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI",Arial,sans-serif;background:#f4f7fb;color:#263746}
+.main-header{
+position:sticky;top:0;z-index:1000;min-height:70px;display:flex;
+align-items:center;justify-content:space-between;gap:14px;padding:11px 22px;
+color:#fff;background:linear-gradient(135deg,#063d78,#0867b9);
+box-shadow:0 3px 12px rgba(0,0,0,.18)}
+.main-header a{color:#fff;text-decoration:none;font-weight:700;font-size:17px;
+padding:8px 11px;border-radius:7px;white-space:nowrap}
+.main-header a:hover{background:rgba(255,255,255,.15)}
+.header-title{flex:1;text-align:center;font-size:26px;font-weight:800}
+.container{width:94%;max-width:1450px;margin:25px auto 45px}
+.intro,.topic{background:#fff;border:1px solid #d4e0ec;border-radius:12px;
+box-shadow:0 3px 10px rgba(0,0,0,.06)}
+.intro{padding:25px 30px;margin-bottom:24px}
+.intro h1{margin:0 0 12px;color:#063d78;font-size:29px}
+.intro p{margin:8px 0;font-size:18px;line-height:1.75}
+.learning{margin:12px 0 0 20px;padding-left:18px}
+.learning li{font-size:17px;line-height:1.65;margin:3px 0}
+.note{margin-top:15px;padding:11px 14px;border-left:4px solid #0867b9;
+background:#eef6ff;border-radius:5px;color:#40576b}
+.topic{margin:14px 0;overflow:hidden}
+.topic-header{min-height:70px;display:flex;align-items:center;gap:12px;
+padding:13px 18px;cursor:pointer}
+.topic-number{background:#063d78;color:#fff;border-radius:7px;padding:7px 11px;
+font-size:17px;font-weight:800;flex:0 0 auto}
+.topic-title{flex:1;color:#063d78;font-size:22px;font-weight:750}
+.toggle{width:38px;height:38px;border:0;border-radius:50%;background:#0867c9;
+color:#fff;font-size:26px;line-height:36px;cursor:pointer;flex:0 0 auto}
+.toggle:hover{background:#064f99}
+.topic-content{display:none;border-top:1px solid #e2eaf2;padding:18px}
+.topic.open .topic-content{display:block}
+.description{font-size:17px;line-height:1.7;margin:0 0 15px}
+.image-box{text-align:center;background:#f7fbff;border:1px solid #d5e2ed;
+border-radius:9px;padding:12px}
+.image-box img{display:block;width:100%;height:auto;max-width:1500px;margin:auto;border-radius:6px}
+.caption{color:#5d7182;font-size:14px;margin-top:9px}
+footer{background:#063d78;color:#fff;text-align:center;padding:17px;font-size:14px}
+@media(max-width:800px){
+.main-header{padding:9px 10px;min-height:60px}
+.main-header a{font-size:13px;padding:6px 5px}
+.header-title{font-size:17px}.container{width:96%;margin-top:16px}
+.intro{padding:18px}.intro h1{font-size:24px}
+.intro p,.description{font-size:16px}.learning li{font-size:15px}
+.topic-header{padding:11px 12px;min-height:62px}
+.topic-title{font-size:18px}.topic-number{font-size:15px;padding:6px 8px}
+.toggle{width:34px;height:34px;font-size:23px;line-height:32px}
+.topic-content{padding:12px}}
+@media(max-width:520px){
+.header-title{font-size:14px}.main-header a{font-size:11px}.topic-title{font-size:16px}}
+</style>
+</head>
+<body>
+
+<header class="main-header">
+<a href="../../index.html">🏠 Main Home</a>
+<div class="header-title">STRENGTH OF MATERIALS — UNIT 1</div>
+<a href="../index.html">Strength of Materials Home</a>
+</header>
+
+<main class="container">
+<section class="intro">
+<h1>Unit 1 — Strength of Materials</h1>
+<p>This unit develops the fundamental understanding of how engineering materials respond to mechanical and thermal loading. Students will learn how external loads produce internal stress and deformation, how stress and strain are related through material properties, and how different materials behave under loading.</p>
+<p>The unit also introduces the analysis of axially loaded members, deformation due to self-weight and temperature, and the energy stored during elastic deformation.</p>
+<ul class="learning">
+<li>Understand the relationship between <b>load, stress, strain and deformation</b>.</li>
+<li>Understand <b>elastic, plastic, ductile and brittle behaviour</b>.</li>
+<li>Study <b>elastic moduli and their relationships</b>.</li>
+<li>Understand <b>stepped and composite bars</b>.</li>
+<li>Understand deformation due to <b>self-weight and temperature</b>.</li>
+<li>Understand <b>strain energy and resilience</b>.</li>
+</ul>
+<div class="note"><b>How to use:</b> All topics are listed below. Click the <b>+</b> button to view the topic and its corresponding image.</div>
+</section>
+
+<section class="topic">
+<div class="topic-header" onclick="toggleTopic(this)">
+<span class="topic-number">1.1</span>
+<span class="topic-title">Stress</span>
+<button class="toggle" type="button">+</button>
+</div>
+<div class="topic-content">
+<p class="description">Understand the basic concept of stress and how internal resistance develops in a loaded member.</p>
+<div class="image-box">
+<img src="../images/unit1_1.webp" alt="Stress">
+<div class="caption">Strength of Materials — Unit 1.1: Stress</div>
+</div>
+</div>
+</section>
+
+<section class="topic">
+<div class="topic-header" onclick="toggleTopic(this)">
+<span class="topic-number">1.2</span>
+<span class="topic-title">Strain</span>
+<button class="toggle" type="button">+</button>
+</div>
+<div class="topic-content">
+<p class="description">Understand strain as the deformation produced in a material and its basic physical meaning.</p>
+<div class="image-box">
+<img src="../images/unit1_2.webp" alt="Strain">
+<div class="caption">Strength of Materials — Unit 1.2: Strain</div>
+</div>
+</div>
+</section>
+
+<section class="topic">
+<div class="topic-header" onclick="toggleTopic(this)">
+<span class="topic-number">1.3</span>
+<span class="topic-title">Elasticity, Plasticity, Elastic Limit & Hooke's Law</span>
+<button class="toggle" type="button">+</button>
+</div>
+<div class="topic-content">
+<p class="description">Understand elastic and plastic behaviour, elastic limit, Hooke's law and Young's modulus.</p>
+<div class="image-box">
+<img src="../images/unit1_3.webp" alt="Elasticity, Plasticity, Elastic Limit & Hooke's Law">
+<div class="caption">Strength of Materials — Unit 1.3: Elasticity, Plasticity, Elastic Limit & Hooke's Law</div>
+</div>
+</div>
+</section>
+
+<section class="topic">
+<div class="topic-header" onclick="toggleTopic(this)">
+<span class="topic-number">1.4</span>
+<span class="topic-title">Elastic Moduli and Relations Between Them</span>
+<button class="toggle" type="button">+</button>
+</div>
+<div class="topic-content">
+<p class="description">Study the three elastic moduli and the important relationships between them.</p>
+<div class="image-box">
+<img src="../images/unit1_4.webp" alt="Elastic Moduli and Relations Between Them">
+<div class="caption">Strength of Materials — Unit 1.4: Elastic Moduli and Relations Between Them</div>
+</div>
+</div>
+</section>
+
+<section class="topic">
+<div class="topic-header" onclick="toggleTopic(this)">
+<span class="topic-number">1.5</span>
+<span class="topic-title">Stress–Strain Curve for Ductile Materials</span>
+<button class="toggle" type="button">+</button>
+</div>
+<div class="topic-content">
+<p class="description">Study the characteristic stress–strain behaviour of ductile materials and the important regions and points of the curve.</p>
+<div class="image-box">
+<img src="../images/unit1_5.webp" alt="Stress–Strain Curve for Ductile Materials">
+<div class="caption">Strength of Materials — Unit 1.5: Stress–Strain Curve for Ductile Materials</div>
+</div>
+</div>
+</section>
+
+<section class="topic">
+<div class="topic-header" onclick="toggleTopic(this)">
+<span class="topic-number">1.6</span>
+<span class="topic-title">Stress–Strain Curve for Brittle Materials</span>
+<button class="toggle" type="button">+</button>
+</div>
+<div class="topic-content">
+<p class="description">Study the characteristic stress–strain behaviour of brittle materials and their fracture behaviour.</p>
+<div class="image-box">
+<img src="../images/unit1_6.webp" alt="Stress–Strain Curve for Brittle Materials">
+<div class="caption">Strength of Materials — Unit 1.6: Stress–Strain Curve for Brittle Materials</div>
+</div>
+</div>
+</section>
+
+<section class="topic">
+<div class="topic-header" onclick="toggleTopic(this)">
+<span class="topic-number">1.7</span>
+<span class="topic-title">Stepped Bar</span>
+<button class="toggle" type="button">+</button>
+</div>
+<div class="topic-content">
+<p class="description">Understand the behaviour of an axially loaded stepped bar and the deformation of its individual portions.</p>
+<div class="image-box">
+<img src="../images/unit1_7.webp" alt="Stepped Bar">
+<div class="caption">Strength of Materials — Unit 1.7: Stepped Bar</div>
+</div>
+</div>
+</section>
+
+<section class="topic">
+<div class="topic-header" onclick="toggleTopic(this)">
+<span class="topic-number">1.8</span>
+<span class="topic-title">Composite Bar</span>
+<button class="toggle" type="button">+</button>
+</div>
+<div class="topic-content">
+<p class="description">Understand series and parallel composite bars and the compatibility of deformation between their members.</p>
+<div class="image-box">
+<img src="../images/unit1_8.webp" alt="Composite Bar">
+<div class="caption">Strength of Materials — Unit 1.8: Composite Bar</div>
+</div>
+</div>
+</section>
+
+<section class="topic">
+<div class="topic-header" onclick="toggleTopic(this)">
+<span class="topic-number">1.9</span>
+<span class="topic-title">Deformation of a Bar Due to Self-Weight</span>
+<button class="toggle" type="button">+</button>
+</div>
+<div class="topic-content">
+<p class="description">Study deformation of bars caused by their own weight, including the vertical and tapered-bar cases.</p>
+<div class="image-box">
+<img src="../images/unit1_9.webp" alt="Deformation of a Bar Due to Self-Weight">
+<div class="caption">Strength of Materials — Unit 1.9: Deformation of a Bar Due to Self-Weight</div>
+</div>
+</div>
+</section>
+
+<section class="topic">
+<div class="topic-header" onclick="toggleTopic(this)">
+<span class="topic-number">1.10</span>
+<span class="topic-title">Thermal Strain and Thermal Stress</span>
+<button class="toggle" type="button">+</button>
+</div>
+<div class="topic-content">
+<p class="description">Understand thermal strain and the development of thermal stress when thermal expansion or contraction is restrained.</p>
+<div class="image-box">
+<img src="../images/unit1_10.webp" alt="Thermal Strain and Thermal Stress">
+<div class="caption">Strength of Materials — Unit 1.10: Thermal Strain and Thermal Stress</div>
+</div>
+</div>
+</section>
+
+<section class="topic">
+<div class="topic-header" onclick="toggleTopic(this)">
+<span class="topic-number">1.11</span>
+<span class="topic-title">Strain Energy, Resilience and Modulus of Resilience</span>
+<button class="toggle" type="button">+</button>
+</div>
+<div class="topic-content">
+<p class="description">Understand strain energy stored during elastic deformation, resilience and modulus of resilience.</p>
+<div class="image-box">
+<img src="../images/unit1_11.webp" alt="Strain Energy, Resilience and Modulus of Resilience">
+<div class="caption">Strength of Materials — Unit 1.11: Strain Energy, Resilience and Modulus of Resilience</div>
+</div>
+</div>
+</section>
+
+</main>
+<footer>Strength of Materials | Unit 1</footer>
+<script>
+function toggleTopic(header){
+ const topic=header.closest(".topic");
+ const button=header.querySelector(".toggle");
+ const open=topic.classList.toggle("open");
+ button.textContent=open?"−":"+";
+}
+</script>
+</body>
+</html>
