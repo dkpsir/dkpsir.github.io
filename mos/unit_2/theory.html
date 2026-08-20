@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strength of Materials — Unit 2</title>
+<style>
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #f4f7fb;
+        color: #18324b;
+    }
+
+    .topbar {
+        background: #063f78;
+        color: white;
+        padding: 18px 28px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        box-shadow: 0 2px 8px rgba(0,0,0,.12);
+    }
+
+    .title {
+        font-size: 28px;
+        font-weight: 700;
+        letter-spacing: .3px;
+    }
+
+    .nav {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .nav a {
+        text-decoration: none;
+        color: white;
+        background: #0b69c7;
+        padding: 10px 18px;
+        border-radius: 22px;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    .nav a:hover { background: #095aa9; }
+
+    .container {
+        max-width: 1250px;
+        margin: 24px auto 50px;
+        padding: 0 18px;
+    }
+
+    .unit-header {
+        background: white;
+        border-radius: 16px;
+        padding: 26px 28px;
+        border: 1px solid #d9e3ee;
+        box-shadow: 0 3px 12px rgba(20,55,90,.08);
+        margin-bottom: 18px;
+    }
+
+    .unit-header h1 {
+        margin: 0 0 12px;
+        color: #06467f;
+        font-size: 30px;
+    }
+
+    .unit-header h2 {
+        margin: 0 0 14px;
+        color: #b21f2d;
+        font-size: 21px;
+    }
+
+    .abstract {
+        line-height: 1.75;
+        font-size: 16px;
+        margin: 0;
+    }
+
+    .learning-box {
+        margin-top: 18px;
+        padding: 16px 20px;
+        background: #eef6ff;
+        border-left: 5px solid #0b69c7;
+        border-radius: 8px;
+    }
+
+    .learning-box strong {
+        color: #06467f;
+    }
+
+    .topic {
+        background: white;
+        border: 1px solid #d5e0eb;
+        border-radius: 14px;
+        margin: 14px 0;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(20,55,90,.06);
+    }
+
+    .topic-header {
+        width: 100%;
+        border: 0;
+        background: white;
+        padding: 20px 22px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        text-align: left;
+        cursor: pointer;
+        color: #073f73;
+    }
+
+    .topic-header:hover { background: #f8fbff; }
+
+    .number {
+        min-width: 58px;
+        height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #063f78;
+        color: white;
+        border-radius: 9px;
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    .topic-name {
+        flex: 1;
+        font-size: 22px;
+        font-weight: 700;
+    }
+
+    .plus {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #0868c9;
+        color: white;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 27px;
+        font-weight: 400;
+        line-height: 1;
+    }
+
+    .topic-content {
+        display: none;
+        padding: 0 22px 24px;
+        border-top: 1px solid #dbe5ef;
+    }
+
+    .description {
+        font-size: 16px;
+        line-height: 1.65;
+        margin: 18px 0;
+        color: #24435f;
+    }
+
+    .image-box {
+        border: 1px solid #d4e0eb;
+        border-radius: 11px;
+        background: #f8fbff;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    .image-box img {
+        display: block;
+        width: 100%;
+        height: auto;
+        max-height: 700px;
+        object-fit: contain;
+        background: white;
+    }
+
+    .caption {
+        padding: 11px 14px;
+        color: #526d86;
+        font-size: 14px;
+        background: #f4f8fc;
+    }
+
+    .footer {
+        text-align: center;
+        color: #6a8095;
+        font-size: 13px;
+        padding: 20px;
+    }
+
+    @media (max-width: 700px) {
+        .topbar { padding: 15px; }
+        .title { font-size: 21px; }
+        .topic-name { font-size: 18px; }
+        .unit-header { padding: 20px; }
+    }
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+    <div class="title">STRENGTH OF MATERIALS — UNIT 2</div>
+    <nav class="nav">
+        <a href="../../index.html">Home</a>
+        <a href="../index.html">MoS Home</a>
+    </nav>
+</header>
+
+<main class="container">
+
+    <section class="unit-header">
+        <h1>Unit 2</h1>
+        <h2>Shear Force and Bending Moment</h2>
+
+        <p class="abstract">
+            In this unit, students will develop an understanding of how beams respond internally
+            when external loads act on them. They will learn how shear force and bending moment
+            arise at different sections of a beam, how their signs are interpreted, and how these
+            internal actions are represented through shear force and bending moment diagrams.
+            The unit will also help students understand how loading conditions influence the
+            shape of these diagrams and how important locations such as maximum bending moment
+            and points of contraflexure are identified in engineering beams.
+        </p>
+
+        <div class="learning-box">
+            <strong>By the end of this unit, students will be able to:</strong>
+            understand internal shear force and bending moment, interpret their sign conventions,
+            relate loading to S.F. and B.M., construct SFD and BMD for common loading conditions,
+            and identify important sections of a beam from the diagrams.
+        </div>
+    </section>
+
+    <!-- 2.1 -->
+    <section class="topic">
+        <button class="topic-header" onclick="toggleTopic(this)">
+            <span class="number">2.1</span>
+            <span class="topic-name">Introduction to Shear Force and Bending Moment</span>
+            <span class="plus">+</span>
+        </button>
+        <div class="topic-content">
+            <p class="description">
+                The basic concept of internal forces developed in a beam when external loads act on it,
+                and the meaning and engineering significance of shear force and bending moment at a section.
+            </p>
+            <div class="image-box">
+                <img src="../images/unit2_1.webp" alt="Introduction to Shear Force and Bending Moment">
+                <div class="caption">Strength of Materials — Unit 2.1: Introduction to Shear Force and Bending Moment</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2.2 -->
+    <section class="topic">
+        <button class="topic-header" onclick="toggleTopic(this)">
+            <span class="number">2.2</span>
+            <span class="topic-name">Types of Beam Supports and Reactions</span>
+            <span class="plus">+</span>
+        </button>
+        <div class="topic-content">
+            <p class="description">
+                Common beam supports, the reactions produced by them, and how support conditions
+                determine the external forces acting on a beam.
+            </p>
+            <div class="image-box">
+                <img src="../images/unit2_2.webp" alt="Types of Beam Supports and Reactions">
+                <div class="caption">Strength of Materials — Unit 2.2: Types of Beam Supports and Reactions</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2.3 -->
+    <section class="topic">
+        <button class="topic-header" onclick="toggleTopic(this)">
+            <span class="number">2.3</span>
+            <span class="topic-name">Shear Force — Concept and Sign Convention</span>
+            <span class="plus">+</span>
+        </button>
+        <div class="topic-content">
+            <p class="description">
+                The meaning of shear force at a beam section and the positive and negative
+                sign conventions used while analysing the internal shear force.
+            </p>
+            <div class="image-box">
+                <img src="../images/unit2_3.webp" alt="Shear Force Concept and Sign Convention">
+                <div class="caption">Strength of Materials — Unit 2.3: Shear Force — Concept and Sign Convention</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2.4 -->
+    <section class="topic">
+        <button class="topic-header" onclick="toggleTopic(this)">
+            <span class="number">2.4</span>
+            <span class="topic-name">Bending Moment — Concept and Sign Convention</span>
+            <span class="plus">+</span>
+        </button>
+        <div class="topic-content">
+            <p class="description">
+                The internal bending moment developed at a section of a beam, together with
+                sagging and hogging behaviour and the corresponding sign convention.
+            </p>
+            <div class="image-box">
+                <img src="../images/unit2_4.webp" alt="Bending Moment Concept and Sign Convention">
+                <div class="caption">Strength of Materials — Unit 2.4: Bending Moment — Concept and Sign Convention</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2.5 -->
+    <section class="topic">
+        <button class="topic-header" onclick="toggleTopic(this)">
+            <span class="number">2.5</span>
+            <span class="topic-name">Relationship Between Load, Shear Force and Bending Moment</span>
+            <span class="plus">+</span>
+        </button>
+        <div class="topic-content">
+            <p class="description">
+                The relationship between the applied loading and the corresponding variations
+                of shear force and bending moment along the length of a beam.
+            </p>
+            <div class="image-box">
+                <img src="../images/unit2_5.webp" alt="Relationship Between Load Shear Force and Bending Moment">
+                <div class="caption">Strength of Materials — Unit 2.5: Relationship Between Load, Shear Force and Bending Moment</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2.6 -->
+    <section class="topic">
+        <button class="topic-header" onclick="toggleTopic(this)">
+            <span class="number">2.6</span>
+            <span class="topic-name">Shear Force Diagram — Construction and Characteristics</span>
+            <span class="plus">+</span>
+        </button>
+        <div class="topic-content">
+            <p class="description">
+                How the shear force varies from section to section and how the variation is
+                represented graphically through a Shear Force Diagram (SFD).
+            </p>
+            <div class="image-box">
+                <img src="../images/unit2_6.webp" alt="Shear Force Diagram Construction and Characteristics">
+                <div class="caption">Strength of Materials — Unit 2.6: Shear Force Diagram — Construction and Characteristics</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2.7 -->
+    <section class="topic">
+        <button class="topic-header" onclick="toggleTopic(this)">
+            <span class="number">2.7</span>
+            <span class="topic-name">Bending Moment Diagram — Construction and Characteristics</span>
+            <span class="plus">+</span>
+        </button>
+        <div class="topic-content">
+            <p class="description">
+                How bending moment varies along a beam and how the variation is represented
+                graphically through a Bending Moment Diagram (BMD).
+            </p>
+            <div class="image-box">
+                <img src="../images/unit2_7.webp" alt="Bending Moment Diagram Construction and Characteristics">
+                <div class="caption">Strength of Materials — Unit 2.7: Bending Moment Diagram — Construction and Characteristics</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2.8 -->
+    <section class="topic">
+        <button class="topic-header" onclick="toggleTopic(this)">
+            <span class="number">2.8</span>
+            <span class="topic-name">Maximum Bending Moment and Point of Contraflexure</span>
+            <span class="plus">+</span>
+        </button>
+        <div class="topic-content">
+            <p class="description">
+                Important locations in a beam where bending moment reaches a maximum or minimum
+                value, and the point where the bending moment changes sign from sagging to hogging
+                or vice versa.
+            </p>
+            <div class="image-box">
+                <img src="../images/unit2_8.webp" alt="Maximum Bending Moment and Point of Contraflexure">
+                <div class="caption">Strength of Materials — Unit 2.8: Maximum Bending Moment and Point of Contraflexure</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2.9 -->
+    <section class="topic">
+        <button class="topic-header" onclick="toggleTopic(this)">
+            <span class="number">2.9</span>
+            <span class="topic-name">Real-Time Applications of Shear Force and Bending Moment</span>
+            <span class="plus">+</span>
+        </button>
+        <div class="topic-content">
+            <p class="description">
+                Practical engineering applications showing where shear force and bending moment
+                are important, and the specific role they play in analysing and designing beams
+                and structural or machine components.
+            </p>
+            <div class="image-box">
+                <img src="../images/unit2_9.webp" alt="Real-Time Applications of Shear Force and Bending Moment">
+                <div class="caption">Strength of Materials — Unit 2.9: Real-Time Applications of Shear Force and Bending Moment</div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<div class="footer">
+    Strength of Materials — Unit 2
+</div>
+
+<script>
+function toggleTopic(button) {
+    const content = button.nextElementSibling;
+    const icon = button.querySelector(".plus");
+    const isOpen = content.style.display === "block";
+
+    content.style.display = isOpen ? "none" : "block";
+    icon.textContent = isOpen ? "+" : "−";
+}
+</script>
+
+</body>
+</html>
