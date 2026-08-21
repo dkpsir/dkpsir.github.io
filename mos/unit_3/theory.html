@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strength of Materials — Unit 3</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;background:#f4f7fb;color:#222;line-height:1.6}
+.main-header{background:#063d78;color:#fff;min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 18px;position:sticky;top:0;z-index:1000;box-shadow:0 2px 8px rgba(0,0,0,.16)}
+.main-header a{color:#fff;text-decoration:none;background:#075b99;border:1px solid rgba(255,255,255,.35);border-radius:6px;padding:7px 10px;font-size:14px;font-weight:600}
+.main-header a:hover{background:#0878c9}.header-title{font-size:20px;font-weight:700;text-align:center;letter-spacing:.3px}
+.container{width:94%;max-width:1200px;margin:22px auto 35px}
+.intro{background:#fff;border:1px solid #d7e1eb;border-radius:9px;padding:25px;margin-bottom:18px;box-shadow:0 3px 10px rgba(0,0,0,.06)}
+.intro h1{color:#063d78;font-size:28px;margin-bottom:12px}.intro p{font-size:17px;text-align:justify;margin-bottom:11px}
+.learning{margin:12px 0 0 22px}.learning li{margin:5px 0;font-size:16px}
+.note{margin-top:16px;padding:12px 15px;background:#eef6ff;border-left:5px solid #075b99;border-radius:5px;font-size:15px}
+.topic{background:#fff;border:1px solid #d7e1eb;border-radius:9px;margin-bottom:13px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.topic-header{display:flex;align-items:center;gap:12px;min-height:60px;padding:10px 13px;background:#075b99;color:#fff;cursor:pointer}
+.topic-number{background:#fff;color:#075b99;border-radius:6px;padding:5px 9px;font-size:15px;font-weight:700;white-space:nowrap}
+.topic-title{flex:1;font-size:18px;font-weight:700}.toggle{width:35px;height:35px;border:1px solid rgba(255,255,255,.65);border-radius:6px;background:#fff;color:#075b99;font-size:24px;line-height:30px;cursor:pointer;font-weight:700}
+.topic-content{display:none;padding:18px 20px 22px;background:#fff}.topic.open .topic-content{display:block}
+.description{font-size:16px;text-align:justify;margin-bottom:15px}.image-box{text-align:center;margin:12px auto 4px}.image-box img{display:block;width:100%;height:auto;max-width:1500px;margin:auto;border-radius:6px;border:1px solid #dce5ed}.caption{color:#5d7182;font-size:14px;margin-top:8px}.multi-image{display:grid;grid-template-columns:1fr;gap:18px}
+footer{background:#063d78;color:#fff;text-align:center;padding:17px;font-size:14px}
+@media(max-width:800px){.main-header{padding:9px 10px;min-height:60px}.main-header a{font-size:13px;padding:6px 5px}.header-title{font-size:17px}.container{width:96%;margin-top:16px}.intro{padding:18px}.intro h1{font-size:24px}.intro p,.description{font-size:16px}.learning li{font-size:15px}.topic-header{padding:11px 12px;min-height:62px}.topic-title{font-size:18px}.topic-number{font-size:15px;padding:6px 8px}.toggle{width:34px;height:34px;font-size:23px;line-height:32px}.topic-content{padding:12px}}
+@media(max-width:520px){.main-header{flex-wrap:wrap;justify-content:center}.header-title{order:-1;width:100%;font-size:14px}.main-header a{font-size:11px}.topic-title{font-size:16px}.topic-number{font-size:13px}.intro h1{font-size:21px}}
+</style>
+</head>
+<body>
+<header class="main-header">
+<a href="../../index.html">🏠 Main Home</a>
+<div class="header-title">STRENGTH OF MATERIALS — UNIT 3</div>
+<a href="../index.html">Strength of Materials Home</a>
+</header>
+<main class="container">
+<section class="intro">
+<h1>Unit 3 — Bending and Shear Stresses</h1>
+<p>This unit develops the understanding of how beams resist transverse loading through bending and shear. Students will learn how a beam bends, how the neutral axis is established, and how bending stresses vary across different cross-sections. The unit also introduces the bending equation and the concept of section modulus, which are essential for evaluating the strength of beam sections.</p>
+<p>The unit further develops the concept of shear stress in beams, including the governing shear-stress equation and the distribution of shear stress across standard beam sections. These concepts help students analyse and select suitable beam sections for structural and machine applications.</p>
+<ul class="learning">
+<li>Understand the <b>theory and assumptions of simple bending</b>.</li>
+<li>Understand the <b>neutral axis and bending equation</b>.</li>
+<li>Determine <b>bending stresses</b> in standard and hollow beam sections.</li>
+<li>Understand and calculate <b>section modulus</b>.</li>
+<li>Understand the <b>shear-stress equation</b> and its terms.</li>
+<li>Interpret <b>shear-stress distributions</b> for standard beam sections.</li>
+<li>Relate bending and shear concepts to <b>real engineering applications</b>.</li>
+</ul>
+<div class="note"><b>How to use:</b> All topics are listed below. Click the <b>+</b> button to view the topic description and corresponding image.</div>
+</section>
+
+<section class="topic"><div class="topic-header" onclick="toggleTopic(this)"><span class="topic-number">3.1</span><span class="topic-title">Introduction to Bending</span><button class="toggle" type="button" aria-label="Show topic">+</button></div><div class="topic-content"><p class="description">Introduction to beam bending and the response of beams subjected to transverse loading, including bending, sagging, hogging, tension and compression in the beam section.</p><div class="image-box"><img src="../images/unit3_1.webp" alt="Introduction to Bending"><div class="caption">Strength of Materials — Unit 3.1: Introduction to Bending</div></div></div></section>
+
+<section class="topic"><div class="topic-header" onclick="toggleTopic(this)"><span class="topic-number">3.2</span><span class="topic-title">Theory of Simple Bending — Assumptions</span><button class="toggle" type="button" aria-label="Show topic">+</button></div><div class="topic-content"><p class="description">The assumptions used in simple bending theory are introduced, together with the behaviour of longitudinal layers of a beam during bending and the development of tension and compression regions.</p><div class="image-box"><img src="../images/unit3_2.webp" alt="Theory of Simple Bending — Assumptions"><div class="caption">Strength of Materials — Unit 3.2: Theory of Simple Bending — Assumptions</div></div></div></section>
+
+<section class="topic"><div class="topic-header" onclick="toggleTopic(this)"><span class="topic-number">3.3</span><span class="topic-title">Derivation of Bending Equation — Neutral Axis</span><button class="toggle" type="button" aria-label="Show topic">+</button></div><div class="topic-content"><p class="description">The neutral axis, radius of curvature, strain distribution and bending-stress distribution are developed to establish the fundamental bending equation M/I = σ/y = E/R.</p><div class="image-box"><img src="../images/unit3_3.webp" alt="Derivation of Bending Equation and Neutral Axis"><div class="caption">Strength of Materials — Unit 3.3: Derivation of Bending Equation — Neutral Axis</div></div></div></section>
+
+<section class="topic"><div class="topic-header" onclick="toggleTopic(this)"><span class="topic-number">3.4</span><span class="topic-title">Bending Stresses in Beam Sections</span><button class="toggle" type="button" aria-label="Show topic">+</button></div><div class="topic-content"><p class="description">Determination and interpretation of bending stresses in rectangular, circular, I-section, T-section and C-section beams, including corresponding hollow sections.</p><div class="image-box"><img src="../images/unit3_4.webp" alt="Bending Stresses in Beam Sections"><div class="caption">Strength of Materials — Unit 3.4: Bending Stresses in Beam Sections</div></div></div></section>
+
+<section class="topic"><div class="topic-header" onclick="toggleTopic(this)"><span class="topic-number">3.5</span><span class="topic-title">Section Modulus of Standard Cross-Sections</span><button class="toggle" type="button" aria-label="Show topic">+</button></div><div class="topic-content"><p class="description">Section modulus is introduced as a geometric property used to assess the bending resistance of a beam. Standard expressions for common solid and hollow sections are considered.</p><div class="image-box"><img src="../images/unit3_5.webp" alt="Section Modulus of Standard Cross-Sections"><div class="caption">Strength of Materials — Unit 3.5: Section Modulus of Standard Cross-Sections</div></div></div></section>
+
+<section class="topic"><div class="topic-header" onclick="toggleTopic(this)"><span class="topic-number">3.6</span><span class="topic-title">Shear Stress Equation</span><button class="toggle" type="button" aria-label="Show topic">+</button></div><div class="topic-content"><p class="description">The shear-stress equation is introduced for beams subjected to transverse shear force. The meaning of shear force, first moment of area, moment of inertia and section width at the level considered is explained.</p><div class="image-box"><img src="../images/unit3_6.webp" alt="Shear Stress Equation"><div class="caption">Strength of Materials — Unit 3.6: Shear Stress Equation</div></div></div></section>
+
+<section class="topic"><div class="topic-header" onclick="toggleTopic(this)"><span class="topic-number">3.7</span><span class="topic-title">Shear Stress Distribution in Standard Beam Sections</span><button class="toggle" type="button" aria-label="Show topic">+</button></div><div class="topic-content"><p class="description">Shear-stress distributions across rectangular, circular, I-section, T-section and C-section beams are compared, with emphasis on the location of maximum and zero shear stress.</p><div class="image-box"><img src="../images/unit3_7.webp" alt="Shear Stress Distribution in Standard Beam Sections"><div class="caption">Strength of Materials — Unit 3.7: Shear Stress Distribution in Standard Beam Sections</div></div></div></section>
+
+<section class="topic"><div class="topic-header" onclick="toggleTopic(this)"><span class="topic-number">3.8</span><span class="topic-title">Real-Time Applications of Bending and Shear</span><button class="toggle" type="button" aria-label="Show topic">+</button></div><div class="topic-content"><p class="description">Real engineering applications connect bending and shear concepts with bridge girders, building I-beams, automobile chassis, crane beams, machine frames and structural webs.</p><div class="multi-image"><div class="image-box"><img src="../images/unit3_8.webp" alt="Real-Time Applications of Bending and Shear"><div class="caption">Strength of Materials — Unit 3.8: Real-Time Applications of Bending and Shear</div></div><div class="image-box"><img src="../images/unit3_8_2.webp" alt="Real-Time Applications of Shear in Engineering"><div class="caption">Strength of Materials — Unit 3.8: Real-Time Applications — Shear in Engineering</div></div></div></div></section>
+
+</main>
+<footer>© 2026 D. Kiran Prasad &nbsp;|&nbsp; Strength of Materials</footer>
+<script>
+function toggleTopic(header){
+ const topic=header.closest('.topic');
+ const button=header.querySelector('.toggle');
+ const open=topic.classList.toggle('open');
+ button.textContent=open?'−':'+';
+ button.setAttribute('aria-label',open?'Hide topic':'Show topic');
+}
+</script>
+</body>
+</html>
