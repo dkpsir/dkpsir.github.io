@@ -155,21 +155,20 @@ PPTs, datasets, Python source code, downloadable notes and mini-projects.
 <footer style="position:relative;">
 <span>© 2026 D. Kiran Prasad | Academic Resource Portal</span>
 
-<span style="position:absolute;right:8%;top:50%;transform:translateY(-50%);
-             color:#ffd54f;font-weight:600;font-size:14px;">
-    👁️ Total Visits:
-    <span id="visit-count">...</span>
-</span>
+<div style="position:absolute;right:8%;top:50%;transform:translateY(-50%);
+            color:#ffd54f;font-weight:600;font-size:14px;">
+    <span class="counterapi"
+          ns="academic-portal-d-kiran-prasad"
+          action="view"
+          key="website-total-v2"
+          color="#ffd54f"
+          bg="transparent"
+          label="Total Visits"
+          noLink="true">
+    </span>
+</div>
 
-<script>
-function updateVisitCounter(data){
-    if(data && typeof data.value !== "undefined"){
-        document.getElementById("visit-count").textContent = data.value;
-    }
-}
-</script>
-
-<script async src="https://counterapi.com/api/academic-portal-d-kiran-prasad/view/website-total-v2?callback=updateVisitCounter"></script>
+<script src="https://counterapi.com/c.js" async></script>
 </footer>
 
 </body>
