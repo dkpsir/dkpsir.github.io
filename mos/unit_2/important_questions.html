@@ -23,6 +23,7 @@ body{margin:0;background:#eef4f9;color:#111}
 .question-header .plus,.stage-head .plus{flex:0 0 auto;width:34px;height:34px;border-radius:50%;background:#f7fbff;border:1px solid #d4e1ec;color:#075b93;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700}
 .answer{display:none;border-top:1px solid #dbe3ea;padding:16px 19px;font-size:17px;line-height:1.55;background:#fbfdff;color:#111}
 .short-answer{color:#111}
+.short-answer-figure{display:none;}
 .equation{text-align:center;font-size:19px;margin:8px 0}
 .stage{border:1px solid #cbd8e4;border-radius:8px;margin:13px 0;overflow:hidden}
 .stage-head{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#f3f7fa;color:#0b4f86;font-size:18px;font-weight:700;cursor:pointer}
@@ -267,8 +268,12 @@ function toggleSection(el){
 }
 function toggleQuestion(el){
     const body=el.nextElementSibling, icon=el.querySelector(".plus");
+    const figure=body.nextElementSibling;
     const open=body.style.display==="block";
     body.style.display=open?"none":"block";
+    if(figure && figure.classList.contains("short-answer-figure")){
+        figure.style.display=open?"none":"block";
+    }
     icon.textContent=open?"+":"−";
 }
 function toggleStage(el){
