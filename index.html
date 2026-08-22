@@ -13,7 +13,7 @@ header{background:linear-gradient(135deg,#0b3d91,#0f6ab4);color:#fff;padding:18p
 .brand p{margin-top:6px;font-size:18px}
 nav{margin-top:18px}
 nav a{color:#fff;text-decoration:none;margin-right:22px;font-weight:600}
-.hero{display:flex;justify-content:space-between;align-items:center;gap:40px;padding:70px 8%;background:#fff}
+.hero{display:flex;justify-content:space-between;align-items:center;gap:40px;padding:40px 8%;background:#fff}
 .hero-text{flex:2}
 .hero-text h2{font-size:42px;color:#0b3d91;margin-bottom:18px}
 .hero-text p{font-size:18px;line-height:1.8}
@@ -24,7 +24,7 @@ border:6px solid #0b3d91;
 display:flex;align-items:center;justify-content:center;
 background:#dbe9f7;font-size:18px;color:#0b3d91}
 .btn{display:inline-block;margin-top:25px;padding:12px 24px;background:#0b3d91;color:#fff;text-decoration:none;border-radius:8px}
-.section{padding:60px 8%}
+.section{padding:35px 8%}
 .section h2{text-align:center;color:#0b3d91;font-size:34px;margin-bottom:35px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
 .card{background:#fff;border-radius:12px;padding:28px;box-shadow:0 4px 14px rgba(0,0,0,.12)}
@@ -37,6 +37,16 @@ footer{background:#0b3d91;color:#fff;text-align:center;padding:20px}
 .hero{flex-direction:column;text-align:center}
 .brand h1{font-size:30px}
 .hero-text h2{font-size:32px}
+footer{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    align-items:center;
+}
+footer > span:last-of-type{
+    position:static !important;
+    transform:none !important;
+}
 }
 </style>
 </head>
@@ -148,14 +158,18 @@ PPTs, datasets, Python source code, downloadable notes and mini-projects.
 <span style="position:absolute;right:8%;top:50%;transform:translateY(-50%);
              color:#ffd54f;font-weight:600;font-size:14px;">
     👁️ Total Visits:
-    <span class="counterapi"
-          ns="academic-portal-d-kiran-prasad"
-          action="view"
-          key="website-total"
-          noIcon="true"
-          noCss="true"
-          noLink="true">0</span>
+    <span id="visit-count">...</span>
 </span>
+
+<script>
+function updateVisitCounter(data){
+    if(data && typeof data.value !== "undefined"){
+        document.getElementById("visit-count").textContent = data.value;
+    }
+}
+</script>
+
+<script async src="https://counterapi.com/api/academic-portal-d-kiran-prasad/view/website-total-v2?callback=updateVisitCounter"></script>
 </footer>
 
 </body>
