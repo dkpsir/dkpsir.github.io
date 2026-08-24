@@ -1,11 +1,10 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Deep Learning and Machine Learning Projects</title>
-
 <style>
 
 *{
@@ -294,384 +293,368 @@ footer{
 
 }
 
+
+/* ---------- PROJECT SUMMARY / MAIN EXPAND ---------- */
+.project-summary{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:20px;
+    padding:4px 0 20px;
+    cursor:pointer;
+}
+.project-summary-text{
+    flex:1;
+}
+.project-summary-description{
+    color:#4b6073;
+    font-size:17px;
+    line-height:1.65;
+    margin-top:10px;
+    max-width:1000px;
+}
+.project-main-plus{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:#0875c9;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:29px;
+    font-weight:bold;
+    flex-shrink:0;
+    margin-top:4px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.12);
+}
+.project-details{
+    display:none;
+    padding-top:6px;
+    border-top:1px solid #dce5ee;
+}
+.project-details.show{
+    display:block;
+}
+.project-summary:hover .project-main-plus{
+    background:#004f8d;
+    transform:scale(1.03);
+}
+
+
+/* ---------- UPDATED SITE HEADER ---------- */
+.site-header{
+    position:relative;
+    background:linear-gradient(135deg,#003b73,#0875c9);
+    color:white;
+    padding:18px 24px 22px;
+    min-height:78px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.15);
+}
+.header-title-block{
+    text-align:center;
+}
+.header-home-btn{
+    position:absolute;
+    left:24px;
+    top:50%;
+    transform:translateY(-50%);
+    display:inline-block;
+    background:#075ea8;
+    color:#fff;
+    text-decoration:none;
+    padding:10px 18px;
+    border-radius:7px;
+    font-size:16px;
+    font-weight:600;
+    transition:.2s;
+    box-shadow:0 2px 5px rgba(0,0,0,.15);
+}
+.header-home-btn:hover{
+    background:#003f75;
+    transform:translateY(-50%) translateY(-1px);
+}
+.site-header h1{
+    margin:0 0 5px;
+    font-size:32px;
+}
+.site-header p{
+    margin:0;
+    font-size:17px;
+}
+@media(max-width:700px){
+    .site-header{
+        padding:14px 15px 18px;
+        min-height:120px;
+    }
+    .header-home-btn{
+        left:15px;
+        top:15px;
+        transform:none;
+    }
+    .header-home-btn:hover{
+        transform:translateY(-1px);
+    }
+    .header-title-block{
+        padding-top:48px;
+    }
+    .site-header h1{
+        font-size:25px;
+    }
+    .site-header p{
+        font-size:15px;
+    }
+}
+
 </style>
 </head>
-
-
 <body>
-
-
 <!-- ========================================================= -->
 <!-- HEADER -->
 <!-- ========================================================= -->
-
-<header>
-
-    <h1>Deep Learning and Machine Learning Projects</h1>
-
-    <p>
-        Real-World Applications using Deep Learning and Machine Learning Algorithms
-    </p>
-
+<header class="site-header">
+<a class="header-home-btn" href="../../index.html">🏠 Home</a>
+<div class="header-title-block">
+<h1>Deep Learning and Machine Learning Projects</h1>
+<p>Real-World Applications using Deep Learning and Machine Learning Algorithms</p>
+</div>
 </header>
-
-
 <!-- ========================================================= -->
 <!-- TOP NAVIGATION -->
 <!-- ========================================================= -->
-
-<div class="navigation">
-
-    <a href="../../index.html" class="nav-btn">
-        🏠 Home
-    </a>
-
-</div>
-
-
 <!-- ========================================================= -->
 <!-- MAIN CONTENT -->
 <!-- ========================================================= -->
-
 <div class="container">
-
-
 <!-- ========================================================= -->
 <!-- PROJECT 1 -->
 <!-- ========================================================= -->
-
 <div class="project-card">
-
-    <div class="project-number">
-        PROJECT 1
-    </div>
-
-    <div class="project-title">
-        Customer Churn Prediction Using Artificial Neural Network
-    </div>
-
-
-    <!-- ----------------------------------------------------- -->
-    <!-- 1. PROJECT OBJECTIVE AND DATASET -->
-    <!-- ----------------------------------------------------- -->
-
-    <div class="info-box">
-
-        <div class="info-header" onclick="toggleSection(this)">
-
-            <span>
+<div class="project-summary" onclick="toggleProject(this)">
+<div class="project-summary-text">
+<div class="project-number">PROJECT 1</div>
+<div class="project-title">Customer Churn Prediction Using Artificial Neural Network</div>
+<div class="project-summary-description">
+                This project develops an Artificial Neural Network (ANN) to predict whether a
+                telecom customer is likely to churn or remain with the service. The project uses
+                customer demographic, service, account and payment information, followed by data
+                preprocessing, model development and performance evaluation using classification
+                metrics.
+            </div>
+</div>
+<span class="project-main-plus">+</span>
+</div>
+<div class="project-details">
+<!-- ----------------------------------------------------- -->
+<!-- 1. PROJECT OBJECTIVE AND DATASET -->
+<!-- ----------------------------------------------------- -->
+<div class="info-box">
+<div class="info-header" onclick="toggleSection(this)">
+<span>
                 1. Project Objective &amp; Dataset
             </span>
-
-            <span class="plus">+</span>
-
-        </div>
-
-        <div class="info-content">
-
-            <ul>
-
-                <li>
+<span class="plus">+</span>
+</div>
+<div class="info-content">
+<ul>
+<li>
                     The objective of the project is to predict whether
                     a telecom customer is likely to <b>churn</b> or stay.
                 </li>
-
-                <li>
+<li>
                     The project uses the
                     <b>Telco Customer Churn Dataset</b>.
                 </li>
-
-                <li>
+<li>
                     The dataset contains <b>7,043 customer records</b>
                     with 21 original features.
                 </li>
-
-                <li>
+<li>
                     Customer information includes demographic,
                     account, service and payment-related details.
                 </li>
-
-                <li>
+<li>
                     The target variable is <b>Churn</b>, indicating
                     whether the customer left the service.
                 </li>
-
-            </ul>
-
-        </div>
-
-    </div>
-
-
-    <!-- ----------------------------------------------------- -->
-    <!-- 2. DATA PREPROCESSING -->
-    <!-- ----------------------------------------------------- -->
-
-    <div class="info-box">
-
-        <div class="info-header" onclick="toggleSection(this)">
-
-            <span>
+</ul>
+</div>
+</div>
+<!-- ----------------------------------------------------- -->
+<!-- 2. DATA PREPROCESSING -->
+<!-- ----------------------------------------------------- -->
+<div class="info-box">
+<div class="info-header" onclick="toggleSection(this)">
+<span>
                 2. Data Preprocessing &amp; Analysis
             </span>
-
-            <span class="plus">+</span>
-
-        </div>
-
-        <div class="info-content">
-
-            <ul>
-
-                <li>
+<span class="plus">+</span>
+</div>
+<div class="info-content">
+<ul>
+<li>
                     Unnecessary customer identification information
                     is removed.
                 </li>
-
-                <li>
+<li>
                     Missing and inconsistent values are handled.
                 </li>
-
-                <li>
+<li>
                     Categorical variables are converted into
                     numerical form.
                 </li>
-
-                <li>
+<li>
                     Yes/No variables are encoded as numerical values
                     and multi-category variables are one-hot encoded.
                 </li>
-
-                <li>
+<li>
                     Numerical features are scaled before training
                     the neural network.
                 </li>
-
-                <li>
+<li>
                     Exploratory analysis is performed to study
                     customer churn and important customer attributes.
                 </li>
-
-            </ul>
-
-        </div>
-
-    </div>
-
-
-    <!-- ----------------------------------------------------- -->
-    <!-- 3. ANN MODEL -->
-    <!-- ----------------------------------------------------- -->
-
-    <div class="info-box">
-
-        <div class="info-header" onclick="toggleSection(this)">
-
-            <span>
+</ul>
+</div>
+</div>
+<!-- ----------------------------------------------------- -->
+<!-- 3. ANN MODEL -->
+<!-- ----------------------------------------------------- -->
+<div class="info-box">
+<div class="info-header" onclick="toggleSection(this)">
+<span>
                 3. ANN Model Development
             </span>
-
-            <span class="plus">+</span>
-
-        </div>
-
-        <div class="info-content">
-
-            <ul>
-
-                <li>
+<span class="plus">+</span>
+</div>
+<div class="info-content">
+<ul>
+<li>
                     The processed customer data is used to develop
                     an <b>Artificial Neural Network (ANN)</b>.
                 </li>
-
-                <li>
+<li>
                     The network uses <b>26 input features</b>.
                 </li>
-
-                <li>
+<li>
                     Hidden layers use the <b>ReLU</b> activation function.
                 </li>
-
-                <li>
+<li>
                     The output layer contains one neuron with
                     <b>Sigmoid</b> activation for binary classification.
                 </li>
-
-                <li>
-                    <b>Adam</b> is used as the optimizer.
+<li>
+<b>Adam</b> is used as the optimizer.
                 </li>
-
-                <li>
-                    <b>Binary Cross-Entropy</b> is used as the loss function.
+<li>
+<b>Binary Cross-Entropy</b> is used as the loss function.
                 </li>
-
-            </ul>
-
-        </div>
-
-    </div>
-
-
-    <!-- ----------------------------------------------------- -->
-    <!-- 4. EVALUATION -->
-    <!-- ----------------------------------------------------- -->
-
-    <div class="info-box">
-
-        <div class="info-header" onclick="toggleSection(this)">
-
-            <span>
+</ul>
+</div>
+</div>
+<!-- ----------------------------------------------------- -->
+<!-- 4. EVALUATION -->
+<!-- ----------------------------------------------------- -->
+<div class="info-box">
+<div class="info-header" onclick="toggleSection(this)">
+<span>
                 4. Model Evaluation &amp; Comparison
             </span>
-
-            <span class="plus">+</span>
-
-        </div>
-
-        <div class="info-content">
-
-            <ul>
-
-                <li>
+<span class="plus">+</span>
+</div>
+<div class="info-content">
+<ul>
+<li>
                     The ANN model is evaluated using classification
                     performance measures.
                 </li>
-
-                <li>
+<li>
                     Accuracy and classification report are used
                     to evaluate the model.
                 </li>
-
-                <li>
+<li>
                     A confusion matrix is used to analyze correct
                     and incorrect predictions.
                 </li>
-
-                <li>
+<li>
                     ANN performance is compared with other machine
                     learning models.
                 </li>
-
-                <li>
+<li>
                     The comparison includes Logistic Regression,
                     Random Forest and Support Vector Machine (SVM).
                 </li>
-
-            </ul>
-
-        </div>
-
-    </div>
-
-
-    <!-- ----------------------------------------------------- -->
-    <!-- 5. NEW CUSTOMER PREDICTION -->
-    <!-- ----------------------------------------------------- -->
-
-    <div class="info-box">
-
-        <div class="info-header" onclick="toggleSection(this)">
-
-            <span>
+</ul>
+</div>
+</div>
+<!-- ----------------------------------------------------- -->
+<!-- 5. NEW CUSTOMER PREDICTION -->
+<!-- ----------------------------------------------------- -->
+<div class="info-box">
+<div class="info-header" onclick="toggleSection(this)">
+<span>
                 5. Prediction for New Customers
             </span>
-
-            <span class="plus">+</span>
-
-        </div>
-
-        <div class="info-content">
-
-            <ul>
-
-                <li>
+<span class="plus">+</span>
+</div>
+<div class="info-content">
+<ul>
+<li>
                     New customer data is processed using the same
                     preprocessing procedure used during training.
                 </li>
-
-                <li>
+<li>
                     The trained ANN predicts the probability of
                     customer churn.
                 </li>
-
-                <li>
+<li>
                     A probability threshold of <b>0.5</b> is used
                     for the final churn decision.
                 </li>
-
-                <li>
+<li>
                     Customers can therefore be classified as
                     <b>Churn</b> or <b>Not Churn</b>.
                 </li>
-
-                <li>
+<li>
                     The predicted results can be saved for
                     further analysis.
                 </li>
-
-            </ul>
-
-        </div>
-
-    </div>
-
-
-    <!-- ===================================================== -->
-    <!-- PROJECT RESOURCES -->
-    <!-- ===================================================== -->
-
-    <div class="resources">
-
-        <h3>📚 Project Resources</h3>
-
-        <div class="resource-buttons">
-
-            <!-- Replace # with your actual notebook/code link -->
-
-            <a href="project1/customer_churn.ipynb"
-               class="resource-btn"
-               download="customer_churn.ipynb">
+</ul>
+</div>
+</div>
+<!-- ===================================================== -->
+<!-- PROJECT RESOURCES -->
+<!-- ===================================================== -->
+<div class="resources">
+<h3>📚 Project Resources</h3>
+<div class="resource-buttons">
+<!-- Replace # with your actual notebook/code link -->
+<a class="resource-btn" download="customer_churn.ipynb" href="project1/customer_churn.ipynb">
                📥 Download Python Code
             </a>
-
-
-            <!-- Kaggle Dataset -->
-
-            <a
-                href="https://www.kaggle.com/datasets/blastchar/telco-customer-churn"
-                class="resource-btn"
-                target="_blank"
-            >
+<!-- Kaggle Dataset -->
+<a class="resource-btn" href="https://www.kaggle.com/datasets/blastchar/telco-customer-churn" target="_blank">
                 📊 Dataset – Kaggle
             </a>
-
-
-            <!-- Replace # with actual new customer data link -->
-
-            <a href="project1/new_customer_data.csv" class="resource-btn">
+<!-- Replace # with actual new customer data link -->
+<a class="resource-btn" href="project1/new_customer_data.csv">
                 📥 New Customer Data
             </a>
-
-
-            <!-- Replace # with actual PPT link -->
-            <a href="project1/customer_churn_ppt.pdf"
-               class="resource-btn"
-               download="customer_churn_ppt.pdf">
+<!-- Replace # with actual PPT link -->
+<a class="resource-btn" download="customer_churn_ppt.pdf" href="project1/customer_churn_ppt.pdf">
               📑 Project Presentation
             </a>
-            
-        </div>
-
-    </div>
-
-
 </div>
-
+</div>
+</div>
+<!-- ========================================================= -->
+<!-- PROJECT 2 -->
+<!-- ========================================================= -->
 
 <!-- ========================================================= -->
 <!-- FUTURE PROJECTS CAN BE ADDED HERE -->
 <!-- ========================================================= -->
-
 <!--
 
 <div class="project-card">
@@ -689,27 +672,259 @@ footer{
 </div>
 
 -->
-
-
+</div><div class="project-card">
+<div class="project-summary" onclick="toggleProject(this)">
+<div class="project-summary-text">
+<div class="project-number">PROJECT 2</div>
+<div class="project-title">Weather Prediction using Linear Regression</div>
+<div class="project-summary-description">
+                This project uses historical weather records from multiple stations to predict
+                average temperature, minimum temperature, maximum temperature and rainfall.
+                The workflow includes data preprocessing, feature preparation, Linear Regression
+                model training, evaluation using R² and RMSE, and prediction for a selected date
+                and station using Python.
+            </div>
 </div>
-
-
+<span class="project-main-plus">+</span>
+</div>
+<div class="project-details">
+<!-- 1. PROJECT OBJECTIVE AND DATASET -->
+<div class="info-box">
+<div class="info-header" onclick="toggleSection(this)">
+<span>1. Project Objective &amp; Dataset</span>
+<span class="plus">+</span>
+</div>
+<div class="info-content">
+<ul>
+<li>
+                    The objective of the project is to develop a
+                    <b>data-driven weather prediction system</b> using
+                    Linear Regression.
+                </li>
+<li>
+                    The project uses a historical weather dataset containing
+                    daily records from multiple weather stations.
+                </li>
+<li>
+                    The dataset contains date-wise information including
+                    <b>average temperature, minimum temperature, maximum temperature,
+                    and rainfall</b>.
+                </li>
+<li>
+                    The Excel dataset used in this project is
+                    <b>weather data set.xlsx</b>.
+                </li>
+<li>
+                    The dataset is processed locally as part of the project;
+                    no external Kaggle link is required on this page.
+                </li>
+</ul>
+</div>
+</div>
+<!-- 2. INPUT AND OUTPUT VARIABLES -->
+<div class="info-box">
+<div class="info-header" onclick="toggleSection(this)">
+<span>2. Input &amp; Output Variables</span>
+<span class="plus">+</span>
+</div>
+<div class="info-content">
+<p><b>Input Variables</b></p>
+<ul>
+<li><b>year</b> – year extracted from the date of record</li>
+<li><b>month_num</b> – month number derived from the date</li>
+<li><b>day</b> – day of the month</li>
+<li><b>station_encoded</b> – numerical encoding of station names</li>
+</ul>
+<p><b>Output Variables</b></p>
+<ul>
+<li><b>avg_temp</b> – predicted average temperature (°C)</li>
+<li><b>min_temp</b> – predicted minimum temperature (°C)</li>
+<li><b>max_temp</b> – predicted maximum temperature (°C)</li>
+<li><b>rainfall</b> – predicted rainfall amount (mm)</li>
+</ul>
+</div>
+</div>
+<!-- 3. DATA PREPROCESSING -->
+<div class="info-box">
+<div class="info-header" onclick="toggleSection(this)">
+<span>3. Data Preprocessing</span>
+<span class="plus">+</span>
+</div>
+<div class="info-content">
+<ul>
+<li>
+                    The <b>date_of_record</b> column is converted into a
+                    date format.
+                </li>
+<li>
+                    The data is sorted chronologically.
+                </li>
+<li>
+                    Year, month and day are extracted from the date.
+                </li>
+<li>
+                    Station names are converted into numerical values using
+                    <b>LabelEncoder</b>.
+                </li>
+<li>
+                    Missing temperature values are handled using interpolation
+                    and remaining missing values are filled with the mean.
+                </li>
+<li>
+                    Missing rainfall values are replaced with <b>0</b>.
+                </li>
+</ul>
+</div>
+</div>
+<!-- 4. LINEAR REGRESSION MODEL -->
+<div class="info-box">
+<div class="info-header" onclick="toggleSection(this)">
+<span>4. Linear Regression Model Development</span>
+<span class="plus">+</span>
+</div>
+<div class="info-content">
+<ul>
+<li>
+                    The processed dataset is divided into input features
+                    and output variables.
+                </li>
+<li>
+                    The model uses <b>Linear Regression</b> from
+                    scikit-learn.
+                </li>
+<li>
+                    The prepared data is divided into training and testing
+                    subsets.
+                </li>
+<li>
+                    The model learns relationships between date/station
+                    information and the four weather outputs.
+                </li>
+</ul>
+</div>
+</div>
+<!-- 5. MODEL EVALUATION -->
+<div class="info-box">
+<div class="info-header" onclick="toggleSection(this)">
+<span>5. Model Evaluation</span>
+<span class="plus">+</span>
+</div>
+<div class="info-content">
+<ul>
+<li>
+                    The trained model is evaluated using the <b>R² Score</b>.
+                </li>
+<li>
+<b>RMSE (Root Mean Square Error)</b> is also calculated
+                    to measure prediction error.
+                </li>
+<li>
+                    Actual and predicted values can be compared to understand
+                    model performance.
+                </li>
+<li>
+                    When actual weather data is available for a selected
+                    date and station, percentage errors are also calculated.
+                </li>
+</ul>
+</div>
+</div>
+<!-- 6. WEATHER PREDICTION -->
+<div class="info-box">
+<div class="info-header" onclick="toggleSection(this)">
+<span>6. Prediction for a Given Date &amp; Station</span>
+<span class="plus">+</span>
+</div>
+<div class="info-content">
+<ul>
+<li>
+                    A function named <b>predict_weather()</b> is used to
+                    generate predictions.
+                </li>
+<li>
+                    The user provides a <b>date</b> and <b>station name</b>.
+                </li>
+<li>
+                    The date is converted into year, month and day features.
+                </li>
+<li>
+                    The station name is encoded using the trained
+                    station encoder.
+                </li>
+<li>
+                    The model predicts average temperature, minimum
+                    temperature, maximum temperature and rainfall.
+                </li>
+<li>
+                    If actual data exists for that date and station,
+                    the program also reports prediction errors.
+                </li>
+</ul>
+</div>
+</div>
+<!-- 7. EXAMPLE RESULT -->
+<div class="info-box">
+<div class="info-header" onclick="toggleSection(this)">
+<span>7. Example Prediction &amp; Insights</span>
+<span class="plus">+</span>
+</div>
+<div class="info-content">
+<ul>
+<li>
+                    An example prediction can be generated for a selected
+                    station and date.
+                </li>
+<li>
+                    The program displays the predicted weather values.
+                </li>
+<li>
+                    When the actual record is available, the corresponding
+                    percentage errors are displayed.
+                </li>
+<li>
+                    The model score is also displayed to provide an overall
+                    indication of model performance.
+                </li>
+</ul>
+</div>
+</div>
+<!-- PROJECT RESOURCES -->
+<div class="resources">
+<h3>📚 Project Resources</h3>
+<div class="resource-buttons">
+<a class="resource-btn" download="weather_prediction.py" href="project2/weather_prediction.py">
+                📥 Download Python Code
+            </a>
+</div>
+</div>
+</div>
+</div>
 <!-- ========================================================= -->
 <!-- FOOTER -->
 <!-- ========================================================= -->
-
 <footer>
 
     © 2026 D. Kiran Prasad | Deep Learning Projects
 
 </footer>
-
-
 <!-- ========================================================= -->
 <!-- JAVASCRIPT -->
 <!-- ========================================================= -->
-
 <script>
+
+
+function toggleProject(summary){
+    const details = summary.nextElementSibling;
+    const plus = summary.querySelector(".project-main-plus");
+
+    if(details.classList.contains("show")){
+        details.classList.remove("show");
+        plus.textContent = "+";
+    } else {
+        details.classList.add("show");
+        plus.textContent = "−";
+    }
+}
 
 function toggleSection(header){
 
@@ -732,7 +947,5 @@ function toggleSection(header){
 }
 
 </script>
-
-
-</body>
+</div></body>
 </html>
