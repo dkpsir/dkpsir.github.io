@@ -651,7 +651,6 @@ footer{
 <!-- ========================================================= -->
 <!-- PROJECT 2 -->
 <!-- ========================================================= -->
-
 <!-- ========================================================= -->
 <!-- FUTURE PROJECTS CAN BE ADDED HERE -->
 <!-- ========================================================= -->
@@ -895,10 +894,156 @@ footer{
 <a class="resource-btn" download="weather_prediction.py" href="project2/weather_prediction.py">
     📥 Download Python Code
 </a>
-
 <a class="resource-btn" download="weather data set.xlsx" href="project2/weather_data_set.xlsx">
     📊 Download Dataset
 </a>
+</div>
+</div>
+</div>
+</div><div class="project-card">
+<div class="project-summary" onclick="toggleProject(this)">
+<div class="project-summary-text">
+<div class="project-number">PROJECT 3</div>
+<div class="project-title">Student Pass / Fail Prediction using Logistic Regression</div>
+<div class="project-summary-description">
+                This project develops a Logistic Regression model to predict whether a student is
+                likely to pass or fail based on academic performance and demographic attributes.
+                The project uses study hours, attendance, past and final exam scores, gender,
+                parental education, internet access and extracurricular activities, followed by
+                preprocessing, model training and classification evaluation.
+            </div>
+</div>
+<span class="project-main-plus">+</span>
+</div>
+<div class="project-details">
+<div class="info-box">
+<div class="info-header" onclick="toggleSection(this)">
+<span>1. Project Objective &amp; Dataset</span>
+<span class="plus">+</span>
+</div>
+<div class="info-content">
+<ul>
+<li>
+                        The objective is to develop a <b>Logistic Regression</b> model
+                        to classify students as <b>Pass</b> or <b>Fail</b>.
+                    </li>
+<li>
+                        The project uses the <b>Student Pass / Fail Dataset</b>.
+                    </li>
+<li>
+                        The dataset contains academic performance and demographic
+                        attributes such as study hours, attendance, exam scores,
+                        gender, parental education, internet access and extracurricular activities.
+                    </li>
+<li>
+                        The prediction target is <b>Pass_Fail</b>,
+                        where <b>1 = Pass</b> and <b>0 = Fail</b>.
+                    </li>
+</ul>
+</div>
+</div>
+<div class="info-box">
+<div class="info-header" onclick="toggleSection(this)">
+<span>2. Input &amp; Target Variables</span>
+<span class="plus">+</span>
+</div>
+<div class="info-content">
+<p><b>Input Variables</b></p>
+<ul>
+<li>Study_Hours_per_Week</li>
+<li>Attendance_Rate</li>
+<li>Past_Exam_Scores</li>
+<li>Final_Exam_Score</li>
+<li>Gender</li>
+<li>Parental_Education_Level</li>
+<li>Internet_Access_at_Home</li>
+<li>Extracurricular_Activities</li>
+</ul>
+<p><b>Target Variable</b></p>
+<ul>
+<li><b>Pass_Fail</b> – Pass = 1, Fail = 0</li>
+</ul>
+</div>
+</div>
+<div class="info-box">
+<div class="info-header" onclick="toggleSection(this)">
+<span>3. Data Preprocessing &amp; Analysis</span>
+<span class="plus">+</span>
+</div>
+<div class="info-content">
+<ul>
+<li>Missing values are checked before model development.</li>
+<li>The unique <b>Student_ID</b> is removed because it is not useful for prediction.</li>
+<li>Categorical variables are converted and then one-hot encoded.</li>
+<li>Numerical variables are explored using distributions and correlation analysis.</li>
+<li>Additional visual analysis includes pair plots and categorical distributions.</li>
+</ul>
+</div>
+</div>
+<div class="info-box">
+<div class="info-header" onclick="toggleSection(this)">
+<span>4. Logistic Regression Model Development</span>
+<span class="plus">+</span>
+</div>
+<div class="info-content">
+<ul>
+<li>The processed dataset is separated into input features <b>X</b> and target <b>y</b>.</li>
+<li>The data is divided into training and testing subsets using an <b>80:20</b> split.</li>
+<li>A <b>Logistic Regression</b> classifier is trained on the training data.</li>
+<li>The trained model predicts whether a student will <b>Pass</b> or <b>Fail</b>.</li>
+</ul>
+</div>
+</div>
+<div class="info-box">
+<div class="info-header" onclick="toggleSection(this)">
+<span>5. Model Evaluation</span>
+<span class="plus">+</span>
+</div>
+<div class="info-content">
+<ul>
+<li><b>Prediction Accuracy</b> is calculated to measure classification performance.</li>
+<li>A <b>classification report</b> is displayed for additional performance measures.</li>
+<li>A <b>confusion matrix</b> is used to examine actual versus predicted classifications.</li>
+<li>An <b>ROC curve</b> and <b>AUC</b> are used to evaluate the classifier's discrimination performance.</li>
+</ul>
+</div>
+</div>
+<div class="info-box">
+<div class="info-header" onclick="toggleSection(this)">
+<span>6. Prediction for Student Records</span>
+<span class="plus">+</span>
+</div>
+<div class="info-content">
+<ul>
+<li>The trained model is used to predict a randomly selected student from the test set.</li>
+<li>The actual result and predicted result are displayed as <b>Pass</b> or <b>Fail</b>.</li>
+<li>A second prediction is demonstrated using a <b>manually assumed student record</b>.</li>
+<li>The assumed record includes study hours, attendance, exam scores and encoded categorical information.</li>
+</ul>
+</div>
+</div>
+<div class="info-box">
+<div class="info-header" onclick="toggleSection(this)">
+<span>7. Example Prediction &amp; Insights</span>
+<span class="plus">+</span>
+</div>
+<div class="info-content">
+<ul>
+<li>The project demonstrates how academic and demographic variables can be used for pass/fail classification.</li>
+<li>The model output can be interpreted as a predicted <b>Pass</b> or <b>Fail</b> result.</li>
+<li>The project can help illustrate how machine learning may be applied to student performance data.</li>
+</ul>
+</div>
+</div>
+<div class="resources">
+<h3>📚 Project Resources</h3>
+<div class="resource-buttons">
+<a class="resource-btn" download="student_pass_fail_logistic_regression.py" href="project3/student_pass_fail_logistic_regression.py">
+                    📥 Download Python Code
+                </a>
+<a class="resource-btn" download="Student_Pass_Fail_Data Set.csv" href="project3/Student_Pass_Fail_Data Set.csv">
+                    📊 Download Dataset
+                </a>
 </div>
 </div>
 </div>
