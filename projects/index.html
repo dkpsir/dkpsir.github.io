@@ -1047,6 +1047,117 @@ footer{
 </div>
 </div>
 </div>
+</div><div class="project-card">
+<div class="project-summary" onclick="toggleProject(this)">
+<div class="project-summary-text">
+<div class="project-number">PROJECT 4</div>
+<div class="project-title">
+                Comparative Study of Optimization and Regularization Techniques in Deep Learning
+            </div>
+<div class="project-summary-description">
+                This project uses the Fashion-MNIST dataset and a Multilayer Perceptron (MLP)
+                to study how different optimization and regularization techniques affect neural
+                network training. Six optimizers are compared using training-loss convergence,
+                while five regularization techniques are analyzed using a common training setup.
+                The project provides visual comparisons of learning behaviour across techniques.
+            </div>
+</div>
+<span class="project-main-plus">+</span>
+</div>
+<div class="project-details">
+<div class="info-box">
+<div class="info-header" onclick="toggleSection(this)">
+<span>1. Project Objective &amp; Dataset</span>
+<span class="plus">+</span>
+</div>
+<div class="info-content">
+<ul>
+<li>The project uses the <b>Fashion-MNIST</b> dataset for neural-network training.</li>
+<li>The objective is to compare different <b>optimization techniques</b> and <b>regularization techniques</b>.</li>
+<li>The dataset contains 28×28 grayscale clothing images represented by 784 pixel values.</li>
+<li>The ten Fashion-MNIST classes are used for multiclass classification.</li>
+</ul>
+</div>
+</div>
+<div class="info-box">
+<div class="info-header" onclick="toggleSection(this)">
+<span>2. Data Preparation &amp; MLP Model</span>
+<span class="plus">+</span>
+</div>
+<div class="info-content">
+<ul>
+<li>The training and testing CSV files are loaded using Pandas.</li>
+<li>Pixel values are normalized to the range <b>[0, 1]</b>.</li>
+<li>The flattened 784-pixel input is used for an MLP.</li>
+<li>The common MLP architecture is:
+                        <b>784 → Dense(128, ReLU) → Dense(64, ReLU) → Dense(10, Softmax)</b>.
+                    </li>
+<li>Representative images and class distribution are also visualized.</li>
+</ul>
+</div>
+</div>
+<div class="info-box">
+<div class="info-header" onclick="toggleSection(this)">
+<span>3. Optimization Techniques Comparison</span>
+<span class="plus">+</span>
+</div>
+<div class="info-content">
+<p>The project compares the following six optimization techniques:</p>
+<ul>
+<li><b>SGD</b> – Stochastic Gradient Descent</li>
+<li><b>AdaGrad</b></li>
+<li><b>AdaDelta</b></li>
+<li><b>RMSprop</b></li>
+<li><b>NAG</b> – Nesterov Accelerated Gradient</li>
+<li><b>Adam</b></li>
+</ul>
+<p>Each optimizer is used with the common MLP and its epoch-wise training loss is recorded. A consolidated table and comparison graph are then generated.</p>
+</div>
+</div>
+<div class="info-box">
+<div class="info-header" onclick="toggleSection(this)">
+<span>4. Regularization Techniques Comparison</span>
+<span class="plus">+</span>
+</div>
+<div class="info-content">
+<p>The project compares the following five regularization techniques:</p>
+<ul>
+<li><b>L1 Regularization</b></li>
+<li><b>L2 Regularization</b></li>
+<li><b>Dropout</b></li>
+<li><b>Batch Normalization</b></li>
+<li><b>Early Stopping</b></li>
+</ul>
+<p>The techniques are trained using the same general SGD-based setup for comparison, and their epoch-wise losses are combined into one comparison table and graph.</p>
+</div>
+</div>
+<div class="info-box">
+<div class="info-header" onclick="toggleSection(this)">
+<span>5. Loss Convergence &amp; Visualization</span>
+<span class="plus">+</span>
+</div>
+<div class="info-content">
+<ul>
+<li>Training loss is recorded after each epoch.</li>
+<li>Individual epoch-vs-loss graphs are generated for each optimizer.</li>
+<li>The regularization techniques are compared in a single loss-convergence plot.</li>
+<li>All six optimization methods are compared in a single optimizer-loss plot.</li>
+<li>These visualizations help compare convergence behaviour across techniques.</li>
+</ul>
+</div>
+</div>
+<div class="resources">
+<h3>📚 Project Resources</h3>
+<div class="resource-buttons">
+<a class="resource-btn" download="optimization_regularization_fashion_mnist.py" href="project4/optimization_regularization_fashion_mnist.py">
+                    📥 Download Python Code
+                </a>
+<a class="resource-btn" href="https://www.kaggle.com/datasets/zalando-research/fashionmnist" target="_blank">
+                    📊 Dataset – Kaggle
+                </a>
+</div>
+</div>
+</div>
 </div>
 <!-- ========================================================= -->
 <!-- FOOTER -->
