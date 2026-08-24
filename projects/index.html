@@ -1158,6 +1158,152 @@ footer{
 </div>
 </div>
 </div>
+</div><div class="project-card">
+<div class="project-summary" onclick="toggleProject(this)">
+<div class="project-summary-text">
+<div class="project-number">PROJECT 5</div>
+<div class="project-title">Student GPA Prediction using Linear Regression</div>
+<div class="project-summary-description">
+                This project predicts future semester GPA of engineering students using historical
+                academic performance data. Separate Linear Regression models are developed for
+                Regular and Lateral students to predict 5th to 8th semester GPAs. The project
+                evaluates each model using R², compares actual and predicted GPA for a selected
+                student record, and also provides editable inputs for further prediction.
+            </div>
+</div>
+<span class="project-main-plus">+</span>
+</div>
+<div class="project-details">
+<div class="info-box">
+<div class="info-header" onclick="toggleSection(this)">
+<span>1. Project Objective &amp; Dataset</span>
+<span class="plus">+</span>
+</div>
+<div class="info-content">
+<ul>
+<li>
+                        The objective is to develop a predictive system for
+                        <b>semester-wise GPA forecasting</b> using historical academic data.
+                    </li>
+<li>
+                        The project distinguishes between <b>Regular</b> and <b>Lateral</b> students.
+                    </li>
+<li>
+                        Separate Linear Regression models are trained for the
+                        <b>5th, 6th, 7th and 8th semester</b> GPA predictions.
+                    </li>
+<li>
+                        The project uses the customized Excel dataset
+                        <b>student GPA data bank.xlsx</b>.
+                    </li>
+</ul>
+</div>
+</div>
+<div class="info-box">
+<div class="info-header" onclick="toggleSection(this)">
+<span>2. Input &amp; Target Variables</span>
+<span class="plus">+</span>
+</div>
+<div class="info-content">
+<p><b>Input Variables</b></p>
+<ul>
+<li>SSC / 10th Grade GPA</li>
+<li>Intermediate / 12th Grade GPA</li>
+<li>1st to 4th Semester GPAs for Regular students</li>
+<li>3rd and 4th Semester GPAs for Lateral students</li>
+<li>Student type – Regular or Lateral</li>
+</ul>
+<p><b>Target Variables</b></p>
+<ul>
+<li>5th Semester GPA</li>
+<li>6th Semester GPA</li>
+<li>7th Semester GPA</li>
+<li>8th Semester GPA</li>
+</ul>
+</div>
+</div>
+<div class="info-box">
+<div class="info-header" onclick="toggleSection(this)">
+<span>3. Data Preparation &amp; Student Type Identification</span>
+<span class="plus">+</span>
+</div>
+<div class="info-content">
+<ul>
+<li>Duplicate records are removed.</li>
+<li>Zero values in semester GPA columns are treated as missing values.</li>
+<li>A student is classified as <b>Lateral</b> when both 1st and 2nd semester GPAs are missing.</li>
+<li>All other students are classified as <b>Regular</b>.</li>
+<li>Semester columns are automatically detected and ordered from 1st to 8th semester.</li>
+</ul>
+</div>
+</div>
+<div class="info-box">
+<div class="info-header" onclick="toggleSection(this)">
+<span>4. Linear Regression Model Development</span>
+<span class="plus">+</span>
+</div>
+<div class="info-content">
+<ul>
+<li>Separate feature sets are used for Regular and Lateral students.</li>
+<li>Independent Linear Regression models are trained for each target semester.</li>
+<li>The training data is divided into training and testing subsets using an 80:20 split.</li>
+<li>Each model predicts the GPA of its corresponding future semester.</li>
+</ul>
+</div>
+</div>
+<div class="info-box">
+<div class="info-header" onclick="toggleSection(this)">
+<span>5. Model Evaluation</span>
+<span class="plus">+</span>
+</div>
+<div class="info-content">
+<ul>
+<li>Each Regular and Lateral model is evaluated using the <b>R² score</b>.</li>
+<li>The R² values are displayed separately for 5th, 6th, 7th and 8th semester predictions.</li>
+<li>This allows the performance of each semester-specific model to be examined independently.</li>
+</ul>
+</div>
+</div>
+<div class="info-box">
+<div class="info-header" onclick="toggleSection(this)">
+<span>6. Prediction for a Selected Student Record</span>
+<span class="plus">+</span>
+</div>
+<div class="info-content">
+<ul>
+<li>A selected dataset record can be used for prediction.</li>
+<li>Missing input features can be replaced with a user-defined fill value.</li>
+<li>The program predicts the 5th to 8th semester GPAs using the appropriate Regular or Lateral models.</li>
+<li>When actual GPA values are available, the program displays the <b>actual GPA, predicted GPA and absolute error</b>.</li>
+</ul>
+</div>
+</div>
+<div class="info-box">
+<div class="info-header" onclick="toggleSection(this)">
+<span>7. Static Input Prediction</span>
+<span class="plus">+</span>
+</div>
+<div class="info-content">
+<ul>
+<li>Editable example inputs are provided for a <b>Regular student</b>.</li>
+<li>Editable example inputs are also provided for a <b>Lateral student</b>.</li>
+<li>The trained models use these values to predict GPAs for the 5th to 8th semesters.</li>
+<li>This allows users to try different academic histories without modifying the training data.</li>
+</ul>
+</div>
+</div>
+<div class="resources">
+<h3>📚 Project Resources</h3>
+<div class="resource-buttons">
+<a class="resource-btn" download="student_gpa_prediction_linear_regression.py" href="project5/student_gpa_prediction_linear_regression.py">
+                    📥 Download Python Code
+                </a>
+<a class="resource-btn" download="student GPA_data_bank.xlsx" href="project5/student%20GPA%20data%20bank.xlsx">
+                    📊 Download Dataset
+                </a>
+</div>
+</div>
+</div>
 </div>
 <!-- ========================================================= -->
 <!-- FOOTER -->
