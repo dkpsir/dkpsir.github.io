@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Input, Types & Output Visualizer</title>
+<style>
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#f4f8fc;margin:20px;color:#111}
+h2{text-align:center;color:#0b4a8b;margin-bottom:20px}
+
+.container{display:flex;gap:20px;max-width:1200px;margin:0 auto}
+.left,.right{flex:1}
+
+.card{background:#fff;border-radius:10px;padding:18px;box-shadow:0 3px 12px rgba(0,0,0,0.08);margin-bottom:16px}
+.section-title{font-size:16px;font-weight:700;color:#0b4a8b;margin-bottom:12px;border-bottom:2px solid #e2ecf5;padding-bottom:6px}
+
+.input-group{display:flex;align-items:center;margin-bottom:10px;gap:10px}
+.input-group label{width:90px;font-weight:700;font-size:14px}
+.input-group input{flex:1;padding:7px 10px;font-size:14px;border:1px solid #aaa;border-radius:5px}
+
+.controls{display:flex;align-items:center;gap:10px;margin-top:14px}
+button{padding:9px 18px;font-size:15px;font-weight:700;border:none;border-radius:5px;cursor:pointer;transition:0.2s}
+.btn-start{background:#0b4a8b;color:#fff}
+.btn-start:hover{background:#083666}
+.btn-next{background:#28a745;color:#fff}
+.btn-next:hover{background:#1e7e34}
+.btn-next:disabled{background:#b0d8b9;cursor:not-allowed}
+
+table{border-collapse:collapse;width:100%;background:#fff}
+th,td{border:1px solid #ccd7e2;padding:9px;text-align:center;font-size:14px}
+th{background:#dcecff;color:#0b4a8b}
+.var-highlight{background:#fff3cd;font-weight:bold;color:#856404}
+
+pre{background:#1e1e1e;color:#ddd;padding:14px;border-radius:8px;margin:0;line-height:1.6;font-size:14px;font-family:Consolas,"Courier New",monospace}
+.line{display:block;padding:2px 6px;border-radius:4px}
+.active{background:#ffeb3b;color:#000;font-weight:bold}
+
+.callout{background:#e8f4fd;border-left:5px solid #0b4a8b;padding:12px 14px;border-radius:4px;font-size:14px;line-height:1.5;min-height:48px}
+.terminal{background:#111;color:#4af626;font-family:Consolas,"Courier New",monospace;padding:12px;border-radius:6px;font-size:14px;line-height:1.5;min-height:140px;white-space:pre-wrap}
+
+@media(max-width:900px){
+    .container{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<h2>Python Visualizer : Dynamic Input, Type Casting & Output</h2>
+
+<div class="container">
+    <!-- Left Column: Controls, Variables Table, Console -->
+    <div class="left">
+        <div class="card">
+            <div class="section-title">1. User Inputs</div>
+            <div class="input-group">
+                <label for="in_name">Name (str):</label>
+                <input type="text" id="in_name" value="Ravi">
+            </div>
+            <div class="input-group">
+                <label for="in_age">Age (int):</label>
+                <input type="number" id="in_age" value="20">
+            </div>
+            <div class="input-group">
+                <label for="in_height">Height (float):</label>
+                <input type="number" step="0.01" id="in_height" value="5.8">
+            </div>
+
+            <div class="controls">
+                <button class="btn-start" onclick="start()">Start / Reset</button>
+                <button class="btn-next" id="nextBtn" onclick="nextStep()" disabled>Next Step</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="section-title">2. Variable State in Memory</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Variable</th>
+                        <th>Type</th>
+                        <th>Value in Memory</th>
+                    </tr>
+                </thead>
+                <tbody id="memoryBody">
+                    <tr><td colspan="3" style="color:#777;">Click <b>Start / Reset</b> to initialize memory</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <div class="section-title">3. Console Output Screen</div>
+            <div class="terminal" id="terminalOut">>_</div>
+        </div>
+    </div>
+
+    <!-- Right Column: Code & Step Explanation -->
+    <div class="right">
+        <div class="card">
+            <div class="section-title">Python Code</div>
+            <pre id="code">
+<span id="l1" class="line">name = input("Enter name: ")</span>
+<span id="l2" class="line">age = int(input("Enter age: "))</span>
+<span id="l3" class="line">height = float(input("Enter height: "))</span>
+<span id="l4" class="line"></span>
+<span id="l5" class="line">print("\n----- DETAILS -----")</span>
+<span id="l6" class="line">print("Name =", name)</span>
+<span id="l7" class="line">print("Age =", age)</span>
+<span id="l8" class="line">print("Height =", height)</span>
+<span id="l9" class="line">print("Age type =", type(age))</span>
+<span id="l10" class="line">print("Height type =", type(height))</span></pre>
+        </div>
+
+        <div class="card">
+            <div class="section-title">Step Explanation</div>
+            <div class="callout" id="explanation">Fill in your desired inputs on the left and click <b>Start / Reset</b> to begin stepping.</div>
+        </div>
+    </div>
+</div>
+
+<script>
+let step = 0;
+let valName = "", valAge = 0, valHeight = 0.0;
+let consoleBuffer = "";
+
+function clearHL() {
+    document.querySelectorAll('.line').forEach(el => el.classList.remove('active'));
+}
+
+function start() {
+    let rawName = document.getElementById('in_name').value.trim();
+    let rawAge = document.getElementById('in_age').value.trim();
+    let rawHeight = document.getElementById('in_height').value.trim();
+
+    if (!rawName || isNaN(parseInt(rawAge)) || isNaN(parseFloat(rawHeight))) {
+        alert("Please provide valid values for Name, Age (integer), and Height (decimal number).");
+        return;
+    }
+
+    valName = rawName;
+    valAge = parseInt(rawAge);
+    valHeight = parseFloat(rawHeight);
+    step = 0;
+    consoleBuffer = "";
+
+    clearHL();
+    document.getElementById('terminalOut').textContent = ">_";
+    document.getElementById('explanation').innerHTML = "Execution initialized. Click <b>Next Step</b> to run Line 1.";
+    
+    document.getElementById('memoryBody').innerHTML = `
+        <tr id="row_name"><td><b>name</b></td><td>str</td><td id="cell_name"><em>unassigned</em></td></tr>
+        <tr id="row_age"><td><b>age</b></td><td>int</td><td id="cell_age"><em>unassigned</em></td></tr>
+        <tr id="row_height"><td><b>height</b></td><td>float</td><td id="cell_height"><em>unassigned</em></td></tr>
+    `;
+
+    document.getElementById('nextBtn').disabled = false;
+}
+
+function nextStep() {
+    clearHL();
+    document.querySelectorAll('tr').forEach(r => r.classList.remove('var-highlight'));
+
+    if (step === 0) {
+        document.getElementById('l1').classList.add('active');
+        document.getElementById('cell_name').innerHTML = `<b>"${valName}"</b>`;
+        document.getElementById('row_name').classList.add('var-highlight');
+        document.getElementById('explanation').innerHTML = `<b>Line 1:</b> <code>input()</code> captures text from the keyboard and assigns the string <b>"${valName}"</b> to variable <code>name</code>.`;
+        consoleBuffer += `Enter name: ${valName}\n`;
+        document.getElementById('terminalOut').textContent = consoleBuffer;
+        step++;
+    } else if (step === 1) {
+        document.getElementById('l2').classList.add('active');
+        document.getElementById('cell_age').innerHTML = `<b>${valAge}</b>`;
+        document.getElementById('row_age').classList.add('var-highlight');
+        document.getElementById('explanation').innerHTML = `<b>Line 2:</b> <code>input()</code> receives <code>"${valAge}"</code>, <code>int()</code> converts it to integer <b>${valAge}</b>, and assigns it to <code>age</code>.`;
+        consoleBuffer += `Enter age: ${valAge}\n`;
+        document.getElementById('terminalOut').textContent = consoleBuffer;
+        step++;
+    } else if (step === 2) {
+        document.getElementById('l3').classList.add('active');
+        document.getElementById('cell_height').innerHTML = `<b>${valHeight}</b>`;
+        document.getElementById('row_height').classList.add('var-highlight');
+        document.getElementById('explanation').innerHTML = `<b>Line 3:</b> <code>input()</code> receives <code>"${valHeight}"</code>, <code>float()</code> converts it to decimal <b>${valHeight}</b>, and assigns it to <code>height</code>.`;
+        consoleBuffer += `Enter height: ${valHeight}\n`;
+        document.getElementById('terminalOut').textContent = consoleBuffer;
+        step++;
+    } else if (step === 3) {
+        document.getElementById('l5').classList.add('active');
+        consoleBuffer += `\n----- DETAILS -----\n`;
+        document.getElementById('terminalOut').textContent = consoleBuffer;
+        document.getElementById('explanation').innerHTML = `<b>Line 5:</b> Prints newline followed by the header line <code>----- DETAILS -----</code>.`;
+        step++;
+    } else if (step === 4) {
+        document.getElementById('l6').classList.add('active');
+        consoleBuffer += `Name = ${valName}\n`;
+        document.getElementById('terminalOut').textContent = consoleBuffer;
+        document.getElementById('explanation').innerHTML = `<b>Line 6:</b> Prints the label <code>"Name ="</code> and fetches value <b>"${valName}"</b> from memory.`;
+        step++;
+    } else if (step === 5) {
+        document.getElementById('l7').classList.add('active');
+        consoleBuffer += `Age = ${valAge}\n`;
+        document.getElementById('terminalOut').textContent = consoleBuffer;
+        document.getElementById('explanation').innerHTML = `<b>Line 7:</b> Prints the label <code>"Age ="</code> and fetches integer value <b>${valAge}</b> from memory.`;
+        step++;
+    } else if (step === 6) {
+        document.getElementById('l8').classList.add('active');
+        consoleBuffer += `Height = ${valHeight}\n`;
+        document.getElementById('terminalOut').textContent = consoleBuffer;
+        document.getElementById('explanation').innerHTML = `<b>Line 8:</b> Prints the label <code>"Height ="</code> and fetches decimal value <b>${valHeight}</b> from memory.`;
+        step++;
+    } else if (step === 7) {
+        document.getElementById('l9').classList.add('active');
+        consoleBuffer += `Age type = <class 'int'>\n`;
+        document.getElementById('terminalOut').textContent = consoleBuffer;
+        document.getElementById('explanation').innerHTML = `<b>Line 9:</b> <code>type(age)</code> evaluates to <b>&lt;class 'int'&gt;</b> and prints the type result.`;
+        step++;
+    } else if (step === 8) {
+        document.getElementById('l10').classList.add('active');
+        consoleBuffer += `Height type = <class 'float'>`;
+        document.getElementById('terminalOut').textContent = consoleBuffer;
+        document.getElementById('explanation').innerHTML = `<b>Line 10:</b> <code>type(height)</code> evaluates to <b>&lt;class 'float'&gt;</b> and prints the type result. Execution complete!`;
+        document.getElementById('nextBtn').disabled = true;
+        step++;
+    }
+}
+</script>
+
+</body>
+</html>
