@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tricky Questions in Python - Functions</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#eef4f9;color:#111;font-family:"Segoe UI",Arial,sans-serif}
+.header{position:relative;background:linear-gradient(90deg,#0b477d,#087cc1);color:#fff;text-align:center;padding:26px 20px}
+.header-nav{position:absolute;left:24px;right:24px;top:50%;transform:translateY(-50%);display:flex;justify-content:space-between;align-items:center;pointer-events:none}
+.header-nav a{color:#fff;text-decoration:none;font-size:18px;font-weight:700;pointer-events:auto;display:flex;align-items:center;gap:6px}
+.header-nav a:hover{text-decoration:underline}
+.header h1{margin:0;font-size:32px;letter-spacing:.5px;text-transform:uppercase}
+.header p{margin:8px 0 0;font-size:19px;font-weight:600;opacity:.95}
+.container{width:94%;max-width:1250px;margin:26px auto}
+.action-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:20px}
+.search-input{flex:1;min-width:240px;max-width:420px;padding:10px 14px;font-size:15px;border:1px solid #b7cde3;border-radius:6px;outline:none}
+.search-input:focus{border-color:#075b99}
+.btn-group{display:flex;gap:10px}
+.btn-toggle{background:#075b99;color:#fff;border:none;padding:10px 16px;font-size:14px;font-weight:700;border-radius:6px;cursor:pointer}
+.btn-toggle:hover{background:#054270}
+.accordion-item{background:#fff;border-radius:10px;margin-bottom:16px;box-shadow:0 3px 12px rgba(0,0,0,.05);border:1px solid #dbe6f2;overflow:hidden;transition:all .2s ease}
+.accordion-item:hover{border-color:#99bfe6}
+.accordion-header{display:flex;align-items:flex-start;padding:16px 20px;cursor:pointer;user-select:none;gap:16px}
+.badge{width:36px;height:36px;min-width:36px;background:#075b99;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;margin-top:2px}
+.q-body{flex:1}
+.q-title{font-size:17px;font-weight:700;color:#0b3b66;line-height:1.45;margin-bottom:10px}
+.code-box{background:#1e1e1e;color:#e6edf3;padding:12px 16px;border-radius:7px;font:14.5px/1.5 Consolas,"Courier New",monospace;overflow-x:auto;margin:0;border:1px solid #333}
+.toggle-icon{width:32px;height:32px;min-width:32px;background:#075b99;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;transition:transform .25s ease,background .2s ease;margin-top:2px}
+.accordion-item.open .toggle-icon{background:#d32f2f;transform:rotate(45deg)}
+.accordion-content{display:none;padding:0 20px 20px 72px;border-top:1px dashed #dbe6f2;background:#fbfdff}
+.accordion-item.open .accordion-content{display:block;padding-top:16px}
+.output-box{background:#f8fafc;border:1px solid #cfe0f0;border-radius:8px;padding:14px 16px}
+.output-title{font-size:13px;font-weight:700;color:#075b99;text-transform:uppercase;margin-bottom:6px;letter-spacing:.5px}
+.output-text{font:700 15px Consolas,"Courier New",monospace;color:#b84d00;background:#fff9f0;padding:8px 12px;border-radius:6px;border:1px solid #ffd8a8;white-space:pre-wrap;margin:0 0 10px}
+.error-text{color:#c92a2a;background:#fff5f5;border-color:#ffc9c9}
+.explanation{background:#eff6fc;border-left:4px solid #075b99;padding:10px 14px;border-radius:4px;font-size:14.5px;line-height:1.5;color:#1b3954}
+footer{background:#063b70;color:#fff;text-align:center;padding:16px;font-size:15px;margin-top:40px}
+@media(max-width:850px){.header-nav{position:static;transform:none;margin-bottom:14px;pointer-events:auto}.header{padding-top:20px}.header h1{font-size:24px}.accordion-content{padding-left:20px}}
+</style>
+</head>
+<body>
+<header class="header">
+<div class="header-nav"><a href="../index.html">🏠 Python Home</a><a href="../../index.html">🏠 Main Home</a></div>
+<h1>Functions • Scope • Recursion • Closures • Arguments</h1>
+</header>
+<main class="container">
+<div class="action-bar">
+<input type="text" id="searchInput" class="search-input" placeholder="🔍 Search question code or text..." onkeyup="filterQuestions()">
+<div class="btn-group"><button class="btn-toggle" onclick="toggleAll(true)">Expand All</button><button class="btn-toggle" onclick="toggleAll(false)">Collapse All</button></div>
+</div>
+<div id="accordionContainer">
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">1</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(x=[]):
+    x.append(len(x))
+    return x
+
+print(f())
+print(f())
+print(f([10, 20]))</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>[0]
+[0, 1]
+[10, 20, 2]</div>
+<div class="explanation"><b>Explanation:</b> The default list is created once and reused. Its length before each call is appended. The explicitly supplied list is a separate object.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">2</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">x = 10
+
+def f():
+    x = 20
+    return x
+
+print(f())
+print(x)</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>20
+10</div>
+<div class="explanation"><b>Explanation:</b> The assignment inside f creates a local x. It does not change the global x.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="identify the output or error in the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">3</div>
+<div class="q-body">
+<div class="q-title">Identify the output or error in the following program:</div>
+<pre class="code-box">x = 10
+
+def f():
+    print(x)
+    x = 20
+
+f()</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output / Exception</div>
+<div class="output-text error-text>UnboundLocalError</div>
+<div class="explanation"><b>Explanation:</b> Because x is assigned inside f, Python treats x as local throughout that function. The print attempts to read that local variable before it has a value.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">4</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def outer():
+    x = 10
+    def inner():
+        return x + 5
+    x = 20
+    return inner()
+
+print(outer())</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>25</div>
+<div class="explanation"><b>Explanation:</b> inner closes over the variable x, not a snapshot of its earlier value. When inner runs, the enclosing x is 20.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">5</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def outer():
+    x = 10
+    def inner():
+        nonlocal x
+        x += 5
+        return x
+    return inner
+
+f = outer()
+print(f())
+print(f())</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>15
+20</div>
+<div class="explanation"><b>Explanation:</b> The returned inner function retains access to outer's x. nonlocal allows each call to update the same enclosing variable.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">6</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def make():
+    return [lambda: i for i in range(3)]
+
+funcs = make()
+print([f() for f in funcs])</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>[2, 2, 2]</div>
+<div class="explanation"><b>Explanation:</b> The lambdas capture the variable i, not its value at each iteration. All are called after the loop has finished, when i is 2.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">7</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def make():
+    return [lambda i=i: i for i in range(3)]
+
+funcs = make()
+print([f() for f in funcs])</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>[0, 1, 2]</div>
+<div class="explanation"><b>Explanation:</b> Each lambda stores the current i as a default argument when the lambda is created.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">8</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(a, b=10, *args, **kwargs):
+    return a + b + sum(args) + sum(kwargs.values())
+
+print(f(1, 2, 3, 4, x=5, y=6))</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>21</div>
+<div class="explanation"><b>Explanation:</b> The values are 1 + 2 + 3 + 4 + 5 + 6 = 21. Positional extras enter args and keyword extras enter kwargs.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="identify the output or error in the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">9</div>
+<div class="q-body">
+<div class="q-title">Identify the output or error in the following program:</div>
+<pre class="code-box">def f(a, b, /, c, *, d):
+    return a + b + c + d
+
+print(f(1, 2, 3, d=4))
+print(f(a=1, b=2, c=3, d=4))</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output / Exception</div>
+<div class="output-text error-text>10
+TypeError</div>
+<div class="explanation"><b>Explanation:</b> a and b are positional-only because they appear before /. d is keyword-only because it appears after *. The second call violates the positional-only rule.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">10</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(x):
+    x += 10
+    return x
+
+x = 5
+print(f(x))
+print(x)</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>15
+5</div>
+<div class="explanation"><b>Explanation:</b> Integers are immutable. x inside the function becomes a new local integer; the caller's x remains 5.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">11</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(a):
+    a.append(10)
+
+x = [1, 2]
+f(x)
+print(x)</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>[1, 2, 10]</div>
+<div class="explanation"><b>Explanation:</b> The function receives a reference to the same list object and mutates that list.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">12</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(a):
+    a = a + [10]
+
+x = [1, 2]
+f(x)
+print(x)</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>[1, 2]</div>
+<div class="explanation"><b>Explanation:</b> a + [10] creates a new list and assigns it only to the local name a. The caller's list is unchanged.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">13</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(a):
+    a += [10]
+
+x = [1, 2]
+f(x)
+print(x)</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>[1, 2, 10]</div>
+<div class="explanation"><b>Explanation:</b> For a list, += performs in-place extension, so the original list is modified.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">14</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f():
+    return 1, 2, 3
+
+a = f()
+print(a)
+print(type(a).__name__)</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>(1, 2, 3)
+tuple</div>
+<div class="explanation"><b>Explanation:</b> Multiple return values are packed into a tuple. Therefore a receives a tuple object.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">15</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f():
+    print("A")
+    return
+    print("B")
+
+x = f()
+print(x)</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>A
+None</div>
+<div class="explanation"><b>Explanation:</b> return without an expression returns None and immediately exits the function, so B is never printed.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">16</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(x):
+    if x &gt; 0:
+        return "P"
+    return "N"
+
+print(f(2))
+print(f(-2))</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>P
+N</div>
+<div class="explanation"><b>Explanation:</b> The first call satisfies the condition and returns P. The second call reaches the final return and returns N.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">17</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(n):
+    if n == 0:
+        return 0
+    return n + f(n - 1)
+
+print(f(4))</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>10</div>
+<div class="explanation"><b>Explanation:</b> The recursive calls produce 4+3+2+1+0, which totals 10.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">18</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(n):
+    if n &lt;= 0:
+        return
+    print(n, end=" ")
+    f(n - 1)
+    print(n, end=" ")
+
+f(3)</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>3 2 1 1 2 3</div>
+<div class="explanation"><b>Explanation:</b> The first print occurs while recursion goes downward; the second print occurs while the calls return.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">19</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(n):
+    if n == 0:
+        return
+    f(n - 1)
+    print(n, end=" ")
+
+f(4)</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>1 2 3 4</div>
+<div class="explanation"><b>Explanation:</b> Printing occurs after the recursive call, so values appear while the recursion unwinds.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">20</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(n):
+    if n &lt;= 1:
+        return n
+    return f(n-1) + f(n-2)
+
+print(f(5))</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>5</div>
+<div class="explanation"><b>Explanation:</b> The function recursively computes Fibonacci values: f(5)=5.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">21</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(n):
+    if n == 0:
+        return
+    print(n, end=" ")
+    f(n-2)
+
+f(5)</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>5 3 1</div>
+<div class="explanation"><b>Explanation:</b> Each recursive call decreases n by 2 until n becomes non-positive.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">22</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(a, b):
+    return a if a &gt; b else b
+
+print(f(7, 3))</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>7</div>
+<div class="explanation"><b>Explanation:</b> The conditional expression returns the larger of the two arguments.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">23</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(a, b):
+    return a, b
+
+x = f(1, 2)
+a, b = x
+print(a + b)</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>3</div>
+<div class="explanation"><b>Explanation:</b> The function returns a tuple (1,2), which is unpacked into a and b.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">24</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f():
+    return [1, 2]
+
+a = f()
+b = f()
+a.append(3)
+
+print(a)
+print(b)</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>[1, 2, 3]
+[1, 2]</div>
+<div class="explanation"><b>Explanation:</b> Each function call creates a new list, so modifying a does not modify b.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">25</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f():
+    x = []
+    def add(v):
+        x.append(v)
+    add(1)
+    add(2)
+    return x
+
+print(f())</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>[1, 2]</div>
+<div class="explanation"><b>Explanation:</b> The nested function modifies the enclosing list. Lists are mutable, so no nonlocal declaration is needed for append.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">26</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f():
+    x = 10
+    def g():
+        nonlocal x
+        x += 1
+    g()
+    g()
+    return x
+
+print(f())</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>12</div>
+<div class="explanation"><b>Explanation:</b> Both calls to g modify the same x in f through nonlocal.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">27</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(x):
+    def g(y):
+        return x + y
+    return g
+
+a = f(10)
+print(a(5))
+print(a(20))</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>15
+30</div>
+<div class="explanation"><b>Explanation:</b> g retains x=10 from the enclosing call to f. This is a closure.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">28</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(x):
+    return lambda y: x * y
+
+double = f(2)
+triple = f(3)
+
+print(double(5), triple(5))</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>10 15</div>
+<div class="explanation"><b>Explanation:</b> Each returned lambda retains the x value from its own enclosing call.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">29</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(x):
+    def g():
+        return x
+    x += 1
+    return g
+
+a = f(10)
+print(a())</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>11</div>
+<div class="explanation"><b>Explanation:</b> The closure refers to the enclosing variable x. x is changed to 11 before g is returned.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">30</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(a=[]):
+    a += [1]
+    return a
+
+print(f())
+print(f())</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>[1]
+[1, 1]</div>
+<div class="explanation"><b>Explanation:</b> The default list persists between calls, and += modifies that same list.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">31</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(a, b):
+    a, b = b, a
+    return a, b
+
+x, y = f(10, 20)
+print(x, y)</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>20 10</div>
+<div class="explanation"><b>Explanation:</b> Tuple assignment swaps the local parameter values before they are returned.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">32</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(*args):
+    print(len(args))
+    print(args[0])
+
+f()
+f(10, 20, 30)</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>0
+IndexError
+3
+10</div>
+<div class="explanation"><b>Explanation:</b> The first call has no positional arguments, so args is empty and args[0] raises IndexError before the second call executes.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="identify the output or error in the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">33</div>
+<div class="q-body">
+<div class="q-title">Identify the output or error in the following program:</div>
+<pre class="code-box">def f(a, b):
+    return a + b
+
+print(f(1, 2, 3))</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output / Exception</div>
+<div class="output-text error-text>TypeError</div>
+<div class="explanation"><b>Explanation:</b> The function accepts exactly two positional parameters, but three arguments are supplied.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="identify the output or error in the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">34</div>
+<div class="q-body">
+<div class="q-title">Identify the output or error in the following program:</div>
+<pre class="code-box">def f(a, b=5):
+    return a + b
+
+print(f())</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output / Exception</div>
+<div class="output-text error-text>TypeError</div>
+<div class="explanation"><b>Explanation:</b> a has no default value, so it is required.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">35</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(a=1, b=2):
+    return a * b
+
+print(f(b=5))
+print(f(4))
+print(f())</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>5
+8
+2</div>
+<div class="explanation"><b>Explanation:</b> Keyword arguments can override b while a retains its default. A positional 4 replaces a, and the final call uses both defaults.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">36</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(a, b):
+    return a + b
+
+d = {"a": 10, "b": 20}
+print(f(**d))</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>30</div>
+<div class="explanation"><b>Explanation:</b> Dictionary unpacking with ** maps matching keys to the function's parameter names.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="identify the output or error in the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">37</div>
+<div class="q-body">
+<div class="q-title">Identify the output or error in the following program:</div>
+<pre class="code-box">def f(a, b):
+    return a + b
+
+d = {"a": 10, "c": 20}
+print(f(**d))</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output / Exception</div>
+<div class="output-text error-text>TypeError</div>
+<div class="explanation"><b>Explanation:</b> The dictionary contains an unexpected keyword c, while the required parameter b is missing.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">38</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(x):
+    return x * 2
+
+g = f
+f = lambda x: x + 10
+
+print(g(5))
+print(f(5))</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>10
+15</div>
+<div class="explanation"><b>Explanation:</b> g keeps the original function object. Reassigning the name f to a lambda does not change what g refers to.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">39</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f():
+    return "A"
+
+g = f
+del f
+print(g())</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>A</div>
+<div class="explanation"><b>Explanation:</b> Deleting the name f removes that binding, but g still references the original function object.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">40</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f():
+    return 10
+
+def f():
+    return 20
+
+print(f())</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>20</div>
+<div class="explanation"><b>Explanation:</b> The second function definition rebinds the name f to the new function.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">41</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(x):
+    return x + 1
+
+print(f(f(3)))</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>5</div>
+<div class="explanation"><b>Explanation:</b> The inner call produces 4, which becomes the argument of the outer call. The outer call returns 5.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">42</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(x):
+    if x &lt;= 1:
+        return 1
+    return x * f(x - 1)
+
+print(f(4))</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>24</div>
+<div class="explanation"><b>Explanation:</b> The recursion computes 4×3×2×1, giving 24.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">43</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(n):
+    total = 0
+    for i in range(n):
+        if i % 2 == 0:
+            total += i
+    return total
+
+print(f(7))</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>12</div>
+<div class="explanation"><b>Explanation:</b> The optional for loop runs inside the function. The even values 0,2,4,6 are added, giving 12.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">44</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(n):
+    total = 0
+    while n &gt; 0:
+        total += n
+        n -= 2
+    return total
+
+print(f(7))</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>16</div>
+<div class="explanation"><b>Explanation:</b> The while loop adds 7+5+3+1, giving 16.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">45</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(n):
+    for i in range(n):
+        if i == 2:
+            return i
+    return -1
+
+print(f(5))</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>2</div>
+<div class="explanation"><b>Explanation:</b> return immediately exits the entire function when i reaches 2; it does not merely stop the loop.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">46</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f():
+    for i in range(4):
+        if i == 2:
+            break
+        print(i, end=" ")
+    return "Done"
+
+print(f())</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>0 1 Done</div>
+<div class="explanation"><b>Explanation:</b> The loop stops at i=2. After break, execution leaves the loop and reaches the return statement.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">47</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f():
+    for i in range(3):
+        if i == 1:
+            continue
+        print(i, end=" ")
+    return "X"
+
+print(f())</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>0 2 X</div>
+<div class="explanation"><b>Explanation:</b> continue skips only the current iteration. The function continues with i=2 and then returns X.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">48</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f():
+    i = 1
+    while i &lt;= 3:
+        print(i, end=" ")
+        i += 1
+    return i
+
+print("|", f())</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>1 2 3 | 4</div>
+<div class="explanation"><b>Explanation:</b> The loop ends when i becomes 4. That final value is returned after the loop.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">49</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f():
+    for i in range(3):
+        pass
+    return i
+
+print(f())</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>2</div>
+<div class="explanation"><b>Explanation:</b> The loop completes with i equal to its last value, 2. pass does nothing.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">50</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(x):
+    if x:
+        return 1
+    else:
+        return 2
+
+print(f(0), f(5), f([]), f([1]))</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>2 1 2 1</div>
+<div class="explanation"><b>Explanation:</b> Zero and an empty list are false-like; 5 and a non-empty list are true-like.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">51</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(x):
+    return x and x + 10
+
+print(f(0))
+print(f(5))</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>0
+15</div>
+<div class="explanation"><b>Explanation:</b> and returns the first false-like operand or the final operand. With 0 it returns 0; with 5 it evaluates and returns 15.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">52</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(x):
+    return x or 99
+
+print(f(0))
+print(f(5))</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>99
+5</div>
+<div class="explanation"><b>Explanation:</b> or returns the first truthy operand. 0 is false-like, so 99 is returned; 5 is already truthy.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">53</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f():
+    print("inside")
+    return 10
+
+x = f
+print("A")
+print(x())</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>A
+inside
+10</div>
+<div class="explanation"><b>Explanation:</b> Assigning x=f stores the function object without calling it. The function runs only when x() is executed.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">54</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(x):
+    def g():
+        return x * 2
+    return g()
+
+print(f(7))</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>14</div>
+<div class="explanation"><b>Explanation:</b> g is called inside f while x is still available from the enclosing scope, so it returns 14.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">55</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(x):
+    def g(y=x):
+        return y
+    x = x + 10
+    return g()
+
+print(f(5))</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>5</div>
+<div class="explanation"><b>Explanation:</b> The default argument y=x is evaluated when g is defined, before x is changed to 15.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">56</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f():
+    x = 1
+    def g():
+        nonlocal x
+        x += 1
+        return x
+    return g
+
+g = f()
+for _ in range(3):
+    print(g(), end=" ")</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>2 3 4</div>
+<div class="explanation"><b>Explanation:</b> The optional for loop repeatedly calls the same closure, which retains and updates x through nonlocal.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">57</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(x):
+    if x == 0:
+        return "zero"
+    elif x % 2 == 0:
+        return "even"
+    return "odd"
+
+for n in [0, 2, 3]:
+    print(f(n), end=" ")</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>zero even odd</div>
+<div class="explanation"><b>Explanation:</b> The optional for loop calls the function with three values. Each call follows the first matching return path.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">58</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(n):
+    s = 0
+    while n:
+        s += n % 10
+        n //= 10
+    return s
+
+print(f(1234))</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>10</div>
+<div class="explanation"><b>Explanation:</b> The while loop extracts digits 4,3,2,1 and adds them to produce 10.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="identify the output or error in the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">59</div>
+<div class="q-body">
+<div class="q-title">Identify the output or error in the following program:</div>
+<pre class="code-box">def f():
+    return x
+
+print(f())</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output / Exception</div>
+<div class="output-text error-text>NameError</div>
+<div class="explanation"><b>Explanation:</b> x has not been defined in the global or enclosing scope when f is called.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="identify the output or error in the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">60</div>
+<div class="q-body">
+<div class="q-title">Identify the output or error in the following program:</div>
+<pre class="code-box">def f():
+    yield 1
+    return 2
+
+g = f()
+print(next(g))
+print(next(g))</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output / Exception</div>
+<div class="output-text error-text>StopIteration (value=2)</div>
+<div class="explanation"><b>Explanation:</b> The first next yields 1. The second next reaches return 2, which terminates the generator and places 2 in the StopIteration exception's value.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">61</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f():
+    yield 1
+    yield 2
+
+g = f()
+print(next(g))
+print(list(g))</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>1
+[2]</div>
+<div class="explanation"><b>Explanation:</b> The first next consumes only the first yielded value. list(g) then continues from the suspended point and collects the remaining value.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">62</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(x):
+    return [x, x]
+
+a = f(5)
+a[0] = 10
+print(a)</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>[10, 5]</div>
+<div class="explanation"><b>Explanation:</b> The function creates a new list containing two references to the integer 5. Changing the first list element changes only that position.</div>
+</div>
+</div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the following program: functions function scope recursion lambda closure default arguments return for while if error">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">63</div>
+<div class="q-body">
+<div class="q-title">Find the output of the following program:</div>
+<pre class="code-box">def f(a):
+    return a * 2
+
+print(f([1, 2]))
+print(f("ab"))</pre>
+</div>
+<div class="toggle-icon">+</div>
+</div>
+<div class="accordion-content">
+<div class="output-box">
+<div class="output-title">Predicted Output</div>
+<div class="output-text>[1, 2, 1, 2]
+abab</div>
+<div class="explanation"><b>Explanation:</b> For a list, *2 repeats the list. For a string, *2 repeats the string.</div>
+</div>
+</div>
+</div></div>
+</main>
+<footer>© 2026 D. Kiran Prasad | Python Programming</footer>
+<script>
+function toggleItem(header){header.parentElement.classList.toggle('open')}
+function toggleAll(open){document.querySelectorAll('.accordion-item').forEach(item=>item.classList.toggle('open',open))}
+function filterQuestions(){
+ const query=document.getElementById('searchInput').value.toLowerCase();
+ document.querySelectorAll('.accordion-item').forEach(item=>{
+   const text=item.innerText.toLowerCase();
+   const keywords=item.getAttribute('data-keywords')||'';
+   item.style.display=(text.includes(query)||keywords.includes(query))?'block':'none';
+ });
+}
+</script>
+</body>
+</html>
