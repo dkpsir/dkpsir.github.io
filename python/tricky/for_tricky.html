@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tricky Questions in Python - For Loop</title>
+<style>
+*{box-sizing:border-box} body{margin:0;background:#eef4f9;color:#111;font-family:"Segoe UI",Arial,sans-serif}
+.header{position:relative;background:linear-gradient(90deg,#0b477d,#087cc1);color:#fff;text-align:center;padding:26px 20px}
+.header-nav{position:absolute;left:24px;right:24px;top:50%;transform:translateY(-50%);display:flex;justify-content:space-between;align-items:center;pointer-events:none}
+.header-nav a{color:#fff;text-decoration:none;font-size:18px;font-weight:700;pointer-events:auto;display:flex;align-items:center;gap:6px}
+.header-nav a:hover{text-decoration:underline} .header h1{margin:0;font-size:32px;letter-spacing:.5px;text-transform:uppercase}
+.header p{margin:8px 0 0;font-size:19px;font-weight:600;opacity:.95} .container{width:94%;max-width:1250px;margin:26px auto}
+.action-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:20px}
+.search-input{flex:1;min-width:240px;max-width:420px;padding:10px 14px;font-size:15px;border:1px solid #b7cde3;border-radius:6px;outline:none}
+.search-input:focus{border-color:#075b99} .btn-group{display:flex;gap:10px}
+.btn-toggle{background:#075b99;color:#fff;border:none;padding:10px 16px;font-size:14px;font-weight:700;border-radius:6px;cursor:pointer}
+.btn-toggle:hover{background:#054270} .accordion-item{background:#fff;border-radius:10px;margin-bottom:16px;box-shadow:0 3px 12px rgba(0,0,0,.05);border:1px solid #dbe6f2;overflow:hidden}
+.accordion-item:hover{border-color:#99bfe6} .accordion-header{display:flex;align-items:flex-start;padding:16px 20px;cursor:pointer;user-select:none;gap:16px}
+.badge{width:36px;height:36px;min-width:36px;background:#075b99;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;margin-top:2px}
+.q-body{flex:1} .q-title{font-size:17px;font-weight:700;color:#0b3b66;line-height:1.45;margin-bottom:10px}
+.code-box{background:#1e1e1e;color:#e6edf3;padding:12px 16px;border-radius:7px;font:14.5px/1.5 Consolas,"Courier New",monospace;overflow-x:auto;margin:0;border:1px solid #333}
+.toggle-icon{width:32px;height:32px;min-width:32px;background:#075b99;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;transition:transform .25s ease,background .2s ease;margin-top:2px}
+.accordion-item.open .toggle-icon{background:#d32f2f;transform:rotate(45deg)} .accordion-content{display:none;padding:0 20px 20px 72px;border-top:1px dashed #dbe6f2;background:#fbfdff}
+.accordion-item.open .accordion-content{display:block;padding-top:16px} .output-box{background:#f8fafc;border:1px solid #cfe0f0;border-radius:8px;padding:14px 16px}
+.output-title{font-size:13px;font-weight:700;color:#075b99;text-transform:uppercase;margin-bottom:6px;letter-spacing:.5px}
+.output-text{font:700 15px Consolas,"Courier New",monospace;color:#b84d00;background:#fff9f0;padding:8px 12px;border-radius:6px;border:1px solid #ffd8a8;white-space:pre-wrap;margin:0 0 10px}
+.error-text{color:#c92a2a;background:#fff5f5;border-color:#ffc9c9} .explanation{background:#eff6fc;border-left:4px solid #075b99;padding:10px 14px;border-radius:4px;font-size:14.5px;line-height:1.5;color:#1b3954}
+.tag{display:inline-block;background:#e2edfa;color:#075b99;font-size:12.5px;font-weight:700;padding:3px 8px;border-radius:4px;margin-bottom:10px}
+.tag-error{background:#ffe3e3;color:#c92a2a} footer{background:#063b70;color:#fff;text-align:center;padding:16px;font-size:15px;margin-top:40px}
+@media(max-width:850px){.header-nav{position:static;transform:none;margin-bottom:14px;pointer-events:auto}.header{padding-top:20px}.header h1{font-size:24px}.accordion-content{padding-left:20px}}
+</style>
+</head>
+<body>
+<header class="header">
+<div class="header-nav"><a href="../index.html">🏠 Python Home</a><a href="../../index.html">🏠 Main Home</a></div>
+<h1>FOR LOOP • NESTED LOOPS • LOOP CONTROL • CONDITIONS</h1>
+<p>Highly Confusing Questions in Python</p>
+</header>
+<main class="container">
+<div class="action-bar">
+<input type="text" id="searchInput" class="search-input" placeholder="🔍 Search questions..." onkeyup="filterQuestions()">
+<div class="btn-group"><button class="btn-toggle" onclick="toggleAll(true)">Expand All</button><button class="btn-toggle" onclick="toggleAll(false)">Collapse All</button></div>
+</div>
+<div id="accordionContainer">
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">1</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(1, 6):
+    print(i * 2, end=" ")</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">2 4 6 8 10</div>
+      <div class="explanation"><b>Explanation:</b> The loop takes the values 1 through 5 and multiplies each value by 2.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">2</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">total = 0
+
+for i in range(1, 6):
+    total += i
+    if total &gt; 6:
+        total -= 2
+
+print(total)</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">13</div>
+      <div class="explanation"><b>Explanation:</b> Trace total: 1 → 3 → 6 → 8 → 13. The subtraction occurs only when total becomes greater than 6 at i=4.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">3</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(5):
+    if i % 2 == 0:
+        print(i, end=" ")
+    else:
+        print(i + 10, end=" ")</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">0 11 2 13 4</div>
+      <div class="explanation"><b>Explanation:</b> Each loop value is tested separately. Even values are printed unchanged; odd values have 10 added.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">4</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(3):
+    for j in range(2):
+        print(i + j, end=" ")</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">0 1 1 2 2 3</div>
+      <div class="explanation"><b>Explanation:</b> For every value of i, the complete inner loop runs with j=0 and j=1.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">5</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(1, 4):
+    for j in range(i):
+        print(j, end="")
+    print()</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">0
+01
+012</div>
+      <div class="explanation"><b>Explanation:</b> The inner range depends on i. It runs 1, 2, and 3 times respectively.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">6</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(1, 5):
+    if i == 3:
+        break
+    print(i, end=" ")
+print("X")</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">1 2 X</div>
+      <div class="explanation"><b>Explanation:</b> The loop prints 1 and 2. At i=3, break terminates the loop immediately, and execution continues with print("X").</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">7</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(1, 6):
+    if i == 3:
+        continue
+    print(i, end=" ")</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">1 2 4 5</div>
+      <div class="explanation"><b>Explanation:</b> When i is 3, continue skips the remaining statements in that iteration and moves to the next iteration.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">8</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(5):
+    if i == 2:
+        pass
+    print(i, end=" ")</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">0 1 2 3 4</div>
+      <div class="explanation"><b>Explanation:</b> pass does nothing. Unlike continue, it does not skip the print statement.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">9</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">count = 0
+
+for i in range(2, 8):
+    if i % 2 == 0:
+        count += i
+    else:
+        count -= 1
+
+print(count)</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">9</div>
+      <div class="explanation"><b>Explanation:</b> The even values 2, 4 and 6 add 12. The odd values 3, 5 and 7 each subtract 1, so 12 - 3 = 9.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">10</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(3):
+    print("A", end="")
+    for j in range(2):
+        print(j, end="")
+    print("B", end="")</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">A01BA01BA01B</div>
+      <div class="explanation"><b>Explanation:</b> The complete inner loop executes twice for every outer-loop iteration.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">11</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">x = 0
+
+for i in range(1, 5):
+    x = x + i
+    if x % 2 == 0:
+        x = x // 2
+
+print(x)</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">7</div>
+      <div class="explanation"><b>Explanation:</b> Trace x: 1 → 3 → 3 (6 is even, so 6//2 = 3) → 7. Therefore the final value is 7.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">12</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(1, 4):
+    for j in range(1, 4):
+        if i == j:
+            print("*", end="")
+        else:
+            print(".", end="")
+    print()</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">*..
+.*.
+..*</div>
+      <div class="explanation"><b>Explanation:</b> The condition is true only when the row and column values are equal, producing a diagonal.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">13</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(3):
+    if i == 1:
+        for j in range(3):
+            print(j, end=" ")
+    else:
+        print(i, end=" ")</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">0 0 1 2 2</div>
+      <div class="explanation"><b>Explanation:</b> For i=0 and i=2, the outer else prints i. For i=1, the nested loop prints 0, 1 and 2.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">14</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(4):
+    for j in range(4):
+        if i + j == 3:
+            print(i, j, end="; ")</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">0 3; 1 2; 2 1; 3 0;</div>
+      <div class="explanation"><b>Explanation:</b> Only pairs whose sum is 3 satisfy the condition.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">15</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(1, 5):
+    if i % 2:
+        for j in range(i):
+            print(j, end="")
+    else:
+        print(i, end="")
+    print("|", end="")</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">0|01|2|0123|</div>
+      <div class="explanation"><b>Explanation:</b> Odd i values run a nested loop; even i values print i once. The separator is printed after every outer iteration.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">16</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(3):
+    for j in range(3):
+        if j == 1:
+            break
+        print(i + j, end=" ")
+    print("|", end=" ")</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">0 | 1 | 2 |</div>
+      <div class="explanation"><b>Explanation:</b> For every outer iteration, j=0 prints i. At j=1 the inner loop breaks, so j=2 is never reached.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">17</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(3):
+    for j in range(3):
+        if j == 1:
+            continue
+        print(i + j, end=" ")
+    print("|", end=" ")</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">0 2 | 1 3 | 2 4 |</div>
+      <div class="explanation"><b>Explanation:</b> continue skips only the current inner-loop iteration when j=1. The inner loop still continues with j=2.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">18</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(3):
+    if i == 1:
+        continue
+    for j in range(2):
+        print(i + j, end=" ")</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">0 1 2 3</div>
+      <div class="explanation"><b>Explanation:</b> When i=1, continue skips the entire remaining body of that outer iteration, including the inner loop.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">19</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(3):
+    for j in range(3):
+        if i == 1:
+            break
+        print(i + j, end=" ")
+    print("X", end=" ")</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">0 1 2 X X 2 3 4 X</div>
+      <div class="explanation"><b>Explanation:</b> For i=1, the inner loop breaks immediately, but the outer loop continues. The X after the inner loop executes every time.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">20</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(1, 4):
+    for j in range(1, 4):
+        if i * j &gt; 4:
+            break
+        print(i * j, end=" ")</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">1 2 3 2 4 3</div>
+      <div class="explanation"><b>Explanation:</b> For each outer value, products are printed until the first product greater than 4. The break affects only the inner loop.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">21</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">s = 0
+
+for i in range(1, 4):
+    for j in range(1, 4):
+        if i == j:
+            continue
+        s += i + j
+
+print(s)</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">16</div>
+      <div class="explanation"><b>Explanation:</b> All pairs except the diagonal pairs are included. The continue skips additions where i equals j.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">22</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(2, 5):
+    for j in range(i, 0, -1):
+        print(j, end="")
+    print()</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">21
+321
+4321</div>
+      <div class="explanation"><b>Explanation:</b> The inner loop counts backward from i to 1 for each outer value.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">23</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(4):
+    for j in range(4):
+        if i == 2:
+            break
+        print(j, end="")
+    print(i, end=" ")</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">0120 121 2 30123</div>
+      <div class="explanation"><b>Explanation:</b> For i=2 the inner loop prints nothing because it breaks immediately. The outer print of i still executes.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">24</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(1, 5):
+    if i % 2 == 0:
+        for j in range(i):
+            if j == 1:
+                break
+            print(i + j, end=" ")
+    else:
+        print(i, end=" ")
+    print("#", end=" ")</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">1 # 2 # 3 # 4 #</div>
+      <div class="explanation"><b>Explanation:</b> For even i, the nested loop prints only its j=0 value before j=1 breaks. Odd i values use the outer else.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">25</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(3):
+    for j in range(3):
+        if i == 0 or j == 2:
+            print("X", end="")
+        else:
+            print("O", end="")
+    print()</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">XXX
+OOX
+OOX</div>
+      <div class="explanation"><b>Explanation:</b> The first row satisfies i==0 for every column. In later rows only j==2 satisfies the condition.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">26</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(1, 4):
+    for j in range(1, 4):
+        if i &lt; j:
+            print("A", end="")
+        elif i == j:
+            print("B", end="")
+        else:
+            print("C", end="")
+    print()</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">BAA
+CBA
+CCB</div>
+      <div class="explanation"><b>Explanation:</b> Each pair (i,j) selects exactly one branch: A when i<j, B when equal, and C when i>j.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">27</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(3):
+    for j in range(3):
+        if i == j:
+            break
+    else:
+        print(i, end=" ")</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text"></div>
+      <div class="explanation"><b>Explanation:</b> The inner for has a break for every outer iteration because j eventually equals i. Therefore its else never executes.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">28</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(3):
+    for j in range(3):
+        if i + j == 10:
+            break
+    else:
+        print(i, end=" ")</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">0 1 2</div>
+      <div class="explanation"><b>Explanation:</b> The break condition is never true. Therefore the inner loop completes normally for every outer iteration, causing its else block to execute each time.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the error in the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">29</div>
+    <div class="q-body">
+      <div class="q-title">Find the error in the program.</div>
+      <pre class="code-box">for i in range(5)
+    print(i)</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag tag-error">Error / Correction</span>
+    <div class="output-box">
+      <div class="output-title">Output / Exception</div>
+      <div class="output-text error-text">SyntaxError: expected ':'</div>
+      <div class="explanation"><b>Explanation:</b> The for statement must end with a colon. Correct form: for i in range(5):</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the error in the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">30</div>
+    <div class="q-body">
+      <div class="q-title">Find the error in the program.</div>
+      <pre class="code-box">for i in range(5):
+print(i)</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag tag-error">Error / Correction</span>
+    <div class="output-box">
+      <div class="output-title">Output / Exception</div>
+      <div class="output-text error-text">IndentationError</div>
+      <div class="explanation"><b>Explanation:</b> The loop body must be indented. Correct form: for i in range(5): followed by an indented print statement.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the error in the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">31</div>
+    <div class="q-body">
+      <div class="q-title">Find the error in the program.</div>
+      <pre class="code-box">for i in range(5):
+    if i % 2 == 0
+        print(i)</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag tag-error">Error / Correction</span>
+    <div class="output-box">
+      <div class="output-title">Output / Exception</div>
+      <div class="output-text error-text">SyntaxError: expected ':'</div>
+      <div class="explanation"><b>Explanation:</b> The if statement is missing its colon. Correct form: if i % 2 == 0:</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the error in the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">32</div>
+    <div class="q-body">
+      <div class="q-title">Find the error in the program.</div>
+      <pre class="code-box">for i in range(5):
+    if i == 2:
+    break
+    print(i)</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag tag-error">Error / Correction</span>
+    <div class="output-box">
+      <div class="output-title">Output / Exception</div>
+      <div class="output-text error-text">IndentationError</div>
+      <div class="explanation"><b>Explanation:</b> break must be indented inside the if block. Correct indentation is four additional spaces under if.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the error in the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">33</div>
+    <div class="q-body">
+      <div class="q-title">Find the error in the program.</div>
+      <pre class="code-box">for i in range(5):
+    if i == 2:
+        continue
+    else:
+        break
+    print(i)</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag tag-error">Error / Correction</span>
+    <div class="output-box">
+      <div class="output-title">Output / Exception</div>
+      <div class="output-text error-text">No syntax error; output: 0 1</div>
+      <div class="explanation"><b>Explanation:</b> This program is syntactically valid. For i=0 and 1, the else executes and breaks immediately. Therefore only 0 and 1 are printed.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the error in the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">34</div>
+    <div class="q-body">
+      <div class="q-title">Find the error in the program.</div>
+      <pre class="code-box">for i in range(3):
+    for j in range(2):
+        if i == j:
+            print(i)
+        else:
+            print(j)
+    else:
+        print("Done")</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag tag-error">Error / Correction</span>
+    <div class="output-box">
+      <div class="output-title">Output / Exception</div>
+      <div class="output-text error-text">No error; output: 0 1 Done 1 0 Done 0 1 Done</div>
+      <div class="explanation"><b>Explanation:</b> The else belongs to the inner for loop and executes because the inner loop never uses break.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the error in the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">35</div>
+    <div class="q-body">
+      <div class="q-title">Find the error in the program.</div>
+      <pre class="code-box">for i in range(3):
+    if i == 1:
+        break
+else:
+    print("Complete")
+print("End")</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag tag-error">Error / Correction</span>
+    <div class="output-box">
+      <div class="output-title">Output / Exception</div>
+      <div class="output-text error-text">No error; output: End</div>
+      <div class="explanation"><b>Explanation:</b> The program is valid. break occurs when i is 1, so the for-else else block is skipped. End is then printed.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">36</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">result = 0
+
+for i in range(1, 5):
+    for j in range(1, i + 1):
+        if (i + j) % 2 == 0:
+            result += j
+        else:
+            result -= 1
+
+print(result)</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">1</div>
+      <div class="explanation"><b>Explanation:</b> Trace each inner iteration carefully. The additions and subtractions across all triangular iterations result in the final value 1.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">37</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(4):
+    for j in range(4):
+        if i == 1:
+            continue
+        if j == 2:
+            break
+        print(i + j, end=" ")
+    print("|", end=" ")</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">0 1 | | 2 3 | 3 4 |</div>
+      <div class="explanation"><b>Explanation:</b> When i=1, the outer body continues before reaching the j test, so no inner values are printed. For other rows, j=0 and j=1 print, while j=2 breaks the inner loop.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">38</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(1, 4):
+    for j in range(1, 4):
+        if i == 2 and j == 2:
+            continue
+        if i + j &gt; 4:
+            break
+        print(i, j, end="; ")</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">1 1; 1 2; 1 3; 2 1; 3 1;</div>
+      <div class="explanation"><b>Explanation:</b> The continue skips only the pair (2,2), while the later if can break the inner loop for larger sums. The order of continue and break matters.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">39</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(3):
+    for j in range(3):
+        if i == 1:
+            if j == 0:
+                print("A", end="")
+            else:
+                print("B", end="")
+        else:
+            print("C", end="")
+    print()</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">CCC
+ABB
+CCC</div>
+      <div class="explanation"><b>Explanation:</b> For the middle row i=1, j=0 selects A and j=1,2 select B. The other rows print C for every inner iteration.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">40</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(1, 5):
+    for j in range(1, 5):
+        if j == i:
+            print("X", end="")
+        elif j &gt; i:
+            print("&gt;", end="")
+        else:
+            print("&lt;", end="")
+    print()</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">X&gt;&gt;&gt;
+&lt;X&gt;&gt;
+&lt;&lt;X&gt;
+&lt;&lt;&lt;X</div>
+      <div class="explanation"><b>Explanation:</b> For each row, values left of the diagonal are <, the diagonal is X, and values right of the diagonal are >.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">41</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(3):
+    for j in range(3):
+        if i == j:
+            print(i, end="")
+            continue
+        print(j, end="")
+    print()</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">012
+012
+012</div>
+      <div class="explanation"><b>Explanation:</b> The diagonal value is printed and then continue skips only the second print statement for that iteration. For non-diagonal positions, the second print outputs j.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">42</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(3):
+    for j in range(3):
+        if j == 0:
+            pass
+        elif j == 1:
+            continue
+        else:
+            print(i + j, end=" ")
+    print("X", end=" ")</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">2 X 3 X 4 X</div>
+      <div class="explanation"><b>Explanation:</b> pass does nothing for j=0, continue skips j=1, and only j=2 reaches the print statement. X is printed after the inner loop.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">43</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(1, 5):
+    if i &gt; 2:
+        for j in range(i - 1):
+            print(j, end="")
+    else:
+        for j in range(2):
+            print(i, end="")
+    print("|", end=" ")</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">11 | 11 | 012 | 0123 |</div>
+      <div class="explanation"><b>Explanation:</b> For i=1 and 2 the else loop prints i twice. For i=3 and 4 the nested loop runs i-1 times and prints 0 through i-2.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">44</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(3):
+    for j in range(3):
+        if i * j == 0:
+            print("Z", end="")
+        elif i == j:
+            print("D", end="")
+        else:
+            print(".", end="")
+    print()</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">ZZZ
+Z.D
+Z.D</div>
+      <div class="explanation"><b>Explanation:</b> Any pair with i*j equal to zero prints Z. Otherwise equal indices print D; all remaining positions print a dot.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">45</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(2):
+    for j in range(3):
+        if i == 0:
+            if j == 1:
+                break
+            print("A", end="")
+        else:
+            print("B", end="")
+    print("X", end=" ")</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">AX BBBX</div>
+      <div class="explanation"><b>Explanation:</b> For i=0, A is printed once and then the inner loop breaks at j=1. For i=1, all three inner iterations print B. X executes after each inner loop.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">46</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">total = 0
+
+for i in range(1, 4):
+    for j in range(1, 4):
+        if i == j:
+            total += i
+        else:
+            total -= 1
+
+print(total)</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">-3</div>
+      <div class="explanation"><b>Explanation:</b> There are three diagonal additions: 1+2+3=6. There are six non-diagonal cases, each subtracting 1, so the final result is 6-6=0. Correction: output is 0.</div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item" data-keywords="find the output of the program. for loop nested break continue error output">
+  <div class="accordion-header" onclick="toggleItem(this)">
+    <div class="badge">47</div>
+    <div class="q-body">
+      <div class="q-title">Find the output of the program.</div>
+      <pre class="code-box">for i in range(1, 4):
+    for j in range(1, 4):
+        if i + j == 4:
+            break
+        print(j, end="")
+    print()</pre>
+    </div>
+    <div class="toggle-icon">+</div>
+  </div>
+  <div class="accordion-content">
+    <span class="tag">Answer</span>
+    <div class="output-box">
+      <div class="output-title">Predicted Output</div>
+      <div class="output-text">12
+1
+</div>
+      <div class="explanation"><b>Explanation:</b> For i=1, j=1 and j=2 are printed, then j=3 breaks: 12. For i=2, j=1 is printed and j=2 breaks: 1. For i=3, j=1 immediately satisfies i+j=4, so nothing is printed on that line.</div>
+    </div>
+  </div>
+</div></div>
+</main>
+<footer>© 2026 D. Kiran Prasad | Python Programming</footer>
+<script>
+function toggleItem(header) { header.parentElement.classList.toggle('open'); }
+function toggleAll(open) { document.querySelectorAll('.accordion-item').forEach(item => item.classList.toggle('open', open)); }
+function filterQuestions() {
+ const query=document.getElementById('searchInput').value.toLowerCase();
+ document.querySelectorAll('.accordion-item').forEach(item => {
+   item.style.display=item.innerText.toLowerCase().includes(query)?'block':'none';
+ });
+}
+</script>
+</body>
+</html>
