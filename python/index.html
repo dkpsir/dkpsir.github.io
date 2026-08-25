@@ -381,6 +381,195 @@ body{
     }
     .concept-title{font-size:18px}
 }
+
+/* ---------- TWO MAIN TABS ---------- */
+.main-tabs{
+    display:flex;
+    gap:10px;
+    background:#fff;
+    border-bottom:1px solid var(--border);
+    padding:0 22px;
+}
+.main-tab{
+    border:0;
+    background:transparent;
+    color:#60768d;
+    padding:13px 24px;
+    border-radius:10px 10px 0 0;
+    font-size:17px;
+    font-weight:700;
+    cursor:pointer;
+}
+.main-tab.active{
+    background:var(--navy);
+    color:#fff;
+}
+.main-tab:hover:not(.active){
+    background:var(--blue2);
+    color:var(--navy);
+}
+.tab-page{display:none;}
+.tab-page.active{display:block;}
+.tab-page .portal{grid-template-columns:1fr;}
+.tab-page .experiments-panel{position:static;}
+
+
+/* Compact three-column layout for tab pages */
+#pythonTab .concepts-list{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:14px;
+}
+#pythonTab .concept-card{
+    margin-bottom:0;
+    height:100%;
+}
+#mechanicalTab .experiments-list{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:14px;
+}
+#mechanicalTab .experiment-card{
+    margin-bottom:0;
+    height:100%;
+}
+@media(max-width:1000px){
+    #pythonTab .concepts-list,
+    #mechanicalTab .experiments-list{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+}
+@media(max-width:650px){
+    #pythonTab .concepts-list,
+    #mechanicalTab .experiments-list{
+        grid-template-columns:1fr;
+    }
+}
+
+
+/* Three-column compact layout for existing module/experiment cards */
+.python-section .module-grid,
+.mechanical-section .experiment-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+    align-items: start;
+}
+
+.python-section .module-card,
+.mechanical-section .experiment-card {
+    margin: 0 !important;
+    width: 100% !important;
+}
+
+@media (max-width: 1100px) {
+    .python-section .module-grid,
+    .mechanical-section .experiment-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+
+@media (max-width: 700px) {
+    .python-section .module-grid,
+    .mechanical-section .experiment-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+
+/* Compact 3-up cards inside the two existing tab panels */
+#python .module-card,
+#python .topic-card,
+#python .python-module,
+#mechanical .experiment-card,
+#mechanical .experiment,
+#mechanical .mechanical-experiment {
+    display: inline-block;
+    vertical-align: top;
+    width: calc(33.333% - 9px);
+    margin-right: 10px;
+    margin-bottom: 12px;
+}
+
+#python .module-card:nth-child(3n),
+#python .topic-card:nth-child(3n),
+#python .python-module:nth-child(3n),
+#mechanical .experiment-card:nth-child(3n),
+#mechanical .experiment:nth-child(3n),
+#mechanical .mechanical-experiment:nth-child(3n) {
+    margin-right: 0;
+}
+
+@media (max-width:1100px) {
+    #python .module-card,
+    #python .topic-card,
+    #python .python-module,
+    #mechanical .experiment-card,
+    #mechanical .experiment,
+    #mechanical .mechanical-experiment {
+        width: calc(50% - 6px);
+    }
+}
+
+@media (max-width:700px) {
+    #python .module-card,
+    #python .topic-card,
+    #python .python-module,
+    #mechanical .experiment-card,
+    #mechanical .experiment,
+    #mechanical .mechanical-experiment {
+        width: 100%;
+        margin-right: 0;
+    }
+}
+
+
+/* Subtle pastel backgrounds for individual modules */
+#python .module-card:nth-child(5n+1),
+#python .topic-card:nth-child(5n+1),
+#python .python-module:nth-child(5n+1) {
+    background: #f1f7ff !important;
+}
+#python .module-card:nth-child(5n+2),
+#python .topic-card:nth-child(5n+2),
+#python .python-module:nth-child(5n+2) {
+    background: #f1faf5 !important;
+}
+#python .module-card:nth-child(5n+3),
+#python .topic-card:nth-child(5n+3),
+#python .python-module:nth-child(5n+3) {
+    background: #fffaf0 !important;
+}
+#python .module-card:nth-child(5n+4),
+#python .topic-card:nth-child(5n+4),
+#python .python-module:nth-child(5n+4) {
+    background: #f7f3fc !important;
+}
+#python .module-card:nth-child(5n+5),
+#python .topic-card:nth-child(5n+5),
+#python .python-module:nth-child(5n+5) {
+    background: #fff5f1 !important;
+}
+
+/* Keep the module headings slightly lighter while preserving readability */
+#python .module-card:nth-child(5n+1) .module-header,
+#python .topic-card:nth-child(5n+1) .topic-header,
+#python .python-module:nth-child(5n+1) .module-header,
+#python .module-card:nth-child(5n+2) .module-header,
+#python .topic-card:nth-child(5n+2) .topic-header,
+#python .python-module:nth-child(5n+2) .module-header,
+#python .module-card:nth-child(5n+3) .module-header,
+#python .topic-card:nth-child(5n+3) .topic-header,
+#python .python-module:nth-child(5n+3) .module-header,
+#python .module-card:nth-child(5n+4) .module-header,
+#python .topic-card:nth-child(5n+4) .topic-header,
+#python .python-module:nth-child(5n+4) .module-header,
+#python .module-card:nth-child(5n+5) .module-header,
+#python .topic-card:nth-child(5n+5) .topic-header,
+#python .python-module:nth-child(5n+5) .module-header {
+    background: rgba(255,255,255,.58) !important;
+}
+
 </style>
 </head>
 
@@ -396,9 +585,15 @@ body{
         <div>Name 1 · Name 2 · Name 3</div>
     </div>
 </header>
+<nav class="main-tabs">
+    <button class="main-tab active" onclick="showTab('pythonTab', this)">🐍 Python Core Concepts</button>
+    <button class="main-tab" onclick="showTab('mechanicalTab', this)">⚙ Mechanical Engineering Experiments</button>
+</nav>
+
 
 <main class="page">
 
+    <section id="pythonTab" class="tab-page active">
     <section class="intro">
         <div class="intro-text">
             <h2>Python Concepts &amp; Learning Resources</h2>
@@ -411,15 +606,10 @@ body{
         <div class="resource-key">
             <span class="key concept">📖 Concept</span>
             <span class="key visual">👁 Visualiser</span>
-            <span class="key tricky">🧩 Tricky Programs</span>
+            <span class="key tricky">🧩 Practice Programs</span>
         </div>
     </section>
-
-
     <div class="portal">
-
-        <!-- ================= PYTHON CONCEPTS ================= -->
-
         <section class="panel concepts-panel">
 
             <div class="panel-header">
@@ -885,10 +1075,11 @@ body{
 
             </div>
         </section>
+    </div>
+    </section>
 
-
-        <!-- ================= EXPERIMENTS ================= -->
-
+    <section id="mechanicalTab" class="tab-page">
+        <div class="portal">
         <aside class="panel experiments-panel">
 
             <div class="panel-header">
@@ -1110,12 +1301,15 @@ body{
 
             </div>
         </aside>
+        </div>
+    </section>
 
-    </div>
+
 
     <div class="footer">
         © 2026 D. Kiran Prasad
     </div>
+
 
 </main>
 
@@ -1124,6 +1318,20 @@ body{
     PRINT / RIGHT-CLICK RESTRICTIONS ARE INTENTIONALLY RETAINED.
     They can be removed later when the website is finalized.
 -->
+
+<script>
+function showTab(tabId, button){
+    document.querySelectorAll(".tab-page").forEach(function(page){
+        page.classList.remove("active");
+    });
+    document.querySelectorAll(".main-tab").forEach(function(tab){
+        tab.classList.remove("active");
+    });
+    document.getElementById(tabId).classList.add("active");
+    button.classList.add("active");
+}
+</script>
+
 <script>
 document.addEventListener("contextmenu", function(e){
     e.preventDefault();
