@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Highly Confusing If Else Questions</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#eef4f9;color:#111;font-family:"Segoe UI",Arial,sans-serif}
+.header{background:linear-gradient(90deg,#0b477d,#087cc1);color:#fff;padding:28px 22px;min-height:106px;position:relative;display:flex;align-items:center;justify-content:center}
+.nav{position:absolute;left:22px;right:22px;display:flex;justify-content:space-between;align-items:center}
+.nav a{color:#fff;text-decoration:none;font-size:20px;font-weight:700}.nav a:hover{text-decoration:underline}
+.header h1{margin:0;font-size:31px;letter-spacing:.4px;text-transform:uppercase;text-align:center}
+.container{width:94%;max-width:1400px;margin:26px auto}
+.bar{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.search{flex:1;min-width:250px;max-width:520px;padding:11px 15px;border:1px solid #b7cde3;border-radius:7px;font-size:15px}
+button{background:#075b99;color:#fff;border:0;padding:10px 16px;border-radius:6px;font-weight:700;cursor:pointer}button:hover{background:#054270}
+.item{background:#fff;border:1px solid #dbe6f2;border-radius:10px;margin-bottom:15px;overflow:hidden;box-shadow:0 3px 12px #0000000d}
+.head{display:flex;gap:16px;align-items:flex-start;padding:16px 20px;cursor:pointer}
+.num{width:36px;height:36px;min-width:36px;border-radius:50%;background:#075b99;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+.body{flex:1}.title{font-size:18px;font-weight:700;color:#0b3b66;margin-bottom:10px}
+.head pre{margin:0;background:#1e1e1e;color:#e6edf3;border-radius:7px;padding:13px 16px;font:14.5px/1.55 Consolas,"Courier New",monospace;white-space:pre;overflow:auto}
+.plus{width:34px;height:34px;min-width:34px;border-radius:50%;background:#075b99;color:#fff;display:flex;align-items:center;justify-content:center;font-size:23px;font-weight:700;transition:.2s}
+.item.open .plus{background:#d32f2f;transform:rotate(45deg)}
+.answer{display:none;background:#fbfdff;border-top:1px dashed #cbd9e6;padding:18px 22px 20px 72px}
+.item.open .answer{display:block}.answer-title{font-size:18px;font-weight:700;color:#075b99;margin-bottom:12px}
+.out-title{font-size:13px;font-weight:700;color:#075b99;text-transform:uppercase;margin-bottom:6px}
+.output{margin:0;background:#fff9f0;border:1px solid #ffd8a8;border-radius:7px;padding:11px 14px;color:#b84d00;font:700 15px/1.5 Consolas,"Courier New",monospace;white-space:pre-wrap}
+.explanation{margin-top:12px;background:#eff6fc;border-left:4px solid #075b99;padding:11px 14px;border-radius:4px;font-size:15px;line-height:1.6;color:#173b59}
+footer{margin-top:40px;background:#063b70;color:#fff;text-align:center;padding:16px}
+@media(max-width:850px){.nav{position:static;margin-bottom:14px}.header{display:block;text-align:center}.header h1{font-size:23px}.answer{padding-left:22px}}
+</style>
+</head>
+<body>
+<header class="header">
+<div class="nav"><a href="../index.html">🏠 Python Home</a><a href="../../index.html">🏠 Main Home</a></div>
+<h1>IF • ELSE • ELIF • LOGICAL EXPRESSIONS</h1>
+</header>
+<main class="container">
+<div class="bar"><input id="search" class="search" placeholder="🔍 Search questions..." onkeyup="filterItems()">
+<div><button onclick="allItems(true)">Expand All</button> <button onclick="allItems(false)">Collapse All</button></div></div>
+<div id="list"><div class="item" data-key="find the output of the program. x = 12
+
+if x &gt; 10:
+    x = x - 4
+    if x &gt; 5:
+        x = x + 10
+    else:
+        x = x + 20
+else:
+    x = x + 100
+
+print(x)">
+<div class="head" onclick="toggle(this)">
+<div class="num">1</div>
+<div class="body"><div class="title">Find the output of the program.</div><pre>x = 12
+
+if x &gt; 10:
+    x = x - 4
+    if x &gt; 5:
+        x = x + 10
+    else:
+        x = x + 20
+else:
+    x = x + 100
+
+print(x)</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">18</pre>
+<div class="explanation"><b>Explanation:</b> Initially x is 12, so the outer condition is True and x becomes 8. The inner condition 8 > 5 is also True, so 10 is added. The final value is 18.</div>
+</div></div><div class="item" data-key="find the output of the program. x = 15
+
+if x &gt; 10:
+    print("a")
+elif x &gt; 5:
+    print("b")
+elif x &gt; 0:
+    print("c")
+else:
+    print("d")">
+<div class="head" onclick="toggle(this)">
+<div class="num">2</div>
+<div class="body"><div class="title">Find the output of the program.</div><pre>x = 15
+
+if x &gt; 10:
+    print("A")
+elif x &gt; 5:
+    print("B")
+elif x &gt; 0:
+    print("C")
+else:
+    print("D")</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">A</pre>
+<div class="explanation"><b>Explanation:</b> The first condition is True. Once one branch of an if-elif-else chain is selected, the remaining branches are not tested.</div>
+</div></div><div class="item" data-key="find the output of the program. x = 15
+
+if x &gt; 10:
+    print("a")
+
+if x &gt; 5:
+    print("b")
+else:
+    print("c")">
+<div class="head" onclick="toggle(this)">
+<div class="num">3</div>
+<div class="body"><div class="title">Find the output of the program.</div><pre>x = 15
+
+if x &gt; 10:
+    print("A")
+
+if x &gt; 5:
+    print("B")
+else:
+    print("C")</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">A
+B</pre>
+<div class="explanation"><b>Explanation:</b> These are two separate if statements. Both conditions are True, so both A and B are printed.</div>
+</div></div><div class="item" data-key="find the output of the program. x = 8
+
+if x &gt; 5:
+    print("a")
+    x = 3
+
+if x &gt; 5:
+    print("b")
+else:
+    print("c")">
+<div class="head" onclick="toggle(this)">
+<div class="num">4</div>
+<div class="body"><div class="title">Find the output of the program.</div><pre>x = 8
+
+if x &gt; 5:
+    print("A")
+    x = 3
+
+if x &gt; 5:
+    print("B")
+else:
+    print("C")</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">A
+C</pre>
+<div class="explanation"><b>Explanation:</b> The first condition is evaluated while x is 8, so A is printed. x is then changed to 3. The second if therefore becomes False and C is printed.</div>
+</div></div><div class="item" data-key="find the output of the program. x = 5
+
+if x == 5:
+    x = 10
+elif x == 10:
+    x = 20
+
+print(x)">
+<div class="head" onclick="toggle(this)">
+<div class="num">5</div>
+<div class="body"><div class="title">Find the output of the program.</div><pre>x = 5
+
+if x == 5:
+    x = 10
+elif x == 10:
+    x = 20
+
+print(x)</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">10</pre>
+<div class="explanation"><b>Explanation:</b> The first condition is True, so x becomes 10. Python does not return to the elif after executing the selected branch.</div>
+</div></div><div class="item" data-key="find the output of the program. x = 5
+
+if x &gt; 10:
+    x = 20
+elif x &gt; 3:
+    x = x + 10
+    if x &gt; 10:
+        x = x + 100
+
+print(x)">
+<div class="head" onclick="toggle(this)">
+<div class="num">6</div>
+<div class="body"><div class="title">Find the output of the program.</div><pre>x = 5
+
+if x &gt; 10:
+    x = 20
+elif x &gt; 3:
+    x = x + 10
+    if x &gt; 10:
+        x = x + 100
+
+print(x)</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">115</pre>
+<div class="explanation"><b>Explanation:</b> The first condition is False. The elif condition is True, so x becomes 15. The nested condition is then True and x becomes 115.</div>
+</div></div><div class="item" data-key="find the output of the program. a = true
+b = false
+c = true
+
+if a or b and c:
+    print("yes")
+else:
+    print("no")">
+<div class="head" onclick="toggle(this)">
+<div class="num">7</div>
+<div class="body"><div class="title">Find the output of the program.</div><pre>a = True
+b = False
+c = True
+
+if a or b and c:
+    print("YES")
+else:
+    print("NO")</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">YES</pre>
+<div class="explanation"><b>Explanation:</b> and is evaluated before or. The condition is a or (b and c), which becomes True or False, giving True.</div>
+</div></div><div class="item" data-key="find the output of the program. a = true
+b = false
+c = true
+
+if (a or b) and c:
+    print("yes")
+else:
+    print("no")">
+<div class="head" onclick="toggle(this)">
+<div class="num">8</div>
+<div class="body"><div class="title">Find the output of the program.</div><pre>a = True
+b = False
+c = True
+
+if (a or b) and c:
+    print("YES")
+else:
+    print("NO")</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">YES</pre>
+<div class="explanation"><b>Explanation:</b> a or b is True. True and c is also True, so YES is printed.</div>
+</div></div><div class="item" data-key="find the output of the program. x = 10
+
+if not x &gt; 5:
+    print("a")
+else:
+    print("b")">
+<div class="head" onclick="toggle(this)">
+<div class="num">9</div>
+<div class="body"><div class="title">Find the output of the program.</div><pre>x = 10
+
+if not x &gt; 5:
+    print("A")
+else:
+    print("B")</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">B</pre>
+<div class="explanation"><b>Explanation:</b> x > 5 is True. not True becomes False, so the else block executes.</div>
+</div></div><div class="item" data-key="find the output of the program. x = 0
+
+if not not x:
+    print("a")
+else:
+    print("b")">
+<div class="head" onclick="toggle(this)">
+<div class="num">10</div>
+<div class="body"><div class="title">Find the output of the program.</div><pre>x = 0
+
+if not not x:
+    print("A")
+else:
+    print("B")</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">B</pre>
+<div class="explanation"><b>Explanation:</b> Zero is false-like. Applying not twice returns the condition to False, so B is printed.</div>
+</div></div><div class="item" data-key="find the output of the program. x = -1
+
+if x:
+    print("a")
+
+if x == 0:
+    print("b")
+else:
+    print("c")">
+<div class="head" onclick="toggle(this)">
+<div class="num">11</div>
+<div class="body"><div class="title">Find the output of the program.</div><pre>x = -1
+
+if x:
+    print("A")
+
+if x == 0:
+    print("B")
+else:
+    print("C")</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">A
+C</pre>
+<div class="explanation"><b>Explanation:</b> Any non-zero integer is truthy, including -1. Therefore A is printed. x == 0 is False, so C is printed.</div>
+</div></div><div class="item" data-key="find the output of the program. x = 5
+
+if x &gt; true:
+    print("a")
+elif x == true:
+    print("b")
+else:
+    print("c")">
+<div class="head" onclick="toggle(this)">
+<div class="num">12</div>
+<div class="body"><div class="title">Find the output of the program.</div><pre>x = 5
+
+if x &gt; True:
+    print("A")
+elif x == True:
+    print("B")
+else:
+    print("C")</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">A</pre>
+<div class="explanation"><b>Explanation:</b> True behaves like 1 in a numeric comparison. Therefore 5 > True is equivalent to 5 > 1 and is True.</div>
+</div></div><div class="item" data-key="find the output of the program. x = 10
+
+if 5 &lt; x &lt; 15:
+    print("a")
+else:
+    print("b")">
+<div class="head" onclick="toggle(this)">
+<div class="num">13</div>
+<div class="body"><div class="title">Find the output of the program.</div><pre>x = 10
+
+if 5 &lt; x &lt; 15:
+    print("A")
+else:
+    print("B")</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">A</pre>
+<div class="explanation"><b>Explanation:</b> The chained comparison means 5 < x and x < 15. Both are True for x = 10.</div>
+</div></div><div class="item" data-key="find the output of the program. marks = 50
+
+if marks &gt; 50:
+    print("distinction")
+elif marks &gt;= 50:
+    print("pass")
+else:
+    print("fail")">
+<div class="head" onclick="toggle(this)">
+<div class="num">14</div>
+<div class="body"><div class="title">Find the output of the program.</div><pre>marks = 50
+
+if marks &gt; 50:
+    print("Distinction")
+elif marks &gt;= 50:
+    print("Pass")
+else:
+    print("Fail")</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">Pass</pre>
+<div class="explanation"><b>Explanation:</b> marks > 50 is False because 50 is not greater than 50. marks >= 50 is True, so Pass is printed.</div>
+</div></div><div class="item" data-key="find the output of the program. x = 20
+
+if x &gt; 0:
+    print("positive")
+elif x &gt; 10:
+    print("greater than 10")
+else:
+    print("other")">
+<div class="head" onclick="toggle(this)">
+<div class="num">15</div>
+<div class="body"><div class="title">Find the output of the program.</div><pre>x = 20
+
+if x &gt; 0:
+    print("Positive")
+elif x &gt; 10:
+    print("Greater than 10")
+else:
+    print("Other")</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">Positive</pre>
+<div class="explanation"><b>Explanation:</b> The first condition x > 0 is already True. The later elif is never reached, even though it is more specific.</div>
+</div></div><div class="item" data-key="find the output of the program. x = 4
+y = 10
+
+if x &gt; 5:
+    if y &gt; 5:
+        print("a")
+    else:
+        print("b")
+else:
+    if y &gt; 5:
+        print("c")
+    else:
+        print("d")">
+<div class="head" onclick="toggle(this)">
+<div class="num">16</div>
+<div class="body"><div class="title">Find the output of the program.</div><pre>x = 4
+y = 10
+
+if x &gt; 5:
+    if y &gt; 5:
+        print("A")
+    else:
+        print("B")
+else:
+    if y &gt; 5:
+        print("C")
+    else:
+        print("D")</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">C</pre>
+<div class="explanation"><b>Explanation:</b> The outer condition is False because x is 4. In the outer else, y > 5 is True, so C is printed.</div>
+</div></div><div class="item" data-key="find the output of the program. x = 10
+y = 2
+
+if x &gt; 5:
+    if y &gt; 5:
+        print("a")
+    else:
+        print("b")
+else:
+    print("c")">
+<div class="head" onclick="toggle(this)">
+<div class="num">17</div>
+<div class="body"><div class="title">Find the output of the program.</div><pre>x = 10
+y = 2
+
+if x &gt; 5:
+    if y &gt; 5:
+        print("A")
+    else:
+        print("B")
+else:
+    print("C")</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">B</pre>
+<div class="explanation"><b>Explanation:</b> The outer condition is True, so the outer else is ignored. The inner condition is False, so its else prints B.</div>
+</div></div><div class="item" data-key="find the output of the program. x = 8
+
+result = "high" if x &gt; 10 else "low"
+
+if result == "high":
+    print("a")
+else:
+    print("b")">
+<div class="head" onclick="toggle(this)">
+<div class="num">18</div>
+<div class="body"><div class="title">Find the output of the program.</div><pre>x = 8
+
+result = "High" if x &gt; 10 else "Low"
+
+if result == "High":
+    print("A")
+else:
+    print("B")</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">B</pre>
+<div class="explanation"><b>Explanation:</b> x > 10 is False, so result becomes Low. The later comparison Low == High is False, so B is printed.</div>
+</div></div><div class="item" data-key="find the output of the program. x = 0
+
+if x != 0 and 10 / x &gt; 2:
+    print("a")
+else:
+    print("b")">
+<div class="head" onclick="toggle(this)">
+<div class="num">19</div>
+<div class="body"><div class="title">Find the output of the program.</div><pre>x = 0
+
+if x != 0 and 10 / x &gt; 2:
+    print("A")
+else:
+    print("B")</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">B</pre>
+<div class="explanation"><b>Explanation:</b> The first part of and is False. Python short-circuits the expression and does not evaluate 10 / x, so no division-by-zero error occurs.</div>
+</div></div><div class="item" data-key="find the output of the program. x = 12
+y = 5
+
+if x &gt; 10:
+    x = x - 4
+    if x &gt; y:
+        y = y + 10
+    elif x == y:
+        y = y + 20
+    else:
+        y = y - 10
+elif x == 10:
+    x = x + 10
+    y = y + 10
+else:
+    x = 0
+
+if y &gt; 10 and x &lt; 10:
+    result = "p"
+elif y &gt; 10 or x &gt; 20:
+    result = "q"
+else:
+    result = "r"
+
+print(x, y)
+print(result)">
+<div class="head" onclick="toggle(this)">
+<div class="num">20</div>
+<div class="body"><div class="title">Find the output of the program.</div><pre>x = 12
+y = 5
+
+if x &gt; 10:
+    x = x - 4
+    if x &gt; y:
+        y = y + 10
+    elif x == y:
+        y = y + 20
+    else:
+        y = y - 10
+elif x == 10:
+    x = x + 10
+    y = y + 10
+else:
+    x = 0
+
+if y &gt; 10 and x &lt; 10:
+    result = "P"
+elif y &gt; 10 or x &gt; 20:
+    result = "Q"
+else:
+    result = "R"
+
+print(x, y)
+print(result)</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">8 15
+P</pre>
+<div class="explanation"><b>Explanation:</b> The outer condition is True, making x equal to 8. Since 8 > 5, y becomes 15. In the final if, both y > 10 and x < 10 are True, so result becomes P.</div>
+</div></div><div class="item" data-key="find the error in the program and identify the corrected statement. x = 10
+
+if x &gt; 5
+    print("a")
+else:
+    print("b")">
+<div class="head" onclick="toggle(this)">
+<div class="num">21</div>
+<div class="body"><div class="title">Find the error in the program and identify the corrected statement.</div><pre>x = 10
+
+if x &gt; 5
+    print("A")
+else:
+    print("B")</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">SyntaxError: expected ':'</pre>
+<div class="explanation"><b>Explanation:</b> The condition line is missing the colon at the end. Correct statement: if x > 5:</div>
+</div></div><div class="item" data-key="find the error in the program and identify the corrected statement. x = 10
+
+if x &gt; 5:
+print("a")
+else:
+    print("b")">
+<div class="head" onclick="toggle(this)">
+<div class="num">22</div>
+<div class="body"><div class="title">Find the error in the program and identify the corrected statement.</div><pre>x = 10
+
+if x &gt; 5:
+print("A")
+else:
+    print("B")</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">IndentationError</pre>
+<div class="explanation"><b>Explanation:</b> The statement controlled by if must be indented. Correct form: if x > 5: followed by an indented print statement.</div>
+</div></div><div class="item" data-key="find the error in the program and identify the corrected statement. x = 10
+
+if x = 10:
+    print("a")
+else:
+    print("b")">
+<div class="head" onclick="toggle(this)">
+<div class="num">23</div>
+<div class="body"><div class="title">Find the error in the program and identify the corrected statement.</div><pre>x = 10
+
+if x = 10:
+    print("A")
+else:
+    print("B")</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">SyntaxError</pre>
+<div class="explanation"><b>Explanation:</b> = is assignment, not comparison. A condition needs ==. Correct statement: if x == 10:</div>
+</div></div><div class="item" data-key="find the error in the program and identify the corrected statement. x = 10
+
+if x &gt; 5:
+    print("a")
+else
+    print("b")">
+<div class="head" onclick="toggle(this)">
+<div class="num">24</div>
+<div class="body"><div class="title">Find the error in the program and identify the corrected statement.</div><pre>x = 10
+
+if x &gt; 5:
+    print("A")
+else
+    print("B")</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">SyntaxError: expected ':'</pre>
+<div class="explanation"><b>Explanation:</b> The else statement also requires a colon. Correct statement: else:</div>
+</div></div><div class="item" data-key="find the error in the program and identify the corrected statement. x = 10
+
+if x &gt; 5:
+    print("a")
+  else:
+    print("b")">
+<div class="head" onclick="toggle(this)">
+<div class="num">25</div>
+<div class="body"><div class="title">Find the error in the program and identify the corrected statement.</div><pre>x = 10
+
+if x &gt; 5:
+    print("A")
+  else:
+    print("B")</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">IndentationError</pre>
+<div class="explanation"><b>Explanation:</b> The else must align with its matching if. It should have the same indentation level as if.</div>
+</div></div><div class="item" data-key="find the error in the program and identify the corrected statement. x = 10
+
+if x &gt; 5:
+    print("a")
+elif:
+    print("b")">
+<div class="head" onclick="toggle(this)">
+<div class="num">26</div>
+<div class="body"><div class="title">Find the error in the program and identify the corrected statement.</div><pre>x = 10
+
+if x &gt; 5:
+    print("A")
+elif:
+    print("B")</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">SyntaxError</pre>
+<div class="explanation"><b>Explanation:</b> elif must contain a condition. For example: elif x == 5:</div>
+</div></div><div class="item" data-key="find the output or error of the program. x = 10
+
+if x &gt; 5:
+    print("a")
+    if x &gt; 20:
+        print("b")
+else:
+    print("c")
+
+print("d")">
+<div class="head" onclick="toggle(this)">
+<div class="num">27</div>
+<div class="body"><div class="title">Find the output or error of the program.</div><pre>x = 10
+
+if x &gt; 5:
+    print("A")
+    if x &gt; 20:
+        print("B")
+else:
+    print("C")
+
+print("D")</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">A
+D</pre>
+<div class="explanation"><b>Explanation:</b> The outer condition is True, so A is printed. The nested condition is False. The outer else is skipped. Finally D is printed.</div>
+</div></div><div class="item" data-key="find the output or error of the program. x = 10
+
+if x &gt; 5:
+    if x &lt; 20:
+        print("a")
+    else:
+        print("b")
+else:
+    print("c")
+print("d")">
+<div class="head" onclick="toggle(this)">
+<div class="num">28</div>
+<div class="body"><div class="title">Find the output or error of the program.</div><pre>x = 10
+
+if x &gt; 5:
+    if x &lt; 20:
+        print("A")
+    else:
+        print("B")
+else:
+    print("C")
+print("D")</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">A
+D</pre>
+<div class="explanation"><b>Explanation:</b> Both nested conditions required for A are satisfied: x > 5 and x < 20. Then D is printed because it is outside the conditional structure.</div>
+</div></div><div class="item" data-key="find the error in the program. x = 10
+
+if x &gt; 5:
+    print("a")
+elif x &gt; 2:
+    print("b")
+else:
+    print("c")
+elif x &gt; 0:
+    print("d")">
+<div class="head" onclick="toggle(this)">
+<div class="num">29</div>
+<div class="body"><div class="title">Find the error in the program.</div><pre>x = 10
+
+if x &gt; 5:
+    print("A")
+elif x &gt; 2:
+    print("B")
+else:
+    print("C")
+elif x &gt; 0:
+    print("D")</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">SyntaxError</pre>
+<div class="explanation"><b>Explanation:</b> An elif cannot appear after an else. The complete if-elif-else chain must place all elif branches before the final else.</div>
+</div></div><div class="item" data-key="find the output of the program. x = 7
+
+if x &gt; 5:
+    if x &gt; 10:
+        print("a")
+    elif x &gt; 6:
+        print("b")
+    else:
+        print("c")
+elif x &gt; 0:
+    print("d")
+else:
+    print("e")
+
+print("f")">
+<div class="head" onclick="toggle(this)">
+<div class="num">30</div>
+<div class="body"><div class="title">Find the output of the program.</div><pre>x = 7
+
+if x &gt; 5:
+    if x &gt; 10:
+        print("A")
+    elif x &gt; 6:
+        print("B")
+    else:
+        print("C")
+elif x &gt; 0:
+    print("D")
+else:
+    print("E")
+
+print("F")</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">B
+F</pre>
+<div class="explanation"><b>Explanation:</b> The outer condition is True. The inner x > 10 is False, but x > 6 is True, so B is printed. F is outside the complete conditional structure and is always executed.</div>
+</div></div><div class="item" data-key="find the output of the program. x = 10
+y = 20
+
+if x &lt; y:
+    x = y
+elif y &lt; x:
+    y = x
+
+if x == y:
+    print("same")
+else:
+    print("different")">
+<div class="head" onclick="toggle(this)">
+<div class="num">31</div>
+<div class="body"><div class="title">Find the output of the program.</div><pre>x = 10
+y = 20
+
+if x &lt; y:
+    x = y
+elif y &lt; x:
+    y = x
+
+if x == y:
+    print("Same")
+else:
+    print("Different")</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">Same</pre>
+<div class="explanation"><b>Explanation:</b> The first condition is True, so x is changed to 20. The elif is skipped. Both x and y are now 20, so Same is printed.</div>
+</div></div><div class="item" data-key="find the output of the program. x = 5
+
+if x &gt; 0:
+    if x &gt; 10:
+        print("a")
+    elif x &gt; 3:
+        print("b")
+    if x &gt; 4:
+        print("c")
+else:
+    print("d")">
+<div class="head" onclick="toggle(this)">
+<div class="num">32</div>
+<div class="body"><div class="title">Find the output of the program.</div><pre>x = 5
+
+if x &gt; 0:
+    if x &gt; 10:
+        print("A")
+    elif x &gt; 3:
+        print("B")
+    if x &gt; 4:
+        print("C")
+else:
+    print("D")</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">B
+C</pre>
+<div class="explanation"><b>Explanation:</b> The outer condition is True. Inside it, the inner if-elif chain prints B. The following if is separate, not part of that elif chain, and x > 4 is also True, so C is printed.</div>
+</div></div><div class="item" data-key="find the output of the program. x = 10
+
+if x &gt; 5:
+    x = x - 10
+    if x:
+        print("a")
+    else:
+        print("b")
+else:
+    print("c")">
+<div class="head" onclick="toggle(this)">
+<div class="num">33</div>
+<div class="body"><div class="title">Find the output of the program.</div><pre>x = 10
+
+if x &gt; 5:
+    x = x - 10
+    if x:
+        print("A")
+    else:
+        print("B")
+else:
+    print("C")</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">B</pre>
+<div class="explanation"><b>Explanation:</b> The outer condition is True and changes x from 10 to 0. The nested if tests 0, which is false-like, so B is printed.</div>
+</div></div><div class="item" data-key="find the output of the program. a = 5
+b = 10
+
+if a &lt; b:
+    if b &lt; 5:
+        print("a")
+    else:
+        if a + b == 15:
+            print("b")
+        else:
+            print("c")
+else:
+    print("d")">
+<div class="head" onclick="toggle(this)">
+<div class="num">34</div>
+<div class="body"><div class="title">Find the output of the program.</div><pre>a = 5
+b = 10
+
+if a &lt; b:
+    if b &lt; 5:
+        print("A")
+    else:
+        if a + b == 15:
+            print("B")
+        else:
+            print("C")
+else:
+    print("D")</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">B</pre>
+<div class="explanation"><b>Explanation:</b> a < b is True. b < 5 is False, so its else executes. a + b is 15, so B is printed.</div>
+</div></div><div class="item" data-key="final challenge — find the output. x = 3
+y = 8
+
+if x &lt; y:
+    x = x + 5
+    if x == y:
+        y = y - 3
+    elif x &gt; y:
+        y = y + 3
+    else:
+        x = x + 10
+else:
+    y = y - 5
+
+if x &gt; 10:
+    if y &gt; 10:
+        result = "a"
+    elif y &gt; 5:
+        result = "b"
+    else:
+        result = "c"
+elif x == 8:
+    result = "d"
+else:
+    result = "e"
+
+print(x, y)
+print(result)">
+<div class="head" onclick="toggle(this)">
+<div class="num">35</div>
+<div class="body"><div class="title">FINAL CHALLENGE — Find the output.</div><pre>x = 3
+y = 8
+
+if x &lt; y:
+    x = x + 5
+    if x == y:
+        y = y - 3
+    elif x &gt; y:
+        y = y + 3
+    else:
+        x = x + 10
+else:
+    y = y - 5
+
+if x &gt; 10:
+    if y &gt; 10:
+        result = "A"
+    elif y &gt; 5:
+        result = "B"
+    else:
+        result = "C"
+elif x == 8:
+    result = "D"
+else:
+    result = "E"
+
+print(x, y)
+print(result)</pre></div>
+<div class="plus">+</div></div>
+<div class="answer"><div class="answer-title">Answer</div>
+<div class="out-title">Output / Error</div><pre class="output">18 8
+C</pre>
+<div class="explanation"><b>Explanation:</b> Initially x < y is True, so x becomes 8. x == y is True, so y becomes 5. The remaining inner branches are skipped. In the final structure x > 10 is True; y > 10 is False and y > 5 is also False, so result becomes C.</div>
+</div></div></div>
+</main>
+<footer>© 2026 D. Kiran Prasad | Python Programming</footer>
+<script>
+function toggle(h){h.parentElement.classList.toggle('open')}
+function allItems(v){document.querySelectorAll('.item').forEach(x=>x.classList.toggle('open',v))}
+function filterItems(){let q=document.getElementById('search').value.toLowerCase();document.querySelectorAll('.item').forEach(x=>x.style.display=x.innerText.toLowerCase().includes(q)?'block':'none')}
+</script>
+</body></html>
