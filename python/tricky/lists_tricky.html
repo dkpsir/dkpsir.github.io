@@ -1,42 +1,80 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tricky Questions in Python - Lists</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#eef4f9;color:#111;font-family:"Segoe UI",Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:#eef4f9;color:#111;font-family:"Segoe UI",Arial,sans-serif}
 .header{position:relative;background:linear-gradient(90deg,#0b477d,#087cc1);color:#fff;text-align:center;padding:26px 20px}
 .header-nav{position:absolute;left:24px;right:24px;top:50%;transform:translateY(-50%);display:flex;justify-content:space-between;align-items:center;pointer-events:none}
-.header-nav a{color:#fff;text-decoration:none;font-size:18px;font-weight:700;pointer-events:auto;display:flex;align-items:center;gap:6px}.header-nav a:hover{text-decoration:underline}
-.header h1{margin:0;font-size:32px;letter-spacing:.5px;text-transform:uppercase}.header p{margin:8px 0 0;font-size:19px;font-weight:600;opacity:.95}
-.container{width:94%;max-width:1250px;margin:26px auto}.action-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:20px}
+.header-nav a{color:#fff;text-decoration:none;font-size:18px;font-weight:700;pointer-events:auto;display:flex;align-items:center;gap:6px}
+.header-nav a:hover{text-decoration:underline}
+.header h1{margin:0;font-size:32px;letter-spacing:.5px;text-transform:uppercase}
+.header p{margin:8px 0 0;font-size:19px;font-weight:600;opacity:.95}
+.container{width:94%;max-width:1250px;margin:26px auto}
+.action-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:20px}
 .search-input{flex:1;min-width:240px;max-width:420px;padding:10px 14px;font-size:15px;border:1px solid #b7cde3;border-radius:6px;outline:none}
-.search-input:focus{border-color:#075b99}.btn-group{display:flex;gap:10px}.btn-toggle{background:#075b99;color:#fff;border:none;padding:10px 16px;font-size:14px;font-weight:700;border-radius:6px;cursor:pointer}
-.btn-toggle:hover{background:#054270}.accordion-item{background:#fff;border-radius:10px;margin-bottom:16px;box-shadow:0 3px 12px rgba(0,0,0,.05);border:1px solid #dbe6f2;overflow:hidden}
-.accordion-item:hover{border-color:#99bfe6}.accordion-header{display:flex;align-items:flex-start;padding:16px 20px;cursor:pointer;user-select:none;gap:16px}
+.search-input:focus{border-color:#075b99}
+.btn-group{display:flex;gap:10px}
+.btn-toggle{background:#075b99;color:#fff;border:none;padding:10px 16px;font-size:14px;font-weight:700;border-radius:6px;cursor:pointer;transition:0.2s}
+.btn-toggle:hover{background:#054270}
+.accordion-item{background:#fff;border-radius:10px;margin-bottom:16px;box-shadow:0 3px 12px rgba(0,0,0,.05);border:1px solid #dbe6f2;overflow:hidden;transition:all 0.2s ease}
+.accordion-item:hover{border-color:#99bfe6}
+.accordion-header{display:flex;align-items:flex-start;padding:16px 20px;cursor:pointer;user-select:none;gap:16px}
 .badge{width:36px;height:36px;min-width:36px;background:#075b99;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;margin-top:2px}
-.q-body{flex:1}.q-title{font-size:17px;font-weight:700;color:#0b3b66;line-height:1.45;margin-bottom:10px}
+.q-body{flex:1}
+.q-title{font-size:17px;font-weight:700;color:#0b3b66;line-height:1.45;margin-bottom:10px}
 .code-box{background:#1e1e1e;color:#e6edf3;padding:12px 16px;border-radius:7px;font:14.5px/1.5 Consolas,"Courier New",monospace;overflow-x:auto;margin:0;border:1px solid #333}
 .toggle-icon{width:32px;height:32px;min-width:32px;background:#075b99;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;transition:.25s;margin-top:2px}
-.accordion-item.open .toggle-icon{background:#d32f2f;transform:rotate(45deg)}.accordion-content{display:none;padding:0 20px 20px 72px;border-top:1px dashed #dbe6f2;background:#fbfdff}
-.accordion-item.open .accordion-content{display:block;padding-top:16px}.output-box{background:#f8fafc;border:1px solid #cfe0f0;border-radius:8px;padding:14px 16px}
+.accordion-item.open .toggle-icon{background:#d32f2f;transform:rotate(45deg)}
+.accordion-content{display:none;padding:0 20px 20px 72px;border-top:1px dashed #dbe6f2;background:#fbfdff}
+.accordion-item.open .accordion-content{display:block;padding-top:16px}
+.output-box{background:#f8fafc;border:1px solid #cfe0f0;border-radius:8px;padding:14px 16px}
 .output-title{font-size:13px;font-weight:700;color:#075b99;text-transform:uppercase;margin-bottom:6px;letter-spacing:.5px}
 .output-text{font:700 15px Consolas,"Courier New",monospace;color:#b84d00;background:#fff9f0;padding:8px 12px;border-radius:6px;border:1px solid #ffd8a8;white-space:pre-wrap;margin:0 0 10px}
-.error-text{color:#c92a2a;background:#fff5f5;border-color:#ffc9c9}.explanation{background:#eff6fc;border-left:4px solid #075b99;padding:10px 14px;border-radius:4px;font-size:14.5px;line-height:1.5;color:#1b3954}
+.error-text{color:#c92a2a;background:#fff5f5;border-color:#ffc9c9}
+.explanation{background:#eff6fc;border-left:4px solid #075b99;padding:10px 14px;border-radius:4px;font-size:14.5px;line-height:1.5;color:#1b3954}
 footer{background:#063b70;color:#fff;text-align:center;padding:16px;font-size:15px;margin-top:40px}
 @media(max-width:850px){.header-nav{position:static;transform:none;margin-bottom:14px}.header h1{font-size:24px}.accordion-content{padding-left:20px}}
-</style></head><body>
-<header class="header"><div class="header-nav"><a href="../index.html">🏠 Python Home</a><a href="../../index.html">🏠 Main Home</a></div>
-<h1>Lists</h1></header>
-<main class="container"><div class="action-bar"><input type="text" id="searchInput" class="search-input" placeholder="🔍 Search question code or text..." onkeyup="filterQuestions()">
-<div class="btn-group"><button class="btn-toggle" onclick="toggleAll(true)">Expand All</button><button class="btn-toggle" onclick="toggleAll(false)">Collapse All</button></div></div>
-<div id="accordionContainer"><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+</style>
+</head>
+<body>
+
+<header class="header">
+<div class="header-nav">
+<a href="../index.html">🏠 Python Home</a>
+<a href="../../index.html">🏠 Main Home</a>
+</div>
+<h1>Lists</h1>
+<p>Python Programming - Tricky Questions</p>
+</header>
+
+<main class="container">
+<div class="action-bar">
+<input type="text" id="searchInput" class="search-input" placeholder="🔍 Search question code or text..." onkeyup="filterQuestions()">
+<div class="btn-group">
+<button class="btn-toggle" onclick="toggleAll(true)">Expand All</button>
+<button class="btn-toggle" onclick="toggleAll(false)">Collapse All</button>
+</div>
+</div>
+
+<div id="accordionContainer">
+
+<!-- 1 -->
+<div class="accordion-item" data-keywords="positive negative indexing zero last">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">1</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [10, 20, 30]
 print(a[0], a[-1])</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>10 30</div>
-<div class="explanation"><b>Explanation:</b> Positive indexing starts from 0, while negative indexing starts from -1.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text">10 30</div>
+<div class="explanation"><b>Explanation:</b> Positive indexing starts from 0 (accessing <code>10</code>), while negative indexing starts from -1 (accessing <code>30</code>).</div></div></div></div>
+
+<!-- 2 -->
+<div class="accordion-item" data-keywords="append nested list single element">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">2</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
@@ -45,8 +83,11 @@ a.append([5, 6])
 print(a)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3, 4, [5, 6]]</div>
-<div class="explanation"><b>Explanation:</b> append adds each supplied object as one element. Therefore [5, 6] becomes a nested list.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text">[1, 2, 3, 4, [5, 6]]</div>
+<div class="explanation"><b>Explanation:</b> <code>append()</code> adds its argument as a single element. Passing <code>[5, 6]</code> adds the entire list as a nested sub-list.</div></div></div></div>
+
+<!-- 3 -->
+<div class="accordion-item" data-keywords="extend iterable individual elements">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">3</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
@@ -54,8 +95,11 @@ a.extend([4, 5])
 print(a)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3, 4, 5]</div>
-<div class="explanation"><b>Explanation:</b> extend adds the elements of the iterable individually.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text">[1, 2, 3, 4, 5]</div>
+<div class="explanation"><b>Explanation:</b> <code>extend()</code> iterates over its argument and adds each element individually to the end of the list.</div></div></div></div>
+
+<!-- 4 -->
+<div class="accordion-item" data-keywords="insert index positioning shift">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">4</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
@@ -63,8 +107,11 @@ a.insert(1, 99)
 print(a)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 99, 2, 3]</div>
-<div class="explanation"><b>Explanation:</b> insert(1, 99) places 99 before the element currently at index 1.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text">[1, 99, 2, 3]</div>
+<div class="explanation"><b>Explanation:</b> <code>insert(1, 99)</code> places <code>99</code> at index 1, shifting subsequent elements to the right.</div></div></div></div>
+
+<!-- 5 -->
+<div class="accordion-item" data-keywords="index count occurrences duplicate">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">5</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [10, 20, 30, 20]
@@ -72,9 +119,12 @@ print(a.index(20))
 print(a.count(20))</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>1
+<div class="output-text">1
 2</div>
-<div class="explanation"><b>Explanation:</b> index returns the first occurrence, while count returns the total number of occurrences.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="explanation"><b>Explanation:</b> <code>index(20)</code> returns the index of the first occurrence (1), while <code>count(20)</code> counts total occurrences (2).</div></div></div></div>
+
+<!-- 6 -->
+<div class="accordion-item" data-keywords="slicing start stop exclude">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">6</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3, 4, 5]
@@ -83,26 +133,35 @@ print(a[:3])
 print(a[3:])</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[2, 3, 4]
+<div class="output-text">[2, 3, 4]
 [1, 2, 3]
 [4, 5]</div>
-<div class="explanation"><b>Explanation:</b> The stop index of a slice is excluded.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="explanation"><b>Explanation:</b> In slice notation <code>[start:stop]</code>, the stop index is always excluded.</div></div></div></div>
+
+<!-- 7 -->
+<div class="accordion-item" data-keywords="reverse slice step negative one">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">7</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3, 4, 5]
 print(a[::-1])</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[5, 4, 3, 2, 1]</div>
-<div class="explanation"><b>Explanation:</b> A step of -1 traverses the list from right to left.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text">[5, 4, 3, 2, 1]</div>
+<div class="explanation"><b>Explanation:</b> A step of <code>-1</code> without start/stop boundaries reverses the entire list.</div></div></div></div>
+
+<!-- 8 -->
+<div class="accordion-item" data-keywords="backward slice stop boundary">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">8</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3, 4, 5]
 print(a[4:1:-1])</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[5, 4, 3]</div>
-<div class="explanation"><b>Explanation:</b> The slice starts at index 4 and moves backward, stopping before index 1.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text">[5, 4, 3]</div>
+<div class="explanation"><b>Explanation:</b> Traversal starts at index 4 (<code>5</code>) and steps backward, stopping right before index 1 (<code>2</code>).</div></div></div></div>
+
+<!-- 9 -->
+<div class="accordion-item" data-keywords="aliasing reference assignment mutation">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">9</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
@@ -112,9 +171,12 @@ print(a)
 print(b)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3, 4]
+<div class="output-text">[1, 2, 3, 4]
 [1, 2, 3, 4]</div>
-<div class="explanation"><b>Explanation:</b> Assignment b=a creates another reference to the same list object.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="explanation"><b>Explanation:</b> <code>b = a</code> does not duplicate the list; both variables reference the exact same memory object.</div></div></div></div>
+
+<!-- 10 -->
+<div class="accordion-item" data-keywords="copy method independent outer list">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">10</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
@@ -124,9 +186,12 @@ print(a)
 print(b)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3]
+<div class="output-text">[1, 2, 3]
 [1, 2, 3, 4]</div>
-<div class="explanation"><b>Explanation:</b> copy creates a separate outer list.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="explanation"><b>Explanation:</b> <code>a.copy()</code> creates an independent shallow copy. Modifying <code>b</code> does not alter <code>a</code>.</div></div></div></div>
+
+<!-- 11 -->
+<div class="accordion-item" data-keywords="shallow copy nested lists shared references">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">11</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [[1, 2], [3, 4]]
@@ -136,25 +201,34 @@ print(a)
 print(b)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[[1, 2, 99], [3, 4]]
+<div class="output-text">[[1, 2, 99], [3, 4]]
 [[1, 2, 99], [3, 4]]</div>
-<div class="explanation"><b>Explanation:</b> A shallow copy duplicates only the outer list. The inner lists remain shared.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="explanation"><b>Explanation:</b> Shallow copying duplicates only the outer list. Inner list elements remain shared references.</div></div></div></div>
+
+<!-- 12 -->
+<div class="accordion-item" data-keywords="list multiplication replication repeat">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">12</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
 print(a * 2)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3, 1, 2, 3]</div>
-<div class="explanation"><b>Explanation:</b> List multiplication repeats the sequence.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text">[1, 2, 3, 1, 2, 3]</div>
+<div class="explanation"><b>Explanation:</b> The <code>*</code> operator replicates list elements sequentially without modifying the original list.</div></div></div></div>
+
+<!-- 13 -->
+<div class="accordion-item" data-keywords="concatenation plus operator new list">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">13</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
 print(a + [4, 5])</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3, 4, 5]</div>
-<div class="explanation"><b>Explanation:</b> The + operator creates a new list by concatenating the two lists.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text">[1, 2, 3, 4, 5]</div>
+<div class="explanation"><b>Explanation:</b> The <code>+</code> operator concatenates two lists into a brand new list.</div></div></div></div>
+
+<!-- 14 -->
+<div class="accordion-item" data-keywords="membership in not in boolean">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">14</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
@@ -162,9 +236,12 @@ print(2 in a)
 print(5 not in a)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>True
+<div class="output-text">True
 True</div>
-<div class="explanation"><b>Explanation:</b> Membership operators test whether an element exists in the list.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="explanation"><b>Explanation:</b> <code>in</code> checks for existence of a value, and <code>not in</code> checks for absence.</div></div></div></div>
+
+<!-- 15 -->
+<div class="accordion-item" data-keywords="sort inplace return value none">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">15</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [3, 1, 2]
@@ -173,9 +250,12 @@ print(a)
 print(b)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3]
+<div class="output-text">[1, 2, 3]
 None</div>
-<div class="explanation"><b>Explanation:</b> sort modifies the list in place and returns None.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="explanation"><b>Explanation:</b> <code>list.sort()</code> sorts in-place and returns <code>None</code>.</div></div></div></div>
+
+<!-- 16 -->
+<div class="accordion-item" data-keywords="sorted builtin returns new list">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">16</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [3, 1, 2]
@@ -186,7 +266,10 @@ print(b)</pre></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
 <div class="output-text>[3, 1, 2]
 [1, 2, 3]</div>
-<div class="explanation"><b>Explanation:</b> sorted creates and returns a new sorted list, leaving a unchanged.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="explanation"><b>Explanation:</b> Built-in <code>sorted()</code> returns a new sorted list, leaving the original list unmodified.</div></div></div></div>
+
+<!-- 17 -->
+<div class="accordion-item" data-keywords="pop default last index zero first">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">17</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
@@ -195,8 +278,11 @@ y = a.pop(0)
 print(x, y, a)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>3 1 [2]</div>
-<div class="explanation"><b>Explanation:</b> pop() removes the last element, while pop(0) removes the first element.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text">3 1 [2]</div>
+<div class="explanation"><b>Explanation:</b> <code>pop()</code> removes and returns the last element (3); <code>pop(0)</code> removes and returns the first element (1).</div></div></div></div>
+
+<!-- 18 -->
+<div class="accordion-item" data-keywords="remove first matching value only">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">18</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3, 2]
@@ -204,8 +290,11 @@ a.remove(2)
 print(a)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 3, 2]</div>
-<div class="explanation"><b>Explanation:</b> remove deletes only the first matching value.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text">[1, 3, 2]</div>
+<div class="explanation"><b>Explanation:</b> <code>remove(val)</code> deletes only the first matching occurrence of the specified value.</div></div></div></div>
+
+<!-- 19 -->
+<div class="accordion-item" data-keywords="del index removal statement">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">19</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
@@ -213,8 +302,11 @@ del a[1]
 print(a)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 3]</div>
-<div class="explanation"><b>Explanation:</b> del removes the element at index 1.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text">[1, 3]</div>
+<div class="explanation"><b>Explanation:</b> <code>del a[1]</code> permanently removes the element situated at index 1.</div></div></div></div>
+
+<!-- 20 -->
+<div class="accordion-item" data-keywords="clear empty list in place">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">20</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
@@ -223,7 +315,10 @@ print(a)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
 <div class="output-text>[]</div>
-<div class="explanation"><b>Explanation:</b> clear removes all elements while keeping the list object.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="explanation"><b>Explanation:</b> <code>clear()</code> empties the list in place without deleting the list variable.</div></div></div></div>
+
+<!-- 21 -->
+<div class="accordion-item" data-keywords="mutability item assignment by index">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">21</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
@@ -231,8 +326,11 @@ a[1] = 99
 print(a)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 99, 3]</div>
-<div class="explanation"><b>Explanation:</b> Lists are mutable, so an element can be replaced using its index.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text">[1, 99, 3]</div>
+<div class="explanation"><b>Explanation:</b> Lists are mutable, so elements can be updated in place via indexing.</div></div></div></div>
+
+<!-- 22 -->
+<div class="accordion-item" data-keywords="slice assignment replace length mismatch">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">22</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3, 4]
@@ -240,8 +338,11 @@ a[1:3] = [8, 9, 10]
 print(a)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 8, 9, 10, 4]</div>
-<div class="explanation"><b>Explanation:</b> Slice assignment can replace a slice with a different number of elements.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text">[1, 8, 9, 10, 4]</div>
+<div class="explanation"><b>Explanation:</b> Slice assignment can replace a slice with an iterable of a different length.</div></div></div></div>
+
+<!-- 23 -->
+<div class="accordion-item" data-keywords="slice assignment empty list delete">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">23</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3, 4]
@@ -249,8 +350,11 @@ a[1:3] = []
 print(a)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 4]</div>
-<div class="explanation"><b>Explanation:</b> Assigning an empty list to a slice removes that slice.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text">[1, 4]</div>
+<div class="explanation"><b>Explanation:</b> Assigning an empty list to a slice removes those elements from the list.</div></div></div></div>
+
+<!-- 24 -->
+<div class="accordion-item" data-keywords="full slice assignment replace all in place">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">24</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
@@ -258,16 +362,22 @@ a[:] = [7, 8]
 print(a)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[7, 8]</div>
-<div class="explanation"><b>Explanation:</b> Assigning to the full slice replaces all elements while preserving the same list object.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text">[7, 8]</div>
+<div class="explanation"><b>Explanation:</b> Assigning to <code>a[:]</code> replaces all contents of the existing list object in-place.</div></div></div></div>
+
+<!-- 25 -->
+<div class="accordion-item" data-keywords="negative indexing backward slice">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">25</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3, 4, 5]
 print(a[-2:1:-1])</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[4, 3, 2]</div>
-<div class="explanation"><b>Explanation:</b> The slice starts at index -2 (value 4), moves backward, and stops before index 1.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text">[4, 3, 2]</div>
+<div class="explanation"><b>Explanation:</b> Traversal starts at index -2 (<code>4</code>) and steps backward, stopping right before index 1 (<code>2</code>).</div></div></div></div>
+
+<!-- 26 -->
+<div class="accordion-item" data-keywords="striding step every second element">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">26</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3, 4, 5]
@@ -277,7 +387,10 @@ print(a[1::2])</pre></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
 <div class="output-text>[1, 3, 5]
 [2, 4]</div>
-<div class="explanation"><b>Explanation:</b> The first slice takes even indexes; the second starts at index 1 and then takes every second element.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="explanation"><b>Explanation:</b> <code>[::2]</code> samples even indices (0, 2, 4); <code>[1::2]</code> starts at index 1 and takes every second element (1, 3).</div></div></div></div>
+
+<!-- 27 -->
+<div class="accordion-item" data-keywords="nested indexing 2d matrix access">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">27</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, [2, 3], 4]
@@ -285,9 +398,12 @@ print(a[1][0])
 print(a[-2][-1])</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>2
+<div class="output-text">2
 3</div>
-<div class="explanation"><b>Explanation:</b> The first index selects the nested list, and the second index selects an element inside it.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="explanation"><b>Explanation:</b> <code>a[1][0]</code> accesses the first element of inner list <code>[2, 3]</code>. <code>a[-2][-1]</code> accesses the last element of the same inner list.</div></div></div></div>
+
+<!-- 28 -->
+<div class="accordion-item" data-keywords="for loop variable rebind no list change">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">28</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
@@ -296,8 +412,11 @@ for x in a:
 print(a)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3]</div>
-<div class="explanation"><b>Explanation:</b> x receives each element value. Reassigning x does not modify the list elements.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text">[1, 2, 3]</div>
+<div class="explanation"><b>Explanation:</b> The loop variable <code>x</code> holds a copy of each value. Reassigning <code>x</code> does not alter the elements of list <code>a</code>.</div></div></div></div>
+
+<!-- 29 -->
+<div class="accordion-item" data-keywords="index based loop in place update">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">29</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
@@ -306,8 +425,11 @@ for i in range(len(a)):
 print(a)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[11, 12, 13]</div>
-<div class="explanation"><b>Explanation:</b> The index is used to modify the actual list elements.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text">[11, 12, 13]</div>
+<div class="explanation"><b>Explanation:</b> Assigning directly to <code>a[i]</code> updates each element in-place in memory.</div></div></div></div>
+
+<!-- 30 -->
+<div class="accordion-item" data-keywords="remove during loop mutation skip">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">30</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3, 4]
@@ -317,8 +439,11 @@ for x in a:
 print(a)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 3]</div>
-<div class="explanation"><b>Explanation:</b> Removing elements while iterating changes the list during traversal. Here the even elements encountered are removed.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text">[1, 3]</div>
+<div class="explanation"><b>Explanation:</b> Removing <code>2</code> shifts elements, causing index pointer adjustments that happen to leave only the odd numbers <code>[1, 3]</code>.</div></div></div></div>
+
+<!-- 31 -->
+<div class="accordion-item" data-keywords="list comprehension filtering condition">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">31</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3, 4, 5]
@@ -326,8 +451,11 @@ b = [x for x in a if x % 2 == 1]
 print(b)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 3, 5]</div>
-<div class="explanation"><b>Explanation:</b> The list comprehension keeps only odd values.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text">[1, 3, 5]</div>
+<div class="explanation"><b>Explanation:</b> The comprehension evaluates the condition <code>x % 2 == 1</code>, keeping only odd numbers.</div></div></div></div>
+
+<!-- 32 -->
+<div class="accordion-item" data-keywords="list comprehension mapping transformation">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">32</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
@@ -336,9 +464,12 @@ print(a)
 print(b)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3]
+<div class="output-text">[1, 2, 3]
 [2, 4, 6]</div>
-<div class="explanation"><b>Explanation:</b> The comprehension creates a new list; the original is unchanged.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="explanation"><b>Explanation:</b> The list comprehension generates a brand new list <code>b</code> without changing <code>a</code>.</div></div></div></div>
+
+<!-- 33 -->
+<div class="accordion-item" data-keywords="nested list generation comprehension">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">33</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
@@ -347,7 +478,10 @@ print(b)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
 <div class="output-text>[[1, 2], [2, 3], [3, 4]]</div>
-<div class="explanation"><b>Explanation:</b> Each x generates a new two-element inner list.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="explanation"><b>Explanation:</b> Each element <code>x</code> creates an independent two-element nested list.</div></div></div></div>
+
+<!-- 34 -->
+<div class="accordion-item" data-keywords="flatten 2d list matrix comprehension">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">34</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [[1, 2], [3, 4]]
@@ -355,8 +489,11 @@ b = [x for row in a for x in row]
 print(b)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3, 4]</div>
-<div class="explanation"><b>Explanation:</b> The nested comprehension first visits each row and then each element in that row.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text">[1, 2, 3, 4]</div>
+<div class="explanation"><b>Explanation:</b> The comprehension evaluates outer-to-inner (<code>for row in a: for x in row: ...</code>), flattening the 2D matrix.</div></div></div></div>
+
+<!-- 35 -->
+<div class="accordion-item" data-keywords="ternary operator in list comprehension">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">35</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
@@ -364,8 +501,11 @@ b = [x if x % 2 else x * 10 for x in a]
 print(b)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 20, 3]</div>
-<div class="explanation"><b>Explanation:</b> The conditional expression keeps odd values and multiplies even values by 10.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text">[1, 20, 3]</div>
+<div class="explanation"><b>Explanation:</b> When <code>x % 2 != 0</code> (odd), <code>x</code> is kept; when even (<code>x % 2 == 0</code> is falsy), it evaluates <code>x * 10</code>.</div></div></div></div>
+
+<!-- 36 -->
+<div class="accordion-item" data-keywords="in place add iadd shared reference mutation">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">36</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
@@ -375,9 +515,12 @@ print(a)
 print(b)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3, 4]
+<div class="output-text">[1, 2, 3, 4]
 [1, 2, 3, 4]</div>
-<div class="explanation"><b>Explanation:</b> For a list, += modifies the same list object in place.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="explanation"><b>Explanation:</b> For mutable lists, <code>+=</code> invokes <code>__iadd__</code>, mutating the shared list object in-place.</div></div></div></div>
+
+<!-- 37 -->
+<div class="accordion-item" data-keywords="concatenation reassignment creates new object">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">37</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
@@ -387,17 +530,23 @@ print(a)
 print(b)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3, 4]
+<div class="output-text">[1, 2, 3, 4]
 [1, 2, 3]</div>
-<div class="explanation"><b>Explanation:</b> a + [4] creates a new list and rebinds a. b still refers to the original list.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="explanation"><b>Explanation:</b> <code>a + [4]</code> creates a new list and rebinds <code>a</code>. <code>b</code> remains bound to the original list.</div></div></div></div>
+
+<!-- 38 -->
+<div class="accordion-item" data-keywords="id comparison slice distinct object">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">38</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
 print(id(a) == id(a[:]))</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>False</div>
-<div class="explanation"><b>Explanation:</b> a[:] creates a new list object, even though it contains the same elements.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text">False</div>
+<div class="explanation"><b>Explanation:</b> Slicing <code>a[:]</code> creates a brand new list object with its own distinct memory address.</div></div></div></div>
+
+<!-- 39 -->
+<div class="accordion-item" data-keywords="is vs equality slice comparison">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">39</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
@@ -406,9 +555,12 @@ print(a == b)
 print(a is b)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>True
+<div class="output-text">True
 False</div>
-<div class="explanation"><b>Explanation:</b> The lists have equal contents but are different objects.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="explanation"><b>Explanation:</b> <code>==</code> evaluates element equality (True), while <code>is</code> tests object identity (False).</div></div></div></div>
+
+<!-- 40 -->
+<div class="accordion-item" data-keywords="distinct literals equality vs identity">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">40</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
@@ -417,9 +569,12 @@ print(a == b)
 print(a is b)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>True
+<div class="output-text">True
 False</div>
-<div class="explanation"><b>Explanation:</b> Equality compares contents; is compares object identity.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="explanation"><b>Explanation:</b> Separate list literal definitions allocate distinct objects in memory with identical contents.</div></div></div></div>
+
+<!-- 41 -->
+<div class="accordion-item" data-keywords="aliasing identity check">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">41</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
@@ -428,41 +583,56 @@ a.append(4)
 print(a is b)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>True</div>
-<div class="explanation"><b>Explanation:</b> Both names reference the same list object.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text">True</div>
+<div class="explanation"><b>Explanation:</b> Both identifiers point to the same list object in memory.</div></div></div></div>
+
+<!-- 42 -->
+<div class="accordion-item" data-keywords="pop index out of range indexerror">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">42</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
+<div class="q-body"><div class="q-title">Identify the output or error in the following program:</div><pre class="code-box">a = [1, 2, 3]
 print(a.pop(5))</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text error-text>IndexError</div>
-<div class="explanation"><b>Explanation:</b> Index 5 does not exist in a list of length 3.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text error-text">IndexError: pop index out of range</div>
+<div class="explanation"><b>Explanation:</b> Attempting to pop an out-of-bounds index raises an <code>IndexError</code>.</div></div></div></div>
+
+<!-- 43 -->
+<div class="accordion-item" data-keywords="index out of range indexerror">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">43</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
+<div class="q-body"><div class="q-title">Identify the output or error in the following program:</div><pre class="code-box">a = [1, 2, 3]
 print(a[3])</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text error-text>IndexError</div>
-<div class="explanation"><b>Explanation:</b> Valid positive indexes are 0, 1 and 2.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text error-text">IndexError: list index out of range</div>
+<div class="explanation"><b>Explanation:</b> Valid indices for a list of length 3 are 0, 1, and 2. Index 3 is out of range.</div></div></div></div>
+
+<!-- 44 -->
+<div class="accordion-item" data-keywords="float index typeerror">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">44</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
+<div class="q-body"><div class="q-title">Identify the output or error in the following program:</div><pre class="code-box">a = [1, 2, 3]
 print(a[1.0])</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text error-text>TypeError</div>
-<div class="explanation"><b>Explanation:</b> List indexes must be integers or slices, not floating-point values.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text error-text">TypeError: list indices must be integers or slices, not float</div>
+<div class="explanation"><b>Explanation:</b> List subscript indices cannot be floating-point numbers.</div></div></div></div>
+
+<!-- 45 -->
+<div class="accordion-item" data-keywords="remove missing element valueerror">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">45</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
+<div class="q-body"><div class="q-title">Identify the output or error in the following program:</div><pre class="code-box">a = [1, 2, 3]
 a.remove(5)
 print(a)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text error-text>ValueError</div>
-<div class="explanation"><b>Explanation:</b> remove raises ValueError when the requested value is not present.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text error-text">ValueError: list.remove(x): x not in list</div>
+<div class="explanation"><b>Explanation:</b> <code>remove()</code> throws a <code>ValueError</code> if the target value does not exist in the list.</div></div></div></div>
+
+<!-- 46 -->
+<div class="accordion-item" data-keywords="insert large index clipped to end">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">46</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
@@ -470,8 +640,11 @@ a.insert(100, 9)
 print(a)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3, 9]</div>
-<div class="explanation"><b>Explanation:</b> An insertion index beyond the end places the element at the end.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text">[1, 2, 3, 9]</div>
+<div class="explanation"><b>Explanation:</b> An insertion index larger than the list length places the item at the very end.</div></div></div></div>
+
+<!-- 47 -->
+<div class="accordion-item" data-keywords="insert large negative index clipped to start">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">47</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
@@ -480,7 +653,10 @@ print(a)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
 <div class="output-text>[9, 1, 2, 3]</div>
-<div class="explanation"><b>Explanation:</b> A sufficiently negative insertion position places the item at the beginning.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="explanation"><b>Explanation:</b> An insertion index smaller than the negative list length places the item at index 0.</div></div></div></div>
+
+<!-- 48 -->
+<div class="accordion-item" data-keywords="pop negative index last element">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">48</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
@@ -488,9 +664,12 @@ print(a.pop(-1))
 print(a)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>3
+<div class="output-text">3
 [1, 2]</div>
-<div class="explanation"><b>Explanation:</b> Index -1 refers to the last element.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="explanation"><b>Explanation:</b> <code>pop(-1)</code> explicitly removes and returns the last element.</div></div></div></div>
+
+<!-- 49 -->
+<div class="accordion-item" data-keywords="reverse in place returns none">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">49</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
@@ -499,9 +678,12 @@ print(a)
 print(x)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[3, 2, 1]
+<div class="output-text">[3, 2, 1]
 None</div>
-<div class="explanation"><b>Explanation:</b> reverse changes the list in place and returns None.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="explanation"><b>Explanation:</b> <code>list.reverse()</code> modifies the list in place and returns <code>None</code>.</div></div></div></div>
+
+<!-- 50 -->
+<div class="accordion-item" data-keywords="sort reverse true returns none">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">50</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [3, 1, 2]
@@ -509,17 +691,23 @@ print(a.sort(reverse=True))
 print(a)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>None
+<div class="output-text">None
 [3, 2, 1]</div>
-<div class="explanation"><b>Explanation:</b> sort modifies the list and returns None even when reverse=True.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="explanation"><b>Explanation:</b> <code>a.sort(reverse=True)</code> sorts the list descending in-place and evaluates to <code>None</code>.</div></div></div></div>
+
+<!-- 51 -->
+<div class="accordion-item" data-keywords="index missing element valueerror">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">51</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
+<div class="q-body"><div class="q-title">Identify the output or error in the following program:</div><pre class="code-box">a = [1, 2, 3]
 print(a.index(4))</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text error-text>ValueError</div>
-<div class="explanation"><b>Explanation:</b> index raises ValueError when the value cannot be found.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text error-text">ValueError: 4 is not in list</div>
+<div class="explanation"><b>Explanation:</b> <code>list.index()</code> raises a <code>ValueError</code> when the requested item is absent.</div></div></div></div>
+
+<!-- 52 -->
+<div class="accordion-item" data-keywords="extend string unpacks characters">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">52</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2]
@@ -527,8 +715,11 @@ a.extend("34")
 print(a)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, '3', '4']</div>
-<div class="explanation"><b>Explanation:</b> A string is iterable, so extend adds its characters individually.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text">[1, 2, '3', '4']</div>
+<div class="explanation"><b>Explanation:</b> A string is an iterable; <code>extend()</code> unpacks and appends each individual character.</div></div></div></div>
+
+<!-- 53 -->
+<div class="accordion-item" data-keywords="append string single element">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">53</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2]
@@ -536,17 +727,23 @@ a.append("34")
 print(a)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, '34']</div>
-<div class="explanation"><b>Explanation:</b> append adds the entire string as one element.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text">[1, 2, '34']</div>
+<div class="explanation"><b>Explanation:</b> <code>append()</code> preserves the string as a single string item.</div></div></div></div>
+
+<!-- 54 -->
+<div class="accordion-item" data-keywords="extend non-iterable integer typeerror">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">54</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2]
+<div class="q-body"><div class="q-title">Identify the output or error in the following program:</div><pre class="code-box">a = [1, 2]
 a.extend(3)
 print(a)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text error-text>TypeError</div>
-<div class="explanation"><b>Explanation:</b> extend requires an iterable. An integer is not iterable.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text error-text">TypeError: 'int' object is not iterable</div>
+<div class="explanation"><b>Explanation:</b> <code>extend()</code> requires an iterable argument (e.g. list, tuple, string). Integers are not iterable.</div></div></div></div>
+
+<!-- 55 -->
+<div class="accordion-item" data-keywords="sum max min builtins list">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">55</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
@@ -555,10 +752,13 @@ print(max(a))
 print(min(a))</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>6
+<div class="output-text">6
 3
 1</div>
-<div class="explanation"><b>Explanation:</b> sum, max and min operate on the numeric elements of the list.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="explanation"><b>Explanation:</b> <code>sum()</code> returns the numeric sum (6), <code>max()</code> returns the maximum value (3), and <code>min()</code> returns the minimum value (1).</div></div></div></div>
+
+<!-- 56 -->
+<div class="accordion-item" data-keywords="bool empty list vs non-empty list">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">56</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = []
@@ -567,9 +767,12 @@ a.append(0)
 print(bool(a))</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>False
+<div class="output-text">False
 True</div>
-<div class="explanation"><b>Explanation:</b> An empty list is false-like. A non-empty list is truthy even when its element is 0.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="explanation"><b>Explanation:</b> An empty list evaluates to <code>False</code>. Any non-empty list evaluates to <code>True</code>, even if its element is <code>0</code>.</div></div></div></div>
+
+<!-- 57 -->
+<div class="accordion-item" data-keywords="length truthiness containing falsy elements">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">57</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [0, False, None, "", [], [1]]
@@ -577,9 +780,12 @@ print(len(a))
 print(bool(a))</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>6
+<div class="output-text">6
 True</div>
-<div class="explanation"><b>Explanation:</b> The list contains six elements. Since the outer list is non-empty, it is truthy regardless of the values inside.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="explanation"><b>Explanation:</b> The list contains 6 elements, making its length 6 and its boolean truthiness <code>True</code>.</div></div></div></div>
+
+<!-- 58 -->
+<div class="accordion-item" data-keywords="short-circuit logical and list">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">58</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
@@ -587,17 +793,23 @@ print(a and a[-1])
 print([] and 10)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>3
+<div class="output-text">3
 []</div>
-<div class="explanation"><b>Explanation:</b> and returns the first false-like operand or the last operand. The non-empty list is truthy, so its last element is returned.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="explanation"><b>Explanation:</b> <code>and</code> returns the first falsy operand or the last truthy operand. <code>a</code> is truthy, so it evaluates and returns <code>a[-1]</code> (3). <code>[]</code> is falsy, returning <code>[]</code> immediately.</div></div></div></div>
+
+<!-- 59 -->
+<div class="accordion-item" data-keywords="short-circuit logical or fallback">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">59</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = []
 print(a or [10, 20])</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[10, 20]</div>
-<div class="explanation"><b>Explanation:</b> An empty list is false-like, so or returns the second operand.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
+<div class="output-text">[10, 20]</div>
+<div class="explanation"><b>Explanation:</b> <code>or</code> returns the first truthy operand. Since <code>a</code> is falsy, it evaluates and returns <code>[10, 20]</code>.</div></div></div></div>
+
+<!-- 60 -->
+<div class="accordion-item" data-keywords="function parameter mutation caller list">
 <div class="accordion-header" onclick="toggleItem(this)">
 <div class="badge">60</div>
 <div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">def f(x):
@@ -609,1328 +821,30 @@ print(f(a))
 print(a)</pre></div>
 <div class="toggle-icon">+</div></div>
 <div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 10]
+<div class="output-text">[1, 2, 10]
 [1, 2, 10]</div>
-<div class="explanation"><b>Explanation:</b> The function mutates the same list object passed by the caller.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">61</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">def f(x=[]):
-    x.append(1)
-    return x
+<div class="explanation"><b>Explanation:</b> Lists are passed by object reference. Mutating <code>x</code> inside the function modifies the caller's object <code>a</code>.</div></div></div></div>
 
-for i in range(3):
-    print(f(), end=" ")</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1] [1, 1] [1, 1, 1]</div>
-<div class="explanation"><b>Explanation:</b> The default list persists across all three function calls.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">62</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">def f(x):
-    return x[:]
+</div>
+</main>
 
-a = [1, 2]
-b = f(a)
-b.append(3)
-print(a)
-print(b)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2]
-[1, 2, 3]</div>
-<div class="explanation"><b>Explanation:</b> The slice creates a new outer list, so appending to b does not change a.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">63</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [[1], [2]]
-b = a * 2
-b[0].append(9)
-print(a)
-print(b)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[[1, 9], [2]]
-[[1, 9], [2], [1, 9], [2]]</div>
-<div class="explanation"><b>Explanation:</b> List multiplication repeats references to the same inner lists; it does not deep-copy them.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">64</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [[0] * 3] * 3
-a[0][1] = 9
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[[0, 9, 0], [0, 9, 0], [0, 9, 0]]</div>
-<div class="explanation"><b>Explanation:</b> The outer multiplication repeats references to the same inner list, so changing one row changes all rows.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">65</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [[0 for j in range(3)] for i in range(3)]
-a[0][1] = 9
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[[0, 9, 0], [0, 0, 0], [0, 0, 0]]</div>
-<div class="explanation"><b>Explanation:</b> The nested comprehension creates three independent inner lists.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">66</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-for i in range(len(a)):
-    a.insert(i, 0)
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[0, 1, 0, 2, 0, 3]</div>
-<div class="explanation"><b>Explanation:</b> The loop uses the original length range 0,1,2, while insert changes positions during execution.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">67</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3, 4]
-for i in range(len(a)-1, -1, -1):
-    if a[i] % 2 == 0:
-        a.pop(i)
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 3]</div>
-<div class="explanation"><b>Explanation:</b> Traversing indexes backward avoids the shifting-index problem caused by removing elements.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">68</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-b = [4, 5]
-a.extend(b)
-b.append(6)
-print(a)
-print(b)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3, 4, 5]
-[4, 5, 6]</div>
-<div class="explanation"><b>Explanation:</b> extend copies the current elements from b into a; it does not make a reference to b.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">69</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-b = a
-a.clear()
-print(a)
-print(b)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[]
-[]</div>
-<div class="explanation"><b>Explanation:</b> clear mutates the shared list object, so both references observe the empty list.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">70</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-b = a.copy()
-a.clear()
-print(a)
-print(b)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[]
-[1, 2, 3]</div>
-<div class="explanation"><b>Explanation:</b> b refers to a separate outer list created by copy.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">71</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [3, 2, 1]
-print(a == sorted(a))
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>False
-[3, 2, 1]</div>
-<div class="explanation"><b>Explanation:</b> sorted returns [1,2,3], which is not equal to the original descending list.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">72</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-a += (4, 5)
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3, 4, 5]</div>
-<div class="explanation"><b>Explanation:</b> List += accepts an iterable and extends the list with its elements.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">73</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-print(a + (4, 5))</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text error-text>TypeError</div>
-<div class="explanation"><b>Explanation:</b> The + operator for lists requires another list, not a tuple.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">74</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-a[1:2] = [7, 8, 9]
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 7, 8, 9, 3]</div>
-<div class="explanation"><b>Explanation:</b> The one-element slice [2] is replaced by three elements.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">75</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-a[1:1] = [7, 8]
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 7, 8, 2, 3]</div>
-<div class="explanation"><b>Explanation:</b> An empty slice at index 1 is replaced, so the new elements are inserted without deleting anything.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">76</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3, 4]
-a[::2] = [9, 8]
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[9, 2, 8, 4]</div>
-<div class="explanation"><b>Explanation:</b> Extended slice assignment replaces the elements at indexes 0 and 2.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">77</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3, 4]
-a[::2] = [9]
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text error-text>ValueError</div>
-<div class="explanation"><b>Explanation:</b> Extended slice assignment requires the replacement sequence to have the same number of elements as the selected slice.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">78</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-print(a[10:20])</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[]</div>
-<div class="explanation"><b>Explanation:</b> Out-of-range slice boundaries are safely clipped; slicing does not raise IndexError in this case.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">79</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-print(a[10])</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text error-text>IndexError</div>
-<div class="explanation"><b>Explanation:</b> Direct indexing requires the index to exist.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">80</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-print(a[-10:])</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3]</div>
-<div class="explanation"><b>Explanation:</b> An out-of-range slice boundary is clipped to the beginning of the list.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">81</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-print(a[2:0:-1])</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[3, 2]</div>
-<div class="explanation"><b>Explanation:</b> The slice starts at index 2 and moves backward, stopping before index 0.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">82</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-print(a[0:3:-1])</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[]</div>
-<div class="explanation"><b>Explanation:</b> The start is before the stop while the step is negative, so no elements can be selected.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">83</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-print(a[-1:-4:-1])</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[3, 2, 1]</div>
-<div class="explanation"><b>Explanation:</b> The slice walks backward from the last element through the first.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">84</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-x = a.pop()
-print(x in a)
-print(x)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>False
-3</div>
-<div class="explanation"><b>Explanation:</b> 3 is removed before the membership test, so it is no longer in the list.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">85</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3, 2]
-while 2 in a:
-    a.remove(2)
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 3]</div>
-<div class="explanation"><b>Explanation:</b> The while loop repeatedly removes the first occurrence of 2 until no 2 remains.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">86</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-for i, x in enumerate(a):
-    a[i] = x * 10
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[10, 20, 30]</div>
-<div class="explanation"><b>Explanation:</b> enumerate supplies both the index and current value, allowing the actual list element to be changed.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">87</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [10, 20, 30]
-for i, x in enumerate(a):
-    if i == 1:
-        a.append(40)
-    print(i, x, end="; ")</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>0 10; 1 20; 2 30; 3 40;</div>
-<div class="explanation"><b>Explanation:</b> The list iterator sees the appended element, so the new element is also visited.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">88</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-for x in a:
-    a.append(x + 3)
-    if len(a) &gt; 5:
-        break
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3, 4, 5, 6]</div>
-<div class="explanation"><b>Explanation:</b> Each iteration appends a new value. The break stops after the list length becomes greater than 5.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">89</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-b = [x for x in a if x &gt; 1]
-a.append(4)
-print(b)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[2, 3]</div>
-<div class="explanation"><b>Explanation:</b> The comprehension creates b immediately; later changes to a do not change b.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">90</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-b = [x for x in a]
-a.append(4)
-print(b)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3]</div>
-<div class="explanation"><b>Explanation:</b> The comprehension creates a new list at the time it executes.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">91</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-b = [x for x in a if x &gt; 1]
-print(x)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text error-text>NameError</div>
-<div class="explanation"><b>Explanation:</b> The comprehension variable x does not leak into the surrounding scope in Python 3.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">92</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-b = [x * y for x in a for y in a if x &lt; y]
-print(b)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[2, 3, 6]</div>
-<div class="explanation"><b>Explanation:</b> The pairs satisfying x<y are (1,2), (1,3), and (2,3), producing 2, 3 and 6.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">93</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-b = [x + y for x in a for y in a if x == y]
-print(b)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[2, 4, 6]</div>
-<div class="explanation"><b>Explanation:</b> Only equal pairs are selected, producing 1+1, 2+2 and 3+3.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">94</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [[1, 2], [3, 4]]
-print([row[:] for row in a])</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[[1, 2], [3, 4]]</div>
-<div class="explanation"><b>Explanation:</b> Each row is sliced to create a separate shallow copy of that inner list.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">95</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [[1, 2], [3, 4]]
-b = [row for row in a]
-b[0].append(9)
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[[1, 2, 9], [3, 4]]</div>
-<div class="explanation"><b>Explanation:</b> The comprehension copies the references to the inner lists, not the inner lists themselves.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">96</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-a[:] = a[::-1]
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[3, 2, 1]</div>
-<div class="explanation"><b>Explanation:</b> The reversed copy replaces the contents of the entire original list.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">97</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-b = a[:]
-a.reverse()
-print(a)
-print(b)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[3, 2, 1]
-[1, 2, 3]</div>
-<div class="explanation"><b>Explanation:</b> b is an independent outer list, so reversing a does not change b.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">98</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-b = a
-a.reverse()
-print(b)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[3, 2, 1]</div>
-<div class="explanation"><b>Explanation:</b> a.reverse() modifies the shared list object, which b also references.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">99</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [3, 1, 2]
-b = sorted(a)
-a.sort()
-print(b)
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3]
-[1, 2, 3]</div>
-<div class="explanation"><b>Explanation:</b> Both operations produce sorted contents, but sorted creates b while sort modifies a.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">100</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-print(a.count(1.0))
-print(a.index(1.0))</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>1
-0</div>
-<div class="explanation"><b>Explanation:</b> 1 and 1.0 compare equal in Python, so the integer 1 matches both membership-related operations.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">101</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [True, 1, False, 0]
-print(a.count(1))
-print(a.count(0))</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>2
-2</div>
-<div class="explanation"><b>Explanation:</b> True equals 1 and False equals 0 for equality comparisons, so each pair is counted.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">102</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-a *= 2
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3, 1, 2, 3]</div>
-<div class="explanation"><b>Explanation:</b> In-place list multiplication repeats the list contents.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">103</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-b = a
-a *= 2
-print(a)
-print(b)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3, 1, 2, 3]
-[1, 2, 3, 1, 2, 3]</div>
-<div class="explanation"><b>Explanation:</b> For lists, *= modifies the existing list in place, so both references see the change.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">104</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-b = a
-a = a * 2
-print(a)
-print(b)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3, 1, 2, 3]
-[1, 2, 3]</div>
-<div class="explanation"><b>Explanation:</b> a*2 creates a new list and rebinds a, leaving b connected to the original.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">105</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-print(a.pop())
-print(a.pop())
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>3
-2
-[1]</div>
-<div class="explanation"><b>Explanation:</b> pop without an index removes elements from the end one at a time.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">106</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-try:
-    a.remove(5)
-except ValueError:
-    print("Not Found")</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>Not Found</div>
-<div class="explanation"><b>Explanation:</b> remove raises ValueError for a missing value, which is caught by the except block.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">107</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">def f(a):
-    a[0] = 99
-
-x = [1, 2]
-f(x)
-print(x)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[99, 2]</div>
-<div class="explanation"><b>Explanation:</b> The function modifies the caller's mutable list object.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">108</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">def f(a):
-    a = [99, 100]
-
-x = [1, 2]
-f(x)
-print(x)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2]</div>
-<div class="explanation"><b>Explanation:</b> Rebinding the local parameter a does not replace the caller's list.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">109</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-c = a.copy()
-print(c is a)
-print(c == a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>False
-True</div>
-<div class="explanation"><b>Explanation:</b> copy creates a different object with equal contents.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">110</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-b = list(a)
-b.append(4)
-print(a)
-print(b)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3]
-[1, 2, 3, 4]</div>
-<div class="explanation"><b>Explanation:</b> list(a) creates a new outer list.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">111</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-b = [*a, 4]
-print(b)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3, 4]</div>
-<div class="explanation"><b>Explanation:</b> Iterable unpacking expands the elements of a into the new list.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">112</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2]
-b = [*a, *a]
-print(b)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 1, 2]</div>
-<div class="explanation"><b>Explanation:</b> Each unpacking operation contributes all elements of a.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">113</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-b = [0, *a, 4]
-print(b)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[0, 1, 2, 3, 4]</div>
-<div class="explanation"><b>Explanation:</b> The unpacked list elements are inserted between 0 and 4.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">114</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-print(a[-0])</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>1</div>
-<div class="explanation"><b>Explanation:</b> In Python, -0 is equal to 0, so a[-0] is the first element.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">115</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-print(a[True])
-print(a[False])</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>2
-1</div>
-<div class="explanation"><b>Explanation:</b> Boolean values can act as integers: True is 1 and False is 0.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">116</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-a[True] = 9
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 9, 3]</div>
-<div class="explanation"><b>Explanation:</b> True is interpreted as integer index 1.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">117</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-print(a[1:1])
-print(a[1:1] == [])</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[]
-True</div>
-<div class="explanation"><b>Explanation:</b> A slice with equal start and stop contains no elements and returns an empty list.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">118</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-print(a[:0])
-print(a[0:])</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[]
-[1, 2, 3]</div>
-<div class="explanation"><b>Explanation:</b> [:0] stops before index 0, while [0:] starts at index 0 and goes to the end.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">119</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-a[1:] = a[:1]
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 1]</div>
-<div class="explanation"><b>Explanation:</b> The slice from index 1 onward is replaced by a copy containing only the first element.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">120</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-a[1:] = a
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 1, 2, 3]</div>
-<div class="explanation"><b>Explanation:</b> The right-hand side is evaluated first, producing the original three-element sequence, which replaces the slice [2,3].</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">121</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-a[::2] = a[1::2]
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text error-text>ValueError</div>
-<div class="explanation"><b>Explanation:</b> The left extended slice selects two positions (0,2), while the right side contains only one element (2).</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">122</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3, 4]
-print(a[::0])</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text error-text>ValueError</div>
-<div class="explanation"><b>Explanation:</b> A slice step cannot be zero.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">123</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-print(a[5:1])</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[]</div>
-<div class="explanation"><b>Explanation:</b> A forward slice whose start is beyond its stop produces an empty list.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">124</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-print(a[5:1:-1])</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[3, 2]</div>
-<div class="explanation"><b>Explanation:</b> The out-of-range start is clipped to the last valid position, then the slice moves backward to before index 1.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">125</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-print(a[-1:0:-1])</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[3, 2]</div>
-<div class="explanation"><b>Explanation:</b> The slice starts at the last element and moves backward, stopping before index 0.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">126</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-for i in range(len(a)):
-    a.pop()
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[]</div>
-<div class="explanation"><b>Explanation:</b> The range object is created with values 0,1,2 before the loop. Each iteration removes one element from the end.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">127</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3, 4]
-for i in range(len(a)):
-    a.pop(i)
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text error-text>IndexError</div>
-<div class="explanation"><b>Explanation:</b> The list shrinks while the fixed range still contains indexes up to 3; eventually an index no longer exists.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">128</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3, 4]
-for i in range(len(a)-1, -1, -1):
-    a.pop(i)
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[]</div>
-<div class="explanation"><b>Explanation:</b> Indexes are removed from the end toward the beginning, so every index remains valid when it is used.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">129</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-for i in a:
-    a.append(10)
-    if len(a) == 6:
-        break
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3, 10, 10, 10]</div>
-<div class="explanation"><b>Explanation:</b> The loop appends one 10 for each of the original elements and breaks when the list reaches length 6.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">130</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-for i in range(3):
-    a.insert(0, i)
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[2, 1, 0, 1, 2, 3]</div>
-<div class="explanation"><b>Explanation:</b> Each new value is inserted at the beginning, pushing earlier elements to the right.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">131</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-for i in range(3):
-    a.insert(i, i)
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[0, 1, 1, 2, 3]</div>
-<div class="explanation"><b>Explanation:</b> At each step the insertion position is based on the current list, while i is 0,1,2.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">132</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-b = [4, 5]
-a[1:2] = b
-b.append(6)
-print(a)
-print(b)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 4, 5, 3]
-[4, 5, 6]</div>
-<div class="explanation"><b>Explanation:</b> Slice assignment copies the current elements into a; it does not make that slice reference b.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">133</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, [2, 3]]
-b = a[:]
-a[0] = 9
-a[1].append(4)
-print(b)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, [2, 3, 4]]</div>
-<div class="explanation"><b>Explanation:</b> The outer list is copied, so b retains the original first element. The nested list remains shared.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">134</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [[1], [2]]
-b = a[:]
-a[0] = [9]
-print(b)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[[1], [2]]</div>
-<div class="explanation"><b>Explanation:</b> Replacing a[0] changes only the outer list a. b still points to the original first inner-list reference.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">135</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [[1], [2]]
-b = a[:]
-a[0].append(9)
-print(b)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[[1, 9], [2]]</div>
-<div class="explanation"><b>Explanation:</b> The inner list is shared by the shallow copy, so append changes what both lists see.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">136</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-b = [a, a]
-b[0].append(4)
-print(b)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[[1, 2, 3, 4], [1, 2, 3, 4]]</div>
-<div class="explanation"><b>Explanation:</b> Both elements of b reference the same list object a.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">137</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-b = [a.copy(), a.copy()]
-b[0].append(4)
-print(b)
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[[1, 2, 3, 4], [1, 2, 3]]
-[1, 2, 3]</div>
-<div class="explanation"><b>Explanation:</b> Each copy creates a separate list, and a itself is also unchanged.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">138</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-print(list(reversed(a)))
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[3, 2, 1]
-[1, 2, 3]</div>
-<div class="explanation"><b>Explanation:</b> reversed returns an iterator and does not modify the original list.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">139</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-x = reversed(a)
-a.append(4)
-print(list(x))</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[4, 3, 2, 1]</div>
-<div class="explanation"><b>Explanation:</b> The reversed iterator is created over the list and observes the list when consumed; after append, the resulting traversal includes 4.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">140</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [3, 1, 2]
-x = iter(a)
-print(next(x))
-a.append(4)
-print(list(x))</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>3
-[1, 2, 4]</div>
-<div class="explanation"><b>Explanation:</b> The iterator is positioned after the first element. The later append is visible when the remaining iterator is consumed.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">141</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-x = iter(a)
-print(next(x))
-print(next(x))
-print(next(x))</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>1
-2
-3</div>
-<div class="explanation"><b>Explanation:</b> Each next call advances the same list iterator by one position.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">142</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1]
-x = iter(a)
-print(next(x))
-print(next(x))</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text error-text>StopIteration</div>
-<div class="explanation"><b>Explanation:</b> The first next returns 1. The second next is called after the iterator is exhausted and raises StopIteration.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">143</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-x = iter(a)
-print(x is iter(a))</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>False</div>
-<div class="explanation"><b>Explanation:</b> Calling iter(a) creates a new list iterator each time; the two iterator objects are different.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">144</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-print(len(a))
-a *= 0
-print(len(a), a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>3
-0 []</div>
-<div class="explanation"><b>Explanation:</b> In-place multiplication by zero removes all elements.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">145</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-a *= -1
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[]</div>
-<div class="explanation"><b>Explanation:</b> Negative or zero list repetition produces an empty list.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">146</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-print(a * 0)
-print(a * -2)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[]
-[]</div>
-<div class="explanation"><b>Explanation:</b> Repeating a list zero or a negative number of times produces an empty list.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">147</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-b = a * 1
-print(a is b)
-print(a == b)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>False
-True</div>
-<div class="explanation"><b>Explanation:</b> Multiplication creates a new list, even when the multiplier is 1.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">148</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-b = a.copy()
-a.append(4)
-b.append(5)
-print(a)
-print(b)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3, 4]
-[1, 2, 3, 5]</div>
-<div class="explanation"><b>Explanation:</b> The two outer lists are independent.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">149</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-a.remove(2)
-a.insert(1, 9)
-a.pop()
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 9]</div>
-<div class="explanation"><b>Explanation:</b> The operations occur in sequence: remove 2, insert 9, then pop the final 3.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">150</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3, 2]
-a.remove(2)
-a.reverse()
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[2, 3, 1]</div>
-<div class="explanation"><b>Explanation:</b> The first 2 is removed, producing [1,3,2], then reverse produces [2,3,1].</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">151</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [3, 1, 2, 1]
-a.sort()
-a.remove(1)
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3]</div>
-<div class="explanation"><b>Explanation:</b> After sorting, the list is [1,1,2,3]. remove deletes the first 1.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">152</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-a.append(a)
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3, [...]]</div>
-<div class="explanation"><b>Explanation:</b> The list is appended to itself, creating a self-reference. Python displays the recursive reference as [...].</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">153</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = []
-a.append(a)
-print(a is a[0])</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>True</div>
-<div class="explanation"><b>Explanation:</b> The first element is a reference to the list itself.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">154</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2]
-a.extend(a)
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 1, 2]</div>
-<div class="explanation"><b>Explanation:</b> The existing elements are used to extend the list with another copy of those elements.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">155</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2]
-a += a
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 1, 2]</div>
-<div class="explanation"><b>Explanation:</b> List += performs in-place extension using the current list elements.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">156</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2]
-a = a + a
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 1, 2]</div>
-<div class="explanation"><b>Explanation:</b> The expression creates a new concatenated list and assigns it back to a.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">157</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-print(sum(a, 10))</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>16</div>
-<div class="explanation"><b>Explanation:</b> The optional start value 10 is added to the sum of the list: 10+1+2+3.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">158</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-print(max(a, default=99))</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>3</div>
-<div class="explanation"><b>Explanation:</b> default is used only when the iterable is empty.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">159</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = []
-print(max(a, default=99))</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>99</div>
-<div class="explanation"><b>Explanation:</b> Since the list is empty, max returns the supplied default value.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">160</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [10, 20, 30]
-print(sum(x &gt; 15 for x in a))</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>2</div>
-<div class="explanation"><b>Explanation:</b> The comparisons produce False, True, True. In numeric context, False is 0 and True is 1, giving 2.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">161</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-print(all(a))
-print(any(a))</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>True
-True</div>
-<div class="explanation"><b>Explanation:</b> All elements are truthy and at least one element is truthy.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">162</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 0, 3]
-print(all(a))
-print(any(a))</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>False
-True</div>
-<div class="explanation"><b>Explanation:</b> all is false because 0 is false-like, while any is true because other elements are truthy.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">163</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [0, False, None]
-print(any(a))
-print(all(a))</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>False
-False</div>
-<div class="explanation"><b>Explanation:</b> Every element is false-like, so both any and all return False.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">164</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-b = [x for x in a if x &gt; 1]
-b.clear()
-print(a)
-print(b)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3]
-[]</div>
-<div class="explanation"><b>Explanation:</b> The comprehension created an independent outer list b.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">165</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-b = a
-b[:] = []
-print(a)
-print(b)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[]
-[]</div>
-<div class="explanation"><b>Explanation:</b> Slice assignment modifies the shared list object itself.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">166</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-b = a
-b = []
-print(a)
-print(b)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3]
-[]</div>
-<div class="explanation"><b>Explanation:</b> Rebinding b does not affect the object referenced by a.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">167</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-b = a
-del b[:]
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[]</div>
-<div class="explanation"><b>Explanation:</b> Deleting the complete slice mutates the shared list.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">168</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-del a[:]
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[]</div>
-<div class="explanation"><b>Explanation:</b> Deleting the full slice removes all elements.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">169</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-del a[::2]
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[2]</div>
-<div class="explanation"><b>Explanation:</b> The extended slice selects indexes 0 and 2, so those elements are deleted.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">170</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3, 4]
-del a[1:3]
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 4]</div>
-<div class="explanation"><b>Explanation:</b> The slice containing indexes 1 and 2 is deleted.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">171</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-print(a[::])
-print(a[::-1])</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3]
-[3, 2, 1]</div>
-<div class="explanation"><b>Explanation:</b> A full slice with step 1 copies the sequence order; step -1 reverses it.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">172</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-b = a[:]
-b[0] = 9
-print(a)
-print(b)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3]
-[9, 2, 3]</div>
-<div class="explanation"><b>Explanation:</b> The outer list was copied, so replacing b[0] does not affect a.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">173</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, [2, 3]]
-b = a[:]
-b[1] = [9]
-print(a)
-print(b)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, [2, 3]]
-[1, [9]]</div>
-<div class="explanation"><b>Explanation:</b> Replacing the second outer element changes only b. It does not mutate the shared inner list.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">174</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, [2, 3]]
-b = a[:]
-b[1].append(9)
-print(a)
-print(b)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, [2, 3, 9]]
-[1, [2, 3, 9]]</div>
-<div class="explanation"><b>Explanation:</b> The inner list is shared by the shallow copy, so its mutation is visible through both references.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">175</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-print(a == [1, 2, 3])
-print(a == (1, 2, 3))</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>True
-False</div>
-<div class="explanation"><b>Explanation:</b> Lists compare equal to lists with equal contents, but not to tuples.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">176</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-print(a &lt; [1, 2, 4])
-print(a &lt; [1, 2])</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>True
-False</div>
-<div class="explanation"><b>Explanation:</b> Sequences are compared lexicographically. At the first difference, 3<4 is true; a longer equal-prefix list is greater than its shorter prefix.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">177</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2]
-b = [1, 2, 0]
-print(a &lt; b)
-print(b &lt; a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>True
-False</div>
-<div class="explanation"><b>Explanation:</b> When one list is a prefix of another, the shorter list compares as smaller.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">178</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [3, 1, 2]
-print(sorted(a, reverse=True))
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[3, 2, 1]
-[3, 1, 2]</div>
-<div class="explanation"><b>Explanation:</b> sorted returns a new list and does not modify a.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">179</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [("b", 2), ("a", 3), ("c", 1)]
-a.sort()
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[('a', 3), ('b', 2), ('c', 1)]</div>
-<div class="explanation"><b>Explanation:</b> Tuples are compared lexicographically, so sorting first compares their string elements.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">180</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [("a", 3), ("b", 1), ("c", 2)]
-print(sorted(a, key=lambda x: x[1]))</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[('b', 1), ('c', 2), ('a', 3)]</div>
-<div class="explanation"><b>Explanation:</b> The key function extracts the second tuple element, so sorting is based on 3,1,2.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">181</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3, 4]
-print([x for x in a if x % 2 == 0][::-1])</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[4, 2]</div>
-<div class="explanation"><b>Explanation:</b> The comprehension first selects 2 and 4, then the slice reverses that new list.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">182</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3, 4]
-x = [a.pop() for _ in range(2)]
-print(x)
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[4, 3]
-[1, 2]</div>
-<div class="explanation"><b>Explanation:</b> The comprehension calls pop twice, each time removing the current last element.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">183</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-x = [a.append(i) for i in range(3)]
-print(a)
-print(x)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 3, 0, 1, 2]
-[None, None, None]</div>
-<div class="explanation"><b>Explanation:</b> append mutates a but returns None, so the comprehension collects three None values.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">184</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-x = [a.pop(0) for _ in range(2)]
-print(x)
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2]
-[3]</div>
-<div class="explanation"><b>Explanation:</b> Each pop(0) removes and returns the first current element.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">185</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-for i in range(2):
-    a[i] = a[-1]
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[3, 3, 3]</div>
-<div class="explanation"><b>Explanation:</b> On i=0, a[0] becomes 3. On i=1, a[1] also becomes the current last element 3.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">186</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-for i in range(2):
-    a[-1] = a[i]
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 1]</div>
-<div class="explanation"><b>Explanation:</b> The last element is first replaced by 1 and then by 2? Correction: i=0 makes [1,2,1]; i=1 reads 2 and makes [1,2,2].</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">187</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-for i in range(2):
-    a[-1] = a[i]
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[1, 2, 2]</div>
-<div class="explanation"><b>Explanation:</b> For i=0 the last element becomes 1. For i=1, a[1] is still 2, so the last element becomes 2.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">188</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-for i in range(len(a)):
-    a[i] = a[i] * a[-1]
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[3, 6, 9]</div>
-<div class="explanation"><b>Explanation:</b> The last element remains 3 throughout this loop because the current last index is i=2 only at the final iteration, when a[2] becomes 9 after reading its old value 3.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">189</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-for i in range(len(a)):
-    a[i] = a[i] * 2
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[2, 4, 6]</div>
-<div class="explanation"><b>Explanation:</b> Each element is updated through its index.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">190</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 2, 3]
-for x in a:
-    a[a.index(x)] *= 2
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[2, 4, 6]</div>
-<div class="explanation"><b>Explanation:</b> Each current value is located and doubled. In this unique-value list, index finds the current matching element.</div></div></div></div><div class="accordion-item" data-keywords="lists list slicing indexing mutation shallow copy comprehension for while if functions append extend remove pop sort sorted nested error">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">191</div>
-<div class="q-body"><div class="q-title">Find the output of the following program:</div><pre class="code-box">a = [1, 1, 2]
-for x in a:
-    a[a.index(x)] += 10
-print(a)</pre></div>
-<div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><div class="output-title">Predicted Output / Exception</div>
-<div class="output-text>[21, 1, 2]</div>
-<div class="explanation"><b>Explanation:</b> For both occurrences of 1, index(1) returns the first position, so the first element is incremented twice.</div></div></div></div></div></main>
 <footer>© 2026 D. Kiran Prasad | Python Programming</footer>
+
 <script>
-function toggleItem(h){h.parentElement.classList.toggle('open')}
-function toggleAll(v){document.querySelectorAll('.accordion-item').forEach(x=>x.classList.toggle('open',v))}
-function filterQuestions(){let q=document.getElementById('searchInput').value.toLowerCase();document.querySelectorAll('.accordion-item').forEach(x=>{let t=x.innerText.toLowerCase(),k=x.dataset.keywords||'';x.style.display=(t.includes(q)||k.includes(q))?'block':'none'})}
-</script></body></html>
+function toggleItem(header){
+    header.parentElement.classList.toggle('open');
+}
+function toggleAll(open){
+    document.querySelectorAll('.accordion-item').forEach(el => el.classList.toggle('open', open));
+}
+function filterQuestions(){
+    let q = document.getElementById('searchInput').value.toLowerCase();
+    document.querySelectorAll('.accordion-item').forEach(el => {
+        let text = el.innerText.toLowerCase();
+        let kw = el.dataset.keywords || '';
+        el.style.display = (text.includes(q) || kw.includes(q)) ? 'block' : 'none';
+    });
+}
+</script>
+</body>
+</html>
