@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Highly Confusing Questions in Python - Basics</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#eef4f9;color:#111;font-family:"Segoe UI",Arial,sans-serif}
+.header{position:relative;background:linear-gradient(90deg,#0b477d,#087cc1);color:#fff;text-align:center;padding:26px 20px}
+.nav{position:absolute;left:24px;right:24px;top:50%;transform:translateY(-50%);display:flex;justify-content:space-between}
+.nav a{color:#fff;text-decoration:none;font-size:18px;font-weight:700}
+.header h1{margin:0;font-size:32px;text-transform:uppercase}.header p{margin:8px 0 0;font-size:19px;font-weight:600}
+.container{width:94%;max-width:1350px;margin:26px auto}.bar{display:flex;justify-content:space-between;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+.search{flex:1;max-width:500px;min-width:240px;padding:10px 14px;border:1px solid #b7cde3;border-radius:6px;font-size:15px}
+button{background:#075b99;color:white;border:0;border-radius:6px;padding:10px 16px;font-weight:700;cursor:pointer}
+.group{display:flex;gap:10px}
+.item{background:#fff;border:1px solid #dbe6f2;border-radius:10px;margin-bottom:16px;overflow:hidden;box-shadow:0 3px 12px #0000000d}
+.item:hover{border-color:#99bfe6}.head{display:flex;align-items:flex-start;gap:16px;padding:16px 20px;cursor:pointer}
+.num{width:34px;height:34px;min-width:34px;border-radius:50%;background:#075b99;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+.body{flex:1}.title{font-size:17px;font-weight:700;color:#0b3b66;margin-bottom:10px}
+pre{margin:0;white-space:pre-wrap}.head pre{background:#1e1e1e;color:#e6edf3;padding:12px 16px;border-radius:7px;font:14.5px/1.5 Consolas,"Courier New",monospace;overflow:auto}
+.plus{width:32px;height:32px;min-width:32px;background:#075b99;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;transition:.2s}
+.item.open .plus{background:#d32f2f;transform:rotate(45deg)}.answer{display:none;padding:0 20px 20px 70px;border-top:1px dashed #dbe6f2;background:#fbfdff}
+.item.open .answer{display:block;padding-top:16px}.tag{display:inline-block;background:#e2edfa;color:#075b99;font-size:12.5px;font-weight:700;padding:3px 8px;border-radius:4px;margin-bottom:10px}
+.out{background:#f8fafc;border:1px solid #cfe0f0;border-radius:8px;padding:14px 16px}.out>b{color:#075b99;font-size:13px;text-transform:uppercase}
+.out pre{margin-top:6px;background:#fff9f0;color:#b84d00;border:1px solid #ffd8a8;border-radius:6px;padding:8px 12px;font:700 15px Consolas,"Courier New",monospace}
+.explanation{background:#eff6fc;border-left:4px solid #075b99;padding:10px 14px;border-radius:4px;font-size:14.5px;line-height:1.55;color:#1b3954;margin-top:10px}
+footer{background:#063b70;color:#fff;text-align:center;padding:16px;margin-top:40px}
+@media(max-width:850px){.nav{position:static;transform:none;margin-bottom:14px}.answer{padding-left:20px}}
+</style></head><body>
+<header class="header"><div class="nav"><a href="../index.html">🏠 Python Home</a><a href="../../index.html">🏠 Main Home</a></div>
+<h1>Variables • Data Types • Type Conversion • Input • Expressions</h1></header>
+<main class="container"><div class="bar"><input id="search" class="search" placeholder="🔍 Search keyword..." onkeyup="filterItems()"><div class="group">
+<button onclick="allItems(true)">Expand All</button><button onclick="allItems(false)">Collapse All</button></div></div>
+<div id="list"><div class="item" data-key="reassignment + type change x = 10
+x = "10"
+x = x + "5"
+
+print(x)
+print(type(x))">
+<div class="head" onclick="toggle(this)"><div class="num">1</div><div class="body">
+<div class="title">Reassignment + Type Change</div><pre>x = 10
+x = "10"
+x = x + "5"
+
+print(x)
+print(type(x))</pre></div><div class="plus">+</div></div>
+<div class="answer"><span class="tag">Reassignment + Type Change</span><div class="out"><b>Predicted Output</b><pre>105
+&lt;class 'str'&gt;</pre>
+<div class="explanation"><b>Explanation:</b> Python does not permanently attach a type to a variable name. x first refers to an integer, then to a string, so x + "5" performs string concatenation.</div></div></div></div><div class="item" data-key="different literals, different types a = 10
+b = 10.0
+c = "10"
+d = true
+
+print(type(a).__name__)
+print(type(b).__name__)
+print(type(c).__name__)
+print(type(d).__name__)">
+<div class="head" onclick="toggle(this)"><div class="num">2</div><div class="body">
+<div class="title">Different Literals, Different Types</div><pre>a = 10
+b = 10.0
+c = "10"
+d = True
+
+print(type(a).__name__)
+print(type(b).__name__)
+print(type(c).__name__)
+print(type(d).__name__)</pre></div><div class="plus">+</div></div>
+<div class="answer"><span class="tag">Different Literals, Different Types</span><div class="out"><b>Predicted Output</b><pre>int
+float
+str
+bool</pre>
+<div class="explanation"><b>Explanation:</b> The decimal point makes 10.0 a float, quotation marks make "10" a string, and True is Boolean.</div></div></div></div><div class="item" data-key="boolean arithmetic a = true
+b = false
+
+print(a + b)
+print(a * 5)
+print(false + 10)
+print(type(a + b))">
+<div class="head" onclick="toggle(this)"><div class="num">3</div><div class="body">
+<div class="title">Boolean Arithmetic</div><pre>a = True
+b = False
+
+print(a + b)
+print(a * 5)
+print(False + 10)
+print(type(a + b))</pre></div><div class="plus">+</div></div>
+<div class="answer"><span class="tag">Boolean Arithmetic</span><div class="out"><b>Predicted Output</b><pre>1
+5
+10
+&lt;class 'int'&gt;</pre>
+<div class="explanation"><b>Explanation:</b> In numeric expressions, True behaves like 1 and False behaves like 0.</div></div></div></div><div class="item" data-key="bool() trap print(bool(0))
+print(bool("0"))
+print(bool(""))
+print(bool("false"))
+print(bool([]))">
+<div class="head" onclick="toggle(this)"><div class="num">4</div><div class="body">
+<div class="title">bool() Trap</div><pre>print(bool(0))
+print(bool("0"))
+print(bool(""))
+print(bool("False"))
+print(bool([]))</pre></div><div class="plus">+</div></div>
+<div class="answer"><span class="tag">bool() Trap</span><div class="out"><b>Predicted Output</b><pre>False
+True
+False
+True
+False</pre>
+<div class="explanation"><b>Explanation:</b> Zero, an empty string and an empty list are false-like. Non-empty strings are True even when their text says "False" or "0".</div></div></div></div><div class="item" data-key="same input, different types # user enters: 20
+x = input()
+y = int(x)
+
+x = x + "5"
+y = y + 5
+
+print(x, y)
+print(type(x).__name__, type(y).__name__)">
+<div class="head" onclick="toggle(this)"><div class="num">5</div><div class="body">
+<div class="title">Same Input, Different Types</div><pre># User enters: 20
+x = input()
+y = int(x)
+
+x = x + "5"
+y = y + 5
+
+print(x, y)
+print(type(x).__name__, type(y).__name__)</pre></div><div class="plus">+</div></div>
+<div class="answer"><span class="tag">Same Input, Different Types</span><div class="out"><b>Predicted Output</b><pre>205 25
+str int</pre>
+<div class="explanation"><b>Explanation:</b> x remains a string and becomes "205". y was separately converted to integer 20 and becomes 25.</div></div></div></div><div class="item" data-key="multiple assignment a = 4
+b = 7
+
+a, b = b, a + b
+
+print(a, b)">
+<div class="head" onclick="toggle(this)"><div class="num">6</div><div class="body">
+<div class="title">Multiple Assignment</div><pre>a = 4
+b = 7
+
+a, b = b, a + b
+
+print(a, b)</pre></div><div class="plus">+</div></div>
+<div class="answer"><span class="tag">Multiple Assignment</span><div class="out"><b>Predicted Output</b><pre>7 11</pre>
+<div class="explanation"><b>Explanation:</b> Python evaluates the complete right side first using the old values: b is 7 and a+b is 11. Then both assignments happen.</div></div></div></div><div class="item" data-key="chained assignment a = b = 10
+
+a = a + 5
+
+print(a)
+print(b)">
+<div class="head" onclick="toggle(this)"><div class="num">7</div><div class="body">
+<div class="title">Chained Assignment</div><pre>a = b = 10
+
+a = a + 5
+
+print(a)
+print(b)</pre></div><div class="plus">+</div></div>
+<div class="answer"><span class="tag">Chained Assignment</span><div class="out"><b>Predicted Output</b><pre>15
+10</pre>
+<div class="explanation"><b>Explanation:</b> Reassigning a does not automatically reassign b. After the first line both names refer to 10; after the second line only a refers to 15.</div></div></div></div><div class="item" data-key="case sensitivity value = 10
+value = 20
+value = 30
+
+print(value)
+print(value)
+print(value)">
+<div class="head" onclick="toggle(this)"><div class="num">8</div><div class="body">
+<div class="title">Case Sensitivity</div><pre>value = 10
+Value = 20
+VALUE = 30
+
+print(value)
+print(Value)
+print(VALUE)</pre></div><div class="plus">+</div></div>
+<div class="answer"><span class="tag">Case Sensitivity</span><div class="out"><b>Predicted Output</b><pre>10
+20
+30</pre>
+<div class="explanation"><b>Explanation:</b> Python treats value, Value and VALUE as three different variable names.</div></div></div></div><div class="item" data-key="nested conversion x = "25.9"
+
+y = int(float(x))
+z = str(y) + "0"
+
+print(y)
+print(z)
+print(type(z).__name__)">
+<div class="head" onclick="toggle(this)"><div class="num">9</div><div class="body">
+<div class="title">Nested Conversion</div><pre>x = "25.9"
+
+y = int(float(x))
+z = str(y) + "0"
+
+print(y)
+print(z)
+print(type(z).__name__)</pre></div><div class="plus">+</div></div>
+<div class="answer"><span class="tag">Nested Conversion</span><div class="out"><b>Predicted Output</b><pre>25
+250
+str</pre>
+<div class="explanation"><b>Explanation:</b> The string becomes float 25.9, then int() removes the fractional part, producing 25. Converting it to string and adding "0" produces "250".</div></div></div></div><div class="item" data-key="int() does not round a = int(7.9)
+b = int(-7.9)
+
+print(a)
+print(b)">
+<div class="head" onclick="toggle(this)"><div class="num">10</div><div class="body">
+<div class="title">int() Does Not Round</div><pre>a = int(7.9)
+b = int(-7.9)
+
+print(a)
+print(b)</pre></div><div class="plus">+</div></div>
+<div class="answer"><span class="tag">int() Does Not Round</span><div class="out"><b>Predicted Output</b><pre>7
+-7</pre>
+<div class="explanation"><b>Explanation:</b> int() truncates toward zero; it does not round to the nearest integer.</div></div></div></div><div class="item" data-key="convert → calculate → convert back x = "10"
+y = "20"
+
+result = int(x) + int(y)
+text = str(result) + "5"
+
+print(result)
+print(text)">
+<div class="head" onclick="toggle(this)"><div class="num">11</div><div class="body">
+<div class="title">Convert → Calculate → Convert Back</div><pre>x = "10"
+y = "20"
+
+result = int(x) + int(y)
+text = str(result) + "5"
+
+print(result)
+print(text)</pre></div><div class="plus">+</div></div>
+<div class="answer"><span class="tag">Convert → Calculate → Convert Back</span><div class="out"><b>Predicted Output</b><pre>30
+305</pre>
+<div class="explanation"><b>Explanation:</b> The first expression performs numeric addition. The result 30 is then converted to text and concatenated with "5".</div></div></div></div><div class="item" data-key="comparison produces boolean x = 10
+y = 20
+
+result = (x < y)
+
+print(result)
+print(result + 10)
+print(type(result + 10).__name__)">
+<div class="head" onclick="toggle(this)"><div class="num">12</div><div class="body">
+<div class="title">Comparison Produces Boolean</div><pre>x = 10
+y = 20
+
+result = (x &lt; y)
+
+print(result)
+print(result + 10)
+print(type(result + 10).__name__)</pre></div><div class="plus">+</div></div>
+<div class="answer"><span class="tag">Comparison Produces Boolean</span><div class="out"><b>Predicted Output</b><pre>True
+11
+int</pre>
+<div class="explanation"><b>Explanation:</b> x < y produces True. In arithmetic True behaves as 1, so True + 10 becomes 11.</div></div></div></div><div class="item" data-key="equality across types print(10 == 10.0)
+print(10 == "10")
+print(true == 1)
+print(false == 0)">
+<div class="head" onclick="toggle(this)"><div class="num">13</div><div class="body">
+<div class="title">Equality Across Types</div><pre>print(10 == 10.0)
+print(10 == "10")
+print(True == 1)
+print(False == 0)</pre></div><div class="plus">+</div></div>
+<div class="answer"><span class="tag">Equality Across Types</span><div class="out"><b>Predicted Output</b><pre>True
+False
+True
+True</pre>
+<div class="explanation"><b>Explanation:</b> 10 and 10.0 are equal numeric values. True compares equal to 1 and False to 0, while the string "10" is not the number 10.</div></div></div></div><div class="item" data-key="spaces are input data # user enters: "10 20"
+x = input()
+
+print(len(x))
+print(x[2])
+print(x + "5")">
+<div class="head" onclick="toggle(this)"><div class="num">14</div><div class="body">
+<div class="title">Spaces Are Input Data</div><pre># User enters: "10 20"
+x = input()
+
+print(len(x))
+print(x[2])
+print(x + "5")</pre></div><div class="plus">+</div></div>
+<div class="answer"><span class="tag">Spaces Are Input Data</span><div class="out"><b>Predicted Output</b><pre>5
+ 
+10 205</pre>
+<div class="explanation"><b>Explanation:</b> The input has five characters: 1, 0, space, 2, 0. Index 2 is therefore the space.</div></div></div></div><div class="item" data-key="whitespace + conversion # user enters: "   25   "
+x = input()
+
+print(len(x))
+print(int(x))
+print(len(x.strip()))">
+<div class="head" onclick="toggle(this)"><div class="num">15</div><div class="body">
+<div class="title">Whitespace + Conversion</div><pre># User enters: "   25   "
+x = input()
+
+print(len(x))
+print(int(x))
+print(len(x.strip()))</pre></div><div class="plus">+</div></div>
+<div class="answer"><span class="tag">Whitespace + Conversion</span><div class="out"><b>Predicted Output</b><pre>8
+25
+2</pre>
+<div class="explanation"><b>Explanation:</b> There are 8 characters including surrounding spaces. int() accepts surrounding whitespace, while strip() removes it.</div></div></div></div><div class="item" data-key="right side uses old values a = 2
+b = 3
+
+a, b = a + b, a * b
+
+print(a, b)">
+<div class="head" onclick="toggle(this)"><div class="num">16</div><div class="body">
+<div class="title">Right Side Uses Old Values</div><pre>a = 2
+b = 3
+
+a, b = a + b, a * b
+
+print(a, b)</pre></div><div class="plus">+</div></div>
+<div class="answer"><span class="tag">Right Side Uses Old Values</span><div class="out"><b>Predicted Output</b><pre>5 6</pre>
+<div class="explanation"><b>Explanation:</b> Both right-hand expressions use the old values: a+b is 5 and a*b is 6. Assignment occurs after both are evaluated.</div></div></div></div><div class="item" data-key="/ versus // a = 10
+b = 2
+
+x = a / b
+y = a // b
+
+print(x, type(x).__name__)
+print(y, type(y).__name__)">
+<div class="head" onclick="toggle(this)"><div class="num">17</div><div class="body">
+<div class="title">/ Versus //</div><pre>a = 10
+b = 2
+
+x = a / b
+y = a // b
+
+print(x, type(x).__name__)
+print(y, type(y).__name__)</pre></div><div class="plus">+</div></div>
+<div class="answer"><span class="tag">/ Versus //</span><div class="out"><b>Predicted Output</b><pre>5.0 float
+5 int</pre>
+<div class="explanation"><b>Explanation:</b> / produces a floating-point result. // performs floor division and produces an integer here.</div></div></div></div><div class="item" data-key="operator meaning depends on type a = "3"
+b = "4"
+
+print(a + b)
+print(a * int(b))
+print(int(a) + int(b))">
+<div class="head" onclick="toggle(this)"><div class="num">18</div><div class="body">
+<div class="title">Operator Meaning Depends on Type</div><pre>a = "3"
+b = "4"
+
+print(a + b)
+print(a * int(b))
+print(int(a) + int(b))</pre></div><div class="plus">+</div></div>
+<div class="answer"><span class="tag">Operator Meaning Depends on Type</span><div class="out"><b>Predicted Output</b><pre>34
+3333
+7</pre>
+<div class="explanation"><b>Explanation:</b> For strings, + concatenates and * repeats. After conversion to integers, + performs numeric addition.</div></div></div></div><div class="item" data-key="empty vs non-empty print(bool([]))
+print(bool([0]))
+print(bool(""))
+print(bool(" "))
+print(bool(none))">
+<div class="head" onclick="toggle(this)"><div class="num">19</div><div class="body">
+<div class="title">Empty vs Non-Empty</div><pre>print(bool([]))
+print(bool([0]))
+print(bool(""))
+print(bool(" "))
+print(bool(None))</pre></div><div class="plus">+</div></div>
+<div class="answer"><span class="tag">Empty vs Non-Empty</span><div class="out"><b>Predicted Output</b><pre>False
+True
+False
+True
+False</pre>
+<div class="explanation"><b>Explanation:</b> Empty containers/strings and None are false-like. A list containing 0 and a string containing one space are non-empty, so they are True.</div></div></div></div><div class="item" data-key="final challenge x = "5"
+
+x = int(x) + 2
+x = str(x) + "3"
+x = int(x) * 2
+x = x / 4
+
+print(x)
+print(type(x).__name__)">
+<div class="head" onclick="toggle(this)"><div class="num">20</div><div class="body">
+<div class="title">FINAL CHALLENGE</div><pre>x = "5"
+
+x = int(x) + 2
+x = str(x) + "3"
+x = int(x) * 2
+x = x / 4
+
+print(x)
+print(type(x).__name__)</pre></div><div class="plus">+</div></div>
+<div class="answer"><span class="tag">FINAL CHALLENGE</span><div class="out"><b>Predicted Output</b><pre>36.5
+float</pre>
+<div class="explanation"><b>Explanation:</b> Trace every reassignment: "5" → 7 → "73" → 146 → 36.5. The type changes from str to int, back to str, back to int, and finally to float.</div></div></div></div></div></main>
+<footer>© 2026 D. Kiran Prasad | Python Programming</footer>
+<script>
+function toggle(h){h.parentElement.classList.toggle('open')}
+function allItems(open){document.querySelectorAll('.item').forEach(x=>x.classList.toggle('open',open))}
+function filterItems(){let q=document.getElementById('search').value.toLowerCase();document.querySelectorAll('.item').forEach(x=>x.style.display=(x.innerText.toLowerCase().includes(q)||x.dataset.key.includes(q))?'block':'none')}
+</script></body></html>
