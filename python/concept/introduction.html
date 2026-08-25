@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Python Basics - Variables, Data Types & Type Conversion</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#eef4f9;color:#111;font-family:"Segoe UI",Arial,sans-serif}
+.header-nav{position:absolute;left:18px;right:18px;top:28px;display:flex;justify-content:space-between;align-items:center}
+.header-nav a{color:#fff;text-decoration:none;font-size:18px;font-weight:700}
+.header-nav a:hover{text-decoration:underline}
+.header{position:relative;background:linear-gradient(90deg,#0b477d,#087cc1);color:#fff;text-align:center;padding:24px}
+.header h1{margin:0;font-size:34px;padding-top:8px}.header p{margin:7px 0;font-size:18px}
+.container{width:94%;max-width:1450px;margin:26px auto}
+.card{background:#fff;border-radius:12px;padding:24px;margin-bottom:24px;box-shadow:0 4px 18px #0001}
+h2{color:#075b99;margin:0 0 18px;font-size:25px;border-left:6px solid #075b99;padding-left:12px}
+h3{color:#075b99}.theory{font-size:18px;line-height:1.65}
+.highlight,.note{background:#fff8df;border-left:5px solid #d99a00;padding:14px 18px;margin:16px 0;line-height:1.6}
+.syntax-title{text-align:center;color:#075b99;font-size:26px;font-weight:700;margin-bottom:22px}
+.syntax-box{width:92%;margin:35px auto;background:#fff9df;border:2px solid #d7b54a;border-radius:8px;padding:22px;text-align:center;font:700 25px Consolas,"Courier New",monospace;color:#064ea8}
+.name{color:#177c35}.operator{color:#7a159c}.keyword{color:#d20c0c}.string{color:#b85c00}.argument{color:#8b4a00}
+.explain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.explain{border:2px solid #c8d5e3;border-radius:10px;padding:15px;text-align:center;background:#fbfdff}
+.term{font:700 19px Consolas;color:#075b99;margin-bottom:8px}.explain p{margin:0;line-height:1.45}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:900px}
+th{background:#24577f;color:#fff;font-size:20px;padding:15px;text-align:left}
+td{border:1px solid #ccd7e2;padding:15px;vertical-align:top;font-size:17px;line-height:1.5}
+tr:nth-child(even){background:#f7faff}
+.code{display:inline-block;background:#f3f7fc;border:1px solid #b7d0ef;border-radius:8px;padding:8px 12px;font:17px Consolas,"Courier New",monospace;color:#064ea8;white-space:pre-wrap}
+.output{color:#d65b00;font:700 17px Consolas,"Courier New",monospace;white-space:pre-wrap}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.code-block{background:#f7f9fb;border:1px solid #d4dee8;border-radius:9px;padding:18px;overflow:auto}
+pre{margin:0;font:16px/1.6 Consolas,"Courier New",monospace}
+.program-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:20px;margin-top:18px}
+.program-code,.program-details{border:1px solid #cbd9e6;border-radius:10px;padding:18px}
+.program-code{background:#f7f9fb}
+.program-details{background:#fbfdff}
+.program-details h3{margin-top:0}
+.program-details p{margin:8px 0;line-height:1.5}
+.program-details .mini-title{font-weight:700;color:#075b99;margin-top:14px}
+.explain-list{margin:6px 0;padding-left:22px;font-size:16px;line-height:1.55}
+.good-practice{background:#eef8f1;border-left:5px solid #29904b;padding:12px 16px;margin-top:14px;line-height:1.5}
+ul{line-height:1.7;font-size:17px}
+footer{background:#063b70;color:#fff;text-align:center;padding:14px}
+@media(max-width:900px){
+.explain-grid,.two-col,.program-grid{grid-template-columns:1fr}
+.syntax-box{width:100%;font-size:20px}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+<div class="header-nav">
+<a href="../index.html">🏠 Python Home</a>
+<a href="../../index.html">🏠 Main Home</a>
+</div>
+<h1>PYTHON BASICS</h1>
+<p>Introduction, Variables, Data Types &amp; Type Conversion</p>
+</header>
+
+<main class="container">
+
+<section class="card">
+<h2>1. Introduction to Python</h2>
+<div class="theory">
+<p><b>Python</b> is a high-level, general-purpose programming language known for its simple and readable syntax. It is widely used for programming, data analysis, artificial intelligence, machine learning, automation and many other applications.</p>
+<p>A Python program is a sequence of statements written to perform a particular task. Python allows a problem to be expressed using variables, data, operators, functions and control structures.</p>
+<div class="highlight"><b>Basic idea:</b><br>Problem → Python Statements → Execution → Output</div>
+</div>
+</section>
+
+<section class="card">
+<h2>2. Basic Features of Python</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Feature</th><th>Meaning</th><th>Why Useful?</th></tr></thead>
+<tbody>
+<tr><td><b>Simple Syntax</b></td><td>Python code is relatively easy to read and write.</td><td>Suitable for beginners.</td></tr>
+<tr><td><b>High-Level Language</b></td><td>Programmers work with readable instructions rather than machine-level details.</td><td>Faster development.</td></tr>
+<tr><td><b>Interpreted</b></td><td>Python programs are executed by the Python interpreter.</td><td>Easy to run and test programs.</td></tr>
+<tr><td><b>General Purpose</b></td><td>Can be used for many types of applications.</td><td>Useful across different domains.</td></tr>
+<tr><td><b>Readable</b></td><td>Simple syntax and indentation make code easier to understand.</td><td>Improves maintainability.</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="card">
+<h2>3. Variables</h2>
+<div class="theory">
+<p>A <b>variable</b> is a name used to refer to a value during program execution. In Python, a variable is created when a value is assigned to it.</p>
+</div>
+<div class="syntax-title">Assignment Syntax</div>
+<div class="syntax-box"><span class="name">variable</span> <span class="operator"> = </span><span class="argument">value</span></div>
+<div class="explain-grid">
+<div class="explain"><div class="term">variable</div><p>Name used to refer to the stored value.</p></div>
+<div class="explain"><div class="term">=</div><p>Assignment operator used to assign the value.</p></div>
+<div class="explain"><div class="term">value</div><p>Data stored or referred to by the variable.</p></div>
+</div>
+</section>
+
+<section class="card">
+<h2>4. Rules for Naming Variables</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Rule</th><th>Valid Example</th><th>Invalid Example</th></tr></thead>
+<tbody>
+<tr><td>Can contain letters, digits and underscore.</td><td><span class="code">student1</span></td><td><span class="code">student-name</span></td></tr>
+<tr><td>Must not start with a digit.</td><td><span class="code">mark1</span></td><td><span class="code">1mark</span></td></tr>
+<tr><td>No spaces are allowed.</td><td><span class="code">total_marks</span></td><td><span class="code">total marks</span></td></tr>
+<tr><td>Python keywords cannot be used as variable names.</td><td><span class="code">total</span></td><td><span class="code">class</span></td></tr>
+<tr><td>Names are case-sensitive.</td><td><span class="code">totalMarks</span></td><td><span class="code">totalmarks</span> is a different name</td></tr>
+</tbody></table></div>
+<div class="note"><b>Good practice:</b> Use meaningful names such as <b>total_marks</b>, <b>student_name</b> and <b>average</b>.</div>
+</section>
+
+<section class="card">
+<h2>5. Basic Data Types</h2>
+<div class="theory"><p>A <b>data type</b> describes the kind of value stored by a variable.</p></div>
+<div class="table-wrap"><table>
+<thead><tr><th>Data Type</th><th>Meaning</th><th>Example</th><th>Example Value</th></tr></thead>
+<tbody>
+<tr><td><b>int</b></td><td>Integer numbers without a decimal point.</td><td><span class="code">age = 20</span></td><td class="output">20</td></tr>
+<tr><td><b>float</b></td><td>Numbers containing a decimal point.</td><td><span class="code">price = 25.5</span></td><td class="output">25.5</td></tr>
+<tr><td><b>str</b></td><td>Text or a sequence of characters.</td><td><span class="code">name = "Ravi"</span></td><td class="output">"Ravi"</td></tr>
+<tr><td><b>bool</b></td><td>Logical value: True or False.</td><td><span class="code">passed = True</span></td><td class="output">True</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="card">
+<h2>6. Checking the Data Type using type()</h2>
+<div class="syntax-title">General Syntax</div>
+<div class="syntax-box"><span class="keyword">type</span>(<span class="argument">value</span>)</div>
+<div class="table-wrap"><table>
+<thead><tr><th>Python Code</th><th>Output</th><th>Explanation</th></tr></thead>
+<tbody>
+<tr><td><span class="code">x = 25<br>print(type(x))</span></td><td class="output">&lt;class 'int'&gt;</td><td>25 is an integer, so Python reports its type as <b>int</b>.</td></tr>
+<tr><td><span class="code">x = 25.5<br>print(type(x))</span></td><td class="output">&lt;class 'float'&gt;</td><td>25.5 contains a decimal value, so its type is <b>float</b>.</td></tr>
+<tr><td><span class="code">x = "25"<br>print(type(x))</span></td><td class="output">&lt;class 'str'&gt;</td><td>The quotation marks make 25 text, so its type is <b>str</b>.</td></tr>
+<tr><td><span class="code">x = True<br>print(type(x))</span></td><td class="output">&lt;class 'bool'&gt;</td><td>True is a logical Boolean value.</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="card">
+<h2>7. Type Conversion</h2>
+<div class="theory">
+<p><b>Type conversion</b> means changing a value from one data type to another.</p>
+<div class="highlight"><b>Common conversion functions:</b><br>
+<span class="code">int()</span> &nbsp; <span class="code">float()</span> &nbsp; <span class="code">str()</span> &nbsp; <span class="code">bool()</span>
+</div>
+</div>
+<div class="table-wrap"><table>
+<thead><tr><th>Conversion</th><th>Python Code</th><th>Result</th><th>Explanation</th></tr></thead>
+<tbody>
+<tr><td><b>String → Integer</b></td><td><span class="code">int("25")</span></td><td class="output">25</td><td>Converts numeric text into an integer.</td></tr>
+<tr><td><b>String → Float</b></td><td><span class="code">float("25.5")</span></td><td class="output">25.5</td><td>Converts numeric text into a floating-point value.</td></tr>
+<tr><td><b>Integer → String</b></td><td><span class="code">str(25)</span></td><td class="output">"25"</td><td>Converts the number into text.</td></tr>
+<tr><td><b>Integer → Boolean</b></td><td><span class="code">bool(1)</span></td><td class="output">True</td><td>Converts the value to a Boolean result.</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="card">
+<h2>8. Why Type Conversion is Needed</h2>
+
+<div class="program-grid">
+<div class="program-code">
+<h3>Program</h3>
+<pre>a = input("Enter a number: ")
+b = input("Enter another number: ")
+
+print(a + b)</pre>
+</div>
+<div class="program-details">
+<h3>Explanation</h3>
+<ol class="explain-list">
+<li><b>input()</b> accepts the first value.</li>
+<li>The value is stored as a <b>string</b>.</li>
+<li>The second input is also stored as a string.</li>
+<li><b>+</b> joins the two strings instead of performing numerical addition.</li>
+</ol>
+<div class="mini-title">Input</div>
+<p class="output">10<br>20</p>
+<div class="mini-title">Output</div>
+<p class="output">1020</p>
+</div>
+</div>
+
+<div class="good-practice"><b>What should we do?</b> Convert the inputs to integers before performing numerical addition.</div>
+
+<div class="program-grid">
+<div class="program-code">
+<h3>Corrected Program</h3>
+<pre>a = int(input("Enter a number: "))
+b = int(input("Enter another number: "))
+
+print(a + b)</pre>
+</div>
+<div class="program-details">
+<h3>Explanation</h3>
+<ol class="explain-list">
+<li><b>input()</b> receives the values as strings.</li>
+<li><b>int()</b> converts each string to an integer.</li>
+<li>The <b>+</b> operator now performs numerical addition.</li>
+<li><b>print()</b> displays the result.</li>
+</ol>
+<div class="mini-title">Input</div>
+<p class="output">10<br>20</p>
+<div class="mini-title">Output</div>
+<p class="output">30</p>
+</div>
+</div>
+</section>
+
+<section class="card">
+<h2>9. Implicit and Explicit Conversion</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Type</th><th>Python Code</th><th>Result</th><th>Explanation</th></tr></thead>
+<tbody>
+<tr>
+<td><b>Implicit Conversion</b></td>
+<td><span class="code">x = 10<br>y = 2.5<br>z = x + y</span></td>
+<td class="output">12.5<br>float</td>
+<td>Python automatically promotes the integer value to a compatible numeric type during the expression.</td>
+</tr>
+<tr>
+<td><b>Explicit Conversion</b></td>
+<td><span class="code">x = int("10")</span></td>
+<td class="output">10<br>int</td>
+<td>The programmer explicitly requests conversion using <b>int()</b>.</td>
+</tr>
+</tbody></table></div>
+</section>
+
+<section class="card">
+<h2>10. Basic Python Programs</h2>
+
+<div class="program-grid">
+<div class="program-code">
+<h3>Program 1 – Display a Value</h3>
+<pre>name = "Ravi"
+age = 20
+
+print(name)
+print(age)</pre>
+</div>
+<div class="program-details">
+<h3>Explanation</h3>
+<p>The variables <b>name</b> and <b>age</b> store a string and an integer. Two <b>print()</b> statements display their values.</p>
+<div class="mini-title">Input</div><p>None – values are already assigned.</p>
+<div class="mini-title">Output</div><p class="output">Ravi<br>20</p>
+</div>
+</div>
+
+<div class="program-grid">
+<div class="program-code">
+<h3>Program 2 – Add Two Numbers</h3>
+<pre>a = 10
+b = 5
+sum_value = a + b
+
+print("Sum =", sum_value)</pre>
+</div>
+<div class="program-details">
+<h3>Explanation</h3>
+<p>Two integer values are stored in <b>a</b> and <b>b</b>. The <b>+</b> operator calculates their sum, which is stored in <b>sum_value</b>.</p>
+<div class="mini-title">Input</div><p>None – values are assigned in the program.</p>
+<div class="mini-title">Output</div><p class="output">Sum = 15</p>
+</div>
+</div>
+
+<div class="program-grid">
+<div class="program-code">
+<h3>Program 3 – Square of a Number</h3>
+<pre>x = 7
+square = x * x
+
+print("Square =", square)</pre>
+</div>
+<div class="program-details">
+<h3>Explanation</h3>
+<p>The value 7 is stored in <b>x</b>. Multiplying <b>x</b> by itself calculates its square.</p>
+<div class="mini-title">Input</div><p>None – <b>x</b> is assigned the value 7.</p>
+<div class="mini-title">Output</div><p class="output">Square = 49</p>
+</div>
+</div>
+
+<div class="program-grid">
+<div class="program-code">
+<h3>Program 4 – Convert Text to Number</h3>
+<pre>value = "25"
+number = int(value)
+
+print("Number + 5 =", number + 5)</pre>
+</div>
+<div class="program-details">
+<h3>Explanation</h3>
+<p><b>value</b> contains the text <b>"25"</b>. The <b>int()</b> function converts it to the integer 25, allowing numerical addition.</p>
+<div class="mini-title">Input</div><p>The string <span class="code">"25"</span> is assigned in the program.</p>
+<div class="mini-title">Output</div><p class="output">Number + 5 = 30</p>
+</div>
+</div>
+
+<div class="program-grid">
+<div class="program-code">
+<h3>Program 5 – Formatted Decimal Output</h3>
+<pre>price = 125.6789
+
+print(f"Price = {price:.2f}")</pre>
+</div>
+<div class="program-details">
+<h3>Explanation</h3>
+<p>The value is a <b>float</b>. The <b>f-string</b> inserts the variable into the output, while <b>:.2f</b> displays exactly two digits after the decimal point.</p>
+<div class="mini-title">Input</div><p>None – the value is assigned in the program.</p>
+<div class="mini-title">Output</div><p class="output">Price = 125.68</p>
+</div>
+</div>
+</section>
+
+<section class="card">
+<h2>11. Complete Example – Personal Details</h2>
+<div class="program-grid">
+<div class="program-code">
+<h3>Python Program</h3>
+<pre>name = input("Enter name: ")
+age = int(input("Enter age: "))
+height = float(input("Enter height: "))
+
+print("\n----- DETAILS -----")
+print("Name =", name)
+print("Age =", age)
+print("Height =", height)
+print("Age type =", type(age))
+print("Height type =", type(height))</pre>
+</div>
+<div class="program-details">
+<h3>Explanation</h3>
+<ol class="explain-list">
+<li><b>name</b> receives text from the user.</li>
+<li><b>age</b> is converted from input text to an integer using <b>int()</b>.</li>
+<li><b>height</b> is converted to a floating-point value using <b>float()</b>.</li>
+<li>The <b>print()</b> statements display the stored values.</li>
+<li><b>type()</b> verifies the data type of the numeric variables.</li>
+</ol>
+<div class="mini-title">Input</div>
+<p class="output">Ravi<br>20<br>1.72</p>
+<div class="mini-title">Output</div>
+<p class="output">----- DETAILS -----<br>
+Name = Ravi<br>
+Age = 20<br>
+Height = 1.72<br>
+Age type = &lt;class 'int'&gt;<br>
+Height type = &lt;class 'float'&gt;</p>
+</div>
+</div>
+<div class="note"><b>Program pattern:</b> Input → Convert when necessary → Store in variables → Process → Display output → Check results.</div>
+</section>
+
+<section class="card">
+<h2>12. Important Points to Remember</h2>
+<ul>
+<li>Python is a high-level, general-purpose programming language.</li>
+<li>A variable is a name used to refer to a value.</li>
+<li>Common basic data types are <b>int, float, str</b> and <b>bool</b>.</li>
+<li>Use <b>type()</b> to check the type of a value.</li>
+<li>Use <b>int()</b>, <b>float()</b>, <b>str()</b> and <b>bool()</b> for explicit type conversion.</li>
+<li><b>input()</b> normally returns a string, so numerical input often needs conversion.</li>
+<li>Use meaningful variable names to make programs easier to understand.</li>
+<li>When showing a Python program, understand what each statement does before looking at the output.</li>
+</ul>
+</section>
+
+</main>
+<footer>© 2026 D. Kiran Prasad | Python Programming</footer>
+</body>
+</html>
