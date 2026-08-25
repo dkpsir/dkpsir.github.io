@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Interest Calculation Visualizer</title>
+<style>
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#f4f8fc;margin:20px;color:#111}
+h2{text-align:center;color:#0b4a8b;margin-bottom:20px}
+
+.container{display:flex;gap:20px;max-width:1200px;margin:0 auto}
+.left,.right{flex:1}
+
+.card{background:#fff;border-radius:10px;padding:18px;box-shadow:0 3px 12px rgba(0,0,0,0.08);margin-bottom:16px}
+.section-title{font-size:16px;font-weight:700;color:#0b4a8b;margin-bottom:12px;border-bottom:2px solid #e2ecf5;padding-bottom:6px}
+
+.input-group{display:flex;align-items:center;margin-bottom:10px;gap:10px}
+.input-group label{width:160px;font-weight:700;font-size:14px}
+.input-group input{flex:1;padding:7px 10px;font-size:14px;border:1px solid #aaa;border-radius:5px}
+
+.controls{display:flex;align-items:center;gap:10px;margin-top:14px}
+button{padding:9px 18px;font-size:15px;font-weight:700;border:none;border-radius:5px;cursor:pointer;transition:0.2s}
+.btn-start{background:#0b4a8b;color:#fff}
+.btn-start:hover{background:#083666}
+.btn-next{background:#28a745;color:#fff}
+.btn-next:hover{background:#1e7e34}
+.btn-next:disabled{background:#b0d8b9;cursor:not-allowed}
+
+table{border-collapse:collapse;width:100%;background:#fff}
+th,td{border:1px solid #ccd7e2;padding:9px;text-align:center;font-size:14px}
+th{background:#dcecff;color:#0b4a8b}
+.var-highlight{background:#fff3cd;font-weight:bold;color:#856404}
+
+pre{background:#1e1e1e;color:#ddd;padding:14px;border-radius:8px;margin:0;line-height:1.6;font-size:14px;font-family:Consolas,"Courier New",monospace}
+.line{display:block;padding:2px 6px;border-radius:4px}
+.active{background:#ffeb3b;color:#000;font-weight:bold}
+
+.callout{background:#e8f4fd;border-left:5px solid #0b4a8b;padding:12px 14px;border-radius:4px;font-size:14px;line-height:1.5;min-height:50px}
+.terminal{background:#111;color:#4af626;font-family:Consolas,"Courier New",monospace;padding:12px;border-radius:6px;font-size:14px;line-height:1.5;min-height:140px;white-space:pre-wrap}
+
+@media(max-width:900px){
+    .container{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<h2>Python Visualizer : Simple Interest & Final Amount</h2>
+
+<div class="container">
+    <!-- Left Column -->
+    <div class="left">
+        <div class="card">
+            <div class="section-title">1. Input Parameters</div>
+            <div class="input-group">
+                <label for="in_p">Principal (p):</label>
+                <input type="number" step="any" id="in_p" value="10000">
+            </div>
+            <div class="input-group">
+                <label for="in_t">Time in Years (t):</label>
+                <input type="number" step="any" id="in_t" value="2">
+            </div>
+            <div class="input-group">
+                <label for="in_r">Rate % (r):</label>
+                <input type="number" step="any" id="in_r" value="7.5">
+            </div>
+
+            <div class="controls">
+                <button class="btn-start" onclick="start()">Start / Reset</button>
+                <button class="btn-next" id="nextBtn" onclick="nextStep()" disabled>Next Step</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="section-title">2. Variable State in Memory</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Variable</th>
+                        <th>Type</th>
+                        <th>Value in Memory</th>
+                    </tr>
+                </thead>
+                <tbody id="memoryBody">
+                    <tr><td colspan="3" style="color:#777;">Click <b>Start / Reset</b> to initialize memory</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <div class="section-title">3. Console Output Screen</div>
+            <div class="terminal" id="terminalOut">>_</div>
+        </div>
+    </div>
+
+    <!-- Right Column -->
+    <div class="right">
+        <div class="card">
+            <div class="section-title">Python Code</div>
+            <pre id="code">
+<span id="l1" class="line">p = float(input("Principal amount: "))</span>
+<span id="l2" class="line">t = float(input("Time period (years): "))</span>
+<span id="l3" class="line">r = float(input("Rate of interest (%): "))</span>
+<span id="l4" class="line"></span>
+<span id="l5" class="line">si = (p * t * r) / 100</span>
+<span id="l6" class="line">final_amount = p + si</span>
+<span id="l7" class="line"></span>
+<span id="l8" class="line">print("\n---  INTEREST DETAILS ---")</span>
+<span id="l9" class="line">print(f"Simple Interest = {si:.2f}")</span>
+<span id="l10" class="line">print(f"Final Amount    = {final_amount:.2f}")</span></pre>
+        </div>
+
+        <div class="card">
+            <div class="section-title">Step Explanation</div>
+            <div class="callout" id="explanation">Set input parameters on the left and click <b>Start / Reset</b> to begin stepping.</div>
+        </div>
+    </div>
+</div>
+
+<script>
+let step = 0;
+let valP = 0, valT = 0, valR = 0, valSI = 0, valFinal = 0;
+let consoleBuffer = "";
+
+function clearHL() {
+    document.querySelectorAll('.line').forEach(el => el.classList.remove('active'));
+}
+
+function start() {
+    let pInput = document.getElementById('in_p').value.trim();
+    let tInput = document.getElementById('in_t').value.trim();
+    let rInput = document.getElementById('in_r').value.trim();
+
+    if (isNaN(parseFloat(pInput)) || isNaN(parseFloat(tInput)) || isNaN(parseFloat(rInput))) {
+        alert("Please enter valid numerical values for Principal, Time, and Rate.");
+        return;
+    }
+
+    valP = parseFloat(pInput);
+    valT = parseFloat(tInput);
+    valR = parseFloat(rInput);
+    valSI = (valP * valT * valR) / 100;
+    valFinal = valP + valSI;
+    step = 0;
+    consoleBuffer = "";
+
+    clearHL();
+    document.getElementById('terminalOut').textContent = ">_";
+    document.getElementById('explanation').innerHTML = "Execution initialized. Click <b>Next Step</b> to run Line 1.";
+    
+    document.getElementById('memoryBody').innerHTML = `
+        <tr id="row_p"><td><b>p</b></td><td>float</td><td id="cell_p"><em>unassigned</em></td></tr>
+        <tr id="row_t"><td><b>t</b></td><td>float</td><td id="cell_t"><em>unassigned</em></td></tr>
+        <tr id="row_r"><td><b>r</b></td><td>float</td><td id="cell_r"><em>unassigned</em></td></tr>
+        <tr id="row_si"><td><b>si</b></td><td>float</td><td id="cell_si"><em>unassigned</em></td></tr>
+        <tr id="row_final"><td><b>final_amount</b></td><td>float</td><td id="cell_final"><em>unassigned</em></td></tr>
+    `;
+
+    document.getElementById('nextBtn').disabled = false;
+}
+
+function nextStep() {
+    clearHL();
+    document.querySelectorAll('tr').forEach(r => r.classList.remove('var-highlight'));
+
+    if (step === 0) {
+        document.getElementById('l1').classList.add('active');
+        document.getElementById('cell_p').innerHTML = `<b>${valP}</b>`;
+        document.getElementById('row_p').classList.add('var-highlight');
+        document.getElementById('explanation').innerHTML = `<b>Line 1:</b> <code>input()</code> captures principal amount, <code>float()</code> converts it to <b>${valP}</b>, and assigns to <code>p</code>.`;
+        consoleBuffer += `Principal amount: ${valP}\n`;
+        document.getElementById('terminalOut').textContent = consoleBuffer;
+        step++;
+    } else if (step === 1) {
+        document.getElementById('l2').classList.add('active');
+        document.getElementById('cell_t').innerHTML = `<b>${valT}</b>`;
+        document.getElementById('row_t').classList.add('var-highlight');
+        document.getElementById('explanation').innerHTML = `<b>Line 2:</b> <code>input()</code> captures time period, <code>float()</code> converts it to <b>${valT}</b>, and assigns to <code>t</code>.`;
+        consoleBuffer += `Time period (years): ${valT}\n`;
+        document.getElementById('terminalOut').textContent = consoleBuffer;
+        step++;
+    } else if (step === 2) {
+        document.getElementById('l3').classList.add('active');
+        document.getElementById('cell_r').innerHTML = `<b>${valR}</b>`;
+        document.getElementById('row_r').classList.add('var-highlight');
+        document.getElementById('explanation').innerHTML = `<b>Line 3:</b> <code>input()</code> captures rate of interest, <code>float()</code> converts it to <b>${valR}</b>, and assigns to <code>r</code>.`;
+        consoleBuffer += `Rate of interest (%): ${valR}\n`;
+        document.getElementById('terminalOut').textContent = consoleBuffer;
+        step++;
+    } else if (step === 3) {
+        document.getElementById('l5').classList.add('active');
+        document.getElementById('cell_si').innerHTML = `<b>${valSI.toFixed(2)}</b>`;
+        document.getElementById('row_si').classList.add('var-highlight');
+        document.getElementById('explanation').innerHTML = `<b>Line 5:</b> Computes <code>(p * t * r) / 100</code> &rarr; <code>(${valP} * ${valT} * ${valR}) / 100</code> = <b>${valSI.toFixed(2)}</b> and stores in <code>si</code>.`;
+        step++;
+    } else if (step === 4) {
+        document.getElementById('l6').classList.add('active');
+        document.getElementById('cell_final').innerHTML = `<b>${valFinal.toFixed(2)}</b>`;
+        document.getElementById('row_final').classList.add('var-highlight');
+        document.getElementById('explanation').innerHTML = `<b>Line 6:</b> Computes <code>p + si</code> &rarr; <code>${valP} + ${valSI.toFixed(2)}</code> = <b>${valFinal.toFixed(2)}</b> and stores in <code>final_amount</code>.`;
+        step++;
+    } else if (step === 5) {
+        document.getElementById('l8').classList.add('active');
+        consoleBuffer += `\n---  INTEREST DETAILS ---\n`;
+        document.getElementById('terminalOut').textContent = consoleBuffer;
+        document.getElementById('explanation').innerHTML = `<b>Line 8:</b> Prints newline followed by the header line <code>---  INTEREST DETAILS ---</code>.`;
+        step++;
+    } else if (step === 6) {
+        document.getElementById('l9').classList.add('active');
+        consoleBuffer += `Simple Interest = ${valSI.toFixed(2)}\n`;
+        document.getElementById('terminalOut').textContent = consoleBuffer;
+        document.getElementById('explanation').innerHTML = `<b>Line 9:</b> Formats <code>si</code> to 2 decimal places using <code>{si:.2f}</code> and prints <b>${valSI.toFixed(2)}</b>.`;
+        step++;
+    } else if (step === 7) {
+        document.getElementById('l10').classList.add('active');
+        consoleBuffer += `Final Amount    = ${valFinal.toFixed(2)}`;
+        document.getElementById('terminalOut').textContent = consoleBuffer;
+        document.getElementById('explanation').innerHTML = `<b>Line 10:</b> Formats <code>final_amount</code> to 2 decimal places using <code>{final_amount:.2f}</code> and prints <b>${valFinal.toFixed(2)}</b>. Execution complete!`;
+        document.getElementById('nextBtn').disabled = true;
+        step++;
+    }
+}
+</script>
+
+</body>
+</html>
