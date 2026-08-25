@@ -385,29 +385,41 @@ body{
 /* ---------- TWO MAIN TABS ---------- */
 .main-tabs{
     display:flex;
-    gap:10px;
-    background:#fff;
+    gap:14px;
+    background:#f7fafc;
+    border-top:6px solid #d62828;
     border-bottom:1px solid var(--border);
-    padding:0 22px;
+    padding:10px 22px 0;
 }
+
+/* Both tabs have the same neutral appearance before selection */
 .main-tab{
-    border:0;
-    background:transparent;
-    color:#60768d;
+    border:1px solid #cbd8e4;
+    background:#eef3f7;
+    color:#405a70;
     padding:13px 24px;
     border-radius:10px 10px 0 0;
     font-size:17px;
     font-weight:700;
     cursor:pointer;
+    transition:all .18s ease;
 }
-.main-tab.active{
-    background:var(--navy);
-    color:#fff;
-}
+
+/* Strong hover colour, with high-contrast text */
 .main-tab:hover:not(.active){
-    background:var(--blue2);
-    color:var(--navy);
+    background:#d8eee9;
+    color:#075b50;
+    border-color:#168a78;
 }
+
+/* Strong selected-tab colour */
+.main-tab.active{
+    background:#168a78;
+    color:#fff;
+    border-color:#168a78;
+    box-shadow:0 -2px 0 #168a78, 0 3px 7px rgba(0,0,0,.12);
+}
+
 .tab-page{display:none;}
 .tab-page.active{display:block;}
 .tab-page .portal{grid-template-columns:1fr;}
