@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Variables and Addition Visualizer</title>
+<style>
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#f4f8fc;margin:20px;color:#111}
+h2{text-align:center;color:#0b4a8b;margin-bottom:20px}
+
+.container{display:flex;gap:20px;max-width:1100px;margin:0 auto}
+.left,.right{flex:1}
+
+.card{background:#fff;border-radius:10px;padding:18px;box-shadow:0 3px 12px rgba(0,0,0,0.08);margin-bottom:16px}
+.section-title{font-size:16px;font-weight:700;color:#0b4a8b;margin-bottom:12px;border-bottom:2px solid #e2ecf5;padding-bottom:6px}
+
+.controls{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+button{padding:9px 18px;font-size:15px;font-weight:700;border:none;border-radius:5px;cursor:pointer;transition:0.2s}
+.btn-start{background:#0b4a8b;color:#fff}
+.btn-start:hover{background:#083666}
+.btn-next{background:#28a745;color:#fff}
+.btn-next:hover{background:#1e7e34}
+.btn-next:disabled{background:#b0d8b9;cursor:not-allowed}
+
+table{border-collapse:collapse;width:100%;background:#fff}
+th,td{border:1px solid #ccd7e2;padding:10px;text-align:center;font-size:15px}
+th{background:#dcecff;color:#0b4a8b}
+.var-highlight{background:#fff3cd;font-weight:bold;color:#856404}
+
+pre{background:#1e1e1e;color:#ddd;padding:16px;border-radius:8px;margin:0;line-height:1.7;font-size:15px;font-family:Consolas,"Courier New",monospace}
+.line{display:block;padding:2px 8px;border-radius:4px}
+.active{background:#ffeb3b;color:#000;font-weight:bold}
+
+.callout{background:#e8f4fd;border-left:5px solid #0b4a8b;padding:12px 14px;border-radius:4px;font-size:15px;line-height:1.5;min-height:48px}
+.terminal{background:#111;color:#4af626;font-family:Consolas,"Courier New",monospace;padding:14px;border-radius:6px;font-size:16px;font-weight:bold;min-height:45px}
+
+@media(max-width:800px){
+    .container{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<h2>Python Visualizer : Variables & Addition</h2>
+
+<div class="container">
+    <!-- Left Column -->
+    <div class="left">
+        <div class="card">
+            <div class="section-title">Execution Controls</div>
+            <div class="controls">
+                <button class="btn-start" onclick="start()">Start / Reset</button>
+                <button class="btn-next" id="nextBtn" onclick="nextStep()" disabled>Next Step</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="section-title">Variable State (Memory)</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Variable</th>
+                        <th>Type</th>
+                        <th>Value in Memory</th>
+                    </tr>
+                </thead>
+                <tbody id="memoryBody">
+                    <tr><td colspan="3" style="color:#777;">Click <b>Start / Reset</b> to initialize memory</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <div class="section-title">Console Output</div>
+            <div class="terminal" id="terminalOut">>_</div>
+        </div>
+    </div>
+
+    <!-- Right Column -->
+    <div class="right">
+        <div class="card">
+            <div class="section-title">Python Code</div>
+            <pre id="code">
+<span id="l1" class="line">a = 10</span>
+<span id="l2" class="line">b = 5</span>
+<span id="l3" class="line">sum_value = a + b</span>
+<span id="l4" class="line">print("Sum =", sum_value)</span></pre>
+        </div>
+
+        <div class="card">
+            <div class="section-title">Step Explanation</div>
+            <div class="callout" id="explanation">Click <b>Start / Reset</b> to begin stepping through the program.</div>
+        </div>
+    </div>
+</div>
+
+<script>
+let step = 0;
+const a = 10;
+const b = 5;
+const sumVal = a + b;
+
+function clearHL() {
+    document.querySelectorAll('.line').forEach(el => el.classList.remove('active'));
+}
+
+function start() {
+    step = 0;
+    clearHL();
+    
+    document.getElementById('terminalOut').innerHTML = ">_";
+    document.getElementById('explanation').innerHTML = "Execution initialized. Click <b>Next Step</b> to execute Line 1.";
+    document.getElementById('memoryBody').innerHTML = `
+        <tr id="row_a"><td><b>a</b></td><td>int</td><td id="cell_a"><em>unassigned</em></td></tr>
+        <tr id="row_b"><td><b>b</b></td><td>int</td><td id="cell_b"><em>unassigned</em></td></tr>
+        <tr id="row_sum"><td><b>sum_value</b></td><td>int</td><td id="cell_sum"><em>unassigned</em></td></tr>
+    `;
+    
+    document.getElementById('nextBtn').disabled = false;
+}
+
+function nextStep() {
+    clearHL();
+    document.querySelectorAll('tr').forEach(r => r.classList.remove('var-highlight'));
+
+    if (step === 0) {
+        document.getElementById('l1').classList.add('active');
+        document.getElementById('cell_a').innerHTML = `<b>${a}</b>`;
+        document.getElementById('row_a').classList.add('var-highlight');
+        document.getElementById('explanation').innerHTML = `<b>Line 1:</b> Allocates variable <code>a</code> in memory and assigns the integer value <b>${a}</b>.`;
+        step++;
+    } else if (step === 1) {
+        document.getElementById('l2').classList.add('active');
+        document.getElementById('cell_b').innerHTML = `<b>${b}</b>`;
+        document.getElementById('row_b').classList.add('var-highlight');
+        document.getElementById('explanation').innerHTML = `<b>Line 2:</b> Allocates variable <code>b</code> in memory and assigns the integer value <b>${b}</b>.`;
+        step++;
+    } else if (step === 2) {
+        document.getElementById('l3').classList.add('active');
+        document.getElementById('cell_sum').innerHTML = `<b>${sumVal}</b>`;
+        document.getElementById('row_sum').classList.add('var-highlight');
+        document.getElementById('explanation').innerHTML = `<b>Line 3:</b> Reads values of <code>a</code> (${a}) and <code>b</code> (${b}), computes <b>${a} + ${b} = ${sumVal}</b>, and assigns the result to <code>sum_value</code>.`;
+        step++;
+    } else if (step === 3) {
+        document.getElementById('l4').classList.add('active');
+        document.getElementById('terminalOut').innerHTML = `Sum = ${sumVal}`;
+        document.getElementById('explanation').innerHTML = `<b>Line 4:</b> Prints the string <code>"Sum ="</code> followed by the value of <code>sum_value</code> (${sumVal}) to the console.`;
+        document.getElementById('nextBtn').disabled = true;
+        step++;
+    }
+}
+</script>
+
+</body>
+</html>
