@@ -1,0 +1,107 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Python File Input and Output</title><style>body{margin:0;background:#eef4f9;font-family:Arial;color:#111}.header{background:linear-gradient(90deg,#0b477d,#087cc1);color:white;text-align:center;padding:24px}.header h1{margin:0;font-size:30px}.container{width:94%;max-width:1450px;margin:24px auto}.card{background:white;border-radius:12px;padding:24px;margin-bottom:22px;box-shadow:0 4px 18px #0002}h2{color:#075b99;border-left:6px solid #075b99;padding-left:12px}p,li,td{line-height:1.55}table{width:100%;border-collapse:collapse}th{background:#24577f;color:white;padding:11px;text-align:left}td{border:1px solid #ccd7e2;padding:11px;vertical-align:top}tr:nth-child(even){background:#f7faff}.code{display:block;background:#f3f7fc;border:1px solid #bfd2e7;border-radius:5px;padding:7px;font:14px Consolas,monospace;color:#064ea8;white-space:pre-wrap}.note{background:#fff8df;border-left:5px solid #d99a00;padding:13px 17px;margin-top:15px}.program{background:#1c1f23;color:#e9eef2;border-radius:8px;padding:17px;overflow:auto;font:14px/1.55 Consolas,monospace;white-space:pre-wrap}.output{background:#111820;color:#e9f2f7;border-radius:8px;padding:13px;font:14px/1.55 Consolas,monospace;white-space:pre-wrap;margin-top:10px}footer{background:#063b70;color:white;text-align:center;padding:13px}@media(max-width:700px){.container{width:95%}.card{padding:15px}th,td{font-size:13px}}</style></head><body>
+<header class="header"><h1>PYTHON PROGRAMMING</h1><p>File Input and Output – Exhaustive Theory and Examples</p></header><main class="container">
+<section class="card"><h2>1. What is File Input and Output?</h2><p><b>File Input and Output (File I/O)</b> means reading data from files and writing data to files using Python.</p><table><tr><th>Operation</th><th>Meaning</th><th>Description</th></tr><tr><td>Input from file</td><td>Reading</td><td>Transfers stored data from an external file into the program.</td></tr><tr><td>Output to file</td><td>Writing</td><td>Stores data produced by the program in an external file.</td></tr></table><div class="note"><b>Explanation:</b> Files provide persistent storage, so information can remain available after a program finishes.</div></section>
+<section class="card"><h2>2. open() Function</h2><p>Python uses the built-in <b>open()</b> function to open a file.</p><div class="code">open("filename", "mode")</div><table><tr><th>Argument</th><th>Example</th><th>Description</th></tr><tr><td>filename</td><td><span class="code">"data.txt"</span></td><td>Name or path of the file.</td></tr><tr><td>mode</td><td><span class="code">"r"</span></td><td>Specifies the required operation.</td></tr><tr><td>encoding</td><td><span class="code">encoding="utf-8"</span></td><td>Specifies character encoding.</td></tr></table></section>
+<section class="card"><h2>3. File Modes</h2><table><tr><th>Mode</th><th>Name</th><th>Description</th></tr><tr><td>r</td><td>Read</td><td>Reads an existing file. Missing file normally causes FileNotFoundError.</td></tr><tr><td>w</td><td>Write</td><td>Creates a missing file or replaces existing contents.</td></tr><tr><td>a</td><td>Append</td><td>Preserves existing contents and writes at the end.</td></tr><tr><td>x</td><td>Create</td><td>Creates a new file; fails if it already exists.</td></tr><tr><td>r+</td><td>Read + Write</td><td>Reads and writes an existing file.</td></tr><tr><td>w+</td><td>Write + Read</td><td>Reads and writes, but existing contents are replaced.</td></tr><tr><td>a+</td><td>Append + Read</td><td>Reads and appends while preserving existing contents.</td></tr></table></section>
+<section class="card"><h2>4. Creating a File</h2><pre class="program">file = open("data.txt", "w")
+file.close()</pre><div class="note"><b>Explanation:</b> Write mode creates data.txt if it does not exist. If it exists, its previous contents are cleared.</div></section>
+<section class="card"><h2>5. write()</h2><div class="code">file.write("text")</div><pre class="program">with open("data.txt", "w") as file:
+    file.write("Hello")
+    file.write("Python")</pre><div class="note"><b>Explanation:</b> write() writes a string. It does not automatically insert a newline.</div></section>
+<section class="card"><h2>6. Newline Character</h2><pre class="program">with open("data.txt", "w") as file:
+    file.write("Hello\n")
+    file.write("Python")</pre><div class="output">File contents:
+Hello
+Python</div><div class="note"><b>Explanation:</b> \n moves the following text to a new line.</div></section>
+<section class="card"><h2>7. writelines()</h2><div class="code">file.writelines(sequence)</div><pre class="program">lines = ["Apple\n", "Banana\n", "Orange"]
+with open("data.txt", "w") as file:
+    file.writelines(lines)</pre><div class="note"><b>Explanation:</b> writelines() writes multiple strings. It does not automatically add newline characters.</div></section>
+<section class="card"><h2>8. read()</h2><div class="code">file.read()</div><pre class="program">with open("data.txt", "r") as file:
+    data = file.read()
+    print(data)</pre><div class="note"><b>Explanation:</b> read() reads the complete remaining contents as one string.</div></section>
+<section class="card"><h2>9. read(size)</h2><div class="code">file.read(size)</div><pre class="program">with open("data.txt", "r") as file:
+    data = file.read(5)
+    print(data)</pre><div class="note"><b>Explanation:</b> The size argument limits how many characters are read from the current position.</div></section>
+<section class="card"><h2>10. readline()</h2><div class="code">file.readline()</div><pre class="program">with open("data.txt", "r") as file:
+    line = file.readline()
+    print(line)</pre><div class="note"><b>Explanation:</b> readline() reads one line from the current file position.</div></section>
+<section class="card"><h2>11. readlines()</h2><div class="code">file.readlines()</div><pre class="program">with open("data.txt", "r") as file:
+    lines = file.readlines()
+    print(lines)</pre><div class="note"><b>Explanation:</b> readlines() reads the remaining lines and returns a list of strings.</div></section>
+<section class="card"><h2>12. Reading Methods Comparison</h2><table><tr><th>Method</th><th>Returns</th><th>Description</th></tr><tr><td>read()</td><td>String</td><td>Reads all remaining contents.</td></tr><tr><td>read(size)</td><td>String</td><td>Reads a limited number of characters.</td></tr><tr><td>readline()</td><td>String</td><td>Reads one line.</td></tr><tr><td>readlines()</td><td>List</td><td>Reads remaining lines as list elements.</td></tr></table></section>
+<section class="card"><h2>13. File Pointer – tell()</h2><div class="code">file.tell()</div><pre class="program">with open("data.txt", "r") as file:
+    print(file.tell())
+    file.read(5)
+    print(file.tell())</pre><div class="note"><b>Explanation:</b> tell() returns the current position of the file pointer.</div></section>
+<section class="card"><h2>14. File Pointer – seek()</h2><div class="code">file.seek(position)</div><pre class="program">with open("data.txt", "r") as file:
+    file.read(5)
+    file.seek(0)
+    print(file.read(5))</pre><div class="note"><b>Explanation:</b> seek() moves the file pointer. seek(0) moves it to the beginning.</div></section>
+<section class="card"><h2>15. with Statement</h2><div class="code">with open("data.txt", "r") as file:</div><div class="note"><b>Explanation:</b> The with statement automatically closes the file after the indented block is completed. It is the recommended approach for normal file operations.</div></section>
+<section class="card"><h2>16. close()</h2><pre class="program">file = open("data.txt", "r")
+data = file.read()
+file.close()</pre><div class="note"><b>Explanation:</b> close() explicitly closes the file and releases the associated resource. With with, it is normally unnecessary.</div></section>
+<section class="card"><h2>17. Write Mode vs Append Mode</h2><table><tr><th>Mode</th><th>Effect</th><th>Explanation</th></tr><tr><td>w</td><td>Replace</td><td>Existing contents are removed before writing.</td></tr><tr><td>a</td><td>Add</td><td>Existing contents remain and new data is added at the end.</td></tr></table></section>
+<section class="card"><h2>18. File Creation and Common Errors</h2><table><tr><th>Situation</th><th>Result</th><th>Explanation</th></tr><tr><td>Read missing file</td><td>FileNotFoundError</td><td>The requested file does not exist at the specified location.</td></tr><tr><td>Write missing file</td><td>File created</td><td>w mode creates the file.</td></tr><tr><td>Write existing file</td><td>Contents replaced</td><td>w mode truncates existing contents.</td></tr><tr><td>Append existing file</td><td>Contents preserved</td><td>a mode adds at the end.</td></tr><tr><td>Create existing file with x</td><td>FileExistsError</td><td>x mode requires the file not to exist.</td></tr></table></section>
+<section class="card"><h2>19. File Encoding</h2><div class="code">open("data.txt", "r", encoding="utf-8")</div><div class="note"><b>Explanation:</b> Encoding defines how characters are represented in a file. UTF-8 is a widely used encoding.</div></section>
+<section class="card"><h2>20. File Paths</h2><table><tr><th>Type</th><th>Example</th><th>Description</th></tr><tr><td>Relative</td><td>data.txt</td><td>Relative to the current working directory.</td></tr><tr><td>Folder path</td><td>data/data.txt</td><td>File inside a specified folder.</td></tr><tr><td>Absolute</td><td>C:/Users/Alice/data.txt</td><td>Complete file location.</td></tr></table></section>
+<section class="card"><h2>21. Checking File Existence</h2><pre class="program">import os
+if os.path.exists("data.txt"):
+    print("File exists")
+else:
+    print("File does not exist")</pre><div class="note"><b>Explanation:</b> os.path.exists() checks whether a file or directory exists at the specified path.</div></section>
+<section class="card"><h2>22. Directory Operations</h2><table><tr><th>Operation</th><th>Example</th><th>Description</th></tr><tr><td>Current directory</td><td>os.getcwd()</td><td>Returns the current working directory.</td></tr><tr><td>List directory</td><td>os.listdir()</td><td>Lists items in a directory.</td></tr><tr><td>Create directory</td><td>os.mkdir("data")</td><td>Creates a directory.</td></tr><tr><td>Change directory</td><td>os.chdir("data")</td><td>Changes the current working directory.</td></tr></table></section>
+<section class="card"><h2>23. CSV Files</h2><p><b>CSV</b> means Comma-Separated Values. It is commonly used for tabular data.</p><div class="note"><b>Example:</b><br>Name,Age,City<br>Alice,20,Delhi</div><p>Python provides the built-in <span class="code">csv</span> module for CSV files.</p></section>
+<section class="card"><h2>24. Writing CSV</h2><pre class="program">import csv
+with open("data.csv", "w", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerow(["Name", "Age", "City"])
+    writer.writerow(["Alice", 20, "Delhi"])</pre><div class="note"><b>Explanation:</b> csv.writer() creates a writer and writerow() writes one row.</div></section>
+<section class="card"><h2>25. Writing Multiple CSV Rows</h2><pre class="program">rows = [["Alice",20], ["Bob",21], ["Charlie",19]]
+with open("data.csv", "w", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerows(rows)</pre><div class="note"><b>Explanation:</b> writerows() writes multiple rows in one operation.</div></section>
+<section class="card"><h2>26. Reading CSV</h2><pre class="program">import csv
+with open("data.csv", "r") as file:
+    reader = csv.reader(file)
+    for row in reader:
+        print(row)</pre><div class="note"><b>Explanation:</b> csv.reader() reads rows one at a time, with each row commonly represented as a list.</div></section>
+<section class="card"><h2>27. CSV Dictionary Operations</h2><table><tr><th>Concept</th><th>Example</th><th>Description</th></tr><tr><td>DictReader</td><td>csv.DictReader(file)</td><td>Reads each row as a dictionary using headings as keys.</td></tr><tr><td>DictWriter</td><td>csv.DictWriter(file, fieldnames=fields)</td><td>Writes dictionary data to CSV using specified field names.</td></tr><tr><td>Header</td><td>writer.writeheader()</td><td>Writes field names as the first row.</td></tr></table></section>
+<section class="card"><h2>28. newline="" in CSV</h2><div class="code">open("data.csv", "w", newline="")</div><div class="note"><b>Explanation:</b> newline="" allows the CSV module to manage newline characters correctly and helps avoid unwanted blank lines on some systems.</div></section>
+<section class="card"><h2>29. JSON – Theory Only</h2><p><b>JSON</b> means JavaScript Object Notation and is widely used for structured data exchange.</p><pre class="program">{
+    "name": "Alice",
+    "age": 20
+}</pre><table><tr><th>Operation</th><th>Example</th><th>Description</th></tr><tr><td>Import</td><td>import json</td><td>Imports the JSON module.</td></tr><tr><td>Write</td><td>json.dump(data, file)</td><td>Writes a Python object to a JSON file.</td></tr><tr><td>Read</td><td>json.load(file)</td><td>Reads JSON data from a file.</td></tr><tr><td>Python to JSON string</td><td>json.dumps(data)</td><td>Converts a Python object to a JSON-formatted string.</td></tr><tr><td>JSON string to Python</td><td>json.loads(text)</td><td>Converts JSON text to a Python object.</td></tr></table><div class="note"><b>Experiment scope:</b> JSON is covered here as theory; the finalized laboratory program uses text and CSV files.</div></section>
+<section class="card"><h2>30. Complete Laboratory Program</h2><pre class="program">import csv
+
+# 1. String methods
+name = "  gear  "
+
+print("Original:", name)
+print("Uppercase:", name.upper())
+print("Lowercase:", name.lower())
+print("Without spaces:", name.strip())
+print("Length:", len(name.strip()))
+print("Replaced:", name.replace("gear", "shaft"))
+print("Count of 'a':", name.count("a"))
+
+# 2. Write to a text file
+with open("data.txt", "w") as file:
+    file.write("Gear\n")
+    file.write("Steel\n")
+    file.write("120 mm")
+
+# 3. Read from text file
+with open("data.txt", "r") as file:
+    print("\nText file data:")
+    print(file.read())
+
+# 4. Write to CSV file
+with open("data.csv", "w", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerow(["Name", "Material", "Diameter"])
+    writer.writerow(["Gear", "Steel", "120 mm"])
+
+print("\nCSV file created successfully.")</pre><div class="note"><b>Explanation:</b> The program demonstrates string operations, creates and writes a text file, reads the text file, and creates and writes a CSV file. JSON is not used in this laboratory program.</div></section>
+<section class="card"><h2>31. Important Theory Points</h2><ul><li>open() is used to open files.</li><li>r reads, w writes/replaces, a appends, and x creates.</li><li>w creates a missing file automatically.</li><li>r normally raises FileNotFoundError for a missing file.</li><li>write() writes a string and does not automatically add a newline.</li><li>writelines() writes multiple strings but does not add newlines automatically.</li><li>read() reads complete remaining contents.</li><li>readline() reads one line.</li><li>readlines() returns remaining lines as a list.</li><li>with automatically closes the file.</li><li>tell() returns the current file-pointer position.</li><li>seek() moves the file pointer.</li><li>CSV is useful for tabular data.</li><li>csv.reader() reads CSV rows and csv.writer() writes them.</li><li>newline="" is commonly used when writing CSV files.</li><li>JSON is a structured data format handled by Python's json module.</li></ul></section>
+</main><footer>Python Programming | File Input and Output – Exhaustive Theory</footer></body></html>
