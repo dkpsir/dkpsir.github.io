@@ -68,40 +68,6 @@ with open("data.csv", "r") as file:
         print(row)</pre><div class="note"><b>Explanation:</b> csv.reader() reads rows one at a time, with each row commonly represented as a list.</div></section>
 <section class="card"><h2>27. CSV Dictionary Operations</h2><table><tr><th>Concept</th><th>Example</th><th>Description</th></tr><tr><td>DictReader</td><td>csv.DictReader(file)</td><td>Reads each row as a dictionary using headings as keys.</td></tr><tr><td>DictWriter</td><td>csv.DictWriter(file, fieldnames=fields)</td><td>Writes dictionary data to CSV using specified field names.</td></tr><tr><td>Header</td><td>writer.writeheader()</td><td>Writes field names as the first row.</td></tr></table></section>
 <section class="card"><h2>28. newline="" in CSV</h2><div class="code">open("data.csv", "w", newline="")</div><div class="note"><b>Explanation:</b> newline="" allows the CSV module to manage newline characters correctly and helps avoid unwanted blank lines on some systems.</div></section>
-<section class="card"><h2>29. JSON – Theory Only</h2><p><b>JSON</b> means JavaScript Object Notation and is widely used for structured data exchange.</p><pre class="program">{
-    "name": "Alice",
-    "age": 20
-}</pre><table><tr><th>Operation</th><th>Example</th><th>Description</th></tr><tr><td>Import</td><td>import json</td><td>Imports the JSON module.</td></tr><tr><td>Write</td><td>json.dump(data, file)</td><td>Writes a Python object to a JSON file.</td></tr><tr><td>Read</td><td>json.load(file)</td><td>Reads JSON data from a file.</td></tr><tr><td>Python to JSON string</td><td>json.dumps(data)</td><td>Converts a Python object to a JSON-formatted string.</td></tr><tr><td>JSON string to Python</td><td>json.loads(text)</td><td>Converts JSON text to a Python object.</td></tr></table><div class="note"><b>Experiment scope:</b> JSON is covered here as theory; the finalized laboratory program uses text and CSV files.</div></section>
-<section class="card"><h2>30. Complete Laboratory Program</h2><pre class="program">import csv
 
-# 1. String methods
-name = "  gear  "
-
-print("Original:", name)
-print("Uppercase:", name.upper())
-print("Lowercase:", name.lower())
-print("Without spaces:", name.strip())
-print("Length:", len(name.strip()))
-print("Replaced:", name.replace("gear", "shaft"))
-print("Count of 'a':", name.count("a"))
-
-# 2. Write to a text file
-with open("data.txt", "w") as file:
-    file.write("Gear\n")
-    file.write("Steel\n")
-    file.write("120 mm")
-
-# 3. Read from text file
-with open("data.txt", "r") as file:
-    print("\nText file data:")
-    print(file.read())
-
-# 4. Write to CSV file
-with open("data.csv", "w", newline="") as file:
-    writer = csv.writer(file)
-    writer.writerow(["Name", "Material", "Diameter"])
-    writer.writerow(["Gear", "Steel", "120 mm"])
-
-print("\nCSV file created successfully.")</pre><div class="note"><b>Explanation:</b> The program demonstrates string operations, creates and writes a text file, reads the text file, and creates and writes a CSV file. JSON is not used in this laboratory program.</div></section>
 <section class="card"><h2>31. Important Theory Points</h2><ul><li>open() is used to open files.</li><li>r reads, w writes/replaces, a appends, and x creates.</li><li>w creates a missing file automatically.</li><li>r normally raises FileNotFoundError for a missing file.</li><li>write() writes a string and does not automatically add a newline.</li><li>writelines() writes multiple strings but does not add newlines automatically.</li><li>read() reads complete remaining contents.</li><li>readline() reads one line.</li><li>readlines() returns remaining lines as a list.</li><li>with automatically closes the file.</li><li>tell() returns the current file-pointer position.</li><li>seek() moves the file pointer.</li><li>CSV is useful for tabular data.</li><li>csv.reader() reads CSV rows and csv.writer() writes them.</li><li>newline="" is commonly used when writing CSV files.</li><li>JSON is a structured data format handled by Python's json module.</li></ul></section>
 </main><footer>Python Programming | File Input and Output – Exhaustive Theory</footer></body></html>
