@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experiment 5 - Strings and File I/O</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#eef4f9;color:#111;font-family:Arial,Helvetica,sans-serif}
+.header{position:relative;background:linear-gradient(90deg,#0b477d,#087cc1);color:#fff;padding:28px 20px;text-align:center}
+.header h1{margin:0;font-size:30px}.header p{margin:7px 0 0;font-size:18px}
+.header-nav{position:absolute;left:24px;right:24px;top:18px;display:flex;justify-content:space-between}
+.header-nav a{color:#fff;text-decoration:none;font-weight:700;font-size:16px}
+.container{width:96%;max-width:1400px;margin:24px auto}
+.split-row{display:flex;gap:20px;align-items:stretch;margin-bottom:22px}
+.flow-col{flex:0 0 55%}.code-col{flex:0 0 45%}
+.card{background:#fff;border-radius:12px;padding:22px;box-shadow:0 3px 15px rgba(0,0,0,.08);height:100%}
+.title{background:#0b5b94;color:#fff;padding:13px 18px;border-radius:8px;font-size:21px;font-weight:700;margin-bottom:20px}
+.flow{display:flex;flex-direction:column;align-items:center;gap:9px}
+.node{width:100%;max-width:540px;padding:13px 18px;text-align:center;border:2px solid #17679f;border-radius:9px;background:#f7fbff;color:#073f6c;font-weight:700;font-size:14px;line-height:1.45}
+.node.start,.node.end{width:180px;border-radius:28px;background:#0b5b94;color:#fff}
+.node.string{background:#f4efff;border-color:#7c3aed;color:#5121a8}
+.node.file{background:#eef7ee;border-color:#4c9b5b;color:#245d2c}
+.node.csv{background:#fff5e8;border-color:#d97706;color:#8a4a05}
+.arrow{color:#0b5b94;font-size:22px;line-height:18px;font-weight:700}
+.decision{width:125px;height:125px;background:#fde68a;border:2px solid #d97706;transform:rotate(45deg);display:flex;justify-content:center;align-items:center}
+.decision-text{transform:rotate(-45deg);text-align:center;font-weight:700;color:#92400e;font-size:13px}
+.branch-row{width:100%;max-width:780px;display:grid;grid-template-columns:1fr 1fr;gap:25px}
+.branch{display:flex;flex-direction:column;align-items:center}
+.branch-label{font-weight:800;font-size:13px;color:#374151;background:#e5e7eb;padding:3px 10px;border-radius:4px;margin-bottom:5px}
+.branch-arrow{color:#0b5b94;font-size:20px;line-height:16px;font-weight:700;margin-bottom:5px}
+.program{background:#1e1e1e;color:#ddd;border-radius:8px;padding:17px;overflow:auto;font:13px/1.5 Consolas,"Courier New",monospace;white-space:pre;height:calc(100% - 60px)}
+table{width:100%;border-collapse:collapse;background:#fff}
+th,td{border:1px solid #c8d6e2;padding:11px 13px;text-align:left;vertical-align:top}
+th{background:#0b5b94;color:#fff;font-size:15px}
+tr:nth-child(even){background:#f7fafc}
+code{background:#eef3f7;color:#063f6c;padding:3px 6px;border-radius:4px;font-family:"Courier New",monospace;white-space:nowrap}
+.note{background:#fff8df;border-left:5px solid #d89a00;padding:13px 16px;margin-top:18px;line-height:1.5}
+.output{background:#111820;color:#e9f2f7;border-radius:8px;padding:13px;font:13px/1.55 Consolas,"Courier New",monospace;white-space:pre-wrap;margin-top:10px}
+footer{background:#0b477d;color:#fff;text-align:center;padding:13px;margin-top:25px}
+@media(max-width:700px){.split-row{flex-direction:column}.flow-col,.code-col{flex:0 0 100%}.branch-row{grid-template-columns:1fr}.header h1{font-size:24px}.container{width:96%}.card{padding:14px}th,td{padding:9px;font-size:14px}}
+</style>
+</head>
+<body>
+<header class="header">
+<div class="header-nav"><a href="#">← Python Home</a><a href="#">Main Home →</a></div>
+<h1>PYTHON PROGRAMMING LAB</h1>
+<p>Experiment 5 – Strings and File I/O</p>
+</header>
+
+<main class="container">
+<div class="split-row">
+<div class="flow-col">
+<section class="card">
+<div class="title">Experiment 5 – Flow Chart</div>
+<div class="flow">
+<div class="node start">START</div>
+<div class="arrow">↓</div>
+
+<div class="node string">
+<strong>String Processing</strong><br>
+Create <code>name = "  gear  "</code><br>
+Apply <code>upper()</code>, <code>lower()</code>, <code>strip()</code>, <code>len()</code>, <code>replace()</code>, <code>count()</code>
+</div>
+<div class="arrow">↓</div>
+
+<div class="node file">
+<strong>Write Text File</strong><br>
+Open <code>data.txt</code> in write mode <code>"w"</code><br>
+Write Gear, Steel and 120 mm
+</div>
+<div class="arrow">↓</div>
+
+<div class="node file">
+<strong>Read Text File</strong><br>
+Open <code>data.txt</code> in read mode <code>"r"</code><br>
+Read and display complete file contents
+</div>
+<div class="arrow">↓</div>
+
+<div class="node csv">
+<strong>Write CSV File</strong><br>
+Open <code>data.csv</code> in write mode<br>
+Create CSV writer and write heading and data rows
+</div>
+<div class="arrow">↓</div>
+
+<div class="node">
+Display<br><code>"CSV file created successfully."</code>
+</div>
+<div class="arrow">↓</div>
+<div class="node end">END</div>
+</div>
+</section>
+</div>
+
+<div class="code-col">
+<section class="card">
+<div class="title">Complete Python Program</div>
+<pre class="program">import csv
+
+# 1. String methods
+name = "  gear  "
+
+print("Original:", name)
+print("Uppercase:", name.upper())
+print("Lowercase:", name.lower())
+print("Without spaces:", name.strip())
+print("Length:", len(name.strip()))
+print("Replaced:", name.replace("gear", "shaft"))
+print("Count of 'a':", name.count("a"))
+
+# 2. Write to a text file
+with open("data.txt", "w") as file:
+    file.write("Gear\n")
+    file.write("Steel\n")
+    file.write("120 mm")
+
+# 3. Read from text file
+with open("data.txt", "r") as file:
+    print("\nText file data:")
+    print(file.read())
+
+# 4. Write to CSV file
+with open("data.csv", "w", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerow(["Name", "Material", "Diameter"])
+    writer.writerow(["Gear", "Steel", "120 mm"])
+
+print("\nCSV file created successfully.")</pre>
+</section>
+</div>
+</div>
+
+<section class="card" style="margin-bottom:22px;">
+<div class="title">Python Program – Step-by-Step Explanation</div>
+<table>
+<thead><tr><th style="width:38%">Python Statement / Step</th><th style="width:18%">Concept</th><th>What it does</th></tr></thead>
+<tbody>
+<tr><td><code>import csv</code></td><td>Module</td><td>Imports Python's CSV module for creating and working with CSV files.</td></tr>
+<tr><td><code>name = "  gear  "</code></td><td>String</td><td>Creates a string containing leading and trailing spaces.</td></tr>
+<tr><td><code>name.upper()</code></td><td>String Method</td><td>Converts the string to uppercase.</td></tr>
+<tr><td><code>name.lower()</code></td><td>String Method</td><td>Converts the string to lowercase.</td></tr>
+<tr><td><code>name.strip()</code></td><td>String Method</td><td>Removes leading and trailing spaces.</td></tr>
+<tr><td><code>len(name.strip())</code></td><td>Length</td><td>Finds the number of characters in the stripped string.</td></tr>
+<tr><td><code>name.replace("gear", "shaft")</code></td><td>String Method</td><td>Replaces the word <code>gear</code> with <code>shaft</code>.</td></tr>
+<tr><td><code>name.count("a")</code></td><td>String Method</td><td>Counts the number of occurrences of <code>a</code>.</td></tr>
+<tr><td><code>open("data.txt", "w")</code></td><td>File Opening</td><td>Opens the text file in write mode. If the file does not exist, it is created.</td></tr>
+<tr><td><code>file.write(...)</code></td><td>File Writing</td><td>Writes text data into <code>data.txt</code>.</td></tr>
+<tr><td><code>open("data.txt", "r")</code></td><td>File Opening</td><td>Opens the existing text file in read mode.</td></tr>
+<tr><td><code>file.read()</code></td><td>File Reading</td><td>Reads the complete contents of the text file.</td></tr>
+<tr><td><code>csv.writer(file)</code></td><td>CSV</td><td>Creates a CSV writer object.</td></tr>
+<tr><td><code>writer.writerow(...)</code></td><td>CSV Writing</td><td>Writes one row of data into the CSV file.</td></tr>
+<tr><td><code>with open(...) as file:</code></td><td>File Management</td><td>Automatically manages and closes the file after the block is completed.</td></tr>
+<tr><td><code>newline=""</code></td><td>CSV File</td><td>Helps the CSV module handle new lines correctly while writing.</td></tr>
+</tbody>
+</table>
+<div class="note"><b>Important:</b> The program does not require keyboard input. Running it creates <code>data.txt</code> and <code>data.csv</code> in the current working directory.</div>
+</section>
+
+<section class="card">
+<div class="title">Expected Output</div>
+<div class="output">Original:   gear  
+Uppercase:   GEAR  
+Lowercase:   gear  
+Without spaces: gear
+Length: 4
+Replaced:   shaft  
+Count of 'a': 1
+
+Text file data:
+Gear
+Steel
+120 mm
+
+CSV file created successfully.</div>
+</section>
+</main>
+
+<footer>© 2026 D. Kiran Prasad | Python Experiments</footer>
+</body>
+</html>
