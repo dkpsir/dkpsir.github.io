@@ -4,456 +4,754 @@
 .header{background:linear-gradient(90deg,#0b477d,#087cc1);color:#fff;padding:22px;text-align:center}.header h1{margin:0;font-size:31px}.header p{margin:7px 0 0;font-size:18px}
 .header-nav{display:flex;justify-content:space-between;max-width:1450px;margin:0 auto 10px}.header-nav a{color:#fff;text-decoration:none;background:rgba(255,255,255,.15);padding:7px 12px;border-radius:6px}
 .container{width:94%;max-width:1450px;margin:24px auto}.action-bar{display:flex;gap:12px;align-items:center;margin-bottom:18px}.search-input{flex:1;padding:12px 15px;border:1px solid #b8c9d8;border-radius:8px;font-size:15px}.btn-group{display:flex;gap:8px}.btn-toggle{border:0;background:#075b99;color:#fff;padding:11px 15px;border-radius:7px;cursor:pointer}.btn-toggle:hover{background:#063f69}
-.accordion-item{background:#fff;border-radius:10px;margin-bottom:12px;box-shadow:0 3px 12px rgba(0,0,0,.09);overflow:hidden}.accordion-header{display:flex;align-items:flex-start;gap:12px;padding:15px 18px;cursor:pointer}.badge{background:#075b99;color:#fff;min-width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}.q-body{flex:1}.q-title{font-weight:700;color:#075b99;margin-bottom:8px}.code-box{margin:0;background:#1c1f23;color:#e9eef2;border-radius:7px;padding:14px;font:14px/1.55 Consolas,"Courier New",monospace;white-space:pre-wrap;overflow:auto}.toggle-icon{font-size:25px;color:#075b99;font-weight:700;width:25px;text-align:center}
+.accordion-item{background:#fff;border-radius:10px;margin-bottom:12px;box-shadow:0 3px 12px rgba(0,0,0,.09);overflow:hidden}.accordion-header{display:flex;align-items:flex-start;gap:12px;padding:15px 18px;cursor:pointer}.badge{background:#075b99;color:#fff;min-width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}.q-body{flex:1}.q-title{font-weight:700;color:#075b99;margin-bottom:8px;line-height:1.45}.code-box{margin:0;background:#1c1f23;color:#e9eef2;border-radius:7px;padding:14px;font:14px/1.55 Consolas,"Courier New",monospace;white-space:pre-wrap;overflow:auto}.toggle-icon{font-size:25px;color:#075b99;font-weight:700;width:25px;text-align:center}
 .accordion-content{display:none;padding:0 18px 18px 66px}.accordion-item.open .accordion-content{display:block}.accordion-item.open .toggle-icon{transform:rotate(45deg)}
 .output-box{background:#f3f7fc;border:1px solid #bfd2e7;border-radius:8px;padding:15px}.output-title{font-weight:700;color:#075b99;margin-bottom:7px}.output-text{background:#111820;color:#e9f2f7;border-radius:6px;padding:12px;font:14px/1.5 Consolas,"Courier New",monospace;white-space:pre-wrap}.explanation{margin-top:12px;background:#fff8df;border-left:5px solid #d99a00;padding:12px 15px;line-height:1.55}.type{display:inline-block;margin-bottom:10px;background:#e6f1fa;color:#075b99;padding:4px 9px;border-radius:12px;font-size:12px;font-weight:700}
 footer{background:#063b70;color:#fff;text-align:center;padding:13px;margin-top:25px}@media(max-width:800px){.action-bar{flex-direction:column;align-items:stretch}.btn-group{justify-content:center}.accordion-content{padding-left:18px}}
 </style></head><body>
 <header class="header"><div class="header-nav"><a href="../index.html">🏠 Python Home</a><a href="../../index.html">🏠 Main Home</a></div>
 <h1>Strings</h1></header>
-<main class="container"><div class="action-bar"><input id="searchInput" class="search-input" placeholder="🔍 Search question, concept or code..." onkeyup="filterQuestions()">
+<main class="container"><div class="action-bar"><input id="searchInput" class="search-input" placeholder="🔍 Search question, code or concept..." onkeyup="filterQuestions()">
 <div class="btn-group"><button class="btn-toggle" onclick="toggleAll(true)">Expand All</button><button class="btn-toggle" onclick="toggleAll(false)">Collapse All</button></div></div>
-<div id="accordionContainer"><div class="accordion-item" data-keywords="indexing s = &quot;python&quot;
-print(s[0])
-print(s[-1]) p
-n">
+<div id="accordionContainer"><div class="accordion-item" data-keywords="what is the output of the following program? s = &quot;python&quot;
+print(s[1])
+print(s[-2]) y
+o">
 <div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">1</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — Indexing</div>
+<div class="badge">1</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
 <pre class="code-box">s = &quot;PYTHON&quot;
-print(s[0])
-print(s[-1])</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">P
-N</div>
-<div class="explanation"><b>Explanation:</b> Positive indexing starts at 0, while -1 refers to the last character.</div></div></div></div><div class="accordion-item" data-keywords="indexing s = &quot;python&quot;
-print(s[2])
-print(s[-3]) t
-h">
+print(s[1])
+print(s[-2])</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">Y
+O</div>
+<div class="explanation"><b>Explanation:</b> Positive indexing starts at 0 and negative indexing starts from the end with -1.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? s = &quot;python programming&quot;
+print(s[:6])
+print(s[7:]) python
+programming">
 <div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">2</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — Indexing</div>
-<pre class="code-box">s = &quot;PYTHON&quot;
-print(s[2])
-print(s[-3])</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">T
-H</div>
-<div class="explanation"><b>Explanation:</b> Index 2 is T and negative index -3 refers to H.</div></div></div></div><div class="accordion-item" data-keywords="slicing s = &quot;python&quot;
-print(s[1:4]) yth">
+<div class="badge">2</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
+<pre class="code-box">s = &quot;Python Programming&quot;
+print(s[:6])
+print(s[7:])</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">Python
+Programming</div>
+<div class="explanation"><b>Explanation:</b> The stop position is excluded. The first slice takes indexes 0 to 5; the second starts at index 7.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? s = &quot;abcdefghij&quot;
+print(s[1:8:2])
+print(s[::-3]) bdfh
+jgd a">
 <div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">3</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — Slicing</div>
-<pre class="code-box">s = &quot;PYTHON&quot;
-print(s[1:4])</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">YTH</div>
-<div class="explanation"><b>Explanation:</b> The start index is included and the stop index is excluded.</div></div></div></div><div class="accordion-item" data-keywords="slicing s = &quot;python&quot;
-print(s[:3])
-print(s[3:]) pyt
-hon">
+<div class="badge">3</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
+<pre class="code-box">s = &quot;ABCDEFGHIJ&quot;
+print(s[1:8:2])
+print(s[::-3])</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">BDFH
+JGD A</div>
+<div class="explanation"><b>Explanation:</b> The first slice selects B, D, F, H. The reverse slice moves backward by three positions: J, G, D, A.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? s = &quot;hello&quot;
+s = s + &quot; world&quot;
+print(s) hello world">
 <div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">4</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — Slicing</div>
-<pre class="code-box">s = &quot;PYTHON&quot;
-print(s[:3])
-print(s[3:])</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">PYT
-HON</div>
-<div class="explanation"><b>Explanation:</b> An omitted start means beginning; an omitted stop means the end.</div></div></div></div><div class="accordion-item" data-keywords="slicing s = &quot;python&quot;
-print(s[::2]) pto">
+<div class="badge">4</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
+<pre class="code-box">s = &quot;Hello&quot;
+s = s + &quot; World&quot;
+print(s)</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">Hello World</div>
+<div class="explanation"><b>Explanation:</b> The + operator concatenates two strings and creates a new string.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? s = &quot;hi&quot;
+print(s * 3)
+print(3 * s) hihihi
+hihihi">
 <div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">5</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — Slicing</div>
-<pre class="code-box">s = &quot;PYTHON&quot;
-print(s[::2])</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">PTO</div>
-<div class="explanation"><b>Explanation:</b> Step 2 selects every second character.</div></div></div></div><div class="accordion-item" data-keywords="reverse slicing s = &quot;python&quot;
-print(s[::-1]) nohtyp">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">6</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — Reverse slicing</div>
-<pre class="code-box">s = &quot;PYTHON&quot;
-print(s[::-1])</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">NOHTYP</div>
-<div class="explanation"><b>Explanation:</b> A step of -1 reads the string from right to left.</div></div></div></div><div class="accordion-item" data-keywords="concatenation a = &quot;hello&quot;
-b = &quot;world&quot;
-print(a + &quot; &quot; + b) hello world">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">7</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — Concatenation</div>
-<pre class="code-box">a = &quot;Hello&quot;
-b = &quot;World&quot;
-print(a + &quot; &quot; + b)</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">Hello World</div>
-<div class="explanation"><b>Explanation:</b> The + operator joins strings.</div></div></div></div><div class="accordion-item" data-keywords="repetition s = &quot;hi&quot;
-print(s * 3) hihihi">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">8</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — Repetition</div>
+<div class="badge">5</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
 <pre class="code-box">s = &quot;Hi&quot;
-print(s * 3)</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">HiHiHi</div>
-<div class="explanation"><b>Explanation:</b> The * operator repeats the string.</div></div></div></div><div class="accordion-item" data-keywords="membership s = &quot;python&quot;
+print(s * 3)
+print(3 * s)</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">HiHiHi
+HiHiHi</div>
+<div class="explanation"><b>Explanation:</b> String repetition works with the * operator on either side of the integer.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? s = &quot;python&quot;
+print(&quot;py&quot; in s)
 print(&quot;py&quot; in s)
 print(&quot;java&quot; not in s) true
+false
 true">
 <div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">9</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — Membership</div>
+<div class="badge">6</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
 <pre class="code-box">s = &quot;Python&quot;
 print(&quot;Py&quot; in s)
-print(&quot;Java&quot; not in s)</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">True
+print(&quot;py&quot; in s)
+print(&quot;Java&quot; not in s)</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">True
+False
 True</div>
-<div class="explanation"><b>Explanation:</b> in checks presence and not in checks absence.</div></div></div></div><div class="accordion-item" data-keywords="length s = &quot;hello world&quot;
-print(len(s)) 11">
+<div class="explanation"><b>Explanation:</b> Membership testing is case-sensitive. Py is present, py is not, and Java is absent.</div>
+</div></div></div><div class="accordion-item" data-keywords="find the error in the following program. s = &quot;python&quot;
+print(s[6]) indexerror">
 <div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">10</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — Length</div>
-<pre class="code-box">s = &quot;Hello World&quot;
-print(len(s))</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">11</div>
-<div class="explanation"><b>Explanation:</b> len() counts every character, including the space.</div></div></div></div><div class="accordion-item" data-keywords="upper() s = &quot;python&quot;
-print(s.upper()) python">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">11</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — upper()</div>
-<pre class="code-box">s = &quot;PyThOn&quot;
-print(s.upper())</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">PYTHON</div>
-<div class="explanation"><b>Explanation:</b> upper() converts alphabetic characters to uppercase.</div></div></div></div><div class="accordion-item" data-keywords="lower() s = &quot;python&quot;
-print(s.lower()) python">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">12</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — lower()</div>
-<pre class="code-box">s = &quot;PyThOn&quot;
-print(s.lower())</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">python</div>
-<div class="explanation"><b>Explanation:</b> lower() converts alphabetic characters to lowercase.</div></div></div></div><div class="accordion-item" data-keywords="capitalize() s = &quot;python programming&quot;
-print(s.capitalize()) python programming">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">13</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — capitalize()</div>
-<pre class="code-box">s = &quot;python PROGRAMMING&quot;
-print(s.capitalize())</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">Python programming</div>
-<div class="explanation"><b>Explanation:</b> capitalize() uppercases the first character and lowercases the remaining cased characters.</div></div></div></div><div class="accordion-item" data-keywords="title() s = &quot;python programming&quot;
-print(s.title()) python programming">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">14</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — title()</div>
-<pre class="code-box">s = &quot;python programming&quot;
-print(s.title())</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">Python Programming</div>
-<div class="explanation"><b>Explanation:</b> title() capitalizes the first character of each word.</div></div></div></div><div class="accordion-item" data-keywords="swapcase() s = &quot;python&quot;
-print(s.swapcase()) python">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">15</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — swapcase()</div>
-<pre class="code-box">s = &quot;PyThOn&quot;
-print(s.swapcase())</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">pYtHoN</div>
-<div class="explanation"><b>Explanation:</b> swapcase() changes uppercase to lowercase and lowercase to uppercase.</div></div></div></div><div class="accordion-item" data-keywords="strip() s = &quot;  python  &quot;
-print(s.strip()) python">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">16</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — strip()</div>
-<pre class="code-box">s = &quot;  Python  &quot;
-print(s.strip())</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">Python</div>
-<div class="explanation"><b>Explanation:</b> strip() removes whitespace from both ends.</div></div></div></div><div class="accordion-item" data-keywords="lstrip() / rstrip() s = &quot;  python  &quot;
-print(s.lstrip())
-print(s.rstrip()) python  
-  python">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">17</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — lstrip() / rstrip()</div>
-<pre class="code-box">s = &quot;  Python  &quot;
-print(s.lstrip())
-print(s.rstrip())</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">Python  
-  Python</div>
-<div class="explanation"><b>Explanation:</b> lstrip() removes left-side whitespace; rstrip() removes right-side whitespace.</div></div></div></div><div class="accordion-item" data-keywords="replace() s = &quot;i like java&quot;
-print(s.replace(&quot;java&quot;, &quot;python&quot;)) i like python">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">18</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — replace()</div>
-<pre class="code-box">s = &quot;I like Java&quot;
-print(s.replace(&quot;Java&quot;, &quot;Python&quot;))</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">I like Python</div>
-<div class="explanation"><b>Explanation:</b> replace() returns a new string with the specified text replaced.</div></div></div></div><div class="accordion-item" data-keywords="count() s = &quot;banana&quot;
-print(s.count(&quot;a&quot;))
-print(s.count(&quot;an&quot;)) 3
-2">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">19</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — count()</div>
-<pre class="code-box">s = &quot;banana&quot;
-print(s.count(&quot;a&quot;))
-print(s.count(&quot;an&quot;))</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">3
-2</div>
-<div class="explanation"><b>Explanation:</b> count() counts non-overlapping occurrences of the specified substring.</div></div></div></div><div class="accordion-item" data-keywords="find() s = &quot;python&quot;
-print(s.find(&quot;th&quot;))
-print(s.find(&quot;java&quot;)) 2
--1">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">20</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — find()</div>
+<div class="badge">7</div>
+<div class="q-body"><div class="q-title">Find the error in the following program.</div>
 <pre class="code-box">s = &quot;Python&quot;
-print(s.find(&quot;th&quot;))
-print(s.find(&quot;Java&quot;))</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">2
--1</div>
-<div class="explanation"><b>Explanation:</b> find() returns the first position, or -1 when the substring is absent.</div></div></div></div><div class="accordion-item" data-keywords="index() s = &quot;python&quot;
-print(s.index(&quot;th&quot;)) 2">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">21</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — index()</div>
-<pre class="code-box">s = &quot;Python&quot;
-print(s.index(&quot;th&quot;))</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">2</div>
-<div class="explanation"><b>Explanation:</b> index() returns the first position of the substring.</div></div></div></div><div class="accordion-item" data-keywords="index() missing text s = &quot;python&quot;
-print(s.index(&quot;java&quot;)) valueerror">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">22</div><div class="q-body"><div class="q-title">FIND THE ERROR — index() missing text</div>
-<pre class="code-box">s = &quot;Python&quot;
-print(s.index(&quot;Java&quot;))</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Error</span>
-<div class="output-title">Answer</div><div class="output-text">ValueError</div>
-<div class="explanation"><b>Explanation:</b> index() raises ValueError when the requested substring is not found.</div></div></div></div><div class="accordion-item" data-keywords="startswith() s = &quot;python programming&quot;
-print(s.startswith(&quot;python&quot;))
-print(s.startswith(&quot;java&quot;)) true
-false">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">23</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — startswith()</div>
-<pre class="code-box">s = &quot;Python Programming&quot;
-print(s.startswith(&quot;Python&quot;))
-print(s.startswith(&quot;Java&quot;))</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">True
-False</div>
-<div class="explanation"><b>Explanation:</b> startswith() checks whether the string begins with the specified text.</div></div></div></div><div class="accordion-item" data-keywords="endswith() s = &quot;python.py&quot;
-print(s.endswith(&quot;.py&quot;)) true">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">24</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — endswith()</div>
-<pre class="code-box">s = &quot;Python.py&quot;
-print(s.endswith(&quot;.py&quot;))</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">True</div>
-<div class="explanation"><b>Explanation:</b> endswith() checks whether the string ends with the specified text.</div></div></div></div><div class="accordion-item" data-keywords="split() s = &quot;python is easy&quot;
-print(s.split()) [&#x27;python&#x27;, &#x27;is&#x27;, &#x27;easy&#x27;]">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">25</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — split()</div>
-<pre class="code-box">s = &quot;Python is easy&quot;
-print(s.split())</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">[&#x27;Python&#x27;, &#x27;is&#x27;, &#x27;easy&#x27;]</div>
-<div class="explanation"><b>Explanation:</b> split() divides the string and returns a list.</div></div></div></div><div class="accordion-item" data-keywords="split() with separator s = &quot;a,b,c&quot;
-print(s.split(&quot;,&quot;)) [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;]">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">26</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — split() with separator</div>
-<pre class="code-box">s = &quot;A,B,C&quot;
-print(s.split(&quot;,&quot;))</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">[&#x27;A&#x27;, &#x27;B&#x27;, &#x27;C&#x27;]</div>
-<div class="explanation"><b>Explanation:</b> The comma is used as the separator.</div></div></div></div><div class="accordion-item" data-keywords="join() words = [&quot;python&quot;, &quot;is&quot;, &quot;easy&quot;]
-print(&quot;-&quot;.join(words)) python-is-easy">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">27</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — join()</div>
-<pre class="code-box">words = [&quot;Python&quot;, &quot;is&quot;, &quot;easy&quot;]
-print(&quot;-&quot;.join(words))</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">Python-is-easy</div>
-<div class="explanation"><b>Explanation:</b> join() combines string elements using the separator.</div></div></div></div><div class="accordion-item" data-keywords="join() with integer items = [&quot;a&quot;, 2, &quot;c&quot;]
-print(&quot;-&quot;.join(items)) typeerror">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">28</div><div class="q-body"><div class="q-title">FIND THE ERROR — join() with integer</div>
-<pre class="code-box">items = [&quot;A&quot;, 2, &quot;C&quot;]
-print(&quot;-&quot;.join(items))</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Error</span>
-<div class="output-title">Answer</div><div class="output-text">TypeError</div>
-<div class="explanation"><b>Explanation:</b> join() requires all sequence elements to be strings.</div></div></div></div><div class="accordion-item" data-keywords="isalpha() s = &quot;python&quot;
-print(s.isalpha())
-print(&quot;python3&quot;.isalpha()) true
-false">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">29</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — isalpha()</div>
-<pre class="code-box">s = &quot;Python&quot;
-print(s.isalpha())
-print(&quot;Python3&quot;.isalpha())</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">True
-False</div>
-<div class="explanation"><b>Explanation:</b> isalpha() is True only when all characters are alphabetic and the string is non-empty.</div></div></div></div><div class="accordion-item" data-keywords="isdigit() print(&quot;123&quot;.isdigit())
-print(&quot;12.3&quot;.isdigit()) true
-false">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">30</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — isdigit()</div>
-<pre class="code-box">print(&quot;123&quot;.isdigit())
-print(&quot;12.3&quot;.isdigit())</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">True
-False</div>
-<div class="explanation"><b>Explanation:</b> A decimal point is not a digit character for isdigit().</div></div></div></div><div class="accordion-item" data-keywords="isalnum() print(&quot;python123&quot;.isalnum())
-print(&quot;python 123&quot;.isalnum()) true
-false">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">31</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — isalnum()</div>
-<pre class="code-box">print(&quot;Python123&quot;.isalnum())
-print(&quot;Python 123&quot;.isalnum())</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">True
-False</div>
-<div class="explanation"><b>Explanation:</b> isalnum() allows letters and digits but not spaces.</div></div></div></div><div class="accordion-item" data-keywords="isspace() print(&quot;   &quot;.isspace())
-print(&quot; a &quot;.isspace()) true
-false">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">32</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — isspace()</div>
-<pre class="code-box">print(&quot;   &quot;.isspace())
-print(&quot; A &quot;.isspace())</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">True
-False</div>
-<div class="explanation"><b>Explanation:</b> isspace() is True only when all characters are whitespace and the string is non-empty.</div></div></div></div><div class="accordion-item" data-keywords="string immutability s = &quot;python&quot;
-s = &quot;j&quot; + s[1:]
-print(s) jython">
-<div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">33</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — String immutability</div>
-<pre class="code-box">s = &quot;Python&quot;
-s = &quot;J&quot; + s[1:]
-print(s)</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">Jython</div>
-<div class="explanation"><b>Explanation:</b> A new string is created because strings cannot be changed character by character.</div></div></div></div><div class="accordion-item" data-keywords="direct character assignment s = &quot;python&quot;
+print(s[6])</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">IndexError</div>
+<div class="explanation"><b>Explanation:</b> Python has valid indexes from 0 through 5. Index 6 is outside the valid range.</div>
+</div></div></div><div class="accordion-item" data-keywords="find the error in the following program. s = &quot;python&quot;
 s[0] = &quot;j&quot;
 print(s) typeerror">
 <div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">34</div><div class="q-body"><div class="q-title">FIND THE ERROR — Direct character assignment</div>
+<div class="badge">8</div>
+<div class="q-body"><div class="q-title">Find the error in the following program.</div>
 <pre class="code-box">s = &quot;Python&quot;
 s[0] = &quot;J&quot;
-print(s)</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Error</span>
-<div class="output-title">Answer</div><div class="output-text">TypeError</div>
-<div class="explanation"><b>Explanation:</b> Strings are immutable, so an individual character cannot be assigned.</div></div></div></div><div class="accordion-item" data-keywords="aliasing is not relevant to strings a = &quot;python&quot;
-b = a
-b = &quot;java&quot;
-print(a)
-print(b) python
-java">
+print(s)</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">TypeError</div>
+<div class="explanation"><b>Explanation:</b> Strings are immutable. An individual character cannot be changed by assignment.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? s = &quot;  python  &quot;
+print(s.strip())
+print(s)
+print(len(s.strip())) python
+  python  
+6">
 <div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">35</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — Aliasing is not relevant to strings</div>
-<pre class="code-box">a = &quot;Python&quot;
-b = a
-b = &quot;Java&quot;
-print(a)
-print(b)</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">Python
-Java</div>
-<div class="explanation"><b>Explanation:</b> Reassigning b does not change a; strings are immutable and assignment binds names to objects.</div></div></div></div><div class="accordion-item" data-keywords="for loop traversal s = &quot;cat&quot;
-for ch in s:
-    print(ch) c
-a
-t">
+<div class="badge">9</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
+<pre class="code-box">s = &quot;  Python  &quot;
+print(s.strip())
+print(s)
+print(len(s.strip()))</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">Python
+  Python  
+6</div>
+<div class="explanation"><b>Explanation:</b> strip() returns a new string; it does not modify the original string.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? s = &quot;python programming&quot;
+print(s.upper())
+print(s.lower())
+print(s.capitalize())
+print(s.title()) python programming
+python programming
+python programming
+python programming">
 <div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">36</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — for loop traversal</div>
-<pre class="code-box">s = &quot;CAT&quot;
-for ch in s:
-    print(ch)</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">C
-A
-T</div>
-<div class="explanation"><b>Explanation:</b> The loop visits each character sequentially.</div></div></div></div><div class="accordion-item" data-keywords="index out of range s = &quot;python&quot;
-print(s[6]) indexerror">
+<div class="badge">10</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
+<pre class="code-box">s = &quot;python PROGRAMMING&quot;
+print(s.upper())
+print(s.lower())
+print(s.capitalize())
+print(s.title())</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">PYTHON PROGRAMMING
+python programming
+Python programming
+Python Programming</div>
+<div class="explanation"><b>Explanation:</b> Each method performs a different case conversion and returns a new string.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? s = &quot;banana&quot;
+print(s.count(&quot;a&quot;))
+print(s.count(&quot;an&quot;))
+print(s.find(&quot;na&quot;)) 3
+2
+2">
 <div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">37</div><div class="q-body"><div class="q-title">FIND THE ERROR — Index out of range</div>
+<div class="badge">11</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
+<pre class="code-box">s = &quot;banana&quot;
+print(s.count(&quot;a&quot;))
+print(s.count(&quot;an&quot;))
+print(s.find(&quot;na&quot;))</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">3
+2
+2</div>
+<div class="explanation"><b>Explanation:</b> count() counts occurrences, while find() returns the first starting position.</div>
+</div></div></div><div class="accordion-item" data-keywords="find the error in the following program. s = &quot;python&quot;
+print(s.index(&quot;java&quot;)) valueerror">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">12</div>
+<div class="q-body"><div class="q-title">Find the error in the following program.</div>
 <pre class="code-box">s = &quot;Python&quot;
-print(s[6])</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Error</span>
-<div class="output-title">Answer</div><div class="output-text">IndexError</div>
-<div class="explanation"><b>Explanation:</b> Python has valid positive indexes 0 through 5; index 6 is outside the string.</div></div></div></div><div class="accordion-item" data-keywords="slice beyond length s = &quot;python&quot;
-print(s[2:100]) thon">
+print(s.index(&quot;Java&quot;))</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">ValueError</div>
+<div class="explanation"><b>Explanation:</b> index() raises ValueError when the requested substring is not found.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? s = &quot;python programming&quot;
+print(s.startswith(&quot;python&quot;))
+print(s.endswith(&quot;ing&quot;))
+print(s.startswith(&quot;python&quot;)) true
+true
+false">
 <div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">38</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — Slice beyond length</div>
+<div class="badge">13</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
+<pre class="code-box">s = &quot;Python Programming&quot;
+print(s.startswith(&quot;Python&quot;))
+print(s.endswith(&quot;ing&quot;))
+print(s.startswith(&quot;python&quot;))</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">True
+True
+False</div>
+<div class="explanation"><b>Explanation:</b> String comparisons are case-sensitive.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? s = &quot;i like java&quot;
+a = s.replace(&quot;java&quot;, &quot;python&quot;)
+print(s)
+print(a) i like java
+i like python">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">14</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
+<pre class="code-box">s = &quot;I like Java&quot;
+a = s.replace(&quot;Java&quot;, &quot;Python&quot;)
+print(s)
+print(a)</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">I like Java
+I like Python</div>
+<div class="explanation"><b>Explanation:</b> replace() does not modify the original string. It returns a new string.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? s = &quot;one,two,three&quot;
+items = s.split(&quot;,&quot;)
+print(items)
+print(len(items)) [&#x27;one&#x27;, &#x27;two&#x27;, &#x27;three&#x27;]
+3">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">15</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
+<pre class="code-box">s = &quot;one,two,three&quot;
+items = s.split(&quot;,&quot;)
+print(items)
+print(len(items))</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">[&#x27;one&#x27;, &#x27;two&#x27;, &#x27;three&#x27;]
+3</div>
+<div class="explanation"><b>Explanation:</b> split() returns a list containing the separated parts.</div>
+</div></div></div><div class="accordion-item" data-keywords="find the error in the following program. items = [&quot;a&quot;, 2, &quot;c&quot;]
+print(&quot;-&quot;.join(items)) typeerror">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">16</div>
+<div class="q-body"><div class="q-title">Find the error in the following program.</div>
+<pre class="code-box">items = [&quot;A&quot;, 2, &quot;C&quot;]
+print(&quot;-&quot;.join(items))</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">TypeError</div>
+<div class="explanation"><b>Explanation:</b> join() requires every element of the sequence to be a string.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? words = [&quot;python&quot;, &quot;is&quot;, &quot;easy&quot;]
+s = &quot; &quot;.join(words)
+print(s) python is easy">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">17</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
+<pre class="code-box">words = [&quot;Python&quot;, &quot;is&quot;, &quot;easy&quot;]
+s = &quot; &quot;.join(words)
+print(s)</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">Python is easy</div>
+<div class="explanation"><b>Explanation:</b> join() combines the strings using the specified separator.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? s = &quot;python&quot;
+print(s.isalpha())
+print(&quot;123&quot;.isdigit())
+print(&quot;python123&quot;.isalnum()) true
+true
+true">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">18</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
 <pre class="code-box">s = &quot;Python&quot;
-print(s[2:100])</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">thon</div>
-<div class="explanation"><b>Explanation:</b> Slicing beyond the available range is allowed; it returns the available characters.</div></div></div></div><div class="accordion-item" data-keywords="negative slice s = &quot;abcdef&quot;
-print(s[-4:-1]) cde">
+print(s.isalpha())
+print(&quot;123&quot;.isdigit())
+print(&quot;Python123&quot;.isalnum())</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">True
+True
+True</div>
+<div class="explanation"><b>Explanation:</b> The tested strings contain only the character categories accepted by each method.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? print(&quot;12.5&quot;.isdigit())
+print(&quot;python3&quot;.isalpha())
+print(&quot;python3&quot;.isalnum()) false
+false
+true">
 <div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">39</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — Negative slice</div>
+<div class="badge">19</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
+<pre class="code-box">print(&quot;12.5&quot;.isdigit())
+print(&quot;Python3&quot;.isalpha())
+print(&quot;Python3&quot;.isalnum())</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">False
+False
+True</div>
+<div class="explanation"><b>Explanation:</b> A decimal point is not a digit, a mixed letter-digit string is not alphabetic, but letters and digits together are alphanumeric.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? s = &quot;hello world&quot;
+print(s[0:5])
+print(s[-5:])
+print(s[::3]) hello
+world
+hlool">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">20</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
+<pre class="code-box">s = &quot;Hello World&quot;
+print(s[0:5])
+print(s[-5:])
+print(s[::3])</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">Hello
+World
+Hlool</div>
+<div class="explanation"><b>Explanation:</b> The slices use positive and negative positions, while step 3 selects every third character.</div>
+</div></div></div><div class="accordion-item" data-keywords="find the error in the following program. s = &quot;&quot;
+print(s[0]) indexerror">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">21</div>
+<div class="q-body"><div class="q-title">Find the error in the following program.</div>
+<pre class="code-box">s = &quot;&quot;
+print(s[0])</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">IndexError</div>
+<div class="explanation"><b>Explanation:</b> An empty string contains no characters, so index 0 is invalid.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? s = &quot;&quot;
+print(len(s))
+print(bool(s)) 0
+false">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">22</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
+<pre class="code-box">s = &quot;&quot;
+print(len(s))
+print(bool(s))</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">0
+False</div>
+<div class="explanation"><b>Explanation:</b> An empty string has length zero and is considered False in a Boolean context.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? s = &quot;abcdef&quot;
+print(s[-4:-1])
+print(s[-1:-4:-1]) cde
+fed">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">23</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
 <pre class="code-box">s = &quot;abcdef&quot;
-print(s[-4:-1])</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">cde</div>
-<div class="explanation"><b>Explanation:</b> The slice starts at index -4 and stops before -1.</div></div></div></div><div class="accordion-item" data-keywords="escape sequence print(&quot;hello\nworld&quot;) hello
-world">
+print(s[-4:-1])
+print(s[-1:-4:-1])</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">cde
+fed</div>
+<div class="explanation"><b>Explanation:</b> The first slice moves forward from c to before f; the second moves backward from f to after c.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? s = &quot;abcdef&quot;
+print(s[4:1:-1])
+print(s[1:4:-1]) edc
+">
 <div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">40</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — Escape sequence</div>
-<pre class="code-box">print(&quot;Hello\nWorld&quot;)</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">Hello
-World</div>
-<div class="explanation"><b>Explanation:</b> \n represents a new line.</div></div></div></div><div class="accordion-item" data-keywords="string formatting name = &quot;alice&quot;
+<div class="badge">24</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
+<pre class="code-box">s = &quot;abcdef&quot;
+print(s[4:1:-1])
+print(s[1:4:-1])</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">edc
+</div>
+<div class="explanation"><b>Explanation:</b> A negative step requires the start position to be to the right of the stop position. The second slice therefore produces an empty string.</div>
+</div></div></div><div class="accordion-item" data-keywords="find the error in the following program. age = 20
+print(&quot;age: &quot; + age) typeerror">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">25</div>
+<div class="q-body"><div class="q-title">Find the error in the following program.</div>
+<pre class="code-box">age = 20
+print(&quot;Age: &quot; + age)</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">TypeError</div>
+<div class="explanation"><b>Explanation:</b> The + operator cannot directly concatenate a string and an integer.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? age = 20
+print(&quot;age: &quot; + str(age)) age: 20">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">26</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
+<pre class="code-box">age = 20
+print(&quot;Age: &quot; + str(age))</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">Age: 20</div>
+<div class="explanation"><b>Explanation:</b> str() converts the integer to a string before concatenation.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? name = &quot;alice&quot;
 age = 20
 print(f&quot;{name} is {age} years old.&quot;) alice is 20 years old.">
 <div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">41</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — String formatting</div>
+<div class="badge">27</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
 <pre class="code-box">name = &quot;Alice&quot;
 age = 20
-print(f&quot;{name} is {age} years old.&quot;)</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">Alice is 20 years old.</div>
-<div class="explanation"><b>Explanation:</b> An f-string inserts the values of expressions inside braces.</div></div></div></div><div class="accordion-item" data-keywords="concatenating string and integer age = 20
-print(&quot;age: &quot; + age) typeerror">
+print(f&quot;{name} is {age} years old.&quot;)</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">Alice is 20 years old.</div>
+<div class="explanation"><b>Explanation:</b> An f-string evaluates expressions inside braces and inserts their values.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? s = &quot;abc&quot;
+print(s == &quot;abc&quot;)
+print(s == &quot;abc&quot;)
+print(s &lt; &quot;abd&quot;) true
+false
+true">
 <div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">42</div><div class="q-body"><div class="q-title">FIND THE ERROR — Concatenating string and integer</div>
-<pre class="code-box">age = 20
-print(&quot;Age: &quot; + age)</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Error</span>
-<div class="output-title">Answer</div><div class="output-text">TypeError</div>
-<div class="explanation"><b>Explanation:</b> The + operator cannot directly concatenate a string and an integer; conversion such as str(age) is required.</div></div></div></div><div class="accordion-item" data-keywords="explicit conversion age = 20
-print(&quot;age: &quot; + str(age)) age: 20">
+<div class="badge">28</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
+<pre class="code-box">s = &quot;abc&quot;
+print(s == &quot;abc&quot;)
+print(s == &quot;ABC&quot;)
+print(s &lt; &quot;abd&quot;)</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">True
+False
+True</div>
+<div class="explanation"><b>Explanation:</b> Equality is case-sensitive, and string comparison is lexicographic.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? s = &quot;hello&quot;
+for ch in s:
+    if ch in &quot;aeiouaeiou&quot;:
+        print(ch) e
+o">
 <div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">43</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — Explicit conversion</div>
-<pre class="code-box">age = 20
-print(&quot;Age: &quot; + str(age))</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">Age: 20</div>
-<div class="explanation"><b>Explanation:</b> str() converts the integer to a string before concatenation.</div></div></div></div><div class="accordion-item" data-keywords="boolean comparison print(&quot;abc&quot; == &quot;abc&quot;)
-print(&quot;abc&quot; == &quot;abc&quot;) true
-false">
+<div class="badge">29</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
+<pre class="code-box">s = &quot;Hello&quot;
+for ch in s:
+    if ch in &quot;aeiouAEIOU&quot;:
+        print(ch)</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">e
+o</div>
+<div class="explanation"><b>Explanation:</b> The loop visits each character and prints only characters that occur in the vowel string.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? s = &quot;education&quot;
+count = 0
+for ch in s:
+    if ch in &quot;aeiou&quot;:
+        count += 1
+print(count) 5">
 <div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">44</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — Boolean comparison</div>
-<pre class="code-box">print(&quot;abc&quot; == &quot;abc&quot;)
-print(&quot;abc&quot; == &quot;ABC&quot;)</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">True
-False</div>
-<div class="explanation"><b>Explanation:</b> String equality is case-sensitive.</div></div></div></div><div class="accordion-item" data-keywords="lexicographic comparison print(&quot;apple&quot; &lt; &quot;banana&quot;) true">
+<div class="badge">30</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
+<pre class="code-box">s = &quot;education&quot;
+count = 0
+for ch in s:
+    if ch in &quot;aeiou&quot;:
+        count += 1
+print(count)</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">5</div>
+<div class="explanation"><b>Explanation:</b> Each vowel increases the counter by one.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? s = &quot;madam&quot;
+if s == s[::-1]:
+    print(&quot;palindrome&quot;)
+else:
+    print(&quot;not palindrome&quot;) palindrome">
 <div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">45</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — Lexicographic comparison</div>
-<pre class="code-box">print(&quot;apple&quot; &lt; &quot;banana&quot;)</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">True</div>
-<div class="explanation"><b>Explanation:</b> Strings are compared lexicographically based on character ordering.</div></div></div></div><div class="accordion-item" data-keywords="empty string indexing s = &quot;&quot;
-print(s[0]) indexerror">
+<div class="badge">31</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
+<pre class="code-box">s = &quot;madam&quot;
+if s == s[::-1]:
+    print(&quot;Palindrome&quot;)
+else:
+    print(&quot;Not Palindrome&quot;)</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">Palindrome</div>
+<div class="explanation"><b>Explanation:</b> s[::-1] produces the reverse of the string, which is identical to the original.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? s = &quot;python&quot;
+result = &quot;&quot;
+for ch in s:
+    result = ch + result
+print(result) nohtyp">
 <div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">46</div><div class="q-body"><div class="q-title">FIND THE ERROR — Empty string indexing</div>
-<pre class="code-box">s = &quot;&quot;
-print(s[0])</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Error</span>
-<div class="output-title">Answer</div><div class="output-text">IndexError</div>
-<div class="explanation"><b>Explanation:</b> An empty string has no characters and therefore no valid index.</div></div></div></div><div class="accordion-item" data-keywords="empty string length s = &quot;&quot;
-print(len(s)) 0">
+<div class="badge">32</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
+<pre class="code-box">s = &quot;Python&quot;
+result = &quot;&quot;
+for ch in s:
+    result = ch + result
+print(result)</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">nohtyP</div>
+<div class="explanation"><b>Explanation:</b> Each new character is added before the existing result, building the reverse string.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? s = &quot;  hello python  &quot;
+s = s.strip()
+words = s.split()
+print(len(words))
+print(&quot;-&quot;.join(words)) 2
+hello-python">
 <div class="accordion-header" onclick="toggleItem(this)">
-<div class="badge">47</div><div class="q-body"><div class="q-title">FIND THE OUTPUT — Empty string length</div>
-<pre class="code-box">s = &quot;&quot;
-print(len(s))</pre></div><div class="toggle-icon">+</div></div>
-<div class="accordion-content"><div class="output-box"><span class="type">Output</span>
-<div class="output-title">Answer</div><div class="output-text">0</div>
-<div class="explanation"><b>Explanation:</b> An empty string contains zero characters.</div></div></div></div></div></main>
+<div class="badge">33</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
+<pre class="code-box">s = &quot;  Hello Python  &quot;
+s = s.strip()
+words = s.split()
+print(len(words))
+print(&quot;-&quot;.join(words))</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">2
+Hello-Python</div>
+<div class="explanation"><b>Explanation:</b> strip() removes outer spaces, split() creates two words, and join() combines them with a hyphen.</div>
+</div></div></div><div class="accordion-item" data-keywords="find the error in the following program. s = &quot;python&quot;
+print(s.find(&quot;java&quot;) + 1)
+x = s.index(&quot;java&quot;)
+print(x) valueerror">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">34</div>
+<div class="q-body"><div class="q-title">Find the error in the following program.</div>
+<pre class="code-box">s = &quot;Python&quot;
+print(s.find(&quot;Java&quot;) + 1)
+x = s.index(&quot;Java&quot;)
+print(x)</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">ValueError</div>
+<div class="explanation"><b>Explanation:</b> The first statement is valid and produces 0, but index() on the missing substring raises ValueError before the final print.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? s = &quot;banana&quot;
+x = s.replace(&quot;a&quot;, &quot;a&quot;, 2)
+print(x)
+print(s) banana
+banana">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">35</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
+<pre class="code-box">s = &quot;banana&quot;
+x = s.replace(&quot;a&quot;, &quot;A&quot;, 2)
+print(x)
+print(s)</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">bAnAna
+banana</div>
+<div class="explanation"><b>Explanation:</b> The optional count limits replacement to the first two occurrences, and the original remains unchanged.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? s = &quot;python&quot;
+print(s[100:])
+print(s[:100]) 
+python">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">36</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
+<pre class="code-box">s = &quot;Python&quot;
+print(s[100:])
+print(s[:100])</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">
+Python</div>
+<div class="explanation"><b>Explanation:</b> Slicing beyond the string boundaries is allowed and returns the available portion; it does not raise IndexError.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? s = &quot;abc&quot;
+print(s * 0)
+print(len(s * 0)) 
+0">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">37</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
+<pre class="code-box">s = &quot;abc&quot;
+print(s * 0)
+print(len(s * 0))</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">
+0</div>
+<div class="explanation"><b>Explanation:</b> Repeating a string zero times produces an empty string.</div>
+</div></div></div><div class="accordion-item" data-keywords="find the error in the following program. s = &quot;python&quot;
+print(s.split(5)) typeerror">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">38</div>
+<div class="q-body"><div class="q-title">Find the error in the following program.</div>
+<pre class="code-box">s = &quot;Python&quot;
+print(s.split(5))</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">TypeError</div>
+<div class="explanation"><b>Explanation:</b> The separator supplied to split() must be a string, not an integer.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? s = &quot;a  b   c&quot;
+print(s.split())
+print(len(s.split())) [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;]
+3">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">39</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
+<pre class="code-box">s = &quot;A  B   C&quot;
+print(s.split())
+print(len(s.split()))</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">[&#x27;A&#x27;, &#x27;B&#x27;, &#x27;C&#x27;]
+3</div>
+<div class="explanation"><b>Explanation:</b> When no separator is supplied, split() treats runs of whitespace as separators.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? s = &quot;python&quot;
+a = s[:2]
+b = s[2:]
+print(a + b)
+print(a)
+print(b) python
+py
+thon">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">40</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
+<pre class="code-box">s = &quot;Python&quot;
+a = s[:2]
+b = s[2:]
+print(a + b)
+print(a)
+print(b)</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">Python
+Py
+thon</div>
+<div class="explanation"><b>Explanation:</b> The two slices divide the string and concatenating them reconstructs the original.</div>
+</div></div></div><div class="accordion-item" data-keywords="find the error in the following program. s = &quot;python&quot;
+print(s.uppercase()) attributeerror">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">41</div>
+<div class="q-body"><div class="q-title">Find the error in the following program.</div>
+<pre class="code-box">s = &quot;Python&quot;
+print(s.uppercase())</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">AttributeError</div>
+<div class="explanation"><b>Explanation:</b> Python strings have upper(), not uppercase(). Calling a nonexistent string method raises AttributeError.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? s = &quot;python&quot;
+print(s.upper().lower())
+print(s.lower().upper()) python
+python">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">42</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
+<pre class="code-box">s = &quot;Python&quot;
+print(s.upper().lower())
+print(s.lower().upper())</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">python
+PYTHON</div>
+<div class="explanation"><b>Explanation:</b> String methods can be chained because each method returns a string.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? s = &quot;hello&quot;
+print(s[1:4:1])
+print(s[1:4:2])
+print(s[1:4:3]) ell
+el
+e">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">43</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
+<pre class="code-box">s = &quot;Hello&quot;
+print(s[1:4:1])
+print(s[1:4:2])
+print(s[1:4:3])</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">ell
+el
+e</div>
+<div class="explanation"><b>Explanation:</b> The step determines how far the slice moves between selected characters.</div>
+</div></div></div><div class="accordion-item" data-keywords="what is the output of the following program? s = &quot;python&quot;
+x = s
+s = s.upper()
+print(x)
+print(s) python
+python">
+<div class="accordion-header" onclick="toggleItem(this)">
+<div class="badge">44</div>
+<div class="q-body"><div class="q-title">What is the output of the following program?</div>
+<pre class="code-box">s = &quot;Python&quot;
+x = s
+s = s.upper()
+print(x)
+print(s)</pre></div>
+<div class="toggle-icon">+</div></div>
+<div class="accordion-content"><div class="output-box">
+<div class="output-title">Answer</div>
+<div class="output-text">Python
+PYTHON</div>
+<div class="explanation"><b>Explanation:</b> Strings are immutable; assigning s.upper() creates a new string while x still refers to the original.</div>
+</div></div></div></div></main>
 <footer>Python Programming | Strings – Theory Examination Practice</footer>
 <script>
 function toggleItem(h){h.parentElement.classList.toggle('open');}
