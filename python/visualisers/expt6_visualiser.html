@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Experiment 6 - Strings and File I/O Visualizer</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100vh;overflow:hidden;background:#eef4f9;color:#111;font-family:Arial,sans-serif;font-size:12px}
+.container{display:grid;grid-template-columns:1.05fr 1fr;gap:8px;height:100vh;padding:6px;max-width:100%}
+.panel{background:#fff;border-radius:6px;padding:6px 8px;box-shadow:0 1px 4px rgba(0,0,0,.08);display:flex;flex-direction:column;height:calc(100vh - 12px);overflow:hidden}
+h2{color:#0b4f86;font-size:14px;margin-bottom:4px;flex-shrink:0}
+.controls{background:#f8fafc;border:1px solid #ccd8e2;border-radius:4px;padding:4px 6px;margin-bottom:4px;display:flex;align-items:center;gap:6px;flex-shrink:0}
+button{padding:3px 10px;font-size:11px;font-weight:600;cursor:pointer;border-radius:3px;border:1px solid #0b4f86;background:#0b4f86;color:#fff}
+button:hover{background:#093e6a}
+button:disabled{opacity:.45;cursor:not-allowed;background:#718096;border-color:#718096}
+.message{font-size:11.5px;margin:1px 0 4px;color:#1a365d;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex-shrink:0}
+.section-title{background:#0b4f86;color:#fff;padding:2px 5px;font-size:10.5px;font-weight:bold;border-radius:3px 3px 0 0;margin-top:3px;flex-shrink:0}
+.box-content{background:#fff;border:1px solid #ccd8e2;border-top:none;padding:3px 6px;font:11.5px/1.15 Consolas,"Courier New",monospace;white-space:pre-wrap;border-radius:0 0 3px 3px}
+#varDisplay{height:26px;overflow:hidden;flex-shrink:0}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:5px;flex-shrink:0}
+.file-box{background:#fcfcfc;border:1px solid #ccd8e2;border-radius:3px;padding:3px 5px;height:58px;font:10.5px/1.15 Consolas,"Courier New",monospace;white-space:pre-wrap;overflow:hidden}
+.file-header{font-weight:bold;font-size:10.5px;color:#4a5568;margin-bottom:2px;border-bottom:1px solid #e2e8f0;padding-bottom:1px}
+.table-csv{width:100%;border-collapse:collapse}
+.table-csv th,.table-csv td{border:1px solid #cbd5e0;padding:1px 3px;font-size:10px;text-align:left;line-height:1}
+.table-csv th{background:#edf2f7}
+#consoleOutput{flex:1;background:#111;color:#38ef7d;min-height:75px;overflow-y:auto;line-height:1.2}
+.explanation{background:#f7fafc;border-left:3px solid #0b5d96;padding:4px 6px;margin-top:4px;font-size:10.5px;line-height:1.25;flex-shrink:0}
+pre.code{margin:0;background:#1e1e1e;color:#ddd;padding:4px 6px;border-radius:4px;font:10.5px/1.08 Consolas,"Courier New",monospace;letter-spacing:-0.2px;height:100%;overflow:hidden;white-space:pre;display:flex;flex-direction:column;justify-content:space-between}
+.line{display:block;padding:0 2px;border-radius:2px;line-height:1.06}
+.active{background:#ffeb3b;color:#000;font-weight:bold}
+.badge{display:inline-block;padding:1px 3px;font-size:9.5px;border-radius:2px;background:#e2e8f0;color:#2d3748;margin-right:3px}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- LEFT PANEL: State & Output -->
+<section class="panel">
+<h2>Execution State & Output</h2>
+
+<div class="controls">
+<button id="startBtn">Start</button>
+<button id="nextBtn" disabled>Next Step →</button>
+<button id="resetBtn">Reset</button>
+</div>
+
+<div class="message" id="message">Click Start to begin execution.</div>
+
+<!-- Variable Tracker -->
+<div class="section-title">Variable State Inspector</div>
+<div class="box-content" id="varDisplay"><i>No active variables</i></div>
+
+<!-- Virtual File System Storage -->
+<div class="section-title">Virtual File System (Disk Storage)</div>
+<div class="box-content grid-2">
+  <div>
+    <div class="file-header">📄 data.txt</div>
+    <div class="file-box" id="txtFileDisplay"><i>(file not created)</i></div>
+  </div>
+  <div>
+    <div class="file-header">📊 data.csv</div>
+    <div class="file-box" id="csvFileDisplay"><i>(file not created)</i></div>
+  </div>
+</div>
+
+<!-- Standard Python Output Console -->
+<div class="section-title">Python Console Output (stdout)</div>
+<div class="box-content" id="consoleOutput"></div>
+
+<div class="explanation" id="explanation">
+<b>Experiment 6:</b> Click <b>Start</b> to trace Strings and File I/O execution line-by-line.
+</div>
+</section>
+
+<!-- RIGHT PANEL: Python Program Source -->
+<section class="panel">
+<h2>Python Program — Line by Line</h2>
+
+<pre class="code">
+<span id="l1" class="line">import csv</span>
+<span id="l2" class="line"># 1. String methods</span>
+<span id="l3" class="line">name = "  gear  "</span>
+<span id="l4" class="line">print("Original:", name)</span>
+<span id="l5" class="line">print("Uppercase:", name.upper())</span>
+<span id="l6" class="line">print("Lowercase:", name.lower())</span>
+<span id="l7" class="line">print("Without spaces:", name.strip())</span>
+<span id="l8" class="line">print("Length:", len(name.strip()))</span>
+<span id="l9" class="line">print("Replaced:", name.replace("gear", "shaft"))</span>
+<span id="l10" class="line">print("Count of 'a':", name.count("a"))</span>
+<span id="l11" class="line"># 2. Write to a text file</span>
+<span id="l12" class="line">with open("data.txt", "w") as file:</span>
+<span id="l13" class="line">    file.write("Gear\n")</span>
+<span id="l14" class="line">    file.write("Steel\n")</span>
+<span id="l15" class="line">    file.write("120 mm")</span>
+<span id="l16" class="line"># 3. Read from text file</span>
+<span id="l17" class="line">with open("data.txt", "r") as file:</span>
+<span id="l18" class="line">    print("\nText file data:")</span>
+<span id="l19" class="line">    print(file.read())</span>
+<span id="l20" class="line"># 4. Write to CSV file</span>
+<span id="l21" class="line">with open("data.csv", "w", newline="") as file:</span>
+<span id="l22" class="line">    writer = csv.writer(file)</span>
+<span id="l23" class="line">    writer.writerow(["Name", "Material", "Diameter"])</span>
+<span id="l24" class="line">    writer.writerow(["Gear", "Steel", "120 mm"])</span>
+<span id="l25" class="line">print("\nCSV file created successfully.")</span>
+</pre>
+</section>
+
+</div>
+
+<script>
+let step = 0;
+let variables = {};
+let files = { txt: null, csv: [] };
+let stdoutBuffer = "";
+
+const startBtn = document.getElementById("startBtn");
+const nextBtn = document.getElementById("nextBtn");
+const resetBtn = document.getElementById("resetBtn");
+const message = document.getElementById("message");
+const explanation = document.getElementById("explanation");
+const varDisplay = document.getElementById("varDisplay");
+const txtFileDisplay = document.getElementById("txtFileDisplay");
+const csvFileDisplay = document.getElementById("csvFileDisplay");
+const consoleOutput = document.getElementById("consoleOutput");
+
+function clearHighlight(){
+  document.querySelectorAll(".line").forEach(x => x.classList.remove("active"));
+}
+
+function highlight(id){
+  clearHighlight();
+  const el = document.getElementById(id);
+  if(el) el.classList.add("active");
+}
+
+function printToConsole(text){
+  stdoutBuffer += text + "\n";
+  consoleOutput.textContent = stdoutBuffer;
+  consoleOutput.scrollTop = consoleOutput.scrollHeight;
+}
+
+function updateVarDisplay(){
+  if(Object.keys(variables).length === 0){
+    varDisplay.innerHTML = "<i>No active variables</i>";
+    return;
+  }
+  let out = [];
+  for(let [k, v] of Object.entries(variables)){
+    out.push(`<span class="badge">var</span><b>${k}</b> = ${typeof v === 'string' && !v.startsWith('<') ? `"${v}"` : v}`);
+  }
+  varDisplay.innerHTML = out.join(" | ");
+}
+
+function updateFileDisplays(){
+  txtFileDisplay.textContent = files.txt === null ? "(file not created)" : files.txt;
+
+  if(files.csv.length === 0){
+    csvFileDisplay.innerHTML = "<i>(file not created)</i>";
+  } else {
+    let table = '<table class="table-csv">';
+    files.csv.forEach((row, idx) => {
+      let tag = idx === 0 ? 'th' : 'td';
+      table += '<tr>' + row.map(cell => `<${tag}>${cell}</${tag}>`).join('') + '</tr>';
+    });
+    table += '</table>';
+    csvFileDisplay.innerHTML = table;
+  }
+}
+
+function reset(){
+  step = 0;
+  variables = {};
+  files = { txt: null, csv: [] };
+  stdoutBuffer = "";
+
+  startBtn.disabled = false;
+  nextBtn.disabled = true;
+
+  updateVarDisplay();
+  updateFileDisplays();
+  consoleOutput.textContent = "";
+
+  message.textContent = "Click Start to begin execution.";
+  explanation.innerHTML = "<b>Experiment 6:</b> Click <b>Start</b> to trace Strings and File I/O execution line-by-line.";
+  clearHighlight();
+}
+
+function start(){
+  step = 1;
+  startBtn.disabled = true;
+  nextBtn.disabled = false;
+  nextStep();
+}
+
+const steps = [
+  {
+    line: "l1",
+    action: () => {
+      variables["csv"] = "<module 'csv'>";
+      updateVarDisplay();
+      message.textContent = "Importing module.";
+      explanation.innerHTML = "<b>import csv:</b> Loads the built-in CSV module to handle CSV operations.";
+    }
+  },
+  {
+    line: "l3",
+    action: () => {
+      variables["name"] = "  gear  ";
+      updateVarDisplay();
+      message.textContent = "String initialized.";
+      explanation.innerHTML = "<b>name = \"  gear  \":</b> Assigns string with surrounding spaces to variable <code>name</code>.";
+    }
+  },
+  {
+    line: "l4",
+    action: () => {
+      printToConsole("Original:   gear  ");
+      message.textContent = "Printing original string.";
+      explanation.innerHTML = "<b>print(\"Original:\", name):</b> Prints unaltered string with leading/trailing spaces.";
+    }
+  },
+  {
+    line: "l5",
+    action: () => {
+      printToConsole("Uppercase:   GEAR  ");
+      message.textContent = "Calling .upper()";
+      explanation.innerHTML = "<b>name.upper():</b> Converts all characters to uppercase.";
+    }
+  },
+  {
+    line: "l6",
+    action: () => {
+      printToConsole("Lowercase:   gear  ");
+      message.textContent = "Calling .lower()";
+      explanation.innerHTML = "<b>name.lower():</b> Converts all characters to lowercase.";
+    }
+  },
+  {
+    line: "l7",
+    action: () => {
+      printToConsole("Without spaces: gear");
+      message.textContent = "Calling .strip()";
+      explanation.innerHTML = "<b>name.strip():</b> Returns a copy with leading and trailing spaces removed.";
+    }
+  },
+  {
+    line: "l8",
+    action: () => {
+      printToConsole("Length: 4");
+      message.textContent = "Calling len() on stripped string.";
+      explanation.innerHTML = "<b>len(name.strip()):</b> Counts characters of trimmed string (4).";
+    }
+  },
+  {
+    line: "l9",
+    action: () => {
+      printToConsole("Replaced:   shaft  ");
+      message.textContent = "Calling .replace()";
+      explanation.innerHTML = "<b>name.replace(\"gear\", \"shaft\"):</b> Replaces substring 'gear' with 'shaft'.";
+    }
+  },
+  {
+    line: "l10",
+    action: () => {
+      printToConsole("Count of 'a': 1");
+      message.textContent = "Calling .count()";
+      explanation.innerHTML = "<b>name.count(\"a\"):</b> Counts occurrences of substring 'a'.";
+    }
+  },
+  {
+    line: "l12",
+    action: () => {
+      files.txt = "";
+      updateFileDisplays();
+      message.textContent = "Opening data.txt in write mode.";
+      explanation.innerHTML = "<b>with open(\"data.txt\", \"w\") as file:</b> Opens/creates <code>data.txt</code> in write mode.";
+    }
+  },
+  {
+    line: "l13",
+    action: () => {
+      files.txt += "Gear\n";
+      updateFileDisplays();
+      message.textContent = "Writing line 1 to data.txt";
+      explanation.innerHTML = "<b>file.write(\"Gear\\n\"):</b> Writes <code>Gear</code> with newline to text file.";
+    }
+  },
+  {
+    line: "l14",
+    action: () => {
+      files.txt += "Steel\n";
+      updateFileDisplays();
+      message.textContent = "Writing line 2 to data.txt";
+      explanation.innerHTML = "<b>file.write(\"Steel\\n\"):</b> Writes <code>Steel</code> with newline to text file.";
+    }
+  },
+  {
+    line: "l15",
+    action: () => {
+      files.txt += "120 mm";
+      updateFileDisplays();
+      message.textContent = "Writing line 3 to data.txt";
+      explanation.innerHTML = "<b>file.write(\"120 mm\"):</b> Writes <code>120 mm</code>. Exiting closes file automatically.";
+    }
+  },
+  {
+    line: "l17",
+    action: () => {
+      message.textContent = "Opening data.txt in read mode.";
+      explanation.innerHTML = "<b>with open(\"data.txt\", \"r\") as file:</b> Opens <code>data.txt</code> for reading.";
+    }
+  },
+  {
+    line: "l18",
+    action: () => {
+      printToConsole("Text file data:");
+      message.textContent = "Printing header.";
+      explanation.innerHTML = "<b>print(\"\\nText file data:\"):</b> Outputs header prior to reading file content.";
+    }
+  },
+  {
+    line: "l19",
+    action: () => {
+      printToConsole(files.txt);
+      message.textContent = "Reading data.txt content.";
+      explanation.innerHTML = "<b>print(file.read()):</b> Reads entire file content from disk buffer to stdout.";
+    }
+  },
+  {
+    line: "l21",
+    action: () => {
+      files.csv = [];
+      updateFileDisplays();
+      message.textContent = "Opening data.csv in write mode.";
+      explanation.innerHTML = "<b>with open(\"data.csv\", \"w\", newline=\"\") as file:</b> Opens <code>data.csv</code> for writing.";
+    }
+  },
+  {
+    line: "l22",
+    action: () => {
+      variables["writer"] = "<_csv.writer object>";
+      updateVarDisplay();
+      message.textContent = "Creating csv.writer.";
+      explanation.innerHTML = "<b>writer = csv.writer(file):</b> Instantiates CSV writer object bound to file.";
+    }
+  },
+  {
+    line: "l23",
+    action: () => {
+      files.csv.push(["Name", "Material", "Diameter"]);
+      updateFileDisplays();
+      message.textContent = "Writing header row to CSV.";
+      explanation.innerHTML = "<b>writer.writerow([...]):</b> Formats and writes CSV table header row.";
+    }
+  },
+  {
+    line: "l24",
+    action: () => {
+      files.csv.push(["Gear", "Steel", "120 mm"]);
+      updateFileDisplays();
+      message.textContent = "Writing record row to CSV.";
+      explanation.innerHTML = "<b>writer.writerow([...]):</b> Formats and writes record row values to CSV.";
+    }
+  },
+  {
+    line: "l25",
+    action: () => {
+      printToConsole("CSV file created successfully.");
+      message.textContent = "Execution complete.";
+      explanation.innerHTML = "<b>Completed:</b> All string manipulation and file I/O operations finished.";
+      nextBtn.disabled = true;
+      startBtn.disabled = false;
+    }
+  }
+];
+
+function nextStep(){
+  if(step > 0 && step <= steps.length){
+    const current = steps[step - 1];
+    highlight(current.line);
+    current.action();
+    step++;
+  }
+}
+
+startBtn.onclick = start;
+nextBtn.onclick = nextStep;
+resetBtn.onclick = reset;
+
+reset();
+</script>
+</body>
+</html>
