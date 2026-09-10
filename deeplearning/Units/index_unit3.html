@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Unit 3 - Deep Learning</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Segoe UI,Arial,sans-serif;
+    background:#f4f7fc;
+    color:#333;
+}
+
+header{
+    background:linear-gradient(135deg,#003366,#0066cc);
+    color:white;
+    text-align:center;
+    padding:30px;
+}
+
+header h1{
+    margin:0;
+    font-size:38px;
+}
+
+header p{
+    margin-top:8px;
+    font-size:20px;
+}
+
+.container{
+    width:92%;
+    max-width:1200px;
+    margin:30px auto;
+}
+
+.card{
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.12);
+}
+
+/* ---------- Topic Heading ---------- */
+
+.topic-heading{
+
+    color:#cc0000;
+    font-size:34px;
+    font-weight:bold;
+    text-align:left;
+    margin-top:40px;
+    margin-bottom:20px;
+    border-left:8px solid #cc0000;
+    padding-left:15px;
+
+}
+
+
+
+/* ================= Fixed Navigation Bar ================= */
+
+.top-navbar{
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:100px;
+
+    background:#003366;
+
+    color:white;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 25px;
+
+    box-sizing:border-box;
+
+    z-index:9999;
+
+    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+
+}
+
+.nav-left{
+
+    flex:1;
+
+}
+
+.nav-center{
+
+    flex:2;
+
+    text-align:center;
+
+    font-size:28px;
+
+    font-weight:bold;
+
+}
+
+.nav-right{
+
+    flex:1;
+
+    text-align:right;
+
+}
+
+.top-navbar a{
+
+    color:white;
+
+    text-decoration:none;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+}
+
+.top-navbar a:hover{
+
+    color:#ffcc00;
+
+}
+
+/* Leave space for the fixed bar */
+
+body{
+
+    padding-top:104px;
+
+}
+/* ---------- Image ---------- */
+
+.image{
+
+    text-align:center;
+    margin-bottom:50px;
+
+}
+
+.image img{
+
+    width:100%;
+    max-width:1100px;
+    border-radius:8px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.18);
+
+}
+
+.two-column{
+
+    display:flex;
+    gap:30px;
+    align-items:flex-start;
+    margin-bottom:30px;
+
+}
+
+.left-column{
+
+    flex:2;
+
+}
+
+.right-column{
+
+    flex:1;
+    text-align:center;
+
+}
+
+.right-column img{
+
+    width:100%;
+    max-width:380px;
+    border-radius:8px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.18);
+
+}
+
+h3{
+
+    color:#003366;
+    font-size:26px;
+    margin-top:25px;
+
+}
+
+p,li{
+
+    font-size:20px;
+    line-height:1.8;
+
+}
+
+.formula-box{
+
+    background:#f8f9fa;
+    border-left:6px solid #0066cc;
+    padding:15px 20px;
+    margin:20px 0;
+    font-size:24px;
+    font-family:"Cambria Math","Times New Roman",serif;
+
+}
+
+hr{
+
+    margin:35px 0;
+
+}
+
+/* ---------- Buttons ---------- */
+
+.buttons{
+
+    text-align:center;
+    margin-top:30px;
+
+}
+
+.btn{
+
+    display:inline-block;
+    text-decoration:none;
+    background:#0066cc;
+    color:white;
+    padding:12px 22px;
+    margin:8px;
+    border-radius:6px;
+    font-weight:bold;
+
+}
+
+.btn:hover{
+
+    background:#004c99;
+
+}
+
+footer{
+
+    margin-top:40px;
+    background:#003366;
+    color:white;
+    text-align:center;
+    padding:18px;
+
+}
+/* ================= Reading Progress Bar ================= */
+
+#progress-container{
+
+    position:fixed;
+
+    top:100px;          /* Same as navbar height */
+
+    left:0;
+
+    width:100%;
+
+    height:6px;
+
+    background:#d0d0d0;
+
+    z-index:9999;
+
+}
+
+#progress-bar{
+
+    width:0%;
+
+    height:100%;
+
+    background:#d32f2f;;     /* Bright Red */
+
+    transition:width 0.15s linear;
+
+}
+</style>
+
+</head>
+
+<body>
+<div id="progress-container">
+
+    <div id="progress-bar"></div>
+
+</div>
+<div class="top-navbar">
+
+    <div class="nav-left">
+        <a href="../index.html">Deep Learning Home</a>
+    </div>
+
+    <div class="nav-center">
+        UNIT 1 : Basics of Neural Networks
+    </div>
+
+    <div class="nav-right">
+        <a href="index_learning_material.html">Learning Material Home ➜</a>
+</div>
+
+</div>
+
+
+<div class="container">
+
+<div class="card">
+
+<h2 class="topic-heading">1.1 Introduction to Deep Learning</h2>
+
+<div class="image">
+<img src="images/unit1_image1a.webp"
+     alt="Introduction to Deep Learning">
+</div>
+
+<h2 class="topic-heading">AI vs ML Vs Deep Learning</h2>
+
+<div class="image">
+<img src="images/unit1_image1b.webp"
+     alt="AI vs ML Vs Deep Learning">
+</div>
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="buttons">
+
+<a class="btn" href="index.html">⬅ Back to Deep Learning</a>
+
+<a class="btn" href="index_unit2.html">Next Unit ➜</a>
+
+<a class="btn" href="../index.html">🏠 Home</a>
+
+</div>
+
+</div>
+
+<footer>
+
+© 2026 D. Kiran Prasad
+
+</footer>
+<script>
+
+window.onscroll = function(){
+
+    let scrollTop = document.documentElement.scrollTop;
+
+    let scrollHeight = document.documentElement.scrollHeight -
+                       document.documentElement.clientHeight;
+
+    let progress = (scrollTop / scrollHeight) * 100;
+
+    document.getElementById("progress-bar").style.width = progress + "%";
+
+};
+
+</script>
+</body>
+
+</html>
