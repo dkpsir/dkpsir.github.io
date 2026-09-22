@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Python Error Handling – Concepts and Examples</title>
+<style>
+body{margin:0;background:#eef4f9;font-family:Arial;color:#111}.header{background:linear-gradient(90deg,#0b477d,#087cc1);color:white;text-align:center;padding:24px}.header h1{margin:0;font-size:30px}.container{width:94%;max-width:1450px;margin:24px auto}.card{background:white;border-radius:12px;padding:24px;margin-bottom:22px;box-shadow:0 4px 18px #0002}h2{color:#075b99;border-left:6px solid #075b99;padding-left:12px}p,li,td{line-height:1.55}table{width:100%;border-collapse:collapse}th{background:#24577f;color:white;padding:11px;text-align:left}td{border:1px solid #ccd7e2;padding:11px;vertical-align:top}tr:nth-child(even){background:#f7faff}.code{display:block;background:#f3f7fc;border:1px solid #bfd2e7;border-radius:5px;padding:9px;font:14px Consolas,monospace;color:#064ea8;white-space:pre-wrap}.program{background:#1c1f23;color:#e9eef2;border-radius:8px;padding:17px;overflow:auto;font:14px/1.55 Consolas,monospace;white-space:pre-wrap}.output{background:#111820;color:#e9f2f7;border-radius:8px;padding:13px;font:14px/1.55 Consolas,monospace;white-space:pre-wrap;margin-top:10px}.note{background:#fff8df;border-left:5px solid #d99a00;padding:13px 17px;margin-top:15px}.good{background:#edf9f0;border-left:5px solid #2e8b57;padding:13px 17px;margin-top:15px}.flow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;margin:18px 0}.box{background:#e9f4ff;border:2px solid #2374aa;border-radius:9px;padding:13px 18px;text-align:center;font-weight:bold}.arrow{font-size:24px;color:#075b99}footer{background:#063b70;color:white;text-align:center;padding:13px}@media(max-width:700px){.container{width:95%}.card{padding:15px}.arrow{display:none}th,td{font-size:13px}}
+</style></head><body>
+<header class="header"><h1>PYTHON PROGRAMMING</h1><p>Error Handling – Concepts and Examples</p></header>
+<main class="container">
+
+<section class="card"><h2>1. What is Error Handling?</h2>
+<p><b>Error handling</b> is the process of detecting and managing errors that occur while a program is running. Python provides <b>exception handling</b> so that a program can respond to runtime problems in a controlled manner.</p>
+<table><tr><th>Term</th><th>Meaning</th><th>Description</th></tr>
+<tr><td>Error</td><td>Problem in a program</td><td>A condition that prevents the program from producing the intended result.</td></tr>
+<tr><td>Exception</td><td>Runtime event</td><td>An event that interrupts the normal flow of execution.</td></tr>
+<tr><td>Exception Handling</td><td>Managing exceptions</td><td>Using Python statements to detect and handle exceptions.</td></tr></table>
+<div class="note"><b>Important:</b> Error handling is especially useful when input or runtime conditions cannot be guaranteed to be valid.</div></section>
+
+<section class="card"><h2>2. Types of Problems in a Python Program</h2>
+<table><tr><th>Type</th><th>When it occurs</th><th>Example</th></tr>
+<tr><td>Syntax Error</td><td>Python syntax is incorrect.</td><td><span class="code">if x &gt; 5 print(x)</span></td></tr>
+<tr><td>Runtime Exception</td><td>A problem occurs while the program is executing.</td><td><span class="code">10 / 0</span></td></tr>
+<tr><td>Logical Error</td><td>The program runs but produces an incorrect result.</td><td>Using an incorrect formula.</td></tr></table>
+<div class="note"><b>Key point:</b> <span class="code">try</span> and <span class="code">except</span> are primarily used to handle exceptions during execution.</div></section>
+
+<section class="card"><h2>3. Common Built-in Exceptions</h2>
+<table><tr><th>Exception</th><th>Typical Situation</th><th>Example</th></tr>
+<tr><td>ValueError</td><td>Value cannot be converted or is inappropriate.</td><td><span class="code">int("abc")</span></td></tr>
+<tr><td>TypeError</td><td>Operation uses incompatible data types.</td><td><span class="code">"10" + 5</span></td></tr>
+<tr><td>ZeroDivisionError</td><td>Division by zero.</td><td><span class="code">10 / 0</span></td></tr>
+<tr><td>IndexError</td><td>Invalid sequence index.</td><td><span class="code">a[5]</span></td></tr>
+<tr><td>KeyError</td><td>Dictionary key does not exist.</td><td><span class="code">d["x"]</span></td></tr>
+<tr><td>FileNotFoundError</td><td>Requested file is missing.</td><td><span class="code">open("data.txt","r")</span></td></tr>
+<tr><td>NameError</td><td>Undefined name is used.</td><td><span class="code">print(total)</span></td></tr></table></section>
+
+<section class="card"><h2>4. try Block</h2><p>The <b>try</b> block contains statements that may generate an exception.</p>
+<div class="code">try:
+    statements_that_may_cause_error</div>
+<div class="note">Python first attempts to execute the statements inside the try block.</div></section>
+
+<section class="card"><h2>5. except Block</h2><p>The <b>except</b> block contains statements used to handle a matching exception.</p>
+<div class="program">try:
+    number = int(input("Enter an integer: "))
+except ValueError:
+    print("Please enter a valid integer.")</div>
+<div class="note">If the input cannot be converted to an integer, <span class="code">ValueError</span> is raised and the except block executes.</div></section>
+
+<section class="card"><h2>6. Multiple except Blocks</h2>
+<div class="program">try:
+    a = int(input("Enter a: "))
+    b = int(input("Enter b: "))
+    print(a / b)
+
+except ValueError:
+    print("Enter numbers only.")
+
+except ZeroDivisionError:
+    print("Division by zero is not allowed.")</div>
+<div class="note">Different exception types can have different handling statements.</div></section>
+
+<section class="card"><h2>7. Exception Object using as</h2><p>An exception object can be stored in a variable using <b>as</b>.</p>
+<div class="program">try:
+    number = int("abc")
+except ValueError as e:
+    print("Error:", e)</div>
+<div class="output">Error: invalid literal for int() with base 10: 'abc'</div>
+<div class="note">Here, <span class="code">e</span> refers to the exception object and can be used to display its message.</div></section>
+
+<section class="card"><h2>8. else Block</h2><p>The <b>else</b> block executes only when no exception occurs in the try block.</p>
+<div class="program">try:
+    number = int(input("Enter an integer: "))
+except ValueError:
+    print("Invalid input.")
+else:
+    print("Valid integer:", number)</div></section>
+
+<section class="card"><h2>9. finally Block</h2><p>The <b>finally</b> block is used for statements that should normally execute whether an exception occurs or not.</p>
+<div class="program">try:
+    number = int(input("Enter a number: "))
+except ValueError:
+    print("Invalid input.")
+finally:
+    print("Execution completed.")</div>
+<div class="note">It is commonly used for cleanup or final status messages.</div></section>
+
+<section class="card"><h2>10. Complete try–except–else–finally Structure</h2>
+<div class="code">try:
+    # statements that may cause an exception
+except SomeException:
+    # handle exception
+else:
+    # execute when no exception occurs
+finally:
+    # final action / cleanup</div>
+<table><tr><th>Block</th><th>When it executes</th></tr>
+<tr><td>try</td><td>Contains the statements being monitored.</td></tr>
+<tr><td>except</td><td>Executes when a matching exception occurs.</td></tr>
+<tr><td>else</td><td>Executes when no exception occurs.</td></tr>
+<tr><td>finally</td><td>Normally executes after try/except processing.</td></tr></table></section>
+
+<section class="card"><h2>11. Execution Flow</h2>
+<div class="flow"><div class="box">Start</div><div class="arrow">→</div><div class="box">try block</div><div class="arrow">→</div><div class="box">Exception?</div></div>
+<div class="flow"><div class="box">No</div><div class="arrow">→</div><div class="box">else</div><div class="arrow">→</div><div class="box">finally</div><div class="arrow">→</div><div class="box">End</div></div>
+<div class="flow"><div class="box">Yes</div><div class="arrow">→</div><div class="box">Matching except</div><div class="arrow">→</div><div class="box">finally</div><div class="arrow">→</div><div class="box">End</div></div></section>
+
+<section class="card"><h2>12. raise Statement</h2>
+<p>The <b>raise</b> statement explicitly generates an exception when a programmer-defined condition is not satisfied.</p>
+<div class="code">raise ValueError("Invalid value")</div>
+<div class="program">age = int(input("Enter age: "))
+
+if age &lt; 0:
+    raise ValueError("Age cannot be negative.")
+
+print("Age:", age)</div>
+<div class="note"><b>Remember:</b> <b>raise</b> generates the exception; <b>except</b> handles it.</div></section>
+
+<section class="card"><h2>13. Custom / User-Defined Exceptions</h2>
+<p>A programmer can create an application-specific exception by defining a class derived from <b>Exception</b>.</p>
+<div class="program">class TemperatureError(Exception):
+    pass</div>
+<div class="note">The custom exception name should describe the condition it represents.</div></section>
+
+<section class="card"><h2>14. Raising and Handling a Custom Exception</h2>
+<div class="program">class TemperatureError(Exception):
+    pass
+
+try:
+    temperature = 120
+    if temperature &gt; 100:
+        raise TemperatureError("Temperature is too high.")
+
+except TemperatureError as e:
+    print("Temperature Error:", e)</div>
+<div class="output">Temperature Error: Temperature is too high.</div></section>
+
+<section class="card"><h2>15. Built-in Exception vs Custom Exception</h2>
+<table><tr><th>Type</th><th>Example</th><th>Description</th></tr>
+<tr><td>Built-in exception</td><td>ValueError</td><td>Already provided by Python.</td></tr>
+<tr><td>Custom exception</td><td>TemperatureError</td><td>Created by the programmer for a particular application condition.</td></tr></table></section>
+
+<section class="card"><h2>16. Example for Introducing Error Handling in Lab</h2>
+<p>The following <b>Student Marks and Average</b> program is used only as a simple classroom example to introduce <b>try, except, raise, else and finally</b>. It is <b>not the Experiment 7 mechanical program</b>.</p>
+<pre class="program"># Program: Student Marks and Average
+
+try:
+    n = int(input("Enter number of subjects: "))
+
+    if n &lt;= 0:
+        raise ValueError("Number of subjects must be positive")
+
+    total = 0
+
+    for i in range(n):
+        marks = float(input(f"Enter marks for subject {i + 1}: "))
+
+        if marks &lt; 0 or marks &gt; 100:
+            raise ValueError("Marks must be between 0 and 100")
+
+        total += marks
+
+except ValueError as e:
+    print("Error:", e)
+
+except ZeroDivisionError:
+    print("Error: Cannot calculate average with zero subjects.")
+
+else:
+    average = total / n
+    print("Total Marks:", total)
+    print("Average Marks:", average)
+
+finally:
+    print("Program execution completed.")</pre></section>
+
+<section class="card"><h2>17. Understanding the Example Program</h2>
+<table><tr><th>Program Part</th><th>Concept</th><th>Explanation</th></tr>
+<tr><td><span class="code">try:</span></td><td>try block</td><td>Contains input and calculation statements that may produce exceptions.</td></tr>
+<tr><td><span class="code">int(input(...))</span></td><td>ValueError</td><td>Non-integer input can cause ValueError.</td></tr>
+<tr><td><span class="code">if n &lt;= 0</span></td><td>Validation</td><td>Checks whether the number of subjects is acceptable.</td></tr>
+<tr><td><span class="code">raise ValueError(...)</span></td><td>raise</td><td>Explicitly generates ValueError when the condition is invalid.</td></tr>
+<tr><td><span class="code">float(input(...))</span></td><td>ValueError</td><td>Non-numerical marks can cause ValueError.</td></tr>
+<tr><td><span class="code">marks &lt; 0 or marks &gt; 100</span></td><td>Validation + raise</td><td>Checks whether marks are within the permitted range.</td></tr>
+<tr><td><span class="code">except ValueError as e</span></td><td>Exception object</td><td>Catches ValueError and stores the exception object in <b>e</b>.</td></tr>
+<tr><td><span class="code">except ZeroDivisionError</span></td><td>Multiple except</td><td>Demonstrates handling another possible exception separately.</td></tr>
+<tr><td><span class="code">else:</span></td><td>else block</td><td>Calculates and displays the average when no exception occurs.</td></tr>
+<tr><td><span class="code">finally:</span></td><td>finally block</td><td>Displays the completion message after exception handling.</td></tr></table></section>
+
+<section class="card"><h2>18. Example – Valid Input</h2>
+<pre class="program">Enter number of subjects: 3
+Enter marks for subject 1: 80
+Enter marks for subject 2: 75
+Enter marks for subject 3: 85</pre>
+<div class="output">Total Marks: 240.0
+Average Marks: 80.0
+Program execution completed.</div>
+<div class="note">No exception occurs, so the <b>else</b> block executes. The <b>finally</b> block also executes.</div></section>
+
+<section class="card"><h2>19. Example – Invalid Number of Subjects</h2>
+<pre class="program">Enter number of subjects: 0</pre>
+<div class="output">Error: Number of subjects must be positive
+Program execution completed.</div>
+<div class="note">The program explicitly raises ValueError. The matching except block handles it. The else block is skipped, while finally executes.</div></section>
+
+<section class="card"><h2>20. Example – Invalid Marks</h2>
+<pre class="program">Enter number of subjects: 2
+Enter marks for subject 1: 85
+Enter marks for subject 2: 120</pre>
+<div class="output">Error: Marks must be between 0 and 100
+Program execution completed.</div>
+<div class="note">The program detects invalid marks and uses <b>raise ValueError()</b> to generate an exception.</div></section>
+
+<section class="card"><h2>21. Example – Non-Numerical Input</h2>
+<pre class="program">Enter number of subjects: abc</pre>
+<div class="output">Error: invalid literal for int() with base 10: 'abc'
+Program execution completed.</div>
+<div class="note">The conversion using <b>int()</b> produces ValueError, which is handled by <b>except ValueError as e</b>.</div></section>
+
+<section class="card"><h2>22. Important Theory Points</h2>
+<ul>
+<li>Exception handling manages runtime problems in a controlled manner.</li>
+<li><b>try</b> contains statements that may cause an exception.</li>
+<li><b>except</b> handles a matching exception.</li>
+<li>Multiple except blocks can be used for different exception types.</li>
+<li><b>as e</b> stores the exception object in a variable.</li>
+<li><b>else</b> executes only when no exception occurs in try.</li>
+<li><b>finally</b> is used for actions that should normally execute regardless of an exception.</li>
+<li><b>raise</b> explicitly generates an exception.</li>
+<li>ValueError, TypeError, ZeroDivisionError, IndexError and FileNotFoundError are common built-in exceptions.</li>
+<li>Custom exceptions can be created by inheriting from Exception.</li>
+<li>Specific exception handling is generally clearer than unnecessarily broad handling.</li>
+<li>Exception handling does not automatically correct logical errors.</li>
+<li>Input validation and exception handling can be used together.</li>
+</ul></section>
+
+</main>
+<footer>Python Programming | Error Handling – Concepts and Examples</footer>
+</body></html>
