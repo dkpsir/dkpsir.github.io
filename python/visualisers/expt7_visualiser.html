@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Experiment 7 - Exception Handling Visualizer</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100vh;overflow:hidden;background:#eef4f9;color:#111;font-family:Arial,sans-serif;font-size:14px}
+.container{display:grid;grid-template-columns:1.05fr 1fr;gap:12px;height:100vh;padding:10px;max-width:100%}
+.panel{background:#fff;border-radius:8px;padding:10px;box-shadow:0 1px 6px rgba(0,0,0,.08);display:flex;flex-direction:column;height:calc(100vh - 20px);overflow:hidden}
+h2{color:#0b4f86;font-size:16px;margin-bottom:6px;flex-shrink:0}
+.controls{background:#f8fafc;border:1px solid #ccd8e2;border-radius:6px;padding:6px 10px;margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-shrink:0;flex-wrap:wrap}
+button{padding:5px 12px;font-size:13px;font-weight:600;cursor:pointer;border-radius:4px;border:1px solid #0b4f86;background:#0b4f86;color:#fff}
+button:hover{background:#093e6a}
+button:disabled{opacity:.45;cursor:not-allowed;background:#718096;border-color:#718096}
+select{padding:4px 8px;font-size:12.5px;border-radius:4px;border:1px solid #ccd8e2;background:#fff;font-weight:600;color:#2d3748}
+.message{font-size:13px;margin:2px 0 6px;color:#1a365d;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex-shrink:0}
+.section-title{background:#0b4f86;color:#fff;padding:4px 8px;font-size:12px;font-weight:bold;border-radius:4px 4px 0 0;margin-top:4px;flex-shrink:0}
+.box-content{background:#fff;border:1px solid #ccd8e2;border-top:none;padding:5px 8px;font:13px/1.25 Consolas,"Courier New",monospace;white-space:pre-wrap;border-radius:0 0 4px 4px}
+#varDisplay{height:36px;overflow:hidden;flex-shrink:0;display:flex;align-items:center}
+#callStackDisplay{height:36px;overflow:hidden;flex-shrink:0;display:flex;align-items:center;background:#fafafa}
+#consoleOutput{flex:1;background:#111;color:#38ef7d;min-height:95px;overflow-y:auto;line-height:1.25;font-size:13px}
+.explanation{background:#f7fafc;border-left:4px solid #0b5d96;padding:6px 10px;margin-top:6px;font-size:12.5px;line-height:1.35;flex-shrink:0}
+pre.code{margin:0;background:#1e1e1e;color:#ddd;padding:6px 10px;border-radius:6px;font:13px Consolas,"Courier New",monospace;height:100%;overflow:hidden;white-space:pre;display:flex;flex-direction:column;justify-content:space-between}
+.line{display:block;padding:1px 4px;border-radius:3px;line-height:1.2}
+.active{background:#ffeb3b;color:#000;font-weight:bold}
+.error-line{background:#f87171;color:#fff;font-weight:bold}
+.badge{display:inline-block;padding:1px 5px;font-size:11px;border-radius:3px;background:#e2e8f0;color:#2d3748;margin-right:4px}
+.badge-err{background:#fee2e2;color:#991b1b;border:1px solid #f87171}
+.badge-block{background:#e0f2fe;color:#0369a1;border:1px solid #38bdf8}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- LEFT PANEL: State & Output -->
+<section class="panel">
+<h2>Execution State & Output</h2>
+
+<div class="controls">
+<label for="testCase" style="font-weight:bold;font-size:12px;">Select Input Case:</label>
+<select id="testCase">
+  <option value="case1">Case 1: 75 (°C) — Safe Valid Input</option>
+  <option value="case2">Case 2: 120 (°C) — Unsafe Temperature</option>
+  <option value="case3">Case 3: "abc" — Invalid Non-Numeric</option>
+</select>
+<button id="startBtn">Start</button>
+<button id="nextBtn" disabled>Next Step →</button>
+<button id="resetBtn">Reset</button>
+</div>
+
+<div class="message" id="message">Select an input case and click Start.</div>
+
+<!-- Variable Tracker -->
+<div class="section-title">Variable State Inspector</div>
+<div class="box-content" id="varDisplay"><i>No active variables</i></div>
+
+<!-- Active Execution Block Tracker -->
+<div class="section-title">Active Execution Block & Raised Exception</div>
+<div class="box-content" id="callStackDisplay"><i>Global Scope</i></div>
+
+<!-- Standard Python Output Console -->
+<div class="section-title">Python Console Output (stdout)</div>
+<div class="box-content" id="consoleOutput"></div>
+
+<div class="explanation" id="explanation">
+<b>Experiment 7:</b> Choose a test case and click <b>Start</b> to trace Exception Handling line-by-line[cite: 2].
+</div>
+</section>
+
+<!-- RIGHT PANEL: Python Program Source -->
+<section class="panel">
+<h2>Python Program — Line by Line</h2>
+
+<pre class="code">
+<span id="l1" class="line"># Experiment 7: Machine Temperature Monitoring</span>
+<span id="l2" class="line">class TemperatureError(Exception):</span>
+<span id="l3" class="line">    """Custom exception for unsafe machine temperature."""</span>
+<span id="l4" class="line">    pass</span>
+<span id="l5" class="line"></span>
+<span id="l6" class="line">try:</span>
+<span id="l7" class="line">    temperature = float(input("Enter machine temperature (°C): "))</span>
+<span id="l8" class="line">    if temperature < 0 or temperature > 100:</span>
+<span id="l9" class="line">        raise TemperatureError("Machine temperature is outside the safe range!")</span>
+<span id="l10" class="line"></span>
+<span id="l11" class="line">except ValueError:</span>
+<span id="l12" class="line">    print("Error: Please enter a valid numerical temperature.")</span>
+<span id="l13" class="line"></span>
+<span id="l14" class="line">except TemperatureError as e:</span>
+<span id="l15" class="line">    print("Temperature Error:", e)</span>
+<span id="l16" class="line"></span>
+<span id="l17" class="line">else:</span>
+<span id="l18" class="line">    print("Machine temperature is safe.")</span>
+<span id="l19" class="line">    print("Temperature:", temperature, "°C")</span>
+<span id="l20" class="line"></span>
+<span id="l21" class="line">finally:</span>
+<span id="l22" class="line">    print("Temperature checking completed.")</span>
+</pre>
+</section>
+
+</div>
+
+<script>
+let currentStepIndex = 0;
+let variables = {};
+let activeBlock = "Global Scope";
+let raisedError = null;
+let stdoutBuffer = "";
+let currentScenario = [];
+
+const startBtn = document.getElementById("startBtn");
+const nextBtn = document.getElementById("nextBtn");
+const resetBtn = document.getElementById("resetBtn");
+const testCaseSelect = document.getElementById("testCase");
+const message = document.getElementById("message");
+const explanation = document.getElementById("explanation");
+const varDisplay = document.getElementById("varDisplay");
+const callStackDisplay = document.getElementById("callStackDisplay");
+const consoleOutput = document.getElementById("consoleOutput");
+
+function clearHighlight(){
+  document.querySelectorAll(".line").forEach(x => {
+    x.classList.remove("active");
+    x.classList.remove("error-line");
+  });
+}
+
+function highlight(id, isError = false){
+  clearHighlight();
+  const el = document.getElementById(id);
+  if(el){
+    el.classList.add(isError ? "error-line" : "active");
+  }
+}
+
+function printToConsole(text){
+  stdoutBuffer += text + "\n";
+  consoleOutput.textContent = stdoutBuffer;
+  consoleOutput.scrollTop = consoleOutput.scrollHeight;
+}
+
+function updateVarDisplay(){
+  if(Object.keys(variables).length === 0){
+    varDisplay.innerHTML = "<i>No active variables</i>";
+    return;
+  }
+  let out = [];
+  for(let [k, v] of Object.entries(variables)){
+    let valStr = (typeof v === 'string') ? `"${v}"` : v;
+    out.push(`<span class="badge">var</span><b>${k}</b> = ${valStr}`);
+  }
+  varDisplay.innerHTML = out.join(" &nbsp;|&nbsp; ");
+}
+
+function updateBlockDisplay(){
+  let blockHtml = `<span class="badge badge-block">${activeBlock}</span>`;
+  if(raisedError){
+    blockHtml += ` &nbsp;|&nbsp; <span class="badge badge-err">Raised Exception</span> <b>${raisedError}</b>`;
+  }
+  callStackDisplay.innerHTML = blockHtml;
+}
+
+function reset(){
+  currentStepIndex = 0;
+  variables = {};
+  activeBlock = "Global Scope";
+  raisedError = null;
+  stdoutBuffer = "";
+
+  startBtn.disabled = false;
+  nextBtn.disabled = true;
+  testCaseSelect.disabled = false;
+
+  updateVarDisplay();
+  updateBlockDisplay();
+  consoleOutput.textContent = "";
+
+  message.textContent = "Select an input case and click Start.";
+  explanation.innerHTML = "<b>Experiment 7:</b> Choose a test case and click <b>Start</b> to trace Exception Handling line-by-line[cite: 2].";
+  clearHighlight();
+}
+
+// DEFINING EXECUTION SCENARIOS
+const scenarios = {
+  case1: [
+    {
+      line: "l2",
+      action: () => {
+        variables["TemperatureError"] = "<class 'TemperatureError'>";
+        updateVarDisplay();
+        message.textContent = "Defining Custom Exception class.";
+        explanation.innerHTML = "<b>class TemperatureError(Exception):</b> Creates a user-defined exception inherited from <code>Exception</code>[cite: 2].";
+      }
+    },
+    {
+      line: "l6",
+      action: () => {
+        activeBlock = "TRY Block";
+        updateBlockDisplay();
+        message.textContent = "Entering TRY block.";
+        explanation.innerHTML = "<b>try:</b> Enters the guarded block to test statements for runtime errors[cite: 2].";
+      }
+    },
+    {
+      line: "l7",
+      action: () => {
+        printToConsole("Enter machine temperature (°C): 75");
+        variables["temperature"] = 75.0;
+        updateVarDisplay();
+        message.textContent = "Reading input string '75' and parsing to float.";
+        explanation.innerHTML = "<b>float(input(...)):</b> User inputs <code>'75'</code>, successfully converted to float <code>75.0</code>[cite: 2].";
+      }
+    },
+    {
+      line: "l8",
+      action: () => {
+        message.textContent = "Checking condition (75.0 < 0 or 75.0 > 100).";
+        explanation.innerHTML = "<b>if temperature < 0 or temperature > 100:</b> Condition evaluates to <b>False</b>. Skipping <code>raise</code> statement[cite: 2].";
+      }
+    },
+    {
+      line: "l17",
+      action: () => {
+        activeBlock = "ELSE Block";
+        updateBlockDisplay();
+        message.textContent = "Entering ELSE block (No exceptions occurred).";
+        explanation.innerHTML = "<b>else:</b> Bypasses <code>except</code> blocks and enters <code>else</code> because no exception occurred in <code>try</code>[cite: 2].";
+      }
+    },
+    {
+      line: "l18",
+      action: () => {
+        printToConsole("Machine temperature is safe.");
+        message.textContent = "Printing safety status.";
+        explanation.innerHTML = "<b>print(\"Machine temperature is safe.\"):</b> Outputs safety confirmation message[cite: 2].";
+      }
+    },
+    {
+      line: "l19",
+      action: () => {
+        printToConsole("Temperature: 75.0 °C");
+        message.textContent = "Printing temperature value.";
+        explanation.innerHTML = "<b>print(\"Temperature:\", temperature, \"°C\"):</b> Displays validated temperature reading[cite: 2].";
+      }
+    },
+    {
+      line: "l21",
+      action: () => {
+        activeBlock = "FINALLY Block";
+        updateBlockDisplay();
+        message.textContent = "Entering FINALLY block.";
+        explanation.innerHTML = "<b>finally:</b> Executes unconditionally for cleanup operations[cite: 2].";
+      }
+    },
+    {
+      line: "l22",
+      action: () => {
+        printToConsole("Temperature checking completed.");
+        message.textContent = "Execution completed successfully.";
+        explanation.innerHTML = "<b>Completed:</b> Program finished execution without any unhandled errors[cite: 2].";
+        nextBtn.disabled = true;
+        startBtn.disabled = false;
+        testCaseSelect.disabled = false;
+      }
+    }
+  ],
+
+  case2: [
+    {
+      line: "l2",
+      action: () => {
+        variables["TemperatureError"] = "<class 'TemperatureError'>";
+        updateVarDisplay();
+        message.textContent = "Defining Custom Exception class.";
+        explanation.innerHTML = "<b>class TemperatureError(Exception):</b> Creates a user-defined exception inherited from <code>Exception</code>[cite: 2].";
+      }
+    },
+    {
+      line: "l6",
+      action: () => {
+        activeBlock = "TRY Block";
+        updateBlockDisplay();
+        message.textContent = "Entering TRY block.";
+        explanation.innerHTML = "<b>try:</b> Enters guarded block to test code execution[cite: 2].";
+      }
+    },
+    {
+      line: "l7",
+      action: () => {
+        printToConsole("Enter machine temperature (°C): 120");
+        variables["temperature"] = 120.0;
+        updateVarDisplay();
+        message.textContent = "Reading input '120' as float.";
+        explanation.innerHTML = "<b>float(input(...)):</b> Converts input <code>'120'</code> to float <code>120.0</code>[cite: 2].";
+      }
+    },
+    {
+      line: "l8",
+      action: () => {
+        message.textContent = "Checking condition (120.0 < 0 or 120.0 > 100).";
+        explanation.innerHTML = "<b>if temperature < 0 or temperature > 100:</b> Condition evaluates to <b>True</b> (120 > 100)[cite: 2].";
+      }
+    },
+    {
+      line: "l9",
+      isError: true,
+      action: () => {
+        raisedError = "TemperatureError('Machine temperature is outside the safe range!')";
+        updateBlockDisplay();
+        message.textContent = "Explicitly raising Custom Exception!";
+        explanation.innerHTML = "<b>raise TemperatureError(...):</b> Triggers custom exception and interrupts standard try block flow[cite: 2].";
+      }
+    },
+    {
+      line: "l14",
+      action: () => {
+        activeBlock = "EXCEPT Block (TemperatureError)";
+        variables["e"] = "Machine temperature is outside the safe range!";
+        updateVarDisplay();
+        updateBlockDisplay();
+        message.textContent = "Matching and catching TemperatureError.";
+        explanation.innerHTML = "<b>except TemperatureError as e:</b> Catches custom exception and stores details in <code>e</code>[cite: 2].";
+      }
+    },
+    {
+      line: "l15",
+      action: () => {
+        printToConsole("Temperature Error: Machine temperature is outside the safe range!");
+        message.textContent = "Printing exception details.";
+        explanation.innerHTML = "<b>print(\"Temperature Error:\", e):</b> Prints handled custom error message to console[cite: 2].";
+      }
+    },
+    {
+      line: "l21",
+      action: () => {
+        activeBlock = "FINALLY Block";
+        updateBlockDisplay();
+        message.textContent = "Skipping ELSE block -> Entering FINALLY block.";
+        explanation.innerHTML = "<b>finally:</b> Bypasses <code>else</code> block due to exception and enters <code>finally</code>[cite: 2].";
+      }
+    },
+    {
+      line: "l22",
+      action: () => {
+        printToConsole("Temperature checking completed.");
+        message.textContent = "Execution completed with handled exception.";
+        explanation.innerHTML = "<b>Completed:</b> Exception was handled gracefully and program terminated cleanly[cite: 2].";
+        nextBtn.disabled = true;
+        startBtn.disabled = false;
+        testCaseSelect.disabled = false;
+      }
+    }
+  ],
+
+  case3: [
+    {
+      line: "l2",
+      action: () => {
+        variables["TemperatureError"] = "<class 'TemperatureError'>";
+        updateVarDisplay();
+        message.textContent = "Defining Custom Exception class.";
+        explanation.innerHTML = "<b>class TemperatureError(Exception):</b> Creates user-defined exception class[cite: 2].";
+      }
+    },
+    {
+      line: "l6",
+      action: () => {
+        activeBlock = "TRY Block";
+        updateBlockDisplay();
+        message.textContent = "Entering TRY block.";
+        explanation.innerHTML = "<b>try:</b> Enters guarded block[cite: 2].";
+      }
+    },
+    {
+      line: "l7",
+      isError: true,
+      action: () => {
+        printToConsole("Enter machine temperature (°C): abc");
+        raisedError = "ValueError: could not convert string to float: 'abc'";
+        updateBlockDisplay();
+        message.textContent = "Runtime Error! float('abc') failed.";
+        explanation.innerHTML = "<b>float('abc'):</b> String conversion fails and Python automatically raises a built-in <b>ValueError</b>[cite: 2].";
+      }
+    },
+    {
+      line: "l11",
+      action: () => {
+        activeBlock = "EXCEPT Block (ValueError)";
+        updateBlockDisplay();
+        message.textContent = "Matching and catching ValueError.";
+        explanation.innerHTML = "<b>except ValueError:</b> Immediately redirects control to handle the <code>ValueError</code>[cite: 2].";
+      }
+    },
+    {
+      line: "l12",
+      action: () => {
+        printToConsole("Error: Please enter a valid numerical temperature.");
+        message.textContent = "Printing error message.";
+        explanation.innerHTML = "<b>print(\"Error:...\"):</b> Outputs user-friendly error notice for bad input[cite: 2].";
+      }
+    },
+    {
+      line: "l21",
+      action: () => {
+        activeBlock = "FINALLY Block";
+        updateBlockDisplay();
+        message.textContent = "Entering FINALLY block.";
+        explanation.innerHTML = "<b>finally:</b> Executes cleanup step regardless of previous input failure[cite: 2].";
+      }
+    },
+    {
+      line: "l22",
+      action: () => {
+        printToConsole("Temperature checking completed.");
+        message.textContent = "Execution completed with handled ValueError.";
+        explanation.innerHTML = "<b>Completed:</b> Invalid input was caught without program crashing[cite: 2].";
+        nextBtn.disabled = true;
+        startBtn.disabled = false;
+        testCaseSelect.disabled = false;
+      }
+    }
+  ]
+};
+
+function start(){
+  const selectedCase = testCaseSelect.value;
+  currentScenario = scenarios[selectedCase];
+  currentStepIndex = 1;
+
+  startBtn.disabled = true;
+  nextBtn.disabled = false;
+  testCaseSelect.disabled = true;
+
+  nextStep();
+}
+
+function nextStep(){
+  if(currentStepIndex > 0 && currentStepIndex <= currentScenario.length){
+    const stepData = currentScenario[currentStepIndex - 1];
+    highlight(stepData.line, stepData.isError || false);
+    stepData.action();
+    currentStepIndex++;
+  }
+}
+
+startBtn.onclick = start;
+nextBtn.onclick = nextStep;
+resetBtn.onclick = reset;
+
+reset();
+</script>
+</body>
+</html>
