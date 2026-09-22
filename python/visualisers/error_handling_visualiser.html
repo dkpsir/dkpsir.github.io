@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Student Marks & Average Visualizer</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100vh;overflow:hidden;background:#eef4f9;color:#111;font-family:Arial,sans-serif;font-size:14px}
+.container{display:grid;grid-template-columns:1.05fr 1fr;gap:12px;height:100vh;padding:10px;max-width:100%}
+.panel{background:#fff;border-radius:8px;padding:10px;box-shadow:0 1px 6px rgba(0,0,0,.08);display:flex;flex-direction:column;height:calc(100vh - 20px);overflow:hidden}
+h2{color:#0b4f86;font-size:16px;margin-bottom:6px;flex-shrink:0}
+.controls{background:#f8fafc;border:1px solid #ccd8e2;border-radius:6px;padding:6px 10px;margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-shrink:0;flex-wrap:wrap}
+button{padding:5px 12px;font-size:13px;font-weight:600;cursor:pointer;border-radius:4px;border:1px solid #0b4f86;background:#0b4f86;color:#fff}
+button:hover{background:#093e6a}
+button:disabled{opacity:.45;cursor:not-allowed;background:#718096;border-color:#718096}
+select{padding:4px 8px;font-size:12.5px;border-radius:4px;border:1px solid #ccd8e2;background:#fff;font-weight:600;color:#2d3748}
+.message{font-size:13px;margin:2px 0 6px;color:#1a365d;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex-shrink:0}
+.section-title{background:#0b4f86;color:#fff;padding:4px 8px;font-size:12px;font-weight:bold;border-radius:4px 4px 0 0;margin-top:4px;flex-shrink:0}
+.box-content{background:#fff;border:1px solid #ccd8e2;border-top:none;padding:5px 8px;font:13px/1.25 Consolas,"Courier New",monospace;white-space:pre-wrap;border-radius:0 0 4px 4px}
+#varDisplay{height:36px;overflow:hidden;flex-shrink:0;display:flex;align-items:center}
+#callStackDisplay{height:36px;overflow:hidden;flex-shrink:0;display:flex;align-items:center;background:#fafafa}
+#consoleOutput{flex:1;background:#111;color:#38ef7d;min-height:95px;overflow-y:auto;line-height:1.25;font-size:13px}
+.explanation{background:#f7fafc;border-left:4px solid #0b5d96;padding:6px 10px;margin-top:6px;font-size:12.5px;line-height:1.35;flex-shrink:0}
+pre.code{margin:0;background:#1e1e1e;color:#ddd;padding:6px 10px;border-radius:6px;font:13px Consolas,"Courier New",monospace;height:100%;overflow:hidden;white-space:pre;display:flex;flex-direction:column;justify-content:space-between}
+.line{display:block;padding:1px 4px;border-radius:3px;line-height:1.2}
+.active{background:#ffeb3b;color:#000;font-weight:bold}
+.error-line{background:#f87171;color:#fff;font-weight:bold}
+.badge{display:inline-block;padding:1px 5px;font-size:11px;border-radius:3px;background:#e2e8f0;color:#2d3748;margin-right:4px}
+.badge-err{background:#fee2e2;color:#991b1b;border:1px solid #f87171}
+.badge-block{background:#e0f2fe;color:#0369a1;border:1px solid #38bdf8}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- LEFT PANEL: State & Output -->
+<section class="panel">
+<h2>Execution State & Output</h2>
+
+<div class="controls">
+<label for="testCase" style="font-weight:bold;font-size:12px;">Select Case:</label>
+<select id="testCase">
+  <option value="case1">Case 1: Valid Marks (2 Subjects: 85, 90)</option>
+  <option value="case2">Case 2: Invalid Subjects Count (n = -2)</option>
+  <option value="case3">Case 3: Out-of-Range Marks (Marks = 105)</option>
+  <option value="case4">Case 4: Non-Numeric Input ("abc")</option>
+</select>
+<button id="startBtn">Start</button>
+<button id="nextBtn" disabled>Next Step →</button>
+<button id="resetBtn">Reset</button>
+</div>
+
+<div class="message" id="message">Select a test case and click Start.</div>
+
+<!-- Variable Tracker -->
+<div class="section-title">Variable State Inspector</div>
+<div class="box-content" id="varDisplay"><i>No active variables</i></div>
+
+<!-- Active Execution Block Tracker -->
+<div class="section-title">Active Execution Block & Raised Exception</div>
+<div class="box-content" id="callStackDisplay"><i>Global Scope</i></div>
+
+<!-- Standard Python Output Console -->
+<div class="section-title">Python Console Output (stdout)</div>
+<div class="box-content" id="consoleOutput"></div>
+
+<div class="explanation" id="explanation">
+Choose a test case and click <b>Start</b> to trace program execution line-by-line.
+</div>
+</section>
+
+<!-- RIGHT PANEL: Python Program Source -->
+<section class="panel">
+<h2>Python Program — Line by Line</h2>
+
+<pre class="code">
+<span id="l1" class="line"># Program: Student Marks and Average</span>
+<span id="l2" class="line">try:</span>
+<span id="l3" class="line">    n = int(input("Enter number of subjects: "))</span>
+<span id="l4" class="line">    if n <= 0:</span>
+<span id="l5" class="line">        raise ValueError("Number of subjects must be positive")</span>
+<span id="l6" class="line">    total = 0</span>
+<span id="l7" class="line">    for i in range(n):</span>
+<span id="l8" class="line">        marks = float(input(f"Enter marks for subject {i + 1}: "))</span>
+<span id="l9" class="line">        if marks < 0 or marks > 100:</span>
+<span id="l10" class="line">            raise ValueError("Marks must be between 0 and 100")</span>
+<span id="l11" class="line">        total += marks</span>
+<span id="l12" class="line">except ValueError as e:</span>
+<span id="l13" class="line">    print("Error:", e)</span>
+<span id="l14" class="line">except ZeroDivisionError:</span>
+<span id="l15" class="line">    print("Error: Cannot calculate average with zero subjects.")</span>
+<span id="l16" class="line">else:</span>
+<span id="l17" class="line">    average = total / n</span>
+<span id="l18" class="line">    print("Total Marks:", total)</span>
+<span id="l19" class="line">    print("Average Marks:", average)</span>
+<span id="l20" class="line">finally:</span>
+<span id="l21" class="line">    print("Program execution completed.")</span>
+</pre>
+</section>
+
+</div>
+
+<script>
+let currentStepIndex = 0;
+let variables = {};
+let activeBlock = "Global Scope";
+let raisedError = null;
+let stdoutBuffer = "";
+let currentScenario = [];
+
+const startBtn = document.getElementById("startBtn");
+const nextBtn = document.getElementById("nextBtn");
+const resetBtn = document.getElementById("resetBtn");
+const testCaseSelect = document.getElementById("testCase");
+const message = document.getElementById("message");
+const explanation = document.getElementById("explanation");
+const varDisplay = document.getElementById("varDisplay");
+const callStackDisplay = document.getElementById("callStackDisplay");
+const consoleOutput = document.getElementById("consoleOutput");
+
+function clearHighlight(){
+  document.querySelectorAll(".line").forEach(x => {
+    x.classList.remove("active");
+    x.classList.remove("error-line");
+  });
+}
+
+function highlight(id, isError = false){
+  clearHighlight();
+  const el = document.getElementById(id);
+  if(el){
+    el.classList.add(isError ? "error-line" : "active");
+  }
+}
+
+function printToConsole(text){
+  stdoutBuffer += text + "\n";
+  consoleOutput.textContent = stdoutBuffer;
+  consoleOutput.scrollTop = consoleOutput.scrollHeight;
+}
+
+function updateVarDisplay(){
+  if(Object.keys(variables).length === 0){
+    varDisplay.innerHTML = "<i>No active variables</i>";
+    return;
+  }
+  let out = [];
+  for(let [k, v] of Object.entries(variables)){
+    let valStr = (typeof v === 'string') ? `"${v}"` : v;
+    out.push(`<span class="badge">var</span><b>${k}</b> = ${valStr}`);
+  }
+  varDisplay.innerHTML = out.join(" &nbsp;|&nbsp; ");
+}
+
+function updateBlockDisplay(){
+  let blockHtml = `<span class="badge badge-block">${activeBlock}</span>`;
+  if(raisedError){
+    blockHtml += ` &nbsp;|&nbsp; <span class="badge badge-err">Raised Exception</span> <b>${raisedError}</b>`;
+  }
+  callStackDisplay.innerHTML = blockHtml;
+}
+
+function reset(){
+  currentStepIndex = 0;
+  variables = {};
+  activeBlock = "Global Scope";
+  raisedError = null;
+  stdoutBuffer = "";
+
+  startBtn.disabled = false;
+  nextBtn.disabled = true;
+  testCaseSelect.disabled = false;
+
+  updateVarDisplay();
+  updateBlockDisplay();
+  consoleOutput.textContent = "";
+
+  message.textContent = "Select a test case and click Start.";
+  explanation.innerHTML = "Choose a test case and click <b>Start</b> to trace program execution line-by-line.";
+  clearHighlight();
+}
+
+// DEFINING EXECUTION SCENARIOS
+const scenarios = {
+  case1: [
+    {
+      line: "l2",
+      action: () => {
+        activeBlock = "TRY Block";
+        updateBlockDisplay();
+        message.textContent = "Entering TRY block.";
+        explanation.innerHTML = "<b>try:</b> Enters the guarded try block to execute statements safely.";
+      }
+    },
+    {
+      line: "l3",
+      action: () => {
+        printToConsole("Enter number of subjects: 2");
+        variables["n"] = 2;
+        updateVarDisplay();
+        message.textContent = "Reading input for subject count.";
+        explanation.innerHTML = "<b>int(input(...)):</b> Converts input <code>'2'</code> to integer <code>2</code>.";
+      }
+    },
+    {
+      line: "l4",
+      action: () => {
+        message.textContent = "Checking condition (2 <= 0).";
+        explanation.innerHTML = "<b>if n <= 0:</b> Evaluates to <b>False</b> (2 is positive). Skipping raise statement.";
+      }
+    },
+    {
+      line: "l6",
+      action: () => {
+        variables["total"] = 0;
+        updateVarDisplay();
+        message.textContent = "Initializing total accumulator.";
+        explanation.innerHTML = "<b>total = 0:</b> Sets starting total marks to <code>0</code>.";
+      }
+    },
+    {
+      line: "l7",
+      action: () => {
+        variables["i"] = 0;
+        updateVarDisplay();
+        message.textContent = "Entering loop iteration 1 (i = 0).";
+        explanation.innerHTML = "<b>for i in range(2):</b> Begins loop for subject 1 (index 0).";
+      }
+    },
+    {
+      line: "l8",
+      action: () => {
+        printToConsole("Enter marks for subject 1: 85");
+        variables["marks"] = 85.0;
+        updateVarDisplay();
+        message.textContent = "Reading marks for subject 1.";
+        explanation.innerHTML = "<b>float(input(...)):</b> Reads <code>85</code> and stores as <code>85.0</code>.";
+      }
+    },
+    {
+      line: "l9",
+      action: () => {
+        message.textContent = "Checking range (85.0 < 0 or 85.0 > 100).";
+        explanation.innerHTML = "<b>if marks < 0 or marks > 100:</b> Evaluates to <b>False</b> (85 is valid).";
+      }
+    },
+    {
+      line: "l11",
+      action: () => {
+        variables["total"] = 85.0;
+        updateVarDisplay();
+        message.textContent = "Adding subject 1 marks to total.";
+        explanation.innerHTML = "<b>total += marks:</b> Total becomes <code>85.0</code>.";
+      }
+    },
+    {
+      line: "l7",
+      action: () => {
+        variables["i"] = 1;
+        updateVarDisplay();
+        message.textContent = "Entering loop iteration 2 (i = 1).";
+        explanation.innerHTML = "<b>for i in range(2):</b> Moves to subject 2 (index 1).";
+      }
+    },
+    {
+      line: "l8",
+      action: () => {
+        printToConsole("Enter marks for subject 2: 90");
+        variables["marks"] = 90.0;
+        updateVarDisplay();
+        message.textContent = "Reading marks for subject 2.";
+        explanation.innerHTML = "<b>float(input(...)):</b> Reads <code>90</code> and stores as <code>90.0</code>.";
+      }
+    },
+    {
+      line: "l9",
+      action: () => {
+        message.textContent = "Checking range (90.0 < 0 or 90.0 > 100).";
+        explanation.innerHTML = "<b>if marks < 0 or marks > 100:</b> Evaluates to <b>False</b> (90 is valid).";
+      }
+    },
+    {
+      line: "l11",
+      action: () => {
+        variables["total"] = 175.0;
+        updateVarDisplay();
+        message.textContent = "Adding subject 2 marks to total.";
+        explanation.innerHTML = "<b>total += marks:</b> Total becomes <code>175.0</code>.";
+      }
+    },
+    {
+      line: "l16",
+      action: () => {
+        activeBlock = "ELSE Block";
+        updateBlockDisplay();
+        message.textContent = "Entering ELSE block (No exceptions occurred).";
+        explanation.innerHTML = "<b>else:</b> Executes because no exception was raised in the <code>try</code> block.";
+      }
+    },
+    {
+      line: "l17",
+      action: () => {
+        variables["average"] = 87.5;
+        updateVarDisplay();
+        message.textContent = "Calculating average marks.";
+        explanation.innerHTML = "<b>average = total / n:</b> 175.0 / 2 = <code>87.5</code>.";
+      }
+    },
+    {
+      line: "l18",
+      action: () => {
+        printToConsole("Total Marks: 175.0");
+        message.textContent = "Printing Total Marks.";
+        explanation.innerHTML = "<b>print(\"Total Marks:\", total):</b> Outputs total calculated marks.";
+      }
+    },
+    {
+      line: "l19",
+      action: () => {
+        printToConsole("Average Marks: 87.5");
+        message.textContent = "Printing Average Marks.";
+        explanation.innerHTML = "<b>print(\"Average Marks:\", average):</b> Outputs calculated average.";
+      }
+    },
+    {
+      line: "l20",
+      action: () => {
+        activeBlock = "FINALLY Block";
+        updateBlockDisplay();
+        message.textContent = "Entering FINALLY block.";
+        explanation.innerHTML = "<b>finally:</b> Executes unconditionally after normal completion.";
+      }
+    },
+    {
+      line: "l21",
+      action: () => {
+        printToConsole("Program execution completed.");
+        message.textContent = "Execution completed successfully.";
+        explanation.innerHTML = "<b>Completed:</b> Program finished execution cleanly.";
+        nextBtn.disabled = true;
+        startBtn.disabled = false;
+        testCaseSelect.disabled = false;
+      }
+    }
+  ],
+
+  case2: [
+    {
+      line: "l2",
+      action: () => {
+        activeBlock = "TRY Block";
+        updateBlockDisplay();
+        message.textContent = "Entering TRY block.";
+        explanation.innerHTML = "<b>try:</b> Enters guarded execution block.";
+      }
+    },
+    {
+      line: "l3",
+      action: () => {
+        printToConsole("Enter number of subjects: -2");
+        variables["n"] = -2;
+        updateVarDisplay();
+        message.textContent = "Reading input for subject count.";
+        explanation.innerHTML = "<b>int(input(...)):</b> User inputs <code>'-2'</code>.";
+      }
+    },
+    {
+      line: "l4",
+      action: () => {
+        message.textContent = "Checking condition (-2 <= 0).";
+        explanation.innerHTML = "<b>if n <= 0:</b> Evaluates to <b>True</b> (-2 is not positive).";
+      }
+    },
+    {
+      line: "l5",
+      isError: true,
+      action: () => {
+        raisedError = "ValueError('Number of subjects must be positive')";
+        updateBlockDisplay();
+        message.textContent = "Explicitly raising ValueError!";
+        explanation.innerHTML = "<b>raise ValueError(...):</b> Triggers custom exception and halts standard execution flow.";
+      }
+    },
+    {
+      line: "l12",
+      action: () => {
+        activeBlock = "EXCEPT Block (ValueError)";
+        variables["e"] = "Number of subjects must be positive";
+        updateVarDisplay();
+        updateBlockDisplay();
+        message.textContent = "Matching and catching ValueError.";
+        explanation.innerHTML = "<b>except ValueError as e:</b> Catches the exception and binds error message to variable <code>e</code>.";
+      }
+    },
+    {
+      line: "l13",
+      action: () => {
+        printToConsole("Error: Number of subjects must be positive");
+        message.textContent = "Printing error message.";
+        explanation.innerHTML = "<b>print(\"Error:\", e):</b> Outputs custom error string to console.";
+      }
+    },
+    {
+      line: "l20",
+      action: () => {
+        activeBlock = "FINALLY Block";
+        updateBlockDisplay();
+        message.textContent = "Skipping ELSE block -> Entering FINALLY block.";
+        explanation.innerHTML = "<b>finally:</b> Executes unconditionally for cleanup.";
+      }
+    },
+    {
+      line: "l21",
+      action: () => {
+        printToConsole("Program execution completed.");
+        message.textContent = "Execution completed with handled exception.";
+        explanation.innerHTML = "<b>Completed:</b> Exception was caught and handled gracefully.";
+        nextBtn.disabled = true;
+        startBtn.disabled = false;
+        testCaseSelect.disabled = false;
+      }
+    }
+  ],
+
+  case3: [
+    {
+      line: "l2",
+      action: () => {
+        activeBlock = "TRY Block";
+        updateBlockDisplay();
+        message.textContent = "Entering TRY block.";
+        explanation.innerHTML = "<b>try:</b> Enters guarded execution block.";
+      }
+    },
+    {
+      line: "l3",
+      action: () => {
+        printToConsole("Enter number of subjects: 1");
+        variables["n"] = 1;
+        updateVarDisplay();
+        message.textContent = "Reading input for subject count.";
+        explanation.innerHTML = "<b>int(input(...)):</b> Converts input to <code>1</code>.";
+      }
+    },
+    {
+      line: "l6",
+      action: () => {
+        variables["total"] = 0;
+        updateVarDisplay();
+        message.textContent = "Initializing total accumulator.";
+        explanation.innerHTML = "<b>total = 0:</b> Sets total to <code>0</code>.";
+      }
+    },
+    {
+      line: "l7",
+      action: () => {
+        variables["i"] = 0;
+        updateVarDisplay();
+        message.textContent = "Entering loop iteration 1.";
+        explanation.innerHTML = "<b>for i in range(1):</b> Begins loop for subject 1.";
+      }
+    },
+    {
+      line: "l8",
+      action: () => {
+        printToConsole("Enter marks for subject 1: 105");
+        variables["marks"] = 105.0;
+        updateVarDisplay();
+        message.textContent = "Reading marks for subject 1.";
+        explanation.innerHTML = "<b>float(input(...)):</b> Stores input <code>105.0</code>.";
+      }
+    },
+    {
+      line: "l9",
+      action: () => {
+        message.textContent = "Checking range (105.0 < 0 or 105.0 > 100).";
+        explanation.innerHTML = "<b>if marks < 0 or marks > 100:</b> Evaluates to <b>True</b> (105 > 100).";
+      }
+    },
+    {
+      line: "l10",
+      isError: true,
+      action: () => {
+        raisedError = "ValueError('Marks must be between 0 and 100')";
+        updateBlockDisplay();
+        message.textContent = "Explicitly raising ValueError!";
+        explanation.innerHTML = "<b>raise ValueError(...):</b> Interrupts loop and raises exception.";
+      }
+    },
+    {
+      line: "l12",
+      action: () => {
+        activeBlock = "EXCEPT Block (ValueError)";
+        variables["e"] = "Marks must be between 0 and 100";
+        updateVarDisplay();
+        updateBlockDisplay();
+        message.textContent = "Matching and catching ValueError.";
+        explanation.innerHTML = "<b>except ValueError as e:</b> Catches range exception.";
+      }
+    },
+    {
+      line: "l13",
+      action: () => {
+        printToConsole("Error: Marks must be between 0 and 100");
+        message.textContent = "Printing error message.";
+        explanation.innerHTML = "<b>print(\"Error:\", e):</b> Displays range error message.";
+      }
+    },
+    {
+      line: "l20",
+      action: () => {
+        activeBlock = "FINALLY Block";
+        updateBlockDisplay();
+        message.textContent = "Entering FINALLY block.";
+        explanation.innerHTML = "<b>finally:</b> Executes unconditionally.";
+      }
+    },
+    {
+      line: "l21",
+      action: () => {
+        printToConsole("Program execution completed.");
+        message.textContent = "Execution completed with handled exception.";
+        explanation.innerHTML = "<b>Completed:</b> Handled out-of-bounds input gracefully.";
+        nextBtn.disabled = true;
+        startBtn.disabled = false;
+        testCaseSelect.disabled = false;
+      }
+    }
+  ],
+
+  case4: [
+    {
+      line: "l2",
+      action: () => {
+        activeBlock = "TRY Block";
+        updateBlockDisplay();
+        message.textContent = "Entering TRY block.";
+        explanation.innerHTML = "<b>try:</b> Enters guarded execution block.";
+      }
+    },
+    {
+      line: "l3",
+      isError: true,
+      action: () => {
+        printToConsole("Enter number of subjects: abc");
+        raisedError = "ValueError: invalid literal for int() with base 10: 'abc'";
+        updateBlockDisplay();
+        message.textContent = "Runtime Error! int('abc') failed.";
+        explanation.innerHTML = "<b>int('abc'):</b> Python automatically raises a <b>ValueError</b> when non-numeric text cannot be parsed to an integer.";
+      }
+    },
+    {
+      line: "l12",
+      action: () => {
+        activeBlock = "EXCEPT Block (ValueError)";
+        variables["e"] = "invalid literal for int() with base 10: 'abc'";
+        updateVarDisplay();
+        updateBlockDisplay();
+        message.textContent = "Matching and catching built-in ValueError.";
+        explanation.innerHTML = "<b>except ValueError as e:</b> Catches standard Python parsing error.";
+      }
+    },
+    {
+      line: "l13",
+      action: () => {
+        printToConsole("Error: invalid literal for int() with base 10: 'abc'");
+        message.textContent = "Printing error details.";
+        explanation.innerHTML = "<b>print(\"Error:\", e):</b> Outputs conversion error message.";
+      }
+    },
+    {
+      line: "l20",
+      action: () => {
+        activeBlock = "FINALLY Block";
+        updateBlockDisplay();
+        message.textContent = "Entering FINALLY block.";
+        explanation.innerHTML = "<b>finally:</b> Executes cleanup step.";
+      }
+    },
+    {
+      line: "l21",
+      action: () => {
+        printToConsole("Program execution completed.");
+        message.textContent = "Execution completed with handled ValueError.";
+        explanation.innerHTML = "<b>Completed:</b> Invalid text input was handled safely.";
+        nextBtn.disabled = true;
+        startBtn.disabled = false;
+        testCaseSelect.disabled = false;
+      }
+    }
+  ]
+};
+
+function start(){
+  const selectedCase = testCaseSelect.value;
+  currentScenario = scenarios[selectedCase];
+  currentStepIndex = 1;
+
+  startBtn.disabled = true;
+  nextBtn.disabled = false;
+  testCaseSelect.disabled = true;
+
+  nextStep();
+}
+
+function nextStep(){
+  if(currentStepIndex > 0 && currentStepIndex <= currentScenario.length){
+    const stepData = currentScenario[currentStepIndex - 1];
+    highlight(stepData.line, stepData.isError || false);
+    stepData.action();
+    currentStepIndex++;
+  }
+}
+
+startBtn.onclick = start;
+nextBtn.onclick = nextStep;
+resetBtn.onclick = reset;
+
+reset();
+</script>
+</body>
+</html>
