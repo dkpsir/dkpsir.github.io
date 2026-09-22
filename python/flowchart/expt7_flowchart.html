@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experiment 7 - Error Handling using Exception Handling</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#eef4f9;color:#111;font-family:Arial,Helvetica,sans-serif}
+.header{position:relative;background:linear-gradient(90deg,#0b477d,#087cc1);color:#fff;padding:28px 20px;text-align:center}
+.header h1{margin:0;font-size:30px}.header p{margin:7px 0 0;font-size:18px}
+.header-nav{position:absolute;left:24px;right:24px;top:18px;display:flex;justify-content:space-between}
+.header-nav a{color:#fff;text-decoration:none;font-weight:700;font-size:16px}
+.container{width:96%;max-width:1400px;margin:24px auto}
+.split-row{display:flex;gap:20px;align-items:stretch;margin-bottom:22px}
+.flow-col{flex:0 0 55%}.code-col{flex:0 0 45%}
+.card{background:#fff;border-radius:12px;padding:22px;box-shadow:0 3px 15px rgba(0,0,0,.08);height:100%}
+.title{background:#0b5b94;color:#fff;padding:13px 18px;border-radius:8px;font-size:21px;font-weight:700;margin-bottom:20px}
+.flow{display:flex;flex-direction:column;align-items:center;gap:6px}
+.node{width:100%;max-width:540px;padding:12px 16px;text-align:center;border:2px solid #17679f;border-radius:9px;background:#f7fbff;color:#073f6c;font-weight:700;font-size:13.5px;line-height:1.4}
+.node.start,.node.end{width:180px;border-radius:28px;background:#0b5b94;color:#fff}
+.node.class-node{background:#f4efff;border-color:#7c3aed;color:#5121a8}
+.node.try-node{background:#eef7ee;border-color:#4c9b5b;color:#245d2c}
+.node.except-node{background:#fff5e8;border-color:#d97706;color:#8a4a05}
+.node.else-node{background:#ecfdf5;border-color:#10b981;color:#047857}
+.node.finally-node{background:#e0f2fe;border-color:#0284c7;color:#0369a1}
+.arrow{color:#0b5b94;font-size:20px;line-height:16px;font-weight:700}
+
+.decision-box{width:120px;height:120px;background:#fde68a;border:2px solid #d97706;transform:rotate(45deg);display:flex;justify-content:center;align-items:center;margin:12px 0}
+.decision-text{transform:rotate(-45deg);text-align:center;font-weight:700;color:#92400e;font-size:11.5px;line-height:1.25}
+
+.branch-split{width:100%;max-width:540px;display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:2px}
+.branch-col{display:flex;flex-direction:column;align-items:center}
+.branch-tag{font-weight:800;font-size:12px;color:#374151;background:#e5e7eb;padding:2px 8px;border-radius:4px;margin-bottom:4px}
+
+.merge-box{width:100%;max-width:540px;border:2px dashed #0b5b94;border-radius:8px;padding:8px;margin:8px 0;background:#f0f7ff;text-align:center}
+.merge-title{font-size:11px;font-weight:800;color:#0b5b94;letter-spacing:0.5px;margin-bottom:4px;text-transform:uppercase}
+
+.program{background:#1e1e1e;color:#ddd;border-radius:8px;padding:17px;overflow:auto;font:13px/1.5 Consolas,"Courier New",monospace;white-space:pre;height:calc(100% - 60px)}
+table{width:100%;border-collapse:collapse;background:#fff}
+th,td{border:1px solid #c8d6e2;padding:11px 13px;text-align:left;vertical-align:top}
+th{background:#0b5b94;color:#fff;font-size:15px}
+tr:nth-child(even){background:#f7fafc}
+code{background:#eef3f7;color:#063f6c;padding:3px 6px;border-radius:4px;font-family:"Courier New",monospace;white-space:nowrap}
+.note{background:#fff8df;border-left:5px solid #d89a00;padding:13px 16px;margin-top:18px;line-height:1.5}
+.output{background:#111820;color:#e9f2f7;border-radius:8px;padding:13px;font:13px/1.55 Consolas,"Courier New",monospace;white-space:pre-wrap;margin-top:10px}
+footer{background:#0b477d;color:#fff;text-align:center;padding:13px;margin-top:25px}
+@media(max-width:700px){.split-row{flex-direction:column}.flow-col,.code-col{flex:0 0 100%}.branch-split{grid-template-columns:1fr}.header h1{font-size:24px}.container{width:96%}.card{padding:14px}th,td{padding:9px;font-size:14px}}
+</style>
+</head>
+<body>
+<header class="header">
+<div class="header-nav"><a href="#">← Python Home</a><a href="#">Main Home →</a></div>
+<h1>PYTHON PROGRAMMING LAB</h1>
+<p>Experiment 7 – Error Handling using Exception Handling</p>
+</header>
+
+<main class="container">
+<div class="split-row">
+<div class="flow-col">
+<section class="card">
+<div class="title">Experiment 7 – Flow Chart</div>
+<div class="flow">
+<div class="node start">START</div>
+<div class="arrow">↓</div>
+
+<div class="node class-node">
+<strong>Define Custom Exception Class</strong><br>
+<code>class TemperatureError(Exception): pass</code>
+</div>
+<div class="arrow">↓</div>
+
+<div class="node try-node">
+<strong>TRY BLOCK</strong><br>
+Read <code>input()</code> & convert to <code>float()</code>
+</div>
+<div class="arrow">↓</div>
+
+<div class="decision-box">
+<div class="decision-text">Valid Float<br>Conversion?</div>
+</div>
+
+<div class="branch-split">
+<div class="branch-col">
+<div class="branch-tag" style="background:#fee2e2;color:#991b1b;">NO (ValueError)</div>
+<div class="arrow">↓</div>
+<div class="node except-node">
+<strong>Catch ValueError</strong><br>
+Display: <em>"Error: Please enter a valid numerical temperature."</em>
+</div>
+<div class="arrow">↓</div>
+</div>
+
+<div class="branch-col">
+<div class="branch-tag" style="background:#dcfce7;color:#166534;">YES</div>
+<div class="arrow">↓</div>
+<div class="decision-box">
+<div class="decision-text">temp &lt; 0 OR<br>temp &gt; 100?</div>
+</div>
+<div class="arrow">↓</div>
+
+<div class="branch-split" style="max-width:100%;">
+<div class="branch-col">
+<div class="branch-tag" style="background:#fef3c7;color:#92400e;">YES (Unsafe)</div>
+<div class="arrow">↓</div>
+<div class="node except-node" style="padding:8px;font-size:12px;">
+<strong>Raise & Catch TemperatureError</strong><br>
+Display error message
+</div>
+<div class="arrow">↓</div>
+</div>
+
+<div class="branch-col">
+<div class="branch-tag" style="background:#d1fae5;color:#065f46;">NO (Safe)</div>
+<div class="arrow">↓</div>
+<div class="node else-node" style="padding:8px;font-size:12px;">
+<strong>ELSE BLOCK</strong><br>
+Display: <em>"Machine temp is safe"</em>
+</div>
+<div class="arrow">↓</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="merge-box">
+<div class="merge-title">All Execution Paths Converge</div>
+<div class="arrow">↓</div>
+
+<div class="node finally-node">
+<strong>FINALLY BLOCK</strong><br>
+Executes unconditionally for cleanup<br>
+Display: <em>"Temperature checking completed."</em>
+</div>
+</div>
+
+<div class="arrow">↓</div>
+<div class="node end">END</div>
+</div>
+</section>
+</div>
+
+<div class="code-col">
+<section class="card">
+<div class="title">Complete Python Program</div>
+<pre class="program"># Experiment 7: Machine Temperature Monitoring
+
+class TemperatureError(Exception):
+    """Custom exception for unsafe machine temperature."""
+    pass
+
+try:
+    temperature = float(input("Enter machine temperature (°C): "))
+    if temperature < 0 or temperature > 100:
+        raise TemperatureError("Machine temperature is outside the safe range!")
+
+except ValueError:
+    print("Error: Please enter a valid numerical temperature.")
+
+except TemperatureError as e:
+    print("Temperature Error:", e)
+
+else:
+    print("Machine temperature is safe.")
+    print("Temperature:", temperature, "°C")
+
+finally:
+    print("Temperature checking completed.")</pre>
+</section>
+</div>
+</div>
+
+<section class="card" style="margin-bottom:22px;">
+<div class="title">Python Program – Step-by-Step Explanation</div>
+<table>
+<thead><tr><th style="width:38%">Python Statement / Step</th><th style="width:18%">Concept</th><th>What it does</th></tr></thead>
+<tbody>
+<tr><td><code>class TemperatureError(Exception):</code></td><td>Custom Exception</td><td>Creates a user-defined exception class inheriting from Python's built-in <code>Exception</code>[cite: 2].</td></tr>
+<tr><td><code>try:</code></td><td>Try Block</td><td>Encapsulates statements that may produce a runtime exception[cite: 2].</td></tr>
+<tr><td><code>float(input(...))</code></td><td>Input Conversion</td><td>Prompts for user input and converts to float. Raises <code>ValueError</code> if input is non-numeric[cite: 2].</td></tr>
+<tr><td><code>if temperature &lt; 0 or temperature &gt; 100:</code></td><td>Condition Check</td><td>Checks if the temperature is outside the safe range ($0-100^\circ\text{C}$)[cite: 2].</td></tr>
+<tr><td><code>raise TemperatureError(...)</code></td><td>Explicit Exception</td><td>Explicitly generates <code>TemperatureError</code> when out of bounds[cite: 2].</td></tr>
+<tr><td><code>except ValueError:</code></td><td>Exception Handling</td><td>Handles invalid data type conversions (non-numerical input)[cite: 2].</td></tr>
+<tr><td><code>except TemperatureError as e:</code></td><td>Exception Handling</td><td>Catches custom exception and assigns exception information to <code>e</code>[cite: 2].</td></tr>
+<tr><td><code>else:</code></td><td>Else Block</td><td>Executes only when no exception occurs in the <code>try</code> block[cite: 2].</td></tr>
+<tr><td><code>finally:</code></td><td>Finally Block</td><td>Executes whether an exception occurs or not, commonly used for cleanup[cite: 2].</td></tr>
+</tbody>
+</table>
+<div class="note"><b>Aim & Result:</b> To write and execute a Python program to handle runtime errors using exception handling[cite: 2]. The program was executed successfully using Jupyter Notebook[cite: 2].</div>
+</section>
+
+<section class="card">
+<div class="title">Expected Output (Sample Cases)</div>
+
+<strong>Case 1 – Valid input:</strong>[cite: 2]
+<div class="output">Enter machine temperature (°C): 75
+Machine temperature is safe.
+Temperature: 75.0 °C
+Temperature checking completed.</div>[cite: 2]
+
+<br>
+<strong>Case 2 – Unsafe temperature:</strong>[cite: 2]
+<div class="output">Enter machine temperature (°C): 120
+Temperature Error: Machine temperature is outside the safe range!
+Temperature checking completed.</div>[cite: 2]
+
+<br>
+<strong>Case 3 – Invalid input:</strong>[cite: 2]
+<div class="output">Enter machine temperature (°C): abc
+Error: Please enter a valid numerical temperature.
+Temperature checking completed.</div>[cite: 2]
+</section>
+</main>
+
+<footer>© 2026 D. Kiran Prasad | Python Experiments</footer>
+</body>
+</html>
