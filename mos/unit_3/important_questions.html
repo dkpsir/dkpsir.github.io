@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beam Bending Stress Solved Problems & Assumptions</title>
+    <!-- MathJax for rendering equations cleanly without image artifacts -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+<style>
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#eef5fb;
+    color:#222;
+}
+.header{
+    background:linear-gradient(90deg,#124d82,#087cc1);
+    color:white;
+    padding:28px 20px;
+    text-align:center;
+}
+.header h1{
+    margin:0;
+    font-size:38px;
+    font-weight:bold;
+}
+.header h2{
+    margin:8px 0 0;
+    color:white;
+    border:none;
+}
+.top-links{
+    position:absolute;
+    top:45px;
+    left:25px;
+    color:white;
+    font-size:20px;
+    font-weight:bold;
+}
+.notice-box{
+    margin:40px 3%;
+    background:white;
+    border-left:6px solid red;
+    padding:22px;
+    color:red;
+    font-size:24px;
+    border-radius:8px;
+}
+.container{
+    width:94%;
+    margin:auto;
+}
+.problem-card{
+    background:white;
+    border-radius:18px;
+    padding:30px;
+    margin:30px 0;
+    box-shadow:0 6px 20px rgba(0,0,0,.12);
+}
+.problem-card h2{
+    background:#12649a;
+    color:white;
+    padding:18px 25px;
+    border-radius:10px;
+    border:none;
+}
+.problem-statement{
+    background:#fff;
+    border:1px solid #d9e2ec;
+    border-left:5px solid #12649a;
+    padding:18px;
+    color:#d00000;
+    font-weight:bold;
+    font-size:18px;
+}
+.grid-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+}
+.section-box{
+    background:#f8fbff;
+    border:1px solid #d8e3ef;
+    border-radius:10px;
+    padding:18px;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+th{
+    background:#12649a;
+    color:white;
+}
+th,td{
+    border:1px solid #cbd5e1;
+    padding:10px;
+    text-align:center;
+}
+.highlight{
+    background:#fff2a8;
+    padding:8px;
+    border-radius:6px;
+    font-weight:bold;
+}
+.embedded-image{
+    max-width:90%;
+    display:block;
+    margin:25px auto;
+    border-radius:8px;
+}
+.footer{
+    background:#124d82;
+    color:white;
+    text-align:center;
+    padding:15px;
+}
+</style>
+
+</head>
+<body>
+
+    
+<header class="header">
+<div class="top-links">🏠 Back to Domain Home</div>
+<h1>MECHANICS OF SOLIDS</h1>
+<h2>UNIT 3 – Important Questions with Solutions</h2>
+</header>
+<div class="notice-box">
+PDF document with questions and answers: Updated Shortly
+</div>
+<div class="container">
+
+
+    <!-- QUESTION 1 -->
+    <div class="problem-card">
+        <h2>Question 1: Hollow Circular Cross-Section</h2>
+        <div class="problem-statement">
+            Problem: A simply supported beam of length 4 m carries a point load of 16 kN at a distance of 3 m from the left support. The cross section of the beam is a hollow circle with outer diameter 120 mm and inside diameter 80 mm. Determine the maximum tensile and compressive bending stress at the point load.
+        </div>
+
+        <img src="q1_1.webp" alt="Question 1 Setup" class="embedded-image">
+
+        <div class="grid-container">
+            <div class="section-box">
+                <h3>1. Maximum Bending Moment</h3>
+                <p>$$M_{\max} = \frac{W \cdot a \cdot b}{L} = \frac{16 \times 3 \times 1}{4} = 12\text{ kN}\cdot\text{m}$$</p>
+                <p class="highlight">$$M_{\max} = 12 \times 10^6\text{ N}\cdot\text{mm}$$</p>
+            </div>
+            <div class="section-box">
+                <h3>2. Moment of Inertia</h3>
+                <p>$$I = \frac{\pi}{64}(D^4 - d^4) = \frac{\pi}{64}(120^4 - 80^4)$$</p>
+                <p class="highlight">$$I = 8.168 \times 10^6\text{ mm}^4$$</p>
+            </div>
+            <div class="section-box">
+                <h3>3. Bending Stress Calculation</h3>
+                <p>$$y = \frac{D}{2} = 60\text{ mm}$$</p>
+                <p>$$\sigma_{\max} = \frac{M_{\max} \cdot y}{I} = \frac{12 \times 10^6 \times 60}{8.168 \times 10^6}$$</p>
+                <p class="highlight">$$\sigma_{\max} = 88.15\text{ N/mm}^2\text{ (MPa)}$$</p>
+            </div>
+        </div>
+
+        <img src="q1_2.webp" alt="Question 1 Solution Diagrams" class="embedded-image">
+    </div>
+
+    <!-- QUESTION 2 -->
+    <div class="problem-card">
+        <h2>Question 2: T-Section Bending Stress &amp; Distribution</h2>
+        <div class="problem-statement">
+            Problem: A simply supported beam 8 m long of T section as shown below. The beam is subjected to a uniformly distributed load of 12 kN/m over entire length. Determine bending stress and draw its distribution across the section.
+        </div>
+
+        <img src="q2_1.webp" alt="Question 2 Setup" class="embedded-image">
+
+        <h3>Section Properties &amp; Centroid Table (Bottom Reference)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Part No.</th>
+                    <th>Area \(A\) (\(\text{mm}^2\))</th>
+                    <th>\(y\) from bottom (\(\text{mm}\))</th>
+                    <th>\(A y\) (\(\text{mm}^3\))</th>
+                    <th>\(h = |y - \bar{y}|\) (\(\text{mm}\))</th>
+                    <th>\(I_0 + A h^2\) (\(\text{mm}^4\))</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1 (Web)</td>
+                    <td>\(30 \times 180 = 5400\)</td>
+                    <td>\(90\)</td>
+                    <td>\(486,000\)</td>
+                    <td>\(34.15\)</td>
+                    <td>$$20.88 \times 10^6$$</td>
+                </tr>
+                <tr>
+                    <td>2 (Flange)</td>
+                    <td>\(140 \times 20 = 2800\)</td>
+                    <td>\(190\)</td>
+                    <td>\(532,000\)</td>
+                    <td>\(65.85\)</td>
+                    <td>$$12.24 \times 10^6$$</td>
+                </tr>
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td><strong>\(A = 8200\)</strong></td>
+                    <td>—</td>
+                    <td><strong>\(\sum Ay = 1,018,000\)</strong></td>
+                    <td>—</td>
+                    <td><strong class="highlight">\(I = 33.11 \times 10^6\text{ mm}^4\)</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="grid-container">
+            <div class="section-box">
+                <h3>1. Centroid Location</h3>
+                <p>$$\bar{y} = \frac{\sum A y}{A} = \frac{1,018,000}{8200} = 124.15\text{ mm}$$</p>
+                <p>$$y_{\text{top}} = 75.85\text{ mm},\quad y_{\text{bottom}} = 124.15\text{ mm}$$</p>
+            </div>
+            <div class="section-box">
+                <h3>2. Maximum Bending Moment</h3>
+                <p>$$M_{\max} = \frac{w L^2}{8} = \frac{12 \times 8^2}{8} = 96\text{ kN}\cdot\text{m}$$</p>
+                <p class="highlight">$$M_{\max} = 96 \times 10^6\text{ N}\cdot\text{mm}$$</p>
+            </div>
+            <div class="section-box">
+                <h3>3. Extreme Fiber Stresses</h3>
+                <p>$$\sigma_c = \frac{M \cdot y_{\text{top}}}{I} = \frac{96 \times 10^6 \times 75.85}{33.11 \times 10^6} = 219.9\text{ MPa}$$</p>
+                <p>$$\sigma_t = \frac{M \cdot y_{\text{bottom}}}{I} = \frac{96 \times 10^6 \times 124.15}{33.11 \times 10^6} = 359.9\text{ MPa}$$</p>
+            </div>
+        </div>
+
+        <img src="q2_2.webp" alt="Question 2 Solution Diagrams" class="embedded-image">
+    </div>
+
+    <!-- QUESTION 3 -->
+    <div class="problem-card">
+        <h2>Question 3: T-Section Load Capacity (\(w\)) Determination</h2>
+        <div class="problem-statement">
+            Problem: A simply supported beam of T cross-sectional area has a span of 10 m. It is carrying a uniformly distributed load of 'w' N/m along the span. Determine the value of w, if the allowable bending stress is limited to 150 MPa in tension and 220 MPa in compression.
+        </div>
+
+        <img src="q3_1.webp" alt="Question 3 Setup" class="embedded-image">
+
+        <h3>Section Properties &amp; Centroid Table (Bottom Reference)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Part No.</th>
+                    <th>Area \(A\) (\(\text{mm}^2\))</th>
+                    <th>\(y\) from bottom (\(\text{mm}\))</th>
+                    <th>\(A y\) (\(\text{mm}^3\))</th>
+                    <th>\(h = |y - \bar{y}|\) (\(\text{mm}\))</th>
+                    <th>\(I_0 + A h^2\) (\(\text{mm}^4\))</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1 (Web)</td>
+                    <td>\(50 \times 150 = 7500\)</td>
+                    <td>\(75\)</td>
+                    <td>\(562,500\)</td>
+                    <td>\(50\)</td>
+                    <td>$$32.8125 \times 10^6$$</td>
+                </tr>
+                <tr>
+                    <td>2 (Flange)</td>
+                    <td>\(150 \times 50 = 7500\)</td>
+                    <td>\(175\)</td>
+                    <td>\(1,312,500\)</td>
+                    <td>\(50\)</td>
+                    <td>$$20.3125 \times 10^6$$</td>
+                </tr>
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td><strong>\(A = 15,000\)</strong></td>
+                    <td>—</td>
+                    <td><strong>\(\sum Ay = 1,875,000\)</strong></td>
+                    <td>—</td>
+                    <td><strong class="highlight">\(I = 53.125 \times 10^6\text{ mm}^4\)</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="grid-container">
+            <div class="section-box">
+                <h3>1. Centroid &amp; Distances</h3>
+                <p>$$\bar{y} = \frac{1,875,000}{15,000} = 125\text{ mm}$$</p>
+                <p>$$y_{\text{bottom}} = 125\text{ mm},\quad y_{\text{top}} = 75\text{ mm}$$</p>
+            </div>
+            <div class="section-box">
+                <h3>2. Moment Capacity Evaluation</h3>
+                <p>$$M_t = \frac{I \cdot \sigma_t}{y_{\text{bottom}}} = \frac{53.125 \times 10^6 \times 150}{125} = 63.75\text{ kNm}$$</p>
+                <p>$$M_c = \frac{I \cdot \sigma_c}{y_{\text{top}}} = \frac{53.125 \times 10^6 \times 220}{75} = 155.83\text{ kNm}$$</p>
+                <p class="highlight">Governing \(M_{\text{allow}} = 63.75\text{ kN}\cdot\text{m}\)</p>
+            </div>
+            <div class="section-box">
+                <h3>3. Load Carrying Capacity</h3>
+                <p>$$M_{\max} = \frac{w L^2}{8}$$</p>
+                <p>$$63.75 \times 10^6 = \frac{w(10000)^2}{8}$$</p>
+                <p class="highlight">$$w = 5100\text{ N/m} = 5.1\text{ kN/m}$$</p>
+            </div>
+        </div>
+
+        <img src="q3_2.webp" alt="Question 3 Solution Diagrams" class="embedded-image">
+    </div>
+
+    <!-- QUESTION 4 -->
+    <div class="problem-card">
+        <h2>Question 4: Unsymmetrical I-Section Load Capacity (\(w\))</h2>
+        <div class="problem-statement">
+            Problem: A beam of I-section is simply supported over a span of 4 m. Determine the load that the beam can carry, if the allowable bending stress in beam is 30.82 N/mm². (Bottom flange 100x20 mm, Web 30x100 mm, Top flange 60x20 mm).
+        </div>
+
+        <img src="q4_1.webp" alt="Question 4 Setup" class="embedded-image">
+
+        <h3>Section Properties &amp; Centroid Table (Bottom Reference)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Part No.</th>
+                    <th>Area \(A\) (\(\text{mm}^2\))</th>
+                    <th>\(y\) from bottom (\(\text{mm}\))</th>
+                    <th>\(A y\) (\(\text{mm}^3\))</th>
+                    <th>\(h = |y - \bar{y}|\) (\(\text{mm}\))</th>
+                    <th>\(I_0 + A h^2\) (\(\text{mm}^4\))</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1 (Bottom Flange)</td>
+                    <td>\(100 \times 20 = 2000\)</td>
+                    <td>\(10\)</td>
+                    <td>\(20,000\)</td>
+                    <td>\(52.26\)</td>
+                    <td>$$5.528 \times 10^6$$</td>
+                </tr>
+                <tr>
+                    <td>2 (Web)</td>
+                    <td>\(30 \times 100 = 3000\)</td>
+                    <td>\(70\)</td>
+                    <td>\(210,000\)</td>
+                    <td>\(7.74\)</td>
+                    <td>$$2.680 \times 10^6$$</td>
+                </tr>
+                <tr>
+                    <td>3 (Top Flange)</td>
+                    <td>\(60 \times 20 = 1200\)</td>
+                    <td>\(130\)</td>
+                    <td>\(156,000\)</td>
+                    <td>\(67.74\)</td>
+                    <td>$$5.547 \times 10^6$$</td>
+                </tr>
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td><strong>\(A = 6200\)</strong></td>
+                    <td>—</td>
+                    <td><strong>\(\sum Ay = 386,000\)</strong></td>
+                    <td>—</td>
+                    <td><strong class="highlight">\(I = 13.755 \times 10^6\text{ mm}^4\)</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="grid-container">
+            <div class="section-box">
+                <h3>1. Centroid Location</h3>
+                <p>$$\bar{y} = \frac{386,000}{6200} = 62.26\text{ mm}$$</p>
+                <p>$$y_{\text{top}} = 140 - 62.26 = 77.74\text{ mm}$$</p>
+            </div>
+            <div class="section-box">
+                <h3>2. Allowable Bending Moment</h3>
+                <p>Top fiber is farther from N.A., so compression governs:</p>
+                <p>$$M_{\text{allow}} = \frac{\sigma_{\text{allow}} \cdot I}{y_{\text{top}}} = \frac{30.82 \times 13.755 \times 10^6}{77.74}$$</p>
+                <p class="highlight">$$M_{\text{allow}} = 5.453 \times 10^6\text{ N}\cdot\text{mm}$$</p>
+            </div>
+            <div class="section-box">
+                <h3>3. Load Carrying Capacity</h3>
+                <p>$$w = \frac{8 M_{\text{allow}}}{L^2} = \frac{8 \times 5.453 \times 10^6}{(4000)^2}$$</p>
+                <p class="highlight">$$w = 2.726\text{ N/mm} = 2.726\text{ kN/m}$$</p>
+            </div>
+        </div>
+
+        <img src="q4_2.webp" alt="Question 4 Solution Diagrams" class="embedded-image">
+    </div>
+
+    <!-- QUESTION 5 -->
+    <div class="problem-card">
+        <h2>Question 5: Assumptions of Bending Equation Derivation</h2>
+        <div class="problem-statement">
+            Question 5: State the primary assumptions made in the derivation of the simple / pure bending equation $$\frac{M}{I} = \frac{\sigma}{y} = \frac{E}{R}$$.
+        </div>
+
+        <ol class="assumptions-list">
+            <li><strong>Initially Straight Beam:</strong> The beam is initially straight, has a constant cross-sectional area throughout its length, and possesses a longitudinal plane of symmetry along which external loads are applied.</li>
+            <li><strong>Homogeneous and Isotropic Material:</strong> The beam material is perfectly homogeneous (uniform composition throughout) and isotropic (possesses identical elastic properties in all directions).</li>
+            <li><strong>Proportionality Within Elastic Limit:</strong> The material obeys Hooke's Law strictly within its elastic limit, meaning the modulus of elasticity (\(E\)) remains constant in both tension and compression.</li>
+            <li><strong>Large Radius of Curvature:</strong> The radius of curvature (\(R\)) of the beam after bending is extremely large compared to its cross-sectional dimensions (height/depth).</li>
+        </ol>
+    </div>
+
+
+</div>
+<footer class="footer">
+© 2026 D. Kiran Prasad | Mechanics of Solids
+</footer>
+</body>
+
+</html>
