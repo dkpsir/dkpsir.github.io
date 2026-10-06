@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Experiment 8 - Machine Monitoring Visualizer</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;background:#eef4f9;color:#111;font-family:Arial,sans-serif;font-size:14px}
+.container{display:grid;grid-template-columns:1.05fr 1fr;gap:12px;min-height:100vh;padding:10px;max-width:1500px;margin:auto}
+.panel{background:#fff;border-radius:8px;padding:10px;box-shadow:0 1px 6px rgba(0,0,0,.08);display:flex;flex-direction:column;min-width:0}
+h2{color:#0b4f86;font-size:16px;margin-bottom:6px;flex-shrink:0}
+.controls{background:#f8fafc;border:1px solid #ccd8e2;border-radius:6px;padding:6px 10px;margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-shrink:0;flex-wrap:wrap}
+button{padding:5px 12px;font-size:13px;font-weight:600;cursor:pointer;border-radius:4px;border:1px solid #0b4f86;background:#0b4f86;color:#fff}
+button:hover{background:#093e6a}
+button:disabled{opacity:.45;cursor:not-allowed;background:#718096;border-color:#718096}
+select{padding:4px 8px;font-size:12.5px;border-radius:4px;border:1px solid #ccd8e2;background:#fff;font-weight:600;color:#2d3748}
+.message{font-size:13px;margin:2px 0 6px;color:#1a365d;font-weight:600;min-height:17px}
+.section-title{background:#0b4f86;color:#fff;padding:4px 8px;font-size:12px;font-weight:bold;border-radius:4px 4px 0 0;margin-top:4px;flex-shrink:0}
+.box-content{background:#fff;border:1px solid #ccd8e2;border-top:none;padding:6px 8px;font:13px/1.3 Consolas,"Courier New",monospace;border-radius:0 0 4px 4px}
+#varDisplay{min-height:48px;display:flex;align-items:center;flex-wrap:wrap;gap:5px}
+#operationDisplay{min-height:42px;display:flex;align-items:center}
+#dataDisplay{overflow:auto;max-height:255px;padding:0}
+#resultDisplay{overflow:auto;max-height:220px;padding:0}
+table.data{border-collapse:collapse;width:100%;font:12px Consolas,"Courier New",monospace}
+table.data th{background:#dbeafe;color:#17324d;padding:6px;border:1px solid #b9c9d7;position:sticky;top:0}
+table.data td{padding:5px 6px;border:1px solid #d5dee6;text-align:center}
+table.data tr.highlight{background:#fff3a3;font-weight:bold}
+table.data tr.inspect{background:#ffe3d7}
+table.data tr.normal{background:#e3f8ec}
+#consoleOutput{min-height:95px;max-height:180px;background:#111;color:#38ef7d;overflow-y:auto;line-height:1.3;font-size:13px;white-space:pre-wrap}
+.explanation{background:#f7fafc;border-left:4px solid #0b5d96;padding:6px 10px;margin-top:6px;font-size:12.5px;line-height:1.35}
+pre.code{margin:0;line-height:15px;background:#1e1e1e;color:#ddd;padding:5px 8px;border-radius:6px;font:12px/15px Consolas,"Courier New",monospace;min-height:0;white-space:pre;overflow:auto;line-height:15px}
+.line{display:block;padding:0 4px;margin:0;border-radius:2px;line-height:15px;height:15px;}
+.active{background:#ffeb3b;color:#000;font-weight:bold}
+.result-line{background:#b7f7c9;color:#064e3b;font-weight:bold}
+.badge{display:inline-block;padding:2px 6px;font-size:11px;border-radius:3px;background:#e2e8f0;color:#2d3748;margin-right:4px}
+.badge-var{background:#e0f2fe;color:#075985;border:1px solid #7dd3fc}
+.badge-op{background:#fef3c7;color:#92400e;border:1px solid #f59e0b}
+.badge-res{background:#dcfce7;color:#166534;border:1px solid #4ade80}
+.progress{height:6px;background:#e2e8f0;border-radius:4px;overflow:hidden;margin:5px 0 7px}
+.progress > div{height:100%;width:0;background:#0b5d96;transition:width .25s}
+.small{font-size:11px;color:#64748b}
+@media(max-width:950px){.container{grid-template-columns:1fr}.panel{min-height:0}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<section class="panel">
+<h2>Execution State & Data Analysis</h2>
+
+<div class="controls">
+<button id="startBtn">Start</button>
+<button id="nextBtn" disabled>Next Step →</button>
+<button id="resetBtn">Reset</button>
+<span class="small" id="stepCount">Step 0 / 41</span>
+</div>
+<div class="progress"><div id="progressBar"></div></div>
+
+<div class="message" id="message">Click <b>Start</b>, then use <b>Next Step →</b> to execute one code line at a time.</div>
+
+
+
+
+
+<div class="section-title">Machine DataFrame</div>
+<div class="box-content" id="dataDisplay"><i>DataFrame not created yet.</i></div>
+
+<div class="section-title">Analysis Results</div>
+<div class="box-content" id="resultDisplay"><i>No analysis results yet.</i></div>
+
+<div class="section-title">Python Console Output</div>
+<div class="box-content" id="consoleOutput"></div>
+
+<div class="explanation" id="explanation">
+<b>Experiment 8:</b> Every executable code line is executed one at a time. Click Next Step to move to the next line.
+</div>
+</section>
+
+<section class="panel">
+<h2>Python Program — Line-by-Line Execution</h2>
+<pre class="code" id="codeBlock"><span id="l1" class="line">import numpy as np</span><span id="l2" class="line">import pandas as pd</span><span id="l3" class="line"></span><span id="l4" class="line"># Machine data</span><span id="l5" class="line">data = {</span><span id="l6" class="line">    "Machine": ["M1", "M2", "M3", "M4", "M5"],</span><span id="l7" class="line">    "Speed_RPM": [1200, 1500, 1800, 1400, 1600],</span><span id="l8" class="line">    "Temperature_C": [65, 72, 85, 68, 78],</span><span id="l9" class="line">    "Vibration_mm_s": [2.1, 2.8, 4.5, 2.4, 3.2],</span><span id="l10" class="line">    "Power_kW": [5.2, 6.5, 8.0, 5.8, 7.1]</span><span id="l11" class="line">}</span><span id="l12" class="line"></span><span id="l13" class="line"># Create DataFrame</span><span id="l14" class="line">df = pd.DataFrame(data)</span><span id="l15" class="line"></span><span id="l16" class="line">print("Machine Data:")</span><span id="l17" class="line">print(df)</span><span id="l18" class="line"></span><span id="l19" class="line"># Calculate average values</span><span id="l20" class="line">average_temperature = np.mean(df["Temperature_C"])</span><span id="l21" class="line">average_vibration = np.mean(df["Vibration_mm_s"])</span><span id="l22" class="line">average_power = np.mean(df["Power_kW"])</span><span id="l23" class="line"></span><span id="l24" class="line">print("\nAverage Temperature:",</span><span id="l25" class="line">      round(average_temperature, 2), "°C")</span><span id="l26" class="line">print("Average Vibration:",</span><span id="l27" class="line">      round(average_vibration, 2), "mm/s")</span><span id="l28" class="line">print("Average Power:",</span><span id="l29" class="line">      round(average_power, 2), "kW")</span><span id="l30" class="line"></span><span id="l31" class="line"># Find machine with maximum vibration</span><span id="l32" class="line">max_vibration = df["Vibration_mm_s"].max()</span><span id="l33" class="line"></span><span id="l34" class="line">machine = df.loc[</span><span id="l35" class="line">    df["Vibration_mm_s"].idxmax(),</span><span id="l36" class="line">    "Machine"</span><span id="l37" class="line">]</span><span id="l38" class="line"></span><span id="l39" class="line">print("\nMaximum Vibration:",</span><span id="l40" class="line">      max_vibration, "mm/s")</span><span id="l41" class="line">print("Machine with Maximum Vibration:", machine)</span><span id="l42" class="line"></span><span id="l43" class="line"># Classify machine condition</span><span id="l44" class="line">df["Condition"] = np.where(</span><span id="l45" class="line">    df["Vibration_mm_s"] &gt; 3.0,</span><span id="l46" class="line">    "Needs Inspection",</span><span id="l47" class="line">    "Normal"</span><span id="l48" class="line">)</span><span id="l49" class="line"></span><span id="l50" class="line">print("\nMachine Condition:")</span><span id="l51" class="line">print(df[["Machine", "Vibration_mm_s", "Condition"]])</span></pre>
+</section>
+
+</div>
+
+<script>
+const rows = [
+ {Machine:"M1",Speed_RPM:1200,Temperature_C:65,Vibration_mm_s:2.1,Power_kW:5.2},
+ {Machine:"M2",Speed_RPM:1500,Temperature_C:72,Vibration_mm_s:2.8,Power_kW:6.5},
+ {Machine:"M3",Speed_RPM:1800,Temperature_C:85,Vibration_mm_s:4.5,Power_kW:8.0},
+ {Machine:"M4",Speed_RPM:1400,Temperature_C:68,Vibration_mm_s:2.4,Power_kW:5.8},
+ {Machine:"M5",Speed_RPM:1600,Temperature_C:78,Vibration_mm_s:3.2,Power_kW:7.1}
+];
+
+const steps = [
+ {lines:["l1"],msg:"Executing line 1.",op:"Import NumPy",vars:{np:"NumPy"},explain:"<b>import numpy as np</b> loads NumPy and gives it the short name <code>np</code>."},
+ {lines:["l2"],msg:"Executing line 2.",op:"Import Pandas",vars:{np:"NumPy",pd:"Pandas"},explain:"<b>import pandas as pd</b> loads Pandas and gives it the short name <code>pd</code>."},
+ {lines:["l4"],msg:"Executing the comment.",op:"Comment",vars:{np:"NumPy",pd:"Pandas"},explain:"This is a comment describing the purpose of the following dictionary. Comments are ignored by Python during execution."},
+ {lines:["l5"],msg:"Starting the machine-data dictionary.",op:"Dictionary begins",vars:{data:"dictionary"},explain:"<b>data = {</b> starts a dictionary. The dictionary will store machine information as key-value pairs."},
+ {lines:["l6"],msg:"Adding the Machine column.",op:"Dictionary entry",vars:{data:"Machine list added"},explain:"The key <code>Machine</code> is associated with a list containing the five machine identifiers."},
+ {lines:["l7"],msg:"Adding the Speed_RPM column.",op:"Dictionary entry",vars:{data:"Machine + Speed_RPM"},explain:"The key <code>Speed_RPM</code> stores the rotational-speed values for the five machines."},
+ {lines:["l8"],msg:"Adding the Temperature_C column.",op:"Dictionary entry",vars:{data:"Machine + Speed + Temperature"},explain:"The key <code>Temperature_C</code> stores the temperature values in degrees Celsius."},
+ {lines:["l9"],msg:"Adding the Vibration_mm_s column.",op:"Dictionary entry",vars:{data:"Machine + Speed + Temperature + Vibration"},explain:"The key <code>Vibration_mm_s</code> stores vibration values in mm/s. These values are later used for condition classification."},
+ {lines:["l10"],msg:"Adding the Power_kW column.",op:"Dictionary entry",vars:{data:"5 columns defined"},explain:"The key <code>Power_kW</code> stores the power values in kilowatts."},
+ {lines:["l11"],msg:"Closing the machine-data dictionary.",op:"Dictionary complete",vars:{data:"5 keys × 5 values"},explain:"The closing brace completes the dictionary. The complete dataset now contains five columns and five machine records."},
+ {lines:["l13"],msg:"Executing the DataFrame comment.",op:"Comment",vars:{data:"5 keys × 5 values"},explain:"This comment identifies the next statement as the DataFrame-creation step."},
+ {lines:["l14"],msg:"Creating the DataFrame.",op:"pd.DataFrame(data)",vars:{data:"5 keys × 5 values",df:"5 rows × 5 columns"},showData:true,explain:"<b>pd.DataFrame(data)</b> converts the dictionary into a two-dimensional Pandas DataFrame."},
+ {lines:["l16"],msg:"Printing the heading.",op:"print(\"Machine Data:\")",vars:{df:"5 rows × 5 columns"},console:["Machine Data:"],explain:"<b>print()</b> sends the text <code>Machine Data:</code> to the console."},
+ {lines:["l17"],msg:"Printing the DataFrame.",op:"print(df)",vars:{df:"Displayed"},showData:true,console:["M1  1200  65  2.1  5.2","M2  1500  72  2.8  6.5","M3  1800  85  4.5  8.0","M4  1400  68  2.4  5.8","M5  1600  78  3.2  7.1"],explain:"The complete DataFrame is displayed so the machine data can be inspected before calculations."},
+ {lines:["l19"],msg:"Executing the average-values comment.",op:"Comment",vars:{df:"Displayed"},explain:"This comment identifies the next three statements as average-value calculations."},
+ {lines:["l20"],msg:"Calculating average temperature.",op:"np.mean(Temperature_C)",vars:{average_temperature:"71.6 °C"},results:["Average Temperature = 71.6 °C"],explain:"<b>df[\"Temperature_C\"]</b> selects the temperature column and <b>np.mean()</b> calculates its arithmetic mean."},
+ {lines:["l21"],msg:"Calculating average vibration.",op:"np.mean(Vibration_mm_s)",vars:{average_temperature:"71.6 °C",average_vibration:"3.0 mm/s"},results:["Average Vibration = 3.0 mm/s"],explain:"The vibration column is selected and <b>np.mean()</b> calculates the average vibration."},
+ {lines:["l22"],msg:"Calculating average power.",op:"np.mean(Power_kW)",vars:{average_temperature:"71.6 °C",average_vibration:"3.0 mm/s",average_power:"6.52 kW"},results:["Average Power = 6.52 kW"],explain:"The power column is selected and <b>np.mean()</b> calculates the average power."},
+ {lines:["l24"],msg:"Printing the Average Temperature heading and value statement.",op:"print() begins",vars:{average_temperature:"71.6 °C",average_vibration:"3.0 mm/s",average_power:"6.52 kW"},explain:"This is the first line of the multi-line <code>print()</code> statement for average temperature."},
+ {lines:["l25"],msg:"Completing the Average Temperature output.",op:"round(average_temperature, 2)",vars:{average_temperature:"71.6 °C"},console:["Average Temperature: 71.6 °C"],explain:"<b>round(average_temperature, 2)</b> rounds the value to two decimal places and the unit <code>°C</code> is displayed."},
+ {lines:["l26"],msg:"Printing the Average Vibration heading and value statement.",op:"print() begins",vars:{average_vibration:"3.0 mm/s"},explain:"This line begins the output statement for average vibration."},
+ {lines:["l27"],msg:"Completing the Average Vibration output.",op:"round(average_vibration, 2)",vars:{average_vibration:"3.0 mm/s"},console:["Average Vibration: 3.0 mm/s"],explain:"The average vibration is rounded to two decimal places and displayed with the unit mm/s."},
+ {lines:["l28"],msg:"Printing the Average Power heading and value statement.",op:"print() begins",vars:{average_power:"6.52 kW"},explain:"This line begins the output statement for average power."},
+ {lines:["l29"],msg:"Completing the Average Power output.",op:"round(average_power, 2)",vars:{average_power:"6.52 kW"},console:["Average Power: 6.52 kW"],explain:"The average power is rounded to two decimal places and displayed with the unit kW."},
+ {lines:["l31"],msg:"Executing the maximum-vibration comment.",op:"Comment",vars:{average_temperature:"71.6 °C",average_vibration:"3.0 mm/s",average_power:"6.52 kW"},explain:"This comment identifies the next part of the program as the maximum-vibration analysis."},
+ {lines:["l32"],msg:"Finding the maximum vibration value.",op:"Series.max()",vars:{max_vibration:"4.5 mm/s"},results:["Maximum Vibration = 4.5 mm/s"],explain:"<b>df[\"Vibration_mm_s\"].max()</b> returns the largest value in the vibration column. The maximum is 4.5 mm/s."},
+ {lines:["l34"],msg:"Starting the machine-selection statement.",op:"loc[] selection begins",vars:{max_vibration:"4.5 mm/s"},explain:"<b>df.loc[</b> begins a label-based DataFrame selection. The row index and column will be supplied by the following lines."},
+ {lines:["l35"],msg:"Finding the index of maximum vibration.",op:"idxmax()",vars:{max_vibration:"4.5 mm/s",max_index:"2"},highlightRow:2,explain:"<b>idxmax()</b> returns the index of the row containing the maximum vibration. Here the index is <b>2</b>, corresponding to M3."},
+ {lines:["l36"],msg:"Selecting the Machine column.",op:"Column label",vars:{max_index:"2",selected_column:"Machine"},highlightRow:2,explain:"The string <code>\"Machine\"</code> specifies that the Machine column should be returned from the selected row."},
+ {lines:["l37"],msg:"Completing the loc[] statement.",op:"loc[] completed",vars:{machine:"M3"},highlightRow:2,results:["Machine with Maximum Vibration = M3"],explain:"The completed <b>loc[]</b> expression retrieves the machine name at index 2, giving <b>M3</b>."},
+ {lines:["l39"],msg:"Printing the Maximum Vibration heading and value statement.",op:"print() begins",vars:{max_vibration:"4.5 mm/s"},explain:"This line begins the output statement for the maximum vibration value."},
+ {lines:["l40"],msg:"Completing the Maximum Vibration output.",op:"print(max_vibration)",vars:{max_vibration:"4.5 mm/s"},console:["Maximum Vibration: 4.5 mm/s"],explain:"The variable <code>max_vibration</code> is displayed together with the unit mm/s."},
+ {lines:["l41"],msg:"Displaying the machine with maximum vibration.",op:"print(machine)",vars:{machine:"M3"},console:["Machine with Maximum Vibration: M3"],explain:"The variable <code>machine</code> contains the machine identified by <code>idxmax()</code> and <code>loc[]</code>."},
+ {lines:["l43"],msg:"Executing the condition-classification comment.",op:"Comment",vars:{machine:"M3"},explain:"This comment identifies the next statement as the machine-condition classification step."},
+ {lines:["l44"],msg:"Starting the Condition column assignment.",op:"np.where() begins",vars:{machine:"M3"},explain:"<b>df[\"Condition\"] = np.where(</b> starts creation of a new DataFrame column named <code>Condition</code>."},
+ {lines:["l45"],msg:"Testing the vibration threshold.",op:"Vibration > 3.0",vars:{threshold:"3.0 mm/s"},explain:"Every vibration value is compared with <b>3.0 mm/s</b>. Values greater than 3.0 produce True."},
+ {lines:["l46"],msg:"Defining the True result.",op:"True → Needs Inspection",vars:{true_result:"Needs Inspection"},explain:"When the condition is True, <code>np.where()</code> assigns <b>Needs Inspection</b>."},
+ {lines:["l47"],msg:"Defining the False result.",op:"False → Normal",vars:{false_result:"Normal"},explain:"When the condition is False, <code>np.where()</code> assigns <b>Normal</b>."},
+ {lines:["l48"],msg:"Completing the Condition column.",op:"np.where() completed",vars:{Condition:"M1 Normal | M2 Normal | M3 Needs Inspection | M4 Normal | M5 Needs Inspection"},classify:true,explain:"The condition array is assigned to the new <b>Condition</b> column. M3 and M5 exceed 3.0 mm/s and therefore need inspection."},
+ {lines:["l50"],msg:"Printing the final-condition heading.",op:"print(\"Machine Condition:\")",vars:{Condition:"Created"},console:["Machine Condition:"],explain:"The final output section is introduced with the heading <code>Machine Condition:</code>."},
+ {lines:["l51"],msg:"Printing the final selected columns.",op:"Select columns + print()",vars:{finalTable:"Machine + Vibration_mm_s + Condition"},showResult:true,console:["M1  2.1  Normal","M2  2.8  Normal","M3  4.5  Needs Inspection","M4  2.4  Normal","M5  3.2  Needs Inspection"],explain:"The program selects Machine, Vibration_mm_s and Condition and prints the final machine-condition table. This completes execution."}
+];
+
+let idx=0;
+const startBtn=document.getElementById("startBtn");
+const nextBtn=document.getElementById("nextBtn");
+const resetBtn=document.getElementById("resetBtn");
+const message=document.getElementById("message");
+const explanation=document.getElementById("explanation");
+const dataDisplay=document.getElementById("dataDisplay");
+const resultDisplay=document.getElementById("resultDisplay");
+const consoleOutput=document.getElementById("consoleOutput");
+const stepCount=document.getElementById("stepCount");
+const progressBar=document.getElementById("progressBar");
+
+let variables={};
+let output=[];
+let conditions={};
+
+function clearHighlight(){
+ document.querySelectorAll(".line").forEach(x=>x.classList.remove("active"));
+}
+function highlight(lines){
+ clearHighlight();
+ lines.forEach(id=>document.getElementById(id)?.classList.add("active"));
+}
+function renderData(highlightRow=-1){
+ let h=`<table class="data"><thead><tr><th>Index</th><th>Machine</th><th>Speed_RPM</th><th>Temperature_C</th><th>Vibration_mm_s</th><th>Power_kW</th>${Object.keys(conditions).length?'<th>Condition</th>':''}</tr></thead><tbody>`;
+ rows.forEach((r,i)=>{
+   let cls=i===highlightRow?"highlight":(conditions[r.Machine]==="Needs Inspection"?"inspect":(conditions[r.Machine]==="Normal"?"normal":""));
+   h+=`<tr class="${cls}"><td>${i}</td><td>${r.Machine}</td><td>${r.Speed_RPM}</td><td>${r.Temperature_C}</td><td>${r.Vibration_mm_s}</td><td>${r.Power_kW}</td>${Object.keys(conditions).length?`<td>${conditions[r.Machine]||""}</td>`:""}</tr>`;
+ });
+ h+="</tbody></table>";
+ dataDisplay.innerHTML=h;
+}
+function renderResult(){
+ if(!Object.keys(conditions).length){resultDisplay.innerHTML="<i>No classification results yet.</i>";return;}
+ resultDisplay.innerHTML=`<table class="data"><thead><tr><th>Machine</th><th>Vibration_mm_s</th><th>Condition</th></tr></thead><tbody>`+
+ rows.map(r=>`<tr class="${conditions[r.Machine]==="Needs Inspection"?"inspect":"normal"}"><td>${r.Machine}</td><td>${r.Vibration_mm_s}</td><td>${conditions[r.Machine]}</td></tr>`).join("")+
+ `</tbody></table>`;
+}
+function addConsole(lines){
+ output.push(...lines);
+ consoleOutput.textContent=output.join("\n");
+ consoleOutput.scrollTop=consoleOutput.scrollHeight;
+}
+function reset(){
+ idx=0;variables={};output=[];conditions={};
+ clearHighlight();
+ operationDisplay.innerHTML="<i>Waiting to start...</i>";
+ dataDisplay.innerHTML="<i>DataFrame not created yet.</i>";
+ resultDisplay.innerHTML="<i>No analysis results yet.</i>";
+ consoleOutput.textContent="";
+ message.innerHTML='Click <b>Start</b>, then use <b>Next Step →</b> to execute one code line at a time.';
+ explanation.innerHTML='<b>Experiment 8:</b> Every executable code line is executed one at a time. Click Next Step to move to the next line.';
+ stepCount.textContent=`Step 0 / ${steps.length}`;
+ progressBar.style.width="0%";
+ startBtn.disabled=false;nextBtn.disabled=true;
+}
+function executeStep(){
+ if(idx>=steps.length){nextBtn.disabled=true;return;}
+ const s=steps[idx];
+ highlight(s.lines);
+ message.textContent=s.msg;
+ variables={...variables,...s.vars};
+
+ if(s.showData || s.highlightRow!==undefined || s.classify || s.showResult){
+   renderData(s.highlightRow ?? -1);
+ }
+ if(s.classify){
+   conditions={M1:"Normal",M2:"Normal",M3:"Needs Inspection",M4:"Normal",M5:"Needs Inspection"};
+   renderData(s.highlightRow ?? -1);
+   renderResult();
+ }
+ if(s.showResult) renderResult();
+
+ if(s.results){
+   resultDisplay.innerHTML=`<div>${s.results.map(x=>`<span class="badge badge-res">${x}</span>`).join("<br>")}</div>`;
+   if(Object.keys(conditions).length) renderResult();
+ }
+ if(s.console) addConsole(s.console);
+
+ explanation.innerHTML=s.explain;
+ idx++;
+ stepCount.textContent=`Step ${idx} / ${steps.length}`;
+ progressBar.style.width=`${(idx/steps.length)*100}%`;
+
+ if(idx>=steps.length){
+   nextBtn.disabled=true;
+   startBtn.disabled=false;
+ }
+}
+
+startBtn.addEventListener("click",()=>{startBtn.disabled=true;nextBtn.disabled=false;executeStep();});
+nextBtn.addEventListener("click",executeStep);
+resetBtn.addEventListener("click",reset);
+reset();
+</script>
+</body>
+</html>
