@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experiment 8 - Machine Monitoring and Data Analysis</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#eef4f9;color:#111;font-family:Arial,Helvetica,sans-serif}
+.header{background:linear-gradient(90deg,#0b477d,#087cc1);color:#fff;padding:26px 20px;text-align:center}
+.header h1{margin:0;font-size:29px}.header p{margin:7px 0 0;font-size:17px}
+.container{width:96%;max-width:1450px;margin:24px auto}
+.card{background:#fff;border-radius:12px;padding:22px;margin-bottom:22px;box-shadow:0 3px 15px rgba(0,0,0,.08)}
+.title{background:#0b5b94;color:#fff;padding:13px 18px;border-radius:8px;font-size:21px;font-weight:700;margin-bottom:20px}
+.top-grid{display:grid;grid-template-columns:55% 45%;gap:18px;align-items:stretch}
+.flow-wrap{overflow:auto;width:100%}
+.flow-svg{display:block;width:100%;height:auto}
+.program{background:#1e1e1e;color:#ddd;border-radius:8px;padding:17px;overflow:auto;font:12.5px/1.48 Consolas,"Courier New",monospace;white-space:pre;height:calc(100% - 58px);margin:0}
+.note{background:#fff8df;border-left:5px solid #d89a00;padding:13px 16px;margin-top:16px;line-height:1.5}
+table{width:100%;border-collapse:collapse}
+th,td{border:1px solid #c8d6e2;padding:11px 13px;text-align:left;vertical-align:top;line-height:1.48}
+th{background:#0b5b94;color:#fff;font-size:15px}
+tr:nth-child(even){background:#f7fafc}
+code{background:#eef3f7;color:#063f6c;padding:2px 5px;border-radius:4px;font-family:"Courier New",monospace}
+footer{background:#0b477d;color:#fff;text-align:center;padding:13px;margin-top:25px}
+@media(max-width:900px){.top-grid{grid-template-columns:1fr}.program{height:auto;max-height:700px}}
+</style>
+</head>
+<body>
+
+<header class="header">
+<h1>PYTHON PROGRAMMING LAB</h1>
+<p>Experiment 8 – Machine Monitoring and Data Analysis using NumPy and Pandas</p>
+</header>
+
+<main class="container">
+
+<section class="card">
+<div class="title">Experiment 8 – Flow Chart and Python Program</div>
+
+<div class="top-grid">
+
+<!-- LEFT HALF : FLOW CHART -->
+<div>
+<div class="flow-wrap">
+<svg class="flow-svg" viewBox="0 0 620 1510" role="img" aria-label="Experiment 8 flow chart">
+
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+<path d="M0 0 L10 5 L0 10 Z" fill="#0b5b94"/>
+</marker>
+</defs>
+
+<style>
+.l{stroke:#0b5b94;stroke-width:2.4;fill:none}
+.s{fill:#0b5b94;stroke:#08456f;stroke-width:2}
+.i{fill:#f4efff;stroke:#7c3aed;stroke-width:2}
+.d{fill:#eef7ee;stroke:#4c9b5b;stroke-width:2}
+.p{fill:#f7fbff;stroke:#17679f;stroke-width:2}
+.o{fill:#ecfdf5;stroke:#10b981;stroke-width:2}
+.q{fill:#fde68a;stroke:#d97706;stroke-width:2}
+.b{fill:#fff5e8;stroke:#d97706;stroke-width:2}
+.t{font-family:Arial,Helvetica,sans-serif;text-anchor:middle}
+.st{fill:#fff;font-weight:800;font-size:15px}
+.bd{font-weight:800;font-size:13px}
+.n{font-size:11px;fill:#17324d}
+.pu{fill:#5121a8}.gr{fill:#245d2c}.bl{fill:#073f6c}.or{fill:#8a4a05}.te{fill:#047857}
+.dt{font-weight:800;font-size:11px;fill:#92400e}
+.lb{fill:#e5e7eb}.lt{fill:#374151;font-weight:800;font-size:11px}
+</style>
+
+<!-- START -->
+<rect x="220" y="20" width="180" height="44" rx="22" class="s"/>
+<text x="310" y="48" class="t st">START</text>
+<line x1="310" y1="64" x2="310" y2="94" class="l" marker-end="url(#arrow)"/>
+
+<!-- IMPORT -->
+<rect x="105" y="94" width="410" height="66" rx="10" class="i"/>
+<text x="310" y="121" class="t bd pu">IMPORT LIBRARIES</text>
+<text x="310" y="143" class="t n">import numpy as np &amp; import pandas as pd</text>
+<line x1="310" y1="160" x2="310" y2="190" class="l" marker-end="url(#arrow)"/>
+
+<!-- DATA -->
+<rect x="75" y="190" width="470" height="82" rx="10" class="d"/>
+<text x="310" y="217" class="t bd gr">DEFINE MACHINE DATA</text>
+<text x="310" y="239" class="t n">Machine, Speed, Temperature, Vibration, Power</text>
+<text x="310" y="258" class="t n">M1 – M5 values in dictionary</text>
+<line x1="310" y1="272" x2="310" y2="302" class="l" marker-end="url(#arrow)"/>
+
+<!-- DATAFRAME -->
+<rect x="115" y="302" width="390" height="65" rx="10" class="p"/>
+<text x="310" y="328" class="t bd bl">CREATE DATAFRAME</text>
+<text x="310" y="348" class="t n">df = pd.DataFrame(data)</text>
+<line x1="310" y1="367" x2="310" y2="397" class="l" marker-end="url(#arrow)"/>
+
+<!-- DISPLAY -->
+<rect x="130" y="397" width="360" height="63" rx="10" class="o"/>
+<text x="310" y="423" class="t bd te">DISPLAY MACHINE DATA</text>
+<text x="310" y="443" class="t n">print(df)</text>
+<line x1="310" y1="460" x2="310" y2="490" class="l" marker-end="url(#arrow)"/>
+
+<!-- AVERAGES -->
+<rect x="70" y="490" width="480" height="86" rx="10" class="p"/>
+<text x="310" y="517" class="t bd bl">CALCULATE AVERAGE VALUES</text>
+<text x="310" y="539" class="t n">np.mean(Temperature_C), np.mean(Vibration_mm_s)</text>
+<text x="310" y="558" class="t n">np.mean(Power_kW) and round(..., 2)</text>
+<line x1="310" y1="576" x2="310" y2="606" class="l" marker-end="url(#arrow)"/>
+
+<!-- MAX -->
+<rect x="65" y="606" width="490" height="86" rx="10" class="p"/>
+<text x="310" y="633" class="t bd bl">FIND MAXIMUM VIBRATION</text>
+<text x="310" y="655" class="t n">df["Vibration_mm_s"].max()</text>
+<text x="310" y="674" class="t n">idxmax() + loc[] identify the machine</text>
+<line x1="310" y1="692" x2="310" y2="727" class="l" marker-end="url(#arrow)"/>
+
+<!-- DECISION -->
+<polygon points="310,727 435,792 310,857 185,792" class="q"/>
+<text x="310" y="786" class="t dt">Is vibration</text>
+<text x="310" y="803" class="t dt">&gt; 3.0 mm/s?</text>
+
+<!-- YES -->
+<line x1="185" y1="792" x2="92" y2="792" class="l" marker-end="url(#arrow)"/>
+<rect x="60" y="765" width="64" height="27" rx="5" class="lb"/>
+<text x="92" y="784" class="t lt">YES</text>
+<line x1="92" y1="792" x2="92" y2="890" class="l" marker-end="url(#arrow)"/>
+<rect x="18" y="890" width="150" height="75" rx="10" class="b"/>
+<text x="93" y="918" class="t bd or">NEEDS</text>
+<text x="93" y="937" class="t bd or">INSPECTION</text>
+<text x="93" y="954" class="t n">np.where()</text>
+
+<!-- NO -->
+<line x1="435" y1="792" x2="528" y2="792" class="l" marker-end="url(#arrow)"/>
+<rect x="496" y="765" width="64" height="27" rx="5" class="lb"/>
+<text x="528" y="784" class="t lt">NO</text>
+<line x1="528" y1="792" x2="528" y2="890" class="l" marker-end="url(#arrow)"/>
+<rect x="453" y="890" width="150" height="75" rx="10" class="o"/>
+<text x="528" y="928" class="t bd te">NORMAL</text>
+<text x="528" y="948" class="t n">np.where()</text>
+
+<!-- CONVERGENCE -->
+<line x1="93" y1="965" x2="93" y2="1015" class="l"/>
+<line x1="528" y1="965" x2="528" y2="1015" class="l"/>
+<line x1="93" y1="1015" x2="528" y2="1015" class="l"/>
+<line x1="310" y1="1015" x2="310" y2="1050" class="l" marker-end="url(#arrow)"/>
+
+<!-- FINAL TABLE -->
+<rect x="105" y="1050" width="410" height="75" rx="10" class="o"/>
+<text x="310" y="1078" class="t bd te">DISPLAY MACHINE CONDITION</text>
+<text x="310" y="1100" class="t n">Machine, Vibration_mm_s, Condition</text>
+<line x1="310" y1="1125" x2="310" y2="1160" class="l" marker-end="url(#arrow)"/>
+
+<!-- END -->
+<rect x="220" y="1160" width="180" height="44" rx="22" class="s"/>
+<text x="310" y="1188" class="t st">END</text>
+
+</svg>
+</div>
+</div>
+
+<!-- RIGHT HALF : PROGRAM -->
+<div>
+<div class="title" style="margin-bottom:12px">Complete Python Program</div>
+<pre class="program">import numpy as np
+import pandas as pd
+
+# Machine data
+data = {
+    "Machine": ["M1", "M2", "M3", "M4", "M5"],
+    "Speed_RPM": [1200, 1500, 1800, 1400, 1600],
+    "Temperature_C": [65, 72, 85, 68, 78],
+    "Vibration_mm_s": [2.1, 2.8, 4.5, 2.4, 3.2],
+    "Power_kW": [5.2, 6.5, 8.0, 5.8, 7.1]
+}
+
+# Create DataFrame
+df = pd.DataFrame(data)
+
+print("Machine Data:")
+print(df)
+
+# Calculate average values
+average_temperature = np.mean(df["Temperature_C"])
+average_vibration = np.mean(df["Vibration_mm_s"])
+average_power = np.mean(df["Power_kW"])
+
+print("\nAverage Temperature:",
+      round(average_temperature, 2), "°C")
+print("Average Vibration:",
+      round(average_vibration, 2), "mm/s")
+print("Average Power:",
+      round(average_power, 2), "kW")
+
+# Find machine with maximum vibration
+max_vibration = df["Vibration_mm_s"].max()
+
+machine = df.loc[
+    df["Vibration_mm_s"].idxmax(),
+    "Machine"
+]
+
+print("\nMaximum Vibration:",
+      max_vibration, "mm/s")
+print("Machine with Maximum Vibration:", machine)
+
+# Classify machine condition
+df["Condition"] = np.where(
+    df["Vibration_mm_s"] > 3.0,
+    "Needs Inspection",
+    "Normal"
+)
+
+print("\nMachine Condition:")
+print(df[["Machine", "Vibration_mm_s", "Condition"]])</pre>
+</div>
+
+</div>
+</section>
+
+<!-- TABLE BELOW -->
+<section class="card">
+<div class="title">Python Program – Code Line / Snippet and Detailed Explanation</div>
+
+<table>
+<thead>
+<tr>
+<th style="width:31%">Python Code Line / Snippet</th>
+<th style="width:18%">Concept</th>
+<th>Detailed Explanation</th>
+</tr>
+</thead>
+<tbody>
+
+<tr>
+<td><code>import numpy as np</code></td>
+<td>Import NumPy</td>
+<td>Imports the NumPy library and assigns the short alias <code>np</code>. The alias allows NumPy functions such as <code>np.mean()</code> to be written conveniently.</td>
+</tr>
+
+<tr>
+<td><code>import pandas as pd</code></td>
+<td>Import Pandas</td>
+<td>Imports the Pandas library and assigns the alias <code>pd</code>. Pandas is used to create and process tabular data using a DataFrame.</td>
+</tr>
+
+<tr>
+<td><code>data = { ... }</code></td>
+<td>Dictionary</td>
+<td>Creates a Python dictionary containing the machine data. Each key represents a column, while its associated list contains the values for M1 to M5.</td>
+</tr>
+
+<tr>
+<td><code>"Machine": ["M1", "M2", ...]</code></td>
+<td>Dictionary Key and List</td>
+<td>Stores the machine identifiers. The five list elements correspond to the five machines in the dataset.</td>
+</tr>
+
+<tr>
+<td><code>"Speed_RPM": [1200, 1500, ...]</code></td>
+<td>Numerical Data</td>
+<td>Stores the rotational speed values of the machines in revolutions per minute.</td>
+</tr>
+
+<tr>
+<td><code>"Temperature_C": [65, 72, ...]</code></td>
+<td>Numerical Data</td>
+<td>Stores the operating temperature values in degrees Celsius.</td>
+</tr>
+
+<tr>
+<td><code>"Vibration_mm_s": [2.1, 2.8, ...]</code></td>
+<td>Numerical Data</td>
+<td>Stores vibration values in mm/s. These values are later used to determine the machine condition.</td>
+</tr>
+
+<tr>
+<td><code>"Power_kW": [5.2, 6.5, ...]</code></td>
+<td>Numerical Data</td>
+<td>Stores the power values of the machines in kilowatts.</td>
+</tr>
+
+<tr>
+<td><code>df = pd.DataFrame(data)</code></td>
+<td>DataFrame</td>
+<td>Converts the dictionary into a Pandas DataFrame. The dictionary keys become column names and the list elements become rows.</td>
+</tr>
+
+<tr>
+<td><code>print("Machine Data:")</code><br><code>print(df)</code></td>
+<td>Display Data</td>
+<td>Prints a heading and then displays the complete DataFrame containing the machine operating data.</td>
+</tr>
+
+<tr>
+<td><code>df["Temperature_C"]</code></td>
+<td>Column Selection</td>
+<td>Selects the Temperature_C column from the DataFrame. The selected column is passed to NumPy for calculation.</td>
+</tr>
+
+<tr>
+<td><code>np.mean(df["Temperature_C"])</code></td>
+<td>Mean</td>
+<td>Calculates the arithmetic mean of all temperature values in the selected column.</td>
+</tr>
+
+<tr>
+<td><code>average_temperature = ...</code></td>
+<td>Variable Assignment</td>
+<td>Stores the calculated average temperature in the variable <code>average_temperature</code>.</td>
+</tr>
+
+<tr>
+<td><code>np.mean(df["Vibration_mm_s"])</code></td>
+<td>Mean</td>
+<td>Calculates the average vibration value of all machines.</td>
+</tr>
+
+<tr>
+<td><code>np.mean(df["Power_kW"])</code></td>
+<td>Mean</td>
+<td>Calculates the average power value of all machines.</td>
+</tr>
+
+<tr>
+<td><code>round(average_temperature, 2)</code></td>
+<td>Rounding</td>
+<td>Rounds the average temperature to two decimal places before displaying it.</td>
+</tr>
+
+<tr>
+<td><code>print("\nAverage Temperature:", ...)</code></td>
+<td>Formatted Output</td>
+<td>Displays the calculated average temperature along with its unit, °C. The <code>\n</code> starts the output on a new line.</td>
+</tr>
+
+<tr>
+<td><code>df["Vibration_mm_s"].max()</code></td>
+<td>Maximum</td>
+<td>Returns the largest value present in the Vibration_mm_s column. For the given data, the maximum vibration is 4.5 mm/s.</td>
+</tr>
+
+<tr>
+<td><code>max_vibration = ...</code></td>
+<td>Variable Assignment</td>
+<td>Stores the maximum vibration value in the variable <code>max_vibration</code>.</td>
+</tr>
+
+<tr>
+<td><code>df["Vibration_mm_s"].idxmax()</code></td>
+<td>Maximum Index</td>
+<td>Returns the index of the row containing the maximum vibration value. In this dataset, the maximum value belongs to the row for M3.</td>
+</tr>
+
+<tr>
+<td><code>df.loc[index, "Machine"]</code></td>
+<td><code>loc[]</code> Selection</td>
+<td>Selects data using the row index and column label. Here it retrieves the Machine value from the row containing maximum vibration.</td>
+</tr>
+
+<tr>
+<td><code>machine = df.loc[<br>df["Vibration_mm_s"].idxmax(),<br>"Machine"]</code></td>
+<td>Combined Selection</td>
+<td>First finds the index of the maximum vibration and then uses <code>loc[]</code> to obtain the corresponding machine name.</td>
+</tr>
+
+<tr>
+<td><code>np.where(condition, "Needs Inspection", "Normal")</code></td>
+<td>Conditional Selection</td>
+<td>Checks a condition for each vibration value. If the condition is true, <code>"Needs Inspection"</code> is assigned; otherwise <code>"Normal"</code> is assigned.</td>
+</tr>
+
+<tr>
+<td><code>df["Vibration_mm_s"] &gt; 3.0</code></td>
+<td>Condition</td>
+<td>Compares every vibration value with the threshold of 3.0 mm/s and produces a Boolean result for each row.</td>
+</tr>
+
+<tr>
+<td><code>df["Condition"] = np.where(...)</code></td>
+<td>New Column</td>
+<td>Creates a new DataFrame column named <code>Condition</code> and fills it with either <code>Needs Inspection</code> or <code>Normal</code>.</td>
+</tr>
+
+<tr>
+<td><code>df[["Machine", "Vibration_mm_s", "Condition"]]</code></td>
+<td>Select Multiple Columns</td>
+<td>Selects only the three specified columns for the final machine-condition report.</td>
+</tr>
+
+<tr>
+<td><code>print("\nMachine Condition:")</code><br><code>print(...)</code></td>
+<td>Final Output</td>
+<td>Displays the final table showing each machine, its vibration value, and its assigned condition.</td>
+</tr>
+
+</tbody>
+</table>
+
+<div class="note">
+<b>Important:</b> The flow chart and explanations above follow the Python program in the supplied Experiment 8 PDF. The PDF defines machine data in advance, so <b>no keyboard input is required during execution</b>. fileciteturn33file2L1-L3
+</div>
+</section>
+
+</main>
+
+<footer>© 2026 D. Kiran Prasad | Python Experiments</footer>
+</body>
+</html>
