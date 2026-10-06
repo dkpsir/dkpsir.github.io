@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python OOP, Classes & Objects - Complete Guide</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#eef4f9;color:#111;font-family:"Segoe UI",Arial,sans-serif}
+.header{background:linear-gradient(90deg,#0b477d,#087cc1);color:#fff;padding:18px 22px;display:grid;grid-template-columns:1fr 2fr 1fr;align-items:center}
+.header a{color:#fff;text-decoration:none;font-weight:700;font-size:16px}
+.header a:hover{text-decoration:underline}
+.header h1{margin:0;text-align:center;font-size:30px}
+.main-home{text-align:right}
+.container{width:94%;max-width:1450px;margin:24px auto}
+.card{background:#fff;border-radius:12px;padding:24px;margin-bottom:22px;box-shadow:0 4px 18px rgba(0,0,0,.10)}
+.card h2{margin:0 0 18px;color:#075b99;font-size:24px;border-left:6px solid #075b99;padding-left:12px}
+.card h3{color:#244f70;margin-top:20px}
+.theory{font-size:17px;line-height:1.65;margin-bottom:20px}
+.highlight,.note{background:#fff8df;border-left:5px solid #d99a00;padding:14px 18px;margin:12px 0;line-height:1.6}
+.info{background:#edf7ff;border-left:5px solid #087cc1;padding:14px 18px;line-height:1.6;margin:12px 0}
+.success{background:#eefaf2;border-left:5px solid #159447;padding:14px 18px;line-height:1.6;margin:12px 0}
+.warning{background:#fff1f1;border-left:5px solid #c0392b;padding:14px 18px;line-height:1.6;margin:12px 0}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
+.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px}
+.program-box{background:#f7f9fb;border:1px solid #d4dee8;border-radius:9px;padding:18px;overflow:auto}
+.program-box h3{margin:0 0 12px;color:#244f70;font-size:18px}
+pre{margin:0;font:15px/1.55 Consolas,"Courier New",monospace;white-space:pre-wrap}
+.output{color:#b34c00;font:700 15px/1.55 Consolas,"Courier New",monospace;white-space:pre-wrap;margin-top:10px;padding-top:10px;border-top:1px solid #e0c884}
+.table-container{overflow-x:auto}
+table{width:100%;border-collapse:collapse;white-space:normal}
+th{background:#24577f;color:#fff;padding:13px;text-align:left;font-size:16px}
+td{border:1px solid #ccd7e2;padding:13px;vertical-align:top;font-size:15.5px;line-height:1.55}
+tr:nth-child(even){background:#f7faff}
+.code{display:inline-block;background:#f3f7fc;border:1px solid #b7d0ef;border-radius:7px;padding:5px 8px;font:15px Consolas,"Courier New",monospace;color:#064ea8}
+.section-title{background:#064ea8;color:white;padding:10px 20px;border-radius:8px;margin-top:40px;margin-bottom:20px;font-size:28px;text-align:center}
+.diagram{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin:18px 0}
+.diagram .box{background:#e7f3ff;border:2px solid #0b5d96;border-radius:10px;padding:15px 22px;text-align:center;font-weight:700;min-width:180px}
+.diagram .arrow{font-size:28px;color:#075b99;font-weight:bold}
+.badge{display:inline-block;padding:4px 8px;border-radius:5px;background:#e8f1fa;color:#075b99;font-weight:700;margin:2px}
+ul,ol{line-height:1.7}
+.footer{background:#24577f;color:#fff;text-align:center;padding:18px;margin-top:35px}
+@media(max-width:950px){
+.header{grid-template-columns:1fr;gap:8px;text-align:center}
+.main-home{text-align:center}
+.two-col,.three-col{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+<div><a href="#">← Python Home</a></div>
+<h1>PYTHON OOP: CLASSES & OBJECTS</h1>
+<div class="main-home"><a href="#">Main Home →</a></div>
+</header>
+
+<main class="container">
+
+<div class="section-title">PART 1: OBJECT-ORIENTED PROGRAMMING FUNDAMENTALS</div>
+
+<section class="card">
+<h2>1. What is Object-Oriented Programming?</h2>
+<div class="theory">
+<p><b>Object-Oriented Programming (OOP)</b> is a programming approach in which a program is organized around <b>objects</b> rather than only around individual statements or functions. An object represents an entity and contains both <b>data</b> and the <b>operations</b> that can work on that data.</p>
+<p>Python supports object-oriented programming and provides features such as classes, objects, methods, constructors, inheritance, polymorphism, encapsulation, and abstraction.</p>
+</div>
+
+<div class="diagram">
+<div class="box">CLASS<br><small>Blueprint / Template</small></div>
+<div class="arrow">→</div>
+<div class="box">OBJECT<br><small>Actual Instance</small></div>
+<div class="arrow">→</div>
+<div class="box">DATA + METHODS<br><small>State + Behaviour</small></div>
+</div>
+
+<div class="highlight">
+<b>Simple idea:</b> A <b>class</b> describes what an object should contain and what it should do. An <b>object</b> is an actual instance created from that class.
+</div>
+
+<div class="table-container">
+<table>
+<thead><tr><th>Term</th><th>Meaning</th><th>Simple Example</th></tr></thead>
+<tbody>
+<tr><td>Class</td><td>A blueprint or template used to create objects.</td><td><span class="code">class Student:</span></td></tr>
+<tr><td>Object</td><td>An instance of a class.</td><td><span class="code">s1 = Student()</span></td></tr>
+<tr><td>Attribute</td><td>Data associated with an object or class.</td><td><span class="code">s1.name</span></td></tr>
+<tr><td>Method</td><td>A function defined inside a class.</td><td><span class="code">s1.display()</span></td></tr>
+<tr><td>State</td><td>Current values of an object's attributes.</td><td>Name, age, marks</td></tr>
+<tr><td>Behaviour</td><td>Actions performed by an object through methods.</td><td>Display, calculate, update</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section class="card">
+<h2>2. Why Do We Use OOP?</h2>
+<div class="theory">
+<p>OOP becomes useful when a program contains many related data items and operations. Instead of keeping data and functions completely separate, OOP allows them to be grouped into meaningful objects.</p>
+</div>
+<div class="three-col">
+<div class="info"><b>Organization</b><br>Related data and functions can be grouped together inside a class.</div>
+<div class="info"><b>Reusability</b><br>A class can be used to create many objects.</div>
+<div class="info"><b>Maintainability</b><br>Large programs can be divided into smaller logical components.</div>
+</div>
+<div class="table-container">
+<table>
+<thead><tr><th>Without OOP</th><th>With OOP</th></tr></thead>
+<tbody>
+<tr><td>Data and functions may be scattered throughout the program.</td><td>Related data and methods are grouped in a class.</td></tr>
+<tr><td>Repeated code may be required.</td><td>One class can create many objects.</td></tr>
+<tr><td>Large programs can become difficult to organize.</td><td>Programs can be divided into logical classes.</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section class="card">
+<h2>3. Class: Basic Concept</h2>
+<div class="theory">
+<p>A <b>class</b> is a user-defined blueprint that describes the attributes and methods that objects created from it may have.</p>
+<p>The class itself is not normally the individual entity being manipulated. Objects are created from the class.</p>
+</div>
+<div class="program-box">
+<h3>Basic Class Syntax</h3>
+<pre>class ClassName:
+    # attributes
+    # methods
+    pass</pre>
+</div>
+<div class="info">
+<b>Important:</b> Python uses the keyword <span class="code">class</span> to define a class. The class body is written using indentation, just like the body of a function or conditional statement.
+</div>
+</section>
+
+<section class="card">
+<h2>4. Creating a Simple Class</h2>
+<div class="two-col">
+<div class="program-box">
+<h3>Example</h3>
+<pre>class Student:
+    pass
+
+s1 = Student()
+print(type(s1))</pre>
+</div>
+<div class="note">
+<b>Explanation:</b><br>
+The class <span class="code">Student</span> is defined first. The statement <span class="code">s1 = Student()</span> creates an object of that class.
+<div class="output">Output:
+&lt;class '__main__.Student'&gt;</div>
+</div>
+</div>
+<div class="table-container">
+<table>
+<thead><tr><th>Statement</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><td><span class="code">class Student:</span></td><td>Defines a class named Student.</td></tr>
+<tr><td><span class="code">pass</span></td><td>Provides an empty class body temporarily.</td></tr>
+<tr><td><span class="code">s1 = Student()</span></td><td>Creates an object of Student and stores its reference in s1.</td></tr>
+<tr><td><span class="code">type(s1)</span></td><td>Checks the type/class of the object.</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section class="card">
+<h2>5. Object: Basic Concept</h2>
+<div class="theory">
+<p>An <b>object</b> is an actual instance of a class. When an object is created, Python creates an instance that can hold its own data and use the methods defined by the class.</p>
+</div>
+<div class="diagram">
+<div class="box">Student Class</div>
+<div class="arrow">→</div>
+<div class="box">s1 = Student()</div>
+<div class="arrow">+</div>
+<div class="box">s2 = Student()</div>
+</div>
+<div class="success">
+<b>Key point:</b> One class can be used to create many objects. The objects belong to the same class but can contain different data.
+</div>
+<div class="two-col">
+<div class="program-box">
+<h3>Example</h3>
+<pre>class Student:
+    pass
+
+s1 = Student()
+s2 = Student()
+
+print(type(s1))
+print(type(s2))</pre>
+</div>
+<div class="note">
+<b>Explanation:</b><br>
+Both <span class="code">s1</span> and <span class="code">s2</span> are objects of the same Student class.
+</div>
+</div>
+</section>
+
+<div class="section-title">PART 2: ATTRIBUTES AND METHODS</div>
+
+<section class="card">
+<h2>6. Attributes: Data Stored in Objects</h2>
+<div class="theory">
+<p>An <b>attribute</b> is a variable associated with an object or class. Attributes represent the data or state of an object.</p>
+<p>For example, a Student object may have <b>name</b>, <b>roll_no</b>, and <b>marks</b> as attributes.</p>
+</div>
+<div class="two-col">
+<div class="program-box">
+<h3>Example: Instance Attributes</h3>
+<pre>class Student:
+    pass
+
+s1 = Student()
+s1.name = "Ravi"
+s1.marks = 85
+
+print(s1.name)
+print(s1.marks)</pre>
+</div>
+<div class="note">
+<b>Explanation:</b><br>
+The attributes <span class="code">name</span> and <span class="code">marks</span> are attached to object <span class="code">s1</span>.
+<div class="output">Output:
+Ravi
+85</div>
+</div>
+</div>
+<div class="warning">
+<b>Important:</b> Although attributes can be added directly to an object, it is generally better to initialize important instance attributes inside the class constructor using <span class="code">__init__()</span>.
+</div>
+</section>
+
+<section class="card">
+<h2>7. Methods: Functions Inside a Class</h2>
+<div class="theory">
+<p>A <b>method</b> is a function defined inside a class. Methods describe the behaviour or actions that objects of the class can perform.</p>
+</div>
+<div class="two-col">
+<div class="program-box">
+<h3>Example</h3>
+<pre>class Student:
+    def display(self):
+        print("Student details")
+
+s1 = Student()
+s1.display()</pre>
+</div>
+<div class="note">
+<b>Explanation:</b><br>
+<span class="code">display()</span> is a method of Student. The object <span class="code">s1</span> calls the method using the dot operator.
+<div class="output">Output:
+Student details</div>
+</div>
+</div>
+</section>
+
+<section class="card">
+<h2>8. The <span class="code">self</span> Parameter</h2>
+<div class="theory">
+<p><b>self</b> represents the current object on which an instance method is operating. It allows a method to access the attributes and other methods belonging to that particular object.</p>
+</div>
+<div class="program-box">
+<h3>Example</h3>
+<pre>class Student:
+    def display(self):
+        print("This method belongs to:", self)
+
+s1 = Student()
+s1.display()</pre>
+</div>
+<div class="info">
+<b>Important rules about self:</b>
+<ul>
+<li><span class="code">self</span> is normally the first parameter of an instance method.</li>
+<li>When calling the method, you normally do not write <span class="code">self</span> explicitly.</li>
+<li>Python automatically passes the calling object as the first argument.</li>
+<li>The name <span class="code">self</span> is a strong convention; it should be used for clarity.</li>
+</ul>
+</div>
+<div class="highlight">
+<b>Conceptual view:</b> When you write <span class="code">s1.display()</span>, Python internally supplies the object <span class="code">s1</span> to the method.
+</div>
+</section>
+
+<section class="card">
+<h2>9. Understanding <span class="code">object.attribute</span></h2>
+<div class="theory">
+<p>The dot operator <span class="code">.</span> is used to access attributes and methods belonging to an object.</p>
+</div>
+<div class="table-container">
+<table>
+<thead><tr><th>Expression</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><td><span class="code">s1.name</span></td><td>Accesses the name attribute of object s1.</td></tr>
+<tr><td><span class="code">s1.marks</span></td><td>Accesses the marks attribute of object s1.</td></tr>
+<tr><td><span class="code">s1.display()</span></td><td>Calls the display method using s1.</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section class="card">
+<h2>10. Constructor: <span class="code">__init__()</span></h2>
+<div class="theory">
+<p>The special method <span class="code">__init__()</span> is commonly called the <b>constructor</b> in Python teaching. It is automatically invoked when an object is initialized through a class call.</p>
+<p>It is mainly used to initialize instance attributes with starting values.</p>
+</div>
+<div class="two-col">
+<div class="program-box">
+<h3>Example</h3>
+<pre>class Student:
+    def __init__(self, name, marks):
+        self.name = name
+        self.marks = marks
+
+s1 = Student("Ravi", 85)
+
+print(s1.name)
+print(s1.marks)</pre>
+</div>
+<div class="note">
+<b>Explanation:</b><br>
+When <span class="code">Student("Ravi", 85)</span> is executed, Python creates the object and calls <span class="code">__init__()</span> to initialize its attributes.
+<div class="output">Output:
+Ravi
+85</div>
+</div>
+</div>
+</section>
+
+<section class="card">
+<h2>11. How <span class="code">__init__()</span> Works</h2>
+<div class="diagram">
+<div class="box">Student("Ravi", 85)</div>
+<div class="arrow">→</div>
+<div class="box">Create Object</div>
+<div class="arrow">→</div>
+<div class="box">Call __init__()</div>
+<div class="arrow">→</div>
+<div class="box">Initialize Attributes</div>
+</div>
+<div class="table-container">
+<table>
+<thead><tr><th>Parameter</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td><span class="code">self</span></td><td>Reference to the newly initialized object.</td></tr>
+<tr><td><span class="code">name</span></td><td>Input value received during object creation.</td></tr>
+<tr><td><span class="code">marks</span></td><td>Input value received during object creation.</td></tr>
+<tr><td><span class="code">self.name = name</span></td><td>Stores the received name inside the object.</td></tr>
+<tr><td><span class="code">self.marks = marks</span></td><td>Stores the received marks inside the object.</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section class="card">
+<h2>12. Multiple Objects with Different Data</h2>
+<div class="two-col">
+<div class="program-box">
+<h3>Example</h3>
+<pre>class Student:
+    def __init__(self, name, marks):
+        self.name = name
+        self.marks = marks
+
+s1 = Student("Ravi", 85)
+s2 = Student("Anita", 92)
+
+print(s1.name, s1.marks)
+print(s2.name, s2.marks)</pre>
+</div>
+<div class="note">
+<b>Explanation:</b><br>
+Both objects use the same class definition, but each object stores its own values.
+<div class="output">Output:
+Ravi 85
+Anita 92</div>
+</div>
+</div>
+</section>
+
+<div class="section-title">PART 3: TYPES OF ATTRIBUTES AND METHODS</div>
+
+<section class="card">
+<h2>13. Instance Attributes</h2>
+<div class="theory">
+<p>An <b>instance attribute</b> belongs to a particular object. Different objects of the same class can have different values for the same instance attribute.</p>
+</div>
+<div class="program-box">
+<h3>Example</h3>
+<pre>class Student:
+    def __init__(self, name):
+        self.name = name
+
+s1 = Student("Ravi")
+s2 = Student("Anita")
+
+print(s1.name)
+print(s2.name)</pre>
+</div>
+<div class="success"><b>Key point:</b> <span class="code">s1.name</span> and <span class="code">s2.name</span> are separate instance attributes stored for different objects.</div>
+</section>
+
+<section class="card">
+<h2>14. Class Attributes</h2>
+<div class="theory">
+<p>A <b>class attribute</b> is associated with the class itself and is shared by instances unless an instance creates an attribute with the same name.</p>
+</div>
+<div class="two-col">
+<div class="program-box">
+<h3>Example</h3>
+<pre>class Student:
+    college = "ABC College"
+
+s1 = Student()
+s2 = Student()
+
+print(s1.college)
+print(s2.college)</pre>
+</div>
+<div class="note">
+<b>Explanation:</b><br>
+The attribute <span class="code">college</span> is defined inside the class rather than inside <span class="code">__init__()</span>. Both objects can access it.
+<div class="output">Output:
+ABC College
+ABC College</div>
+</div>
+</div>
+</section>
+
+<section class="card">
+<h2>15. Instance Method</h2>
+<div class="theory">
+<p>An <b>instance method</b> works with an individual object and normally has <span class="code">self</span> as its first parameter.</p>
+</div>
+<div class="program-box">
+<pre>class Student:
+    def __init__(self, name):
+        self.name = name
+
+    def display(self):
+        print("Name:", self.name)
+
+s1 = Student("Ravi")
+s1.display()</pre>
+</div>
+</section>
+
+<section class="card">
+<h2>16. Class Method</h2>
+<div class="theory">
+<p>A <b>class method</b> receives the class itself as its first argument, conventionally named <span class="code">cls</span>. It is created using the <span class="code">@classmethod</span> decorator.</p>
+</div>
+<div class="two-col">
+<div class="program-box">
+<h3>Example</h3>
+<pre>class Student:
+    college = "ABC College"
+
+    @classmethod
+    def show_college(cls):
+        print(cls.college)
+
+Student.show_college()</pre>
+</div>
+<div class="note">
+<b>Explanation:</b><br>
+<span class="code">cls</span> refers to the class. A class method can be called using the class itself.
+<div class="output">Output:
+ABC College</div>
+</div>
+</div>
+</section>
+
+<section class="card">
+<h2>17. Static Method</h2>
+<div class="theory">
+<p>A <b>static method</b> does not automatically receive <span class="code">self</span> or <span class="code">cls</span>. It is defined using <span class="code">@staticmethod</span>.</p>
+</div>
+<div class="program-box">
+<h3>Example</h3>
+<pre>class Calculator:
+    @staticmethod
+    def add(a, b):
+        return a + b
+
+print(Calculator.add(10, 20))</pre>
+</div>
+<div class="success"><b>Use:</b> A static method is useful when a function logically belongs to a class but does not need object or class data.</div>
+</section>
+
+<section class="card">
+<h2>18. Instance Method vs Class Method vs Static Method</h2>
+<div class="table-container">
+<table>
+<thead><tr><th>Feature</th><th>Instance Method</th><th>Class Method</th><th>Static Method</th></tr></thead>
+<tbody>
+<tr><td>Decorator</td><td>None required</td><td><span class="code">@classmethod</span></td><td><span class="code">@staticmethod</span></td></tr>
+<tr><td>First parameter</td><td><span class="code">self</span></td><td><span class="code">cls</span></td><td>None automatically</td></tr>
+<tr><td>Works mainly with</td><td>Object data</td><td>Class data</td><td>Independent calculation/utility</td></tr>
+<tr><td>Typical call</td><td><span class="code">obj.method()</span></td><td><span class="code">Class.method()</span></td><td><span class="code">Class.method()</span></td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<div class="section-title">PART 4: ENCAPSULATION AND ACCESS CONTROL</div>
+
+<section class="card">
+<h2>19. Encapsulation</h2>
+<div class="theory">
+<p><b>Encapsulation</b> means combining data and the methods that operate on that data into a single unit, usually a class. It also supports controlled access to internal data.</p>
+</div>
+<div class="diagram">
+<div class="box">Data / Attributes</div>
+<div class="arrow">+</div>
+<div class="box">Methods</div>
+<div class="arrow">→</div>
+<div class="box">Class</div>
+</div>
+<div class="info">
+<b>Python note:</b> Python does not enforce access control in exactly the same way as some languages. Naming conventions such as <span class="code">_name</span> and name mangling with <span class="code">__name</span> are commonly used to indicate or restrict direct access.
+</div>
+</section>
+
+<section class="card">
+<h2>20. Public Attributes</h2>
+<div class="theory">A normal attribute such as <span class="code">self.name</span> is conventionally public and can be accessed directly through the object.</div>
+<div class="program-box">
+<pre>class Student:
+    def __init__(self, name):
+        self.name = name
+
+s1 = Student("Ravi")
+print(s1.name)</pre>
+</div>
+</section>
+
+<section class="card">
+<h2>21. Protected-Style Attribute: Single Underscore</h2>
+<div class="theory">
+<p>An attribute beginning with one underscore, such as <span class="code">_marks</span>, is a convention indicating that the attribute is intended for internal or subclass use. It is not true access restriction.</p>
+</div>
+<div class="program-box">
+<pre>class Student:
+    def __init__(self):
+        self._marks = 85
+
+s1 = Student()
+print(s1._marks)</pre>
+</div>
+<div class="warning"><b>Remember:</b> A single underscore is mainly a naming convention in Python; it does not make the attribute completely inaccessible.</div>
+</section>
+
+<section class="card">
+<h2>22. Private-Style Attribute: Double Underscore</h2>
+<div class="theory">
+<p>An attribute beginning with two underscores, such as <span class="code">__marks</span>, triggers Python's <b>name mangling</b>. This helps avoid accidental name conflicts and discourages direct external access.</p>
+</div>
+<div class="program-box">
+<pre>class Student:
+    def __init__(self):
+        self.__marks = 85
+
+    def display(self):
+        print(self.__marks)
+
+s1 = Student()
+s1.display()</pre>
+</div>
+<div class="success">The method can access <span class="code">__marks</span> internally. Python transforms the internal name using name mangling.</div>
+</section>
+
+<div class="section-title">PART 5: INHERITANCE</div>
+
+<section class="card">
+<h2>23. What is Inheritance?</h2>
+<div class="theory">
+<p><b>Inheritance</b> allows a new class to acquire attributes and methods from an existing class. The existing class is commonly called the <b>parent/base/superclass</b>, and the new class is called the <b>child/derived/subclass</b>.</p>
+</div>
+<div class="diagram">
+<div class="box">Parent / Base Class</div>
+<div class="arrow">↓</div>
+<div class="box">Child / Derived Class</div>
+</div>
+<div class="highlight">
+<b>Purpose:</b> Reuse existing functionality and extend or specialize it in a new class.
+</div>
+</section>
+
+<section class="card">
+<h2>24. Single Inheritance</h2>
+<div class="two-col">
+<div class="program-box">
+<h3>Example</h3>
+<pre>class Animal:
+    def speak(self):
+        print("Animal sound")
+
+class Dog(Animal):
+    pass
+
+d = Dog()
+d.speak()</pre>
+</div>
+<div class="note">
+<b>Explanation:</b><br>
+Dog inherits from Animal. Therefore a Dog object can use the inherited <span class="code">speak()</span> method.
+<div class="output">Output:
+Animal sound</div>
+</div>
+</div>
+</section>
+
+<section class="card">
+<h2>25. Inheritance with Child-Specific Method</h2>
+<div class="program-box">
+<pre>class Animal:
+    def speak(self):
+        print("Animal sound")
+
+class Dog(Animal):
+    def bark(self):
+        print("Dog barks")
+
+d = Dog()
+d.speak()
+d.bark()</pre>
+</div>
+<div class="note">
+The child class can use inherited methods and can also define its own additional methods.
+</div>
+</section>
+
+<section class="card">
+<h2>26. Method Overriding</h2>
+<div class="theory">
+<p><b>Method overriding</b> occurs when a child class defines a method with the same name as a method in its parent class. The child version is used for objects of the child class.</p>
+</div>
+<div class="two-col">
+<div class="program-box">
+<h3>Example</h3>
+<pre>class Animal:
+    def speak(self):
+        print("Animal sound")
+
+class Dog(Animal):
+    def speak(self):
+        print("Bark")
+
+d = Dog()
+d.speak()</pre>
+</div>
+<div class="note">
+<b>Explanation:</b><br>
+Dog provides its own implementation of <span class="code">speak()</span>, so the Dog version is called.
+<div class="output">Output:
+Bark</div>
+</div>
+</div>
+</section>
+
+<section class="card">
+<h2>27. The <span class="code">super()</span> Function</h2>
+<div class="theory">
+<p><span class="code">super()</span> is used to access methods or initialization behavior from a parent class.</p>
+</div>
+<div class="program-box">
+<pre>class Animal:
+    def __init__(self, name):
+        self.name = name
+
+class Dog(Animal):
+    def __init__(self, name, breed):
+        super().__init__(name)
+        self.breed = breed
+
+d = Dog("Tommy", "Labrador")
+print(d.name)
+print(d.breed)</pre>
+</div>
+<div class="info"><b>Why use super()?</b> It allows the child class to reuse parent-class functionality instead of duplicating the same initialization code.</div>
+</section>
+
+<section class="card">
+<h2>28. Types of Inheritance</h2>
+<div class="table-container">
+<table>
+<thead><tr><th>Type</th><th>Structure</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><td>Single</td><td>A → B</td><td>One child inherits from one parent.</td></tr>
+<tr><td>Multiple</td><td>A + B → C</td><td>One child inherits from multiple parents.</td></tr>
+<tr><td>Multilevel</td><td>A → B → C</td><td>Inheritance occurs across multiple levels.</td></tr>
+<tr><td>Hierarchical</td><td>A → B and A → C</td><td>Multiple child classes inherit from one parent.</td></tr>
+<tr><td>Hybrid</td><td>Combination</td><td>Combination of two or more inheritance structures.</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section class="card">
+<h2>29. Multiple Inheritance</h2>
+<div class="program-box">
+<pre>class A:
+    def method_a(self):
+        print("A")
+
+class B:
+    def method_b(self):
+        print("B")
+
+class C(A, B):
+    pass
+
+obj = C()
+obj.method_a()
+obj.method_b()</pre>
+</div>
+<div class="note">
+Class C inherits from both A and B. Therefore an object of C can access methods supplied by both parent classes.
+</div>
+</section>
+
+<section class="card">
+<h2>30. Multilevel Inheritance</h2>
+<div class="program-box">
+<pre>class Grandparent:
+    def show1(self):
+        print("Grandparent")
+
+class Parent(Grandparent):
+    def show2(self):
+        print("Parent")
+
+class Child(Parent):
+    def show3(self):
+        print("Child")
+
+c = Child()
+c.show1()
+c.show2()
+c.show3()</pre>
+</div>
+</section>
+
+<div class="section-title">PART 6: POLYMORPHISM AND ABSTRACTION</div>
+
+<section class="card">
+<h2>31. What is Polymorphism?</h2>
+<div class="theory">
+<p><b>Polymorphism</b> means "many forms." In OOP, the same method name or operation can produce different behavior depending on the object involved.</p>
+</div>
+<div class="two-col">
+<div class="program-box">
+<h3>Example</h3>
+<pre>class Dog:
+    def sound(self):
+        print("Bark")
+
+class Cat:
+    def sound(self):
+        print("Meow")
+
+for animal in [Dog(), Cat()]:
+    animal.sound()</pre>
+</div>
+<div class="note">
+<b>Explanation:</b><br>
+The same method call <span class="code">animal.sound()</span> produces different behavior for Dog and Cat.
+<div class="output">Output:
+Bark
+Meow</div>
+</div>
+</div>
+</section>
+
+<section class="card">
+<h2>32. Duck Typing</h2>
+<div class="theory">
+<p>Python often follows a form of polymorphism called <b>duck typing</b>: if an object provides the required method, the code can use that method without requiring the object's exact class to be checked first.</p>
+</div>
+<div class="program-box">
+<pre>class Printer:
+    def show(self):
+        print("Printing")
+
+class Display:
+    def show(self):
+        print("Displaying")
+
+def execute(obj):
+    obj.show()
+
+execute(Printer())
+execute(Display())</pre>
+</div>
+<div class="success">The function only requires that the supplied object provide a <span class="code">show()</span> method.</div>
+</section>
+
+<section class="card">
+<h2>33. Abstraction</h2>
+<div class="theory">
+<p><b>Abstraction</b> means focusing on essential behavior while hiding implementation details that the user does not need to know.</p>
+<p>Python provides the <span class="code">abc</span> module and abstract base classes for formal abstraction.</p>
+</div>
+<div class="program-box">
+<h3>Example Using Abstract Base Class</h3>
+<pre>from abc import ABC, abstractmethod
+
+class Shape(ABC):
+    @abstractmethod
+    def area(self):
+        pass
+
+class Circle(Shape):
+    def area(self):
+        return 3.14 * 5 * 5
+
+c = Circle()
+print(c.area())</pre>
+</div>
+<div class="note">A subclass must provide an implementation of an abstract method before it can normally be instantiated.</div>
+</section>
+
+<section class="card">
+<h2>34. Four Major OOP Principles</h2>
+<div class="table-container">
+<table>
+<thead><tr><th>Principle</th><th>Meaning</th><th>Python Features Commonly Used</th></tr></thead>
+<tbody>
+<tr><td><b>Encapsulation</b></td><td>Combining data and methods and controlling access to internal data.</td><td>Classes, instance attributes, naming conventions</td></tr>
+<tr><td><b>Inheritance</b></td><td>Creating a new class based on an existing class.</td><td>Class inheritance, <span class="code">super()</span></td></tr>
+<tr><td><b>Polymorphism</b></td><td>Same interface/method call can behave differently for different objects.</td><td>Overriding, duck typing</td></tr>
+<tr><td><b>Abstraction</b></td><td>Expose essential behavior while hiding unnecessary implementation details.</td><td>Abstract classes, <span class="code">ABC</span>, <span class="code">@abstractmethod</span></td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<div class="section-title">PART 7: SPECIAL METHODS AND OBJECT BEHAVIOR</div>
+
+<section class="card">
+<h2>35. Special Methods / Dunder Methods</h2>
+<div class="theory">
+<p>Python has special methods whose names usually begin and end with double underscores. They are often called <b>dunder methods</b> (double underscore methods).</p>
+</div>
+<div class="table-container">
+<table>
+<thead><tr><th>Method</th><th>Common Purpose</th></tr></thead>
+<tbody>
+<tr><td><span class="code">__init__()</span></td><td>Initialize an object.</td></tr>
+<tr><td><span class="code">__str__()</span></td><td>Define a user-friendly string representation.</td></tr>
+<tr><td><span class="code">__repr__()</span></td><td>Define a representation useful for developers/debugging.</td></tr>
+<tr><td><span class="code">__len__()</span></td><td>Define behavior for <span class="code">len(object)</span>.</td></tr>
+<tr><td><span class="code">__add__()</span></td><td>Define behavior for the <span class="code">+</span> operator.</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section class="card">
+<h2>36. The <span class="code">__str__()</span> Method</h2>
+<div class="two-col">
+<div class="program-box">
+<h3>Example</h3>
+<pre>class Student:
+    def __init__(self, name):
+        self.name = name
+
+    def __str__(self):
+        return "Student: " + self.name
+
+s1 = Student("Ravi")
+print(s1)</pre>
+</div>
+<div class="note">
+<b>Explanation:</b><br>
+When the object is passed to <span class="code">print()</span>, Python can use <span class="code">__str__()</span> to obtain a readable representation.
+<div class="output">Output:
+Student: Ravi</div>
+</div>
+</div>
+</section>
+
+<section class="card">
+<h2>37. Object Identity and Equality</h2>
+<div class="theory">
+<p>Two objects can contain equal data but still be different objects. Python provides <span class="code">is</span> for identity comparison and <span class="code">==</span> for equality comparison.</p>
+</div>
+<div class="two-col">
+<div class="program-box">
+<pre>class Student:
+    def __init__(self, name):
+        self.name = name
+
+s1 = Student("Ravi")
+s2 = Student("Ravi")
+
+print(s1 == s2)
+print(s1 is s2)</pre>
+</div>
+<div class="note">
+<b>Important:</b> Unless equality behavior is customized, two separately created objects are not automatically considered equal merely because their attributes contain the same values.
+</div>
+</div>
+</section>
+
+<div class="section-title">PART 8: PRACTICAL COMPLETE EXAMPLES</div>
+
+<section class="card">
+<h2>38. Complete Example: Student Class</h2>
+<div class="program-box">
+<pre>class Student:
+    def __init__(self, name, roll_no, marks):
+        self.name = name
+        self.roll_no = roll_no
+        self.marks = marks
+
+    def display(self):
+        print("Name:", self.name)
+        print("Roll No:", self.roll_no)
+        print("Marks:", self.marks)
+
+    def result(self):
+        if self.marks >= 40:
+            print("Result: Pass")
+        else:
+            print("Result: Fail")
+
+s1 = Student("Ravi", "101", 82)
+s1.display()
+s1.result()</pre>
+</div>
+<div class="table-container">
+<table>
+<thead><tr><th>Part</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td>Class</td><td>Defines the Student structure.</td></tr>
+<tr><td>Constructor</td><td>Initializes name, roll number, and marks.</td></tr>
+<tr><td>display()</td><td>Displays student information.</td></tr>
+<tr><td>result()</td><td>Determines pass/fail based on marks.</td></tr>
+<tr><td>s1</td><td>Object containing the actual student data.</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section class="card">
+<h2>39. Complete Example: Calculator Class</h2>
+<div class="program-box">
+<pre>class Calculator:
+    def add(self, a, b):
+        return a + b
+
+    def subtract(self, a, b):
+        return a - b
+
+    def multiply(self, a, b):
+        return a * b
+
+    def divide(self, a, b):
+        return a / b
+
+c = Calculator()
+
+print(c.add(10, 5))
+print(c.subtract(10, 5))
+print(c.multiply(10, 5))
+print(c.divide(10, 5))</pre>
+</div>
+<div class="success">One object can call multiple methods defined by the same class.</div>
+</section>
+
+<section class="card">
+<h2>40. Complete Example: Multiple Objects</h2>
+<div class="program-box">
+<pre>class Employee:
+    def __init__(self, name, salary):
+        self.name = name
+        self.salary = salary
+
+    def display(self):
+        print(self.name, self.salary)
+
+e1 = Employee("Ravi", 30000)
+e2 = Employee("Anita", 40000)
+e3 = Employee("Kiran", 50000)
+
+e1.display()
+e2.display()
+e3.display()</pre>
+</div>
+<div class="note">
+The class is written once but three separate objects are created. Each object maintains its own instance attributes.
+</div>
+</section>
+
+<section class="card">
+<h2>41. Complete Example: Inheritance + Overriding</h2>
+<div class="program-box">
+<pre>class Employee:
+    def work(self):
+        print("Employee is working")
+
+class Engineer(Employee):
+    def work(self):
+        print("Engineer is designing")
+
+class Teacher(Employee):
+    def work(self):
+        print("Teacher is teaching")
+
+e = Engineer()
+t = Teacher()
+
+e.work()
+t.work()</pre>
+</div>
+<div class="note">
+The same method name <span class="code">work()</span> has different implementations in the derived classes. This demonstrates inheritance and polymorphism through method overriding.
+</div>
+</section>
+
+<section class="card">
+<h2>42. Complete Example: Encapsulation with Methods</h2>
+<div class="program-box">
+<pre>class BankAccount:
+    def __init__(self, balance):
+        self.__balance = balance
+
+    def deposit(self, amount):
+        self.__balance += amount
+
+    def show_balance(self):
+        print("Balance:", self.__balance)
+
+account = BankAccount(1000)
+account.deposit(500)
+account.show_balance()</pre>
+</div>
+<div class="output">Output:
+Balance: 1500</div>
+<div class="success">The balance is maintained internally and modified through a method rather than directly in normal use.</div>
+</section>
+
+<div class="section-title">PART 9: IMPORTANT COMPARISONS AND EXAM POINTS</div>
+
+<section class="card">
+<h2>43. Class vs Object</h2>
+<div class="table-container">
+<table>
+<thead><tr><th>Class</th><th>Object</th></tr></thead>
+<tbody>
+<tr><td>Blueprint or template.</td><td>Actual instance created from the class.</td></tr>
+<tr><td>Defines attributes and methods.</td><td>Contains actual attribute values.</td></tr>
+<tr><td>Defined using <span class="code">class</span>.</td><td>Created by calling the class.</td></tr>
+<tr><td>Example: <span class="code">class Student:</span></td><td>Example: <span class="code">s1 = Student()</span></td></tr>
+<tr><td>One class can exist as a definition.</td><td>Many objects can be created from one class.</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section class="card">
+<h2>44. Function vs Method</h2>
+<div class="table-container">
+<table>
+<thead><tr><th>Function</th><th>Method</th></tr></thead>
+<tbody>
+<tr><td>Defined independently.</td><td>Defined inside a class.</td></tr>
+<tr><td>Called by its function name.</td><td>Usually called through an object or class.</td></tr>
+<tr><td>Example: <span class="code">calculate()</span></td><td>Example: <span class="code">obj.calculate()</span></td></tr>
+<tr><td>Does not automatically receive an object reference.</td><td>Instance methods normally receive <span class="code">self</span>.</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section class="card">
+<h2>45. Attribute vs Method</h2>
+<div class="table-container">
+<table>
+<thead><tr><th>Attribute</th><th>Method</th></tr></thead>
+<tbody>
+<tr><td>Represents data/state.</td><td>Represents behavior/action.</td></tr>
+<tr><td>Usually accessed without parentheses.</td><td>Called using parentheses.</td></tr>
+<tr><td><span class="code">s1.name</span></td><td><span class="code">s1.display()</span></td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section class="card">
+<h2>46. Constructor vs Normal Method</h2>
+<div class="table-container">
+<table>
+<thead><tr><th>Constructor / __init__()</th><th>Normal Method</th></tr></thead>
+<tbody>
+<tr><td>Called automatically during object initialization.</td><td>Called explicitly when required.</td></tr>
+<tr><td>Commonly initializes attributes.</td><td>Performs an operation or behavior.</td></tr>
+<tr><td>Defined as <span class="code">def __init__(self,...)</span>.</td><td>Example: <span class="code">def display(self):</span>.</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section class="card">
+<h2>47. Common OOP Errors</h2>
+<div class="table-container">
+<table>
+<thead><tr><th>Incorrect Situation</th><th>Typical Problem</th></tr></thead>
+<tbody>
+<tr><td>Forgetting <span class="code">self</span> in an instance method.</td><td>Object method may not receive the expected instance reference.</td></tr>
+<tr><td>Writing <span class="code">name = name</span> instead of <span class="code">self.name = name</span>.</td><td>The object attribute is not initialized as intended.</td></tr>
+<tr><td>Calling an undefined method.</td><td>Usually results in <span class="code">AttributeError</span>.</td></tr>
+<tr><td>Accessing an attribute that does not exist.</td><td>Usually results in <span class="code">AttributeError</span>.</td></tr>
+<tr><td>Incorrect indentation inside a class.</td><td>May result in <span class="code">IndentationError</span>.</td></tr>
+<tr><td>Using a class name incorrectly.</td><td>Can result in <span class="code">NameError</span> or other errors depending on the statement.</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section class="card">
+<h2>48. Important Exam Points</h2>
+<div class="highlight">
+<ol>
+<li>OOP organizes programs around objects containing data and behavior.</li>
+<li>A class is a blueprint; an object is an instance of a class.</li>
+<li>The <span class="code">class</span> keyword is used to define a class.</li>
+<li>The dot operator <span class="code">.</span> is used to access object attributes and methods.</li>
+<li><span class="code">self</span> refers to the current object in an instance method.</li>
+<li><span class="code">__init__()</span> is commonly used to initialize object attributes.</li>
+<li>Instance attributes belong to individual objects.</li>
+<li>Class attributes are associated with the class and can be shared by instances.</li>
+<li>Inheritance allows a child class to reuse parent-class functionality.</li>
+<li>Method overriding allows a child class to provide its own implementation.</li>
+<li><span class="code">super()</span> is used to access parent-class behavior.</li>
+<li>Polymorphism allows the same interface or method call to behave differently.</li>
+<li>Encapsulation combines data and methods and supports controlled access.</li>
+<li>Abstraction focuses on essential behavior while hiding unnecessary implementation details.</li>
+<li>Python supports instance methods, class methods, and static methods.</li>
+</ol>
+</div>
+</section>
+
+<section class="card">
+<h2>49. OOP Concept Summary</h2>
+<div class="table-container">
+<table>
+<thead><tr><th>Concept</th><th>One-Line Meaning</th><th>Typical Python Syntax</th></tr></thead>
+<tbody>
+<tr><td>Class</td><td>Blueprint for objects.</td><td><span class="code">class A:</span></td></tr>
+<tr><td>Object</td><td>Instance of a class.</td><td><span class="code">a = A()</span></td></tr>
+<tr><td>Attribute</td><td>Data associated with an object/class.</td><td><span class="code">self.x</span></td></tr>
+<tr><td>Method</td><td>Function inside a class.</td><td><span class="code">def show(self):</span></td></tr>
+<tr><td>Constructor</td><td>Initializes an object.</td><td><span class="code">__init__()</span></td></tr>
+<tr><td>self</td><td>Current object reference.</td><td><span class="code">self.name</span></td></tr>
+<tr><td>Encapsulation</td><td>Combines data and methods; supports controlled access.</td><td>Class + attributes + methods</td></tr>
+<tr><td>Inheritance</td><td>Reuse/extend an existing class.</td><td><span class="code">class B(A):</span></td></tr>
+<tr><td>Polymorphism</td><td>One interface, different behavior.</td><td>Overriding / duck typing</td></tr>
+<tr><td>Abstraction</td><td>Expose essential behavior.</td><td><span class="code">ABC</span>, <span class="code">@abstractmethod</span></td></tr>
+<tr><td>super()</td><td>Access parent-class behavior.</td><td><span class="code">super().method()</span></td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+</main>
+
+<footer class="footer">
+© 2026 | Python OOP: Classes & Objects Complete Guide
+</footer>
+
+</body>
+</html>
