@@ -319,15 +319,20 @@ footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:1
                 <b>Given:</b>
                 <div class="equation">\[
                 \begin{aligned}
-                b \times d &= 150\ \text{mm} \times 200\ \text{mm}\\
+                b &= 150\ \text{mm} \\
+                d &= 200\ \text{mm} \\
                 l &= 6000\ \text{mm}\\
                 E &= 17,500\ \text{N/mm}^2\\
                 FOS &= 3
                 \end{aligned}
                 \]</div>
                 
+                <div class="calc-label">Moments of Inertia (\(I_{xx}\) and \(I_{yy}\))</div>
+                <div class="equation">\[I_{xx} = \frac{b \cdot d^3}{12} = \frac{150 \times 200^3}{12} = 100,000,000\ \text{mm}^4\]</div>
+                <div class="equation">\[I_{yy} = \frac{d \cdot b^3}{12} = \frac{200 \times 150^3}{12} = 56,250,000\ \text{mm}^4\]</div>
+                
                 <div class="calc-label">Least Moment of Inertia, \(I_{min}\)</div>
-                <div class="equation">\[I_{min} = \frac{d \cdot b^3}{12} = \frac{200 \times 150^3}{12} = 56,250,000\ \text{mm}^4\]</div>
+                <div class="equation">\[I_{min} = I_{yy} = 56,250,000\ \text{mm}^4\]</div>
                 
                 <div class="calc-label">Effective Length, \(L_e\) (Both ends fixed)</div>
                 <div class="equation">\[L_e = \frac{l}{2} = \frac{6000}{2} = 3000\ \text{mm}\]</div>
@@ -376,10 +381,14 @@ footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:1
                 \end{aligned}
                 \]</div>
                 
-                <div class="calc-label">Section Properties (\(A\), \(I\), \(k\))</div>
+                <div class="calc-label">Area (\(A\))</div>
                 <div class="equation">\[A = \frac{\pi}{4}(50)^2 = 1963.5\ \text{mm}^2\]</div>
+                
+                <div class="calc-label">Moment of Inertia (\(I\))</div>
                 <div class="equation">\[I = \frac{\pi}{64}(50)^4 = 306,796.16\ \text{mm}^4\]</div>
-                <div class="equation">\[k = \frac{d}{4} = 12.5\ \text{mm}\]</div>
+                
+                <div class="calc-label">Radius of Gyration (\(k\))</div>
+                <div class="equation">\[k = \sqrt{\frac{I}{A}} = \sqrt{\frac{306,796.16}{1963.5}} = 12.5\ \text{mm}\]</div>
                 
                 <div class="calc-label">Effective Length, \(L_e\) (One fixed, one free)</div>
                 <div class="equation">\[L_e = 2l = 3000\ \text{mm}\]</div>
