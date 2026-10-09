@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 5 - Important Questions with Solutions | Mechanics of Solids</title>
+
+<script>
+window.MathJax = {
+    tex: {
+        inlineMath: [['\\(','\\)']],
+        displayMath: [['\\[','\\]']]
+    },
+    svg: { fontCache: 'global' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",Arial,sans-serif}
+body{background:#eef3f8;color:#222}
+header{background:linear-gradient(135deg,#063b70,#0878c9);color:white;padding:20px; text-align:center;position:relative;box-shadow:0 3px 10px rgba(0,0,0,.15)}
+header h1{font-size:28px;margin-bottom:5px}
+header p{font-size:16px}
+.home-link{position:absolute;left:22px;top:20px}
+.mos-link{position:absolute;right:22px;top:20px}
+.home-link a,.mos-link a{color:white;text-decoration:none;font-weight:600;font-size:16px}
+.home-link a:hover,.mos-link a:hover{text-decoration:underline}
+.container{width:94%;max-width:1150px;margin:25px auto 40px}
+.section{background:white;border-radius:13px;box-shadow:0 4px 15px rgba(0,0,0,.10);padding:22px;margin-bottom:25px}
+.section-title{display:flex;align-items:center;justify-content:space-between;background:#075b99;color:white;border-radius:8px;padding:13px 18px;cursor:pointer;font-size:21px;font-weight:700}
+.section-title .plus{width:30px;height:30px;border-radius:50%;background:white;color:#075b99;display:flex;align-items:center;justify-content:center;font-size:23px;line-height:1;flex-shrink:0}
+.questions{display:none;margin-top:14px}
+.questions.show{display:block}
+.question-box{border:1px solid #d4e1ec;border-radius:8px;margin-bottom:11px;overflow:hidden;background:#f8fbff}
+.question-header{width:100%;border:0;background:#f8fbff;color:#173b5c;padding:14px 15px;display:flex;align-items:flex-start;gap:12px;text-align:left;font-size:17px;line-height:1.55;font-weight:600;cursor:pointer}
+.question-header:hover{background:#edf6ff}
+.qno{min-width:30px;height:30px;border-radius:50%;background:#0878c9;color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+.qplus{margin-left:auto;min-width:28px;height:28px;border-radius:50%;background:#0878c9;color:white;display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:400}
+.solution{display:none;background:white;padding:18px 22px 22px;border-top:1px solid #dbe6ef;font-size:16px;line-height:1.65}
+.solution.show{display:block}
+.short-solution{font-size:17px}
+.equation{background:#fbfdff;border-left:4px solid #5b7fa3;border-radius:6px;padding:9px 14px;margin:12px 0;overflow-x:auto}
+.equation .mjx-container{margin:0!important}
+.answer{background:#eaf8ef;border:1px solid #54a56b;border-radius:8px;padding:11px 15px;margin-top:13px;font-size:17px;font-weight:700;color:#17632d}
+.essay .question-box{background:#fffaf0;border-left:4px solid #d59b16}
+.essay .question-header{background:#fffaf0}
+.essay .qno{background:#c88c08}
+.essay .qplus{background:#c88c08}
+.final{background:#fff8df;border:2px solid #e1b52c;border-radius:10px;padding:18px;margin-top:16px}
+.final h3{margin-bottom:8px;color:#765500}
+footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:14px}
+@media(max-width:700px){
+ header h1{font-size:23px}
+ .home-link,.mos-link{position:static;text-align:left;margin-bottom:7px}
+ header{text-align:center}
+ .container{width:96%}.section{padding:15px}
+ .question-header{font-size:15px}.solution{font-size:15px}
+}
+.pdf-download{
+    background:#fff;
+    border:1px solid #e2caca;
+    border-left:5px solid #d00000;
+    border-radius:8px;
+    padding:12px 16px;
+    margin-bottom:18px;
+    font-size:17px;
+    font-weight:600;
+    color:#d00000;
+}
+.pdf-download a{
+    color:#0645ad;
+    text-decoration:underline;
+    font-weight:700;
+    margin-left:6px;
+}
+.pdf-download a:hover{
+    color:#b00000;
+}
+
+.solution-image {
+    display: block;
+    width: 75%;
+    max-width: 750px;
+    height: auto;
+    margin: 10px auto 15px auto;
+    border-radius: 6px;
+}
+
+/* Essay solution layout improvements */
+.essay-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start;margin-top:6px}
+.essay-column{min-width:0}
+.calc-label{font-weight:600;color:#173b5c;margin:8px 0 3px 2px;font-size:16px}
+.essay .equation{padding:7px 10px;margin:7px 0;line-height:1.3}
+.essay .solution{line-height:1.3}
+.essay .solution p{margin:5px 0 8px}
+.essay .solution .answer{margin-top:10px}
+@media(max-width:850px){.essay-grid{grid-template-columns:1fr;gap:8px}}
+</style>
+</head>
+
+<body>
+<header>
+    <div class="home-link"><a href="../../index.html">🏠 Back to Domain Home</a></div>
+    <div class="mos-link"><a href="../index.html">📚 Back to MOS Home</a></div>
+    <h1>MECHANICS OF SOLIDS</h1>
+    <p>UNIT 5 – Important Questions with Solutions</p>
+</header>
+
+<div class="container">
+<!-- PDF DOWNLOAD -->
+<div class="pdf-download">
+    <span>PDF document with questions and answers:</span>
+    <span>Updated Shortly</span>
+</div>
+
+<!-- SHORT ANSWERS -->
+<div class="section">
+    <div class="section-title" onclick="toggleSection(this)">
+        <span>Short Answer Questions – 2 Marks</span>
+        <span class="plus">+</span>
+    </div>
+
+    <div class="questions">
+
+        <div class="question-box">
+            <button class="question-header" onclick="toggleQuestion(this)">
+                <span class="qno">1</span>
+                <span>Distinguish between columns and struts.</span>
+                <span class="qplus">+</span>
+            </button>
+            <div class="solution short-solution">
+                A <b>column</b> is a vertical structural member subjected to axial compressive loads, typically fixed at one or both ends (e.g., pillars of a building). A <b>strut</b> is a structural member subjected to axial compressive loads that can be oriented in any direction (vertical, horizontal, or inclined) and is generally pin-jointed or hinged at the ends (e.g., members of a roof truss).
+            </div>
+        </div>
+
+        <div class="question-box">
+            <button class="question-header" onclick="toggleQuestion(this)">
+                <span class="qno">2</span>
+                <span>What are the different end conditions of a column?</span>
+                <span class="qplus">+</span>
+            </button>
+            <div class="solution short-solution">
+                The four standard end conditions for a column are:<br>
+                1. Both ends hinged (or pinned).<br>
+                2. Both ends fixed.<br>
+                3. One end fixed and the other end hinged.<br>
+                4. One end fixed and the other end free.
+            </div>
+        </div>
+
+        <div class="question-box">
+            <button class="question-header" onclick="toggleQuestion(this)">
+                <span class="qno">3</span>
+                <span>What are circumferential and longitudinal stresses?</span>
+                <span class="qplus">+</span>
+            </button>
+            <div class="solution short-solution">
+                <b>Circumferential (or Hoop) stress:</b> The tensile stress acting tangentially to the circumference of a cylinder subjected to internal pressure. It resists the bursting of the cylinder.<br><br>
+                <b>Longitudinal stress:</b> The tensile stress acting parallel to the longitudinal axis of the cylinder. It resists the tearing of the cylinder across its cross-section.
+            </div>
+        </div>
+
+        <div class="question-box">
+            <button class="question-header" onclick="toggleQuestion(this)">
+                <span class="qno">4</span>
+                <span>State the assumptions made in Lame’s theory for thick cylinder analysis.</span>
+                <span class="qplus">+</span>
+            </button>
+            <div class="solution short-solution">
+                1. The material of the cylinder is homogeneous and isotropic.<br>
+                2. Plane cross-sections perpendicular to the longitudinal axis remain plane after the application of internal pressure.<br>
+                3. The material is stressed within the elastic limit (Hooke's Law holds good).
+            </div>
+        </div>
+
+        <div class="question-box">
+            <button class="question-header" onclick="toggleQuestion(this)">
+                <span class="qno">5</span>
+                <span>A thin-walled water pipe carries water under a pressure 2 N/mm² and discharges water into a tank. Diameter of the pipe is 25 mm and thickness 2.5 mm. What is the longitudinal stress induced in the pipe?</span>
+                <span class="qplus">+</span>
+            </button>
+            <div class="solution short-solution">
+                <b>Given:</b> Pressure \(p = 2\ \text{N/mm}^2\), Diameter \(d = 25\ \text{mm}\), Thickness \(t = 2.5\ \text{mm}\).
+                <div class="equation">\[\sigma_l = \frac{pd}{4t}\]</div>
+                <div class="equation">\[\sigma_l = \frac{2 \times 25}{4 \times 2.5} = \frac{50}{10} = 5\ \text{N/mm}^2\]</div>
+                The longitudinal stress is <b>5 N/mm²</b>.
+            </div>
+        </div>
+
+        <div class="question-box">
+            <button class="question-header" onclick="toggleQuestion(this)">
+                <span class="qno">6</span>
+                <span>How does the radial stress vary in a thick-walled cylinder?</span>
+                <span class="qplus">+</span>
+            </button>
+            <div class="solution short-solution">
+                Radial stress varies logarithmically (often approximated as parabolically) across the thickness of the cylinder wall. It is maximum and compressive at the inner surface (equal to the internal fluid pressure) and minimum (usually zero) at the outer surface.
+            </div>
+        </div>
+
+        <div class="question-box">
+            <button class="question-header" onclick="toggleQuestion(this)">
+                <span class="qno">7</span>
+                <span>Define slenderness ratio.</span>
+                <span class="qplus">+</span>
+            </button>
+            <div class="solution short-solution">
+                The slenderness ratio is defined as the ratio of the effective length (\(L_e\)) of a column to its least radius of gyration (\(k_{min}\)). It is a dimensionless quantity used to determine whether a column will fail by crushing or buckling.
+                <div class="equation">\[\lambda = \frac{L_e}{k_{min}}\]</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- LONG ANSWERS -->
+<div class="section essay">
+    <div class="section-title" onclick="toggleSection(this)">
+        <span>Essay / Long Answer Questions</span>
+        <span class="plus">+</span>
+    </div>
+
+    <div class="questions">
+
+        <!-- LONG 1 -->
+        <div class="question-box">
+            <button class="question-header" onclick="toggleQuestion(this)">
+                <span class="qno">1</span>
+                <span>(a) State the assumptions made in Euler’s column theory. (b) Explain the different end conditions in columns and their effective lengths.</span>
+                <span class="qplus">+</span>
+            </button>
+            <div class="solution">
+                <b>(a) Assumptions in Euler’s theory:</b>
+                <ul>
+                    <li>The column is initially perfectly straight, and the applied load is purely axial.</li>
+                    <li>The cross-section of the column is uniform throughout its length.</li>
+                    <li>The material of the column is perfectly elastic, homogeneous, and isotropic.</li>
+                    <li>The length of the column is very large compared to its lateral dimensions.</li>
+                    <li>The direct stress is very small compared with the bending stress.</li>
+                    <li>The column fails solely by buckling, and yielding of the material is ignored.</li>
+                </ul>
+                <br>
+                <b>(b) End conditions in columns:</b>
+                <p>The load-carrying capacity of a column heavily depends on how its ends are restrained. The "effective length" (\(L_e\)) represents the distance between two adjacent points of zero bending moment (points of inflection).</p>
+                <img src="../images/image5.1.webp" alt="Column End Conditions" class="solution-image">
+                <ul>
+                    <li><b>Both Ends Hinged:</b> The column can rotate freely at both ends. \(L_e = l\)</li>
+                    <li><b>Both Ends Fixed:</b> The column is rigidly held in position and direction at both ends. \(L_e = \frac{l}{2}\)</li>
+                    <li><b>One End Fixed, Other End Hinged:</b> One end is rigid, while the other can rotate. \(L_e = \frac{l}{\sqrt{2}}\)</li>
+                    <li><b>One End Fixed, Other End Free:</b> One end is rigid, and the other is completely free to move laterally (like a flagpole). \(L_e = 2l\)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- LONG 2 -->
+        <div class="question-box">
+            <button class="question-header" onclick="toggleQuestion(this)">
+                <span class="qno">2</span>
+                <span>A hollow mild steel tube 6 m long, 4 cm internal diameter, and 5 mm thick is used as a strut with both ends hinged. Find the crippling load and safe load taking a factor of safety as 3. Take \(E = 2 \times 10^5\ \text{N/mm}^2\).</span>
+                <span class="qplus">+</span>
+            </button>
+            <div class="solution">
+                <b>Given:</b>
+                <div class="equation">\[
+                \begin{aligned}
+                l &= 6000\ \text{mm}\\
+                d &= 40\ \text{mm}, \quad t = 5\ \text{mm}\\
+                FOS &= 3\\
+                E &= 2 \times 10^5\ \text{N/mm}^2
+                \end{aligned}
+                \]</div>
+                
+                <div class="calc-label">External Diameter, \(D\)</div>
+                <div class="equation">\[D = d + 2t = 40 + 2(5) = 50\ \text{mm}\]</div>
+                
+                <div class="calc-label">Moment of Inertia, \(I\)</div>
+                <div class="equation">\[I = \frac{\pi}{64} (D^4 - d^4) = \frac{\pi}{64} (50^4 - 40^4) = 181,132.61\ \text{mm}^4\]</div>
+                
+                <div class="calc-label">Effective Length, \(L_e\) (Both ends hinged)</div>
+                <div class="equation">\[L_e = l = 6000\ \text{mm}\]</div>
+
+                <div class="essay-grid">
+                    <div class="essay-column">
+                        <div class="calc-label">Crippling Load, \(P_e\)</div>
+                        <div class="equation">\[
+                        \begin{aligned}
+                        P_e &= \frac{\pi^2 E I}{L_e^2}\\
+                        &= \frac{\pi^2 (2 \times 10^5) (181,132.61)}{6000^2}\\
+                        &= 9,931.78\ \text{N}
+                        \end{aligned}
+                        \]</div>
+                        <div class="answer">Crippling Load = 9.93 kN</div>
+                    </div>
+                    <div class="essay-column">
+                        <div class="calc-label">Safe Load, \(P_s\)</div>
+                        <div class="equation">\[
+                        \begin{aligned}
+                        P_s &= \frac{P_e}{FOS}\\
+                        &= \frac{9,931.78}{3}\\
+                        &= 3,310.59\ \text{N}
+                        \end{aligned}
+                        \]</div>
+                        <div class="answer">Safe Load = 3.31 kN</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LONG 3 -->
+        <div class="question-box">
+            <button class="question-header" onclick="toggleQuestion(this)">
+                <span class="qno">3</span>
+                <span>A column of timber section 15 cm x 20 cm is 6 m long both ends being fixed. If E for timber = 17.5 kN/mm², determine crippling load and safe load for the column if factor of safety = 3.</span>
+                <span class="qplus">+</span>
+            </button>
+            <div class="solution">
+                <b>Given:</b>
+                <div class="equation">\[
+                \begin{aligned}
+                b \times d &= 150\ \text{mm} \times 200\ \text{mm}\\
+                l &= 6000\ \text{mm}\\
+                E &= 17,500\ \text{N/mm}^2\\
+                FOS &= 3
+                \end{aligned}
+                \]</div>
+                
+                <div class="calc-label">Least Moment of Inertia, \(I_{min}\)</div>
+                <div class="equation">\[I_{min} = \frac{d \cdot b^3}{12} = \frac{200 \times 150^3}{12} = 56,250,000\ \text{mm}^4\]</div>
+                
+                <div class="calc-label">Effective Length, \(L_e\) (Both ends fixed)</div>
+                <div class="equation">\[L_e = \frac{l}{2} = \frac{6000}{2} = 3000\ \text{mm}\]</div>
+
+                <div class="essay-grid">
+                    <div class="essay-column">
+                        <div class="calc-label">Crippling Load, \(P_e\)</div>
+                        <div class="equation">\[
+                        \begin{aligned}
+                        P_e &= \frac{\pi^2 E I_{min}}{L_e^2}\\
+                        &= \frac{\pi^2 (17,500) (56,250,000)}{3000^2}\\
+                        &= 1,079,488\ \text{N}
+                        \end{aligned}
+                        \]</div>
+                        <div class="answer">Crippling Load = 1079.49 kN</div>
+                    </div>
+                    <div class="essay-column">
+                        <div class="calc-label">Safe Load, \(P_s\)</div>
+                        <div class="equation">\[
+                        \begin{aligned}
+                        P_s &= \frac{P_e}{FOS}\\
+                        &= \frac{1,079,488}{3}\\
+                        &= 359,829\ \text{N}
+                        \end{aligned}
+                        \]</div>
+                        <div class="answer">Safe Load = 359.83 kN</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LONG 4 -->
+        <div class="question-box">
+            <button class="question-header" onclick="toggleQuestion(this)">
+                <span class="qno">4</span>
+                <span>A 1.5 m long column has a circular cross-section of 5 cm diameter. One end is fixed, and the other is free. FOS = 3, \(\sigma_c = 560\ \text{N/mm}^2\), \(a = 1/1600\), \(E = 1.2 \times 10^5\ \text{N/mm}^2\). Calculate safe load using Rankine’s and Euler’s formulas.</span>
+                <span class="qplus">+</span>
+            </button>
+            <div class="solution">
+                <b>Given:</b>
+                <div class="equation">\[
+                \begin{aligned}
+                l &= 1500\ \text{mm}, \quad d = 50\ \text{mm}\\
+                \sigma_c &= 560\ \text{N/mm}^2, \quad a = \frac{1}{1600}\\
+                E &= 1.2 \times 10^5\ \text{N/mm}^2, \quad FOS = 3
+                \end{aligned}
+                \]</div>
+                
+                <div class="calc-label">Section Properties (\(A\), \(I\), \(k\))</div>
+                <div class="equation">\[A = \frac{\pi}{4}(50)^2 = 1963.5\ \text{mm}^2\]</div>
+                <div class="equation">\[I = \frac{\pi}{64}(50)^4 = 306,796.16\ \text{mm}^4\]</div>
+                <div class="equation">\[k = \frac{d}{4} = 12.5\ \text{mm}\]</div>
+                
+                <div class="calc-label">Effective Length, \(L_e\) (One fixed, one free)</div>
+                <div class="equation">\[L_e = 2l = 3000\ \text{mm}\]</div>
+
+                <div class="essay-grid">
+                    <div class="essay-column">
+                        <b>Rankine's Formula:</b>
+                        <div class="calc-label">Crippling Load, \(P_R\)</div>
+                        <div class="equation">\[
+                        \begin{aligned}
+                        P_R &= \frac{\sigma_c A}{1 + a (\frac{L_e}{k})^2}\\
+                        &= \frac{560 \times 1963.5}{1 + \frac{1}{1600} (\frac{3000}{12.5})^2}\\
+                        &= 29,717.77\ \text{N}
+                        \end{aligned}
+                        \]</div>
+                        <div class="calc-label">Safe Load, \(P_{s(R)}\)</div>
+                        <div class="equation">\[P_{s(R)} = \frac{29,717.77}{3} = 9,905.92\ \text{N}\]</div>
+                        <div class="answer">Rankine Safe Load = 9.91 kN</div>
+                    </div>
+                    <div class="essay-column">
+                        <b>Euler's Formula:</b>
+                        <div class="calc-label">Crippling Load, \(P_E\)</div>
+                        <div class="equation">\[
+                        \begin{aligned}
+                        P_E &= \frac{\pi^2 E I}{L_e^2}\\
+                        &= \frac{\pi^2 (1.2 \times 10^5) (306,796.16)}{3000^2}\\
+                        &= 40,372.76\ \text{N}
+                        \end{aligned}
+                        \]</div>
+                        <div class="calc-label">Safe Load, \(P_{s(E)}\)</div>
+                        <div class="equation">\[P_{s(E)} = \frac{40,372.76}{3} = 13,457.59\ \text{N}\]</div>
+                        <div class="answer">Euler Safe Load = 13.46 kN</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LONG 5 -->
+        <div class="question-box">
+            <button class="question-header" onclick="toggleQuestion(this)">
+                <span class="qno">5</span>
+                <span>A simply supported beam 4m long carries a UDL of 30kN/m and deflects 15mm at the center. Determine crippling loads if used as a column with (i) one end fixed, other hinged (ii) both ends pinned.</span>
+                <span class="qplus">+</span>
+            </button>
+            <div class="solution">
+                <b>Given:</b>
+                <div class="equation">\[
+                \begin{aligned}
+                l &= 4000\ \text{mm}\\
+                w &= 30\ \text{N/mm}\\
+                \delta &= 15\ \text{mm}
+                \end{aligned}
+                \]</div>
+                
+                <div class="calc-label">Flexural Rigidity, \(EI\)</div>
+                <div class="equation">\[
+                \begin{aligned}
+                \delta &= \frac{5 w l^4}{384 EI}\\
+                EI &= \frac{5 \times 30 \times (4000)^4}{384 \times 15}\\
+                EI &= 6.667 \times 10^{12}\ \text{N}\cdot\text{mm}^2
+                \end{aligned}
+                \]</div>
+
+                <div class="essay-grid">
+                    <div class="essay-column">
+                        <b>Case (i): One end fixed, other hinged</b>
+                        <div class="calc-label">Effective Length, \(L_e\)</div>
+                        <div class="equation">\[L_e = \frac{l}{\sqrt{2}} = \frac{4000}{\sqrt{2}} = 2828.43\ \text{mm}\]</div>
+                        <div class="calc-label">Crippling Load, \(P_1\)</div>
+                        <div class="equation">\[
+                        \begin{aligned}
+                        P_1 &= \frac{\pi^2 EI}{L_e^2}\\
+                        &= \frac{\pi^2 (6.667 \times 10^{12})}{(2828.43)^2}
+                        \end{aligned}
+                        \]</div>
+                        <div class="answer">\(P_1\) = 8224.67 kN</div>
+                    </div>
+                    <div class="essay-column">
+                        <b>Case (ii): Both ends pinned</b>
+                        <div class="calc-label">Effective Length, \(L_e\)</div>
+                        <div class="equation">\[L_e = l = 4000\ \text{mm}\]</div>
+                        <div class="calc-label">Crippling Load, \(P_2\)</div>
+                        <div class="equation">\[
+                        \begin{aligned}
+                        P_2 &= \frac{\pi^2 EI}{L_e^2}\\
+                        &= \frac{\pi^2 (6.667 \times 10^{12})}{4000^2}
+                        \end{aligned}
+                        \]</div>
+                        <div class="answer">\(P_2\) = 4112.33 kN</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</div>
+
+<footer>
+    © 2026 D. Kiran Prasad | Mechanics of Solids
+</footer>
+
+<script>
+function toggleSection(title){
+    const questions=title.nextElementSibling;
+    const plus=title.querySelector(".plus");
+
+    if(questions.classList.contains("show")){
+        questions.classList.remove("show");
+        plus.textContent="+";
+    }else{
+        questions.classList.add("show");
+        plus.textContent="−";
+    }
+}
+
+function toggleQuestion(button){
+    const solution=button.nextElementSibling;
+    const plus=button.querySelector(".qplus");
+
+    if(solution.classList.contains("show")){
+        solution.classList.remove("show");
+        plus.textContent="+";
+    }else{
+        solution.classList.add("show");
+        plus.textContent="−";
+        if(window.MathJax){
+            MathJax.typesetPromise([solution]);
+        }
+    }
+}
+</script>
+
+</body>
+</html>
