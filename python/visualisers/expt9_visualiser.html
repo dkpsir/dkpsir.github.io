@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Experiment 9 - Engine Test Data Visualizer</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;background:#eef4f9;color:#111;font-family:Arial,sans-serif;font-size:14px}
+.container{display:grid;grid-template-columns:1.05fr 1fr;gap:12px;min-height:100vh;padding:10px;max-width:1500px;margin:auto}
+.panel{background:#fff;border-radius:8px;padding:10px;box-shadow:0 1px 6px rgba(0,0,0,.08);display:flex;flex-direction:column;min-width:0}
+h2{color:#0b4f86;font-size:16px;margin-bottom:6px;flex-shrink:0}
+.controls{background:#f8fafc;border:1px solid #ccd8e2;border-radius:6px;padding:6px 10px;margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-shrink:0;flex-wrap:wrap}
+button{padding:5px 12px;font-size:13px;font-weight:600;cursor:pointer;border-radius:4px;border:1px solid #0b4f86;background:#0b4f86;color:#fff}
+button:hover{background:#093e6a}
+button:disabled{opacity:.45;cursor:not-allowed;background:#718096;border-color:#718096}
+select{padding:4px 8px;font-size:12.5px;border-radius:4px;border:1px solid #ccd8e2;background:#fff;font-weight:600;color:#2d3748}
+.message{font-size:13px;margin:2px 0 6px;color:#1a365d;font-weight:600;min-height:17px}
+.section-title{background:#0b4f86;color:#fff;padding:4px 8px;font-size:12px;font-weight:bold;border-radius:4px 4px 0 0;margin-top:4px;flex-shrink:0}
+.box-content{background:#fff;border:1px solid #ccd8e2;border-top:none;padding:6px 8px;font:13px/1.3 Consolas,"Courier New",monospace;border-radius:0 0 4px 4px}
+#varDisplay{min-height:48px;display:flex;align-items:center;flex-wrap:wrap;gap:5px}
+#operationDisplay{min-height:42px;display:flex;align-items:center}
+#dataDisplay{overflow:auto;max-height:255px;padding:0}
+#resultDisplay{overflow:auto;max-height:220px;padding:0}
+table.data{border-collapse:collapse;width:100%;font:12px Consolas,"Courier New",monospace}
+table.data th{background:#dbeafe;color:#17324d;padding:6px;border:1px solid #b9c9d7;position:sticky;top:0}
+table.data td{padding:5px 6px;border:1px solid #d5dee6;text-align:center}
+table.data tr.highlight{background:#fff3a3;font-weight:bold}
+table.data tr.inspect{background:#ffe3d7}
+table.data tr.normal{background:#e3f8ec}
+#consoleOutput{min-height:95px;max-height:180px;background:#111;color:#38ef7d;overflow-y:auto;line-height:1.3;font-size:13px;white-space:pre-wrap}
+.explanation{background:#f7fafc;border-left:4px solid #0b5d96;padding:6px 10px;margin-top:6px;font-size:12.5px;line-height:1.35}
+pre.code{margin:0;line-height:15px;background:#1e1e1e;color:#ddd;padding:5px 8px;border-radius:6px;font:12px/15px Consolas,"Courier New",monospace;min-height:0;white-space:pre;overflow:auto;line-height:15px}
+.line{display:block;padding:0 4px;margin:0;border-radius:2px;line-height:15px;height:15px;}
+.active{background:#ffeb3b;color:#000;font-weight:bold}
+.result-line{background:#b7f7c9;color:#064e3b;font-weight:bold}
+.badge{display:inline-block;padding:2px 6px;font-size:11px;border-radius:3px;background:#e2e8f0;color:#2d3748;margin-right:4px}
+.badge-var{background:#e0f2fe;color:#075985;border:1px solid #7dd3fc}
+.badge-op{background:#fef3c7;color:#92400e;border:1px solid #f59e0b}
+.badge-res{background:#dcfce7;color:#166534;border:1px solid #4ade80}
+.progress{height:6px;background:#e2e8f0;border-radius:4px;overflow:hidden;margin:5px 0 7px}
+.progress > div{height:100%;width:0;background:#0b5d96;transition:width .25s}
+.small{font-size:11px;color:#64748b}
+@media(max-width:950px){.container{grid-template-columns:1fr}.panel{min-height:0}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<section class="panel">
+<h2>Execution State & Data Analysis</h2>
+
+<div class="controls">
+<button id="startBtn">Start</button>
+<button id="nextBtn" disabled>Next Step →</button>
+<button id="resetBtn">Reset</button>
+<span class="small" id="stepCount">Step 0 / 28</span>
+</div>
+<div class="progress"><div id="progressBar"></div></div>
+
+<div class="message" id="message">Click <b>Start</b>, then use <b>Next Step →</b> to execute one code line at a time.</div>
+
+<div class="section-title">Engine DataFrame</div>
+<div class="box-content" id="dataDisplay"><i>DataFrame not created yet.</i></div>
+
+<div class="section-title">Analysis Results</div>
+<div class="box-content" id="resultDisplay"><i>No analysis results yet.</i></div>
+
+<div class="section-title">Python Console Output</div>
+<div class="box-content" id="consoleOutput"></div>
+
+<div class="explanation" id="explanation">
+<b>Experiment 9:</b> Every executable code line is executed one at a time. Click Next Step to move to the next line.
+</div>
+</section>
+
+<section class="panel">
+<h2>Python Program — Line-by-Line Execution</h2>
+<pre class="code" id="codeBlock"><span id="l1" class="line">import numpy as np</span><span id="l2" class="line">import pandas as pd</span><span id="l3" class="line"></span><span id="l4" class="line"># Engine test data</span><span id="l5" class="line">data = {</span><span id="l6" class="line">    "Engine": ["E1", "E2", "E3", "E4", "E5"],</span><span id="l7" class="line">    "Temperature_C": [85, 92, 105, 88, 110],</span><span id="l8" class="line">    "Fuel_Consumption_Lph": [2.5, 2.8, 3.2, 2.6, 3.5],</span><span id="l9" class="line">    "Power_kW": [5.0, 5.5, 6.0, 5.2, 6.5]</span><span id="l10" class="line">}</span><span id="l11" class="line"></span><span id="l12" class="line">df = pd.DataFrame(data)</span><span id="l13" class="line"></span><span id="l14" class="line"># Calculate overall averages using NumPy</span><span id="l15" class="line">avg_temp = np.mean(df["Temperature_C"])</span><span id="l16" class="line">avg_fuel = np.mean(df["Fuel_Consumption_Lph"])</span><span id="l17" class="line">avg_power = np.mean(df["Power_kW"])</span><span id="l18" class="line"></span><span id="l19" class="line"># Identify engines exceeding the temperature limit</span><span id="l20" class="line">temperature_limit = 100</span><span id="l21" class="line">df["Status"] = np.where(</span><span id="l22" class="line">    df["Temperature_C"] > temperature_limit,</span><span id="l23" class="line">    "High Temperature",</span><span id="l24" class="line">    "Normal"</span><span id="l25" class="line">)</span><span id="l26" class="line"></span><span id="l27" class="line">print("ENGINE PERFORMANCE ANALYSIS")</span><span id="l28" class="line">print(df.to_string(index=False))</span><span id="l29" class="line"></span><span id="l30" class="line">print("\nAverage Temperature:", round(avg_temp, 2), "°C")</span><span id="l31" class="line">print("Average Fuel Consumption:", round(avg_fuel, 2), "L/h")</span><span id="l32" class="line">print("Average Power:", round(avg_power, 2), "kW")</span><span id="l33" class="line"></span><span id="l34" class="line">print("\nEngines requiring temperature investigation:")</span><span id="l35" class="line">print(df[df["Status"] == "High Temperature"]["Engine"].to_list())</span></pre>
+</section>
+
+</div>
+
+<script>
+const rows = [
+ {Engine:"E1",Temperature_C:85,Fuel_Consumption_Lph:2.5,Power_kW:5.0},
+ {Engine:"E2",Temperature_C:92,Fuel_Consumption_Lph:2.8,Power_kW:5.5},
+ {Engine:"E3",Temperature_C:105,Fuel_Consumption_Lph:3.2,Power_kW:6.0},
+ {Engine:"E4",Temperature_C:88,Fuel_Consumption_Lph:2.6,Power_kW:5.2},
+ {Engine:"E5",Temperature_C:110,Fuel_Consumption_Lph:3.5,Power_kW:6.5}
+];
+
+const steps = [
+ {lines:["l1"],msg:"Executing line 1.",explain:"<b>import numpy as np</b> loads NumPy and assigns the alias <code>np</code>."},
+ {lines:["l2"],msg:"Executing line 2.",explain:"<b>import pandas as pd</b> loads Pandas and assigns the alias <code>pd</code>."},
+ {lines:["l4"],msg:"Executing the comment.",explain:"This comment identifies the following dictionary as engine test data."},
+ {lines:["l5"],msg:"Starting the engine data dictionary.",explain:"<b>data = {</b> starts a dictionary to store engine readings as key-value pairs."},
+ {lines:["l6"],msg:"Adding the Engine column.",explain:"The key <code>Engine</code> is associated with a list containing the five engine identifiers."},
+ {lines:["l7"],msg:"Adding the Temperature_C column.",explain:"The key <code>Temperature_C</code> stores the temperature values in degrees Celsius."},
+ {lines:["l8"],msg:"Adding the Fuel_Consumption_Lph column.",explain:"The key <code>Fuel_Consumption_Lph</code> stores fuel consumption values in Liters per hour."},
+ {lines:["l9"],msg:"Adding the Power_kW column.",explain:"The key <code>Power_kW</code> stores the power values in kilowatts."},
+ {lines:["l10"],msg:"Closing the engine data dictionary.",explain:"The closing brace completes the dictionary with 4 columns and 5 records."},
+ {lines:["l12"],msg:"Creating the DataFrame.",showData:true,explain:"<b>pd.DataFrame(data)</b> converts the dictionary into a two-dimensional Pandas DataFrame."},
+ {lines:["l14"],msg:"Executing the averages comment.",explain:"This comment identifies the next statements as overall average calculations."},
+ {lines:["l15"],msg:"Calculating average temperature.",results:["avg_temp = 96.0 °C"],explain:"<b>np.mean(df['Temperature_C'])</b> calculates the arithmetic average of engine temperatures."},
+ {lines:["l16"],msg:"Calculating average fuel consumption.",results:["avg_temp = 96.0 °C","avg_fuel = 2.92 L/h"],explain:"<b>np.mean(df['Fuel_Consumption_Lph'])</b> calculates the average fuel consumption."},
+ {lines:["l17"],msg:"Calculating average power.",results:["avg_temp = 96.0 °C","avg_fuel = 2.92 L/h","avg_power = 5.64 kW"],explain:"<b>np.mean(df['Power_kW'])</b> calculates the average power."},
+ {lines:["l19"],msg:"Executing the limit comment.",explain:"Identifies the step for finding engines that exceed the temperature threshold."},
+ {lines:["l20"],msg:"Defining the temperature limit.",results:["temperature_limit = 100"],explain:"Assigns the numerical value <code>100</code> to the variable <code>temperature_limit</code>."},
+ {lines:["l21"],msg:"Starting the Status column assignment.",explain:"<b>df['Status'] = np.where(</b> creates a new column using conditional selection."},
+ {lines:["l22"],msg:"Testing the temperature threshold.",explain:"Compares each engine's temperature against the <code>temperature_limit</code> of 100 °C."},
+ {lines:["l23"],msg:"Defining the True result.",explain:"Assigns <b>'High Temperature'</b> if the engine's temperature exceeds 100 °C."},
+ {lines:["l24"],msg:"Defining the False result.",explain:"Assigns <b>'Normal'</b> if the engine's temperature is 100 °C or lower."},
+ {lines:["l25"],msg:"Completing the Status column.",classify:true,explain:"Closes the <code>np.where()</code> function and appends the new <b>Status</b> column to the DataFrame."},
+ {lines:["l27"],msg:"Printing the main heading.",console:["ENGINE PERFORMANCE ANALYSIS"],explain:"Prints the title for the analysis output."},
+ {lines:["l28"],msg:"Printing the full DataFrame without index.",showData:true,console:["Engine  Temperature_C  Fuel_Consumption_Lph  Power_kW           Status","    E1             85                   2.5       5.0           Normal","    E2             92                   2.8       5.5           Normal","    E3            105                   3.2       6.0 High Temperature","    E4             88                   2.6       5.2           Normal","    E5            110                   3.5       6.5 High Temperature"],explain:"<b>df.to_string(index=False)</b> formats and prints the complete DataFrame, hiding the default row numbers."},
+ {lines:["l30"],msg:"Printing the average temperature.",console:["\nAverage Temperature: 96.0 °C"],explain:"Rounds <code>avg_temp</code> to 2 decimal places and prints it with the °C unit."},
+ {lines:["l31"],msg:"Printing the average fuel consumption.",console:["Average Fuel Consumption: 2.92 L/h"],explain:"Rounds <code>avg_fuel</code> to 2 decimal places and prints it with the L/h unit."},
+ {lines:["l32"],msg:"Printing the average power.",console:["Average Power: 5.64 kW"],explain:"Rounds <code>avg_power</code> to 2 decimal places and prints it with the kW unit."},
+ {lines:["l34"],msg:"Printing the investigation heading.",console:["\nEngines requiring temperature investigation:"],explain:"Prints a heading for the list of high-temperature engines."},
+ {lines:["l35"],msg:"Filtering and printing the investigation list.",showResult:true,console:["['E3', 'E5']"],explain:"<b>df[df['Status'] == 'High Temperature']['Engine'].to_list()</b> filters for high temperature, extracts the Engine column, converts it to a standard Python list, and prints it."}
+];
+
+let idx=0;
+const startBtn=document.getElementById("startBtn");
+const nextBtn=document.getElementById("nextBtn");
+const resetBtn=document.getElementById("resetBtn");
+const message=document.getElementById("message");
+const explanation=document.getElementById("explanation");
+const dataDisplay=document.getElementById("dataDisplay");
+const resultDisplay=document.getElementById("resultDisplay");
+const consoleOutput=document.getElementById("consoleOutput");
+const stepCount=document.getElementById("stepCount");
+const progressBar=document.getElementById("progressBar");
+
+let variables={};
+let output=[];
+let conditions={};
+
+function clearHighlight(){
+ document.querySelectorAll(".line").forEach(x=>x.classList.remove("active"));
+}
+function highlight(lines){
+ clearHighlight();
+ lines.forEach(id=>document.getElementById(id)?.classList.add("active"));
+}
+function renderData(highlightRow=-1){
+ let h=`<table class="data"><thead><tr><th>Index</th><th>Engine</th><th>Temperature_C</th><th>Fuel_Consumption_Lph</th><th>Power_kW</th>${Object.keys(conditions).length?'<th>Status</th>':''}</tr></thead><tbody>`;
+ rows.forEach((r,i)=>{
+   let cls=i===highlightRow?"highlight":(conditions[r.Engine]==="High Temperature"?"inspect":(conditions[r.Engine]==="Normal"?"normal":""));
+   h+=`<tr class="${cls}"><td>${i}</td><td>${r.Engine}</td><td>${r.Temperature_C}</td><td>${r.Fuel_Consumption_Lph}</td><td>${r.Power_kW}</td>${Object.keys(conditions).length?`<td>${conditions[r.Engine]||""}</td>`:""}</tr>`;
+ });
+ h+="</tbody></table>";
+ dataDisplay.innerHTML=h;
+}
+function renderResult(){
+ if(!Object.keys(conditions).length){resultDisplay.innerHTML="<i>No investigation list yet.</i>";return;}
+ const highTemp = rows.filter(r=>conditions[r.Engine]==="High Temperature").map(r=>r.Engine);
+ resultDisplay.innerHTML=`<div><b>Investigation List:</b> ${JSON.stringify(highTemp)}</div>`;
+}
+function addConsole(lines){
+ output.push(...lines);
+ consoleOutput.textContent=output.join("\n");
+ consoleOutput.scrollTop=consoleOutput.scrollHeight;
+}
+function reset(){
+ idx=0;variables={};output=[];conditions={};
+ clearHighlight();
+ dataDisplay.innerHTML="<i>DataFrame not created yet.</i>";
+ resultDisplay.innerHTML="<i>No analysis results yet.</i>";
+ consoleOutput.textContent="";
+ message.innerHTML='Click <b>Start</b>, then use <b>Next Step →</b> to execute one code line at a time.';
+ explanation.innerHTML='<b>Experiment 9:</b> Every executable code line is executed one at a time. Click Next Step to move to the next line.';
+ stepCount.textContent=`Step 0 / ${steps.length}`;
+ progressBar.style.width="0%";
+ startBtn.disabled=false;nextBtn.disabled=true;
+}
+function executeStep(){
+ if(idx>=steps.length){nextBtn.disabled=true;return;}
+ const s=steps[idx];
+ highlight(s.lines);
+ message.textContent=s.msg;
+ variables={...variables,...s.vars};
+
+ if(s.showData || s.highlightRow!==undefined || s.classify || s.showResult){
+   renderData(s.highlightRow ?? -1);
+ }
+ if(s.classify){
+   conditions={E1:"Normal",E2:"Normal",E3:"High Temperature",E4:"Normal",E5:"High Temperature"};
+   renderData(s.highlightRow ?? -1);
+   renderResult();
+ }
+ if(s.showResult) renderResult();
+
+ if(s.results){
+   resultDisplay.innerHTML=`<div>${s.results.map(x=>`<span class="badge badge-res">${x}</span>`).join("<br>")}</div>`;
+   if(Object.keys(conditions).length) renderResult();
+ }
+ if(s.console) addConsole(s.console);
+
+ explanation.innerHTML=s.explain;
+ idx++;
+ stepCount.textContent=`Step ${idx} / ${steps.length}`;
+ progressBar.style.width=`${(idx/steps.length)*100}%`;
+
+ if(idx>=steps.length){
+   nextBtn.disabled=true;
+   startBtn.disabled=false;
+ }
+}
+
+startBtn.addEventListener("click",()=>{startBtn.disabled=true;nextBtn.disabled=false;executeStep();});
+nextBtn.addEventListener("click",executeStep);
+resetBtn.addEventListener("click",reset);
+reset();
+</script>
+</body>
+</html>
