@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Student Marks Analysis Visualizer</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;background:#eef4f9;color:#111;font-family:Arial,sans-serif;font-size:14px}
+.container{display:grid;grid-template-columns:1.05fr 1fr;gap:12px;min-height:100vh;padding:10px;max-width:1500px;margin:auto}
+.panel{background:#fff;border-radius:8px;padding:10px;box-shadow:0 1px 6px rgba(0,0,0,.08);display:flex;flex-direction:column;min-width:0}
+h2{color:#0b4f86;font-size:16px;margin-bottom:6px;flex-shrink:0}
+.controls{background:#f8fafc;border:1px solid #ccd8e2;border-radius:6px;padding:6px 10px;margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-shrink:0;flex-wrap:wrap}
+button{padding:5px 12px;font-size:13px;font-weight:600;cursor:pointer;border-radius:4px;border:1px solid #0b4f86;background:#0b4f86;color:#fff}
+button:hover{background:#093e6a}
+button:disabled{opacity:.45;cursor:not-allowed;background:#718096;border-color:#718096}
+.message{font-size:13px;margin:2px 0 6px;color:#1a365d;font-weight:600;min-height:17px}
+.section-title{background:#0b4f86;color:#fff;padding:4px 8px;font-size:12px;font-weight:bold;border-radius:4px 4px 0 0;margin-top:4px;flex-shrink:0}
+.box-content{background:#fff;border:1px solid #ccd8e2;border-top:none;padding:6px 8px;font:13px/1.3 Consolas,"Courier New",monospace;border-radius:0 0 4px 4px}
+#dataDisplay{overflow:auto;max-height:280px;padding:0}
+#resultDisplay{overflow:auto;max-height:120px;padding:10px;display:flex;align-items:center;justify-content:center;background:#f8fafc;font-size:14px;color:#0f172a;text-align:center;}
+table.data{border-collapse:collapse;width:100%;font:12px Consolas,"Courier New",monospace}
+table.data th{background:#dbeafe;color:#17324d;padding:6px;border:1px solid #b9c9d7;position:sticky;top:0;white-space:nowrap}
+table.data td{padding:5px 6px;border:1px solid #d5dee6;text-align:center;white-space:nowrap}
+table.data tr.highlight{background:#fff3a3;font-weight:bold}
+#consoleOutput{min-height:95px;max-height:160px;background:#111;color:#38ef7d;overflow-y:auto;line-height:1.3;font-size:13px;white-space:pre-wrap}
+.explanation{background:#f7fafc;border-left:4px solid #0b5d96;padding:6px 10px;margin-top:6px;font-size:12.5px;line-height:1.35;min-height:40px}
+pre.code{margin:0;line-height:15px;background:#1e1e1e;color:#ddd;padding:5px 8px;border-radius:6px;font:12px/15px Consolas,"Courier New",monospace;min-height:0;white-space:pre;overflow:auto;max-height:75vh}
+.line{display:block;padding:0 4px;margin:0;border-radius:2px;line-height:15px;height:15px;}
+.active{background:#ffeb3b;color:#000;font-weight:bold}
+.badge-res{display:inline-block;padding:4px 8px;font-size:12px;border-radius:4px;background:#dcfce7;color:#166534;border:1px solid #4ade80;margin:4px}
+.progress{height:6px;background:#e2e8f0;border-radius:4px;overflow:hidden;margin:5px 0 7px}
+.progress > div{height:100%;width:0;background:#0b5d96;transition:width .25s}
+.small{font-size:11px;color:#64748b}
+@media(max-width:950px){.container{grid-template-columns:1fr}.panel{min-height:0}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<section class="panel">
+<h2>Execution State & Data Analysis</h2>
+
+<div class="controls">
+<button id="startBtn">Start</button>
+<button id="nextBtn" disabled>Next Step →</button>
+<button id="resetBtn">Reset</button>
+<span class="small" id="stepCount">Step 0 / 24</span>
+</div>
+<div class="progress"><div id="progressBar"></div></div>
+
+<div class="message" id="message">Click <b>Start</b>, then use <b>Next Step →</b> to execute one code line at a time.</div>
+
+<div class="section-title">Student DataFrame</div>
+<div class="box-content" id="dataDisplay"><i>DataFrame not created yet.</i></div>
+
+<div class="section-title">Analysis Results</div>
+<div class="box-content" id="resultDisplay"><i>No analysis results yet.</i></div>
+
+<div class="section-title">Python Console Output</div>
+<div class="box-content" id="consoleOutput"></div>
+
+<div class="explanation" id="explanation">
+<b>General Application:</b> Every executable code line is executed one at a time. Click Next Step to move to the next line.
+</div>
+</section>
+
+<section class="panel">
+<h2>Python Program — Line-by-Line Execution</h2>
+<pre class="code" id="codeBlock"><span id="l1" class="line">import numpy as np</span>
+<span id="l2" class="line">import pandas as pd</span>
+<span id="l3" class="line"></span>
+<span id="l4" class="line"># Marks of five students in three subjects</span>
+<span id="l5" class="line">data = {</span>
+<span id="l6" class="line">    "Name": ["Anu", "Balu", "Chandu", "Divya", "Eswar"],</span>
+<span id="l7" class="line">    "Python": [85, 72, 90, 65, 78],</span>
+<span id="l8" class="line">    "Statistics": [80, 75, 88, 70, 82],</span>
+<span id="l9" class="line">    "Data Science": [90, 68, 92, 75, 85]</span>
+<span id="l10" class="line">}</span>
+<span id="l11" class="line"></span>
+<span id="l12" class="line"># Create a DataFrame</span>
+<span id="l13" class="line">df = pd.DataFrame(data)</span>
+<span id="l14" class="line"></span>
+<span id="l15" class="line"># Calculate total and average marks</span>
+<span id="l16" class="line">marks = df[["Python", "Statistics", "Data Science"]]</span>
+<span id="l17" class="line">df["Total"] = np.sum(marks, axis=1)</span>
+<span id="l18" class="line">df["Average"] = np.mean(marks, axis=1)</span>
+<span id="l19" class="line"></span>
+<span id="l20" class="line"># Assign result based on average</span>
+<span id="l21" class="line">df["Result"] = np.where(</span>
+<span id="l22" class="line">    df["Average"] >= 70, "Pass", "Needs Improvement"</span>
+<span id="l23" class="line">)</span>
+<span id="l24" class="line"></span>
+<span id="l25" class="line"># Display results</span>
+<span id="l26" class="line">print("STUDENT PERFORMANCE REPORT")</span>
+<span id="l27" class="line">print(df.round(2).to_string(index=False))</span>
+<span id="l28" class="line"></span>
+<span id="l29" class="line"># Find the highest average</span>
+<span id="l30" class="line">topper = df.loc[df["Average"].idxmax()]</span>
+<span id="l31" class="line"></span>
+<span id="l32" class="line">print("\nTop Performer:", topper["Name"])</span>
+<span id="l33" class="line">print("Highest Average:", round(topper["Average"], 2))</span></pre>
+</section>
+
+</div>
+
+<script>
+const baseRows = [
+ {Name:"Anu", Python:85, Statistics:80, DataScience:90},
+ {Name:"Balu", Python:72, Statistics:75, DataScience:68},
+ {Name:"Chandu", Python:90, Statistics:88, DataScience:92},
+ {Name:"Divya", Python:65, Statistics:70, DataScience:75},
+ {Name:"Eswar", Python:78, Statistics:82, DataScience:85}
+];
+
+const resultsTotal = [255, 215, 270, 210, 245];
+const resultsAvg = ["85.00", "71.67", "90.00", "70.00", "81.67"];
+const resultsPass = ["Pass", "Pass", "Pass", "Pass", "Pass"];
+
+const steps = [
+ {lines:["l1"],msg:"Executing line 1.",explain:"<b>import numpy as np</b> loads the NumPy library for numerical operations."},
+ {lines:["l2"],msg:"Executing line 2.",explain:"<b>import pandas as pd</b> loads the Pandas library for tabular data manipulation."},
+ {lines:["l4"],msg:"Comment.",explain:"Describes the initialization of the student data dictionary."},
+ {lines:["l5"],msg:"Starting the data dictionary.",explain:"<b>data = {</b> begins the dictionary structure."},
+ {lines:["l6"],msg:"Adding the Name column.",explain:"The key <code>Name</code> stores the list of 5 student names."},
+ {lines:["l7"],msg:"Adding Python marks.",explain:"The key <code>Python</code> stores marks out of 100."},
+ {lines:["l8"],msg:"Adding Statistics marks.",explain:"The key <code>Statistics</code> stores marks out of 100."},
+ {lines:["l9"],msg:"Adding Data Science marks.",explain:"The key <code>Data Science</code> stores marks out of 100."},
+ {lines:["l10"],msg:"Closing dictionary.",explain:"The closing brace completes the initial dictionary dataset."},
+ {lines:["l12"],msg:"Comment.",explain:"Next step will create the DataFrame."},
+ {lines:["l13"],msg:"Creating the DataFrame.",showData:true,cols:4,explain:"<b>pd.DataFrame(data)</b> creates a 2D tabular DataFrame from the python dictionary."},
+ {lines:["l15"],msg:"Comment.",explain:"Calculations for total and average marks will follow."},
+ {lines:["l16"],msg:"Extracting marks columns.",explain:"<b>marks = df[[...]]</b> extracts only the 3 numerical subject columns required for calculation."},
+ {lines:["l17"],msg:"Calculating Total Marks.",showData:true,cols:5,explain:"<b>np.sum(marks, axis=1)</b> computes the sum across columns (row-wise) for each student. The <code>Total</code> column is added."},
+ {lines:["l18"],msg:"Calculating Average Marks.",showData:true,cols:6,explain:"<b>np.mean(marks, axis=1)</b> computes the arithmetic mean row-wise for each student. The <code>Average</code> column is added."},
+ {lines:["l20"],msg:"Comment.",explain:"Prepares conditional logic for the final result."},
+ {lines:["l21","l22","l23"],msg:"Applying conditional result.",showData:true,cols:7,explain:"<b>np.where()</b> checks if the <code>Average</code> is >= 70. It assigns 'Pass' if true, otherwise 'Needs Improvement'."},
+ {lines:["l25"],msg:"Comment.",explain:"Preparing to print the final tabular DataFrame."},
+ {lines:["l26"],msg:"Printing heading.",console:["STUDENT PERFORMANCE REPORT"],explain:"Prints the main title string to the console output."},
+ {lines:["l27"],msg:"Printing the full DataFrame.",console:["  Name  Python  Statistics  Data Science  Total  Average Result","   Anu      85          80            90    255    85.00   Pass","  Balu      72          75            68    215    71.67   Pass","Chandu      90          88            92    270    90.00   Pass"," Divya      65          70            75    210    70.00   Pass"," Eswar      78          82            85    245    81.67   Pass"],explain:"<b>df.round(2).to_string(index=False)</b> rounds decimal points and neatly prints the table without row numbers."},
+ {lines:["l29"],msg:"Comment.",explain:"Finding the top performing student based on the highest average."},
+ {lines:["l30"],msg:"Identifying the Top Performer.",highlightRow:2,results:["🏆 Top Performer Found: Chandu", "⭐ Highest Average: 90.0"],explain:"<b>df[\"Average\"].idxmax()</b> locates the index of the highest average (Chandu). <b>df.loc[]</b> extracts that specific row."},
+ {lines:["l32"],msg:"Printing Top Performer.",console:["\nTop Performer: Chandu"],explain:"Extracts and prints the 'Name' value from the isolated <code>topper</code> row."},
+ {lines:["l33"],msg:"Printing Highest Average.",console:["Highest Average: 90.0"],explain:"Extracts, rounds, and prints the 'Average' value from the <code>topper</code> row. Execution Complete!"}
+];
+
+let idx=0;
+const startBtn=document.getElementById("startBtn");
+const nextBtn=document.getElementById("nextBtn");
+const resetBtn=document.getElementById("resetBtn");
+const message=document.getElementById("message");
+const explanation=document.getElementById("explanation");
+const dataDisplay=document.getElementById("dataDisplay");
+const resultDisplay=document.getElementById("resultDisplay");
+const consoleOutput=document.getElementById("consoleOutput");
+const stepCount=document.getElementById("stepCount");
+const progressBar=document.getElementById("progressBar");
+
+let output=[];
+let currentCols=0;
+let currentRowHighlight=-1;
+
+function clearHighlight(){
+ document.querySelectorAll(".line").forEach(x=>x.classList.remove("active"));
+}
+function highlight(lines){
+ clearHighlight();
+ lines.forEach(id=>document.getElementById(id)?.classList.add("active"));
+}
+function renderData(cols, hRow=-1){
+ if(cols===0){dataDisplay.innerHTML="<i>DataFrame not created yet.</i>"; return;}
+ let h=`<table class="data"><thead><tr><th>Name</th><th>Python</th><th>Statistics</th><th>Data Science</th>`;
+ if(cols>=5) h+=`<th>Total</th>`;
+ if(cols>=6) h+=`<th>Average</th>`;
+ if(cols>=7) h+=`<th>Result</th>`;
+ h+=`</tr></thead><tbody>`;
+ 
+ baseRows.forEach((r,i)=>{
+   let cls = (i === hRow) ? "highlight" : "";
+   h+=`<tr class="${cls}"><td>${r.Name}</td><td>${r.Python}</td><td>${r.Statistics}</td><td>${r.DataScience}</td>`;
+   if(cols>=5) h+=`<td><span style="color:#0ea5e9;font-weight:bold">${resultsTotal[i]}</span></td>`;
+   if(cols>=6) h+=`<td><span style="color:#eab308;font-weight:bold">${resultsAvg[i]}</span></td>`;
+   if(cols>=7) h+=`<td><span style="color:#ef4444;font-weight:bold">${resultsPass[i]}</span></td>`;
+   h+=`</tr>`;
+ });
+ h+="</tbody></table>";
+ dataDisplay.innerHTML=h;
+}
+function addConsole(lines){
+ output.push(...lines);
+ consoleOutput.textContent=output.join("\n");
+ consoleOutput.scrollTop=consoleOutput.scrollHeight;
+}
+function reset(){
+ idx=0;output=[];currentCols=0;currentRowHighlight=-1;
+ clearHighlight();
+ renderData(0);
+ resultDisplay.innerHTML="<i>No analysis results yet.</i>";
+ consoleOutput.textContent="";
+ message.innerHTML='Click <b>Start</b>, then use <b>Next Step →</b> to execute one code line at a time.';
+ explanation.innerHTML='<b>General Application:</b> Every executable code line is executed one at a time. Click Next Step to move to the next line.';
+ stepCount.textContent=`Step 0 / ${steps.length}`;
+ progressBar.style.width="0%";
+ startBtn.disabled=false;nextBtn.disabled=true;
+}
+function executeStep(){
+ if(idx>=steps.length){nextBtn.disabled=true;return;}
+ const s=steps[idx];
+ highlight(s.lines);
+ message.textContent=s.msg;
+
+ if(s.cols !== undefined) currentCols = s.cols;
+ if(s.highlightRow !== undefined) currentRowHighlight = s.highlightRow;
+ 
+ if(s.showData || currentCols > 0 || s.highlightRow !== undefined){
+   renderData(currentCols, currentRowHighlight);
+ }
+ 
+ if(s.results){
+   resultDisplay.innerHTML=`<div>${s.results.map(x=>`<span class="badge-res">${x}</span>`).join("<br>")}</div>`;
+ }
+
+ if(s.console) addConsole(s.console);
+
+ explanation.innerHTML=s.explain;
+ idx++;
+ stepCount.textContent=`Step ${idx} / ${steps.length}`;
+ progressBar.style.width=`${(idx/steps.length)*100}%`;
+
+ if(idx>=steps.length){
+   nextBtn.disabled=true;
+   startBtn.disabled=false;
+ }
+}
+
+startBtn.addEventListener("click",()=>{startBtn.disabled=true;nextBtn.disabled=false;executeStep();});
+nextBtn.addEventListener("click",executeStep);
+resetBtn.addEventListener("click",reset);
+reset();
+</script>
+</body>
+</html>
