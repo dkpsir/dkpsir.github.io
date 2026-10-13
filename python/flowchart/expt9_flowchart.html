@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experiment 9 - Analysis of Engine Test Data</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#eef4f9;color:#111;font-family:Arial,Helvetica,sans-serif}
+.header{background:linear-gradient(90deg,#0b477d,#087cc1);color:#fff;padding:26px 20px;text-align:center}
+.header h1{margin:0;font-size:29px}.header p{margin:7px 0 0;font-size:17px}
+.container{width:96%;max-width:1450px;margin:24px auto}
+.card{background:#fff;border-radius:12px;padding:22px;margin-bottom:22px;box-shadow:0 3px 15px rgba(0,0,0,.08)}
+.title{background:#0b5b94;color:#fff;padding:13px 18px;border-radius:8px;font-size:21px;font-weight:700;margin-bottom:20px}
+.top-grid{display:grid;grid-template-columns:55% 45%;gap:18px;align-items:stretch}
+.flow-wrap{overflow:auto;width:100%}
+.flow-svg{display:block;width:100%;height:auto}
+.program{background:#1e1e1e;color:#ddd;border-radius:8px;padding:17px;overflow:auto;font:12.5px/1.48 Consolas,"Courier New",monospace;white-space:pre;height:calc(100% - 58px);margin:0}
+.note{background:#fff8df;border-left:5px solid #d89a00;padding:13px 16px;margin-top:16px;line-height:1.5}
+table{width:100%;border-collapse:collapse}
+th,td{border:1px solid #c8d6e2;padding:11px 13px;text-align:left;vertical-align:top;line-height:1.48}
+th{background:#0b5b94;color:#fff;font-size:15px}
+tr:nth-child(even){background:#f7fafc}
+code{background:#eef3f7;color:#063f6c;padding:2px 5px;border-radius:4px;font-family:"Courier New",monospace}
+footer{background:#0b477d;color:#fff;text-align:center;padding:13px;margin-top:25px}
+@media(max-width:900px){.top-grid{grid-template-columns:1fr}.program{height:auto;max-height:700px}}
+</style>
+</head>
+<body>
+
+<header class="header">
+<h1>PYTHON PROGRAMMING LAB</h1>
+<p>Experiment 9 – Analysis of Engine Test Data using NumPy and Pandas</p>
+</header>
+
+<main class="container">
+
+<section class="card">
+<div class="title">Experiment 9 – Flow Chart and Python Program</div>
+
+<div class="top-grid">
+
+<!-- LEFT HALF : FLOW CHART -->
+<div>
+<div class="flow-wrap">
+<svg class="flow-svg" viewBox="0 0 620 1510" role="img" aria-label="Experiment 9 flow chart">
+
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+<path d="M0 0 L10 5 L0 10 Z" fill="#0b5b94"/>
+</marker>
+</defs>
+
+<style>
+.l{stroke:#0b5b94;stroke-width:2.4;fill:none}
+.s{fill:#0b5b94;stroke:#08456f;stroke-width:2}
+.i{fill:#f4efff;stroke:#7c3aed;stroke-width:2}
+.d{fill:#eef7ee;stroke:#4c9b5b;stroke-width:2}
+.p{fill:#f7fbff;stroke:#17679f;stroke-width:2}
+.o{fill:#ecfdf5;stroke:#10b981;stroke-width:2}
+.q{fill:#fde68a;stroke:#d97706;stroke-width:2}
+.b{fill:#fff5e8;stroke:#d97706;stroke-width:2}
+.t{font-family:Arial,Helvetica,sans-serif;text-anchor:middle}
+.st{fill:#fff;font-weight:800;font-size:15px}
+.bd{font-weight:800;font-size:13px}
+.n{font-size:11px;fill:#17324d}
+.pu{fill:#5121a8}.gr{fill:#245d2c}.bl{fill:#073f6c}.or{fill:#8a4a05}.te{fill:#047857}
+.dt{font-weight:800;font-size:11px;fill:#92400e}
+.lb{fill:#e5e7eb}.lt{fill:#374151;font-weight:800;font-size:11px}
+</style>
+
+<!-- START -->
+<rect x="220" y="20" width="180" height="44" rx="22" class="s"/>
+<text x="310" y="48" class="t st">START</text>
+<line x1="310" y1="64" x2="310" y2="94" class="l" marker-end="url(#arrow)"/>
+
+<!-- IMPORT -->
+<rect x="105" y="94" width="410" height="66" rx="10" class="i"/>
+<text x="310" y="121" class="t bd pu">IMPORT LIBRARIES</text>
+<text x="310" y="143" class="t n">import numpy as np &amp; import pandas as pd</text>
+<line x1="310" y1="160" x2="310" y2="190" class="l" marker-end="url(#arrow)"/>
+
+<!-- DATA -->
+<rect x="75" y="190" width="470" height="82" rx="10" class="d"/>
+<text x="310" y="217" class="t bd gr">DEFINE ENGINE DATA</text>
+<text x="310" y="239" class="t n">Engine, Temperature_C, Fuel_Consumption_Lph, Power_kW</text>
+<text x="310" y="258" class="t n">E1 – E5 values in dictionary</text>
+<line x1="310" y1="272" x2="310" y2="302" class="l" marker-end="url(#arrow)"/>
+
+<!-- DATAFRAME -->
+<rect x="115" y="302" width="390" height="65" rx="10" class="p"/>
+<text x="310" y="328" class="t bd bl">CREATE DATAFRAME</text>
+<text x="310" y="348" class="t n">df = pd.DataFrame(data)</text>
+<line x1="310" y1="367" x2="310" y2="397" class="l" marker-end="url(#arrow)"/>
+
+<!-- AVERAGES -->
+<rect x="70" y="397" width="480" height="86" rx="10" class="p"/>
+<text x="310" y="424" class="t bd bl">CALCULATE OVERALL AVERAGES</text>
+<text x="310" y="446" class="t n">np.mean(df["Temperature_C"]), np.mean(df["Fuel_Consumption_Lph"])</text>
+<text x="310" y="465" class="t n">np.mean(df["Power_kW"])</text>
+<line x1="310" y1="483" x2="310" y2="520" class="l" marker-end="url(#arrow)"/>
+
+<!-- DECISION -->
+<polygon points="310,520 435,585 310,650 185,585" class="q"/>
+<text x="310" y="579" class="t dt">Is Temperature</text>
+<text x="310" y="596" class="t dt">&gt; 100 °C?</text>
+
+<!-- YES -->
+<line x1="185" y1="585" x2="92" y2="585" class="l" marker-end="url(#arrow)"/>
+<rect x="60" y="558" width="64" height="27" rx="5" class="lb"/>
+<text x="92" y="577" class="t lt">YES</text>
+<line x1="92" y1="585" x2="92" y2="683" class="l" marker-end="url(#arrow)"/>
+<rect x="18" y="683" width="150" height="75" rx="10" class="b"/>
+<text x="93" y="711" class="t bd or">HIGH</text>
+<text x="93" y="730" class="t bd or">TEMPERATURE</text>
+<text x="93" y="747" class="t n">np.where()</text>
+
+<!-- NO -->
+<line x1="435" y1="585" x2="528" y2="585" class="l" marker-end="url(#arrow)"/>
+<rect x="496" y="558" width="64" height="27" rx="5" class="lb"/>
+<text x="528" y="577" class="t lt">NO</text>
+<line x1="528" y1="585" x2="528" y2="683" class="l" marker-end="url(#arrow)"/>
+<rect x="453" y="683" width="150" height="75" rx="10" class="o"/>
+<text x="528" y="721" class="t bd te">NORMAL</text>
+<text x="528" y="741" class="t n">np.where()</text>
+
+<!-- CONVERGENCE -->
+<line x1="93" y1="758" x2="93" y2="808" class="l"/>
+<line x1="528" y1="758" x2="528" y2="808" class="l"/>
+<line x1="93" y1="808" x2="528" y2="808" class="l"/>
+<line x1="310" y1="808" x2="310" y2="840" class="l" marker-end="url(#arrow)"/>
+
+<!-- DISPLAY PERFORMANCE -->
+<rect x="90" y="840" width="440" height="85" rx="10" class="o"/>
+<text x="310" y="868" class="t bd te">DISPLAY PERFORMANCE & AVERAGES</text>
+<text x="310" y="890" class="t n">print(df.to_string(index=False))</text>
+<text x="310" y="909" class="t n">Print average Temperature, Fuel, and Power</text>
+<line x1="310" y1="925" x2="310" y2="960" class="l" marker-end="url(#arrow)"/>
+
+<!-- FILTER HIGH TEMP -->
+<rect x="75" y="960" width="470" height="75" rx="10" class="p"/>
+<text x="310" y="988" class="t bd bl">FILTER & EXTRACT INVESTIGATION LIST</text>
+<text x="310" y="1010" class="t n">df[df["Status"] == "High Temperature"]["Engine"].to_list()</text>
+<line x1="310" y1="1035" x2="310" y2="1070" class="l" marker-end="url(#arrow)"/>
+
+<!-- DISPLAY INVESTIGATION LIST -->
+<rect x="130" y="1070" width="360" height="63" rx="10" class="o"/>
+<text x="310" y="1096" class="t bd te">PRINT INVESTIGATION ENGINES</text>
+<text x="310" y="1116" class="t n">print(list of engines)</text>
+<line x1="310" y1="1133" x2="310" y2="1160" class="l" marker-end="url(#arrow)"/>
+
+<!-- END -->
+<rect x="220" y="1160" width="180" height="44" rx="22" class="s"/>
+<text x="310" y="1188" class="t st">END</text>
+
+</svg>
+</div>
+</div>
+
+<!-- RIGHT HALF : PROGRAM -->
+<div>
+<div class="title" style="margin-bottom:12px">Complete Python Program</div>
+<pre class="program">import numpy as np
+import pandas as pd
+
+# Engine test data
+data = {
+    "Engine": ["E1", "E2", "E3", "E4", "E5"],
+    "Temperature_C": [85, 92, 105, 88, 110],
+    "Fuel_Consumption_Lph": [2.5, 2.8, 3.2, 2.6, 3.5],
+    "Power_kW": [5.0, 5.5, 6.0, 5.2, 6.5]
+}
+
+df = pd.DataFrame(data)
+
+# Calculate overall averages using NumPy
+avg_temp = np.mean(df["Temperature_C"])
+avg_fuel = np.mean(df["Fuel_Consumption_Lph"])
+avg_power = np.mean(df["Power_kW"])
+
+# Identify engines exceeding the temperature limit
+temperature_limit = 100
+df["Status"] = np.where(
+    df["Temperature_C"] > temperature_limit,
+    "High Temperature",
+    "Normal"
+)
+
+print("ENGINE PERFORMANCE ANALYSIS")
+print(df.to_string(index=False))
+
+print("\nAverage Temperature:", round(avg_temp, 2), "°C")
+print("Average Fuel Consumption:", round(avg_fuel, 2), "L/h")
+print("Average Power:", round(avg_power, 2), "kW")
+
+print("\nEngines requiring temperature investigation:")
+print(df[df["Status"] == "High Temperature"]["Engine"].to_list())</pre>
+</div>
+
+</div>
+</section>
+
+<!-- TABLE BELOW -->
+<section class="card">
+<div class="title">Python Program – Code Line / Snippet and Detailed Explanation</div>
+
+<table>
+<thead>
+<tr>
+<th style="width:31%">Python Code Line / Snippet</th>
+<th style="width:18%">Concept</th>
+<th>Detailed Explanation</th>
+</tr>
+</thead>
+<tbody>
+
+<tr>
+<td><code>import numpy as np</code></td>
+<td>Import NumPy</td>
+<td>Imports the NumPy library and assigns the alias <code>np</code>. The alias allows NumPy functions such as <code>np.mean()</code> to be utilized efficiently.</td>
+</tr>
+
+<tr>
+<td><code>import pandas as pd</code></td>
+<td>Import Pandas</td>
+<td>Imports the Pandas library and assigns the alias <code>pd</code>. Pandas is required to manage and filter the tabular engine data.</td>
+</tr>
+
+<tr>
+<td><code>data = { ... }</code></td>
+<td>Dictionary</td>
+<td>Creates a dictionary holding engine performance data. The keys are columns (Engine, Temperature, Fuel, Power) and the lists are the actual readings.</td>
+</tr>
+
+<tr>
+<td><code>df = pd.DataFrame(data)</code></td>
+<td>DataFrame</td>
+<td>Transforms the structured dictionary into a Pandas DataFrame, creating a 2D table of rows and columns.</td>
+</tr>
+
+<tr>
+<td><code>avg_temp = np.mean(df["Temperature_C"])</code></td>
+<td>Calculate Mean</td>
+<td>Calculates the arithmetic average of all the engines' temperatures using NumPy and assigns it to a variable.</td>
+</tr>
+
+<tr>
+<td><code>temperature_limit = 100</code></td>
+<td>Variable Assignment</td>
+<td>Defines a numerical threshold limit for safe engine operating temperatures.</td>
+</tr>
+
+<tr>
+<td><code>df["Status"] = np.where(...)</code></td>
+<td>Conditional Selection</td>
+<td>Creates a new column 'Status' and assigns a value based on a condition applied to each row.</td>
+</tr>
+
+<tr>
+<td><code>df["Temperature_C"] &gt; temperature_limit</code></td>
+<td>Condition</td>
+<td>The logical check verifying if an engine's temperature exceeds 100 °C. If True, it assigns "High Temperature", otherwise "Normal".</td>
+</tr>
+
+<tr>
+<td><code>print(df.to_string(index=False))</code></td>
+<td>Display Data</td>
+<td>Prints the entire DataFrame cleanly by hiding the default numerical row indices.</td>
+</tr>
+
+<tr>
+<td><code>round(avg_temp, 2)</code></td>
+<td>Round a Value</td>
+<td>Rounds the calculated average temperature to two decimal places for formatted output.</td>
+</tr>
+
+<tr>
+<td><code>df[df["Status"] == "High Temperature"]</code></td>
+<td>Filter DataFrame</td>
+<td>Filters the DataFrame to return only the rows (engines) where the status is flagged as "High Temperature".</td>
+</tr>
+
+<tr>
+<td><code>...["Engine"].to_list()</code></td>
+<td>List Conversion</td>
+<td>Extracts the "Engine" column from the filtered DataFrame and converts that Series into a standard Python list.</td>
+</tr>
+
+</tbody>
+</table>
+
+<div class="note">
+<b>Important:</b> The flow chart and explanations above map directly to the engine test data analysis program. The test values are hard-coded in a dictionary, therefore <b>no keyboard input is required during execution</b>.
+</div>
+</section>
+
+</main>
+
+<footer>© 2026 D. Kiran Prasad | Python Experiments</footer>
+</body>
+</html>
