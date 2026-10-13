@@ -117,14 +117,14 @@ footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:1
                 <span class="qplus">+</span>
             </button>
             <div class="solution">
-                The derivation of the standard torsion equation \( \left( \frac{T}{J} = \frac{\tau}{R} = \frac{G\theta}{L} \right) \) relies on the following fundamental assumptions:
+                The derivation of the standard torsion equation \( \left( \frac{T}{J} = \frac{\tau}{R} = \frac{G\theta}{L} \right) \) relies on the following fundamental assumptions[cite: 9]:
                 <br><br>
                 <ul>
-                    <li><b>Material Properties:</b> The material of the shaft is homogeneous, isotropic, and perfectly elastic (i.e., it obeys Hooke’s Law, and all stresses remain within the elastic limit).</li>
-                    <li><b>Cross-sectional Uniformity:</b> The shaft is initially perfectly straight, and its cross-section is uniform and strictly circular throughout its entire length.</li>
-                    <li><b>Plane Sections Remain Plane:</b> Cross-sections of the shaft that are plane before twisting remain plane and parallel after twisting (there is no axial warping or distortion).</li>
-                    <li><b>Radial Lines:</b> Radii that are straight before the application of torque remain straight after the twist is applied.</li>
-                    <li><b>Shear Stress Distribution:</b> The shear stress induced is proportional to the distance from the central axis. It is zero at the geometric center and reaches a maximum value at the outermost surface of the shaft.</li>
+                    <li><b>Material Properties:</b> The material of the shaft is homogeneous, isotropic, and perfectly elastic (i.e., it obeys Hooke’s Law, and all stresses remain within the elastic limit)[cite: 9].</li>
+                    <li><b>Cross-sectional Uniformity:</b> The shaft is initially perfectly straight, and its cross-section is uniform and strictly circular throughout its entire length[cite: 9].</li>
+                    <li><b>Plane Sections Remain Plane:</b> Cross-sections of the shaft that are plane before twisting remain plane and parallel after twisting (there is no axial warping or distortion)[cite: 9].</li>
+                    <li><b>Radial Lines:</b> Radii that are straight before the application of torque remain straight after the twist is applied[cite: 9].</li>
+                    <li><b>Shear Stress Distribution:</b> The shear stress induced is proportional to the distance from the central axis. It is zero at the geometric center and reaches a maximum value at the outermost surface of the shaft[cite: 9].</li>
                 </ul>
             </div>
         </div>
@@ -261,8 +261,6 @@ footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:1
                 L &= 1\ \text{m} = 1000\ \text{mm}
                 \end{aligned}
                 \]</div>
-                <div class="calc-label">Ratio for hollow shaft (\(k\))</div>
-                <div class="equation">\[\frac{D}{d} = 1.2 \implies k = \frac{d}{D} = \frac{1}{1.2} = 0.8333\]</div>
 
                 <div class="calc-label">Transmitted Torque (T)</div>
                 <div class="equation">\[T = \frac{60 \times 6000}{2 \pi \times 200} = 286.48\ \text{N}\cdot\text{m} = 286,478.9\ \text{N}\cdot\text{mm}\]</div>
@@ -292,11 +290,23 @@ footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:1
 
                     <div class="essay-column">
                         <b>(ii) Design of Hollow Shaft (\(D, d\))</b>
+                        <div class="calc-label">Hollow Shaft Parameters:</div>
+                        <div class="equation">\[\frac{D}{d} = 1.2 \implies d = \frac{D}{1.2} = 0.8333D\]</div>
+                        <div class="equation">\[r = \frac{D}{2}\]</div>
+                        <div class="equation">\[
+                        \begin{aligned}
+                        J &= \frac{\pi}{32} (D^4 - d^4)\\
+                        &= \frac{\pi}{32} (D^4 - (0.8333D)^4)\\
+                        &= \frac{\pi}{32} (0.5177 D^4) = 0.0508 D^4
+                        \end{aligned}
+                        \]</div>
+
                         <p><i>Based on Strength:</i></p>
                         <div class="equation">\[
                         \begin{aligned}
-                        T &= \frac{\pi}{16} \tau D^3 (1 - k^4)\\
-                        286,478.9 &= \frac{\pi}{16} (90) D^3 (1 - 0.8333^4)
+                        \frac{T}{J} &= \frac{\tau}{r}\\
+                        \frac{286,478.9}{0.0508 D^4} &= \frac{90}{(D/2)}\\
+                        \frac{286,478.9}{0.0508} &= 180 D^3
                         \end{aligned}
                         \]</div>
                         <div class="answer">\(D\) (Strength) = 31.52 mm</div>
@@ -304,8 +314,9 @@ footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:1
                         <p style="margin-top:10px;"><i>Based on Stiffness:</i></p>
                         <div class="equation">\[
                         \begin{aligned}
-                        \frac{\pi}{32} D^4 (1 - k^4) &= \frac{T \cdot L}{G \cdot \theta}\\
-                        0.0508 \times D^4 &= 64,368.5
+                        \frac{T}{J} &= \frac{G \theta}{L}\\
+                        \frac{286,478.9}{0.0508 D^4} &= \frac{85,000 \times 0.05236}{1000}\\
+                        D^4 &= \frac{286,478.9}{0.0508 \times 4.4506}
                         \end{aligned}
                         \]</div>
                         <div class="answer">\(D\) (Stiffness) = 33.55 mm</div>
@@ -342,34 +353,36 @@ footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:1
                 \end{aligned}
                 \]</div>
 
-                <div class="calc-label">2. Relate Diameters using the Torsion Equation</div>
-                <p>Let \(D\) be the external diameter. The internal diameter \(d\) is:</p>
-                <div class="equation">\[d = D - 2t = D - 40\ \text{mm}\]</div>
+                <div class="calc-label">2. Define Hollow Shaft Parameters (\(r, J\))</div>
+                <p>Let \(D\) be the external diameter. The internal diameter \(d\) is \(d = D - 2t = D - 40\).</p>
+                <div class="equation">\[r = \frac{D}{2}\]</div>
+                <div class="equation">\[J = \frac{\pi}{32} (D^4 - d^4) = \frac{\pi}{32} (D^4 - (D - 40)^4)\]</div>
 
-                <p>Using the strength equation for a hollow shaft:</p>
+                <div class="calc-label">3. Relate Diameters using the Basic Torsion Equation</div>
                 <div class="equation">\[
                 \begin{aligned}
-                T &= \frac{\pi}{16} \tau \left( \frac{D^4 - d^4}{D} \right)\\
-                14,323,944.88 &= \frac{\pi}{16} (3) \left( \frac{D^4 - (D - 40)^4}{D} \right)\\
-                \frac{14,323,944.88 \times 16}{3 \pi} &= \frac{D^4 - (D - 40)^4}{D}\\
-                24,317,084.15 \cdot D &= D^4 - (D - 40)^4
+                \frac{T}{J} &= \frac{\tau}{r}\\
+                \frac{14,323,944.88}{\frac{\pi}{32} (D^4 - (D - 40)^4)} &= \frac{3}{(D/2)}\\
+                14,323,944.88 \left( \frac{D}{2} \right) &= 3 \left( \frac{\pi}{32} \right) (D^4 - (D - 40)^4)\\
+                7,161,972.44 D &= 0.29452 (D^4 - (D - 40)^4)
                 \end{aligned}
                 \]</div>
 
-                <div class="calc-label">3. Solve for External Diameter (D)</div>
+                <div class="calc-label">4. Solve for External Diameter (D)</div>
                 <p>Expand the binomial term \((D - 40)^4\):</p>
                 <div class="equation">\[(D - 40)^4 = D^4 - 160D^3 + 9600D^2 - 256,000D + 2,560,000\]</div>
                 
                 <p>Substitute this back to set up the polynomial:</p>
                 <div class="equation">\[
                 \begin{aligned}
-                24,317,084.15 \cdot D &= 160D^3 - 9600D^2 + 256,000D - 2,560,000\\
-                160D^3 - 9600D^2 - 24,061,084.15 \cdot D - 2,560,000 &= 0
+                7,161,972.44 D &= 0.29452 (160D^3 - 9600D^2 + 256,000D - 2,560,000)\\
+                24,317,074 D &= 160D^3 - 9600D^2 + 256,000D - 2,560,000\\
+                160D^3 - 9600D^2 - 24,061,074 D - 2,560,000 &= 0
                 \end{aligned}
                 \]</div>
                 
                 <p>Divide by 160 to simplify the cubic equation:</p>
-                <div class="equation">\[D^3 - 60D^2 - 150,381.78D - 16,000 = 0\]</div>
+                <div class="equation">\[D^3 - 60D^2 - 150,381.71D - 16,000 = 0\]</div>
                 
                 <p>Solving this cubic equation yields one valid positive real root:</p>
                 <div class="answer">External Diameter (D) ≈ 419 mm</div>
