@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Experiment 10 - Heat Exchanger Visualizer</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;background:#eef4f9;color:#111;font-family:Arial,sans-serif;font-size:14px}
+.container{display:grid;grid-template-columns:1.05fr 1fr;gap:12px;min-height:100vh;padding:10px;max-width:1500px;margin:auto}
+.panel{background:#fff;border-radius:8px;padding:10px;box-shadow:0 1px 6px rgba(0,0,0,.08);display:flex;flex-direction:column;min-width:0}
+h2{color:#0b4f86;font-size:16px;margin-bottom:6px;flex-shrink:0}
+.controls{background:#f8fafc;border:1px solid #ccd8e2;border-radius:6px;padding:6px 10px;margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-shrink:0;flex-wrap:wrap}
+button{padding:5px 12px;font-size:13px;font-weight:600;cursor:pointer;border-radius:4px;border:1px solid #0b4f86;background:#0b4f86;color:#fff}
+button:hover{background:#093e6a}
+button:disabled{opacity:.45;cursor:not-allowed;background:#718096;border-color:#718096}
+.message{font-size:13px;margin:2px 0 6px;color:#1a365d;font-weight:600;min-height:17px}
+.section-title{background:#0b4f86;color:#fff;padding:4px 8px;font-size:12px;font-weight:bold;border-radius:4px 4px 0 0;margin-top:4px;flex-shrink:0}
+.box-content{background:#fff;border:1px solid #ccd8e2;border-top:none;padding:6px 8px;font:13px/1.3 Consolas,"Courier New",monospace;border-radius:0 0 4px 4px}
+#dataDisplay{overflow:auto;max-height:220px;padding:0}
+#resultDisplay{overflow:auto;height:120px;padding:10px;display:flex;align-items:center;justify-content:center;background:#f8fafc;font-size:14px;color:#0f172a;text-align:center;}
+table.data{border-collapse:collapse;width:100%;font:12px Consolas,"Courier New",monospace}
+table.data th{background:#dbeafe;color:#17324d;padding:6px;border:1px solid #b9c9d7;position:sticky;top:0;white-space:nowrap}
+table.data td{padding:5px 6px;border:1px solid #d5dee6;text-align:center;white-space:nowrap}
+table.data tr.highlight{background:#fff3a3;font-weight:bold}
+#consoleOutput{min-height:95px;max-height:140px;background:#111;color:#38ef7d;overflow-y:auto;line-height:1.3;font-size:13px;white-space:pre-wrap}
+.explanation{background:#f7fafc;border-left:4px solid #0b5d96;padding:6px 10px;margin-top:6px;font-size:12.5px;line-height:1.35;min-height:40px}
+pre.code{margin:0;line-height:15px;background:#1e1e1e;color:#ddd;padding:5px 8px;border-radius:6px;font:12px/15px Consolas,"Courier New",monospace;min-height:0;white-space:pre;overflow:auto;max-height:75vh}
+.line{display:block;padding:0 4px;margin:0;border-radius:2px;line-height:15px;height:15px;}
+.active{background:#ffeb3b;color:#000;font-weight:bold}
+.badge-res{display:inline-block;padding:2px 6px;font-size:11px;border-radius:3px;background:#dcfce7;color:#166534;border:1px solid #4ade80;margin-right:4px}
+.progress{height:6px;background:#e2e8f0;border-radius:4px;overflow:hidden;margin:5px 0 7px}
+.progress > div{height:100%;width:0;background:#0b5d96;transition:width .25s}
+.small{font-size:11px;color:#64748b}
+@media(max-width:950px){.container{grid-template-columns:1fr}.panel{min-height:0}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<section class="panel">
+<h2>Execution State & Data Analysis</h2>
+
+<div class="controls">
+<button id="startBtn">Start</button>
+<button id="nextBtn" disabled>Next Step →</button>
+<button id="resetBtn">Reset</button>
+<span class="small" id="stepCount">Step 0 / 64</span>
+</div>
+<div class="progress"><div id="progressBar"></div></div>
+
+<div class="message" id="message">Click <b>Start</b>, then use <b>Next Step →</b> to execute one code line at a time.</div>
+
+<div class="section-title">Heat Exchanger DataFrame</div>
+<div class="box-content" id="dataDisplay"><i>DataFrame not created yet.</i></div>
+
+<div class="section-title">Plot Viewport / Active Visuals</div>
+<div class="box-content" id="resultDisplay"><i>No plots generated yet.</i></div>
+
+<div class="section-title">Python Console Output</div>
+<div class="box-content" id="consoleOutput"></div>
+
+<div class="explanation" id="explanation">
+<b>Experiment 10:</b> Every executable code line is executed one at a time. Click Next Step to move to the next line.
+</div>
+</section>
+
+<section class="panel">
+<h2>Python Program — Line-by-Line Execution</h2>
+<pre class="code" id="codeBlock"><span id="l1" class="line">import pandas as pd</span>
+<span id="l2" class="line">import matplotlib.pyplot as plt</span>
+<span id="l3" class="line">import seaborn as sns</span>
+<span id="l4" class="line"></span>
+<span id="l5" class="line"># Step 1: Experimental heat exchanger data</span>
+<span id="l6" class="line">data = {</span>
+<span id="l7" class="line">    "Test": ["Test 1", "Test 2", "Test 3", "Test 4", "Test 5"],</span>
+<span id="l8" class="line">    "Hot_Inlet_C": [80, 85, 90, 95, 100],</span>
+<span id="l9" class="line">    "Hot_Outlet_C": [65, 68, 70, 73, 75],</span>
+<span id="l10" class="line">    "Cold_Inlet_C": [25, 27, 28, 30, 32],</span>
+<span id="l11" class="line">    "Cold_Outlet_C": [40, 43, 46, 49, 52]</span>
+<span id="l12" class="line">}</span>
+<span id="l13" class="line"></span>
+<span id="l14" class="line">df = pd.DataFrame(data)</span>
+<span id="l15" class="line"></span>
+<span id="l16" class="line"># Step 2: Define operating parameters</span>
+<span id="l17" class="line">mass_flow_rate = 0.1      # kg/s</span>
+<span id="l18" class="line">specific_heat = 4180      # J/(kg degree C)</span>
+<span id="l19" class="line"></span>
+<span id="l20" class="line"># Step 3: Calculate heat transfer rate on hot side</span>
+<span id="l21" class="line">df["Heat_Transfer_kW"] = mass_flow_rate * specific_heat * (df["Hot_Inlet_C"] - df["Hot_Outlet_C"]) / 1000</span>
+<span id="l22" class="line"></span>
+<span id="l23" class="line"># Step 4: Calculate heat capacity rates</span>
+<span id="l24" class="line">hot_capacity = mass_flow_rate * specific_heat</span>
+<span id="l25" class="line">cold_capacity = mass_flow_rate * specific_heat</span>
+<span id="l26" class="line"></span>
+<span id="l27" class="line"># Maximum possible heat transfer</span>
+<span id="l28" class="line">df["Q_Max_kW"] = min(hot_capacity, cold_capacity) * (df["Hot_Inlet_C"] - df["Cold_Inlet_C"]) / 1000</span>
+<span id="l29" class="line"></span>
+<span id="l30" class="line"># Step 5: Calculate effectiveness</span>
+<span id="l31" class="line">df["Effectiveness_pct"] = df["Heat_Transfer_kW"] / df["Q_Max_kW"] * 100</span>
+<span id="l32" class="line"></span>
+<span id="l33" class="line"># Step 6: Display the results</span>
+<span id="l34" class="line">print("HEAT EXCHANGER PERFORMANCE")</span>
+<span id="l35" class="line">print(df.round(2).to_string(index=False))</span>
+<span id="l36" class="line"></span>
+<span id="l37" class="line">print("\nAverage Heat Transfer Rate:", round(df["Heat_Transfer_kW"].mean(), 2), "kW")</span>
+<span id="l38" class="line">print("Average Effectiveness:", round(df["Effectiveness_pct"].mean(), 2), "%")</span>
+<span id="l39" class="line"></span>
+<span id="l40" class="line"># Step 7: Plot heat transfer rate</span>
+<span id="l41" class="line">plt.figure(figsize=(7, 4))</span>
+<span id="l42" class="line">sns.barplot(data=df, x="Test", y="Heat_Transfer_kW")</span>
+<span id="l43" class="line">plt.title("Heat Transfer Rate for Each Test")</span>
+<span id="l44" class="line">plt.xlabel("Experimental Test")</span>
+<span id="l45" class="line">plt.ylabel("Heat Transfer Rate (kW)")</span>
+<span id="l46" class="line">plt.tight_layout()</span>
+<span id="l47" class="line">plt.show()</span>
+<span id="l48" class="line"></span>
+<span id="l49" class="line"># Step 8: Plot hot and cold outlet temperatures</span>
+<span id="l50" class="line">plt.figure(figsize=(7, 4))</span>
+<span id="l51" class="line">plt.plot(df["Test"], df["Hot_Outlet_C"], marker="o", label="Hot outlet")</span>
+<span id="l52" class="line">plt.plot(df["Test"], df["Cold_Outlet_C"], marker="s", label="Cold outlet")</span>
+<span id="l53" class="line">plt.title("Outlet Temperature Comparison")</span>
+<span id="l54" class="line">plt.xlabel("Experimental Test")</span>
+<span id="l55" class="line">plt.ylabel("Temperature (°C)")</span>
+<span id="l56" class="line">plt.legend()</span>
+<span id="l57" class="line">plt.grid(True)</span>
+<span id="l58" class="line">plt.tight_layout()</span>
+<span id="l59" class="line">plt.show()</span>
+<span id="l60" class="line"></span>
+<span id="l61" class="line"># Step 9: Correlation analysis</span>
+<span id="l62" class="line">columns = ["Hot_Inlet_C", "Hot_Outlet_C", "Cold_Inlet_C", "Cold_Outlet_C", "Heat_Transfer_kW", "Effectiveness_pct"]</span>
+<span id="l63" class="line"></span>
+<span id="l64" class="line">plt.figure(figsize=(9, 6))</span>
+<span id="l65" class="line">sns.heatmap(df[columns].corr(), annot=True, cmap="coolwarm", vmin=-1, vmax=1)</span>
+<span id="l66" class="line">plt.title("Heat Exchanger Parameter Correlations")</span>
+<span id="l67" class="line">plt.tight_layout()</span>
+<span id="l68" class="line">plt.show()</span></pre>
+</section>
+
+</div>
+
+<script>
+const baseRows = [
+ {Test:"Test 1",Hot_Inlet_C:80,Hot_Outlet_C:65,Cold_Inlet_C:25,Cold_Outlet_C:40},
+ {Test:"Test 2",Hot_Inlet_C:85,Hot_Outlet_C:68,Cold_Inlet_C:27,Cold_Outlet_C:43},
+ {Test:"Test 3",Hot_Inlet_C:90,Hot_Outlet_C:70,Cold_Inlet_C:28,Cold_Outlet_C:46},
+ {Test:"Test 4",Hot_Inlet_C:95,Hot_Outlet_C:73,Cold_Inlet_C:30,Cold_Outlet_C:49},
+ {Test:"Test 5",Hot_Inlet_C:100,Hot_Outlet_C:75,Cold_Inlet_C:32,Cold_Outlet_C:52}
+];
+
+const resultsHT = [6.27, 7.11, 8.36, 9.20, 10.45];
+const resultsQMax = [22.99, 24.24, 25.92, 27.17, 28.42];
+const resultsEff = [27.27, 29.31, 32.26, 33.85, 36.76];
+
+const steps = [
+ {lines:["l1"],msg:"Executing line 1.",explain:"<b>import pandas as pd</b> loads the Pandas library for tabular data manipulation."},
+ {lines:["l2"],msg:"Executing line 2.",explain:"<b>import matplotlib.pyplot as plt</b> loads Matplotlib for generating static graphs and line plots."},
+ {lines:["l3"],msg:"Executing line 3.",explain:"<b>import seaborn as sns</b> loads Seaborn for advanced statistical graphics like heatmaps."},
+ {lines:["l5"],msg:"Comment step 1.",explain:"Defines the start of the experimental data initialization."},
+ {lines:["l6"],msg:"Starting the data dictionary.",explain:"<b>data = {</b> starts the dictionary to store experimental inputs."},
+ {lines:["l7"],msg:"Adding the Test column.",explain:"The key <code>Test</code> stores the 5 trial identifiers."},
+ {lines:["l8"],msg:"Adding the Hot_Inlet_C column.",explain:"The key <code>Hot_Inlet_C</code> stores the hot fluid input temperatures."},
+ {lines:["l9"],msg:"Adding the Hot_Outlet_C column.",explain:"The key <code>Hot_Outlet_C</code> stores the hot fluid exit temperatures."},
+ {lines:["l10"],msg:"Adding the Cold_Inlet_C column.",explain:"The key <code>Cold_Inlet_C</code> stores the cold fluid input temperatures."},
+ {lines:["l11"],msg:"Adding the Cold_Outlet_C column.",explain:"The key <code>Cold_Outlet_C</code> stores the cold fluid exit temperatures."},
+ {lines:["l12"],msg:"Closing dictionary.",explain:"The closing brace completes the dictionary."},
+ {lines:["l14"],msg:"Creating the DataFrame.",showData:true,cols:5,explain:"<b>pd.DataFrame(data)</b> converts the dictionary into a 2D Pandas DataFrame."},
+ {lines:["l16"],msg:"Comment step 2.",explain:"Identifies the operating parameter definitions."},
+ {lines:["l17"],msg:"Defining mass flow rate.",explain:"Assigns <code>0.1</code> to <code>mass_flow_rate</code> (kg/s)."},
+ {lines:["l18"],msg:"Defining specific heat.",explain:"Assigns <code>4180</code> to <code>specific_heat</code> (J/kg°C)."},
+ {lines:["l20"],msg:"Comment step 3.",explain:"Calculates the actual heat transfer on the hot side."},
+ {lines:["l21"],msg:"Calculating Heat Transfer (kW).",showData:true,cols:6,explain:"Performs element-wise arithmetic across columns: <b>m * Cp * ΔT / 1000</b>. The new column <code>Heat_Transfer_kW</code> is added."},
+ {lines:["l23"],msg:"Comment step 4.",explain:"Prepares for Q_Max by calculating capacity rates."},
+ {lines:["l24"],msg:"Calculating hot capacity.",explain:"<code>hot_capacity = mass_flow_rate * specific_heat</code>"},
+ {lines:["l25"],msg:"Calculating cold capacity.",explain:"<code>cold_capacity = mass_flow_rate * specific_heat</code>"},
+ {lines:["l27"],msg:"Comment.",explain:"Calculates maximum possible heat transfer based on inlet temps."},
+ {lines:["l28"],msg:"Calculating Q_Max (kW).",showData:true,cols:7,explain:"<b>min(C_h, C_c) * (T_hot_in - T_cold_in) / 1000</b>. The <code>Q_Max_kW</code> column is added."},
+ {lines:["l30"],msg:"Comment step 5.",explain:"Calculates heat exchanger effectiveness percentage."},
+ {lines:["l31"],msg:"Calculating Effectiveness.",showData:true,cols:8,explain:"<b>Q_actual / Q_max * 100</b>. The <code>Effectiveness_pct</code> column is added to the DataFrame."},
+ {lines:["l33"],msg:"Comment step 6.",explain:"Prepares to print the full performance table and averages."},
+ {lines:["l34"],msg:"Printing heading.",console:["HEAT EXCHANGER PERFORMANCE"],explain:"Prints the main output title."},
+ {lines:["l35"],msg:"Printing the full DataFrame.",console:["  Test  Hot_Inlet_C  Hot_Outlet_C  Cold_Inlet_C  Cold_Outlet_C  Heat_Transfer_kW  Q_Max_kW  Effectiveness_pct","Test 1           80            65            25             40              6.27     22.99              27.27","Test 2           85            68            27             43              7.11     24.24              29.31","Test 3           90            70            28             46              8.36     25.92              32.26","Test 4           95            73            30             49              9.20     27.17              33.85","Test 5          100            75            32             52             10.45     28.42              36.76"],explain:"<b>df.round(2).to_string(index=False)</b> rounds values and prints the table neatly without indices."},
+ {lines:["l37"],msg:"Printing average Heat Transfer.",console:["\nAverage Heat Transfer Rate: 8.28 kW"],explain:"Calculates the mean of the <code>Heat_Transfer_kW</code> column and prints it."},
+ {lines:["l38"],msg:"Printing average Effectiveness.",console:["Average Effectiveness: 31.89 %"],explain:"Calculates the mean of the <code>Effectiveness_pct</code> column and prints it."},
+ {lines:["l40"],msg:"Comment step 7.",explain:"Begins generating the first plot (Bar Chart)."},
+ {lines:["l41"],msg:"Creating figure canvas.",plot:"⏳ <i>Initializing Matplotlib Figure (7x4) for Bar Plot...</i>",explain:"<b>plt.figure()</b> creates a new blank window for the plot."},
+ {lines:["l42"],msg:"Plotting Seaborn Barplot.",plot:"📊 <i>Drawing Seaborn Barplot: Test vs Heat_Transfer_kW</i>",explain:"<b>sns.barplot()</b> maps the <code>Test</code> column to the X-axis and <code>Heat_Transfer_kW</code> to the Y-axis."},
+ {lines:["l43"],msg:"Setting Title.",explain:"<b>plt.title()</b> sets the main title of the plot."},
+ {lines:["l44"],msg:"Setting X-axis label.",explain:"<b>plt.xlabel()</b> labels the horizontal axis."},
+ {lines:["l45"],msg:"Setting Y-axis label.",explain:"<b>plt.ylabel()</b> labels the vertical axis."},
+ {lines:["l46"],msg:"Applying tight layout.",explain:"<b>plt.tight_layout()</b> adjusts the padding to prevent labels from overlapping."},
+ {lines:["l47"],msg:"Showing the Bar Plot.",plot:"<div style='background:#fff;border:2px solid #0ea5e9;padding:10px;border-radius:6px'><b>📈 Plot Displayed:</b> Bar Chart (Heat Transfer Rate for Each Test)</div>",explain:"<b>plt.show()</b> opens the Matplotlib window and displays the fully rendered Bar Chart to the user."},
+ {lines:["l49"],msg:"Comment step 8.",explain:"Begins generating the second plot (Line Chart)."},
+ {lines:["l50"],msg:"Creating figure canvas.",plot:"⏳ <i>Initializing Matplotlib Figure (7x4) for Line Plot...</i>",explain:"<b>plt.figure()</b> creates a new blank window for the second plot."},
+ {lines:["l51"],msg:"Plotting Hot Outlet Line.",plot:"📉 <i>Drawing Line Plot: Hot Outlet (circles)...</i>",explain:"<b>plt.plot(marker='o')</b> draws a line connecting the hot outlet temperatures."},
+ {lines:["l52"],msg:"Plotting Cold Outlet Line.",plot:"📉 <i>Drawing Line Plot: Cold Outlet (squares)...</i>",explain:"<b>plt.plot(marker='s')</b> draws a line connecting the cold outlet temperatures."},
+ {lines:["l53"],msg:"Setting Title.",explain:"Sets the title for the Line chart."},
+ {lines:["l54"],msg:"Setting X-axis label.",explain:"Sets the X-axis label."},
+ {lines:["l55"],msg:"Setting Y-axis label.",explain:"Sets the Y-axis label."},
+ {lines:["l56"],msg:"Adding Legend.",explain:"<b>plt.legend()</b> displays the color key differentiating Hot vs Cold lines."},
+ {lines:["l57"],msg:"Enabling Grid.",explain:"<b>plt.grid(True)</b> turns on the background grid lines for readability."},
+ {lines:["l58"],msg:"Applying tight layout.",explain:"Adjusts spacing padding."},
+ {lines:["l59"],msg:"Showing the Line Plot.",plot:"<div style='background:#fff;border:2px solid #eab308;padding:10px;border-radius:6px'><b>📈 Plot Displayed:</b> Line Chart (Outlet Temperature Comparison)</div>",explain:"<b>plt.show()</b> displays the fully rendered Line Chart to the user."},
+ {lines:["l61"],msg:"Comment step 9.",explain:"Begins generating the final plot (Correlation Heatmap)."},
+ {lines:["l62"],msg:"Defining columns for correlation.",explain:"Creates a list of column names to analyze for statistical correlation."},
+ {lines:["l64"],msg:"Creating figure canvas.",plot:"⏳ <i>Initializing Matplotlib Figure (9x6) for Heatmap...</i>",explain:"<b>plt.figure()</b> creates a new blank window for the final plot."},
+ {lines:["l65"],msg:"Plotting Seaborn Heatmap.",plot:"🟩🟨🟥 <i>Calculating correlations & drawing Heatmap (vmin=-1, vmax=1)...</i>",explain:"<b>df[columns].corr()</b> calculates the correlation matrix. <b>sns.heatmap()</b> visually renders these values as colored cells."},
+ {lines:["l66"],msg:"Setting Title.",explain:"Sets the title for the Heatmap."},
+ {lines:["l67"],msg:"Applying tight layout.",explain:"Adjusts spacing padding."},
+ {lines:["l68"],msg:"Showing the Heatmap.",plot:"<div style='background:#fff;border:2px solid #ef4444;padding:10px;border-radius:6px'><b>📈 Plot Displayed:</b> Correlation Heatmap (Heat Exchanger Parameters)</div>",explain:"<b>plt.show()</b> displays the completed Heatmap. Program execution finishes."}
+];
+
+let idx=0;
+const startBtn=document.getElementById("startBtn");
+const nextBtn=document.getElementById("nextBtn");
+const resetBtn=document.getElementById("resetBtn");
+const message=document.getElementById("message");
+const explanation=document.getElementById("explanation");
+const dataDisplay=document.getElementById("dataDisplay");
+const resultDisplay=document.getElementById("resultDisplay");
+const consoleOutput=document.getElementById("consoleOutput");
+const stepCount=document.getElementById("stepCount");
+const progressBar=document.getElementById("progressBar");
+
+let output=[];
+let currentCols=0;
+
+function clearHighlight(){
+ document.querySelectorAll(".line").forEach(x=>x.classList.remove("active"));
+}
+function highlight(lines){
+ clearHighlight();
+ lines.forEach(id=>document.getElementById(id)?.classList.add("active"));
+}
+function renderData(cols){
+ if(cols===0){dataDisplay.innerHTML="<i>DataFrame not created yet.</i>"; return;}
+ let h=`<table class="data"><thead><tr><th>Test</th><th>Hot_Inlet_C</th><th>Hot_Outlet_C</th><th>Cold_Inlet_C</th><th>Cold_Outlet_C</th>`;
+ if(cols>=6) h+=`<th>Heat_Transfer_kW</th>`;
+ if(cols>=7) h+=`<th>Q_Max_kW</th>`;
+ if(cols>=8) h+=`<th>Effectiveness_pct</th>`;
+ h+=`</tr></thead><tbody>`;
+ 
+ baseRows.forEach((r,i)=>{
+   h+=`<tr><td>${r.Test}</td><td>${r.Hot_Inlet_C}</td><td>${r.Hot_Outlet_C}</td><td>${r.Cold_Inlet_C}</td><td>${r.Cold_Outlet_C}</td>`;
+   if(cols>=6) h+=`<td><span style="color:#0ea5e9;font-weight:bold">${resultsHT[i]}</span></td>`;
+   if(cols>=7) h+=`<td><span style="color:#eab308;font-weight:bold">${resultsQMax[i]}</span></td>`;
+   if(cols>=8) h+=`<td><span style="color:#ef4444;font-weight:bold">${resultsEff[i]}</span></td>`;
+   h+=`</tr>`;
+ });
+ h+="</tbody></table>";
+ dataDisplay.innerHTML=h;
+}
+function addConsole(lines){
+ output.push(...lines);
+ consoleOutput.textContent=output.join("\n");
+ consoleOutput.scrollTop=consoleOutput.scrollHeight;
+}
+function reset(){
+ idx=0;output=[];currentCols=0;
+ clearHighlight();
+ renderData(0);
+ resultDisplay.innerHTML="<i>No plots generated yet.</i>";
+ consoleOutput.textContent="";
+ message.innerHTML='Click <b>Start</b>, then use <b>Next Step →</b> to execute one code line at a time.';
+ explanation.innerHTML='<b>Experiment 10:</b> Every executable code line is executed one at a time. Click Next Step to move to the next line.';
+ stepCount.textContent=`Step 0 / ${steps.length}`;
+ progressBar.style.width="0%";
+ startBtn.disabled=false;nextBtn.disabled=true;
+}
+function executeStep(){
+ if(idx>=steps.length){nextBtn.disabled=true;return;}
+ const s=steps[idx];
+ highlight(s.lines);
+ message.textContent=s.msg;
+
+ if(s.cols !== undefined){
+     currentCols = s.cols;
+ }
+ if(s.showData || currentCols > 0){
+   renderData(currentCols);
+ }
+ 
+ if(s.plot){
+   resultDisplay.innerHTML=s.plot;
+ }
+
+ if(s.console) addConsole(s.console);
+
+ explanation.innerHTML=s.explain;
+ idx++;
+ stepCount.textContent=`Step ${idx} / ${steps.length}`;
+ progressBar.style.width=`${(idx/steps.length)*100}%`;
+
+ if(idx>=steps.length){
+   nextBtn.disabled=true;
+   startBtn.disabled=false;
+ }
+}
+
+startBtn.addEventListener("click",()=>{startBtn.disabled=true;nextBtn.disabled=false;executeStep();});
+nextBtn.addEventListener("click",executeStep);
+resetBtn.addEventListener("click",reset);
+reset();
+</script>
+</body>
+</html>
