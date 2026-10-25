@@ -10,6 +10,7 @@
 
 :root{
     --navy:#0b3c75;
+    --red:#c20d0d;
     --blue:#1769aa;
     --blue-bg:#eaf4fc;
     --border:#d5e0ea;
@@ -48,26 +49,6 @@ nav{margin-top:18px}
 nav a{color:#fff;text-decoration:none;margin-right:22px;font-weight:600}
 nav a:hover{text-decoration:underline}
 
-/* ---------- PAGE BANNER TITLE ---------- */
-.page-title-banner {
-    background: #fff;
-    border-bottom: 1px solid var(--border);
-    padding: 22px 8%;
-    text-align: center;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-}
-.page-title-banner h2 {
-    color: var(--navy);
-    font-size: 28px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-}
-.page-title-banner p {
-    color: var(--muted);
-    font-size: 16px;
-    margin-top: 4px;
-}
-
 /* ---------- PAGE CONTAINER ---------- */
 .page{
     width:92%;
@@ -75,37 +56,7 @@ nav a:hover{text-decoration:underline}
     margin:25px auto 40px;
 }
 
-/* ---------- MAIN TAB SWITCHING BAR ---------- */
-.main-tabs{
-    display:flex;
-    gap:10px;
-    border-bottom:3px solid var(--navy);
-    margin-bottom:25px;
-}
-
-.main-tab{
-    border:1px solid var(--border);
-    border-bottom:none;
-    background:#e0e8f0;
-    color:var(--navy);
-    padding:12px 24px;
-    border-radius:8px 8px 0 0;
-    font-size:16px;
-    font-weight:700;
-    cursor:pointer;
-    transition:all .2s ease;
-}
-
-.main-tab:hover:not(.active){
-    background:#d0dce8;
-}
-
-.main-tab.active{
-    background:var(--navy);
-    color:#fff;
-    border-color:var(--navy);
-}
-
+/* ---------- TAB PAGES ---------- */
 .tab-page{display:none;}
 .tab-page.active{display:block;}
 
@@ -286,10 +237,7 @@ footer {
 
 @media(max-width: 700px) {
     .brand h1 { font-size: 30px; }
-    .page-title-banner h2 { font-size: 22px; }
     .experiments-list { grid-template-columns: 1fr; }
-    .main-tabs { flex-direction: column; }
-    .main-tab { border-radius: 8px; border-bottom: 1px solid var(--border); }
 }
 </style>
 </head>
@@ -678,7 +626,7 @@ footer {
     © 2026 D. Kiran Prasad | Academic Resource Portal
 </footer>
 
-<!-- JAVASCRIPT FETCH SCRIPT FOR BOTH BARS -->
+<!-- JAVASCRIPT FETCH SCRIPTS & TAB LOGIC -->
 <script>
 // Fetch Tier 1 site-wide navbar
 fetch('/navbar.html')
@@ -687,14 +635,23 @@ fetch('/navbar.html')
         document.getElementById('nav-placeholder').innerHTML = data;
     });
 
-// Fetch Tier 2 Python section bar (title banner + tabs)
+// Fetch Tier 2 Python section bar (title banner + tabs) and handle initial tab hash state
 fetch('/python-bar.html')
     .then(response => response.text())
     .then(data => {
         document.getElementById('python-bar-placeholder').innerHTML = data;
+
+        // Check if a specific tab hash was passed in the URL (e.g. #mechanicalTab)
+        if (window.location.hash) {
+            let targetTab = window.location.hash.substring(1);
+            let tabButton = document.querySelector(`[onclick*="${targetTab}"]`);
+            if (tabButton) {
+                showTab(targetTab, tabButton);
+            }
+        }
     });
 
-// Tab switcher script for index page content
+// Tab switcher script
 function showTab(tabId, button){
     document.querySelectorAll(".tab-page").forEach(function(page){
         page.classList.remove("active");
@@ -702,8 +659,16 @@ function showTab(tabId, button){
     document.querySelectorAll(".main-tab").forEach(function(tab){
         tab.classList.remove("active");
     });
-    document.getElementById(tabId).classList.add("active");
-    button.classList.add("active");
+    
+    let target = document.getElementById(tabId);
+    if(target) target.classList.add("active");
+
+    if (button) {
+        button.classList.add("active");
+    } else {
+        let activeBtn = document.querySelector(`[onclick*="${tabId}"]`);
+        if(activeBtn) activeBtn.classList.add("active");
+    }
 }
 </script>
 
