@@ -18,15 +18,24 @@ window.MathJax = {
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",Arial,sans-serif}
-body{background:#eef3f8;color:#222}
-header{background:linear-gradient(135deg,#063b70,#0878c9);color:white;padding:20px; text-align:center;position:relative;box-shadow:0 3px 10px rgba(0,0,0,.15)}
-header h1{font-size:28px;margin-bottom:5px}
-header p{font-size:16px}
-.home-link{position:absolute;left:22px;top:20px}
-.mos-link{position:absolute;right:22px;top:20px}
-.home-link a,.mos-link a{color:white;text-decoration:none;font-weight:600;font-size:16px}
-.home-link a:hover,.mos-link a:hover{text-decoration:underline}
-.container{width:94%;max-width:1150px;margin:25px auto 40px}
+body{background:#eef3f8;color:#222;display:flex;flex-direction:column;min-height:100vh}
+
+/* Top Header Styles (Matching Contact & Unit Pages) */
+header{background:linear-gradient(135deg,#0b3d91,#0f6ab4);color:#fff;padding:18px 8%}
+.top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.brand h1{font-size:38px;margin:0}
+.brand p{margin-top:6px;font-size:18px;margin-bottom:0}
+nav{margin-top:18px}
+nav a{color:#fff;text-decoration:none;margin-right:22px;font-weight:600}
+nav a:hover{text-decoration:underline}
+
+.site-section-banner{
+background:#063f78;
+color:#fff;text-align:center;padding:18px 12px;
+font-size:27px;font-weight:800;letter-spacing:.5px;
+box-shadow:0 2px 8px rgba(0,0,0,.12)}
+
+.container{width:94%;max-width:1150px;margin:25px auto 40px;flex:1}
 .section{background:white;border-radius:13px;box-shadow:0 4px 15px rgba(0,0,0,.10);padding:22px;margin-bottom:25px}
 .section-title{display:flex;align-items:center;justify-content:space-between;background:#075b99;color:white;border-radius:8px;padding:13px 18px;cursor:pointer;font-size:21px;font-weight:700}
 .section-title .plus{width:30px;height:30px;border-radius:50%;background:white;color:#075b99;display:flex;align-items:center;justify-content:center;font-size:23px;line-height:1;flex-shrink:0}
@@ -49,11 +58,10 @@ header p{font-size:16px}
 .essay .qplus{background:#c88c08}
 .final{background:#fff8df;border:2px solid #e1b52c;border-radius:10px;padding:18px;margin-top:16px}
 .final h3{margin-bottom:8px;color:#765500}
-footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:14px}
+footer{background:#0b3d91;color:white;text-align:center;padding:15px;font-size:14px;margin-top:auto}
+
+@media(max-width:900px){.brand h1{font-size:30px}}
 @media(max-width:700px){
- header h1{font-size:23px}
- .home-link,.mos-link{position:static;text-align:left;margin-bottom:7px}
- header{text-align:center}
  .container{width:96%}.section{padding:15px}
  .question-header{font-size:15px}.solution{font-size:15px}
 }
@@ -110,11 +118,18 @@ footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:1
 
 <body>
 <header>
-    <div class="home-link"><a href="../../index.html">🏠 Back to Domain Home</a></div>
-    <div class="mos-link"><a href="../index.html">📚 Back to MOS Home</a></div>
-    <h1>MECHANICS OF SOLIDS</h1>
-    <p>UNIT 1 – Important Questions with Solutions</p>
+    <div class="top">
+        <div class="brand">
+            <h1>D. KIRAN PRASAD</h1>
+            <p>Educational Portal • Lecture Videos • Projects • Notes • Source Code</p>
+        </div>
+    </div>
+
+    <!-- Dynamic Navigation Bar Placeholder -->
+    <div id="nav-placeholder"></div>
 </header>
+
+<div class="site-section-banner">IMPORTANT QUESTIONS - STRESS AND STRAIN CONCEPTS</div>
 
 <div class="container">
 <!-- PDF DOWNLOAD -->
@@ -513,6 +528,17 @@ footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:1
 </footer>
 
 <script>
+/* Load the common site navigation from the website root. */
+fetch('/navbar.html')
+    .then(response => {
+        if (!response.ok) throw new Error('Could not load /navbar.html');
+        return response.text();
+    })
+    .then(data => {
+        document.getElementById('nav-placeholder').innerHTML = data;
+    })
+    .catch(error => console.error('Navbar loading error:', error));
+
 function toggleSection(title){
     const questions=title.nextElementSibling;
     const plus=title.querySelector(".plus");
