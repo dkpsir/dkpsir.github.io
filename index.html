@@ -73,14 +73,8 @@ footer{background:#0b3d91;color:#fff;text-align:center;padding:20px;margin-top:4
 </div>
 </div>
 
-<nav>
-<a href="index.html">Home</a>
-<a href="deeplearning/index.html">Deep Learning</a>
-<a href="python/index.html">Python Programming</a>
-<a href="projects/index.html">Projects</a>
-<a href="mos/index.html">Mechanics of Solids</a>
-<a href="contact/contact.html">Contact</a>
-</nav>
+<!-- Dynamic Navigation Bar Placeholder -->
+<div id="nav-placeholder"></div>
 </header>
 
 <section class="hero">
@@ -105,8 +99,8 @@ This portal is designed for engineering students. Select any subject from the to
 <h3>Current Position and Academic Background</h3>
 <ul>
 <li>Working as <strong>Associate Professor</strong> in Mechanical Engineering Department of Seshadri Rao Gudlavalleru Engineering College, Gudlavalleru</li>
-<li><strong>M.E. (Machine Design)</strong> from College of Engineering, Anna University, Guindy,Chennai </li>
-<li><strong>B.Tech in Mechanical Engineering</strong> from Bapatla Engineering College, Bapatla </li>
+<li><strong>M.E. (Machine Design)</strong> from College of Engineering, Anna University, Guindy, Chennai</li>
+<li><strong>B.Tech in Mechanical Engineering</strong> from Bapatla Engineering College, Bapatla</li>
 </ul>
 </div>
 
@@ -140,8 +134,6 @@ Introduction to Machine Learning - 2025 (Elite + Topper 5%)
 Introduction to Machine Learning - 2026 (Elite)
 </span>
 </li>
-
-
 <li style="margin-bottom: 12px; font-size: 16px;">
 <span class="cert-link" onclick="openModal('Deep Learning - IIT Ropar', 'nptel/Deep Learning - IIT Ropar.pdf')">
 Deep Learning - IIT Ropar (Elite)
@@ -152,7 +144,6 @@ Deep Learning - IIT Ropar (Elite)
 Programming, Data Structures and Algorithms Using Python (Elite)
 </span>
 </li>
-
 </ul>
 </div>
 
@@ -280,6 +271,13 @@ Member of The Institution of Engineers (India) (M-1637074)
 </footer>
 
 <script>
+// Load dynamic navbar from root
+fetch('/navbar.html')
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById('nav-placeholder').innerHTML = data;
+    });
+
 function openModal(title, pdfUrl) {
     document.getElementById('modalTitle').innerText = title;
     document.getElementById('pdfViewer').src = pdfUrl;
