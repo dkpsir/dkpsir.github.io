@@ -6,37 +6,60 @@
 <title>D. Kiran Prasad | Academic Portal</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Segoe UI,Arial,sans-serif;background:#eef3f8;color:#333}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#eef3f8;color:#333;line-height:1.6}
 header{background:linear-gradient(135deg,#0b3d91,#0f6ab4);color:#fff;padding:18px 8%}
 .top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
 .brand h1{font-size:38px}
 .brand p{margin-top:6px;font-size:18px}
 nav{margin-top:18px}
 nav a{color:#fff;text-decoration:none;margin-right:22px;font-weight:600}
+nav a:hover{text-decoration:underline}
+
 .hero{display:flex;justify-content:space-between;align-items:center;gap:40px;padding:40px 8%;background:#fff}
 .hero-text{flex:2}
-.hero-text h2{font-size:42px;color:#0b3d91;margin-bottom:18px}
+.hero-text h2{font-size:36px;color:#0b3d91;margin-bottom:12px}
 .hero-text p{font-size:18px;line-height:1.8}
-.hero-image{flex:1;text-align:center}
-.hero-image .photo{
-width:220px;height:220px;border-radius:50%;
-border:6px solid #0b3d91;
-display:flex;align-items:center;justify-content:center;
-background:#dbe9f7;font-size:18px;color:#0b3d91}
-.btn{display:inline-block;margin-top:25px;padding:12px 24px;background:#0b3d91;color:#fff;text-decoration:none;border-radius:8px}
+
+/* Ellipse Photo Style */
+.hero-image{flex:1;text-align:right}
+.hero-image img{
+width:200px;
+height:250px;
+object-fit:cover;
+border-radius: 50% / 40%;
+border:5px solid #0b3d91;
+box-shadow:0 4px 14px rgba(0,0,0,0.15);
+}
+
 .section{padding:35px 8%}
-.section h2{text-align:center;color:#0b3d91;font-size:34px;margin-bottom:35px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
-.card{background:#fff;border-radius:12px;padding:28px;box-shadow:0 4px 14px rgba(0,0,0,.12)}
-.card h3{color:#0b3d91;margin-bottom:12px}
-.card p{line-height:1.7;margin-bottom:18px}
-.card a{text-decoration:none;color:#fff;background:#0b3d91;padding:10px 18px;border-radius:6px;display:inline-block}
-.announce{background:#fff8d6;border-left:6px solid #e2b100;padding:20px;border-radius:8px}
-footer{background:#0b3d91;color:#fff;text-align:center;padding:20px}
+.section h2{color:#0b3d91;font-size:30px;margin-bottom:20px;border-bottom:3px solid #0b3d91;display:inline-block;padding-bottom:5px}
+
+.profile-card{background:#fff;border-radius:12px;padding:30px;box-shadow:0 4px 14px rgba(0,0,0,.1);margin-bottom:25px}
+.profile-card h3{color:#0b3d91;margin-bottom:15px;font-size:22px}
+.profile-card ul{list-style-type:square;margin-left:20px}
+.profile-card li{margin-bottom:10px;font-size:17px}
+
+/* Certification Links & Modal */
+.cert-link{color:#0b3d91;font-weight:bold;text-decoration:none;cursor:pointer;border-bottom:1px dashed #0b3d91}
+.cert-link:hover{color:#0f6ab4}
+
+.modal{display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,0.6);justify-content:center;align-items:center}
+.modal-content{background:#fff;width:80%;max-width:850px;height:80vh;border-radius:10px;position:relative;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.3)}
+.modal-header{background:#0b3d91;color:#fff;padding:12px 20px;display:flex;justify-content:space-between;align-items:center}
+.modal-header h4{margin:0;font-size:18px}
+.close-btn{color:#fff;font-size:28px;font-weight:bold;cursor:pointer;line-height:1}
+.close-btn:hover{color:#ff4d4d}
+.modal-body{flex:1;width:100%;height:100%}
+.modal-body iframe{width:100%;height:100%;border:none}
+
+footer{background:#0b3d91;color:#fff;text-align:center;padding:20px;margin-top:40px}
+
 @media(max-width:900px){
 .hero{flex-direction:column;text-align:center}
+.hero-image{text-align:center;margin-top:20px}
 .brand h1{font-size:30px}
-.hero-text h2{font-size:32px}
+.hero-text h2{font-size:28px}
+.modal-content{width:95%;height:85vh}
 }
 </style>
 </head>
@@ -49,16 +72,13 @@ footer{background:#0b3d91;color:#fff;text-align:center;padding:20px}
 <p>Educational Portal • Lecture Videos • Projects • Notes • Source Code</p>
 </div>
 </div>
-<!-- This is a single-line comment -->
+
 <nav>
 <a href="index.html">Home</a>
 <a href="deeplearning/index.html">Deep Learning</a>
 <a href="python/index.html">Python Programming</a>
-<a href="#">Soft Computing</a>
 <a href="projects/index.html">Projects</a>
 <a href="mos/index.html">Mechanics of Solids</a>
-<a href="#">Graphics and CAD</a>
-
 <a href="contact/contact.html">Contact</a>
 </nav>
 </header>
@@ -67,85 +87,85 @@ footer{background:#0b3d91;color:#fff;text-align:center;padding:20px}
 <div class="hero-text">
 <h2>Welcome to Academic Resource Portal</h2>
 <p>
-This portal is designed for engineering students. Each subject contains lecture videos,
-PPTs, datasets, Python source code, downloadable notes and mini-projects.
+This portal is designed for engineering students. Select any subject from the top navigation menu to access lecture videos, PPTs, datasets, Python source code, downloadable notes, and mini-projects.
 </p>
 </div>
 
-<!--<div class="hero-image">-->
-<!--<div class="photo">-->
-<!--Your Photo<br>220 × 220-->
-<!--</div>-->
-<!--</div>-->
-</section>
-<section class="section">
-<div class="grid">
-
-<div class="card">
-<h3>Deep Learning</h3>
-<p>Units, lecture videos, datasets, projects and implementations.</p>
-<a href="deeplearning/index.html">Open</a>
-</div>
-
-
-
-<div class="card">
-<h3>Python Programming</h3>
-<p>Practice programs, notebooks, source code and exercises.</p>
-<a href="python/index.html">Open</a>
-</div>
-
-<div class="card">
-<h3>Soft Computing</h3>
-<p>ANN, Fuzzy Logic, Genetic Algorithms and optimization techniques.</p>
-<a href="#">Will be Updated soon</a>
-</div>
-
-<div class="card">
-<h3>Projects</h3>
-<p>Real-World Projects of Machine Learning and Deep Learning</p>
-<a href="projects/index.html">open</a>
-</div>
-
-  
-<div class="card">
-<h3>Mechanics of Solids</h3>
-<p>Concepts of Mechanics of Solids with Numericals.</p>
-<a href="mos/index.html">Open</a>
-</div>
-
-<div class="card">
-<h3>Graphics and CAD</h3>
-<p>Interactive simulations, engineering drawing and AutoCAD resources.</p>
-<a href="#">Will be Updated soon</a>
-</div>
-
-
-
-
-
-
-  
+<!-- Ellipse Photo on Right Top -->
+<div class="hero-image">
+<img src="photo.jpg" alt="D. Kiran Prasad Photo">
 </div>
 </section>
 
+<!-- About Me / Personal Data Section -->
 <section class="section">
-<h2>Latest Announcements</h2>
-<div class="announce">
+<h2>About Me</h2>
+
+<div class="profile-card">
+<h3>Designation & Academic Background</h3>
 <ul>
-<li>Python Programming: Experiment 5 manual updated</li>
-<li>Mechanics of Solids: Important Questions of Unit 1 are available</li>
-<li>Deep Learning: Lecture materials for unit 1 and unit2 are available.</li>
-<li>Deep Learning: Customer Churn Prediction project is available in Deep Learning Projectes Section.</li>
+<li><strong>Designation:</strong> Associate Professor in Mechanical Engineering</li>
+<li><strong>Post Graduation:</strong> M.E. (Machine Design)</li>
+<li><strong>Undergraduation:</strong> B.Tech in Mechanical Engineering</li>
+</ul>
+</div>
 
-
+<div class="profile-card">
+<h3>NPTEL Certifications</h3>
+<p>Click on any certification below to view the certificate:</p>
+<br>
+<ul>
+<li>
+<span class="cert-link" onclick="openModal('NPTEL Certification in Machine Design', 'certificates/cert1.pdf')">
+► NPTEL Certification in Machine Design
+</span>
+</li>
+<li>
+<span class="cert-link" onclick="openModal('NPTEL Certification in Deep Learning', 'certificates/cert2.pdf')">
+► NPTEL Certification in Deep Learning
+</span>
+</li>
 </ul>
 </div>
 </section>
 
+<!-- PDF Viewer Modal Window -->
+<div id="pdfModal" class="modal">
+<div class="modal-content">
+<div class="modal-header">
+<h4 id="modalTitle">Certificate Preview</h4>
+<span class="close-btn" onclick="closeModal()">&times;</span>
+</div>
+<div class="modal-body">
+<iframe id="pdfViewer" src=""></iframe>
+</div>
+</div>
+</div>
+
 <footer>
 © 2026 D. Kiran Prasad | Academic Resource Portal
 </footer>
+
+<script>
+function openModal(title, pdfUrl) {
+    document.getElementById('modalTitle').innerText = title;
+    document.getElementById('pdfViewer').src = pdfUrl;
+    document.getElementById('pdfModal').style.display = 'flex';
+}
+
+function closeModal() {
+    document.getElementById('pdfModal').style.display = 'none';
+    document.getElementById('pdfViewer').src = '';
+}
+
+// Close popup when clicking outside the box
+window.onclick = function(event) {
+    var modal = document.getElementById('pdfModal');
+    if (event.target === modal) {
+        closeModal();
+    }
+}
+</script>
 
 </body>
 </html>
