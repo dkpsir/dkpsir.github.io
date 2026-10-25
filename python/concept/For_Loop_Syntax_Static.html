@@ -3,50 +3,88 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Loop</title>
+<title>For Loop | D. Kiran Prasad</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#eef4f9;color:#111;font-family:"Segoe UI",Arial,sans-serif}
-.header{background:linear-gradient(90deg,#0b477d,#087cc1);color:#fff;padding:18px 22px;display:grid;grid-template-columns:1fr 2fr 1fr;align-items:center}
-.header a{color:#fff;text-decoration:none;font-weight:700;font-size:16px}
-.header a:hover{text-decoration:underline}
-.header h1{margin:0;text-align:center;font-size:30px}
-.main-home{text-align:right}
-.container{width:94%;max-width:1450px;margin:24px auto}
-.card{background:#fff;border-radius:12px;padding:24px;margin-bottom:22px;box-shadow:0 4px 18px rgba(0,0,0,.10)}
-.card h2{margin:0 0 18px;color:#075b99;font-size:24px;border-left:6px solid #075b99;padding-left:12px}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+    --navy:#0b3c75;
+    --blue:#1769aa;
+    --blue-bg:#eaf4fc;
+    --border:#d5e0ea;
+    --text:#1d2a36;
+    --muted:#667685;
+    --green:#1b7a48;
+    --green-bg:#edf8f2;
+    --orange:#b85c00;
+    --orange-bg:#fff6e9;
+    --bg:#eef3f8;
+    --white:#fff;
+}
+body{background:var(--bg);color:var(--text);font-family:"Segoe UI",Arial,sans-serif;line-height:1.6}
+
+/* ---------- HEADER & COMMON NAVBAR ---------- */
+header{
+    background:linear-gradient(135deg,#0b3d91,#0f6ab4);
+    color:#fff;
+    padding:18px 8%;
+}
+.top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+}
+.brand h1{font-size:38px}
+.brand p{margin-top:6px;font-size:18px}
+nav{margin-top:18px}
+nav a{color:#fff;text-decoration:none;margin-right:22px;font-weight:600}
+nav a:hover{text-decoration:underline}
+
+/* ---------- PAGE CONTAINER ---------- */
+.container{width:92%;max-width:1350px;margin:25px auto 40px}
+.card{background:#fff;border-radius:12px;padding:24px;margin-bottom:22px;box-shadow:0 4px 18px rgba(0,0,0,.10);border:1px solid var(--border)}
+.card h2{margin:0 0 18px;color:var(--navy);font-size:24px;border-left:6px solid var(--navy);padding-left:12px}
 .theory{font-size:17px;line-height:1.65}
 .highlight,.note{background:#fff8df;border-left:5px solid #d99a00;padding:14px 18px;margin:16px 0;line-height:1.6}
-.syntax-title{text-align:center;color:#075b99;font-size:25px;font-weight:700;margin-bottom:20px}
+.syntax-title{text-align:center;color:var(--navy);font-size:25px;font-weight:700;margin-bottom:20px}
 .syntax-box{width:92%;margin:30px auto;background:#fff9df;border:2px solid #d7b54a;border-radius:8px;padding:20px;text-align:center;font:700 23px Consolas,"Courier New",monospace;color:#064ea8}
 .keyword{color:#c20d0d}.variable{color:#177c35}.condition{color:#7a159c}
 .explain-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
 .explain{border:2px solid #c8d5e3;border-radius:9px;padding:14px;text-align:center;background:#fbfdff}
-.term{font:700 18px Consolas,"Courier New",monospace;color:#075b99;margin-bottom:7px}
+.term{font:700 18px Consolas,"Courier New",monospace;color:var(--navy);margin-bottom:7px}
 .explain p{margin:0;font-size:15px;line-height:1.45}
 .table-wrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;min-width:850px}
-th{background:#24577f;color:#fff;font-size:19px;padding:14px;text-align:left}
+th{background:var(--navy);color:#fff;font-size:19px;padding:14px;text-align:left}
 td{border:1px solid #ccd7e2;padding:14px;vertical-align:middle;font-size:16px;line-height:1.5}
 tr:nth-child(even){background:#f7faff}
 .code{display:inline-block;background:#f3f7fc;border:1px solid #b7d0ef;border-radius:7px;padding:7px 10px;font:16px Consolas,"Courier New",monospace;color:#064ea8;white-space:pre-wrap}
 .output{color:#d65b00;font:700 16px Consolas,"Courier New",monospace;white-space:pre-wrap}
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .code-block{background:#f7f9fb;border:1px solid #d4dee8;border-radius:9px;padding:18px;overflow:auto}
 pre{margin:0;font:16px/1.6 Consolas,"Courier New",monospace}
-ul{line-height:1.7;font-size:17px}
-footer{background:#063b70;color:#fff;text-align:center;padding:13px}
-@media(max-width:950px){.header{grid-template-columns:1fr;gap:8px;text-align:center}.main-home{text-align:center}.explain-grid{grid-template-columns:1fr 1fr}.two-col{grid-template-columns:1fr}}
-@media(max-width:600px){.container{width:94%}.card{padding:17px}.header h1{font-size:25px}.syntax-box{width:100%;font-size:18px}}
+ul{line-height:1.7;font-size:17px;padding-left:20px}
+footer{background:var(--navy);color:#fff;text-align:center;padding:20px;margin-top:40px;font-size:15px}
+
+@media(max-width:950px){.explain-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.container{width:94%}.card{padding:17px}.syntax-box{width:100%;font-size:18px}.explain-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
-<header class="header">
-<div><a href="../index.html">← Python Home</a></div>
-<h1>FOR LOOP</h1>
-<div class="main-home"><a href="../../index.html">Main Home →</a></div>
+<!-- TIER 1: GLOBAL SITE-WIDE NAVIGATION HEADER -->
+<header>
+<div class="top">
+<div class="brand">
+<h1>D. KIRAN PRASAD</h1>
+<p>Educational Portal • Python &amp; Engineering Learning Resources</p>
+</div>
+</div>
+<!-- Dynamic Navigation Bar Placeholder -->
+<div id="nav-placeholder"></div>
 </header>
+
+<!-- TIER 2: PYTHON SECTION BAR PLACEHOLDER -->
+<div id="python-bar-placeholder"></div>
 
 <main class="container">
 
@@ -162,7 +200,7 @@ particular values during iteration.
     if i % 3 == 0:
         print(i)</pre>
 </div>
-<p class="output">Output: 3 6 9</p>
+<p class="output" style="margin-top: 15px;">Output: 3 6 9</p>
 </section>
 
 <section class="card">
@@ -180,7 +218,7 @@ iteration of the outer loop, the inner loop executes completely.
         print(i, j)</pre>
 </div>
 
-<p class="output">Output:<br>
+<p class="output" style="margin-top: 15px;">Output:<br>
 1 1<br>1 2<br>1 3<br>
 2 1<br>2 2<br>2 3<br>
 3 1<br>3 2<br>3 3
@@ -355,10 +393,25 @@ loops, complete the inner loop for every value of the outer loop.
 
 <footer>© 2026 D. Kiran Prasad | Python Programming</footer>
 
+<!-- JAVASCRIPT FETCH SCRIPT FOR BOTH BARS -->
 <script>
-/* Printing / context-menu restrictions intentionally retained for now. */
-document.addEventListener("contextmenu",function(e){e.preventDefault();});
-document.addEventListener("keydown",function(e){
+// Fetch Tier 1 site-wide navbar
+fetch('/navbar.html')
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById('nav-placeholder').innerHTML = data;
+    });
+
+// Fetch Tier 2 Python section bar (title banner + tabs)
+fetch('/python-bar.html')
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById('python-bar-placeholder').innerHTML = data;
+    });
+
+// Context-menu & print restrictions retained
+document.addEventListener("contextmenu", function(e){ e.preventDefault(); });
+document.addEventListener("keydown", function(e){
     if((e.ctrlKey || e.metaKey) && e.key.toLowerCase()==="p"){
         e.preventDefault();
         alert("Printing is disabled.");
