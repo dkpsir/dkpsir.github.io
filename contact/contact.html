@@ -3,68 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Contact</title>
+    <title>Contact | D. Kiran Prasad</title>
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Segoe UI", Arial, sans-serif;
-        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',Arial,sans-serif;background:#eef3f8;color:#333;line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
+        header{background:linear-gradient(135deg,#0b3d91,#0f6ab4);color:#fff;padding:18px 8%}
+        .top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
+        .brand h1{font-size:38px}
+        .brand p{margin-top:6px;font-size:18px}
+        nav{margin-top:18px}
+        nav a{color:#fff;text-decoration:none;margin-right:22px;font-weight:600}
+        nav a:hover{text-decoration:underline}
 
-        body {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            background: linear-gradient(135deg, #eaf4ff, #f5f0ff);
-            color: #222;
-        }
+        .main-content{flex:1;display:flex;justify-content:center;align-items:center;padding:40px 8%}
 
         .card {
-            width: 90%;
+            width: 100%;
             max-width: 650px;
-
             background: #ffffff;
-
             padding: 55px 50px;
-
             border-radius: 20px;
-
             text-align: center;
-
-            box-shadow:
-                0 12px 35px rgba(0, 70, 140, 0.15);
-
-            border-top: 7px solid #1769aa;
+            box-shadow: 0 12px 35px rgba(0, 70, 140, 0.15);
+            border-top: 7px solid #0b3d91;
         }
 
         .icon {
             width: 75px;
             height: 75px;
-
             margin: 0 auto 20px;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
             border-radius: 50%;
-
             background: #e3f2fd;
-
             font-size: 38px;
         }
 
-        h1 {
+        .card h2 {
             font-size: 2.4rem;
-            color: #123b63;
-
+            color: #0b3d91;
             margin-bottom: 12px;
-
             font-weight: 700;
             letter-spacing: 1px;
         }
@@ -72,87 +52,49 @@
         .subtitle {
             font-size: 1.1rem;
             color: #666;
-
             line-height: 1.6;
-
             margin-bottom: 32px;
         }
 
         .mail-label {
             font-size: 1rem;
             color: #777;
-
             margin-bottom: 8px;
         }
 
         .email {
             display: inline-block;
-
             padding: 14px 28px;
-
             border-radius: 10px;
-
             background: #f0f7ff;
-
             border: 2px solid #b9d8f5;
-
             color: #075ea8;
-
             font-family: Georgia, "Times New Roman", serif;
-
             font-size: 1.45rem;
-
             font-weight: 600;
-
             letter-spacing: 0.5px;
-
-            margin-bottom: 35px;
-        }
-
-        .back-link {
-            display: inline-block;
-
-            padding: 12px 28px;
-
-            background: #1769aa;
-
-            color: white;
-
-            text-decoration: none;
-
-            border-radius: 8px;
-
-            font-size: 1rem;
-
-            font-weight: 600;
-
-            transition: 0.2s ease;
-        }
-
-        .back-link:hover {
-            background: #0d4f82;
-
-            transform: translateY(-2px);
+            margin-bottom: 15px;
         }
 
         .footer-text {
             margin-top: 28px;
-
             font-size: 0.85rem;
-
             color: #999;
         }
 
-        @media (max-width: 600px) {
+        footer{background:#0b3d91;color:#fff;text-align:center;padding:20px;margin-top:auto}
 
+        @media (max-width: 900px) {
+            .brand h1{font-size:30px}
+        }
+
+        @media (max-width: 600px) {
             .card {
                 padding: 40px 25px;
             }
-
-            h1 {
+            .card h2 {
                 font-size: 2rem;
             }
-
             .email {
                 font-size: 1.15rem;
                 padding: 12px 18px;
@@ -163,38 +105,57 @@
 
 <body>
 
-    <div class="card">
-
-        <div class="icon">
-            ✉
+    <header>
+        <div class="top">
+            <div class="brand">
+                <h1>D. KIRAN PRASAD</h1>
+                <p>Educational Portal • Lecture Videos • Projects • Notes • Source Code</p>
+            </div>
         </div>
 
-        <h1>Get in Touch</h1>
+        <!-- Dynamic Navigation Bar Placeholder -->
+        <div id="nav-placeholder"></div>
+    </header>
 
-        <p class="subtitle">
-            If you have any questions or inquiries,
-            feel free to contact me.
-        </p>
+    <div class="main-content">
+        <div class="card">
+            <div class="icon">
+                ✉
+            </div>
 
-        <div class="mail-label">
-            Mail to
+            <h2>Get in Touch</h2>
+
+            <p class="subtitle">
+                If you have any questions or inquiries,
+                feel free to contact me.
+            </p>
+
+            <div class="mail-label">
+                Mail to
+            </div>
+
+            <div class="email">
+                dkpsir@gmail.com
+            </div>
+
+            <div class="footer-text">
+                Academic &amp; Educational Resources
+            </div>
         </div>
-
-        <div class="email">
-            dkpsir@gmail.com
-        </div>
-
-        <br>
-
-        <a href="../index.html" class="back-link">
-            ← Back to Home
-        </a>
-
-        <div class="footer-text">
-            Academic &amp; Educational Resources
-        </div>
-
     </div>
+
+    <footer>
+        © 2026 D. Kiran Prasad | Academic Resource Portal
+    </footer>
+
+    <script>
+        // Load dynamic navbar from root folder
+        fetch('/navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('nav-placeholder').innerHTML = data;
+            });
+    </script>
 
 </body>
 </html>
