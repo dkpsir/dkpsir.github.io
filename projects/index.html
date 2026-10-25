@@ -3,9 +3,8 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Deep Learning and Machine Learning Projects</title>
+<title>Deep Learning and Machine Learning Projects | D. Kiran Prasad</title>
 <style>
-
 *{
     margin:0;
     padding:0;
@@ -14,63 +13,30 @@
 }
 
 body{
-    background:#f3f7fc;
-    color:#222;
+    background:#eef3f8;
+    color:#333;
+    line-height:1.6;
 }
 
-/* ---------- TOP HEADER ---------- */
-
+/* ---------- HEADER & NAVBAR ---------- */
 header{
-    background:linear-gradient(135deg,#003b73,#0875c9);
-    color:white;
-    padding:28px 20px;
-    text-align:center;
-    box-shadow:0 3px 10px rgba(0,0,0,0.15);
+    background:linear-gradient(135deg,#0b3d91,#0f6ab4);
+    color:#fff;
+    padding:18px 8%;
 }
-
-header h1{
-    font-size:32px;
-    margin-bottom:7px;
-}
-
-header p{
-    font-size:17px;
-}
-
-/* ---------- NAVIGATION BUTTONS ---------- */
-
-.navigation{
-    width:92%;
-    max-width:1150px;
-    margin:18px auto 0;
-
+.top{
     display:flex;
-    justify-content:flex-start;
+    justify-content:space-between;
     align-items:center;
+    flex-wrap:wrap;
 }
-
-.nav-btn{
-    display:inline-block;
-    background:#075ea8;
-    color:white;
-    text-decoration:none;
-
-    padding:10px 20px;
-    border-radius:7px;
-
-    font-size:16px;
-    font-weight:600;
-
-    transition:0.2s;
-}
-
-.nav-btn:hover{
-    background:#003f75;
-    transform:translateY(-1px);
-}
+.brand h1{font-size:38px}
+.brand p{margin-top:6px;font-size:18px}
+nav{margin-top:18px}
+nav a{color:#fff;text-decoration:none;margin-right:22px;font-weight:600}
+nav a:hover{text-decoration:underline}
 
 /* ---------- MAIN CONTAINER ---------- */
-
 .container{
     width:92%;
     max-width:1150px;
@@ -78,34 +44,27 @@ header p{
 }
 
 /* ---------- PROJECT CARD ---------- */
-
 .project-card{
     background:white;
     border-radius:14px;
     padding:28px;
-
     margin-bottom:28px;
-
     box-shadow:0 5px 16px rgba(0,0,0,0.10);
-
-    border-left:6px solid #0875c9;
+    border-left:6px solid #0b3d91;
 }
 
 .project-title{
-    color:#003b73;
+    color:#0b3d91;
     font-size:26px;
     margin-bottom:20px;
     font-weight:700;
 }
 
 /* ---------- EXPANDABLE SECTIONS ---------- */
-
 .info-box{
     border:1px solid #d5e0eb;
     border-radius:9px;
-
     margin-bottom:12px;
-
     overflow:hidden;
 }
 
@@ -113,16 +72,11 @@ header p{
     display:flex;
     justify-content:space-between;
     align-items:center;
-
     padding:15px 18px;
-
     background:#eef6ff;
-
     cursor:pointer;
-
     font-size:18px;
     font-weight:650;
-
     color:#073b70;
 }
 
@@ -133,33 +87,23 @@ header p{
 .plus{
     width:30px;
     height:30px;
-
     border-radius:50%;
-
     background:#0875c9;
     color:white;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     font-size:23px;
     font-weight:bold;
-
     flex-shrink:0;
 }
 
 .info-content{
     display:none;
-
     padding:16px 22px;
-
     background:#ffffff;
-
     border-top:1px solid #dce5ee;
-
     font-size:17px;
-
     line-height:1.65;
 }
 
@@ -176,21 +120,16 @@ header p{
 }
 
 /* ---------- RESOURCES ---------- */
-
 .resources{
     margin-top:25px;
-
     padding:20px;
-
     background:#f7fbff;
-
     border-radius:10px;
-
     border:1px solid #d8e6f2;
 }
 
 .resources h3{
-    color:#003b73;
+    color:#0b3d91;
     margin-bottom:15px;
     font-size:21px;
 }
@@ -203,95 +142,37 @@ header p{
 
 .resource-btn{
     display:inline-block;
-
-    background:#0875c9;
+    background:#0b3d91;
     color:white;
-
     padding:10px 17px;
-
     border-radius:7px;
-
     text-decoration:none;
-
     font-weight:600;
     font-size:15px;
-
     transition:0.2s;
 }
 
 .resource-btn:hover{
-    background:#004f8d;
+    background:#0f6ab4;
     transform:translateY(-1px);
 }
 
-/* ---------- ADDITIONAL PROJECT PLACEHOLDER ---------- */
-
 .project-number{
-    color:#0875c9;
+    color:#0b3d91;
     font-size:18px;
     margin-bottom:5px;
     font-weight:700;
 }
 
 /* ---------- FOOTER ---------- */
-
 footer{
-    background:#003b73;
+    background:#0b3d91;
     color:white;
-
     text-align:center;
-
-    padding:18px;
-
+    padding:20px;
     margin-top:40px;
-
-    font-size:14px;
+    font-size:15px;
 }
-
-/* ---------- MOBILE ---------- */
-
-@media(max-width:700px){
-
-    header h1{
-        font-size:25px;
-    }
-
-    header p{
-        font-size:15px;
-    }
-
-    .navigation{
-        flex-direction:column;
-        gap:10px;
-    }
-
-    .nav-btn{
-        width:100%;
-        text-align:center;
-    }
-
-    .project-card{
-        padding:18px;
-    }
-
-    .project-title{
-        font-size:22px;
-    }
-
-    .info-header{
-        font-size:16px;
-    }
-
-    .resource-buttons{
-        flex-direction:column;
-    }
-
-    .resource-btn{
-        text-align:center;
-    }
-
-}
-
 
 /* ---------- PROJECT SUMMARY / MAIN EXPAND ---------- */
 .project-summary{
@@ -310,13 +191,12 @@ footer{
     font-size:17px;
     line-height:1.65;
     margin-top:10px;
-    max-width:1000px;
 }
 .project-main-plus{
     width:42px;
     height:42px;
     border-radius:50%;
-    background:#0875c9;
+    background:#0b3d91;
     color:#fff;
     display:flex;
     align-items:center;
@@ -336,98 +216,41 @@ footer{
     display:block;
 }
 .project-summary:hover .project-main-plus{
-    background:#004f8d;
+    background:#0f6ab4;
     transform:scale(1.03);
 }
 
-
-/* ---------- UPDATED SITE HEADER ---------- */
-.site-header{
-    position:relative;
-    background:linear-gradient(135deg,#003b73,#0875c9);
-    color:white;
-    padding:18px 24px 22px;
-    min-height:78px;
-    box-shadow:0 3px 10px rgba(0,0,0,0.15);
-}
-.header-title-block{
-    text-align:center;
-}
-.header-home-btn{
-    position:absolute;
-    left:24px;
-    top:50%;
-    transform:translateY(-50%);
-    display:inline-block;
-    background:#075ea8;
-    color:#fff;
-    text-decoration:none;
-    padding:10px 18px;
-    border-radius:7px;
-    font-size:16px;
-    font-weight:600;
-    transition:.2s;
-    box-shadow:0 2px 5px rgba(0,0,0,.15);
-}
-.header-home-btn:hover{
-    background:#003f75;
-    transform:translateY(-50%) translateY(-1px);
-}
-.site-header h1{
-    margin:0 0 5px;
-    font-size:32px;
-}
-.site-header p{
-    margin:0;
-    font-size:17px;
+/* ---------- MOBILE ---------- */
+@media(max-width:900px){
+    .brand h1{font-size:30px}
 }
 @media(max-width:700px){
-    .site-header{
-        padding:14px 15px 18px;
-        min-height:120px;
-    }
-    .header-home-btn{
-        left:15px;
-        top:15px;
-        transform:none;
-    }
-    .header-home-btn:hover{
-        transform:translateY(-1px);
-    }
-    .header-title-block{
-        padding-top:48px;
-    }
-    .site-header h1{
-        font-size:25px;
-    }
-    .site-header p{
-        font-size:15px;
-    }
+    .project-card{padding:18px}
+    .project-title{font-size:22px}
+    .info-header{font-size:16px}
+    .resource-buttons{flex-direction:column}
+    .resource-btn{text-align:center}
 }
-
 </style>
 </head>
 <body>
 
-<!-- ========================================================= -->
-<!-- HEADER -->
-<!-- ========================================================= -->
-<header class="site-header">
-<a class="header-home-btn" href="../../index.html">🏠 Home</a>
-<div class="header-title-block">
-<h1>Deep Learning and Machine Learning Projects</h1>
-<p>Real-World Applications using Deep Learning and Machine Learning Algorithms</p>
+<!-- HEADER & COMMON NAVIGATION -->
+<header>
+<div class="top">
+<div class="brand">
+<h1>D. KIRAN PRASAD</h1>
+<p>Deep Learning &amp; Machine Learning Projects</p>
 </div>
+</div>
+<!-- Dynamic Navigation Bar Placeholder -->
+<div id="nav-placeholder"></div>
 </header>
 
-<!-- ========================================================= -->
 <!-- MAIN CONTENT -->
-<!-- ========================================================= -->
 <div class="container">
 
-    <!-- ========================================================= -->
     <!-- PROJECT 1 -->
-    <!-- ========================================================= -->
     <div class="project-card">
         <div class="project-summary" onclick="toggleProject(this)">
             <div class="project-summary-text">
@@ -444,7 +267,6 @@ footer{
             <span class="project-main-plus">+</span>
         </div>
         <div class="project-details">
-            <!-- 1. PROJECT OBJECTIVE AND DATASET -->
             <div class="info-box">
                 <div class="info-header" onclick="toggleSection(this)">
                     <span>1. Project Objective &amp; Dataset</span>
@@ -455,12 +277,9 @@ footer{
                         <li>The objective of the project is to predict whether a telecom customer is likely to <b>churn</b> or stay.</li>
                         <li>The project uses the <b>Telco Customer Churn Dataset</b>.</li>
                         <li>The dataset contains <b>7,043 customer records</b> with 21 original features.</li>
-                        <li>Customer information includes demographic, account, service and payment-related details.</li>
-                        <li>The target variable is <b>Churn</b>, indicating whether the customer left the service.</li>
                     </ul>
                 </div>
             </div>
-            <!-- 2. DATA PREPROCESSING -->
             <div class="info-box">
                 <div class="info-header" onclick="toggleSection(this)">
                     <span>2. Data Preprocessing &amp; Analysis</span>
@@ -471,13 +290,9 @@ footer{
                         <li>Unnecessary customer identification information is removed.</li>
                         <li>Missing and inconsistent values are handled.</li>
                         <li>Categorical variables are converted into numerical form.</li>
-                        <li>Yes/No variables are encoded as numerical values and multi-category variables are one-hot encoded.</li>
-                        <li>Numerical features are scaled before training the neural network.</li>
-                        <li>Exploratory analysis is performed to study customer churn and important customer attributes.</li>
                     </ul>
                 </div>
             </div>
-            <!-- 3. ANN MODEL -->
             <div class="info-box">
                 <div class="info-header" onclick="toggleSection(this)">
                     <span>3. ANN Model Development</span>
@@ -486,47 +301,11 @@ footer{
                 <div class="info-content">
                     <ul>
                         <li>The processed customer data is used to develop an <b>Artificial Neural Network (ANN)</b>.</li>
-                        <li>The network uses <b>26 input features</b>.</li>
                         <li>Hidden layers use the <b>ReLU</b> activation function.</li>
-                        <li>The output layer contains one neuron with <b>Sigmoid</b> activation for binary classification.</li>
-                        <li><b>Adam</b> is used as the optimizer.</li>
-                        <li><b>Binary Cross-Entropy</b> is used as the loss function.</li>
+                        <li>The output layer contains one neuron with <b>Sigmoid</b> activation.</li>
                     </ul>
                 </div>
             </div>
-            <!-- 4. EVALUATION -->
-            <div class="info-box">
-                <div class="info-header" onclick="toggleSection(this)">
-                    <span>4. Model Evaluation &amp; Comparison</span>
-                    <span class="plus">+</span>
-                </div>
-                <div class="info-content">
-                    <ul>
-                        <li>The ANN model is evaluated using classification performance measures.</li>
-                        <li>Accuracy and classification report are used to evaluate the model.</li>
-                        <li>A confusion matrix is used to analyze correct and incorrect predictions.</li>
-                        <li>ANN performance is compared with other machine learning models.</li>
-                        <li>The comparison includes Logistic Regression, Random Forest and Support Vector Machine (SVM).</li>
-                    </ul>
-                </div>
-            </div>
-            <!-- 5. NEW CUSTOMER PREDICTION -->
-            <div class="info-box">
-                <div class="info-header" onclick="toggleSection(this)">
-                    <span>5. Prediction for New Customers</span>
-                    <span class="plus">+</span>
-                </div>
-                <div class="info-content">
-                    <ul>
-                        <li>New customer data is processed using the same preprocessing procedure used during training.</li>
-                        <li>The trained ANN predicts the probability of customer churn.</li>
-                        <li>A probability threshold of <b>0.5</b> is used for the final churn decision.</li>
-                        <li>Customers can therefore be classified as <b>Churn</b> or <b>Not Churn</b>.</li>
-                        <li>The predicted results can be saved for further analysis.</li>
-                    </ul>
-                </div>
-            </div>
-            <!-- PROJECT RESOURCES -->
             <div class="resources">
                 <h3>📚 Project Resources</h3>
                 <div class="resource-buttons">
@@ -539,9 +318,7 @@ footer{
         </div>
     </div>
 
-    <!-- ========================================================= -->
     <!-- PROJECT 2 -->
-    <!-- ========================================================= -->
     <div class="project-card">
         <div class="project-summary" onclick="toggleProject(this)">
             <div class="project-summary-text">
@@ -550,9 +327,6 @@ footer{
                 <div class="project-summary-description">
                     This project uses historical weather records from multiple stations to predict
                     average temperature, minimum temperature, maximum temperature and rainfall.
-                    The workflow includes data preprocessing, feature preparation, Linear Regression
-                    model training, evaluation using R² and RMSE, and prediction for a selected date
-                    and station using Python.
                 </div>
             </div>
             <span class="project-main-plus">+</span>
@@ -565,102 +339,8 @@ footer{
                 </div>
                 <div class="info-content">
                     <ul>
-                        <li>The objective of the project is to develop a <b>data-driven weather prediction system</b> using Linear Regression.</li>
-                        <li>The project uses a historical weather dataset containing daily records from multiple weather stations.</li>
-                        <li>The dataset contains date-wise information including <b>average temperature, minimum temperature, maximum temperature, and rainfall</b>.</li>
-                        <li>The Excel dataset used in this project is <b>weather data set.xlsx</b>.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="info-box">
-                <div class="info-header" onclick="toggleSection(this)">
-                    <span>2. Input &amp; Output Variables</span>
-                    <span class="plus">+</span>
-                </div>
-                <div class="info-content">
-                    <p><b>Input Variables</b></p>
-                    <ul>
-                        <li><b>year</b> – year extracted from the date of record</li>
-                        <li><b>month_num</b> – month number derived from the date</li>
-                        <li><b>day</b> – day of the month</li>
-                        <li><b>station_encoded</b> – numerical encoding of station names</li>
-                    </ul>
-                    <p><b>Output Variables</b></p>
-                    <ul>
-                        <li><b>avg_temp</b> – predicted average temperature (°C)</li>
-                        <li><b>min_temp</b> – predicted minimum temperature (°C)</li>
-                        <li><b>max_temp</b> – predicted maximum temperature (°C)</li>
-                        <li><b>rainfall</b> – predicted rainfall amount (mm)</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="info-box">
-                <div class="info-header" onclick="toggleSection(this)">
-                    <span>3. Data Preprocessing</span>
-                    <span class="plus">+</span>
-                </div>
-                <div class="info-content">
-                    <ul>
-                        <li>The <b>date_of_record</b> column is converted into a date format.</li>
-                        <li>The data is sorted chronologically.</li>
-                        <li>Year, month and day are extracted from the date.</li>
-                        <li>Station names are converted into numerical values using <b>LabelEncoder</b>.</li>
-                        <li>Missing temperature values are handled using interpolation and remaining missing values are filled with the mean.</li>
-                        <li>Missing rainfall values are replaced with <b>0</b>.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="info-box">
-                <div class="info-header" onclick="toggleSection(this)">
-                    <span>4. Linear Regression Model Development</span>
-                    <span class="plus">+</span>
-                </div>
-                <div class="info-content">
-                    <ul>
-                        <li>The processed dataset is divided into input features and output variables.</li>
-                        <li>The model uses <b>Linear Regression</b> from scikit-learn.</li>
-                        <li>The prepared data is divided into training and testing subsets.</li>
-                        <li>The model learns relationships between date/station information and the four weather outputs.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="info-box">
-                <div class="info-header" onclick="toggleSection(this)">
-                    <span>5. Model Evaluation</span>
-                    <span class="plus">+</span>
-                </div>
-                <div class="info-content">
-                    <ul>
-                        <li>The trained model is evaluated using the <b>R² Score</b>.</li>
-                        <li><b>RMSE (Root Mean Square Error)</b> is also calculated to measure prediction error.</li>
-                        <li>Actual and predicted values can be compared to understand model performance.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="info-box">
-                <div class="info-header" onclick="toggleSection(this)">
-                    <span>6. Prediction for a Given Date &amp; Station</span>
-                    <span class="plus">+</span>
-                </div>
-                <div class="info-content">
-                    <ul>
-                        <li>A function named <b>predict_weather()</b> is used to generate predictions.</li>
-                        <li>The user provides a <b>date</b> and <b>station name</b>.</li>
-                        <li>The date is converted into year, month and day features.</li>
-                        <li>The station name is encoded using the trained station encoder.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="info-box">
-                <div class="info-header" onclick="toggleSection(this)">
-                    <span>7. Example Prediction &amp; Insights</span>
-                    <span class="plus">+</span>
-                </div>
-                <div class="info-content">
-                    <ul>
-                        <li>An example prediction can be generated for a selected station and date.</li>
-                        <li>The program displays the predicted weather values.</li>
-                        <li>When the actual record is available, the corresponding percentage errors are displayed.</li>
+                        <li>Develop a <b>data-driven weather prediction system</b> using Linear Regression.</li>
+                        <li>Uses daily records from multiple weather stations.</li>
                     </ul>
                 </div>
             </div>
@@ -674,20 +354,14 @@ footer{
         </div>
     </div>
 
-    <!-- ========================================================= -->
     <!-- PROJECT 3 -->
-    <!-- ========================================================= -->
     <div class="project-card">
         <div class="project-summary" onclick="toggleProject(this)">
             <div class="project-summary-text">
                 <div class="project-number">PROJECT 3</div>
                 <div class="project-title">Student Pass / Fail Prediction using Logistic Regression</div>
                 <div class="project-summary-description">
-                    This project develops a Logistic Regression model to predict whether a student is
-                    likely to pass or fail based on academic performance and demographic attributes.
-                    The project uses study hours, attendance, past and final exam scores, gender,
-                    parental education, internet access and extracurricular activities, followed by
-                    preprocessing, model training and classification evaluation.
+                    Develops a Logistic Regression model to predict whether a student is likely to pass or fail based on academic performance.
                 </div>
             </div>
             <span class="project-main-plus">+</span>
@@ -700,98 +374,8 @@ footer{
                 </div>
                 <div class="info-content">
                     <ul>
-                        <li>The objective is to develop a <b>Logistic Regression</b> model to classify students as <b>Pass</b> or <b>Fail</b>.</li>
-                        <li>The project uses the <b>Student Pass / Fail Dataset</b>.</li>
-                        <li>The dataset contains academic performance and demographic attributes such as study hours, attendance, exam scores, gender, parental education, internet access and extracurricular activities.</li>
-                        <li>The prediction target is <b>Pass_Fail</b>, where <b>1 = Pass</b> and <b>0 = Fail</b>.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="info-box">
-                <div class="info-header" onclick="toggleSection(this)">
-                    <span>2. Input &amp; Target Variables</span>
-                    <span class="plus">+</span>
-                </div>
-                <div class="info-content">
-                    <p><b>Input Variables</b></p>
-                    <ul>
-                        <li>Study_Hours_per_Week</li>
-                        <li>Attendance_Rate</li>
-                        <li>Past_Exam_Scores</li>
-                        <li>Final_Exam_Score</li>
-                        <li>Gender</li>
-                        <li>Parental_Education_Level</li>
-                        <li>Internet_Access_at_Home</li>
-                        <li>Extracurricular_Activities</li>
-                    </ul>
-                    <p><b>Target Variable</b></p>
-                    <ul>
-                        <li><b>Pass_Fail</b> – Pass = 1, Fail = 0</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="info-box">
-                <div class="info-header" onclick="toggleSection(this)">
-                    <span>3. Data Preprocessing &amp; Analysis</span>
-                    <span class="plus">+</span>
-                </div>
-                <div class="info-content">
-                    <ul>
-                        <li>Missing values are checked before model development.</li>
-                        <li>The unique <b>Student_ID</b> is removed because it is not useful for prediction.</li>
-                        <li>Categorical variables are converted and then one-hot encoded.</li>
-                        <li>Numerical variables are explored using distributions and correlation analysis.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="info-box">
-                <div class="info-header" onclick="toggleSection(this)">
-                    <span>4. Logistic Regression Model Development</span>
-                    <span class="plus">+</span>
-                </div>
-                <div class="info-content">
-                    <ul>
-                        <li>The processed dataset is separated into input features <b>X</b> and target <b>y</b>.</li>
-                        <li>The data is divided into training and testing subsets using an <b>80:20</b> split.</li>
-                        <li>A <b>Logistic Regression</b> classifier is trained on the training data.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="info-box">
-                <div class="info-header" onclick="toggleSection(this)">
-                    <span>5. Model Evaluation</span>
-                    <span class="plus">+</span>
-                </div>
-                <div class="info-content">
-                    <ul>
-                        <li><b>Prediction Accuracy</b> is calculated to measure classification performance.</li>
-                        <li>A <b>classification report</b> is displayed for additional performance measures.</li>
-                        <li>A <b>confusion matrix</b> is used to examine actual versus predicted classifications.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="info-box">
-                <div class="info-header" onclick="toggleSection(this)">
-                    <span>6. Prediction for Student Records</span>
-                    <span class="plus">+</span>
-                </div>
-                <div class="info-content">
-                    <ul>
-                        <li>The trained model is used to predict a randomly selected student from the test set.</li>
-                        <li>The actual result and predicted result are displayed as <b>Pass</b> or <b>Fail</b>.</li>
-                        <li>A second prediction is demonstrated using a <b>manually assumed student record</b>.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="info-box">
-                <div class="info-header" onclick="toggleSection(this)">
-                    <span>7. Example Prediction &amp; Insights</span>
-                    <span class="plus">+</span>
-                </div>
-                <div class="info-content">
-                    <ul>
-                        <li>The project demonstrates how academic and demographic variables can be used for pass/fail classification.</li>
-                        <li>The model output can be interpreted as a predicted <b>Pass</b> or <b>Fail</b> result.</li>
+                        <li>Classify students as <b>Pass</b> or <b>Fail</b> using Logistic Regression.</li>
+                        <li>Uses study hours, attendance, exam scores, and demographics.</li>
                     </ul>
                 </div>
             </div>
@@ -805,20 +389,14 @@ footer{
         </div>
     </div>
 
-    <!-- ========================================================= -->
     <!-- PROJECT 4 -->
-    <!-- ========================================================= -->
     <div class="project-card">
         <div class="project-summary" onclick="toggleProject(this)">
             <div class="project-summary-text">
                 <div class="project-number">PROJECT 4</div>
-                <div class="project-title">Comparative Study of Optimization and Regularization Techniques in Deep Learning</div>
+                <div class="project-title">Comparative Study of Optimization and Regularization Techniques</div>
                 <div class="project-summary-description">
-                    This project uses the Fashion-MNIST dataset and a Multilayer Perceptron (MLP)
-                    to study how different optimization and regularization techniques affect neural
-                    network training. Six optimizers are compared using training-loss convergence,
-                    while five regularization techniques are analyzed using a common training setup.
-                    The project provides visual comparisons of learning behaviour across techniques.
+                    Studies how different optimization and regularization techniques affect neural network training using Fashion-MNIST.
                 </div>
             </div>
             <span class="project-main-plus">+</span>
@@ -831,67 +409,8 @@ footer{
                 </div>
                 <div class="info-content">
                     <ul>
-                        <li>The project uses the <b>Fashion-MNIST</b> dataset for neural-network training.</li>
-                        <li>The objective is to compare different <b>optimization techniques</b> and <b>regularization techniques</b>.</li>
-                        <li>The dataset contains 28×28 grayscale clothing images represented by 784 pixel values.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="info-box">
-                <div class="info-header" onclick="toggleSection(this)">
-                    <span>2. Data Preparation &amp; MLP Model</span>
-                    <span class="plus">+</span>
-                </div>
-                <div class="info-content">
-                    <ul>
-                        <li>The training and testing CSV files are loaded using Pandas.</li>
-                        <li>Pixel values are normalized to the range <b>[0, 1]</b>.</li>
-                        <li>The common MLP architecture is: <b>784 → Dense(128, ReLU) → Dense(64, ReLU) → Dense(10, Softmax)</b>.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="info-box">
-                <div class="info-header" onclick="toggleSection(this)">
-                    <span>3. Optimization Techniques Comparison</span>
-                    <span class="plus">+</span>
-                </div>
-                <div class="info-content">
-                    <p>The project compares the following six optimization techniques:</p>
-                    <ul>
-                        <li><b>SGD</b> – Stochastic Gradient Descent</li>
-                        <li><b>AdaGrad</b></li>
-                        <li><b>AdaDelta</b></li>
-                        <li><b>RMSprop</b></li>
-                        <li><b>NAG</b> – Nesterov Accelerated Gradient</li>
-                        <li><b>Adam</b></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="info-box">
-                <div class="info-header" onclick="toggleSection(this)">
-                    <span>4. Regularization Techniques Comparison</span>
-                    <span class="plus">+</span>
-                </div>
-                <div class="info-content">
-                    <p>The project compares the following five regularization techniques:</p>
-                    <ul>
-                        <li><b>L1 Regularization</b></li>
-                        <li><b>L2 Regularization</b></li>
-                        <li><b>Dropout</b></li>
-                        <li><b>Batch Normalization</b></li>
-                        <li><b>Early Stopping</b></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="info-box">
-                <div class="info-header" onclick="toggleSection(this)">
-                    <span>5. Loss Convergence &amp; Visualization</span>
-                    <span class="plus">+</span>
-                </div>
-                <div class="info-content">
-                    <ul>
-                        <li>Training loss is recorded after each epoch.</li>
-                        <li>Individual epoch-vs-loss graphs are generated for each optimizer and regularization technique.</li>
+                        <li>Compares 6 optimizers and 5 regularization methods.</li>
+                        <li>Uses the <b>Fashion-MNIST</b> dataset.</li>
                     </ul>
                 </div>
             </div>
@@ -905,20 +424,14 @@ footer{
         </div>
     </div>
 
-    <!-- ========================================================= -->
     <!-- PROJECT 5 -->
-    <!-- ========================================================= -->
     <div class="project-card">
         <div class="project-summary" onclick="toggleProject(this)">
             <div class="project-summary-text">
                 <div class="project-number">PROJECT 5</div>
                 <div class="project-title">Student GPA Prediction using Linear Regression</div>
                 <div class="project-summary-description">
-                    This project predicts future semester GPA of engineering students using historical
-                    academic performance data. Separate Linear Regression models are developed for
-                    Regular and Lateral students to predict 5th to 8th semester GPAs. The project
-                    evaluates each model using R², compares actual and predicted GPA for a selected
-                    student record, and also provides editable inputs for further prediction.
+                    Predicts future semester GPA of engineering students using historical academic records for Regular and Lateral students.
                 </div>
             </div>
             <span class="project-main-plus">+</span>
@@ -931,65 +444,8 @@ footer{
                 </div>
                 <div class="info-content">
                     <ul>
-                        <li>The objective is to develop a predictive system for <b>semester-wise GPA forecasting</b> using historical academic data.</li>
-                        <li>The project distinguishes between <b>Regular</b> and <b>Lateral</b> students.</li>
-                        <li>Separate Linear Regression models are trained for the <b>5th, 6th, 7th and 8th semester</b> GPA predictions.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="info-box">
-                <div class="info-header" onclick="toggleSection(this)">
-                    <span>2. Input &amp; Target Variables</span>
-                    <span class="plus">+</span>
-                </div>
-                <div class="info-content">
-                    <p><b>Input Variables</b></p>
-                    <ul>
-                        <li>SSC / 10th Grade GPA</li>
-                        <li>Intermediate / 12th Grade GPA</li>
-                        <li>1st to 4th Semester GPAs for Regular students</li>
-                        <li>3rd and 4th Semester GPAs for Lateral students</li>
-                    </ul>
-                    <p><b>Target Variables</b></p>
-                    <ul>
-                        <li>5th, 6th, 7th and 8th Semester GPA</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="info-box">
-                <div class="info-header" onclick="toggleSection(this)">
-                    <span>3. Data Preparation &amp; Student Type Identification</span>
-                    <span class="plus">+</span>
-                </div>
-                <div class="info-content">
-                    <ul>
-                        <li>Duplicate records are removed.</li>
-                        <li>Zero values in semester GPA columns are treated as missing values.</li>
-                        <li>A student is classified as <b>Lateral</b> when both 1st and 2nd semester GPAs are missing.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="info-box">
-                <div class="info-header" onclick="toggleSection(this)">
-                    <span>4. Linear Regression Model Development</span>
-                    <span class="plus">+</span>
-                </div>
-                <div class="info-content">
-                    <ul>
-                        <li>Separate feature sets are used for Regular and Lateral students.</li>
-                        <li>Independent Linear Regression models are trained for each target semester.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="info-box">
-                <div class="info-header" onclick="toggleSection(this)">
-                    <span>5. Model Evaluation</span>
-                    <span class="plus">+</span>
-                </div>
-                <div class="info-content">
-                    <ul>
-                        <li>Each Regular and Lateral model is evaluated using the <b>R² score</b>.</li>
-                        <li>The R² values are displayed separately for 5th, 6th, 7th and 8th semester predictions.</li>
+                        <li>Semester-wise GPA forecasting using Linear Regression.</li>
+                        <li>Separates Regular and Lateral students.</li>
                     </ul>
                 </div>
             </div>
@@ -1005,17 +461,20 @@ footer{
 
 </div>
 
-<!-- ========================================================= -->
 <!-- FOOTER -->
-<!-- ========================================================= -->
 <footer>
-    © 2026 D. Kiran Prasad | Deep Learning Projects
+    © 2026 D. Kiran Prasad | Academic Resource Portal
 </footer>
 
-<!-- ========================================================= -->
 <!-- JAVASCRIPT -->
-<!-- ========================================================= -->
 <script>
+// Load dynamic navbar from root folder
+fetch('/navbar.html')
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById('nav-placeholder').innerHTML = data;
+    });
+
 function toggleProject(summary){
     const details = summary.nextElementSibling;
     const plus = summary.querySelector(".project-main-plus");
