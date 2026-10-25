@@ -6,11 +6,24 @@
 <title>Strength of Materials — Unit 3</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,Helvetica,sans-serif;background:#f4f7fb;color:#222;line-height:1.6}
-.main-header{background:#063d78;color:#fff;min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 18px;position:sticky;top:0;z-index:1000;box-shadow:0 2px 8px rgba(0,0,0,.16)}
-.main-header a{color:#fff;text-decoration:none;background:#075b99;border:1px solid rgba(255,255,255,.35);border-radius:6px;padding:7px 10px;font-size:14px;font-weight:600}
-.main-header a:hover{background:#0878c9}.header-title{font-size:20px;font-weight:700;text-align:center;letter-spacing:.3px}
-.container{width:94%;max-width:1200px;margin:22px auto 35px}
+body{font-family:Arial,Helvetica,sans-serif;background:#f4f7fb;color:#222;line-height:1.6;display:flex;flex-direction:column;min-height:100vh}
+
+/* Top Header Styles (Matching Contact & Previous Units) */
+header{background:linear-gradient(135deg,#0b3d91,#0f6ab4);color:#fff;padding:18px 8%}
+.top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.brand h1{font-size:38px;margin:0}
+.brand p{margin-top:6px;font-size:18px;margin-bottom:0}
+nav{margin-top:18px}
+nav a{color:#fff;text-decoration:none;margin-right:22px;font-weight:600}
+nav a:hover{text-decoration:underline}
+
+.site-section-banner{
+background:#063f78;
+color:#fff;text-align:center;padding:18px 12px;
+font-size:27px;font-weight:800;letter-spacing:.5px;
+box-shadow:0 2px 8px rgba(0,0,0,.12)}
+
+.container{width:94%;max-width:1200px;margin:22px auto 35px;flex:1}
 .intro{background:#fff;border:1px solid #d7e1eb;border-radius:9px;padding:25px;margin-bottom:18px;box-shadow:0 3px 10px rgba(0,0,0,.06)}
 .intro h1{color:#063d78;font-size:28px;margin-bottom:12px}.intro p{font-size:17px;text-align:justify;margin-bottom:11px}
 .learning{margin:12px 0 0 22px}.learning li{margin:5px 0;font-size:16px}
@@ -21,17 +34,29 @@ body{font-family:Arial,Helvetica,sans-serif;background:#f4f7fb;color:#222;line-h
 .topic-title{flex:1;font-size:18px;font-weight:700}.toggle{width:35px;height:35px;border:1px solid rgba(255,255,255,.65);border-radius:6px;background:#fff;color:#075b99;font-size:24px;line-height:30px;cursor:pointer;font-weight:700}
 .topic-content{display:none;padding:18px 20px 22px;background:#fff}.topic.open .topic-content{display:block}
 .description{font-size:16px;text-align:justify;margin-bottom:15px}.image-box{text-align:center;margin:12px auto 4px}.image-box img{display:block;width:100%;height:auto;max-width:1500px;margin:auto;border-radius:6px;border:1px solid #dce5ed}.caption{color:#5d7182;font-size:14px;margin-top:8px}.multi-image{display:grid;grid-template-columns:1fr;gap:18px}
-footer{background:#063d78;color:#fff;text-align:center;padding:17px;font-size:14px}
-@media(max-width:800px){.main-header{padding:9px 10px;min-height:60px}.main-header a{font-size:13px;padding:6px 5px}.header-title{font-size:17px}.container{width:96%;margin-top:16px}.intro{padding:18px}.intro h1{font-size:24px}.intro p,.description{font-size:16px}.learning li{font-size:15px}.topic-header{padding:11px 12px;min-height:62px}.topic-title{font-size:18px}.topic-number{font-size:15px;padding:6px 8px}.toggle{width:34px;height:34px;font-size:23px;line-height:32px}.topic-content{padding:12px}}
-@media(max-width:520px){.main-header{flex-wrap:wrap;justify-content:center}.header-title{order:-1;width:100%;font-size:14px}.main-header a{font-size:11px}.topic-title{font-size:16px}.topic-number{font-size:13px}.intro h1{font-size:21px}}
+footer{background:#0b3d91;color:#fff;text-align:center;padding:17px;font-size:14px;margin-top:auto}
+
+@media(max-width:900px){.brand h1{font-size:30px}}
+@media(max-width:800px){.container{width:96%;margin-top:16px}.intro{padding:18px}.intro h1{font-size:24px}.intro p,.description{font-size:16px}.learning li{font-size:15px}.topic-header{padding:11px 12px;min-height:62px}.topic-title{font-size:18px}.topic-number{font-size:15px;padding:6px 8px}.toggle{width:34px;height:34px;font-size:23px;line-height:32px}.topic-content{padding:12px}}
+@media(max-width:520px){.topic-title{font-size:16px}.topic-number{font-size:13px}.intro h1{font-size:21px}}
 </style>
 </head>
 <body>
-<header class="main-header">
-<a href="../../index.html">🏠 Main Home</a>
-<div class="header-title">STRENGTH OF MATERIALS — UNIT 3</div>
-<a href="../index.html">Strength of Materials Home</a>
+
+<header>
+    <div class="top">
+        <div class="brand">
+            <h1>D. KIRAN PRASAD</h1>
+            <p>Educational Portal • Lecture Videos • Projects • Notes • Source Code</p>
+        </div>
+    </div>
+
+    <!-- Dynamic Navigation Bar Placeholder -->
+    <div id="nav-placeholder"></div>
 </header>
+
+<div class="site-section-banner">STRENGTH OF MATERIALS — BENDING AND SHEAR STRESSES CONCEPTS</div>
+
 <main class="container">
 <section class="intro">
 <h1>Unit 3 — Bending and Shear Stresses</h1>
@@ -68,6 +93,17 @@ footer{background:#063d78;color:#fff;text-align:center;padding:17px;font-size:14
 </main>
 <footer>© 2026 D. Kiran Prasad &nbsp;|&nbsp; Strength of Materials</footer>
 <script>
+/* Load the common site navigation from the website root. */
+fetch('/navbar.html')
+    .then(response => {
+        if (!response.ok) throw new Error('Could not load /navbar.html');
+        return response.text();
+    })
+    .then(data => {
+        document.getElementById('nav-placeholder').innerHTML = data;
+    })
+    .catch(error => console.error('Navbar loading error:', error));
+
 function toggleTopic(header){
  const topic=header.closest('.topic');
  const button=header.querySelector('.toggle');
