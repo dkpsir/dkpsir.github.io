@@ -11,47 +11,46 @@
         font-family: "Segoe UI", Arial, sans-serif;
         background: #f4f7fb;
         color: #18324b;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
     }
 
-    .topbar {
-        background: #063f78;
-        color: white;
-        padding: 18px 28px;
+    /* Top Header Styles (Matching Contact Page) */
+    header {
+        background: linear-gradient(135deg,#0b3d91,#0f6ab4);
+        color: #fff;
+        padding: 18px 8%;
+    }
+    .top {
         display: flex;
-        align-items: center;
         justify-content: space-between;
-        gap: 20px;
-        box-shadow: 0 2px 8px rgba(0,0,0,.12);
-    }
-
-    .title {
-        font-size: 28px;
-        font-weight: 700;
-        letter-spacing: .3px;
-    }
-
-    .nav {
-        display: flex;
-        gap: 10px;
+        align-items: center;
         flex-wrap: wrap;
     }
+    .brand h1 { font-size: 38px; margin: 0; }
+    .brand p { margin-top: 6px; font-size: 18px; margin-bottom: 0; }
+    nav { margin-top: 18px; }
+    nav a { color: #fff; text-decoration: none; margin-right: 22px; font-weight: 600; }
+    nav a:hover { text-decoration: underline; }
 
-    .nav a {
-        text-decoration: none;
+    .site-section-banner {
+        background: #063f78;
         color: white;
-        background: #0b69c7;
-        padding: 10px 18px;
-        border-radius: 22px;
-        font-weight: 600;
-        font-size: 14px;
+        text-align: center;
+        padding: 18px 12px;
+        font-size: 27px;
+        font-weight: 800;
+        letter-spacing: .5px;
+        box-shadow: 0 2px 8px rgba(0,0,0,.12);
     }
-
-    .nav a:hover { background: #095aa9; }
 
     .container {
         max-width: 1250px;
         margin: 24px auto 50px;
         padding: 0 18px;
+        flex: 1;
+        width: 100%;
     }
 
     .unit-header {
@@ -187,15 +186,21 @@
         background: #f4f8fc;
     }
 
-    .footer {
+    footer {
+        background: #0b3d91;
+        color: #fff;
         text-align: center;
-        color: #6a8095;
-        font-size: 13px;
         padding: 20px;
+        font-size: 14px;
+        margin-top: auto;
+    }
+
+    @media (max-width: 900px) {
+        .brand h1 { font-size: 30px; }
     }
 
     @media (max-width: 700px) {
-        .topbar { padding: 15px; }
+        header { padding: 15px; }
         .title { font-size: 21px; }
         .topic-name { font-size: 18px; }
         .unit-header { padding: 20px; }
@@ -205,13 +210,19 @@
 
 <body>
 
-<header class="topbar">
-    <div class="title">STRENGTH OF MATERIALS — UNIT 2</div>
-    <nav class="nav">
-        <a href="../../index.html">Home</a>
-        <a href="../index.html">MoS Home</a>
-    </nav>
+<header>
+    <div class="top">
+        <div class="brand">
+            <h1>D. KIRAN PRASAD</h1>
+            <p>Educational Portal • Lecture Videos • Projects • Notes • Source Code</p>
+        </div>
+    </div>
+
+    <!-- Dynamic Navigation Bar Placeholder -->
+    <div id="nav-placeholder"></div>
 </header>
+
+<div class="site-section-banner">STRENGTH OF MATERIALS — SHEAR FORCE AND BENDING MOMENT CONCEPTS</div>
 
 <main class="container">
 
@@ -412,12 +423,24 @@
 
 </main>
 
-<div class="footer">
-    Strength of Materials — Unit 2
-</div>
+<footer>
+    © 2026 D. Kiran Prasad | Strength of Materials — Unit 2
+</footer>
 
 <script>
+/* Load the common site navigation from the website root. */
+fetch('/navbar.html')
+    .then(response => {
+        if (!response.ok) throw new Error('Could not load /navbar.html');
+        return response.text();
+    })
+    .then(data => {
+        document.getElementById('nav-placeholder').innerHTML = data;
+    })
+    .catch(error => console.error('Navbar loading error:', error));
+
 function toggleTopic(button) {
+    const topic = button.closest(".topic");
     const content = button.nextElementSibling;
     const icon = button.querySelector(".plus");
     const isOpen = content.style.display === "block";
