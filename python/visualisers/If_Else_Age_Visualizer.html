@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>If Else Age Visualizer</title>
+<style>
+body{font-family:Arial;background:#f4f8fc;margin:18px}
+h2{text-align:center;color:#0b4a8b}
+.container{display:flex;gap:18px}
+.left,.right{flex:1}
+pre{background:#1e1e1e;color:#ddd;padding:10px;border-radius:6px;line-height:1.15;font-size:13px}
+.line{display:block;padding:0 4px}
+.active{background:#ffeb3b;color:#000;font-weight:bold}
+input{padding:8px;font-size:16px;width:120px}
+button{padding:8px 14px;font-size:15px;margin-left:8px}
+#out{margin-top:15px;font-size:22px;color:green;font-weight:bold}
+table{border-collapse:collapse;width:100%;background:white}
+th,td{border:1px solid #555;padding:8px}
+th{background:#dcecff}
+</style>
+</head>
+<body>
+<h2>if - else Statement : Voting Eligibility</h2>
+<div class="container">
+<div class="left">
+<table>
+<tr><th>Condition</th><th>Output</th></tr>
+<tr><td>Age ≥ 18</td><td>Eligible to Vote</td></tr>
+<tr><td>Age < 18</td><td>Not Eligible to Vote</td></tr>
+</table><br>
+Enter Age :
+<input id="age" type="number">
+<button onclick="start()">Start</button>
+<button onclick="nextStep()">Next</button>
+<div id="out"></div>
+</div>
+
+<div class="right">
+<pre>
+<span id="l1" class="line">age = int(input("Enter Age: "))</span>
+<span id="l2" class="line">if age >= 18:</span>
+<span id="l3" class="line">    print("Eligible to Vote")</span>
+<span id="l4" class="line">else:</span>
+<span id="l5" class="line">    print("Not Eligible to Vote")</span>
+</pre>
+</div>
+</div>
+
+<script>
+let seq=[],idx=0,res="";
+function clr(){document.querySelectorAll('.line').forEach(x=>x.classList.remove('active'));}
+function hi(id){clr();document.getElementById(id).classList.add('active');}
+function start(){
+ let a=parseInt(document.getElementById('age').value);
+ if(isNaN(a)){alert("Enter age");return;}
+ seq=['l1'];
+ if(a>=18){seq.push('l2','l3');res='Eligible to Vote';}
+ else{seq.push('l2','l4','l5');res='Not Eligible to Vote';}
+ idx=0;document.getElementById('out').innerHTML='';
+ nextStep();
+}
+function nextStep(){
+ if(idx<seq.length){
+   hi(seq[idx]); idx++;
+   if(idx===seq.length){
+      setTimeout(()=>{document.getElementById('out').innerHTML='Output: <b>'+res+'</b>';},300);
+   }
+ }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<title>Function Visualizer V2</title>
+<style>
+body{font-family:Segoe UI,Arial;background:#eef3f8;margin:20px}
+h2{margin-top:0}
+.wrap{display:flex;gap:18px}
+.panel{background:#fff;border-radius:8px;box-shadow:0 0 6px #bbb;padding:15px}
+.left{width:34%}.right{flex:1}
+button{padding:8px 18px;margin-right:8px}
+input{width:120px}
+table{border-collapse:collapse;width:100%}
+th,td{border:1px solid #bbb;padding:5px}
+.code{font:22px Consolas,monospace;line-height:1.6}
+.line{padding:2px 8px;border-radius:4px;white-space:pre}
+.active{background:#fff176}
+.kw{color:#005cc5;font-weight:bold}
+.fn{color:#22863a;font-weight:bold}
+.ret{color:#6f42c1;font-weight:bold}
+.pr{color:#005cc5}
+.str{color:#a31515}
+.stack,.out{border:1px solid #bbb;padding:8px;background:#f5f5ff;min-height:50px}
+.out{background:#111;color:#00ff66}
+</style></head>
+<body>
+<h2>Python Function Visualizer - Version 2</h2>
+<button onclick="start()">Start</button><button onclick="nextStep()">Next</button><button onclick="resetAll()">Reset</button>
+<div class="wrap">
+<div class="panel left">
+<b>Input</b><br><br>
+Length <input id=l value=10><br><br>
+Breadth <input id=b value=5><br><br>
+<b>Variables</b>
+<table>
+<tr><th>Variable</th><th>Value</th></tr>
+<tr><td>length</td><td id=vlen></td></tr>
+<tr><td>breadth</td><td id=vbr></td></tr>
+<tr><td>l (local)</td><td id=vl></td></tr>
+<tr><td>b (local)</td><td id=vb></td></tr>
+<tr><td>area (local)</td><td id=va></td></tr>
+<tr><td>result</td><td id=vr></td></tr>
+</table><br>
+<b>Call Stack</b>
+<div id=stack class=stack>Main()</div><br>
+<b>Output</b>
+<div id=out class=out></div>
+</div>
+<div class="panel right">
+<div class=code id=code></div>
+</div></div>
+<script>
+const prog=[
+`<span class=kw>def</span> <span class=fn>area</span>(l, b):`,
+`    area = l * b`,
+`    <span class=ret>return</span> area`,
+``,
+`<span class=kw>def</span> <span class=fn>display</span>(ans):`,
+`    <span class=pr>print</span>(<span class=str>"Area ="</span>, ans)`,
+``,
+`length = int(input())`,
+`breadth = int(input())`,
+`result = area(length, breadth)`,
+`display(result)`
+];
+const c=document.getElementById("code");
+prog.forEach((x,i)=>{let d=document.createElement("div");d.className="line";d.id="ln"+i;d.innerHTML=x;c.appendChild(d);});
+let s=-1,L,B,A,R;
+function hi(i){document.querySelectorAll(".line").forEach(e=>e.classList.remove("active"));if(i>=0)ln=i,document.getElementById("ln"+i).classList.add("active");}
+function resetAll(){s=-1;["vlen","vbr","vl","vb","va","vr"].forEach(id=>window[id].textContent="");stack.innerHTML="Main()";out.textContent="";hi(-1);}
+function start(){resetAll();s=0;nextStep();}
+function nextStep(){
+switch(s){
+case 0:hi(7);L=parseInt(l.value);vlen.textContent=L;break;
+case 1:hi(8);B=parseInt(b.value);vbr.textContent=B;break;
+case 2:hi(9);stack.innerHTML="Main()<br>↓<br>area()";break;
+case 3:hi(0);vl.textContent=L;vb.textContent=B;break;
+case 4:hi(1);A=L*B;va.textContent=A;break;
+case 5:hi(2);break;
+case 6:hi(9);R=A;vr.textContent=R;vl.textContent="";vb.textContent="";va.textContent="";stack.innerHTML="Main()";break;
+case 7:hi(10);stack.innerHTML="Main()<br>↓<br>display()";break;
+case 8:hi(4);break;
+case 9:hi(5);out.textContent=">>> Area = "+R;break;
+case 10:stack.innerHTML="Main()";hi(-1);break;
+default:return;
+}
+s++;
+}
+</script></body></html>

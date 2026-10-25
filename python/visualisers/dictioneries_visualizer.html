@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Dictionary - Add a Key-Value Pair</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#eef4f9;color:#111;font-family:Arial,sans-serif}
+.container{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:1450px;margin:20px auto;padding:0 18px}
+.panel{background:#fff;border-radius:9px;padding:14px;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+.controls{background:#fff;border-radius:8px;padding:12px;margin-bottom:14px}
+button{padding:8px 17px;margin-right:7px;font-size:16px;cursor:pointer}
+button:disabled{opacity:.5;cursor:not-allowed}
+input{padding:8px;font-size:16px;width:150px;margin:4px}
+.message{font-size:16px;margin:10px 0;min-height:24px}
+pre.code{margin:0;background:#1e1e1e;color:#ddd;padding:12px;border-radius:7px;
+font:14px/1.5 Consolas,"Courier New",monospace;min-height:450px;overflow:auto}
+.line{display:block;padding:1px 5px}
+.active{background:#ffeb3b;color:#000;font-weight:bold}
+.input-box{background:#f8fafc;border:1px solid #ccd8e2;border-radius:7px;padding:11px}
+.input-box label{font-weight:bold}
+.output-title{background:#0b4f86;color:#fff;text-align:center;padding:8px;font-weight:bold;margin-top:14px}
+.output-box{background:#fff;border:1px solid #555;padding:10px;min-height:105px;
+font:14px/1.45 Consolas,"Courier New",monospace;white-space:pre-wrap}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.box-title{text-align:center;font-weight:bold;padding:7px}
+.original .box-title{background:#e5e5e5}
+.updated .box-title{background:#dff1e2}
+.box-content{background:#fff;border:1px solid #555;padding:10px;
+font:14px/1.45 Consolas,"Courier New",monospace;white-space:pre-wrap;min-height:105px}
+.explanation{background:#f7fafc;border-left:4px solid #0b5d96;padding:11px;margin-top:12px;line-height:1.5}
+h2{margin:2px 0 12px;color:#0b4f86;font-size:20px}
+@media(max-width:850px){.container{grid-template-columns:1fr}.compare{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- LEFT -->
+<section class="panel">
+<h2>Input / Output</h2>
+
+<div class="controls">
+<button id="startBtn">Start</button>
+<button id="nextBtn" disabled>Next →</button>
+<button id="resetBtn">Reset</button>
+</div>
+
+<div class="input-box">
+<label>Input for addition</label><br>
+Key:
+<input id="keyInput" type="text" placeholder="marks">
+Value:
+<input id="valueInput" type="text" placeholder="85">
+<button id="giveInputBtn" disabled>Give Input</button>
+</div>
+
+<div class="message" id="message">Click Start to begin.</div>
+
+<!-- Only the two required dictionary displays -->
+<div class="compare">
+  <div class="original">
+    <div class="box-title">Original Dictionary</div>
+    <div class="box-content" id="originalDisplay"></div>
+  </div>
+  <div class="updated">
+    <div class="box-title">Updated Dictionary</div>
+    <div class="box-content" id="updatedDisplay"></div>
+  </div>
+</div>
+
+<div class="output-title">Python Output</div>
+<div class="output-box" id="output"></div>
+
+</section>
+
+<!-- RIGHT -->
+<section class="panel">
+<h2>Python Program — Line by Line</h2>
+
+<pre class="code">
+<span id="l1" class="line">student = {</span>
+<span id="l2" class="line">    "name": "Ravi",</span>
+<span id="l3" class="line">    "age": 20,</span>
+<span id="l4" class="line">    "branch": "CSE"</span>
+<span id="l5" class="line">}</span>
+<span id="l6" class="line"></span>
+<span id="l7" class="line">print(student)</span>
+<span id="l8" class="line"></span>
+<span id="l9" class="line">key = input("Enter key: ")</span>
+<span id="l10" class="line">value = input("Enter value: ")</span>
+<span id="l11" class="line"></span>
+<span id="l12" class="line">student[key] = value</span>
+<span id="l13" class="line"></span>
+<span id="l14" class="line">print(student)</span>
+</pre>
+
+<div class="explanation" id="explanation">
+<b>Execution:</b> Click Start and then Next to execute one Python line at a time.
+</div>
+</section>
+
+</div>
+
+<script>
+const initial={name:"Ravi",age:20,branch:"CSE"};
+let student={...initial};
+let step=0;
+let inputGiven=false;
+
+const startBtn=document.getElementById("startBtn");
+const nextBtn=document.getElementById("nextBtn");
+const resetBtn=document.getElementById("resetBtn");
+const giveInputBtn=document.getElementById("giveInputBtn");
+const keyInput=document.getElementById("keyInput");
+const valueInput=document.getElementById("valueInput");
+const message=document.getElementById("message");
+const originalDisplay=document.getElementById("originalDisplay");
+const updatedDisplay=document.getElementById("updatedDisplay");
+const output=document.getElementById("output");
+const explanation=document.getElementById("explanation");
+
+function text(obj){
+ return JSON.stringify(obj,null,2);
+}
+
+function clearHighlight(){
+ document.querySelectorAll(".line").forEach(x=>x.classList.remove("active"));
+}
+
+function highlight(id){
+ clearHighlight();
+ document.getElementById(id).classList.add("active");
+}
+
+function reset(){
+ student={...initial};
+ step=0;
+ inputGiven=false;
+
+ startBtn.disabled=false;
+ nextBtn.disabled=true;
+ giveInputBtn.disabled=true;
+
+ keyInput.value="";
+ valueInput.value="";
+
+ // Both displays are empty initially.
+ originalDisplay.textContent="";
+ updatedDisplay.textContent="";
+ output.textContent="";
+
+ message.textContent="Click Start to begin.";
+ explanation.innerHTML="<b>Execution:</b> Click Start and then Next to execute one Python line at a time.";
+ clearHighlight();
+}
+
+function start(){
+ student={...initial};
+ step=1;
+ inputGiven=false;
+
+ startBtn.disabled=true;
+ nextBtn.disabled=false;
+ giveInputBtn.disabled=true;
+
+ // Both remain empty until their respective print statements execute.
+ originalDisplay.textContent="";
+ updatedDisplay.textContent="";
+ output.textContent="";
+
+ message.textContent="Program started. Click Next.";
+ explanation.innerHTML="<b>Step 1:</b> Execute the dictionary creation statements.";
+ clearHighlight();
+}
+
+function giveInput(){
+ const k=keyInput.value.trim();
+ const v=valueInput.value;
+
+ if(!k || v===""){
+   alert("Please enter both key and value.");
+   return;
+ }
+
+ inputGiven=true;
+ giveInputBtn.disabled=true;
+
+ message.textContent="Input received. Click Next to continue.";
+ explanation.innerHTML="<b>Input received:</b> the key and value are ready for the next Python statements.";
+}
+
+function nextStep(){
+
+ // 1-5: dictionary creation
+ if(step>=1 && step<=5){
+   highlight("l"+step);
+   message.textContent="Executing dictionary creation line "+step+".";
+   explanation.innerHTML="<b>Dictionary creation:</b> the dictionary is being created in memory.";
+   step++;
+   return;
+ }
+
+ // First print: ORIGINAL dictionary only
+ if(step===6){
+   highlight("l7");
+   originalDisplay.textContent=text(student);
+   output.textContent=text(student);
+   message.textContent="Original dictionary displayed by the first print().";
+   explanation.innerHTML="<b>print(student)</b> displays the original dictionary. The Updated Dictionary box remains empty.";
+   step=7;
+   return;
+ }
+
+ // Input key
+ if(step===7){
+   highlight("l9");
+   giveInputBtn.disabled=false;
+   message.textContent="Enter the key and value, then click Give Input.";
+   explanation.innerHTML="<b>key = input(...)</b> asks the user for the key.";
+   step=8;
+   return;
+ }
+
+ // Input value
+ if(step===8){
+   if(!inputGiven){
+     message.textContent="Please enter the key and value, then click Give Input.";
+     return;
+   }
+   highlight("l10");
+   message.textContent="Value received. Click Next.";
+   explanation.innerHTML="<b>value = input(...)</b> receives the value from the user.";
+   step=9;
+   return;
+ }
+
+ // Update memory - but do NOT display updated output yet
+ if(step===9){
+   highlight("l12");
+
+   const k=keyInput.value.trim();
+   const v=valueInput.value;
+   student[k]=v;
+
+   message.textContent="Dictionary updated in memory. Updated output is still empty.";
+   explanation.innerHTML="<b>student[key] = value</b> updates the dictionary in memory. Nothing is printed yet.";
+   step=10;
+   return;
+ }
+
+ // Second print: UPDATED dictionary only
+ if(step===10){
+   highlight("l14");
+
+   updatedDisplay.textContent=text(student);
+   output.textContent=text(student);
+
+   message.textContent="Updated dictionary displayed by the second print().";
+   explanation.innerHTML="<b>print(student)</b> is executed again, so the updated dictionary is now displayed.";
+
+   nextBtn.disabled=true;
+   startBtn.disabled=false;
+   step=11;
+   return;
+ }
+}
+
+startBtn.onclick=start;
+nextBtn.onclick=nextStep;
+giveInputBtn.onclick=giveInput;
+resetBtn.onclick=reset;
+
+reset();
+</script>
+</body>
+</html>
