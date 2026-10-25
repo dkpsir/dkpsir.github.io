@@ -637,37 +637,62 @@ fetch('/navbar.html')
 
 // Fetch Tier 2 Python section bar (title banner + tabs) and handle initial tab hash state
 fetch('/python-bar.html')
-    .then(response => response.text())
+    .then(response => {
+        if (!response.ok) throw new Error('Could not load python-bar.html');
+        return response.text();
+    })
     .then(data => {
-        document.getElementById('python-bar-placeholder').innerHTML = data;
+        const placeholder = document.getElementById('python-bar-placeholder');
+        placeholder.innerHTML = data;
 
-        // Check if a specific tab hash was passed in the URL (e.g. #mechanicalTab)
-        if (window.location.hash) {
-            let targetTab = window.location.hash.substring(1);
-            let tabButton = document.querySelector(`[onclick*="${targetTab}"]`);
-            if (tabButton) {
-                showTab(targetTab, tabButton);
-            }
+        // The existing python-bar.html uses links pointing to /python/index.html.
+        // Intercept those links and switch the in-page sections instead of reloading.
+        placeholder.querySelectorAll('.main-tab').forEach(function(tab) {
+            tab.addEventListener('click', function(event) {
+                event.preventDefault();
+                const label = (tab.textContent || '').toLowerCase();
+                const targetId = label.includes('mechanical')
+                    ? 'mechanicalTab'
+                    : 'pythonTab';
+                showTab(targetId, tab);
+                history.replaceState(null, '', targetId === 'mechanicalTab'
+                    ? '#mechanicalTab' : '#pythonTab');
+            });
+        });
+
+        // Restore the selected tab when a hash is present.
+        const requestedTab = window.location.hash.substring(1);
+        if (requestedTab === 'mechanicalTab' || requestedTab === 'pythonTab') {
+            showTab(requestedTab);
+        } else {
+            showTab('pythonTab');
         }
+    })
+    .catch(function(error) {
+        console.error(error);
     });
 
 // Tab switcher script
 function showTab(tabId, button){
-    document.querySelectorAll(".tab-page").forEach(function(page){
-        page.classList.remove("active");
+    document.querySelectorAll('.tab-page').forEach(function(page) {
+        page.classList.toggle('active', page.id === tabId);
     });
-    document.querySelectorAll(".main-tab").forEach(function(tab){
-        tab.classList.remove("active");
-    });
-    
-    let target = document.getElementById(tabId);
-    if(target) target.classList.add("active");
 
-    if (button) {
-        button.classList.add("active");
-    } else {
-        let activeBtn = document.querySelector(`[onclick*="${tabId}"]`);
-        if(activeBtn) activeBtn.classList.add("active");
+    document.querySelectorAll('#python-bar-placeholder .main-tab').forEach(function(tab) {
+        const isMechanical = (tab.textContent || '').toLowerCase().includes('mechanical');
+        const isActive = tabId === 'mechanicalTab' ? isMechanical : !isMechanical;
+        tab.classList.toggle('active', isActive);
+        tab.style.background = isActive ? '#0b3c75' : '#e0e8f0';
+        tab.style.color = isActive ? '#fff' : '#0b3c75';
+    });
+
+    if (button) button.classList.add('active');
+
+    const bannerTitle = document.querySelector('#python-bar-placeholder .page-title-banner h2');
+    if (bannerTitle) {
+        bannerTitle.textContent = tabId === 'mechanicalTab'
+            ? 'MECHANICAL ENGINEERING EXPERIMENTS'
+            : 'CONCEPTS OF PYTHON AND VISUALISERS';
     }
 }
 </script>
