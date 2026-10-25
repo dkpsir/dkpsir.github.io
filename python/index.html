@@ -296,7 +296,7 @@ footer {
 
 <body>
 
-<!-- HEADER & COMMON NAVIGATION -->
+<!-- TIER 1: GLOBAL SITE-WIDE NAVIGATION HEADER -->
 <header>
 <div class="top">
 <div class="brand">
@@ -304,24 +304,14 @@ footer {
 <p>Educational Portal • Python &amp; Engineering Learning Resources</p>
 </div>
 </div>
-<!-- Dynamic Navigation Bar Placeholder -->
 <div id="nav-placeholder"></div>
 </header>
 
-<!-- PAGE TITLE BANNER -->
-<div class="page-title-banner">
-    <h2>CONCEPTS OF PYTHON AND VISUALISERS</h2>
-    <p>Master Python concepts through theory, interactive execution visualisers, and practice programs.</p>
-</div>
+<!-- TIER 2: PYTHON SECTION BAR PLACEHOLDER -->
+<div id="python-bar-placeholder"></div>
 
 <!-- MAIN PAGE CONTAINER -->
 <main class="page">
-
-    <!-- MAIN TABS -->
-    <nav class="main-tabs">
-        <button class="main-tab active" onclick="showTab('pythonTab', this)">🐍 Python Core Concepts</button>
-        <button class="main-tab" onclick="showTab('mechanicalTab', this)">⚙ Mechanical Engineering Experiments</button>
-    </nav>
 
     <!-- ========================================================= -->
     <!-- TAB 1: PYTHON CORE CONCEPTS (TABLE FORMAT) -->
@@ -688,16 +678,23 @@ footer {
     © 2026 D. Kiran Prasad | Academic Resource Portal
 </footer>
 
-<!-- JAVASCRIPT -->
+<!-- JAVASCRIPT FETCH SCRIPT FOR BOTH BARS -->
 <script>
-// Load dynamic navbar from root folder
+// Fetch Tier 1 site-wide navbar
 fetch('/navbar.html')
     .then(response => response.text())
     .then(data => {
         document.getElementById('nav-placeholder').innerHTML = data;
     });
 
-// Tab switcher script
+// Fetch Tier 2 Python section bar (title banner + tabs)
+fetch('/python-bar.html')
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById('python-bar-placeholder').innerHTML = data;
+    });
+
+// Tab switcher script for index page content
 function showTab(tabId, button){
     document.querySelectorAll(".tab-page").forEach(function(page){
         page.classList.remove("active");
