@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
@@ -409,6 +408,7 @@ footer{
 </style>
 </head>
 <body>
+
 <!-- ========================================================= -->
 <!-- HEADER -->
 <!-- ========================================================= -->
@@ -419,906 +419,603 @@ footer{
 <p>Real-World Applications using Deep Learning and Machine Learning Algorithms</p>
 </div>
 </header>
-<!-- ========================================================= -->
-<!-- TOP NAVIGATION -->
-<!-- ========================================================= -->
+
 <!-- ========================================================= -->
 <!-- MAIN CONTENT -->
 <!-- ========================================================= -->
 <div class="container">
-<!-- ========================================================= -->
-<!-- PROJECT 1 -->
-<!-- ========================================================= -->
-<div class="project-card">
-<div class="project-summary" onclick="toggleProject(this)">
-<div class="project-summary-text">
-<div class="project-number">PROJECT 1</div>
-<div class="project-title">Customer Churn Prediction Using Artificial Neural Network</div>
-<div class="project-summary-description">
-                This project develops an Artificial Neural Network (ANN) to predict whether a
-                telecom customer is likely to churn or remain with the service. The project uses
-                customer demographic, service, account and payment information, followed by data
-                preprocessing, model development and performance evaluation using classification
-                metrics.
+
+    <!-- ========================================================= -->
+    <!-- PROJECT 1 -->
+    <!-- ========================================================= -->
+    <div class="project-card">
+        <div class="project-summary" onclick="toggleProject(this)">
+            <div class="project-summary-text">
+                <div class="project-number">PROJECT 1</div>
+                <div class="project-title">Customer Churn Prediction Using Artificial Neural Network</div>
+                <div class="project-summary-description">
+                    This project develops an Artificial Neural Network (ANN) to predict whether a
+                    telecom customer is likely to churn or remain with the service. The project uses
+                    customer demographic, service, account and payment information, followed by data
+                    preprocessing, model development and performance evaluation using classification
+                    metrics.
+                </div>
             </div>
-</div>
-<span class="project-main-plus">+</span>
-</div>
-<div class="project-details">
-<!-- ----------------------------------------------------- -->
-<!-- 1. PROJECT OBJECTIVE AND DATASET -->
-<!-- ----------------------------------------------------- -->
-<div class="info-box">
-<div class="info-header" onclick="toggleSection(this)">
-<span>
-                1. Project Objective &amp; Dataset
-            </span>
-<span class="plus">+</span>
-</div>
-<div class="info-content">
-<ul>
-<li>
-                    The objective of the project is to predict whether
-                    a telecom customer is likely to <b>churn</b> or stay.
-                </li>
-<li>
-                    The project uses the
-                    <b>Telco Customer Churn Dataset</b>.
-                </li>
-<li>
-                    The dataset contains <b>7,043 customer records</b>
-                    with 21 original features.
-                </li>
-<li>
-                    Customer information includes demographic,
-                    account, service and payment-related details.
-                </li>
-<li>
-                    The target variable is <b>Churn</b>, indicating
-                    whether the customer left the service.
-                </li>
-</ul>
-</div>
-</div>
-<!-- ----------------------------------------------------- -->
-<!-- 2. DATA PREPROCESSING -->
-<!-- ----------------------------------------------------- -->
-<div class="info-box">
-<div class="info-header" onclick="toggleSection(this)">
-<span>
-                2. Data Preprocessing &amp; Analysis
-            </span>
-<span class="plus">+</span>
-</div>
-<div class="info-content">
-<ul>
-<li>
-                    Unnecessary customer identification information
-                    is removed.
-                </li>
-<li>
-                    Missing and inconsistent values are handled.
-                </li>
-<li>
-                    Categorical variables are converted into
-                    numerical form.
-                </li>
-<li>
-                    Yes/No variables are encoded as numerical values
-                    and multi-category variables are one-hot encoded.
-                </li>
-<li>
-                    Numerical features are scaled before training
-                    the neural network.
-                </li>
-<li>
-                    Exploratory analysis is performed to study
-                    customer churn and important customer attributes.
-                </li>
-</ul>
-</div>
-</div>
-<!-- ----------------------------------------------------- -->
-<!-- 3. ANN MODEL -->
-<!-- ----------------------------------------------------- -->
-<div class="info-box">
-<div class="info-header" onclick="toggleSection(this)">
-<span>
-                3. ANN Model Development
-            </span>
-<span class="plus">+</span>
-</div>
-<div class="info-content">
-<ul>
-<li>
-                    The processed customer data is used to develop
-                    an <b>Artificial Neural Network (ANN)</b>.
-                </li>
-<li>
-                    The network uses <b>26 input features</b>.
-                </li>
-<li>
-                    Hidden layers use the <b>ReLU</b> activation function.
-                </li>
-<li>
-                    The output layer contains one neuron with
-                    <b>Sigmoid</b> activation for binary classification.
-                </li>
-<li>
-<b>Adam</b> is used as the optimizer.
-                </li>
-<li>
-<b>Binary Cross-Entropy</b> is used as the loss function.
-                </li>
-</ul>
-</div>
-</div>
-<!-- ----------------------------------------------------- -->
-<!-- 4. EVALUATION -->
-<!-- ----------------------------------------------------- -->
-<div class="info-box">
-<div class="info-header" onclick="toggleSection(this)">
-<span>
-                4. Model Evaluation &amp; Comparison
-            </span>
-<span class="plus">+</span>
-</div>
-<div class="info-content">
-<ul>
-<li>
-                    The ANN model is evaluated using classification
-                    performance measures.
-                </li>
-<li>
-                    Accuracy and classification report are used
-                    to evaluate the model.
-                </li>
-<li>
-                    A confusion matrix is used to analyze correct
-                    and incorrect predictions.
-                </li>
-<li>
-                    ANN performance is compared with other machine
-                    learning models.
-                </li>
-<li>
-                    The comparison includes Logistic Regression,
-                    Random Forest and Support Vector Machine (SVM).
-                </li>
-</ul>
-</div>
-</div>
-<!-- ----------------------------------------------------- -->
-<!-- 5. NEW CUSTOMER PREDICTION -->
-<!-- ----------------------------------------------------- -->
-<div class="info-box">
-<div class="info-header" onclick="toggleSection(this)">
-<span>
-                5. Prediction for New Customers
-            </span>
-<span class="plus">+</span>
-</div>
-<div class="info-content">
-<ul>
-<li>
-                    New customer data is processed using the same
-                    preprocessing procedure used during training.
-                </li>
-<li>
-                    The trained ANN predicts the probability of
-                    customer churn.
-                </li>
-<li>
-                    A probability threshold of <b>0.5</b> is used
-                    for the final churn decision.
-                </li>
-<li>
-                    Customers can therefore be classified as
-                    <b>Churn</b> or <b>Not Churn</b>.
-                </li>
-<li>
-                    The predicted results can be saved for
-                    further analysis.
-                </li>
-</ul>
-</div>
-</div>
-<!-- ===================================================== -->
-<!-- PROJECT RESOURCES -->
-<!-- ===================================================== -->
-<div class="resources">
-<h3>📚 Project Resources</h3>
-<div class="resource-buttons">
-<!-- Replace # with your actual notebook/code link -->
-<a class="resource-btn" download="customer_churn.ipynb" href="project1/customer_churn.ipynb">
-               📥 Download Python Code
-            </a>
-<!-- Kaggle Dataset -->
-<a class="resource-btn" href="https://www.kaggle.com/datasets/blastchar/telco-customer-churn" target="_blank">
-                📊 Dataset – Kaggle
-            </a>
-<!-- Replace # with actual new customer data link -->
-<a class="resource-btn" href="project1/new_customer_data.csv">
-                📥 New Customer Data
-            </a>
-<!-- Replace # with actual PPT link -->
-<a class="resource-btn" download="customer_churn_ppt.pdf" href="project1/customer_churn_ppt.pdf">
-              📑 Project Presentation
-            </a>
-</div>
-</div>
-</div>
-<!-- ========================================================= -->
-<!-- PROJECT 2 -->
-<!-- ========================================================= -->
-<!-- ========================================================= -->
-<!-- FUTURE PROJECTS CAN BE ADDED HERE -->
-<!-- ========================================================= -->
-<!--
-
-<div class="project-card">
-
-    <div class="project-number">
-        PROJECT 2
+            <span class="project-main-plus">+</span>
+        </div>
+        <div class="project-details">
+            <!-- 1. PROJECT OBJECTIVE AND DATASET -->
+            <div class="info-box">
+                <div class="info-header" onclick="toggleSection(this)">
+                    <span>1. Project Objective &amp; Dataset</span>
+                    <span class="plus">+</span>
+                </div>
+                <div class="info-content">
+                    <ul>
+                        <li>The objective of the project is to predict whether a telecom customer is likely to <b>churn</b> or stay.</li>
+                        <li>The project uses the <b>Telco Customer Churn Dataset</b>.</li>
+                        <li>The dataset contains <b>7,043 customer records</b> with 21 original features.</li>
+                        <li>Customer information includes demographic, account, service and payment-related details.</li>
+                        <li>The target variable is <b>Churn</b>, indicating whether the customer left the service.</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 2. DATA PREPROCESSING -->
+            <div class="info-box">
+                <div class="info-header" onclick="toggleSection(this)">
+                    <span>2. Data Preprocessing &amp; Analysis</span>
+                    <span class="plus">+</span>
+                </div>
+                <div class="info-content">
+                    <ul>
+                        <li>Unnecessary customer identification information is removed.</li>
+                        <li>Missing and inconsistent values are handled.</li>
+                        <li>Categorical variables are converted into numerical form.</li>
+                        <li>Yes/No variables are encoded as numerical values and multi-category variables are one-hot encoded.</li>
+                        <li>Numerical features are scaled before training the neural network.</li>
+                        <li>Exploratory analysis is performed to study customer churn and important customer attributes.</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 3. ANN MODEL -->
+            <div class="info-box">
+                <div class="info-header" onclick="toggleSection(this)">
+                    <span>3. ANN Model Development</span>
+                    <span class="plus">+</span>
+                </div>
+                <div class="info-content">
+                    <ul>
+                        <li>The processed customer data is used to develop an <b>Artificial Neural Network (ANN)</b>.</li>
+                        <li>The network uses <b>26 input features</b>.</li>
+                        <li>Hidden layers use the <b>ReLU</b> activation function.</li>
+                        <li>The output layer contains one neuron with <b>Sigmoid</b> activation for binary classification.</li>
+                        <li><b>Adam</b> is used as the optimizer.</li>
+                        <li><b>Binary Cross-Entropy</b> is used as the loss function.</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 4. EVALUATION -->
+            <div class="info-box">
+                <div class="info-header" onclick="toggleSection(this)">
+                    <span>4. Model Evaluation &amp; Comparison</span>
+                    <span class="plus">+</span>
+                </div>
+                <div class="info-content">
+                    <ul>
+                        <li>The ANN model is evaluated using classification performance measures.</li>
+                        <li>Accuracy and classification report are used to evaluate the model.</li>
+                        <li>A confusion matrix is used to analyze correct and incorrect predictions.</li>
+                        <li>ANN performance is compared with other machine learning models.</li>
+                        <li>The comparison includes Logistic Regression, Random Forest and Support Vector Machine (SVM).</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 5. NEW CUSTOMER PREDICTION -->
+            <div class="info-box">
+                <div class="info-header" onclick="toggleSection(this)">
+                    <span>5. Prediction for New Customers</span>
+                    <span class="plus">+</span>
+                </div>
+                <div class="info-content">
+                    <ul>
+                        <li>New customer data is processed using the same preprocessing procedure used during training.</li>
+                        <li>The trained ANN predicts the probability of customer churn.</li>
+                        <li>A probability threshold of <b>0.5</b> is used for the final churn decision.</li>
+                        <li>Customers can therefore be classified as <b>Churn</b> or <b>Not Churn</b>.</li>
+                        <li>The predicted results can be saved for further analysis.</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- PROJECT RESOURCES -->
+            <div class="resources">
+                <h3>📚 Project Resources</h3>
+                <div class="resource-buttons">
+                    <a class="resource-btn" download="customer_churn.ipynb" href="project1/customer_churn.ipynb">📥 Download Python Code</a>
+                    <a class="resource-btn" href="https://www.kaggle.com/datasets/blastchar/telco-customer-churn" target="_blank">📊 Dataset – Kaggle</a>
+                    <a class="resource-btn" href="project1/new_customer_data.csv">📥 New Customer Data</a>
+                    <a class="resource-btn" download="customer_churn_ppt.pdf" href="project1/customer_churn_ppt.pdf">📑 Project Presentation</a>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="project-title">
-        Project Title
+    <!-- ========================================================= -->
+    <!-- PROJECT 2 -->
+    <!-- ========================================================= -->
+    <div class="project-card">
+        <div class="project-summary" onclick="toggleProject(this)">
+            <div class="project-summary-text">
+                <div class="project-number">PROJECT 2</div>
+                <div class="project-title">Weather Prediction using Linear Regression</div>
+                <div class="project-summary-description">
+                    This project uses historical weather records from multiple stations to predict
+                    average temperature, minimum temperature, maximum temperature and rainfall.
+                    The workflow includes data preprocessing, feature preparation, Linear Regression
+                    model training, evaluation using R² and RMSE, and prediction for a selected date
+                    and station using Python.
+                </div>
+            </div>
+            <span class="project-main-plus">+</span>
+        </div>
+        <div class="project-details">
+            <div class="info-box">
+                <div class="info-header" onclick="toggleSection(this)">
+                    <span>1. Project Objective &amp; Dataset</span>
+                    <span class="plus">+</span>
+                </div>
+                <div class="info-content">
+                    <ul>
+                        <li>The objective of the project is to develop a <b>data-driven weather prediction system</b> using Linear Regression.</li>
+                        <li>The project uses a historical weather dataset containing daily records from multiple weather stations.</li>
+                        <li>The dataset contains date-wise information including <b>average temperature, minimum temperature, maximum temperature, and rainfall</b>.</li>
+                        <li>The Excel dataset used in this project is <b>weather data set.xlsx</b>.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="info-header" onclick="toggleSection(this)">
+                    <span>2. Input &amp; Output Variables</span>
+                    <span class="plus">+</span>
+                </div>
+                <div class="info-content">
+                    <p><b>Input Variables</b></p>
+                    <ul>
+                        <li><b>year</b> – year extracted from the date of record</li>
+                        <li><b>month_num</b> – month number derived from the date</li>
+                        <li><b>day</b> – day of the month</li>
+                        <li><b>station_encoded</b> – numerical encoding of station names</li>
+                    </ul>
+                    <p><b>Output Variables</b></p>
+                    <ul>
+                        <li><b>avg_temp</b> – predicted average temperature (°C)</li>
+                        <li><b>min_temp</b> – predicted minimum temperature (°C)</li>
+                        <li><b>max_temp</b> – predicted maximum temperature (°C)</li>
+                        <li><b>rainfall</b> – predicted rainfall amount (mm)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="info-header" onclick="toggleSection(this)">
+                    <span>3. Data Preprocessing</span>
+                    <span class="plus">+</span>
+                </div>
+                <div class="info-content">
+                    <ul>
+                        <li>The <b>date_of_record</b> column is converted into a date format.</li>
+                        <li>The data is sorted chronologically.</li>
+                        <li>Year, month and day are extracted from the date.</li>
+                        <li>Station names are converted into numerical values using <b>LabelEncoder</b>.</li>
+                        <li>Missing temperature values are handled using interpolation and remaining missing values are filled with the mean.</li>
+                        <li>Missing rainfall values are replaced with <b>0</b>.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="info-header" onclick="toggleSection(this)">
+                    <span>4. Linear Regression Model Development</span>
+                    <span class="plus">+</span>
+                </div>
+                <div class="info-content">
+                    <ul>
+                        <li>The processed dataset is divided into input features and output variables.</li>
+                        <li>The model uses <b>Linear Regression</b> from scikit-learn.</li>
+                        <li>The prepared data is divided into training and testing subsets.</li>
+                        <li>The model learns relationships between date/station information and the four weather outputs.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="info-header" onclick="toggleSection(this)">
+                    <span>5. Model Evaluation</span>
+                    <span class="plus">+</span>
+                </div>
+                <div class="info-content">
+                    <ul>
+                        <li>The trained model is evaluated using the <b>R² Score</b>.</li>
+                        <li><b>RMSE (Root Mean Square Error)</b> is also calculated to measure prediction error.</li>
+                        <li>Actual and predicted values can be compared to understand model performance.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="info-header" onclick="toggleSection(this)">
+                    <span>6. Prediction for a Given Date &amp; Station</span>
+                    <span class="plus">+</span>
+                </div>
+                <div class="info-content">
+                    <ul>
+                        <li>A function named <b>predict_weather()</b> is used to generate predictions.</li>
+                        <li>The user provides a <b>date</b> and <b>station name</b>.</li>
+                        <li>The date is converted into year, month and day features.</li>
+                        <li>The station name is encoded using the trained station encoder.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="info-header" onclick="toggleSection(this)">
+                    <span>7. Example Prediction &amp; Insights</span>
+                    <span class="plus">+</span>
+                </div>
+                <div class="info-content">
+                    <ul>
+                        <li>An example prediction can be generated for a selected station and date.</li>
+                        <li>The program displays the predicted weather values.</li>
+                        <li>When the actual record is available, the corresponding percentage errors are displayed.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="resources">
+                <h3>📚 Project Resources</h3>
+                <div class="resource-buttons">
+                    <a class="resource-btn" download="weather_prediction.py" href="project2/weather_prediction.py">📥 Download Python Code</a>
+                    <a class="resource-btn" download="weather data set.xlsx" href="project2/weather_data_set.xlsx">📊 Download Dataset</a>
+                </div>
+            </div>
+        </div>
     </div>
 
-    ...same structure...
+    <!-- ========================================================= -->
+    <!-- PROJECT 3 -->
+    <!-- ========================================================= -->
+    <div class="project-card">
+        <div class="project-summary" onclick="toggleProject(this)">
+            <div class="project-summary-text">
+                <div class="project-number">PROJECT 3</div>
+                <div class="project-title">Student Pass / Fail Prediction using Logistic Regression</div>
+                <div class="project-summary-description">
+                    This project develops a Logistic Regression model to predict whether a student is
+                    likely to pass or fail based on academic performance and demographic attributes.
+                    The project uses study hours, attendance, past and final exam scores, gender,
+                    parental education, internet access and extracurricular activities, followed by
+                    preprocessing, model training and classification evaluation.
+                </div>
+            </div>
+            <span class="project-main-plus">+</span>
+        </div>
+        <div class="project-details">
+            <div class="info-box">
+                <div class="info-header" onclick="toggleSection(this)">
+                    <span>1. Project Objective &amp; Dataset</span>
+                    <span class="plus">+</span>
+                </div>
+                <div class="info-content">
+                    <ul>
+                        <li>The objective is to develop a <b>Logistic Regression</b> model to classify students as <b>Pass</b> or <b>Fail</b>.</li>
+                        <li>The project uses the <b>Student Pass / Fail Dataset</b>.</li>
+                        <li>The dataset contains academic performance and demographic attributes such as study hours, attendance, exam scores, gender, parental education, internet access and extracurricular activities.</li>
+                        <li>The prediction target is <b>Pass_Fail</b>, where <b>1 = Pass</b> and <b>0 = Fail</b>.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="info-header" onclick="toggleSection(this)">
+                    <span>2. Input &amp; Target Variables</span>
+                    <span class="plus">+</span>
+                </div>
+                <div class="info-content">
+                    <p><b>Input Variables</b></p>
+                    <ul>
+                        <li>Study_Hours_per_Week</li>
+                        <li>Attendance_Rate</li>
+                        <li>Past_Exam_Scores</li>
+                        <li>Final_Exam_Score</li>
+                        <li>Gender</li>
+                        <li>Parental_Education_Level</li>
+                        <li>Internet_Access_at_Home</li>
+                        <li>Extracurricular_Activities</li>
+                    </ul>
+                    <p><b>Target Variable</b></p>
+                    <ul>
+                        <li><b>Pass_Fail</b> – Pass = 1, Fail = 0</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="info-header" onclick="toggleSection(this)">
+                    <span>3. Data Preprocessing &amp; Analysis</span>
+                    <span class="plus">+</span>
+                </div>
+                <div class="info-content">
+                    <ul>
+                        <li>Missing values are checked before model development.</li>
+                        <li>The unique <b>Student_ID</b> is removed because it is not useful for prediction.</li>
+                        <li>Categorical variables are converted and then one-hot encoded.</li>
+                        <li>Numerical variables are explored using distributions and correlation analysis.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="info-header" onclick="toggleSection(this)">
+                    <span>4. Logistic Regression Model Development</span>
+                    <span class="plus">+</span>
+                </div>
+                <div class="info-content">
+                    <ul>
+                        <li>The processed dataset is separated into input features <b>X</b> and target <b>y</b>.</li>
+                        <li>The data is divided into training and testing subsets using an <b>80:20</b> split.</li>
+                        <li>A <b>Logistic Regression</b> classifier is trained on the training data.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="info-header" onclick="toggleSection(this)">
+                    <span>5. Model Evaluation</span>
+                    <span class="plus">+</span>
+                </div>
+                <div class="info-content">
+                    <ul>
+                        <li><b>Prediction Accuracy</b> is calculated to measure classification performance.</li>
+                        <li>A <b>classification report</b> is displayed for additional performance measures.</li>
+                        <li>A <b>confusion matrix</b> is used to examine actual versus predicted classifications.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="info-header" onclick="toggleSection(this)">
+                    <span>6. Prediction for Student Records</span>
+                    <span class="plus">+</span>
+                </div>
+                <div class="info-content">
+                    <ul>
+                        <li>The trained model is used to predict a randomly selected student from the test set.</li>
+                        <li>The actual result and predicted result are displayed as <b>Pass</b> or <b>Fail</b>.</li>
+                        <li>A second prediction is demonstrated using a <b>manually assumed student record</b>.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="info-header" onclick="toggleSection(this)">
+                    <span>7. Example Prediction &amp; Insights</span>
+                    <span class="plus">+</span>
+                </div>
+                <div class="info-content">
+                    <ul>
+                        <li>The project demonstrates how academic and demographic variables can be used for pass/fail classification.</li>
+                        <li>The model output can be interpreted as a predicted <b>Pass</b> or <b>Fail</b> result.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="resources">
+                <h3>📚 Project Resources</h3>
+                <div class="resource-buttons">
+                    <a class="resource-btn" download="student_pass_fail_logistic_regression.py" href="project3/student_pass_fail_logistic_regression.py">📥 Download Python Code</a>
+                    <a class="resource-btn" download="Student_Pass_Fail_Data Set.csv" href="project3/Student_Pass_Fail_Data%20Set.csv">📊 Download Dataset</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- PROJECT 4 -->
+    <!-- ========================================================= -->
+    <div class="project-card">
+        <div class="project-summary" onclick="toggleProject(this)">
+            <div class="project-summary-text">
+                <div class="project-number">PROJECT 4</div>
+                <div class="project-title">Comparative Study of Optimization and Regularization Techniques in Deep Learning</div>
+                <div class="project-summary-description">
+                    This project uses the Fashion-MNIST dataset and a Multilayer Perceptron (MLP)
+                    to study how different optimization and regularization techniques affect neural
+                    network training. Six optimizers are compared using training-loss convergence,
+                    while five regularization techniques are analyzed using a common training setup.
+                    The project provides visual comparisons of learning behaviour across techniques.
+                </div>
+            </div>
+            <span class="project-main-plus">+</span>
+        </div>
+        <div class="project-details">
+            <div class="info-box">
+                <div class="info-header" onclick="toggleSection(this)">
+                    <span>1. Project Objective &amp; Dataset</span>
+                    <span class="plus">+</span>
+                </div>
+                <div class="info-content">
+                    <ul>
+                        <li>The project uses the <b>Fashion-MNIST</b> dataset for neural-network training.</li>
+                        <li>The objective is to compare different <b>optimization techniques</b> and <b>regularization techniques</b>.</li>
+                        <li>The dataset contains 28×28 grayscale clothing images represented by 784 pixel values.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="info-header" onclick="toggleSection(this)">
+                    <span>2. Data Preparation &amp; MLP Model</span>
+                    <span class="plus">+</span>
+                </div>
+                <div class="info-content">
+                    <ul>
+                        <li>The training and testing CSV files are loaded using Pandas.</li>
+                        <li>Pixel values are normalized to the range <b>[0, 1]</b>.</li>
+                        <li>The common MLP architecture is: <b>784 → Dense(128, ReLU) → Dense(64, ReLU) → Dense(10, Softmax)</b>.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="info-header" onclick="toggleSection(this)">
+                    <span>3. Optimization Techniques Comparison</span>
+                    <span class="plus">+</span>
+                </div>
+                <div class="info-content">
+                    <p>The project compares the following six optimization techniques:</p>
+                    <ul>
+                        <li><b>SGD</b> – Stochastic Gradient Descent</li>
+                        <li><b>AdaGrad</b></li>
+                        <li><b>AdaDelta</b></li>
+                        <li><b>RMSprop</b></li>
+                        <li><b>NAG</b> – Nesterov Accelerated Gradient</li>
+                        <li><b>Adam</b></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="info-header" onclick="toggleSection(this)">
+                    <span>4. Regularization Techniques Comparison</span>
+                    <span class="plus">+</span>
+                </div>
+                <div class="info-content">
+                    <p>The project compares the following five regularization techniques:</p>
+                    <ul>
+                        <li><b>L1 Regularization</b></li>
+                        <li><b>L2 Regularization</b></li>
+                        <li><b>Dropout</b></li>
+                        <li><b>Batch Normalization</b></li>
+                        <li><b>Early Stopping</b></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="info-header" onclick="toggleSection(this)">
+                    <span>5. Loss Convergence &amp; Visualization</span>
+                    <span class="plus">+</span>
+                </div>
+                <div class="info-content">
+                    <ul>
+                        <li>Training loss is recorded after each epoch.</li>
+                        <li>Individual epoch-vs-loss graphs are generated for each optimizer and regularization technique.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="resources">
+                <h3>📚 Project Resources</h3>
+                <div class="resource-buttons">
+                    <a class="resource-btn" download="optimization_regularization_fashion_mnist.py" href="project4/optimization_regularization_fashion_mnist.py">📥 Download Python Code</a>
+                    <a class="resource-btn" href="https://www.kaggle.com/datasets/zalando-research/fashionmnist" target="_blank">📊 Dataset – Kaggle</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- PROJECT 5 -->
+    <!-- ========================================================= -->
+    <div class="project-card">
+        <div class="project-summary" onclick="toggleProject(this)">
+            <div class="project-summary-text">
+                <div class="project-number">PROJECT 5</div>
+                <div class="project-title">Student GPA Prediction using Linear Regression</div>
+                <div class="project-summary-description">
+                    This project predicts future semester GPA of engineering students using historical
+                    academic performance data. Separate Linear Regression models are developed for
+                    Regular and Lateral students to predict 5th to 8th semester GPAs. The project
+                    evaluates each model using R², compares actual and predicted GPA for a selected
+                    student record, and also provides editable inputs for further prediction.
+                </div>
+            </div>
+            <span class="project-main-plus">+</span>
+        </div>
+        <div class="project-details">
+            <div class="info-box">
+                <div class="info-header" onclick="toggleSection(this)">
+                    <span>1. Project Objective &amp; Dataset</span>
+                    <span class="plus">+</span>
+                </div>
+                <div class="info-content">
+                    <ul>
+                        <li>The objective is to develop a predictive system for <b>semester-wise GPA forecasting</b> using historical academic data.</li>
+                        <li>The project distinguishes between <b>Regular</b> and <b>Lateral</b> students.</li>
+                        <li>Separate Linear Regression models are trained for the <b>5th, 6th, 7th and 8th semester</b> GPA predictions.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="info-header" onclick="toggleSection(this)">
+                    <span>2. Input &amp; Target Variables</span>
+                    <span class="plus">+</span>
+                </div>
+                <div class="info-content">
+                    <p><b>Input Variables</b></p>
+                    <ul>
+                        <li>SSC / 10th Grade GPA</li>
+                        <li>Intermediate / 12th Grade GPA</li>
+                        <li>1st to 4th Semester GPAs for Regular students</li>
+                        <li>3rd and 4th Semester GPAs for Lateral students</li>
+                    </ul>
+                    <p><b>Target Variables</b></p>
+                    <ul>
+                        <li>5th, 6th, 7th and 8th Semester GPA</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="info-header" onclick="toggleSection(this)">
+                    <span>3. Data Preparation &amp; Student Type Identification</span>
+                    <span class="plus">+</span>
+                </div>
+                <div class="info-content">
+                    <ul>
+                        <li>Duplicate records are removed.</li>
+                        <li>Zero values in semester GPA columns are treated as missing values.</li>
+                        <li>A student is classified as <b>Lateral</b> when both 1st and 2nd semester GPAs are missing.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="info-header" onclick="toggleSection(this)">
+                    <span>4. Linear Regression Model Development</span>
+                    <span class="plus">+</span>
+                </div>
+                <div class="info-content">
+                    <ul>
+                        <li>Separate feature sets are used for Regular and Lateral students.</li>
+                        <li>Independent Linear Regression models are trained for each target semester.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="info-header" onclick="toggleSection(this)">
+                    <span>5. Model Evaluation</span>
+                    <span class="plus">+</span>
+                </div>
+                <div class="info-content">
+                    <ul>
+                        <li>Each Regular and Lateral model is evaluated using the <b>R² score</b>.</li>
+                        <li>The R² values are displayed separately for 5th, 6th, 7th and 8th semester predictions.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="resources">
+                <h3>📚 Project Resources</h3>
+                <div class="resource-buttons">
+                    <a class="resource-btn" download="student_gpa_prediction_linear_regression.py" href="project5/student_gpa_prediction_linear_regression.py">📥 Download Python Code</a>
+                    <a class="resource-btn" download="student GPA_data_bank.xlsx" href="project5/student%20GPA%20data%20bank.xlsx">📊 Download Dataset</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 
--->
-</div><div class="project-card">
-<div class="project-summary" onclick="toggleProject(this)">
-<div class="project-summary-text">
-<div class="project-number">PROJECT 2</div>
-<div class="project-title">Weather Prediction using Linear Regression</div>
-<div class="project-summary-description">
-                This project uses historical weather records from multiple stations to predict
-                average temperature, minimum temperature, maximum temperature and rainfall.
-                The workflow includes data preprocessing, feature preparation, Linear Regression
-                model training, evaluation using R² and RMSE, and prediction for a selected date
-                and station using Python.
-            </div>
-</div>
-<span class="project-main-plus">+</span>
-</div>
-<div class="project-details">
-<!-- 1. PROJECT OBJECTIVE AND DATASET -->
-<div class="info-box">
-<div class="info-header" onclick="toggleSection(this)">
-<span>1. Project Objective &amp; Dataset</span>
-<span class="plus">+</span>
-</div>
-<div class="info-content">
-<ul>
-<li>
-                    The objective of the project is to develop a
-                    <b>data-driven weather prediction system</b> using
-                    Linear Regression.
-                </li>
-<li>
-                    The project uses a historical weather dataset containing
-                    daily records from multiple weather stations.
-                </li>
-<li>
-                    The dataset contains date-wise information including
-                    <b>average temperature, minimum temperature, maximum temperature,
-                    and rainfall</b>.
-                </li>
-<li>
-                    The Excel dataset used in this project is
-                    <b>weather data set.xlsx</b>.
-                </li>
-<li>
-                    The dataset is processed locally as part of the project;
-                    no external Kaggle link is required on this page.
-                </li>
-</ul>
-</div>
-</div>
-<!-- 2. INPUT AND OUTPUT VARIABLES -->
-<div class="info-box">
-<div class="info-header" onclick="toggleSection(this)">
-<span>2. Input &amp; Output Variables</span>
-<span class="plus">+</span>
-</div>
-<div class="info-content">
-<p><b>Input Variables</b></p>
-<ul>
-<li><b>year</b> – year extracted from the date of record</li>
-<li><b>month_num</b> – month number derived from the date</li>
-<li><b>day</b> – day of the month</li>
-<li><b>station_encoded</b> – numerical encoding of station names</li>
-</ul>
-<p><b>Output Variables</b></p>
-<ul>
-<li><b>avg_temp</b> – predicted average temperature (°C)</li>
-<li><b>min_temp</b> – predicted minimum temperature (°C)</li>
-<li><b>max_temp</b> – predicted maximum temperature (°C)</li>
-<li><b>rainfall</b> – predicted rainfall amount (mm)</li>
-</ul>
-</div>
-</div>
-<!-- 3. DATA PREPROCESSING -->
-<div class="info-box">
-<div class="info-header" onclick="toggleSection(this)">
-<span>3. Data Preprocessing</span>
-<span class="plus">+</span>
-</div>
-<div class="info-content">
-<ul>
-<li>
-                    The <b>date_of_record</b> column is converted into a
-                    date format.
-                </li>
-<li>
-                    The data is sorted chronologically.
-                </li>
-<li>
-                    Year, month and day are extracted from the date.
-                </li>
-<li>
-                    Station names are converted into numerical values using
-                    <b>LabelEncoder</b>.
-                </li>
-<li>
-                    Missing temperature values are handled using interpolation
-                    and remaining missing values are filled with the mean.
-                </li>
-<li>
-                    Missing rainfall values are replaced with <b>0</b>.
-                </li>
-</ul>
-</div>
-</div>
-<!-- 4. LINEAR REGRESSION MODEL -->
-<div class="info-box">
-<div class="info-header" onclick="toggleSection(this)">
-<span>4. Linear Regression Model Development</span>
-<span class="plus">+</span>
-</div>
-<div class="info-content">
-<ul>
-<li>
-                    The processed dataset is divided into input features
-                    and output variables.
-                </li>
-<li>
-                    The model uses <b>Linear Regression</b> from
-                    scikit-learn.
-                </li>
-<li>
-                    The prepared data is divided into training and testing
-                    subsets.
-                </li>
-<li>
-                    The model learns relationships between date/station
-                    information and the four weather outputs.
-                </li>
-</ul>
-</div>
-</div>
-<!-- 5. MODEL EVALUATION -->
-<div class="info-box">
-<div class="info-header" onclick="toggleSection(this)">
-<span>5. Model Evaluation</span>
-<span class="plus">+</span>
-</div>
-<div class="info-content">
-<ul>
-<li>
-                    The trained model is evaluated using the <b>R² Score</b>.
-                </li>
-<li>
-<b>RMSE (Root Mean Square Error)</b> is also calculated
-                    to measure prediction error.
-                </li>
-<li>
-                    Actual and predicted values can be compared to understand
-                    model performance.
-                </li>
-<li>
-                    When actual weather data is available for a selected
-                    date and station, percentage errors are also calculated.
-                </li>
-</ul>
-</div>
-</div>
-<!-- 6. WEATHER PREDICTION -->
-<div class="info-box">
-<div class="info-header" onclick="toggleSection(this)">
-<span>6. Prediction for a Given Date &amp; Station</span>
-<span class="plus">+</span>
-</div>
-<div class="info-content">
-<ul>
-<li>
-                    A function named <b>predict_weather()</b> is used to
-                    generate predictions.
-                </li>
-<li>
-                    The user provides a <b>date</b> and <b>station name</b>.
-                </li>
-<li>
-                    The date is converted into year, month and day features.
-                </li>
-<li>
-                    The station name is encoded using the trained
-                    station encoder.
-                </li>
-<li>
-                    The model predicts average temperature, minimum
-                    temperature, maximum temperature and rainfall.
-                </li>
-<li>
-                    If actual data exists for that date and station,
-                    the program also reports prediction errors.
-                </li>
-</ul>
-</div>
-</div>
-<!-- 7. EXAMPLE RESULT -->
-<div class="info-box">
-<div class="info-header" onclick="toggleSection(this)">
-<span>7. Example Prediction &amp; Insights</span>
-<span class="plus">+</span>
-</div>
-<div class="info-content">
-<ul>
-<li>
-                    An example prediction can be generated for a selected
-                    station and date.
-                </li>
-<li>
-                    The program displays the predicted weather values.
-                </li>
-<li>
-                    When the actual record is available, the corresponding
-                    percentage errors are displayed.
-                </li>
-<li>
-                    The model score is also displayed to provide an overall
-                    indication of model performance.
-                </li>
-</ul>
-</div>
-</div>
-<!-- PROJECT RESOURCES -->
-<div class="resources">
-<h3>📚 Project Resources</h3>
-<div class="resource-buttons">
-<a class="resource-btn" download="weather_prediction.py" href="project2/weather_prediction.py">
-    📥 Download Python Code
-</a>
-<a class="resource-btn" download="weather data set.xlsx" href="project2/weather_data_set.xlsx">
-    📊 Download Dataset
-</a>
-</div>
-</div>
-</div>
-</div><div class="project-card">
-<div class="project-summary" onclick="toggleProject(this)">
-<div class="project-summary-text">
-<div class="project-number">PROJECT 3</div>
-<div class="project-title">Student Pass / Fail Prediction using Logistic Regression</div>
-<div class="project-summary-description">
-                This project develops a Logistic Regression model to predict whether a student is
-                likely to pass or fail based on academic performance and demographic attributes.
-                The project uses study hours, attendance, past and final exam scores, gender,
-                parental education, internet access and extracurricular activities, followed by
-                preprocessing, model training and classification evaluation.
-            </div>
-</div>
-<span class="project-main-plus">+</span>
-</div>
-<div class="project-details">
-<div class="info-box">
-<div class="info-header" onclick="toggleSection(this)">
-<span>1. Project Objective &amp; Dataset</span>
-<span class="plus">+</span>
-</div>
-<div class="info-content">
-<ul>
-<li>
-                        The objective is to develop a <b>Logistic Regression</b> model
-                        to classify students as <b>Pass</b> or <b>Fail</b>.
-                    </li>
-<li>
-                        The project uses the <b>Student Pass / Fail Dataset</b>.
-                    </li>
-<li>
-                        The dataset contains academic performance and demographic
-                        attributes such as study hours, attendance, exam scores,
-                        gender, parental education, internet access and extracurricular activities.
-                    </li>
-<li>
-                        The prediction target is <b>Pass_Fail</b>,
-                        where <b>1 = Pass</b> and <b>0 = Fail</b>.
-                    </li>
-</ul>
-</div>
-</div>
-<div class="info-box">
-<div class="info-header" onclick="toggleSection(this)">
-<span>2. Input &amp; Target Variables</span>
-<span class="plus">+</span>
-</div>
-<div class="info-content">
-<p><b>Input Variables</b></p>
-<ul>
-<li>Study_Hours_per_Week</li>
-<li>Attendance_Rate</li>
-<li>Past_Exam_Scores</li>
-<li>Final_Exam_Score</li>
-<li>Gender</li>
-<li>Parental_Education_Level</li>
-<li>Internet_Access_at_Home</li>
-<li>Extracurricular_Activities</li>
-</ul>
-<p><b>Target Variable</b></p>
-<ul>
-<li><b>Pass_Fail</b> – Pass = 1, Fail = 0</li>
-</ul>
-</div>
-</div>
-<div class="info-box">
-<div class="info-header" onclick="toggleSection(this)">
-<span>3. Data Preprocessing &amp; Analysis</span>
-<span class="plus">+</span>
-</div>
-<div class="info-content">
-<ul>
-<li>Missing values are checked before model development.</li>
-<li>The unique <b>Student_ID</b> is removed because it is not useful for prediction.</li>
-<li>Categorical variables are converted and then one-hot encoded.</li>
-<li>Numerical variables are explored using distributions and correlation analysis.</li>
-<li>Additional visual analysis includes pair plots and categorical distributions.</li>
-</ul>
-</div>
-</div>
-<div class="info-box">
-<div class="info-header" onclick="toggleSection(this)">
-<span>4. Logistic Regression Model Development</span>
-<span class="plus">+</span>
-</div>
-<div class="info-content">
-<ul>
-<li>The processed dataset is separated into input features <b>X</b> and target <b>y</b>.</li>
-<li>The data is divided into training and testing subsets using an <b>80:20</b> split.</li>
-<li>A <b>Logistic Regression</b> classifier is trained on the training data.</li>
-<li>The trained model predicts whether a student will <b>Pass</b> or <b>Fail</b>.</li>
-</ul>
-</div>
-</div>
-<div class="info-box">
-<div class="info-header" onclick="toggleSection(this)">
-<span>5. Model Evaluation</span>
-<span class="plus">+</span>
-</div>
-<div class="info-content">
-<ul>
-<li><b>Prediction Accuracy</b> is calculated to measure classification performance.</li>
-<li>A <b>classification report</b> is displayed for additional performance measures.</li>
-<li>A <b>confusion matrix</b> is used to examine actual versus predicted classifications.</li>
-<li>An <b>ROC curve</b> and <b>AUC</b> are used to evaluate the classifier's discrimination performance.</li>
-</ul>
-</div>
-</div>
-<div class="info-box">
-<div class="info-header" onclick="toggleSection(this)">
-<span>6. Prediction for Student Records</span>
-<span class="plus">+</span>
-</div>
-<div class="info-content">
-<ul>
-<li>The trained model is used to predict a randomly selected student from the test set.</li>
-<li>The actual result and predicted result are displayed as <b>Pass</b> or <b>Fail</b>.</li>
-<li>A second prediction is demonstrated using a <b>manually assumed student record</b>.</li>
-<li>The assumed record includes study hours, attendance, exam scores and encoded categorical information.</li>
-</ul>
-</div>
-</div>
-<div class="info-box">
-<div class="info-header" onclick="toggleSection(this)">
-<span>7. Example Prediction &amp; Insights</span>
-<span class="plus">+</span>
-</div>
-<div class="info-content">
-<ul>
-<li>The project demonstrates how academic and demographic variables can be used for pass/fail classification.</li>
-<li>The model output can be interpreted as a predicted <b>Pass</b> or <b>Fail</b> result.</li>
-<li>The project can help illustrate how machine learning may be applied to student performance data.</li>
-</ul>
-</div>
-</div>
-<div class="resources">
-<h3>📚 Project Resources</h3>
-<div class="resource-buttons">
-<a class="resource-btn" download="student_pass_fail_logistic_regression.py" href="project3/student_pass_fail_logistic_regression.py">
-                    📥 Download Python Code
-                </a>
-<a class="resource-btn" download="Student_Pass_Fail_Data Set.csv" href="project3/Student_Pass_Fail_Data Set.csv">
-                    📊 Download Dataset
-                </a>
-</div>
-</div>
-</div>
-</div><div class="project-card">
-<div class="project-summary" onclick="toggleProject(this)">
-<div class="project-summary-text">
-<div class="project-number">PROJECT 4</div>
-<div class="project-title">
-                Comparative Study of Optimization and Regularization Techniques in Deep Learning
-            </div>
-<div class="project-summary-description">
-                This project uses the Fashion-MNIST dataset and a Multilayer Perceptron (MLP)
-                to study how different optimization and regularization techniques affect neural
-                network training. Six optimizers are compared using training-loss convergence,
-                while five regularization techniques are analyzed using a common training setup.
-                The project provides visual comparisons of learning behaviour across techniques.
-            </div>
-</div>
-<span class="project-main-plus">+</span>
-</div>
-<div class="project-details">
-<div class="info-box">
-<div class="info-header" onclick="toggleSection(this)">
-<span>1. Project Objective &amp; Dataset</span>
-<span class="plus">+</span>
-</div>
-<div class="info-content">
-<ul>
-<li>The project uses the <b>Fashion-MNIST</b> dataset for neural-network training.</li>
-<li>The objective is to compare different <b>optimization techniques</b> and <b>regularization techniques</b>.</li>
-<li>The dataset contains 28×28 grayscale clothing images represented by 784 pixel values.</li>
-<li>The ten Fashion-MNIST classes are used for multiclass classification.</li>
-</ul>
-</div>
-</div>
-<div class="info-box">
-<div class="info-header" onclick="toggleSection(this)">
-<span>2. Data Preparation &amp; MLP Model</span>
-<span class="plus">+</span>
-</div>
-<div class="info-content">
-<ul>
-<li>The training and testing CSV files are loaded using Pandas.</li>
-<li>Pixel values are normalized to the range <b>[0, 1]</b>.</li>
-<li>The flattened 784-pixel input is used for an MLP.</li>
-<li>The common MLP architecture is:
-                        <b>784 → Dense(128, ReLU) → Dense(64, ReLU) → Dense(10, Softmax)</b>.
-                    </li>
-<li>Representative images and class distribution are also visualized.</li>
-</ul>
-</div>
-</div>
-<div class="info-box">
-<div class="info-header" onclick="toggleSection(this)">
-<span>3. Optimization Techniques Comparison</span>
-<span class="plus">+</span>
-</div>
-<div class="info-content">
-<p>The project compares the following six optimization techniques:</p>
-<ul>
-<li><b>SGD</b> – Stochastic Gradient Descent</li>
-<li><b>AdaGrad</b></li>
-<li><b>AdaDelta</b></li>
-<li><b>RMSprop</b></li>
-<li><b>NAG</b> – Nesterov Accelerated Gradient</li>
-<li><b>Adam</b></li>
-</ul>
-<p>Each optimizer is used with the common MLP and its epoch-wise training loss is recorded. A consolidated table and comparison graph are then generated.</p>
-</div>
-</div>
-<div class="info-box">
-<div class="info-header" onclick="toggleSection(this)">
-<span>4. Regularization Techniques Comparison</span>
-<span class="plus">+</span>
-</div>
-<div class="info-content">
-<p>The project compares the following five regularization techniques:</p>
-<ul>
-<li><b>L1 Regularization</b></li>
-<li><b>L2 Regularization</b></li>
-<li><b>Dropout</b></li>
-<li><b>Batch Normalization</b></li>
-<li><b>Early Stopping</b></li>
-</ul>
-<p>The techniques are trained using the same general SGD-based setup for comparison, and their epoch-wise losses are combined into one comparison table and graph.</p>
-</div>
-</div>
-<div class="info-box">
-<div class="info-header" onclick="toggleSection(this)">
-<span>5. Loss Convergence &amp; Visualization</span>
-<span class="plus">+</span>
-</div>
-<div class="info-content">
-<ul>
-<li>Training loss is recorded after each epoch.</li>
-<li>Individual epoch-vs-loss graphs are generated for each optimizer.</li>
-<li>The regularization techniques are compared in a single loss-convergence plot.</li>
-<li>All six optimization methods are compared in a single optimizer-loss plot.</li>
-<li>These visualizations help compare convergence behaviour across techniques.</li>
-</ul>
-</div>
-</div>
-<div class="resources">
-<h3>📚 Project Resources</h3>
-<div class="resource-buttons">
-<a class="resource-btn" download="optimization_regularization_fashion_mnist.py" href="project4/optimization_regularization_fashion_mnist.py">
-                    📥 Download Python Code
-                </a>
-<a class="resource-btn" href="https://www.kaggle.com/datasets/zalando-research/fashionmnist" target="_blank">
-                    📊 Dataset – Kaggle
-                </a>
-</div>
-</div>
-</div>
-</div><div class="project-card">
-<div class="project-summary" onclick="toggleProject(this)">
-<div class="project-summary-text">
-<div class="project-number">PROJECT 5</div>
-<div class="project-title">Student GPA Prediction using Linear Regression</div>
-<div class="project-summary-description">
-                This project predicts future semester GPA of engineering students using historical
-                academic performance data. Separate Linear Regression models are developed for
-                Regular and Lateral students to predict 5th to 8th semester GPAs. The project
-                evaluates each model using R², compares actual and predicted GPA for a selected
-                student record, and also provides editable inputs for further prediction.
-            </div>
-</div>
-<span class="project-main-plus">+</span>
-</div>
-<div class="project-details">
-<div class="info-box">
-<div class="info-header" onclick="toggleSection(this)">
-<span>1. Project Objective &amp; Dataset</span>
-<span class="plus">+</span>
-</div>
-<div class="info-content">
-<ul>
-<li>
-                        The objective is to develop a predictive system for
-                        <b>semester-wise GPA forecasting</b> using historical academic data.
-                    </li>
-<li>
-                        The project distinguishes between <b>Regular</b> and <b>Lateral</b> students.
-                    </li>
-<li>
-                        Separate Linear Regression models are trained for the
-                        <b>5th, 6th, 7th and 8th semester</b> GPA predictions.
-                    </li>
-<li>
-                        The project uses the customized Excel dataset
-                        <b>student GPA data bank.xlsx</b>.
-                    </li>
-</ul>
-</div>
-</div>
-<div class="info-box">
-<div class="info-header" onclick="toggleSection(this)">
-<span>2. Input &amp; Target Variables</span>
-<span class="plus">+</span>
-</div>
-<div class="info-content">
-<p><b>Input Variables</b></p>
-<ul>
-<li>SSC / 10th Grade GPA</li>
-<li>Intermediate / 12th Grade GPA</li>
-<li>1st to 4th Semester GPAs for Regular students</li>
-<li>3rd and 4th Semester GPAs for Lateral students</li>
-<li>Student type – Regular or Lateral</li>
-</ul>
-<p><b>Target Variables</b></p>
-<ul>
-<li>5th Semester GPA</li>
-<li>6th Semester GPA</li>
-<li>7th Semester GPA</li>
-<li>8th Semester GPA</li>
-</ul>
-</div>
-</div>
-<div class="info-box">
-<div class="info-header" onclick="toggleSection(this)">
-<span>3. Data Preparation &amp; Student Type Identification</span>
-<span class="plus">+</span>
-</div>
-<div class="info-content">
-<ul>
-<li>Duplicate records are removed.</li>
-<li>Zero values in semester GPA columns are treated as missing values.</li>
-<li>A student is classified as <b>Lateral</b> when both 1st and 2nd semester GPAs are missing.</li>
-<li>All other students are classified as <b>Regular</b>.</li>
-<li>Semester columns are automatically detected and ordered from 1st to 8th semester.</li>
-</ul>
-</div>
-</div>
-<div class="info-box">
-<div class="info-header" onclick="toggleSection(this)">
-<span>4. Linear Regression Model Development</span>
-<span class="plus">+</span>
-</div>
-<div class="info-content">
-<ul>
-<li>Separate feature sets are used for Regular and Lateral students.</li>
-<li>Independent Linear Regression models are trained for each target semester.</li>
-<li>The training data is divided into training and testing subsets using an 80:20 split.</li>
-<li>Each model predicts the GPA of its corresponding future semester.</li>
-</ul>
-</div>
-</div>
-<div class="info-box">
-<div class="info-header" onclick="toggleSection(this)">
-<span>5. Model Evaluation</span>
-<span class="plus">+</span>
-</div>
-<div class="info-content">
-<ul>
-<li>Each Regular and Lateral model is evaluated using the <b>R² score</b>.</li>
-<li>The R² values are displayed separately for 5th, 6th, 7th and 8th semester predictions.</li>
-<li>This allows the performance of each semester-specific model to be examined independently.</li>
-</ul>
-</div>
-</div>
-<div class="info-box">
-<div class="info-header" onclick="toggleSection(this)">
-<span>6. Prediction for a Selected Student Record</span>
-<span class="plus">+</span>
-</div>
-<div class="info-content">
-<ul>
-<li>A selected dataset record can be used for prediction.</li>
-<li>Missing input features can be replaced with a user-defined fill value.</li>
-<li>The program predicts the 5th to 8th semester GPAs using the appropriate Regular or Lateral models.</li>
-<li>When actual GPA values are available, the program displays the <b>actual GPA, predicted GPA and absolute error</b>.</li>
-</ul>
-</div>
-</div>
-<div class="info-box">
-<div class="info-header" onclick="toggleSection(this)">
-<span>7. Static Input Prediction</span>
-<span class="plus">+</span>
-</div>
-<div class="info-content">
-<ul>
-<li>Editable example inputs are provided for a <b>Regular student</b>.</li>
-<li>Editable example inputs are also provided for a <b>Lateral student</b>.</li>
-<li>The trained models use these values to predict GPAs for the 5th to 8th semesters.</li>
-<li>This allows users to try different academic histories without modifying the training data.</li>
-</ul>
-</div>
-</div>
-<div class="resources">
-<h3>📚 Project Resources</h3>
-<div class="resource-buttons">
-<a class="resource-btn" download="student_gpa_prediction_linear_regression.py" href="project5/student_gpa_prediction_linear_regression.py">
-                    📥 Download Python Code
-                </a>
-<a class="resource-btn" download="student GPA_data_bank.xlsx" href="project5/student%20GPA%20data%20bank.xlsx">
-                    📊 Download Dataset
-                </a>
-</div>
-</div>
-</div>
-</div>
 <!-- ========================================================= -->
 <!-- FOOTER -->
 <!-- ========================================================= -->
 <footer>
-
     © 2026 D. Kiran Prasad | Deep Learning Projects
-
 </footer>
+
 <!-- ========================================================= -->
 <!-- JAVASCRIPT -->
 <!-- ========================================================= -->
 <script>
-
-
 function toggleProject(summary){
     const details = summary.nextElementSibling;
     const plus = summary.querySelector(".project-main-plus");
@@ -1333,25 +1030,19 @@ function toggleProject(summary){
 }
 
 function toggleSection(header){
-
     const content = header.nextElementSibling;
     const plus = header.querySelector(".plus");
 
     if(content.classList.contains("show")){
-
         content.classList.remove("show");
         plus.textContent = "+";
-
     }
     else{
-
         content.classList.add("show");
         plus.textContent = "−";
-
     }
-
 }
-
 </script>
-</div></body>
+
+</body>
 </html>
