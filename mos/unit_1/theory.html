@@ -7,15 +7,16 @@
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:"Segoe UI",Arial,sans-serif;background:#f4f7fb;color:#263746}
-.main-header{
-position:sticky;top:0;z-index:1000;min-height:70px;display:flex;
-align-items:center;justify-content:space-between;gap:14px;padding:11px 22px;
-color:#fff;background:linear-gradient(135deg,#063d78,#0867b9);
-box-shadow:0 3px 12px rgba(0,0,0,.18)}
-.main-header a{color:#fff;text-decoration:none;font-weight:700;font-size:17px;
-padding:8px 11px;border-radius:7px;white-space:nowrap}
-.main-header a:hover{background:rgba(255,255,255,.15)}
-.header-title{flex:1;text-align:center;font-size:26px;font-weight:800}
+.navbar-placeholder{width:100%}
+.site-section-banner{
+background:linear-gradient(135deg,#063d78,#0867b9);
+color:#fff;text-align:center;padding:18px 12px;
+font-size:27px;font-weight:800;letter-spacing:.5px;
+box-shadow:0 3px 10px rgba(0,0,0,.12)}
+.learning-title-banner{
+background:#fff;color:#063d78;text-align:center;
+padding:17px 12px;border-bottom:1px solid #d4e0ec;
+font-size:22px;font-weight:750;box-shadow:0 2px 6px rgba(0,0,0,.04)}
 .container{width:94%;max-width:1450px;margin:25px auto 45px}
 .intro,.topic{background:#fff;border:1px solid #d4e0ec;border-radius:12px;
 box-shadow:0 3px 10px rgba(0,0,0,.06)}
@@ -44,9 +45,9 @@ border-radius:9px;padding:12px}
 .caption{color:#5d7182;font-size:14px;margin-top:9px}
 footer{background:#063d78;color:#fff;text-align:center;padding:17px;font-size:14px}
 @media(max-width:800px){
-.main-header{padding:9px 10px;min-height:60px}
-.main-header a{font-size:13px;padding:6px 5px}
-.header-title{font-size:17px}.container{width:96%;margin-top:16px}
+.site-section-banner{font-size:21px;padding:15px 8px}
+.learning-title-banner{font-size:18px;padding:14px 8px}
+.container{width:96%;margin-top:16px}
 .intro{padding:18px}.intro h1{font-size:24px}
 .intro p,.description{font-size:16px}.learning li{font-size:15px}
 .topic-header{padding:11px 12px;min-height:62px}
@@ -54,16 +55,21 @@ footer{background:#063d78;color:#fff;text-align:center;padding:17px;font-size:14
 .toggle{width:34px;height:34px;font-size:23px;line-height:32px}
 .topic-content{padding:12px}}
 @media(max-width:520px){
-.header-title{font-size:14px}.main-header a{font-size:11px}.topic-title{font-size:16px}}
+.site-section-banner{font-size:18px}
+.learning-title-banner{font-size:16px}
+.topic-title{font-size:16px}}
 </style>
 </head>
 <body>
 
-<header class="main-header">
-<a href="../../index.html">🏠 Main Home</a>
-<div class="header-title">STRENGTH OF MATERIALS — UNIT 1</div>
-<a href="../index.html">Strength of Materials Home</a>
-</header>
+<!-- COMMON WEBSITE NAVBAR: loaded from the root navbar.html -->
+<div id="nav-placeholder" class="navbar-placeholder"></div>
+
+<!-- SUBJECT TITLE -->
+<div class="site-section-banner">STRENGTH OF MATERIALS</div>
+
+<!-- LEARNING MATERIAL TITLE -->
+<div class="learning-title-banner">LEARNING MATERIAL - STRESS AND STRAIN CONCEPTS</div>
 
 <main class="container">
 <section class="intro">
@@ -264,6 +270,17 @@ footer{background:#063d78;color:#fff;text-align:center;padding:17px;font-size:14
 </main>
 <footer>Strength of Materials | Unit 1</footer>
 <script>
+/* Load the common site navigation from the website root. */
+fetch('/navbar.html')
+    .then(response => {
+        if (!response.ok) throw new Error('Could not load /navbar.html');
+        return response.text();
+    })
+    .then(data => {
+        document.getElementById('nav-placeholder').innerHTML = data;
+    })
+    .catch(error => console.error('Navbar loading error:', error));
+
 function toggleTopic(header){
  const topic=header.closest(".topic");
  const button=header.querySelector(".toggle");
