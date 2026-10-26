@@ -19,13 +19,15 @@ window.MathJax = {
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",Arial,sans-serif}
 body{background:#eef3f8;color:#222}
-header{background:linear-gradient(135deg,#063b70,#0878c9);color:white;padding:20px; text-align:center;position:relative;box-shadow:0 3px 10px rgba(0,0,0,.15)}
-header h1{font-size:28px;margin-bottom:5px}
-header p{font-size:16px}
-.home-link{position:absolute;left:22px;top:20px}
-.mos-link{position:absolute;right:22px;top:20px}
-.home-link a,.mos-link a{color:white;text-decoration:none;font-weight:600;font-size:16px}
-.home-link a:hover,.mos-link a:hover{text-decoration:underline}
+header{background:linear-gradient(135deg,#0b3d91,#0f6ab4);color:#fff;padding:18px 8%;box-shadow:0 3px 10px rgba(0,0,0,.15)}
+.top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.brand h1{font-size:38px;margin:0}
+.brand p{margin-top:6px;font-size:18px;margin-bottom:0}
+#nav-placeholder{margin-top:18px}
+nav{margin-top:0}
+nav a{color:#fff;text-decoration:none;margin-right:22px;font-weight:600}
+nav a:hover{text-decoration:underline}
+.site-section-banner{background:#063f78;color:#fff;text-align:center;padding:18px 12px;font-size:27px;font-weight:800;letter-spacing:.5px;box-shadow:0 2px 8px rgba(0,0,0,.12)}
 .container{width:94%;max-width:1150px;margin:25px auto 40px}
 .section{background:white;border-radius:13px;box-shadow:0 4px 15px rgba(0,0,0,.10);padding:22px;margin-bottom:25px}
 .section-title{display:flex;align-items:center;justify-content:space-between;background:#075b99;color:white;border-radius:8px;padding:13px 18px;cursor:pointer;font-size:21px;font-weight:700}
@@ -48,9 +50,8 @@ header p{font-size:16px}
 .essay .qplus{background:#c88c08}
 footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:14px}
 @media(max-width:700px){
- header h1{font-size:23px}
- .home-link,.mos-link{position:static;text-align:left;margin-bottom:7px}
- header{text-align:center}
+ .brand h1{font-size:28px}
+ .brand p{font-size:15px}
  .container{width:96%}.section{padding:15px}
  .question-header{font-size:15px}.solution{font-size:15px}
 }
@@ -82,16 +83,42 @@ footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:1
 .essay .solution p{margin:5px 0 8px}
 .essay .solution .answer{margin-top:10px}
 @media(max-width:850px){.essay-grid{grid-template-columns:1fr;gap:8px}}
+
+/* Print Settings: show all questions and solutions, including collapsed content */
+@page { size: auto; margin: 12mm; }
+@media print {
+    html, body { background: #fff !important; color: #000 !important; display: block !important; min-height: 0 !important; }
+    header, #nav-placeholder, footer { display: none !important; }
+    .site-section-banner { background: #fff !important; color: #000 !important; box-shadow: none !important; padding: 0 0 10px !important; font-size: 18pt !important; }
+    .container { width: 100% !important; max-width: none !important; margin: 0 !important; }
+    .pdf-download { color: #000 !important; background: #fff !important; border-color: #aaa !important; }
+    .section, .questions, .solution { display: block !important; visibility: visible !important; height: auto !important; max-height: none !important; overflow: visible !important; }
+    .section, .question-box { box-shadow: none !important; background: #fff !important; border-color: #bbb !important; }
+    .section-title, .question-header { color: #000 !important; background: #fff !important; border: 1px solid #bbb !important; }
+    .plus, .qplus { display: none !important; }
+    .essay-grid { display: block !important; }
+    .essay-column { width: 100% !important; }
+    .equation { overflow: visible !important; break-inside: avoid; page-break-inside: avoid; }
+    .answer { color: #000 !important; background: #fff !important; border-color: #aaa !important; }
+    .section, .question-box { break-inside: auto !important; page-break-inside: auto !important; }
+    p, li { orphans: 3; widows: 3; }
+}
 </style>
 </head>
 
 <body>
 <header>
-    <div class="home-link"><a href="../../index.html">🏠 Back to Domain Home</a></div>
-    <div class="mos-link"><a href="../index.html">📚 Back to MOS Home</a></div>
-    <h1>MECHANICS OF SOLIDS</h1>
-    <p>UNIT 4 – Torsion (Important Questions with Solutions)</p>
+    <div class="top">
+        <div class="brand">
+            <h1>D. KIRAN PRASAD</h1>
+            <p>Educational Portal • Lecture Videos • Projects • Notes • Source Code</p>
+        </div>
+    </div>
+    <!-- Dynamic Navigation Bar Placeholder -->
+    <div id="nav-placeholder"></div>
 </header>
+
+<div class="site-section-banner">UNIT 4 – TORSION (IMPORTANT QUESTIONS WITH SOLUTIONS)</div>
 
 <div class="container">
 <!-- PDF DOWNLOAD -->
@@ -399,6 +426,17 @@ footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:1
 </footer>
 
 <script>
+/* Load the common navigation bar from the website root. */
+fetch('/navbar.html')
+    .then(response => {
+        if (!response.ok) throw new Error('Could not load /navbar.html');
+        return response.text();
+    })
+    .then(data => {
+        document.getElementById('nav-placeholder').innerHTML = data;
+    })
+    .catch(error => console.error('Navbar loading error:', error));
+
 function toggleSection(title){
     const questions=title.nextElementSibling;
     const plus=title.querySelector(".plus");
