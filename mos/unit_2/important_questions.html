@@ -48,6 +48,103 @@ svg{width:100%;height:auto;display:block}
 .final{background:#eef8ee;border:1px solid #8bb98b;border-radius:7px;padding:13px;line-height:1.7;margin-top:10px}
 .footer{width:94%;max-width:1440px;margin:25px auto 20px;background:#0b477d;color:#fff;text-align:center;padding:11px;font-size:14px}
 @media(max-width:800px){.brand h1{font-size:30px}.brand p{font-size:16px}.page-banner h2{font-size:24px}.page-banner p{font-size:16px}#nav-placeholder nav a{display:inline-block;margin:0 12px 8px 0}.section-card{padding:16px}.section-title{font-size:20px}.question-header{font-size:16px}}
+
+
+/* Print-friendly layout: show all questions, answers, and solution steps. */
+@page { size: auto; margin: 12mm; }
+@media print {
+    html, body {
+        background: #fff !important;
+        color: #000 !important;
+        display: block !important;
+        min-height: 0 !important;
+        height: auto !important;
+        overflow: visible !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    .site-header, #nav-placeholder, .footer { display: none !important; }
+    .page-banner {
+        background: #fff !important;
+        color: #000 !important;
+        box-shadow: none !important;
+        padding: 0 0 10px !important;
+        margin: 0 0 12px !important;
+        border-bottom: 1px solid #999;
+    }
+    .page-banner h2, .page-banner p { color: #000 !important; }
+    .container, main.container {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important;
+    }
+    .section-body, .answer, .solution, .questions {
+        display: block !important;
+        visibility: visible !important;
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+        opacity: 1 !important;
+    }
+    .plus, .qplus, .nav-buttons, button.prev, button.next { display: none !important; }
+    .section-card, .question, .answer, .complete-solution,
+    .solution-calculations, .solution-diagrams {
+        box-shadow: none !important;
+        position: static !important;
+        overflow: visible !important;
+        max-height: none !important;
+    }
+    .section-card {
+        padding: 10px !important;
+        margin: 0 0 14px !important;
+        border: 1px solid #bbb !important;
+        border-radius: 0 !important;
+        break-inside: auto !important;
+        page-break-inside: auto !important;
+    }
+    .section-title, .question-header {
+        color: #000 !important;
+        background: #f1f1f1 !important;
+        break-after: avoid-page;
+        page-break-after: avoid;
+    }
+    .question {
+        break-inside: auto !important;
+        page-break-inside: auto !important;
+        margin: 8px 0 !important;
+        border: 1px solid #ccc !important;
+    }
+    .answer { padding: 10px !important; }
+    .short-answer-figure, img, svg, table, .equation, .calc, .step-title {
+        max-width: 100% !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+    .complete-solution {
+        display: block !important;
+        grid-template-columns: 1fr !important;
+    }
+    .solution-diagrams { margin-bottom: 12px !important; }
+    /* Interactive stepper content: print every step, not only the active one. */
+    .step-box, .step-box.active {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+        transform: none !important;
+        break-inside: avoid-page;
+        page-break-inside: avoid;
+    }
+    .pdf-download { color: #000 !important; background: #fff !important; }
+    a { color: #000 !important; text-decoration: none !important; }
+}
+
 </style>
 
 <style>
