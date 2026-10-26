@@ -14,30 +14,66 @@ body{
     font-family:Arial,Helvetica,sans-serif;
     background:#eef5fb;
     color:#222;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
 }
-.header{
-    background:linear-gradient(90deg,#124d82,#087cc1);
-    color:white;
-    padding:28px 20px;
-    text-align:center;
+.site-header{
+    background:linear-gradient(135deg,#0b3d91,#0f6ab4);
+    color:#fff;
+    padding:18px 8%;
 }
-.header h1{
+.top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+}
+.brand h1{
     margin:0;
     font-size:38px;
     font-weight:bold;
 }
-.header h2{
-    margin:8px 0 0;
+.brand p{
+    margin:6px 0 0;
+    font-size:18px;
+}
+#nav-placeholder{
+    margin-top:18px;
+}
+#nav-placeholder nav{
+    margin-top:0;
+}
+#nav-placeholder a{
+    color:#fff;
+    text-decoration:none;
+    margin-right:22px;
+    font-weight:600;
+}
+#nav-placeholder a:hover{
+    text-decoration:underline;
+}
+.page-banner{
+    background:linear-gradient(90deg,#124d82,#087cc1);
+    color:white;
+    padding:24px 20px;
+    text-align:center;
+}
+.page-banner h2{
+    margin:0;
+    font-size:32px;
     color:white;
     border:none;
 }
-.top-links{
-    position:absolute;
-    top:45px;
-    left:25px;
-    color:white;
+.page-banner p{
+    margin:8px 0 0;
     font-size:20px;
-    font-weight:bold;
+}
+@media(max-width:800px){
+    .brand h1{font-size:28px}
+    .brand p{font-size:16px}
+    .page-banner h2{font-size:25px}
+    .page-banner p{font-size:17px}
 }
 .notice-box{
     margin:40px 3%;
@@ -123,11 +159,21 @@ th,td{
 <body>
 
     
-<header class="header">
-<div class="top-links">🏠 Back to Domain Home</div>
-<h1>MECHANICS OF SOLIDS</h1>
-<h2>UNIT 3 – Important Questions with Solutions</h2>
+<header class="site-header">
+    <div class="top">
+        <div class="brand">
+            <h1>D. KIRAN PRASAD</h1>
+            <p>Educational Portal • Lecture Videos • Projects • Notes • Source Code</p>
+        </div>
+    </div>
+    <!-- Shared dynamic navigation loaded from the website root -->
+    <div id="nav-placeholder"></div>
 </header>
+
+<section class="page-banner">
+    <h2>MECHANICS OF SOLIDS</h2>
+    <p>UNIT 3 – Important Questions with Solutions</p>
+</section>
 <div class="notice-box">
 PDF document with questions and answers: Updated Shortly
 </div>
@@ -406,6 +452,18 @@ PDF document with questions and answers: Updated Shortly
 <footer class="footer">
 © 2026 D. Kiran Prasad | Mechanics of Solids
 </footer>
+<script>
+    // Load the shared navigation bar from the website root.
+    fetch('/navbar.html')
+        .then(response => {
+            if (!response.ok) throw new Error('Could not load navbar.html');
+            return response.text();
+        })
+        .then(data => {
+            document.getElementById('nav-placeholder').innerHTML = data;
+        })
+        .catch(error => console.error('Navigation bar loading failed:', error));
+</script>
 </body>
 
 </html>
