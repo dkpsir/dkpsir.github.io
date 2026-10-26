@@ -6,13 +6,16 @@
 <title>Mechanics of Solids - Unit 2 Important Questions</title>
 <style>
 *{box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-body{margin:0;background:#eef4f9;color:#111}
-.header{position:relative;background:linear-gradient(90deg,#0b477d,#087cc1);color:#fff;text-align:center;padding:28px 20px 26px}
-.header h1{margin:0;font-size:36px}.header p{margin:8px 0 0;font-size:20px}
-.header-nav{position:absolute;left:16px;right:16px;top:30px;display:flex;justify-content:space-between}
-.header-nav a{color:#fff;text-decoration:none;font-size:18px;font-weight:700}
-.header-nav a:hover{text-decoration:underline}
-.container{width:94%;max-width:1440px;margin:32px auto}
+body{margin:0;background:#eef4f9;color:#111;min-height:100vh;display:flex;flex-direction:column}
+.site-header{background:linear-gradient(135deg,#0b3d91,#0f6ab4);color:#fff;padding:18px 8%}
+.site-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.brand h1{margin:0;font-size:38px;font-weight:800}.brand p{margin:6px 0 0;font-size:18px}
+#nav-placeholder nav{margin-top:18px}
+#nav-placeholder nav a{color:#fff;text-decoration:none;margin-right:22px;font-weight:600}
+#nav-placeholder nav a:hover{text-decoration:underline}
+.page-banner{background:linear-gradient(90deg,#0b477d,#087cc1);color:#fff;text-align:center;padding:22px 20px}
+.page-banner h2{margin:0;font-size:30px}.page-banner p{margin:8px 0 0;font-size:19px}
+.container{width:94%;max-width:1440px;margin:32px auto;flex:1}
 .pdf-download{background:#fff;border:1px solid #e3b9b9;border-left:6px solid #d40000;border-radius:8px;padding:17px 20px;color:#d00000;font-size:20px;margin-bottom:22px}
 .section-card{background:#fff;border-radius:17px;padding:28px;margin-bottom:28px;box-shadow:0 5px 22px rgba(0,0,0,.10)}
 .section-title{background:#0d5f98;color:#fff;border-radius:8px;padding:15px 20px;min-height:70px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-size:25px;font-weight:700}
@@ -44,7 +47,7 @@ svg{width:100%;height:auto;display:block}
 .nav-buttons button:disabled{background:#aaa;cursor:not-allowed}
 .final{background:#eef8ee;border:1px solid #8bb98b;border-radius:7px;padding:13px;line-height:1.7;margin-top:10px}
 .footer{width:94%;max-width:1440px;margin:25px auto 20px;background:#0b477d;color:#fff;text-align:center;padding:11px;font-size:14px}
-@media(max-width:800px){.header{padding-top:72px}.header h1{font-size:28px}.header p{font-size:17px}.header-nav a{font-size:14px}.section-card{padding:16px}.section-title{font-size:20px}.question-header{font-size:16px}}
+@media(max-width:800px){.brand h1{font-size:30px}.brand p{font-size:16px}.page-banner h2{font-size:24px}.page-banner p{font-size:16px}#nav-placeholder nav a{display:inline-block;margin:0 12px 8px 0}.section-card{padding:16px}.section-title{font-size:20px}.question-header{font-size:16px}}
 </style>
 
 <style>
@@ -185,14 +188,21 @@ svg{width:100%;height:auto;display:block}
 </head>
 <body>
 
-<header class="header">
-<div class="header-nav">
-<a href="../../index.html">🏠&nbsp; Back to Domain Home</a>
-<a href="../index.html">📚&nbsp; Back to MOS Home</a>
-</div>
-<h1>MECHANICS OF SOLIDS</h1>
-<p>UNIT 2 – Important Questions with Solutions</p>
+<header class="site-header">
+    <div class="site-top">
+        <div class="brand">
+            <h1>D. KIRAN PRASAD</h1>
+            <p>Educational Portal • Lecture Videos • Projects • Notes • Source Code</p>
+        </div>
+    </div>
+    <!-- Dynamic navigation is loaded from the shared root navbar.html -->
+    <div id="nav-placeholder"></div>
 </header>
+
+<section class="page-banner">
+    <h2>MECHANICS OF SOLIDS</h2>
+    <p>UNIT 2 – IMPORTANT QUESTIONS WITH SOLUTIONS</p>
+</section>
 
 <main class="container">
 <div class="pdf-download">PDF document with questions and answers: Updated Shortly</div>
@@ -274,6 +284,19 @@ svg{width:100%;height:auto;display:block}
 </main>
 
 <footer class="footer">© 2026 D. Kiran Prasad | Mechanics of Solids</footer>
+
+<script>
+// Load the shared dynamic navigation bar from the website root.
+fetch('/navbar.html')
+    .then(response => {
+        if (!response.ok) throw new Error('Unable to load navbar.html');
+        return response.text();
+    })
+    .then(data => {
+        document.getElementById('nav-placeholder').innerHTML = data;
+    })
+    .catch(error => console.error('Navigation bar loading error:', error));
+</script>
 
 <script>
 function toggleSection(el){
