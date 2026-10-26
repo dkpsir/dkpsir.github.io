@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Important Questions | D. Kiran Prasad</title>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:"Segoe UI",Arial,sans-serif;
+    }
+
+    body{
+        background:#eef3f8;
+        color:#222;
+        display:flex;
+        flex-direction:column;
+        min-height:100vh;
+    }
+
+    /* Common Header */
+    header{
+        background:linear-gradient(135deg,#0b3d91,#0f6ab4);
+        color:#fff;
+        padding:18px 8%;
+    }
+    
+    .top{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        flex-wrap:wrap;
+    }
+    
+    .brand h1{
+        font-size:38px;
+    }
+    
+    .brand p{
+        margin-top:6px;
+        font-size:18px;
+    }
+    
+    nav{
+        margin-top:18px;
+    }
+    
+    nav a{
+        color:#fff;
+        text-decoration:none;
+        margin-right:22px;
+        font-weight:600;
+    }
+    
+    nav a:hover{
+        text-decoration:underline;
+    }
+
+    /* Page Title Banner */
+    .page-title {
+        background: #fff;
+        text-align: center;
+        padding: 20px 20px;
+        box-shadow: 0 3px 10px rgba(0,0,0,.05);
+        border-bottom: 4px solid #0878c9;
+        margin-bottom: 40px;
+    }
+
+    .page-title h2 {
+        font-size: 28px;
+        color: #063b70;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+    }
+
+    /* Main Container */
+    .container{
+        width:94%;
+        max-width:1100px;
+        margin:0 auto 40px;
+        flex: 1;
+    }
+
+    /* Units Grid */
+    .units{
+        display:grid;
+        grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+        gap:20px;
+    }
+
+    .unit-card{
+        background:white;
+        border-radius:12px;
+        overflow:hidden;
+        box-shadow:0 4px 14px rgba(0,0,0,.10);
+        border:1px solid #d7e1eb;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .unit-header{
+        background:#075b99;
+        color:white;
+        text-align:center;
+        padding:15px;
+        font-size:18px;
+        font-weight:700;
+    }
+
+    .unit-body{
+        padding:25px 20px;
+        text-align:center;
+        color:#444;
+        font-size:16px;
+        font-weight:600;
+        line-height:1.5;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .unit-footer{
+        padding:15px;
+        background:#f8fbfe;
+        border-top:1px solid #e1e8ef;
+        text-align:center;
+    }
+
+    .click-btn{
+        display:inline-block;
+        text-decoration:none;
+        background:#eef6ff;
+        color:#075b99;
+        border:1px solid #c9ddec;
+        border-radius:8px;
+        padding:10px 20px;
+        font-size:15px;
+        font-weight:700;
+        transition:.2s;
+        width: 100%;
+    }
+
+    .click-btn:hover{
+        background:#0878c9;
+        color:white;
+    }
+
+    /* Bottom Footer */
+    footer{
+        background:#0b3d91;
+        color:white;
+        text-align:center;
+        padding:20px;
+        font-size:14px;
+        margin-top:auto;
+    }
+
+    /* Responsive */
+    @media(max-width:900px){
+        .brand h1{font-size:30px}
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="top">
+        <div class="brand">
+            <h1>D. KIRAN PRASAD</h1>
+            <p>Educational Portal • Lecture Videos • Projects • Notes • Source Code</p>
+        </div>
+    </div>
+
+    <!-- Dynamic Navigation Bar Placeholder -->
+    <div id="nav-placeholder"></div>
+</header>
+
+<div class="page-title">
+    <h2>Important Questions for SRGEC (R 23)</h2>
+</div>
+
+<div class="container">
+    <div class="units">
+
+        <!-- Unit 1 -->
+        <div class="unit-card">
+            <div class="unit-header">Unit - 1</div>
+            <div class="unit-body">Stress and Strain</div>
+            <div class="unit-footer">
+                <a href="unit_1/important_questions.html" class="click-btn">Click here</a>
+            </div>
+        </div>
+
+        <!-- Unit 2 -->
+        <div class="unit-card">
+            <div class="unit-header">Unit - 2</div>
+            <div class="unit-body">Shear Force and Bending Moment</div>
+            <div class="unit-footer">
+                <a href="unit_2/important_questions.html" class="click-btn">Click here</a>
+            </div>
+        </div>
+
+        <!-- Unit 3 -->
+        <div class="unit-card">
+            <div class="unit-header">Unit - 3</div>
+            <div class="unit-body">Bending and Shear Stresses</div>
+            <div class="unit-footer">
+                <a href="unit_3/important_questions.html" class="click-btn">Click here</a>
+            </div>
+        </div>
+
+        <!-- Unit 4 -->
+        <div class="unit-card">
+            <div class="unit-header">Unit - 4</div>
+            <div class="unit-body">Deflections of Beams and Torsion</div>
+            <div class="unit-footer">
+                <a href="unit_4/important_questions.html" class="click-btn">Click here</a>
+            </div>
+        </div>
+
+        <!-- Unit 5 -->
+        <div class="unit-card">
+            <div class="unit-header">Unit - 5</div>
+            <div class="unit-body">Columns and Struts,<br>Thin and Thick Cylinders</div>
+            <div class="unit-footer">
+                <a href="unit5/important_questions.html" class="click-btn">Click here</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<footer>
+    © 2026 D. Kiran Prasad | Academic Resource Portal
+</footer>
+
+<script>
+    // Load dynamic navbar from root folder
+    fetch('/navbar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('nav-placeholder').innerHTML = data;
+        });
+</script>
+
+</body>
+</html>
