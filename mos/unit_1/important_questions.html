@@ -113,6 +113,30 @@ footer{background:#0b3d91;color:white;text-align:center;padding:15px;font-size:1
 .essay .solution p{margin:5px 0 8px}
 .essay .solution .answer{margin-top:10px}
 @media(max-width:850px){.essay-grid{grid-template-columns:1fr;gap:8px}}
+
+/* Print Settings */
+@media print {
+    /* Hide header and footer */
+    header { display: none !important; }
+    footer { display: none !important; }
+    
+    /* Clean background */
+    body { background: white !important; }
+    
+    /* Auto-expand all questions and solutions for printing */
+    .questions { display: block !important; }
+    .solution { display: block !important; }
+    
+    /* Hide the + / - toggle buttons on paper */
+    .plus, .qplus { display: none !important; }
+    
+    /* Adjust borders and shadows for clean printing */
+    .section, .question-box {
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+        page-break-inside: avoid; /* Prevents questions from splitting across pages */
+    }
+}
 </style>
 </head>
 
