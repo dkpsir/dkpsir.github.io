@@ -153,6 +153,107 @@ th,td{
     text-align:center;
     padding:15px;
 }
+
+
+/* Print settings: keep the learning content, hide site navigation */
+@page {
+    size: auto;
+    margin: 12mm;
+}
+@media print {
+    html, body {
+        background: #fff !important;
+        color: #000 !important;
+        display: block !important;
+        min-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important;
+    }
+
+    .site-header, #nav-placeholder, .footer {
+        display: none !important;
+    }
+
+    .page-banner {
+        background: #fff !important;
+        color: #000 !important;
+        padding: 8px 0 14px !important;
+        box-shadow: none !important;
+        break-inside: avoid;
+    }
+    .page-banner h2, .page-banner p {
+        color: #000 !important;
+    }
+
+    .notice-box {
+        margin: 10px 0 16px !important;
+        padding: 10px !important;
+        color: #000 !important;
+        border: 1px solid #aaa !important;
+        border-left: 4px solid #777 !important;
+        background: #fff !important;
+        font-size: 12pt !important;
+        break-inside: avoid;
+    }
+
+    .container {
+        width: 100% !important;
+        margin: 0 !important;
+    }
+    .problem-card {
+        background: #fff !important;
+        margin: 0 0 16px !important;
+        padding: 12px !important;
+        border: 1px solid #bbb !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        break-inside: auto !important;
+        page-break-inside: auto !important;
+        overflow: visible !important;
+    }
+    .problem-card h2 {
+        color: #000 !important;
+        background: #eee !important;
+        border: 1px solid #aaa !important;
+        padding: 8px 10px !important;
+        break-after: avoid;
+    }
+    .problem-statement {
+        color: #000 !important;
+        background: #fff !important;
+        break-inside: auto !important;
+    }
+    .grid-container {
+        display: block !important;
+    }
+    .section-box {
+        background: #fff !important;
+        border: 1px solid #ccc !important;
+        border-radius: 0 !important;
+        margin: 0 0 10px !important;
+        break-inside: auto !important;
+        page-break-inside: auto !important;
+    }
+    table {
+        width: 100% !important;
+        break-inside: auto !important;
+    }
+    tr, img, .embedded-image {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+    .embedded-image {
+        max-width: 100% !important;
+        height: auto !important;
+        margin: 12px auto !important;
+    }
+    p, .highlight {
+        orphans: 3;
+        widows: 3;
+    }
+}
+
 </style>
 
 </head>
