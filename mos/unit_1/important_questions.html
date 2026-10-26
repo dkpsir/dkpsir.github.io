@@ -114,27 +114,91 @@ footer{background:#0b3d91;color:white;text-align:center;padding:15px;font-size:1
 .essay .solution .answer{margin-top:10px}
 @media(max-width:850px){.essay-grid{grid-template-columns:1fr;gap:8px}}
 
-/* Print Settings */
+/* Print Settings: hide site header/footer and print every question and solution,
+   regardless of whether the page is expanded on screen. */
+@page {
+    size: auto;
+    margin: 12mm;
+}
 @media print {
-    /* Hide header and footer */
-    header { display: none !important; }
-    footer { display: none !important; }
-    
-    /* Clean background */
-    body { background: white !important; }
-    
-    /* Auto-expand all questions and solutions for printing */
-    .questions { display: block !important; }
-    .solution { display: block !important; }
-    
-    /* Hide the + / - toggle buttons on paper */
-    .plus, .qplus { display: none !important; }
-    
-    /* Adjust borders and shadows for clean printing */
-    .section, .question-box {
+    html, body {
+        background: #fff !important;
+        color: #000 !important;
+        min-height: 0 !important;
+        height: auto !important;
+        display: block !important;
+        overflow: visible !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    /* Hide the common top header/navbar and footer on paper. */
+    header, #nav-placeholder, footer {
+        display: none !important;
+    }
+
+    /* Keep the page/unit banner and content, but remove screen-only spacing. */
+    .site-section-banner {
         box-shadow: none !important;
-        border: 1px solid #ccc !important;
-        page-break-inside: avoid; /* Prevents questions from splitting across pages */
+        break-after: avoid-page;
+    }
+    .container {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 8mm 0 !important;
+        padding: 0 !important;
+        overflow: visible !important;
+    }
+
+    /* Expand every section and answer even when collapsed in the browser. */
+    .questions,
+    .questions:not(.show),
+    .solution,
+    .solution:not(.show) {
+        display: block !important;
+        visibility: visible !important;
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+
+    /* Remove interactive controls. */
+    .plus, .qplus {
+        display: none !important;
+    }
+    .section-title, .question-header {
+        cursor: default !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    /* Avoid clipping long solutions across pages. */
+    .section, .question-box, .solution, .essay-grid, .essay-column {
+        overflow: visible !important;
+        box-shadow: none !important;
+        break-inside: auto !important;
+        page-break-inside: auto !important;
+    }
+    .question-box {
+        border: 1px solid #bbb !important;
+        margin-bottom: 8mm !important;
+    }
+    .equation {
+        overflow: visible !important;
+        break-inside: avoid-page;
+        page-break-inside: avoid;
+    }
+    img {
+        max-width: 100% !important;
+        height: auto !important;
+        break-inside: avoid-page;
+        page-break-inside: avoid;
+    }
+    .essay-grid {
+        display: block !important;
+    }
+    .essay-column {
+        width: 100% !important;
     }
 }
 </style>
