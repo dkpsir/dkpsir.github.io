@@ -96,16 +96,47 @@ footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:1
 .essay .solution p{margin:5px 0 8px}
 .essay .solution .answer{margin-top:10px}
 @media(max-width:850px){.essay-grid{grid-template-columns:1fr;gap:8px}}
+
+/* Shared website header and unit banner */
+header{background:linear-gradient(135deg,#0b3d91,#0f6ab4);color:#fff;padding:18px 8%;text-align:left;position:static}
+.top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.brand h1{font-size:38px;margin:0}
+.brand p{margin-top:6px;font-size:18px}
+#nav-placeholder{margin-top:18px}
+.site-section-banner{background:#063f78;color:#fff;text-align:center;padding:18px 12px;font-size:25px;font-weight:800}
+@page{size:auto;margin:12mm}
+@media print{
+ html,body{background:white!important;height:auto!important;overflow:visible!important;display:block!important}
+ header,#nav-placeholder,footer{display:none!important}
+ .site-section-banner{background:white!important;color:black!important;box-shadow:none!important;padding:8px 0!important;font-size:20px!important}
+ .container{width:100%!important;max-width:none!important;margin:0!important;padding:0!important}
+ .pdf-download{display:none!important}
+ .questions,.solution{display:block!important;visibility:visible!important;height:auto!important;max-height:none!important;overflow:visible!important}
+ .plus,.qplus{display:none!important}
+ .section,.question-box{box-shadow:none!important;border:1px solid #ccc!important;overflow:visible!important;break-inside:auto!important;page-break-inside:auto!important}
+ .section{padding:10px!important;margin-bottom:12px!important}
+ .question-box{margin-bottom:10px!important}
+ .question-header{color:black!important;background:white!important}
+ .section-title{color:black!important;background:white!important;border:1px solid #aaa!important}
+ .solution{background:white!important;padding:12px!important}
+ .essay-grid{display:block!important}
+ .essay-column{width:100%!important;min-width:0!important;break-inside:auto!important}
+ .equation{overflow:visible!important;break-inside:avoid!important}
+ .solution-image,img,svg{max-width:100%!important;height:auto!important;break-inside:avoid!important}
+ .answer,.final{break-inside:avoid!important}
+}
 </style>
 </head>
 
 <body>
 <header>
-    <div class="home-link"><a href="../../index.html">🏠 Back to Domain Home</a></div>
-    <div class="mos-link"><a href="../index.html">📚 Back to MOS Home</a></div>
-    <h1>MECHANICS OF SOLIDS</h1>
-    <p>UNIT 5 – Important Questions with Solutions</p>
+    <div class="top"><div class="brand">
+        <h1>D. KIRAN PRASAD</h1>
+        <p>Educational Portal • Lecture Videos • Projects • Notes • Source Code</p>
+    </div></div>
+    <div id="nav-placeholder"></div>
 </header>
+<div class="site-section-banner">MECHANICS OF SOLIDS – UNIT 5 – IMPORTANT QUESTIONS WITH SOLUTIONS</div>
 
 <div class="container">
 <!-- PDF DOWNLOAD -->
@@ -492,6 +523,12 @@ footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:1
     © 2026 D. Kiran Prasad | Mechanics of Solids
 </footer>
 
+<script>
+fetch('/navbar.html')
+ .then(response => {if(!response.ok) throw new Error('Could not load navbar');return response.text();})
+ .then(html => {document.getElementById('nav-placeholder').innerHTML=html;})
+ .catch(error => console.error('Navbar loading error:',error));
+</script>
 <script>
 function toggleSection(title){
     const questions=title.nextElementSibling;
