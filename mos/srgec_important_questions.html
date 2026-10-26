@@ -149,6 +149,28 @@
         color:white;
     }
 
+
+    /* Additional questions: visually separated from the original five units */
+    .additional-section{
+        margin-top:32px;
+        border-left:8px solid #c40000;
+        padding:8px 0 8px 22px;
+    }
+    .additional-title{
+        color:#a30000;
+        font-size:24px;
+        margin:0 0 18px;
+        padding-bottom:10px;
+        border-bottom:2px solid #e7bcbc;
+    }
+    .additional-section .units{
+        grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+    }
+    @media(max-width:600px){
+        .additional-section{padding-left:14px;border-left-width:6px}
+        .additional-title{font-size:21px}
+    }
+
     /* Bottom Footer */
     footer{
         background:#0b3d91;
@@ -233,6 +255,36 @@
         </div>
 
     </div>
+
+    <!-- Additional questions, separated from the original five units -->
+    <section class="additional-section" aria-labelledby="additional-questions-title">
+        <h2 class="additional-title" id="additional-questions-title">Additional Topics - Important Questions(Essay)</h2>
+        <div class="units">
+            <div class="unit-card">
+                <div class="unit-header">Unit - 3</div>
+                <div class="unit-body">Shear Stresses</div>
+                <div class="unit-footer">
+                    <a href="unit_3/additional_questions.html" class="click-btn">Click here</a>
+                </div>
+            </div>
+
+            <div class="unit-card">
+                <div class="unit-header">Unit - 4</div>
+                <div class="unit-body">Deflections</div>
+                <div class="unit-footer">
+                    <a href="unit_4/additional_questions.html" class="click-btn">Click here</a>
+                </div>
+            </div>
+
+            <div class="unit-card">
+                <div class="unit-header">Unit - 5</div>
+                <div class="unit-body">Thin and Thick Cylinders</div>
+                <div class="unit-footer">
+                    <a href="unit5/additional_questions.html" class="click-btn">Click here</a>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 
 <footer>
