@@ -3,235 +3,264 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mechanics of Solids</title>
+<title>Mechanics of Solids | D. Kiran Prasad</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:"Segoe UI",Arial,sans-serif;
-}
-
-body{
-    background:#eef3f8;
-    color:#222;
-}
-
-/* Header */
-header{
-    background:linear-gradient(135deg,#063b70,#0878c9);
-    color:white;
-    padding:22px 20px;
-    text-align:center;
-    position:relative;
-    box-shadow:0 3px 10px rgba(0,0,0,.15);
-}
-
-header h1{
-    font-size:30px;
-    margin-bottom:6px;
-}
-
-header p{
-    font-size:16px;
-}
-
-/* Back to main website */
-.home-link{
-    position:absolute;
-    left:22px;
-    top:22px;
-}
-
-.home-link a{
-    color:white;
-    text-decoration:none;
-    font-size:16px;
-    font-weight:600;
-}
-
-.home-link a:hover{
-    text-decoration:underline;
-}
-
-/* Main */
-.container{
-    width:94%;
-    max-width:1350px;
-    margin:28px auto 40px;
-}
-
-/* Course description */
-.description{
-    background:white;
-    border-radius:12px;
-    padding:24px 28px;
-    box-shadow:0 4px 14px rgba(0,0,0,.10);
-    margin-bottom:28px;
-    border-left:5px solid #0878c9;
-}
-
-.description h2{
-    color:#063b70;
-    font-size:23px;
-    margin-bottom:12px;
-}
-
-.description p{
-    font-size:17px;
-    line-height:1.7;
-    text-align:justify;
-}
-
-/* Unit grid */
-.units{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:14px;
-}
-
-.unit{
-    background:white;
-    border-radius:11px;
-    overflow:hidden;
-    box-shadow:0 4px 13px rgba(0,0,0,.10);
-    border:1px solid #d7e1eb;
-    min-width:0;
-}
-
-.unit-title{
-    background:#075b99;
-    color:white;
-    text-align:center;
-    padding:15px 8px;
-    font-size:18px;
-    font-weight:700;
-}
-
-.topic{
-    min-height:74px;
-    padding:12px 12px 8px;
-    text-align:center;
-    color:#444;
-    font-size:14px;
-    line-height:1.45;
-    background:#f8fbfe;
-    border-bottom:1px solid #e1e8ef;
-}
-
-.links{
-    padding:12px;
-}
-
-.links a{
-    display:block;
-    text-decoration:none;
-    background:#eef6ff;
-    color:#075b99;
-    border:1px solid #c9ddec;
-    border-radius:7px;
-    padding:9px 7px;
-    margin-bottom:8px;
-    text-align:center;
-    font-size:14px;
-    font-weight:600;
-    transition:.2s;
-}
-
-.links a:last-child{
-    margin-bottom:0;
-}
-
-.links a:hover{
-    background:#0878c9;
-    color:white;
-}
-
-/* Bottom */
-footer{
-    background:#063b70;
-    color:white;
-    text-align:center;
-    padding:16px;
-    font-size:14px;
-}
-
-/* Responsive */
-@media(max-width:1050px){
-    .units{
-        grid-template-columns:repeat(3,1fr);
-    }
-}
-
-@media(max-width:700px){
-    header h1{
-        font-size:24px;
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:"Segoe UI",Arial,sans-serif;
     }
 
-    .home-link{
-        position:static;
-        text-align:left;
-        margin-bottom:10px;
+    body{
+        background:#eef3f8;
+        color:#222;
+        display:flex;
+        flex-direction:column;
+        min-height:100vh;
     }
 
-    .units{
-        grid-template-columns:1fr;
+    /* Common Header */
+    header{
+        background:linear-gradient(135deg,#0b3d91,#0f6ab4);
+        color:#fff;
+        padding:18px 8%;
+    }
+    
+    .top{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        flex-wrap:wrap;
+    }
+    
+    .brand h1{
+        font-size:38px;
+    }
+    
+    .brand p{
+        margin-top:6px;
+        font-size:18px;
+    }
+    
+    nav{
+        margin-top:18px;
+    }
+    
+    nav a{
+        color:#fff;
+        text-decoration:none;
+        margin-right:22px;
+        font-weight:600;
+    }
+    
+    nav a:hover{
+        text-decoration:underline;
     }
 
+    /* Page Title Banner */
+    .page-title {
+        background: #fff;
+        text-align: center;
+        padding: 20px 20px;
+        box-shadow: 0 3px 10px rgba(0,0,0,.05);
+        border-bottom: 4px solid #0878c9;
+        margin-bottom: 30px;
+    }
+
+    .page-title h2 {
+        font-size: 28px;
+        color: #063b70;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+    }
+
+    .page-title p {
+        font-size: 16px;
+        color: #555;
+    }
+
+    /* Main Container */
+    .container{
+        width:94%;
+        max-width:1350px;
+        margin:0 auto 40px;
+        flex: 1;
+    }
+
+    /* Section headers */
+    .section-heading{
+        background:#075b99;
+        color:#fff;
+        border-radius:10px;
+        padding:15px 20px;
+        margin:0 0 18px;
+        font-size:22px;
+        font-weight:700;
+        box-shadow:0 3px 10px rgba(0,0,0,.08);
+    }
+    .section-block{margin-bottom:30px;}
+
+    /* Content Cards */
     .description{
-        padding:20px;
+        background:white;
+        border-radius:12px;
+        padding:24px 28px;
+        box-shadow:0 4px 14px rgba(0,0,0,.10);
+        border-left:5px solid #0878c9;
     }
-}
 
-/* Section headers */
-.section-heading{
-    background:#075b99;
-    color:#fff;
-    border-radius:10px;
-    padding:15px 20px;
-    margin:0 0 18px;
-    font-size:22px;
-    font-weight:700;
-    box-shadow:0 3px 10px rgba(0,0,0,.08);
-}
-.section-block{margin-bottom:30px;}
-.gate-link-card{
-    background:#fff;
-    border-radius:12px;
-    padding:22px 24px;
-    box-shadow:0 4px 14px rgba(0,0,0,.10);
-    border:1px solid #d7e1eb;
-}
-.gate-link{
-    display:inline-block;
-    text-decoration:none;
-    background:#eef6ff;
-    color:#075b99;
-    border:1px solid #c9ddec;
-    border-radius:8px;
-    padding:11px 18px;
-    font-size:16px;
-    font-weight:700;
-}
-.gate-link:hover{background:#0878c9;color:#fff;}
+    .description p{
+        font-size:17px;
+        line-height:1.7;
+        text-align:justify;
+    }
 
+    .highlight-link {
+        color: #0878c9;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .highlight-link:hover {
+        text-decoration: underline;
+    }
+
+    /* Unit grid */
+    .units{
+        display:grid;
+        grid-template-columns:repeat(5,1fr);
+        gap:14px;
+    }
+
+    .unit{
+        background:white;
+        border-radius:11px;
+        overflow:hidden;
+        box-shadow:0 4px 13px rgba(0,0,0,.10);
+        border:1px solid #d7e1eb;
+        min-width:0;
+    }
+
+    .topic{
+        min-height:70px;
+        padding:15px 12px;
+        text-align:center;
+        color:white;
+        font-size:16px;
+        font-weight:700;
+        line-height:1.45;
+        background:#075b99;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+
+    .links{
+        padding:12px;
+    }
+
+    .links a{
+        display:block;
+        text-decoration:none;
+        background:#eef6ff;
+        color:#075b99;
+        border:1px solid #c9ddec;
+        border-radius:7px;
+        padding:9px 7px;
+        margin-bottom:8px;
+        text-align:center;
+        font-size:14px;
+        font-weight:600;
+        transition:.2s;
+    }
+
+    .links a:last-child{
+        margin-bottom:0;
+    }
+
+    .links a:hover{
+        background:#0878c9;
+        color:white;
+    }
+
+    /* GATE Questions */
+    .gate-link-card{
+        background:#fff;
+        border-radius:12px;
+        padding:22px 24px;
+        box-shadow:0 4px 14px rgba(0,0,0,.10);
+        border:1px solid #d7e1eb;
+    }
+    
+    .gate-link{
+        display:inline-block;
+        text-decoration:none;
+        background:#eef6ff;
+        color:#075b99;
+        border:1px solid #c9ddec;
+        border-radius:8px;
+        padding:11px 18px;
+        font-size:16px;
+        font-weight:700;
+    }
+    
+    .gate-link:hover{
+        background:#0878c9;
+        color:#fff;
+    }
+
+    /* Bottom Footer */
+    footer{
+        background:#0b3d91;
+        color:white;
+        text-align:center;
+        padding:20px;
+        font-size:14px;
+        margin-top:auto;
+    }
+
+    /* Responsive */
+    @media(max-width:1050px){
+        .units{
+            grid-template-columns:repeat(3,1fr);
+        }
+    }
+
+    @media(max-width:900px){
+        .brand h1{font-size:30px}
+    }
+
+    @media(max-width:700px){
+        .units{
+            grid-template-columns:1fr;
+        }
+        .description{
+            padding:20px;
+        }
+    }
 </style>
 </head>
 
 <body>
 
 <header>
-
-    <div class="home-link">
-        <a href="../index.html">🏠 Home</a>
+    <div class="top">
+        <div class="brand">
+            <h1>D. KIRAN PRASAD</h1>
+            <p>Educational Portal • Lecture Videos • Projects • Notes • Source Code</p>
+        </div>
     </div>
 
-    <h1>MECHANICS OF SOLIDS</h1>
-    <p>Course Learning Portal</p>
-
+    <!-- Dynamic Navigation Bar Placeholder -->
+    <div id="nav-placeholder"></div>
 </header>
 
+<div class="page-title">
+    <h2>MECHANICS OF SOLIDS</h2>
+    <p>Course Learning Portal</p>
+</div>
 
 <div class="container">
 
@@ -254,169 +283,72 @@ footer{
         </div>
     </section>
 
-    <!-- SECTION 2: LECTURE MATERIALS -->
+    <!-- SECTION 2: IMPORTANT QUESTIONS (SRGEC R 23) -->
+    <section class="section-block">
+        <div class="section-heading">Important Questions</div>
+        <div class="description">
+            <p style="text-align: left; font-size: 18px;">
+                Important Questions for SRGEC (R 23) - 
+                <a href="srgec_important_questions.html" class="highlight-link">Click here</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- SECTION 3: LECTURE MATERIALS -->
     <section class="section-block">
         <div class="section-heading">Lecture Materials</div>
         <section class="units">
 
-
-        <!-- UNIT 1 -->
-        <div class="unit">
-
-            <div class="unit-title">
-                UNIT 1
+            <!-- Card 1 -->
+            <div class="unit">
+                <div class="topic">Stress and Strain</div>
+                <div class="links">
+                    <a href="unit_1/theory.html">📘 Theory</a>
+                    <a href="unit_1/problems.html">📝 Problems</a>
+                    <a href="unit_1/animations.html">⭐ Animations</a>
+                </div>
             </div>
 
-            <div class="topic">
-                Stress and Strain
+            <!-- Card 2 -->
+            <div class="unit">
+                <div class="topic">Shear Force and Bending Moment</div>
+                <div class="links">
+                    <a href="unit_2/theory.html">📘 Theory</a>
+                    <a href="unit_2/problems.html">📝 Problems</a>
+                </div>
             </div>
 
-            <div class="links">
-
-                <a href="unit_1/theory.html">
-                    📘 Theory
-                </a>
-
-                <a href="unit_1/problems.html">
-                    📝 Problems
-                </a>
-
-                <a href="unit_1/important_questions.html">
-                    ⭐ Important Questions
-                </a>
-                <a href="unit_1/animations.html">
-                    ⭐ Animations
-                </a>
-
+            <!-- Card 3 -->
+            <div class="unit">
+                <div class="topic">Bending and Shear Stresses</div>
+                <div class="links">
+                    <a href="unit_3/theory.html">📘 Theory</a>
+                    <a href="unit_3/problems.html">📝 Problems</a>
+                </div>
             </div>
 
-        </div>
-
-
-        <!-- UNIT 2 -->
-        <div class="unit">
-
-            <div class="unit-title">
-                UNIT 2
+            <!-- Card 4 -->
+            <div class="unit">
+                <div class="topic">Deflections of Beams and Torsion</div>
+                <div class="links">
+                    <a href="unit_4/theory.html">📘 Theory</a>
+                    <a href="unit_4/problems.html">📝 Problems</a>
+                </div>
             </div>
 
-            <div class="topic">
-                Shear Force and Bending Moment
+            <!-- Card 5 -->
+            <div class="unit">
+                <div class="topic">Columns and Struts,<br>Thin and Thick Cylinders</div>
+                <div class="links">
+                    <a href="unit5/theory.html">📘 Theory</a>
+                    <a href="unit5/problems.html">📝 Problems</a>
+                </div>
             </div>
-
-            <div class="links">
-
-                <a href="unit_2/theory.html">
-                    📘 Theory
-                </a>
-
-                <a href="unit_2/problems.html">
-                    📝 Problems
-                </a>
-
-                <a href="unit_2/important_questions.html">
-                    ⭐ Important Questions
-                </a>
-
-            </div>
-
-        </div>
-
-
-        <!-- UNIT 3 -->
-        <div class="unit">
-
-            <div class="unit-title">
-                UNIT 3
-            </div>
-
-            <div class="topic">
-                Bending and Shear Stresses
-            </div>
-
-            <div class="links">
-
-                <a href="unit_3/theory.html">
-                    📘 Theory
-                </a>
-
-                <a href="unit_3/problems.html">
-                    📝 Problems
-                </a>
-
-                <a href="unit_3/important_questions.html">
-                    ⭐ Important Questions
-                </a>
-
-            </div>
-
-        </div>
-
-
-        <!-- UNIT 4 -->
-        <div class="unit">
-
-            <div class="unit-title">
-                UNIT 4
-            </div>
-
-            <div class="topic">
-                Deflections of Beams and Torsion
-            </div>
-
-            <div class="links">
-
-                <a href="unit_4/theory.html">
-                    📘 Theory
-                </a>
-
-                <a href="unit_4/problems.html">
-                    📝 Problems
-                </a>
-
-                <a href="unit_4/important_questions.html">
-                    ⭐ Important Questions
-                </a>
-
-            </div>
-
-        </div>
-
-
-        <!-- UNIT 5 -->
-        <div class="unit">
-
-            <div class="unit-title">
-                UNIT 5
-            </div>
-
-            <div class="topic">
-                Columns and Struts,<br>
-                Thin and Thick Cylinders
-            </div>
-
-            <div class="links">
-
-                <a href="unit5/theory.html">
-                    📘 Theory
-                </a>
-
-                <a href="unit5/problems.html">
-                    📝 Problems
-                </a>
-
-                <a href="unit5/important_questions.html">
-                    ⭐ Important Questions
-                </a>
-
-            </div>
-
-        </div>
 
         </section>
     </section>
 
-    <!-- SECTION 3: PREVIOUS GATE QUESTIONS -->
+    <!-- SECTION 4: PREVIOUS GATE QUESTIONS -->
     <section class="section-block">
         <div class="section-heading">Previous GATE Questions</div>
         <div class="gate-link-card">
@@ -428,11 +360,18 @@ footer{
 
 </div>
 
-
 <footer>
-    © 2026 D. Kiran Prasad
+    © 2026 D. Kiran Prasad | Academic Resource Portal
 </footer>
+
+<script>
+    // Load dynamic navbar from root folder
+    fetch('/navbar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('nav-placeholder').innerHTML = data;
+        });
+</script>
 
 </body>
 </html>
-
