@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shear Stress Distribution — Important Questions | Mechanics of Solids</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+/* Core styles preserved from Unit 4 template[cite: 2] */
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",Arial,sans-serif}
+body{background:#eef3f8;color:#222}
+header{background:linear-gradient(135deg,#0b3d91,#0f6ab4);color:#fff;padding:18px 8%;box-shadow:0 3px 10px rgba(0,0,0,.15)}
+.top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.brand h1{font-size:38px;margin:0}
+.brand p{margin-top:6px;font-size:18px;margin-bottom:0}
+#nav-placeholder{margin-top:18px}
+nav{margin-top:0}
+nav a{color:#fff;text-decoration:none;margin-right:22px;font-weight:600}
+nav a:hover{text-decoration:underline}
+.site-section-banner{background:#063f78;color:#fff;text-align:center;padding:18px 12px;font-size:27px;font-weight:800;letter-spacing:.5px;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.container{width:94%;max-width:1150px;margin:25px auto 40px}
+.section{background:white;border-radius:13px;box-shadow:0 4px 15px rgba(0,0,0,.10);padding:22px;margin-bottom:25px}
+.section-title{display:flex;align-items:center;justify-content:space-between;background:#075b99;color:white;border-radius:8px;padding:13px 18px;cursor:pointer;font-size:21px;font-weight:700}
+.section-title .plus{width:30px;height:30px;border-radius:50%;background:white;color:#075b99;display:flex;align-items:center;justify-content:center;font-size:23px;line-height:1;flex-shrink:0}
+.questions{display:none;margin-top:14px}
+.questions.show{display:block}
+.question-box{border:1px solid #d4e1ec;border-radius:8px;margin-bottom:11px;overflow:hidden;background:#f8fbff}
+.question-header{width:100%;border:0;background:#f8fbff;color:#173b5c;padding:14px 15px;display:flex;align-items:flex-start;gap:12px;text-align:left;font-size:17px;line-height:1.55;font-weight:600;cursor:pointer}
+.question-header:hover{background:#edf6ff}
+.qno{min-width:30px;height:30px;border-radius:50%;background:#0878c9;color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+.qplus{margin-left:auto;min-width:28px;height:28px;border-radius:50%;background:#0878c9;color:white;display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:400}
+.solution{display:none;background:white;padding:18px 22px 22px;border-top:1px solid #dbe6ef;font-size:16px;line-height:1.65}
+.solution.show{display:block}
+.equation{background:#fbfdff;border-left:4px solid #5b7fa3;border-radius:6px;padding:9px 14px;margin:12px 0;overflow-x:auto}
+.equation .mjx-container{margin:0!important}
+.answer{background:#eaf8ef;border:1px solid #54a56b;border-radius:8px;padding:11px 15px;margin-top:13px;font-size:17px;font-weight:700;color:#17632d}
+.essay .question-box{background:#fffaf0;border-left:4px solid #d59b16}
+.essay .question-header{background:#fffaf0}
+.essay .qno{background:#c88c08}
+.essay .qplus{background:#c88c08}
+footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:14px}
+@media(max-width:700px){
+ .brand h1{font-size:28px}
+ .brand p{font-size:15px}
+ .container{width:96%}.section{padding:15px}
+ .question-header{font-size:15px}.solution{font-size:15px}
+}
+.pdf-download{
+    background:#fff;
+    border:1px solid #e2caca;
+    border-left:5px solid #d00000;
+    border-radius:8px;
+    padding:12px 16px;
+    margin-bottom:18px;
+    font-size:17px;
+    font-weight:600;
+    color:#d00000;
+}
+.pdf-download a{
+    color:#0645ad;
+    text-decoration:underline;
+    font-weight:700;
+    margin-left:6px;
+}
+.pdf-download a:hover{
+    color:#b00000;
+}
+.essay-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start;margin-top:6px}
+.essay-column{min-width:0}
+.calc-label{font-weight:600;color:#173b5c;margin:8px 0 3px 2px;font-size:16px}
+.essay .equation{padding:7px 10px;margin:7px 0;line-height:1.3}
+.essay .solution{line-height:1.3}
+.essay .solution p{margin:5px 0 8px}
+.essay .solution .answer{margin-top:10px}
+@media(max-width:850px){.essay-grid{grid-template-columns:1fr;gap:8px}}
+
+/* Data Table Styling for Theory Questions */
+.diff-table {width: 100%; border-collapse: collapse; margin: 15px 0;}
+.diff-table th, .diff-table td {border: 1px solid #dbe6ef; padding: 10px; text-align: left; line-height: 1.5;}
+.diff-table th {background: #edf6ff; color: #173b5c;}
+
+/* Print Settings */
+@page { size: auto; margin: 12mm; }
+@media print {
+    html, body { background: #fff !important; color: #000 !important; display: block !important; min-height: 0 !important; }
+    header, #nav-placeholder, footer { display: none !important; }
+    .site-section-banner { background: #fff !important; color: #000 !important; box-shadow: none !important; padding: 0 0 10px !important; font-size: 18pt !important; }
+    .container { width: 100% !important; max-width: none !important; margin: 0 !important; }
+    .pdf-download { color: #000 !important; background: #fff !important; border-color: #aaa !important; }
+    .section, .questions, .solution { display: block !important; visibility: visible !important; height: auto !important; max-height: none !important; overflow: visible !important; }
+    .section, .question-box { box-shadow: none !important; background: #fff !important; border-color: #bbb !important; }
+    .section-title, .question-header { color: #000 !important; background: #fff !important; border: 1px solid #bbb !important; }
+    .plus, .qplus { display: none !important; }
+    .essay-grid { display: block !important; }
+    .essay-column { width: 100% !important; }
+    .equation { overflow: visible !important; break-inside: avoid; page-break-inside: avoid; }
+    .answer { color: #000 !important; background: #fff !important; border-color: #aaa !important; }
+    .section, .question-box { break-inside: auto !important; page-break-inside: auto !important; }
+    p, li { orphans: 3; widows: 3; }
+}
+/* Figure placeholders; insert your own image files at the stated paths. */
+.figure-slot{margin:14px auto;padding:16px;border:2px dashed #a8bfd2;border-radius:8px;text-align:center;background:#f9fcff;max-width:700px}
+.figure-slot img{display:block;max-width:100%;height:auto;margin:auto}
+.figure-slot figcaption{font-size:14px;color:#52677b;margin-top:8px}
+.essay .equation .MathJax{font-size:110%!important}
+@media print{.figure-slot{background:white;border:1px dashed #888;break-inside:avoid}}
+
+/* Shear-stress page additions */
+.solution table{width:100%;border-collapse:collapse;margin:12px 0 16px;font-size:15px}
+.solution th,.solution td{border:1px solid #d4e1ec;padding:8px;text-align:center;vertical-align:middle}
+.solution th{background:#edf6ff;color:#173b5c}
+.solution .calc-label{font-weight:700;color:#173b5c;margin:14px 0 5px}
+.solution .note{font-size:14px;color:#52677b}
+.solution .figure-slot{min-height:64px}
+@media print{
+ .question-box{break-inside:auto!important}
+ .solution table{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <div class="brand">
+      <h1>D. KIRAN PRASAD</h1>
+      <p>Educational Portal • Lecture Videos • Projects • Notes • Source Code</p>
+    </div>
+  </div>
+  <div id="nav-placeholder"></div>
+</header>
+<div class="site-section-banner">SHEAR STRESS DISTRIBUTION — IMPORTANT QUESTIONS</div>
+<div class="container">
+  <div class="pdf-download">
+    <span>Shear stress distribution: questions and worked solutions</span>
+    <span style="margin-left:8px;color:#155f91">Five questions</span>
+  </div>
+  
+<div class="section essay">
+  <div class="section-title" onclick="toggleSection(this)">
+    <span>Shear Stress Distribution — Questions and Worked Solutions</span>
+    <span class="plus">+</span>
+  </div>
+  <div class="questions">
+
+    <div class="question-box">
+      <button class="question-header" onclick="toggleQuestion(this)">
+        <span class="qno">1</span>
+        <span>Derive the expression for shear stress in a rectangular beam subjected to a shear force.</span>
+        <span class="qplus">+</span>
+      </button>
+      <div class="solution">
+        <p><b>Notation:</b> \(F\) = shear force; \(b\) = breadth; \(d\) = depth; \(y\) = distance of the layer from the neutral axis; \(I\) = second moment of area about the neutral axis; \(\tau\) = shear stress.</p>
+        <div class="calc-label">1. Basic shear stress equation</div>
+        <div class="equation">\[\tau=\frac{FQ}{Ib}=\frac{FA\bar y'}{Ib}\]</div>
+        <p>Here, \(Q=A\bar y'\) is the first moment of the area above the layer about the neutral axis.</p>
+        <div class="calc-label">2. Area above the considered layer</div>
+        <div class="equation">\[A=b\left(\frac d2-y\right)\]</div>
+        <div class="calc-label">3. Distance of the selected area's centroid from the neutral axis</div>
+        <div class="equation">
+        \[\begin{aligned}
+        \bar y'&=y+\frac12\left(\frac d2-y\right)\\
+        &=y+\frac d4-\frac y2\\
+        &=\frac12\left(y+\frac d2\right)
+        \end{aligned}\]
+        </div>
+        <div class="calc-label">4. Moment of inertia of the rectangular section</div>
+        <div class="equation">\[I=\frac{bd^3}{12}\]</div>
+        <div class="calc-label">5. Substitute into the shear stress equation</div>
+        <div class="equation">
+        \[\begin{aligned}
+        \tau&=\frac{F\left[b\left(\frac d2-y\right)\right]\left[\frac12\left(y+\frac d2\right)\right]}{Ib}\\
+        &=\frac{F}{2I}\left(\frac d2-y\right)\left(y+\frac d2\right)\\
+        &=\frac{F}{2I}\left(\frac{d^2}{4}-y^2\right)
+        \end{aligned}\]
+        </div>
+        <div class="equation">
+        \[\begin{aligned}
+        \tau&=\frac{6F}{bd^3}\left(\frac{d^2}{4}-y^2\right)\\
+        &=\frac{3F}{2bd}\left(1-\frac{4y^2}{d^2}\right)
+        \end{aligned}\]
+        </div>
+        <div class="answer">Shear stress at any depth: \(\displaystyle\tau=\frac{3F}{2bd}\left(1-\frac{4y^2}{d^2}\right)\)</div>
+        <div class="calc-label">6. Maximum shear stress</div>
+        <p>At the neutral axis, \(y=0\).</p>
+        <div class="equation">\[\boxed{\tau_{\max}=\frac{3F}{2bd}=\frac32\frac{F}{A}}\]</div>
+        <p>At the top and bottom surfaces, \(y=\pm d/2\), so \(\tau=0\). The distribution is parabolic, with maximum stress at the neutral axis.</p>
+        <figure class="figure-slot"><figcaption><b>Shear stress distribution diagram:</b> insert figure here. The diagram should be parabolic, zero at the top and bottom surfaces and maximum at the neutral axis.</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="question-box">
+      <button class="question-header" onclick="toggleQuestion(this)">
+        <span class="qno">2</span>
+        <span>A hollow circular section of outside diameter 200 mm and thickness 10 mm carries a shear force of 25 kN. Find the maximum shear stress and the shear stress at the inner edge, and draw the shear stress distribution diagram.</span>
+        <span class="qplus">+</span>
+      </button>
+      <div class="solution">
+        <p><b>Given:</b> \(D=200\text{ mm}\), \(t=10\text{ mm}\), \(F=25{,}000\text{ N}\).</p>
+        <div class="equation">
+        \[\begin{aligned}
+        R&=\frac D2=100\text{ mm}\\
+        r&=R-t=90\text{ mm}\\
+        d_i&=D-2t=180\text{ mm}
+        \end{aligned}\]
+        </div>
+        <div class="calc-label">1. Moment of inertia about the neutral axis</div>
+        <div class="equation">
+        \[\begin{aligned}
+        I&=\frac{\pi}{64}(D^4-d_i^4)\\
+        &=\frac{\pi}{64}(200^4-180^4)\\
+        &=\boxed{27.010\times10^6\text{ mm}^4}
+        \end{aligned}\]
+        </div>
+        <div class="calc-label">2. Maximum shear stress at the neutral axis</div>
+        <p>First moment of area of the upper half of the annulus:</p>
+        <div class="equation">
+        \[\begin{aligned}
+        Q_{\mathrm{NA}}&=\frac23(R^3-r^3)\\
+        &=\frac23(100^3-90^3)\\
+        &=180{,}666.67\text{ mm}^3
+        \end{aligned}\]
+        </div>
+        <p>The material width at the neutral axis is \(b=2(R-r)=20\text{ mm}\).</p>
+        <div class="equation">
+        \[\begin{aligned}
+        \tau_{\max}&=\frac{FQ_{\mathrm{NA}}}{Ib}\\
+        &=\frac{25{,}000(180{,}666.67)}{(27.010\times10^6)(20)}\\
+        &\approx\boxed{8.36\text{ N/mm}^2}
+        \end{aligned}\]
+        </div>
+        <div class="calc-label">3. Shear stress at the inner edge</div>
+        <p>At the upper inner edge, \(y=r=90\text{ mm}\). The inner-circle segment above this tangent level has zero area, so \(Q\) is calculated from the outer-circle segment.</p>
+        <div class="equation">
+        \[\begin{aligned}
+        Q&=\frac23(R^2-y^2)^{3/2}\\
+        &=\frac23(100^2-90^2)^{3/2}\\
+        &=55{,}211.5\text{ mm}^3
+        \end{aligned}\]
+        </div>
+        <p>Width of material at this level:</p>
+        <div class="equation">
+        \[\begin{aligned}
+        b&=2\sqrt{R^2-y^2}\\
+        &=2\sqrt{100^2-90^2}\\
+        &=87.18\text{ mm}
+        \end{aligned}\]
+        </div>
+        <div class="equation">
+        \[\begin{aligned}
+        \tau_{\mathrm{inner}}&=\frac{FQ}{Ib}\\
+        &=\frac{25{,}000(55{,}211.5)}{(27.010\times10^6)(87.18)}\\
+        &\approx\boxed{0.586\text{ N/mm}^2}
+        \end{aligned}\]
+        </div>
+        <div class="answer">Maximum shear stress: \(\tau_{\max}\approx8.36\text{ MPa}\). Inner-edge shear stress: \(\tau_{\mathrm{inner}}\approx0.586\text{ MPa}\).</div>
+        <figure class="figure-slot"><figcaption><b>Shear stress distribution diagram:</b> insert figure here. Mark zero stress at the outer top and bottom surfaces, maximum stress at the neutral axis, and stress at the inner edges \(y=\pm90\text{ mm}\).</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="question-box">
+      <button class="question-header" onclick="toggleQuestion(this)">
+        <span class="qno">3</span>
+        <span>A simply supported beam of T cross-sectional area has a span length of 12 m and carries a shear force of 50 kN. Draw the shear stress distribution across the section.</span>
+        <span class="qplus">+</span>
+      </button>
+      <div class="solution">
+        <p><b>Section dimensions:</b> flange \(150\times50\text{ mm}\); web \(50\times150\text{ mm}\); total depth \(200\text{ mm}\); \(F=50{,}000\text{ N}\).</p>
+        <p class="note">The span is not needed in the calculation because the shear force is already given.</p>
+        <div class="calc-label">1. Centroid table (bottom reference)</div>
+        <table>
+          <thead><tr><th>Part</th><th>Area \(A\) (mm²)</th><th>\(y\) from bottom (mm)</th><th>\(Ay\) (mm³)</th></tr></thead>
+          <tbody>
+            <tr><td>1 (Web)</td><td>\(50\times150=7500\)</td><td>75</td><td>562,500</td></tr>
+            <tr><td>2 (Flange)</td><td>\(150\times50=7500\)</td><td>175</td><td>1,312,500</td></tr>
+          </tbody>
+          <tfoot><tr><td><b>Total</b></td><td>\(A=15{,}000\)</td><td>—</td><td>\(\sum Ay=1{,}875{,}000\)</td></tr></tfoot>
+        </table>
+        <div class="equation">
+        \[\begin{aligned}
+        \bar y&=\frac{\sum Ay}{\sum A}\\
+        &=\frac{1{,}875{,}000}{15{,}000}\\
+        &=\boxed{125\text{ mm from bottom}}
+        \end{aligned}\]
+        </div>
+        <div class="calc-label">2. Moment of inertia table</div>
+        <table>
+          <thead><tr><th>Part</th><th>\(I_0\) (mm⁴)</th><th>\(A\) (mm²)</th><th>\(h=|y-\bar y|\) (mm)</th><th>\(I_0+Ah^2\) (mm⁴)</th></tr></thead>
+          <tbody>
+            <tr><td>1 (Web)</td><td>\(\frac{50(150)^3}{12}=14.0625\times10^6\)</td><td>7500</td><td>50</td><td>\(32.8125\times10^6\)</td></tr>
+            <tr><td>2 (Flange)</td><td>\(\frac{150(50)^3}{12}=1.5625\times10^6\)</td><td>7500</td><td>50</td><td>\(20.3125\times10^6\)</td></tr>
+          </tbody>
+          <tfoot><tr><td colspan="4"><b>Total moment of inertia</b></td><td>\(\boxed{I=53.125\times10^6\text{ mm}^4}\)</td></tr></tfoot>
+        </table>
+        <div class="calc-label">3. Shear stress at the flange–web junction</div>
+        <div class="equation">
+        \[\begin{aligned}
+        Q_f&=A_f\bar y_f\\
+        &=(150\times50)(175-125)\\
+        &=375{,}000\text{ mm}^3
+        \end{aligned}\]
+        </div>
+        <p>Flange side, \(b=150\text{ mm}\):</p>
+        <div class="equation">\[\tau_f=\frac{50{,}000(375{,}000)}{(53.125\times10^6)(150)}=\boxed{2.353\text{ N/mm}^2}\]</div>
+        <p>Web side, \(b=50\text{ mm}\):</p>
+        <div class="equation">\[\tau_w=\frac{50{,}000(375{,}000)}{(53.125\times10^6)(50)}=\boxed{7.059\text{ N/mm}^2}\]</div>
+        <div class="calc-label">4. Maximum shear stress at the neutral axis</div>
+        <div class="equation">
+        \[\begin{aligned}
+        Q_{\mathrm{NA}}&=7500(50)+(50\times25)(12.5)\\
+        &=375{,}000+15{,}625\\
+        &=390{,}625\text{ mm}^3
+        \end{aligned}\]
+        </div>
+        <div class="equation">\[\tau_{\max}=\frac{50{,}000(390{,}625)}{(53.125\times10^6)(50)}=\boxed{7.353\text{ N/mm}^2}\]</div>
+        <div class="answer">Centroid: 125 mm from bottom. \(I=53.125\times10^6\text{ mm}^4\). Maximum shear stress: \(7.353\text{ MPa}\).</div>
+        <figure class="figure-slot"><figcaption><b>Shear stress distribution diagram:</b> insert figure here. Show zero stress at top and bottom, a jump at the flange–web junction, and maximum stress at the neutral axis.</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="question-box">
+      <button class="question-header" onclick="toggleQuestion(this)">
+        <span class="qno">4</span>
+        <span>An I-section has top and bottom flanges each \(200\times20\text{ mm}\), and a web \(360\times20\text{ mm}\). Find the maximum shear stress and sketch the shear stress distribution if the shear force is 200 kN.</span>
+        <span class="qplus">+</span>
+      </button>
+      <div class="solution">
+        <p><b>Given:</b> \(F=200{,}000\text{ N}\); each flange \(200\times20\text{ mm}\); web \(20\times360\text{ mm}\); total depth \(400\text{ mm}\).</p>
+        <div class="calc-label">1. Centroid</div>
+        <p>The section is symmetrical; therefore, the neutral axis is at mid-depth:</p>
+        <div class="equation">\[\bar y=\frac{400}{2}=\boxed{200\text{ mm from bottom}}\]</div>
+        <div class="calc-label">2. Moment of inertia</div>
+        <div class="equation">
+        \[\begin{aligned}
+        I&=2\left[\frac{200(20)^3}{12}+(200\times20)(190)^2\right]+\frac{20(360)^3}{12}\\
+        &=2[133{,}333.33+4000(190)^2]+77.76\times10^6\\
+        &=\boxed{366.8267\times10^6\text{ mm}^4}
+        \end{aligned}\]
+        </div>
+        <div class="calc-label">3. Shear stress at the flange–web junction</div>
+        <div class="equation">
+        \[\begin{aligned}
+        Q_f&=(200\times20)(200-10)\\
+        &=4000(190)=760{,}000\text{ mm}^3
+        \end{aligned}\]
+        </div>
+        <p>Flange side, \(b=200\text{ mm}\):</p>
+        <div class="equation">\[\tau_f=\frac{200{,}000(760{,}000)}{(366.8267\times10^6)(200)}=\boxed{2.073\text{ N/mm}^2}\]</div>
+        <p>Web side, \(b=20\text{ mm}\):</p>
+        <div class="equation">\[\tau_w=\frac{200{,}000(760{,}000)}{(366.8267\times10^6)(20)}=\boxed{20.726\text{ N/mm}^2}\]</div>
+        <div class="calc-label">4. Maximum shear stress at the neutral axis</div>
+        <div class="equation">
+        \[\begin{aligned}
+        Q_{\mathrm{NA}}&=(4000)(190)+(20\times180)(90)\\
+        &=760{,}000+324{,}000\\
+        &=1{,}084{,}000\text{ mm}^3
+        \end{aligned}\]
+        </div>
+        <div class="equation">\[\tau_{\max}=\frac{200{,}000(1{,}084{,}000)}{(366.8267\times10^6)(20)}=\boxed{29.55\text{ N/mm}^2}\]</div>
+        <div class="answer">Maximum shear stress: \(\boxed{29.55\text{ MPa}}\), at the neutral axis in the web.</div>
+        <figure class="figure-slot"><figcaption><b>Shear stress distribution diagram:</b> insert figure here. Show symmetry about the neutral axis, stress jumps at both flange–web junctions, and maximum stress at the neutral axis.</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="question-box">
+      <button class="question-header" onclick="toggleQuestion(this)">
+        <span class="qno">5</span>
+        <span>An I-section is 600 mm deep and 200 mm wide. The flanges are 30 mm thick and the web is 20 mm thick. If the section carries a shear force of 500 kN, draw the shear stress distribution and calculate the shear force carried by the web.</span>
+        <span class="qplus">+</span>
+      </button>
+      <div class="solution">
+        <p><b>Given:</b> \(D=600\text{ mm}\), flange width \(=200\text{ mm}\), flange thickness \(=30\text{ mm}\), web thickness \(=20\text{ mm}\), \(F=500{,}000\text{ N}\).</p>
+        <div class="equation">
+        \[\begin{aligned}
+        h_w&=600-2(30)=540\text{ mm}\\
+        \text{Neutral axis}&=300\text{ mm from top or bottom}
+        \end{aligned}\]
+        </div>
+        <div class="calc-label">1. Moment of inertia</div>
+        <div class="equation">
+        \[\begin{aligned}
+        I&=2\left[\frac{200(30)^3}{12}+(200\times30)(285)^2\right]+\frac{20(540)^3}{12}\\
+        &=2[450{,}000+6000(285)^2]+262.44\times10^6\\
+        &=\boxed{1.23804\times10^9\text{ mm}^4}
+        \end{aligned}\]
+        </div>
+        <div class="calc-label">2. Shear stress at the flange–web junction</div>
+        <div class="equation">
+        \[\begin{aligned}
+        Q_f&=(200\times30)(300-15)\\
+        &=6000(285)=1{,}710{,}000\text{ mm}^3
+        \end{aligned}\]
+        </div>
+        <p>Flange side, \(b=200\text{ mm}\):</p>
+        <div class="equation">\[\tau_f=\frac{500{,}000(1{,}710{,}000)}{(1.23804\times10^9)(200)}=\boxed{3.454\text{ N/mm}^2}\]</div>
+        <p>Web side, \(b=20\text{ mm}\):</p>
+        <div class="equation">\[\tau_w=\frac{500{,}000(1{,}710{,}000)}{(1.23804\times10^9)(20)}=\boxed{34.53\text{ N/mm}^2}\]</div>
+        <div class="calc-label">3. Maximum shear stress at the neutral axis</div>
+        <div class="equation">
+        \[\begin{aligned}
+        Q_{\mathrm{NA}}&=(200\times30)(285)+(20\times270)(135)\\
+        &=1{,}710{,}000+729{,}000\\
+        &=2{,}439{,}000\text{ mm}^3
+        \end{aligned}\]
+        </div>
+        <div class="equation">\[\tau_{\max}=\frac{500{,}000(2{,}439{,}000)}{(1.23804\times10^9)(20)}=\boxed{49.25\text{ N/mm}^2}\]</div>
+        <div class="calc-label">4. Shear force carried by the web</div>
+        <p>The shear force carried by the web is the integral of shear stress over the web area. Let \(y\) be measured from the neutral axis, with \(-270\le y\le270\text{ mm}\).</p>
+        <div class="equation">
+        \[\begin{aligned}
+        Q(y)&=6000(285)+20(270-y)\frac{270+y}{2}\\
+        &=2{,}439{,}000-10y^2\\
+        \tau(y)&=\frac{FQ(y)}{I\,t_w}
+        \end{aligned}\]
+        </div>
+        <div class="equation">
+        \[\begin{aligned}
+        V_{\mathrm{web}}&=\int_{-270}^{270}\tau(y)t_w\,dy\\
+        &=\frac{F}{I}\int_{-270}^{270}(2{,}439{,}000-10y^2)\,dy\\
+        &=\frac{500{,}000}{1.23804\times10^9}
+        \left[2{,}439{,}000(540)-10\frac{2(270)^3}{3}\right]\\
+        &=\boxed{478.92\text{ kN (approximately)}}
+        \end{aligned}\]
+        </div>
+        <div class="answer">Maximum shear stress: \(\tau_{\max}\approx49.25\text{ MPa}\). Shear force carried by the web: \(V_{\mathrm{web}}\approx478.92\text{ kN}\), about \(95.78\%\) of the total shear force.</div>
+        <figure class="figure-slot"><figcaption><b>Shear stress distribution diagram:</b> insert figure here. Show a symmetric distribution, stress jumps at the flange–web junctions, and maximum stress at the neutral axis.</figcaption></figure>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div>
+<footer>© 2026 D. Kiran Prasad | Mechanics of Solids</footer>
+<script>
+fetch('/navbar.html')
+  .then(response => {
+    if (!response.ok) throw new Error('Could not load /navbar.html');
+    return response.text();
+  })
+  .then(data => { document.getElementById('nav-placeholder').innerHTML = data; })
+  .catch(error => console.error('Navbar loading error:', error));
+
+function toggleSection(title) {
+  const questions = title.nextElementSibling;
+  const plus = title.querySelector('.plus');
+  if (questions.classList.contains('show')) {
+    questions.classList.remove('show'); plus.textContent = '+';
+  } else {
+    questions.classList.add('show'); plus.textContent = '−';
+  }
+}
+function toggleQuestion(button) {
+  const solution = button.nextElementSibling;
+  const plus = button.querySelector('.qplus');
+  if (solution.classList.contains('show')) {
+    solution.classList.remove('show'); plus.textContent = '+';
+  } else {
+    solution.classList.add('show'); plus.textContent = '−';
+    if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([solution]);
+  }
+}
+</script>
+</body>
+</html>
