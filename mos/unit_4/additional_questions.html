@@ -12,111 +12,228 @@ window.MathJax = {
 </script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",Arial,sans-serif}
-body{background:#eef3f8;color:#222}
-header{background:linear-gradient(135deg,#0b3d91,#0f6ab4);color:#fff;padding:18px 8%;box-shadow:0 3px 10px rgba(0,0,0,.15)}
+/* CSS Variables for Elegant Modern Palette */
+:root {
+  --primary-navy: #0F172A;       /* Deep slate navy header */
+  --primary-blue: #1E40AF;       /* Royal sapphire blue accents */
+  --accent-teal: #0D9488;        /* Soft ocean teal highlights */
+  --bg-page: #F8FAFC;            /* Clean light grey-slate background */
+  --bg-card: #FFFFFF;            /* Soft pure white card background */
+  --bg-subtle: #F1F5F9;          /* Subtle cool grey tint */
+  --text-main: #334155;          /* Crisp slate text */
+  --text-heading: #0F172A;       /* High-contrast dark titles */
+  
+  /* Highlight Colors */
+  --eq-bg: #F0F7FF;              /* Soft sky blue background for formulas */
+  --eq-border: #3B82F6;          /* Vivid blue left accent border */
+  --answer-bg: #ECFDF5;          /* Soft emerald background */
+  --answer-border: #10B981;      /* Emerald green border */
+  --answer-text: #065F46;        /* Deep rich emerald text */
+  --given-bg: #FFFBEB;           /* Gentle warm amber for Given data */
+  --given-border: #F59E0B;       /* Amber accent line */
+  --given-text: #92400E;         /* Deep amber text */
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI", -apple-system, BlinkMacSystemFont, Arial, sans-serif}
+body{background:var(--bg-page);color:var(--text-main);line-height:1.6}
+header{background:linear-gradient(135deg, var(--primary-navy), #1E293B);color:#fff;padding:22px 8%;box-shadow:0 4px 15px rgba(15,23,42,0.12)}
 .top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
-.brand h1{font-size:38px;margin:0}
-.brand p{margin-top:6px;font-size:18px;margin-bottom:0}
+.brand h1{font-size:36px;font-weight:700;letter-spacing:-0.5px;color:#F8FAFC}
+.brand p{margin-top:6px;font-size:16px;color:#94A3B8;font-weight:400}
 #nav-placeholder{margin-top:18px}
-nav{margin-top:0}
-nav a{color:#fff;text-decoration:none;margin-right:22px;font-weight:600}
-nav a:hover{text-decoration:underline}
-.site-section-banner{background:#063f78;color:#fff;text-align:center;padding:18px 12px;font-size:27px;font-weight:800;letter-spacing:.5px;box-shadow:0 2px 8px rgba(0,0,0,.12)}
-.container{width:94%;max-width:1150px;margin:25px auto 40px}
-.section{background:white;border-radius:13px;box-shadow:0 4px 15px rgba(0,0,0,.10);padding:22px;margin-bottom:25px}
-.section-title{display:flex;align-items:center;justify-content:space-between;background:#075b99;color:white;border-radius:8px;padding:13px 18px;cursor:pointer;font-size:21px;font-weight:700}
-.section-title .plus{width:30px;height:30px;border-radius:50%;background:white;color:#075b99;display:flex;align-items:center;justify-content:center;font-size:23px;line-height:1;flex-shrink:0}
-.questions{display:none;margin-top:14px}
+nav a{color:#E2E8F0;text-decoration:none;margin-right:22px;font-weight:600}
+nav a:hover{color:#38BDF8}
+
+.site-section-banner{
+  background:linear-gradient(90deg, #1E40AF, #0D9488);
+  color:#fff;
+  text-align:center;
+  padding:16px 12px;
+  font-size:24px;
+  font-weight:800;
+  letter-spacing:0.8px;
+  box-shadow:0 3px 10px rgba(0,0,0,.08);
+}
+.container{width:94%;max-width:1150px;margin:30px auto 50px}
+.section{background:var(--bg-card);border-radius:14px;box-shadow:0 6px 20px rgba(15,23,42,0.06);padding:24px;margin-bottom:30px;border:1px solid #E2E8F0}
+.section-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:linear-gradient(135deg, #1E3A8A, #1E40AF);
+  color:white;
+  border-radius:10px;
+  padding:15px 22px;
+  cursor:pointer;
+  font-size:20px;
+  font-weight:700;
+  transition:all 0.2s ease;
+}
+.section-title:hover{background:linear-gradient(135deg, #1E40AF, #2563EB)}
+.section-title .plus{
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.2);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  line-height:1;
+  flex-shrink:0;
+  backdrop-filter:blur(4px);
+}
+.questions{display:none;margin-top:16px}
 .questions.show{display:block}
-.question-box{border:1px solid #d4e1ec;border-radius:8px;margin-bottom:11px;overflow:hidden;background:#f8fbff}
-.question-header{width:100%;border:0;background:#f8fbff;color:#173b5c;padding:14px 15px;display:flex;align-items:flex-start;gap:12px;text-align:left;font-size:17px;line-height:1.55;font-weight:600;cursor:pointer}
-.question-header:hover{background:#edf6ff}
-.qno{min-width:30px;height:30px;border-radius:50%;background:#0878c9;color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
-.qplus{margin-left:auto;min-width:28px;height:28px;border-radius:50%;background:#0878c9;color:white;display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:400}
-.solution{display:none;background:white;padding:18px 22px 22px;border-top:1px solid #dbe6ef;font-size:16px;line-height:1.65}
+
+/* Question Cards */
+.question-box{
+  border:1px solid #E2E8F0;
+  border-radius:10px;
+  margin-bottom:14px;
+  overflow:hidden;
+  background:#FFFFFF;
+  box-shadow:0 2px 8px rgba(0,0,0,0.02);
+  transition:border-color 0.2s ease;
+}
+.question-box:hover{border-color:#CBD5E1}
+.question-header{
+  width:100%;
+  border:0;
+  background:#FFFFFF;
+  color:var(--text-heading);
+  padding:16px 18px;
+  display:flex;
+  align-items:flex-start;
+  gap:14px;
+  text-align:left;
+  font-size:16px;
+  line-height:1.6;
+  font-weight:600;
+  cursor:pointer;
+}
+.question-header:hover{background:var(--bg-subtle)}
+.qno{
+  min-width:32px;
+  height:32px;
+  border-radius:50%;
+  background:linear-gradient(135deg, #2563EB, #1D4ED8);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  font-size:14px;
+  box-shadow:0 2px 6px rgba(37,99,235,0.3);
+}
+.qplus{
+  margin-left:auto;
+  min-width:28px;
+  height:28px;
+  border-radius:50%;
+  background:var(--bg-subtle);
+  color:#64748B;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  font-weight:600;
+}
+
+/* Solution Layout */
+.solution{display:none;background:#FFFFFF;padding:20px 24px 24px;border-top:1px solid #F1F5F9;font-size:16px;line-height:1.7}
 .solution.show{display:block}
-.equation{background:#fbfdff;border-left:4px solid #5b7fa3;border-radius:6px;padding:9px 14px;margin:12px 0;overflow-x:auto}
-.equation .mjx-container{margin:0!important}
-.answer{background:#eaf8ef;border:1px solid #54a56b;border-radius:8px;padding:11px 15px;margin-top:13px;font-size:17px;font-weight:700;color:#17632d}
-.essay .question-box{background:#fffaf0;border-left:4px solid #d59b16}
-.essay .question-header{background:#fffaf0}
-.essay .qno{background:#c88c08}
-.essay .qplus{background:#c88c08}
-footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:14px}
+
+/* Given Data Box */
+.given-box{
+  background:var(--given-bg);
+  border-left:4px solid var(--given-border);
+  color:var(--given-text);
+  padding:12px 16px;
+  border-radius:6px;
+  margin-bottom:16px;
+  font-size:15px;
+}
+
+/* Step Sub-headings */
+.calc-label{
+  font-weight:700;
+  color:var(--primary-blue);
+  margin:18px 0 6px;
+  font-size:16px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.calc-label::before{
+  content:"";
+  display:inline-block;
+  width:6px;
+  height:16px;
+  background:var(--accent-teal);
+  border-radius:3px;
+}
+
+/* Formula & Equations Styling */
+.equation{
+  background:var(--eq-bg);
+  border-left:4px solid var(--eq-border);
+  border-radius:8px;
+  padding:12px 18px;
+  margin:12px 0;
+  overflow-x:auto;
+  box-shadow:inset 0 1px 2px rgba(0,0,0,0.02);
+}
+.equation .mjx-container{margin:0!important;color:#1E293B!important}
+
+/* Final Answer Highlight Box */
+.answer{
+  background:var(--answer-bg);
+  border:1px solid var(--answer-border);
+  border-left:5px solid var(--answer-border);
+  border-radius:8px;
+  padding:14px 18px;
+  margin-top:18px;
+  font-size:16px;
+  font-weight:700;
+  color:var(--answer-text);
+  box-shadow:0 3px 10px rgba(16,185,129,0.08);
+}
+
+footer{background:var(--primary-navy);color:#94A3B8;text-align:center;padding:18px;font-size:14px}
+
 @media(max-width:700px){
- .brand h1{font-size:28px}
- .brand p{font-size:15px}
- .container{width:96%}.section{padding:15px}
+ .brand h1{font-size:26px}
+ .brand p{font-size:14px}
+ .container{width:96%}.section{padding:16px}
  .question-header{font-size:15px}.solution{font-size:15px}
 }
 .pdf-download{
-    background:#fff;
-    border:1px solid #e2caca;
-    border-left:5px solid #d00000;
+    background:#FFFFFF;
+    border:1px solid #E2E8F0;
+    border-left:5px solid #0D9488;
     border-radius:8px;
-    padding:12px 16px;
-    margin-bottom:18px;
-    font-size:17px;
+    padding:12px 18px;
+    margin-bottom:20px;
+    font-size:16px;
     font-weight:600;
-    color:#d00000;
+    color:#0F766E;
+    box-shadow:0 2px 6px rgba(0,0,0,0.02);
 }
-.pdf-download a{
-    color:#0645ad;
-    text-decoration:underline;
-    font-weight:700;
-    margin-left:6px;
-}
-.pdf-download a:hover{
-    color:#b00000;
-}
-.essay-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start;margin-top:6px}
-.essay-column{min-width:0}
-.calc-label{font-weight:600;color:#173b5c;margin:8px 0 3px 2px;font-size:16px}
-.essay .equation{padding:7px 10px;margin:7px 0;line-height:1.3}
-.essay .solution{line-height:1.3}
-.essay .solution p{margin:5px 0 8px}
-.essay .solution .answer{margin-top:10px}
-@media(max-width:850px){.essay-grid{grid-template-columns:1fr;gap:8px}}
-
-.diff-table {width: 100%; border-collapse: collapse; margin: 15px 0;}
-.diff-table th, .diff-table td {border: 1px solid #dbe6ef; padding: 10px; text-align: left; line-height: 1.5;}
-.diff-table th {background: #edf6ff; color: #173b5c;}
 
 @page { size: auto; margin: 12mm; }
 @media print {
-    html, body { background: #fff !important; color: #000 !important; display: block !important; min-height: 0 !important; }
+    html, body { background: #fff !important; color: #000 !important; display: block !important; }
     header, #nav-placeholder, footer { display: none !important; }
     .site-section-banner { background: #fff !important; color: #000 !important; box-shadow: none !important; padding: 0 0 10px !important; font-size: 18pt !important; }
     .container { width: 100% !important; max-width: none !important; margin: 0 !important; }
-    .pdf-download { color: #000 !important; background: #fff !important; border-color: #aaa !important; }
-    .section, .questions, .solution { display: block !important; visibility: visible !important; height: auto !important; max-height: none !important; overflow: visible !important; }
-    .section, .question-box { box-shadow: none !important; background: #fff !important; border-color: #bbb !important; }
-    .section-title, .question-header { color: #000 !important; background: #fff !important; border: 1px solid #bbb !important; }
+    .section, .questions, .solution { display: block !important; visibility: visible !important; height: auto !important; }
+    .section, .question-box { box-shadow: none !important; background: #fff !important; border-color: #cbd5e1 !important; }
+    .section-title, .question-header { color: #000 !important; background: #fff !important; }
     .plus, .qplus { display: none !important; }
-    .essay-grid { display: block !important; }
-    .essay-column { width: 100% !important; }
-    .equation { overflow: visible !important; break-inside: avoid; page-break-inside: avoid; }
-    .answer { color: #000 !important; background: #fff !important; border-color: #aaa !important; }
-    .section, .question-box { break-inside: auto !important; page-break-inside: auto !important; }
-    p, li { orphans: 3; widows: 3; }
-}
-
-.figure-slot{margin:14px auto;padding:16px;border:2px dashed #a8bfd2;border-radius:8px;text-align:center;background:#f9fcff;max-width:700px}
-.figure-slot img{display:block;max-width:100%;height:auto;margin:auto}
-.figure-slot figcaption{font-size:14px;color:#52677b;margin-top:8px}
-.essay .equation .MathJax{font-size:110%!important}
-@media print{.figure-slot{background:white;border:1px dashed #888;break-inside:avoid}}
-
-.solution table{width:100%;border-collapse:collapse;margin:12px 0 16px;font-size:15px}
-.solution th,.solution td{border:1px solid #d4e1ec;padding:8px;text-align:center;vertical-align:middle}
-.solution th{background:#edf6ff;color:#173b5c}
-.solution .calc-label{font-weight:700;color:#173b5c;margin:14px 0 5px}
-.solution .note{font-size:14px;color:#52677b}
-.solution .figure-slot{min-height:64px}
-@media print{
- .question-box{break-inside:auto!important}
- .solution table{break-inside:avoid}
+    .equation { background: #f8fafc !important; border-left: 4px solid #000 !important; }
+    .answer { color: #000 !important; background: #fff !important; border: 1.5px solid #000 !important; }
 }
 </style>
 </head>
@@ -134,7 +251,7 @@ footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:1
 <div class="container">
   <div class="pdf-download">
     <span>Beam Deflections: Questions and Worked Solutions</span>
-    <span style="margin-left:8px;color:#155f91">Four questions</span>
+    <span style="margin-left:8px;color:#2563EB">Four questions</span>
   </div>
   
 <div class="section essay">
@@ -151,39 +268,134 @@ footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:1
         <span>A simply supported beam of 8 m length carries two point loads of 64 kN and 48 kN at 1 m and 4 m respectively from the left-hand end. Find the reactions, deflection under each load, and the maximum deflection. Take \(E = 210\text{ GPa}\) and \(I = 180 \times 10^6\text{ mm}^4\).</span>
         <span class="qplus">+</span>
       </button>
-      <div class="solution">
-        <p><b>Given:</b> \(L = 8\text{ m}\), \(W_1 = 64\text{ kN}\) at \(x_1 = 1\text{ m}\), \(W_2 = 48\text{ kN}\) at \(x_2 = 4\text{ m}\), \(E = 210\text{ GPa} = 210 \times 10^6\text{ kN/m}^2\), \(I = 180 \times 10^6\text{ mm}^4 = 1.8 \times 10^{-4}\text{ m}^4\).</p>
-        
-        <div class="calc-label">1. Flexural Rigidity (\(EI\))</div>
-        <div class="equation">\[EI = (210 \times 10^6) \times (1.8 \times 10^{-4}) = 37{,}800\text{ kN}\cdot\text{m}^2\]</div>
-        
-        <div class="calc-label">2. Support Reactions</div>
-        <p>Taking moments about left support \(A\):</p>
+            <div class="solution">
+        <div class="given-box">
+          <b>Given Data:</b> \(L = 8\text{ m}\), \(W_1 = 64\text{ kN}\) at \(x_1 = 1\text{ m}\), \(W_2 = 48\text{ kN}\) at \(x_2 = 4\text{ m}\), \(E = 210\text{ GPa}\), \(I = 180 \times 10^6\text{ mm}^4\).
+        </div>
+
+        <div class="calc-label">Conversion of Units</div>
+        <p>Since the loads and beam dimensions are expressed in kN and m, convert \(E\) and \(I\) into compatible units (kN and m).</p>
         <div class="equation">
         \[\begin{aligned}
-        R_B \times 8 &= (64 \times 1) + (48 \times 4) = 64 + 192 = 256\\
-        R_B &= \mathbf{32\text{ kN}}\\
-        R_A &= 64 + 48 - 32 = \mathbf{80\text{ kN}}
+        E &= 210\text{ GPa}=210\times10^9\text{ N/m}^2\\
+          &= \frac{210\times10^9}{1000}
+           =210\times10^6\text{ kN/m}^2\\
+        I &=180\times10^6\text{ mm}^4
+          =180\times10^6(10^{-3})^4\text{ m}^4\\
+          &=180\times10^{-6}=1.8\times10^{-4}\text{ m}^4
         \end{aligned}\]
         </div>
 
-        <div class="calc-label">3. Macaulay's Deflection Equation</div>
-        <div class="equation">\[EI \frac{d^2y}{dx^2} = -80x + 64\langle x - 1\rangle + 48\langle x - 4\rangle\]</div>
-        <div class="equation">\[EI \, y = -\frac{40}{3}x^3 + C_1 x + C_2 + \frac{32}{3}\langle x - 1\rangle^3 + 8\langle x - 4\rangle^3\]</div>
-        <p>Applying boundary conditions (\(y=0\) at \(x=0\) and \(x=8\text{ m}\)):</p>
-        <div class="equation">\[C_2 = 0, \quad C_1 = 332\text{ kN}\cdot\text{m}^2\]</div>
+        <div class="calc-label">Flexural Rigidity (\(EI\))</div>
+        <p>Flexural rigidity is the product of Young's modulus and the second moment of area.</p>
+        <div class="equation">\[EI=(210\times10^6)(1.8\times10^{-4})=\mathbf{37{,}800\text{ kN}\cdot\text{m}^2}\]</div>
 
-        <div class="calc-label">4. Deflection Under Each Load</div>
-        <p>Under \(64\text{ kN}\) load (\(x = 1\text{ m}\)):</p>
-        <div class="equation">\[EI \, y_1 = -\frac{40}{3}(1)^3 + 332(1) = 318.667 \implies y_1 = \frac{318.667}{37800} = \mathbf{8.43\text{ mm}}\]</div>
-        <p>Under \(48\text{ kN}\) load (\(x = 4\text{ m}\)):</p>
-        <div class="equation">\[EI \, y_2 = -\frac{40}{3}(4)^3 + 332(4) - \frac{32}{3}(3)^3 = 762.667 \implies y_2 = \frac{762.667}{37800} = \mathbf{20.18\text{ mm}}\]</div>
+        <div class="calc-label">Support Reactions</div>
+        <p>Let \(R_A\) and \(R_B\) be the vertical reactions at the left and right supports respectively.</p>
+        <p><b>Step 1: Taking moments about support A</b></p>
+        <div class="equation">
+        \[\begin{aligned}
+        \sum M_A=0:\quad R_B(8)-64(1)-48(4)&=0\\
+        8R_B&=64+192\\
+        8R_B&=256\\
+        R_B&=\frac{256}{8}=\mathbf{32\text{ kN}}
+        \end{aligned}\]
+        </div>
+        <p><b>Step 2: Applying vertical force equilibrium</b></p>
+        <div class="equation">
+        \[\begin{aligned}
+        \sum V=0:\quad R_A+R_B-64-48&=0\\
+        R_A+32&=112\\
+        R_A&=\mathbf{80\text{ kN}}
+        \end{aligned}\]
+        </div>
 
-        <div class="calc-label">5. Maximum Deflection</div>
-        <p>Setting slope \(\frac{dy}{dx} = 0\) between \(x = 1\text{ m}\) and \(x = 4\text{ m}\):</p>
-        <div class="equation">\[-40x^2 + 332 + 32(x - 1)^2 = 0 \implies 2x^2 + 16x - 91 = 0 \implies x = \mathbf{3.842\text{ m}}\]</div>
-        <div class="equation">\[y_{\max} = \frac{764.37}{37800} = \mathbf{20.22\text{ mm}}\]</div>
-        <div class="answer">Reactions: \(R_A = 80\text{ kN}\), \(R_B = 32\text{ kN}\). Deflections: \(y_1 = 8.43\text{ mm}\), \(y_2 = 20.18\text{ mm}\), \(y_{\max} = 20.22\text{ mm}\) at \(3.84\text{ m}\) from left end.</div>
+        <div class="calc-label">Macaulay's Deflection Equation</div>
+        <p>Taking a section at a distance \(x\) from the left support, the bending moment is written using Macaulay brackets. Here, \(\langle x-a\rangle^n=0\) when \(x&lt;a\), and \((x-a)^n\) when \(x\geq a\).</p>
+        <div class="equation">\[M(x)=-80x+64\langle x-1\rangle+48\langle x-4\rangle\]</div>
+        <p>Using the double integration equation \(EI\,d^2y/dx^2=M(x)\):</p>
+        <div class="equation">
+        \[\begin{aligned}
+        EI\frac{d^2y}{dx^2}
+        &=-80x+64\langle x-1\rangle+48\langle x-4\rangle\\
+        EI\frac{dy}{dx}
+        &=-40x^2+32\langle x-1\rangle^2
+          +24\langle x-4\rangle^2+C_1\\
+        EI\,y
+        &=-\frac{40}{3}x^3+\frac{32}{3}\langle x-1\rangle^3
+          +8\langle x-4\rangle^3+C_1x+C_2
+        \end{aligned}\]
+        </div>
+
+        <div class="calc-label">Evaluation of Constants (\(C_1\) and \(C_2\))</div>
+        <p><b>Boundary condition 1:</b> At the left support, \(x=0\), deflection \(y=0\).</p>
+        <div class="equation">\[EI(0)=-\frac{40}{3}(0)^3+0+0+C_1(0)+C_2=0\quad\therefore C_2=0\]</div>
+        <p><b>Boundary condition 2:</b> At the right support, \(x=8\text{ m}\), deflection \(y=0\).</p>
+        <div class="equation">
+        \[\begin{aligned}
+        0&=-\frac{40}{3}(8)^3+\frac{32}{3}(8-1)^3+8(8-4)^3+8C_1\\
+        0&=-\frac{40}{3}(512)+\frac{32}{3}(343)+8(64)+8C_1\\
+        0&=-\frac{20480}{3}+\frac{10976}{3}+512+8C_1\\
+        8C_1&=-512+\frac{9504}{3}=2656\\
+        C_1&=\mathbf{332\text{ kN}\cdot\text{m}^2}
+        \end{aligned}\]
+        </div>
+        <p>Therefore, the complete deflection equation is:</p>
+        <div class="equation">\[EI\,y=-\frac{40}{3}x^3+332x+\frac{32}{3}\langle x-1\rangle^3+8\langle x-4\rangle^3\]</div>
+
+        <div class="calc-label">Deflection Under Each Load</div>
+        <p><b>1. Deflection under the \(64\text{ kN}\) load (\(x=1\text{ m}\))</b></p>
+        <p>At \(x=1\), the brackets \(\langle1-1\rangle^3\) and \(\langle1-4\rangle^3\) are zero.</p>
+        <div class="equation">
+        \[\begin{aligned}
+        EI\,y_1&=-\frac{40}{3}(1)^3+332(1)\\
+        &=-13.333+332=318.667\\
+        y_1&=\frac{318.667}{37{,}800}
+        =0.008430\text{ m}\\
+        &=\mathbf{8.43\text{ mm (downward)}}
+        \end{aligned}\]
+        </div>
+        <p><b>2. Deflection under the \(48\text{ kN}\) load (\(x=4\text{ m}\))</b></p>
+        <p>At \(x=4\), \(\langle4-1\rangle^3=(3)^3\), while \(\langle4-4\rangle^3=0\).</p>
+        <div class="equation">
+        \[\begin{aligned}
+        EI\,y_2&=-\frac{40}{3}(4)^3+332(4)+\frac{32}{3}(4-1)^3\\
+        &=-\frac{2560}{3}+1328+\frac{32}{3}(27)\\
+        &=-853.333+1328+288\\
+        &=762.667\\
+        y_2&=\frac{762.667}{37{,}800}
+        =0.020176\text{ m}\\
+        &=\mathbf{20.18\text{ mm (downward)}}
+        \end{aligned}\]
+        </div>
+
+        <div class="calc-label">Maximum Deflection and Its Location</div>
+        <p>Maximum deflection occurs where the slope is zero, i.e. \(dy/dx=0\). The maximum point lies between the two loads, \(1&lt;x&lt;4\), so the term \(\langle x-4\rangle^2=0\).</p>
+        <div class="equation">
+        \[\begin{aligned}
+        EI\frac{dy}{dx}&=-40x^2+32(x-1)^2+332=0\\
+        -40x^2+32(x^2-2x+1)+332&=0\\
+        -8x^2-64x+364&=0\\
+        2x^2+16x-91&=0\\
+        x&=\frac{-16\pm\sqrt{16^2-4(2)(-91)}}{2(2)}\\
+        &=\frac{-16\pm\sqrt{984}}{4}
+        \end{aligned}\]
+        </div>
+        <p>Taking the positive root that lies within the interval \(1&lt;x&lt;4\):</p>
+        <div class="equation">\[x=\mathbf{3.842\text{ m from the left support}}\]</div>
+        <p>Substitute \(x=3.842\text{ m}\) into the deflection equation. Since this point is before the second load, the term \(\langle x-4\rangle^3=0\).</p>
+        <div class="equation">
+        \[\begin{aligned}
+        EI\,y_{\max}
+        &=-\frac{40}{3}(3.842)^3+332(3.842)
+          +\frac{32}{3}(3.842-1)^3\\
+        &\approx764.24\\
+        y_{\max}&=\frac{764.24}{37{,}800}
+        =0.020218\text{ m}\\
+        &=\mathbf{20.22\text{ mm (downward)}}
+        \end{aligned}\]
+        </div>
+        <div class="answer">Reactions: \(R_A=80\text{ kN}\), \(R_B=32\text{ kN}\). Deflection under 64 kN: \(8.43\text{ mm}\). Deflection under 48 kN: \(20.18\text{ mm}\). Maximum deflection: \(20.22\text{ mm}\) downward at \(3.842\text{ m}\) from the left support.</div>
       </div>
     </div>
 
@@ -194,27 +406,135 @@ footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:1
         <span>A beam of length 6 m is simply supported at its ends and carries two point loads of 48 kN and 40 kN at a distance of 1 m and 3 m respectively from the left support. Find i) deflection under each load, ii) maximum deflection, and iii) the point at which maximum deflection occurs. Take \(E = 2 \times 10^5\text{ N/mm}^2\) and \(I = 85 \times 10^6\text{ mm}^4\).</span>
         <span class="qplus">+</span>
       </button>
-      <div class="solution">
-        <p><b>Given:</b> \(L = 6\text{ m}\), \(W_1 = 48\text{ kN}\) at \(x_1 = 1\text{ m}\), \(W_2 = 40\text{ kN}\) at \(x_2 = 3\text{ m}\), \(E = 2 \times 10^5\text{ N/mm}^2 = 2 \times 10^8\text{ kN/m}^2\), \(I = 85 \times 10^{-6}\text{ m}^4\).</p>
-        
-        <div class="calc-label">1. Flexural Rigidity (\(EI\)) and Reactions</div>
-        <div class="equation">\[EI = (2 \times 10^8) \times (85 \times 10^{-6}) = 17{,}000\text{ kN}\cdot\text{m}^2\]</div>
-        <div class="equation">\[R_B = \frac{(48 \times 1) + (40 \times 3)}{6} = \mathbf{28\text{ kN}}, \quad R_A = 48 + 40 - 28 = \mathbf{60\text{ kN}}\]</div>
+            <div class="solution">
+        <div class="given-box">
+          <b>Given Data:</b> \(L=6\text{ m}\), \(W_1=48\text{ kN}\) at \(x_1=1\text{ m}\), \(W_2=40\text{ kN}\) at \(x_2=3\text{ m}\), \(E=2\times10^5\text{ N/mm}^2\), \(I=85\times10^6\text{ mm}^4\).
+        </div>
 
-        <div class="calc-label">2. Deflection Equation (Macaulay's Method)</div>
-        <div class="equation">\[EI \, y = -10x^3 + 163.333x + 8\langle x - 1\rangle^3 + \frac{20}{3}\langle x - 3\rangle^3\]</div>
+        <div class="calc-label">Conversion of Units</div>
+        <p>Convert Young's modulus from N/mm² to kN/m² and the second moment of area from mm⁴ to m⁴.</p>
+        <div class="equation">
+        \[\begin{aligned}
+        E&=2\times10^5\text{ N/mm}^2
+        =2\times10^5\times10^6\text{ N/m}^2\\
+        &=2\times10^{11}\text{ N/m}^2
+        =2\times10^8\text{ kN/m}^2\\
+        I&=85\times10^6(10^{-3})^4
+        =85\times10^{-6}\text{ m}^4
+        \end{aligned}\]
+        </div>
 
-        <div class="calc-label">3. Deflections</div>
-        <p>Under \(48\text{ kN}\) load (\(x = 1\text{ m}\)):</p>
-        <div class="equation">\[EI \, y_1 = -10(1)^3 + 163.333(1) = 153.333 \implies y_1 = \frac{153.333}{17000} = \mathbf{9.02\text{ mm}}\]</div>
-        <p>Under \(40\text{ kN}\) load (\(x = 3\text{ m}\)):</p>
-        <div class="equation">\[EI \, y_2 = -10(3)^3 + 163.333(3) + 8(2)^3 = 284 \implies y_2 = \frac{284}{17000} = \mathbf{16.71\text{ mm}}\]</div>
+        <div class="calc-label">Flexural Rigidity (\(EI\))</div>
+        <div class="equation">\[EI=(2\times10^8)(85\times10^{-6})=\mathbf{17{,}000\text{ kN}\cdot\text{m}^2}\]</div>
 
-        <div class="calc-label">4. Point & Value of Maximum Deflection</div>
-        <p>Slope \(\frac{dy}{dx} = 0\) for \(1 \le x \le 3\):</p>
-        <div class="equation">\[-30x^2 + 163.333 + 24(x - 1)^2 = 0 \implies 18x^2 + 144x - 562 = 0 \implies x = \mathbf{2.87\text{ m}}\]</div>
-        <div class="equation">\[y_{\max} = \frac{284.68}{17000} = \mathbf{16.75\text{ mm}}\]</div>
-        <div class="answer">Deflections: \(y_1 = 9.02\text{ mm}\), \(y_2 = 16.71\text{ mm}\). Maximum deflection: \(16.75\text{ mm}\) at \(2.87\text{ m}\) from left support.</div>
+        <div class="calc-label">Support Reactions</div>
+        <p>Let \(R_A\) and \(R_B\) be the vertical reactions at the left and right supports respectively.</p>
+        <p><b>Step 1: Taking moments about A</b></p>
+        <div class="equation">
+        \[\begin{aligned}
+        \sum M_A=0:\quad R_B(6)-48(1)-40(3)&=0\\
+        6R_B&=48+120=168\\
+        R_B&=\frac{168}{6}=\mathbf{28\text{ kN}}
+        \end{aligned}\]
+        </div>
+        <p><b>Step 2: Applying vertical force equilibrium</b></p>
+        <div class="equation">
+        \[\begin{aligned}
+        \sum V=0:\quad R_A+R_B-48-40&=0\\
+        R_A+28&=88\\
+        R_A&=\mathbf{60\text{ kN}}
+        \end{aligned}\]
+        </div>
+
+        <div class="calc-label">Deflection Equation (Macaulay's Method)</div>
+        <p>Taking a section at a distance \(x\) from the left support, the bending moment is:</p>
+        <div class="equation">\[M(x)=-60x+48\langle x-1\rangle+40\langle x-3\rangle\]</div>
+        <p>Using \(EI\,d^2y/dx^2=M(x)\), integrate once to obtain slope and a second time to obtain deflection.</p>
+        <div class="equation">
+        \[\begin{aligned}
+        EI\frac{d^2y}{dx^2}
+        &=-60x+48\langle x-1\rangle+40\langle x-3\rangle\\
+        EI\frac{dy}{dx}
+        &=-30x^2+24\langle x-1\rangle^2
+          +20\langle x-3\rangle^2+C_1\\
+        EI\,y
+        &=-10x^3+8\langle x-1\rangle^3
+          +\frac{20}{3}\langle x-3\rangle^3+C_1x+C_2
+        \end{aligned}\]
+        </div>
+
+        <div class="calc-label">Evaluation of Constants (\(C_1\) and \(C_2\))</div>
+        <p><b>Boundary condition 1:</b> At \(x=0\), \(y=0\).</p>
+        <div class="equation">\[0=0+0+0+0+C_2\quad\therefore C_2=0\]</div>
+        <p><b>Boundary condition 2:</b> At \(x=6\text{ m}\), \(y=0\).</p>
+        <div class="equation">
+        \[\begin{aligned}
+        0&=-10(6)^3+8(6-1)^3+\frac{20}{3}(6-3)^3+6C_1\\
+        0&=-2160+8(125)+\frac{20}{3}(27)+6C_1\\
+        0&=-2160+1000+180+6C_1\\
+        6C_1&=980\\
+        C_1&=\mathbf{163.333\text{ kN}\cdot\text{m}^2}
+        \end{aligned}\]
+        </div>
+        <p>Therefore, the complete deflection equation is:</p>
+        <div class="equation">\[EI\,y=-10x^3+163.333x+8\langle x-1\rangle^3+\frac{20}{3}\langle x-3\rangle^3\]</div>
+
+        <div class="calc-label">Deflections Under Each Load</div>
+        <p><b>1. Deflection under the \(48\text{ kN}\) load (\(x=1\text{ m}\))</b></p>
+        <p>At \(x=1\), both Macaulay bracket terms are zero.</p>
+        <div class="equation">
+        \[\begin{aligned}
+        EI\,y_1&=-10(1)^3+163.333(1)\\
+        &=153.333\\
+        y_1&=\frac{153.333}{17{,}000}
+        =0.009020\text{ m}\\
+        &=\mathbf{9.02\text{ mm (downward)}}
+        \end{aligned}\]
+        </div>
+        <p><b>2. Deflection under the \(40\text{ kN}\) load (\(x=3\text{ m}\))</b></p>
+        <p>At \(x=3\), \(\langle3-1\rangle^3=2^3=8\), while \(\langle3-3\rangle^3=0\).</p>
+        <div class="equation">
+        \[\begin{aligned}
+        EI\,y_2&=-10(3)^3+163.333(3)+8(3-1)^3\\
+        &=-270+489.999+8(8)\\
+        &\approx-270+490+64=284\\
+        y_2&=\frac{284}{17{,}000}
+        =0.016706\text{ m}\\
+        &=\mathbf{16.71\text{ mm (downward)}}
+        \end{aligned}\]
+        </div>
+
+        <div class="calc-label">Point and Value of Maximum Deflection</div>
+        <p>At the point of maximum deflection, the slope is zero. The required point lies between the two loads, \(1&lt;x&lt;3\), hence \(\langle x-3\rangle^2=0\).</p>
+        <div class="equation">
+        \[\begin{aligned}
+        EI\frac{dy}{dx}&=-30x^2+163.333+24(x-1)^2=0\\
+        -30x^2+163.333+24(x^2-2x+1)&=0\\
+        -6x^2-48x+187.333&=0\\
+        18x^2+144x-562&=0
+        \end{aligned}\]
+        </div>
+        <p>Solving the quadratic equation:</p>
+        <div class="equation">
+        \[\begin{aligned}
+        x&=\frac{-144\pm\sqrt{144^2-4(18)(-562)}}{2(18)}\\
+        &=\frac{-144\pm\sqrt{61200}}{36}
+        \end{aligned}\]
+        </div>
+        <p>Taking the positive root within the interval \(1&lt;x&lt;3\):</p>
+        <div class="equation">\[x=\mathbf{2.872\text{ m from the left support}}\]</div>
+        <p>Substitute this value into the deflection equation. Since \(x&lt;3\), the bracket \(\langle x-3\rangle^3=0\).</p>
+        <div class="equation">
+        \[\begin{aligned}
+        EI\,y_{\max}
+        &=-10(2.872)^3+163.333(2.872)+8(2.872-1)^3\\
+        &\approx284.68\\
+        y_{\max}&=\frac{284.68}{17{,}000}
+        =0.016746\text{ m}\\
+        &=\mathbf{16.75\text{ mm (downward)}}
+        \end{aligned}\]
+        </div>
+        <div class="answer">Deflection under 48 kN: \(9.02\text{ mm}\). Deflection under 40 kN: \(16.71\text{ mm}\). Maximum deflection: \(16.75\text{ mm}\) downward at \(2.872\text{ m}\) from the left support.</div>
       </div>
     </div>
 
@@ -225,26 +545,101 @@ footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:1
         <span>Determine the slope and deflection of a cantilever beam with a point load acting at the free end by using the double integration method.</span>
         <span class="qplus">+</span>
       </button>
-      <div class="solution">
-        <p>Consider a cantilever beam of length \(L\) fixed at \(x=0\) and carrying a point load \(P\) at the free end \(x=L\).</p>
-        
-        <div class="calc-label">1. Differential Equation & Moment</div>
-        <p>Bending moment at distance \(x\) from fixed end: \(M(x) = -P(L - x)\)</p>
-        <div class="equation">\[EI \frac{d^2y}{dx^2} = -PL + Px\]</div>
+            <div class="solution">
+        <div class="given-box">
+          <b>Given Data:</b> Cantilever beam of length \(L\), fixed at \(A\) (\(x=0\)), carrying a point load \(P\) vertically downward at the free end \(B\) (\(x=L\)). Young's modulus \(=E\), second moment of area \(=I\).
+        </div>
 
-        <div class="calc-label">2. Slope Integration</div>
-        <div class="equation">\[EI \frac{dy}{dx} = -PLx + \frac{Px^2}{2} + C_1\]</div>
-        <p>Boundary condition at fixed end (\(x=0, \frac{dy}{dx}=0\)) gives \(C_1 = 0\).</p>
-        <div class="equation">\[\theta(x) = \frac{dy}{dx} = \frac{P}{2EI}(x^2 - 2Lx)\]</div>
+        <div class="calc-label">Bending Moment at a Section</div>
+        <p>Consider a section at a distance \(x\) from the fixed end. The portion of the beam to the right of the section carries the point load \(P\), acting at a distance \((L-x)\) from the section.</p>
+        <div class="equation">
+        \[\begin{aligned}
+        M(x)&=-P(L-x)\\
+        &=-PL+Px
+        \end{aligned}\]
+        </div>
+        <p>The negative sign indicates hogging bending moment for the chosen sign convention. From the elastic curve equation:</p>
+        <div class="equation">\[EI\frac{d^2y}{dx^2}=M(x)=-PL+Px\]</div>
 
-        <div class="calc-label">3. Deflection Integration</div>
-        <div class="equation">\[EI \, y = -\frac{PLx^2}{2} + \frac{Px^3}{6} + C_2\]</div>
-        <p>Boundary condition at fixed end (\(x=0, y=0\)) gives \(C_2 = 0\).</p>
-        <div class="equation">\[y(x) = \frac{Px^2}{6EI}(3L - x) \quad \text{(downward)}\]</div>
+        <div class="calc-label">Slope Equation — First Integration</div>
+        <p>Integrating the differential equation with respect to \(x\):</p>
+        <div class="equation">
+        \[\begin{aligned}
+        EI\frac{d^2y}{dx^2}&=-PL+Px\\
+        EI\int\frac{d^2y}{dx^2}\,dx&=\int(-PL+Px)\,dx\\
+        EI\frac{dy}{dx}&=-PLx+\frac{Px^2}{2}+C_1
+        \end{aligned}\]
+        </div>
+        <p><b>Boundary condition at the fixed end:</b> At \(x=0\), the slope is zero, \(\left.dy/dx\right|_{x=0}=0\).</p>
+        <div class="equation">
+        \[\begin{aligned}
+        EI(0)&=-PL(0)+\frac{P(0)^2}{2}+C_1\\
+        0&=C_1\\
+        \therefore C_1&=0
+        \end{aligned}\]
+        </div>
+        <p>Therefore, the slope at any section is:</p>
+        <div class="equation">
+        \[\begin{aligned}
+        EI\frac{dy}{dx}&=-PLx+\frac{Px^2}{2}\\
+        \theta(x)=\frac{dy}{dx}
+        &=-\frac{P}{2EI}(2Lx-x^2)
+        \end{aligned}\]
+        </div>
+        <p>The negative sign represents clockwise rotation under the selected sign convention. The magnitude of slope is used for the final result.</p>
 
-        <div class="calc-label">4. Values at Free End (\(x=L\))</div>
-        <div class="equation">\[\theta_{\max} = \frac{PL^2}{2EI}, \quad y_{\max} = \frac{PL^3}{3EI}\]</div>
-        <div class="answer">Maximum Slope: \(\displaystyle\theta_{\max} = \frac{PL^2}{2EI}\). Maximum Deflection: \(\displaystyle y_{\max} = \frac{PL^3}{3EI}\).</div>
+        <div class="calc-label">Deflection Equation — Second Integration</div>
+        <p>Integrating the slope equation once again with respect to \(x\):</p>
+        <div class="equation">
+        \[\begin{aligned}
+        EI\frac{dy}{dx}&=-PLx+\frac{Px^2}{2}\\
+        EI\int dy&=\int\left(-PLx+\frac{Px^2}{2}\right)dx\\
+        EI\,y&=-\frac{PLx^2}{2}+\frac{Px^3}{6}+C_2
+        \end{aligned}\]
+        </div>
+        <p><b>Boundary condition at the fixed end:</b> At \(x=0\), vertical deflection is zero, \(y=0\).</p>
+        <div class="equation">
+        \[\begin{aligned}
+        EI(0)&=-\frac{PL(0)^2}{2}+\frac{P(0)^3}{6}+C_2\\
+        0&=C_2\\
+        \therefore C_2&=0
+        \end{aligned}\]
+        </div>
+        <p>Hence, the deflection equation is:</p>
+        <div class="equation">
+        \[\begin{aligned}
+        EI\,y&=-\frac{PLx^2}{2}+\frac{Px^3}{6}\\
+        y(x)&=-\frac{Px^2}{6EI}(3L-x)
+        \end{aligned}\]
+        </div>
+        <p>The negative sign indicates downward deflection. Therefore, the magnitude of downward deflection is:</p>
+        <div class="equation">\[\boxed{\delta(x)=\frac{Px^2}{6EI}(3L-x)}\]</div>
+
+        <div class="calc-label">Slope and Deflection at the Free End</div>
+        <p>At the free end, \(x=L\).</p>
+        <p><b>1. Slope at the free end</b></p>
+        <div class="equation">
+        \[\begin{aligned}
+        \theta_B&=-\frac{P}{2EI}\left[2L(L)-L^2\right]\\
+        &=-\frac{P}{2EI}(2L^2-L^2)\\
+        &=-\frac{PL^2}{2EI}
+        \end{aligned}\]
+        </div>
+        <p>Magnitude of maximum slope:</p>
+        <div class="equation">\[\boxed{\theta_{\max}=\frac{PL^2}{2EI}\text{ radians}}\]</div>
+        <p><b>2. Deflection at the free end</b></p>
+        <div class="equation">
+        \[\begin{aligned}
+        y_B&=-\frac{PL(L)^2}{2EI}+\frac{P(L)^3}{6EI}\\
+        &=-\frac{PL^3}{2EI}+\frac{PL^3}{6EI}\\
+        &=-\frac{3PL^3-PL^3}{6EI}\\
+        &=-\frac{2PL^3}{6EI}\\
+        &=-\frac{PL^3}{3EI}
+        \end{aligned}\]
+        </div>
+        <p>Magnitude of maximum downward deflection:</p>
+        <div class="equation">\[\boxed{y_{\max}=\frac{PL^3}{3EI}}\]</div>
+        <div class="answer">For a cantilever carrying a point load \(P\) at its free end: Maximum slope at the free end, \(\displaystyle\theta_{\max}=\frac{PL^2}{2EI}\) radians. Maximum deflection at the free end, \(\displaystyle y_{\max}=\frac{PL^3}{3EI}\) downward.</div>
       </div>
     </div>
 
@@ -255,19 +650,126 @@ footer{background:#063b70;color:white;text-align:center;padding:15px;font-size:1
         <span>A cantilever beam of 3 m span carries a uniformly distributed load of 10 kN per meter length over the entire span. Determine the deflection of the free end. Take \(E = 200\text{ GPa}\) and \(I = 80 \times 10^6\text{ mm}^4\).</span>
         <span class="qplus">+</span>
       </button>
-      <div class="solution">
-        <p><b>Given:</b> \(L = 3\text{ m}\), \(w = 10\text{ kN/m}\), \(E = 200\text{ GPa} = 200 \times 10^6\text{ kN/m}^2\), \(I = 80 \times 10^6\text{ mm}^4 = 80 \times 10^{-6}\text{ m}^4\).</p>
-        
-        <div class="calc-label">1. Flexural Rigidity (\(EI\))</div>
-        <div class="equation">\[EI = (200 \times 10^6) \times (80 \times 10^{-6}) = 16{,}000\text{ kN}\cdot\text{m}^2\]</div>
+            <div class="solution">
+        <div class="given-box">
+          <b>Given Data:</b> \(L=3\text{ m}\), \(w=10\text{ kN/m}\), \(E=200\text{ GPa}\), \(I=80\times10^6\text{ mm}^4\). The UDL acts over the entire length of the cantilever.
+        </div>
 
-        <div class="calc-label">2. Free End Deflection Formula</div>
-        <p>For a cantilever beam under full UDL \(w\):</p>
-        <div class="equation">\[y_{\max} = \frac{w L^4}{8 EI}\]</div>
+        <div class="calc-label">Conversion of Units</div>
+        <p>Use kN and m throughout the calculation.</p>
+        <div class="equation">
+        \[\begin{aligned}
+        E&=200\text{ GPa}=200\times10^9\text{ N/m}^2\\
+        &=200\times10^6\text{ kN/m}^2\\
+        I&=80\times10^6(10^{-3})^4\\
+        &=80\times10^{-6}\text{ m}^4
+        \end{aligned}\]
+        </div>
 
-        <div class="calc-label">3. Calculation</div>
-        <div class="equation">\[y_{\max} = \frac{10 \times (3)^4}{8 \times 16{,}000} = \frac{810}{128{,}000} = 0.006328125\text{ m} = \mathbf{6.33\text{ mm}}\]</div>
-        <div class="answer">Deflection at free end: \(y_{\max} = \mathbf{6.33\text{ mm}}\) (downward).</div>
+        <div class="calc-label">Flexural Rigidity (\(EI\))</div>
+        <div class="equation">\[EI=(200\times10^6)(80\times10^{-6})=\mathbf{16{,}000\text{ kN}\cdot\text{m}^2}\]</div>
+
+        <div class="calc-label">Resultant Load and Fixed-End Reactions</div>
+        <p>The uniformly distributed load over the full span can be replaced by an equivalent point load acting at the centre of the loaded length.</p>
+        <div class="equation">
+        \[\begin{aligned}
+        W&=wL=10(3)=30\text{ kN}\\
+        \text{Distance of resultant from fixed end}&=\frac{L}{2}=\frac{3}{2}=1.5\text{ m}
+        \end{aligned}\]
+        </div>
+        <p>Taking vertical force equilibrium:</p>
+        <div class="equation">
+        \[\begin{aligned}
+        \sum V=0:\quad R_A-W&=0\\
+        R_A&=\mathbf{30\text{ kN}}
+        \end{aligned}\]
+        </div>
+        <p>Taking moments about the fixed end:</p>
+        <div class="equation">
+        \[\begin{aligned}
+        \sum M_A=0:\quad M_A-W\left(\frac{L}{2}\right)&=0\\
+        M_A&=30(1.5)\\
+        M_A&=\mathbf{45\text{ kN}\cdot\text{m}}
+        \end{aligned}\]
+        </div>
+
+        <div class="calc-label">Bending Moment at a Section</div>
+        <p>Consider a section at a distance \(x\) from the fixed end. The UDL acting on the portion to the right of the section has length \((L-x)\). Its resultant is \(w(L-x)\), acting at a distance \((L-x)/2\) from the section.</p>
+        <div class="equation">
+        \[\begin{aligned}
+        M(x)&=-w(L-x)\left(\frac{L-x}{2}\right)\\
+        &=-\frac{w}{2}(L-x)^2
+        \end{aligned}\]
+        </div>
+        <p>Using the elastic curve equation:</p>
+        <div class="equation">\[EI\frac{d^2y}{dx^2}=-\frac{w}{2}(L-x)^2\]</div>
+
+        <div class="calc-label">Slope Equation — First Integration</div>
+        <p>Expanding the square and integrating with respect to \(x\):</p>
+        <div class="equation">
+        \[\begin{aligned}
+        EI\frac{d^2y}{dx^2}
+        &=-\frac{w}{2}(L^2-2Lx+x^2)\\
+        EI\frac{dy}{dx}
+        &=-\frac{wL^2x}{2}+\frac{wLx^2}{2}
+          -\frac{wx^3}{6}+C_1
+        \end{aligned}\]
+        </div>
+        <p><b>Boundary condition at the fixed end:</b> At \(x=0\), slope \(dy/dx=0\).</p>
+        <div class="equation">
+        \[\begin{aligned}
+        0&=-\frac{wL^2(0)}{2}+\frac{wL(0)^2}{2}
+          -\frac{w(0)^3}{6}+C_1\\
+        \therefore C_1&=0
+        \end{aligned}\]
+        </div>
+        <p>Thus, the slope equation becomes:</p>
+        <div class="equation">\[EI\frac{dy}{dx}=-\frac{wL^2x}{2}+\frac{wLx^2}{2}-\frac{wx^3}{6}\]</div>
+
+        <div class="calc-label">Deflection Equation — Second Integration</div>
+        <p>Integrating the slope equation with respect to \(x\):</p>
+        <div class="equation">
+        \[\begin{aligned}
+        EI\,y&=-\frac{wL^2x^2}{4}+\frac{wLx^3}{6}
+          -\frac{wx^4}{24}+C_2
+        \end{aligned}\]
+        </div>
+        <p><b>Boundary condition at the fixed end:</b> At \(x=0\), deflection \(y=0\).</p>
+        <div class="equation">
+        \[\begin{aligned}
+        0&=-\frac{wL^2(0)^2}{4}+\frac{wL(0)^3}{6}
+          -\frac{w(0)^4}{24}+C_2\\
+        \therefore C_2&=0
+        \end{aligned}\]
+        </div>
+        <p>Therefore, the deflection equation is:</p>
+        <div class="equation">\[EI\,y=-\frac{wL^2x^2}{4}+\frac{wLx^3}{6}-\frac{wx^4}{24}\]</div>
+
+        <div class="calc-label">Deflection at the Free End</div>
+        <p>At the free end, \(x=L=3\text{ m}\). Substitute this value into the deflection equation.</p>
+        <div class="equation">
+        \[\begin{aligned}
+        EI\,y_B&=-\frac{wL^2(L)^2}{4}
+          +\frac{wL(L)^3}{6}-\frac{w(L)^4}{24}\\
+        &=-\frac{wL^4}{4}+\frac{wL^4}{6}-\frac{wL^4}{24}\\
+        &=\frac{wL^4}{24}(-6+4-1)\\
+        &=-\frac{wL^4}{8}
+        \end{aligned}\]
+        </div>
+        <p>The negative sign indicates downward deflection. Hence, the magnitude is:</p>
+        <div class="equation">\[\boxed{y_B=\frac{wL^4}{8EI}}\]</div>
+
+        <div class="calc-label">Numerical Calculation</div>
+        <div class="equation">
+        \[\begin{aligned}
+        y_B&=\frac{10(3)^4}{8(16{,}000)}\\
+        &=\frac{10(81)}{128{,}000}\\
+        &=\frac{810}{128{,}000}\\
+        &=0.006328125\text{ m}\\
+        &=\mathbf{6.33\text{ mm}}
+        \end{aligned}\]
+        </div>
+        <div class="answer">Deflection at the free end: \(y_B=\mathbf{6.33\text{ mm}}\) downward.</div>
       </div>
     </div>
 
