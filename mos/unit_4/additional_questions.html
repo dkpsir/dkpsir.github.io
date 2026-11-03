@@ -312,8 +312,8 @@ footer{background:var(--primary-navy);color:#94A3B8;text-align:center;padding:18
 
         <div class="calc-label">Macaulay's Deflection Equation</div>
         <p>Taking a section at a distance \(x\) from the left support, the bending moment is written using Macaulay brackets. Here, \(\langle x-a\rangle^n=0\) when \(x&lt;a\), and \((x-a)^n\) when \(x\geq a\).</p>
-        <div class="equation">\[M(x)=-80x+64\langle x-1\rangle+48\langle x-4\rangle\]</div>
-        <p>Using the double integration equation \(EI\,d^2y/dx^2=M(x)\):</p>
+        <div class="equation">\[M(x)=80x-64\langle x-1\rangle-48\langle x-4\rangle\]</div>
+        <p>Taking downward deflection as positive, the elastic curve equation is \(EI\,d^2y/dx^2=-M(x)\):</p>
         <div class="equation">
         \[\begin{aligned}
         EI\frac{d^2y}{dx^2}
@@ -448,8 +448,8 @@ footer{background:var(--primary-navy);color:#94A3B8;text-align:center;padding:18
 
         <div class="calc-label">Deflection Equation (Macaulay's Method)</div>
         <p>Taking a section at a distance \(x\) from the left support, the bending moment is:</p>
-        <div class="equation">\[M(x)=-60x+48\langle x-1\rangle+40\langle x-3\rangle\]</div>
-        <p>Using \(EI\,d^2y/dx^2=M(x)\), integrate once to obtain slope and a second time to obtain deflection.</p>
+        <div class="equation">\[M(x)=60x-48\langle x-1\rangle-40\langle x-3\rangle\]</div>
+        <p>Taking downward deflection as positive, use \(EI\,d^2y/dx^2=-M(x)\). Integrate once to obtain slope and a second time to obtain deflection.</p>
         <div class="equation">
         \[\begin{aligned}
         EI\frac{d^2y}{dx^2}
@@ -559,21 +559,21 @@ footer{background:var(--primary-navy);color:#94A3B8;text-align:center;padding:18
         \end{aligned}\]
         </div>
         <p>The negative sign indicates hogging bending moment for the chosen sign convention. From the elastic curve equation:</p>
-        <div class="equation">\[EI\frac{d^2y}{dx^2}=M(x)=-PL+Px\]</div>
+        <div class="equation">\[EI\frac{d^2y}{dx^2}=-M(x)=PL-Px\]</div>
 
         <div class="calc-label">Slope Equation — First Integration</div>
         <p>Integrating the differential equation with respect to \(x\):</p>
         <div class="equation">
         \[\begin{aligned}
-        EI\frac{d^2y}{dx^2}&=-PL+Px\\
-        EI\int\frac{d^2y}{dx^2}\,dx&=\int(-PL+Px)\,dx\\
-        EI\frac{dy}{dx}&=-PLx+\frac{Px^2}{2}+C_1
+        EI\frac{d^2y}{dx^2}&=PL-Px\\
+        EI\int\frac{d^2y}{dx^2}\,dx&=\int(PL-Px)\,dx\\
+        EI\frac{dy}{dx}&=PLx-\frac{Px^2}{2}+C_1
         \end{aligned}\]
         </div>
         <p><b>Boundary condition at the fixed end:</b> At \(x=0\), the slope is zero, \(\left.dy/dx\right|_{x=0}=0\).</p>
         <div class="equation">
         \[\begin{aligned}
-        EI(0)&=-PL(0)+\frac{P(0)^2}{2}+C_1\\
+        EI(0)&=PL(0)-\frac{P(0)^2}{2}+C_1\\
         0&=C_1\\
         \therefore C_1&=0
         \end{aligned}\]
@@ -581,26 +581,26 @@ footer{background:var(--primary-navy);color:#94A3B8;text-align:center;padding:18
         <p>Therefore, the slope at any section is:</p>
         <div class="equation">
         \[\begin{aligned}
-        EI\frac{dy}{dx}&=-PLx+\frac{Px^2}{2}\\
+        EI\frac{dy}{dx}&=PLx-\frac{Px^2}{2}\\
         \theta(x)=\frac{dy}{dx}
-        &=-\frac{P}{2EI}(2Lx-x^2)
+        &=\frac{P}{2EI}(2Lx-x^2)
         \end{aligned}\]
         </div>
-        <p>The negative sign represents clockwise rotation under the selected sign convention. The magnitude of slope is used for the final result.</p>
+        <p>The positive slope represents clockwise rotation when downward deflection is taken as positive.</p>
 
         <div class="calc-label">Deflection Equation — Second Integration</div>
         <p>Integrating the slope equation once again with respect to \(x\):</p>
         <div class="equation">
         \[\begin{aligned}
-        EI\frac{dy}{dx}&=-PLx+\frac{Px^2}{2}\\
-        EI\int dy&=\int\left(-PLx+\frac{Px^2}{2}\right)dx\\
-        EI\,y&=-\frac{PLx^2}{2}+\frac{Px^3}{6}+C_2
+        EI\frac{dy}{dx}&=PLx-\frac{Px^2}{2}\\
+        EI\int dy&=\int\left(PLx-\frac{Px^2}{2}\right)dx\\
+        EI\,y&=\frac{PLx^2}{2}-\frac{Px^3}{6}+C_2
         \end{aligned}\]
         </div>
         <p><b>Boundary condition at the fixed end:</b> At \(x=0\), vertical deflection is zero, \(y=0\).</p>
         <div class="equation">
         \[\begin{aligned}
-        EI(0)&=-\frac{PL(0)^2}{2}+\frac{P(0)^3}{6}+C_2\\
+        EI(0)&=\frac{PL(0)^2}{2}-\frac{P(0)^3}{6}+C_2\\
         0&=C_2\\
         \therefore C_2&=0
         \end{aligned}\]
@@ -608,11 +608,11 @@ footer{background:var(--primary-navy);color:#94A3B8;text-align:center;padding:18
         <p>Hence, the deflection equation is:</p>
         <div class="equation">
         \[\begin{aligned}
-        EI\,y&=-\frac{PLx^2}{2}+\frac{Px^3}{6}\\
-        y(x)&=-\frac{Px^2}{6EI}(3L-x)
+        EI\,y&=\frac{PLx^2}{2}-\frac{Px^3}{6}\\
+        y(x)&=\frac{Px^2}{6EI}(3L-x)
         \end{aligned}\]
         </div>
-        <p>The negative sign indicates downward deflection. Therefore, the magnitude of downward deflection is:</p>
+        <p>The positive value represents downward deflection.</p>
         <div class="equation">\[\boxed{\delta(x)=\frac{Px^2}{6EI}(3L-x)}\]</div>
 
         <div class="calc-label">Slope and Deflection at the Free End</div>
@@ -620,24 +620,24 @@ footer{background:var(--primary-navy);color:#94A3B8;text-align:center;padding:18
         <p><b>1. Slope at the free end</b></p>
         <div class="equation">
         \[\begin{aligned}
-        \theta_B&=-\frac{P}{2EI}\left[2L(L)-L^2\right]\\
-        &=-\frac{P}{2EI}(2L^2-L^2)\\
-        &=-\frac{PL^2}{2EI}
+        \theta_B&=\frac{P}{2EI}\left[2L(L)-L^2\right]\\
+        &=\frac{P}{2EI}(2L^2-L^2)\\
+        &=\frac{PL^2}{2EI}
         \end{aligned}\]
         </div>
-        <p>Magnitude of maximum slope:</p>
+        <p>Maximum slope:</p>
         <div class="equation">\[\boxed{\theta_{\max}=\frac{PL^2}{2EI}\text{ radians}}\]</div>
         <p><b>2. Deflection at the free end</b></p>
         <div class="equation">
         \[\begin{aligned}
-        y_B&=-\frac{PL(L)^2}{2EI}+\frac{P(L)^3}{6EI}\\
-        &=-\frac{PL^3}{2EI}+\frac{PL^3}{6EI}\\
-        &=-\frac{3PL^3-PL^3}{6EI}\\
-        &=-\frac{2PL^3}{6EI}\\
-        &=-\frac{PL^3}{3EI}
+        y_B&=\frac{PL(L)^2}{2EI}-\frac{P(L)^3}{6EI}\\
+        &=\frac{PL^3}{2EI}-\frac{PL^3}{6EI}\\
+        &=\frac{3PL^3-PL^3}{6EI}\\
+        &=\frac{2PL^3}{6EI}\\
+        &=\frac{PL^3}{3EI}
         \end{aligned}\]
         </div>
-        <p>Magnitude of maximum downward deflection:</p>
+        <p>Maximum downward deflection:</p>
         <div class="equation">\[\boxed{y_{\max}=\frac{PL^3}{3EI}}\]</div>
         <div class="answer">For a cantilever carrying a point load \(P\) at its free end: Maximum slope at the free end, \(\displaystyle\theta_{\max}=\frac{PL^2}{2EI}\) radians. Maximum deflection at the free end, \(\displaystyle y_{\max}=\frac{PL^3}{3EI}\) downward.</div>
       </div>
@@ -702,61 +702,61 @@ footer{background:var(--primary-navy);color:#94A3B8;text-align:center;padding:18
         \end{aligned}\]
         </div>
         <p>Using the elastic curve equation:</p>
-        <div class="equation">\[EI\frac{d^2y}{dx^2}=-\frac{w}{2}(L-x)^2\]</div>
+        <div class="equation">\[EI\frac{d^2y}{dx^2}=-M(x)=\frac{w}{2}(L-x)^2\]</div>
 
         <div class="calc-label">Slope Equation — First Integration</div>
         <p>Expanding the square and integrating with respect to \(x\):</p>
         <div class="equation">
         \[\begin{aligned}
         EI\frac{d^2y}{dx^2}
-        &=-\frac{w}{2}(L^2-2Lx+x^2)\\
+        &=\frac{w}{2}(L^2-2Lx+x^2)\\
         EI\frac{dy}{dx}
         &=-\frac{wL^2x}{2}+\frac{wLx^2}{2}
-          -\frac{wx^3}{6}+C_1
+          +\frac{wx^3}{6}+C_1
         \end{aligned}\]
         </div>
         <p><b>Boundary condition at the fixed end:</b> At \(x=0\), slope \(dy/dx=0\).</p>
         <div class="equation">
         \[\begin{aligned}
-        0&=-\frac{wL^2(0)}{2}+\frac{wL(0)^2}{2}
-          -\frac{w(0)^3}{6}+C_1\\
+        0&=\frac{wL^2(0)}{2}-\frac{wL(0)^2}{2}
+          +\frac{w(0)^3}{6}+C_1\\
         \therefore C_1&=0
         \end{aligned}\]
         </div>
         <p>Thus, the slope equation becomes:</p>
-        <div class="equation">\[EI\frac{dy}{dx}=-\frac{wL^2x}{2}+\frac{wLx^2}{2}-\frac{wx^3}{6}\]</div>
+        <div class="equation">\[EI\frac{dy}{dx}=\frac{wL^2x}{2}-\frac{wLx^2}{2}+\frac{wx^3}{6}\]</div>
 
         <div class="calc-label">Deflection Equation — Second Integration</div>
         <p>Integrating the slope equation with respect to \(x\):</p>
         <div class="equation">
         \[\begin{aligned}
-        EI\,y&=-\frac{wL^2x^2}{4}+\frac{wLx^3}{6}
-          -\frac{wx^4}{24}+C_2
+        EI\,y&=\frac{wL^2x^2}{4}-\frac{wLx^3}{6}
+          +\frac{wx^4}{24}+C_2
         \end{aligned}\]
         </div>
         <p><b>Boundary condition at the fixed end:</b> At \(x=0\), deflection \(y=0\).</p>
         <div class="equation">
         \[\begin{aligned}
-        0&=-\frac{wL^2(0)^2}{4}+\frac{wL(0)^3}{6}
-          -\frac{w(0)^4}{24}+C_2\\
+        0&=\frac{wL^2(0)^2}{4}-\frac{wL(0)^3}{6}
+          +\frac{w(0)^4}{24}+C_2\\
         \therefore C_2&=0
         \end{aligned}\]
         </div>
         <p>Therefore, the deflection equation is:</p>
-        <div class="equation">\[EI\,y=-\frac{wL^2x^2}{4}+\frac{wLx^3}{6}-\frac{wx^4}{24}\]</div>
+        <div class="equation">\[EI\,y=\frac{wL^2x^2}{4}-\frac{wLx^3}{6}+\frac{wx^4}{24}\]</div>
 
         <div class="calc-label">Deflection at the Free End</div>
         <p>At the free end, \(x=L=3\text{ m}\). Substitute this value into the deflection equation.</p>
         <div class="equation">
         \[\begin{aligned}
-        EI\,y_B&=-\frac{wL^2(L)^2}{4}
-          +\frac{wL(L)^3}{6}-\frac{w(L)^4}{24}\\
-        &=-\frac{wL^4}{4}+\frac{wL^4}{6}-\frac{wL^4}{24}\\
-        &=\frac{wL^4}{24}(-6+4-1)\\
-        &=-\frac{wL^4}{8}
+        EI\,y_B&=\frac{wL^2(L)^2}{4}
+          -\frac{wL(L)^3}{6}+\frac{w(L)^4}{24}\\
+        &=\frac{wL^4}{4}-\frac{wL^4}{6}+\frac{wL^4}{24}\\
+        &=\frac{wL^4}{24}(6-4+1)\\
+        &=\frac{wL^4}{8}
         \end{aligned}\]
         </div>
-        <p>The negative sign indicates downward deflection. Hence, the magnitude is:</p>
+        <p>The positive value indicates downward deflection. Hence:</p>
         <div class="equation">\[\boxed{y_B=\frac{wL^4}{8EI}}\]</div>
 
         <div class="calc-label">Numerical Calculation</div>
