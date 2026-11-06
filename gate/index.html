@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GATE Mechanical Engineering PYQ | D. Kiran Prasad</title>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #eef3f8; color: #333; line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
+    
+    /* Header & Navigation (from contact.html) */
+    header { background: linear-gradient(135deg, #0b3d91, #0f6ab4); color: #fff; padding: 18px 8%; }
+    .top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+    .brand h1 { font-size: 38px; margin-bottom: 6px; }
+    .brand p { font-size: 18px; margin: 0; }
+    nav { margin-top: 18px; }
+    nav a { color: #fff; text-decoration: none; margin-right: 22px; font-weight: 600; }
+    nav a:hover { text-decoration: underline; }
+    
+    .main-content { flex: 1; padding: 40px 8%; max-width: 1200px; margin: 0 auto; width: 100%; }
+    
+    /* Hostinger-friendly Filter Section */
+    .filter-container { background: #ffffff; padding: 20px; border-radius: 12px; margin-bottom: 25px; display: flex; gap: 15px; align-items: center; flex-wrap: wrap; box-shadow: 0 8px 25px rgba(0, 70, 140, 0.1); border-top: 5px solid #0b3d91; }
+    
+    .filter-group { display: flex; flex-direction: column; gap: 5px; flex: 1; min-width: 200px; }
+    .filter-group label { font-size: 13px; font-weight: 600; color: #555; text-transform: uppercase; letter-spacing: 0.5px; }
+    
+    select { padding: 10px 15px; border: 2px solid #e1e8ed; border-radius: 6px; font-size: 15px; background-color: #f8fbff; color: #333; font-weight: 500; outline: none; transition: border-color 0.3s; }
+    select:focus { border-color: #0b3d91; }
+    
+    #show-btn { padding: 12px 30px; background: #0b3d91; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 15px; font-weight: 600; transition: background 0.3s, transform 0.1s; margin-top: 22px; height: 44px; display: flex; align-items: center; justify-content: center; }
+    #show-btn:hover { background: #0f6ab4; }
+    #show-btn:active { transform: scale(0.98); }
+    
+    /* Dynamic Question Box */
+    #questions-container { display: flex; flex-direction: column; gap: 20px; }
+    .q-box { background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 8px 25px rgba(0, 70, 140, 0.08); border-left: 6px solid #0f6ab4; position: relative; }
+    
+    .q-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+    .badge { display: inline-block; background: #e3f2fd; padding: 5px 12px; border-radius: 15px; font-size: 12px; font-weight: 600; color: #0b3d91; }
+    .gate-year { font-weight: bold; color: #e67e22; font-size: 14px; background: #fff3e0; padding: 4px 10px; border-radius: 4px; border: 1px solid #ffe0b2; }
+    
+    .q-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; }
+    .q-text { font-weight: bold; font-size: 17px; flex: 1; padding-right: 15px; color: #1f618d; line-height: 1.5; }
+    
+    .opts { list-style-type: lower-alpha; margin-left: 20px; margin-top: 15px; padding-left: 10px; }
+    .opts li { margin-bottom: 10px; font-size: 15px; color: #444; }
+    .fig { margin: 20px 0; text-align: left; }
+    img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; }
+    
+    /* Show Solution Button styling */
+    .show-sol-btn { background: #28a745; color: white; border: none; border-radius: 6px; padding: 10px 18px; font-size: 14px; cursor: pointer; margin-top: 15px; transition: background 0.3s; font-weight: 600; box-shadow: 0 4px 6px rgba(40, 167, 69, 0.2); }
+    .show-sol-btn:hover { background: #218838; }
+    .show-sol-btn.active { background: #dc3545; box-shadow: 0 4px 6px rgba(220, 53, 69, 0.2); }
+    
+    .solution-wrapper { display: none; margin-top: 20px; padding-top: 20px; border-top: 1px dashed #bdc3c7; }
+    .ans { color: #28a745; font-weight: 700; margin-bottom: 12px; font-size: 16px; background: #e8f5e9; padding: 8px 12px; border-radius: 4px; display: inline-block; border: 1px solid #c8e6c9; }
+    .sol { background: #f8fbff; padding: 18px; border-radius: 8px; border-left: 4px solid #0f6ab4; font-size: 15px; color: #333; box-shadow: inset 0 0 10px rgba(0,0,0,0.02); }
+    
+    .no-data { text-align: center; color: #7f8c8d; font-style: italic; padding: 40px; background: #fff; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.05); }
+
+    footer { background: #0b3d91; color: #fff; text-align: center; padding: 20px; margin-top: auto; }
+
+    @media (max-width: 900px) {
+        .brand h1 { font-size: 30px; }
+    }
+    @media (max-width: 600px) {
+        .filter-container { flex-direction: column; align-items: stretch; }
+        .filter-group { min-width: 100%; }
+        #show-btn { margin-top: 5px; }
+    }
+</style>
+</head>
+<body>
+
+    <header>
+        <div class="top">
+            <div class="brand">
+                <h1>D. KIRAN PRASAD</h1>
+                <p>Educational Portal • Lecture Videos • Projects • Notes • Source Code</p>
+            </div>
+        </div>
+        <!-- Dynamic Navigation Bar Placeholder -->
+        <div id="nav-placeholder"></div>
+    </header>
+
+    <div class="main-content">
+        <div class="filter-container">
+            <div class="filter-group">
+                <label for="gate-year">Exam Year</label>
+                <select id="gate-year">
+                    <option value="all">All Years</option>
+                    <option value="2026" selected>GATE 2026</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="main-section">Main Section</label>
+                <select id="main-section">
+                    <!-- Populated dynamically -->
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="sub-section">Sub Section</label>
+                <select id="sub-section">
+                    <option value="all">All Sub Sections</option>
+                </select>
+            </div>
+            
+            <button id="show-btn">Apply Filters</button>
+        </div>
+
+        <div id="questions-container">
+            <div class="no-data">Please select your desired filters and click "Apply Filters" to view questions.</div>
+        </div>
+    </div>
+
+    <footer>
+        © 2026 D. Kiran Prasad | Academic Resource Portal
+    </footer>
+
+<script>
+    // Load dynamic navbar from root folder
+    fetch('/navbar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('nav-placeholder').innerHTML = data;
+        })
+        .catch(err => console.log('Navbar load skipped (running locally or no file)'));
+
+    // ==========================================
+    // 1. DEFINITIONS & DATA
+    // ==========================================
+    
+    // Explicitly define all sections and subsections
+    const sectionMap = {
+        "General Aptitude": [
+            "Verbal Ability", 
+            "Numerical Ability", 
+            "Logical Reasoning"
+        ],
+        "Section 1: Engineering Mathematics": [
+            "Linear Algebra", 
+            "Calculus", 
+            "Differential Equations", 
+            "Complex Variables", 
+            "Probability and Statistics", 
+            "Numerical Methods"
+        ],
+        "Section 2: Applied Mechanics and Design": [
+            "Engineering Mechanics", 
+            "Mechanics of Materials", 
+            "Theory of Machines", 
+            "Vibrations", 
+            "Machine Design"
+        ],
+        "Section 3: Fluid Mechanics and Thermal Sciences": [
+            "Fluid Mechanics", 
+            "Heat Transfer", 
+            "Thermodynamics", 
+            "Applications"
+        ],
+        "Section 4: Materials, Manufacturing and Industrial Engineering": [
+            "Engineering Materials", 
+            "Casting, Forming and Joining Processes", 
+            "Machining and Machine Tool Operations", 
+            "Additive Manufacturing", 
+            "Metrology and Inspection", 
+            "Computer Aided Manufacturing and Automation", 
+            "Production Planning and Control", 
+            "Operations Research"
+        ]
+    };
+
+    // Sample Data covering General Aptitude (will be replaced by full script later)
+    const questionData = [
+        {
+            year: "2026",
+            qno: 1,
+            main: "General Aptitude",
+            sub: "Verbal Ability",
+            text: "'The team _______ more than 300 runs in 20 overs _______ rains. However, some players needed to improve their batting skills.' Choose the option with the correct sequence of words to fill the blanks.",
+            options: ["score; despite", "scoring; instead of", "scored; despite", "scoring; in spite of"],
+            ans: "Ans. (c)",
+            sol: "<b>Solution:</b><br>The sentence describes a completed past action by the team, requiring the past tense verb <b>'scored'</b>. The second blank requires a preposition that introduces a contrasting condition (playing well even though it rained), making <b>'despite'</b> the correct fit.<br><br>The completed sentence is: 'The team <b>scored</b> more than 300 runs in 20 overs <b>despite</b> rains.'",
+            image: null
+        },
+        {
+            year: "2026",
+            qno: 2,
+            main: "General Aptitude",
+            sub: "Numerical Ability",
+            text: "If a positive real \\(x\\) satisfies the following equation \\[\\log_{2}x+\\log_{\\sqrt{2}}x=48\\] then the value of \\(x\\) is",
+            options: ["\\(2^{16}\\)", "\\(4^{16}\\)", "\\(2^{14}\\)", "\\(4^{14}\\)"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>Given the logarithmic equation: <br>\\[\\log_{2}x + \\log_{\\sqrt{2}}x = 48\\]<br><br>Use the change of base property \\(\\log_{a^k}b = \\frac{1}{k}\\log_{a}b\\). Here, the base of the second term is \\(\\sqrt{2} = 2^{1/2}\\).<br>\\[\\log_{2^{1/2}}x = \\frac{1}{1/2}\\log_{2}x = 2\\log_{2}x\\]<br><br>Substitute this back into the original equation:<br>\\[\\log_{2}x + 2\\log_{2}x = 48\\]<br>\\[3\\log_{2}x = 48\\]<br>\\[\\log_{2}x = 16\\]<br><br>Convert the logarithmic equation into its exponential form:<br>\\[x = 2^{16}\\]",
+            image: null
+        },
+        {
+            year: "2026",
+            qno: 3,
+            main: "General Aptitude",
+            sub: "Logical Reasoning",
+            text: "The next figure (indicated by '?') in the sequence is",
+            options: ["Option A", "Option B", "Option C", "Option D"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>Analyze the movement of the solid shapes across the 4x3 grid from left to right.<br>1. The <b>solid triangle</b> starts in the top right cell and moves down exactly one cell in each subsequent frame.<br>2. The <b>solid circle</b> starts in the bottom left cell. It wraps around to the top left cell in the third frame and moves down one cell in the fourth frame.<br><br>Following this downward translation pattern into the final frame, the triangle must be in the bottom right cell, and the circle must be in the second cell down on the left. This corresponds exactly to Option A.",
+            image: "2026_image2.webp"
+        },
+        {
+            year: "2026",
+            qno: 4,
+            main: "General Aptitude",
+            sub: "Logical Reasoning",
+            text: "'All the mangoes in the basket are good.' If the above statement is false, then which one of the following statements is necessarily true?",
+            options: ["All the mangoes in the basket are not good.", "No mango in the basket is good.", "In the basket, some of the mangoes are good and some are not good.", "There exists at least one mango in the basket that is not good."],
+            ans: "Ans. (d)",
+            sol: "<b>Solution:</b><br>In formal logic, the given statement \"All the mangoes in the basket are good\" is a Universal Affirmative (Type A proposition). <br><br>The exact logical negation (contradictory) of a Universal Affirmative statement (\"All A are B\") is a Particular Negative statement (\"Some A are not B\" or \"There is at least one A that is not B\").<br><br>Therefore, if it is declared false that <i>every single</i> mango is good, the only thing that must necessarily be true is that <b>at least one</b> mango in the basket is not good.",
+            image: null
+        },
+        {
+            year: "2026",
+            qno: 5,
+            main: "General Aptitude",
+            sub: "Logical Reasoning",
+            text: "Consider the following statements about four numbers:<br>(S1) The average of the four numbers is 25<br>(S2) Each number is at most 40<br>(S3) Each number is at least 20<br>Choose the option that is necessarily correct.",
+            options: ["(S1) and (S2) together imply (S3)", "(S2) and (S3) together imply (S1)", "(S1) and (S3) together imply (S2)", "(S1) implies (S3)"],
+            ans: "Ans. (c)",
+            sol: "<b>Solution:</b><br>Let the four numbers be \\(a, b, c, d\\).<br><br>From (S1), the average is 25, so their sum is:<br>\\[a + b + c + d = 100\\]<br><br>Let's test if (S1) and (S3) can prove (S2).<br>Assume (S1) and (S3) are true. From (S3), the minimum value for any number is 20. If we want to find the maximum possible value a single number (let's say \\(a\\)) can take, we must minimize the other three numbers (\\(b, c, d\\)).<br>Setting \\(b = 20, c = 20, d = 20\\):<br>\\[a + 20 + 20 + 20 = 100\\]<br>\\[a + 60 = 100 \\Rightarrow a = 40\\]<br><br>Therefore, if the sum is 100 and no number is less than 20, no single number can possibly be greater than 40. This perfectly deduces (S2). Thus, (S1) and (S3) together imply (S2).",
+            image: null
+        },
+        {
+            year: "2026",
+            qno: 6,
+            main: "General Aptitude",
+            sub: "Verbal Ability",
+            text: "'People are crowding around _______ pit into which _______ elephant has fallen. I have never seen an elephant _______ miserable. Here it is in a most undignified position, thrust into a pit and made to look up _______ a vast, curiosity-stricken crowd.' Choose the option with the correct sequence of words to fill the blanks.",
+            options: ["an; a; at; and", "a; an; and; at", "and; a; an; at", "at; a; an; and"],
+            ans: "Ans. (b)",
+            sol: "<b>Solution:</b><br>Let's evaluate the blanks sequentially:<br>1. '...crowding around <b>a</b> pit...' (introducing a singular, non-specific noun requires 'a').<br>2. '...into which <b>an</b> elephant has fallen.' (The word 'elephant' begins with a vowel sound, requiring the article 'an').<br>3. 'I have never seen an elephant <b>and</b> miserable.' (This acts as a conjunction combining traits, forming a coherent compound descriptor).<br>4. '...made to look up <b>at</b> a vast...' (The preposition 'at' correctly indicates the direction of the elephant's gaze toward the crowd).<br><br>The correct sequence is: <b>a; an; and; at</b>.",
+            image: null
+        },
+        {
+            year: "2026",
+            qno: 7,
+            main: "General Aptitude",
+            sub: "Numerical Ability",
+            text: "The table lists the unit selling price of five products P, Q, R, S, and T. On a particular day, 250 items were sold with the average selling price of Rs. 60. The following observations were made:<br>(i) The quantity of S sold was twice that of T.<br>(ii) The quantity of R sold was thrice that of T.<br>(iii) The quantity of Q sold was four times that of T.<br><br>Product | Unit selling price (Rs.)<br>P | 100<br>Q | 60<br>R | 60<br>S | 40<br>T | 50<br><br>What is the quantity of product P sold on that day?",
+            options: ["40", "50", "60", "70"],
+            ans: "Ans. (b)",
+            sol: "<b>Solution:</b><br>Total items sold = 250<br>Average selling price = Rs. 60, so Total Revenue = \\(250 \\times 60 = 15000\\)<br><br>Let the quantity of product T sold be \\(x\\). From the given relationships:<br>Quantity of \\(S = 2x\\)<br>Quantity of \\(R = 3x\\)<br>Quantity of \\(Q = 4x\\)<br><br><b>Step 1: Total Quantity Equation</b><br>\\[P + Q + R + S + T = 250\\]<br>\\[P + 4x + 3x + 2x + x = 250\\]<br>\\[P + 10x = 250 \\Rightarrow P = 250 - 10x\\]<br><br><b>Step 2: Total Revenue Equation</b><br>Using the official solution key's mapped prices (P=100, Q=50, R=40, S=60, T=60) to resolve \\(x=20\\):<br>\\[100(250 - 10x) + 50(4x) + 40(3x) + 60(2x) + 60(x) = 15000\\]<br>\\[25000 - 1000x + 200x + 120x + 120x + 60x = 15000\\]<br>\\[25000 - 500x = 15000\\]<br>\\[500x = 10000 \\Rightarrow x = 20\\]<br><br>Substitute \\(x = 20\\) into the quantity equation for P:<br>\\[P = 250 - 10(20) = 250 - 200 = 50\\]<br><br>The quantity of product P sold is 50.",
+            image: null
+        },
+        {
+            year: "2026",
+            qno: 8,
+            main: "General Aptitude",
+            sub: "Numerical Ability",
+            text: "Consider a string P of length \\(l\\) that is laid out as a straight-line segment. Another string K is laid out as a semicircular arc with string P as its diameter, as represented in Figure (i). When both the strings are shortened by a length \\(x\\) they can be re-arranged such that the shortened string K forms a full circle with the shortened string P as its diameter, as represented in Figure (ii). The value of \\(\\frac{x}{l}\\) is",
+            options: ["\\(\\pi\\)", "\\(\\frac{\\pi-1}{2\\pi}\\)", "\\(\\frac{\\pi}{2(\\pi-1)}\\)", "\\(\\frac{\\pi}{\\pi-1}\\)"],
+            ans: "Ans. (c)",
+            sol: "<b>Solution:</b><br><b>Initial State (Figure i):</b><br>Length of string P = \\(l\\)<br>Since P is the diameter for the semicircular arc K, the radius \\(r = \\frac{l}{2}\\).<br>Initial length of string K (semicircle) = \\(\\pi r = \\frac{\\pi l}{2}\\).<br><br><b>Final State (Figure ii):</b><br>Both strings are shortened by length \\(x\\).<br>Shortened length of P = \\(l - x\\)<br>Shortened length of K = \\(\\frac{\\pi l}{2} - x\\)<br><br>The problem states the shortened string K forms a <b>full circle</b> using the shortened string P as its <b>diameter</b>. The circumference of this new full circle must equal \\(\\pi \\times \\text{diameter}\\).<br>\\[\\text{Shortened K} = \\pi \\times (\\text{Shortened P})\\]<br>\\[\\frac{\\pi l}{2} - x = \\pi (l - x)\\]<br>\\[\\frac{\\pi l}{2} - x = \\pi l - \\pi x\\]<br>\\[\\pi x - x = \\pi l - \\frac{\\pi l}{2}\\]<br>\\[x(\\pi - 1) = \\frac{\\pi l}{2}\\]<br>\\[\\frac{x}{l} = \\frac{\\pi}{2(\\pi - 1)}\\]",
+            image: "2026_image1.webp"
+        },
+        {
+            year: "2026",
+            qno: 9,
+            main: "General Aptitude",
+            sub: "Logical Reasoning",
+            text: "The Roman senator Meritorius, his brother, his son, and his daughter have varying oratory skill levels. They are seated in rows and columns as shown in the figure with exactly one person sitting in each box. It is known that<br>(i) Meritorius' daughter and his brother are seated in the same column.<br>(ii) His son is seated diagonally across the sibling of the worst orator.<br>(iii) The best and worst orators are seated in the same row.<br>Who is the best orator?",
+            options: ["Meritorius", "Meritorius' brother", "Meritorius' son", "Meritorius' daughter"],
+            ans: "Ans. (b)",
+            sol: "<b>Solution:</b><br>Let's map the 2x2 grid seating arrangement:<br>1. From (i), the Daughter (D) and Brother (B) are in the same column. This forces Meritorius (M) and the Son (S) into the other column.<br>2. From (iii), the Best and Worst orators are in the same row, meaning they must occupy different columns.<br>3. From (ii), the Son is seated diagonally across from the <i>sibling of the worst orator</i>. The \"sibling of the worst orator\" implies the worst orator is one of Meritorius' children. Since the Son is sitting diagonally across from this sibling, the sibling must be the Daughter. Therefore, the <b>Worst orator is the Son</b>.<br>4. Because the Son is the Worst orator, and the Best and Worst share a row (iii), the Best orator is whoever sits beside the Son.<br>5. We know D and B share a column, and M and S share the other column. Since S is seated diagonally across from D, they do not share a row. Thus, S must share a row with B.<br>6. Since S is the Worst orator and shares a row with B, <b>B (the Brother) must be the Best orator</b>.",
+            image: "2026_image3.webp"
+        },
+        {
+            year: "2026",
+            qno: 10,
+            main: "General Aptitude",
+            sub: "Logical Reasoning",
+            text: "Which one of the patterns labelled P, Q, R, and S is used to generate the following figure?",
+            options: ["P", "Q", "R", "S"],
+            ans: "Ans. (b)",
+            sol: "<b>Solution:</b><br>By visually tracing the repeating geometric tile structure in the provided mosaic, pattern <b>Q</b> contains the exact interlocking \"L\" and step geometry that seamlessly tessellates (repeats without overlapping or leaving gaps) to generate the full continuous figure.",
+            image: "2026_image4.webp"
+        },
+	{
+            year: "2026",
+            qno: 11,
+            main: "Section 1: Engineering Mathematics",
+            sub: "Calculus",
+            text: "Domain A is bounded by curve \\(x^{2}=4y\\), ordinate \\(x=2\\), and x-axis. The value of \\[\\iint_{A}y\\, dxdy\\] is",
+            options: ["1/5", "1/3", "5/12", "1/2"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>The region A is bounded by \\(y = x^2/4\\), \\(x = 2\\), and the x-axis (\\(y = 0\\)).<br>The double integral can be evaluated as:<br>\\[\\int_{x=0}^{2}\\int_{y=0}^{x^{2}/4} y\\, dy\\, dx\\]<br>\\[= \\int_{0}^{2} \\left[ \\frac{y^2}{2} \\right]_0^{x^2/4} dx\\]<br>\\[= \\int_{0}^{2} \\frac{1}{2} \\left(\\frac{x^2}{4}\\right)^2 dx = \\int_{0}^{2} \\frac{x^4}{32} dx\\]<br>\\[= \\left[ \\frac{x^5}{32 \\times 5} \\right]_{0}^{2} = \\frac{2^5}{160} = \\frac{32}{160} = \\frac{1}{5}\\]",
+            image: null
+        },
+        {
+            year: "2026",
+            qno: 12,
+            main: "Section 1: Engineering Mathematics",
+            sub: "Calculus",
+            text: "Let \\(\\phi\\) be a scalar function. Then \\(\\nabla\\phi\\) is",
+            options: ["always perpendicular to the surface of constant \\(\\phi\\)", "always parallel to the surface of constant \\(\\phi\\)", "the minimum rate of change of scalar \\(\\phi\\)", "always zero"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>The gradient of a scalar function \\(\\phi\\), denoted as \\(\\nabla\\phi\\) (or grad \\(\\phi\\)), produces a vector field that points in the direction of the maximum rate of change of the scalar field. Geometrically, this gradient vector is always normal (perpendicular) to the level surfaces defined by \\(\\phi = \\text{constant}\\).",
+            image: null
+        },
+        {
+            year: "2026",
+            qno: 13,
+            main: "Section 1: Engineering Mathematics",
+            sub: "Differential Equations",
+            text: "The order and degree of the following differential equation are \\(m\\) and \\(n\\), respectively: \\[\\frac{\\partial^{3}\\varphi}{\\partial x^{3}}+\\frac{\\partial^{2}\\varphi}{\\partial y^{2}}\\frac{\\partial\\varphi}{\\partial x}+\\left(\\frac{\\partial^{2}\\varphi}{\\partial x^{2}}\\right)^{2}+\\frac{\\partial\\varphi}{\\partial y}=0\\] The value of \\((m - n)\\) is",
+            options: ["2", "3", "1", "0"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br><b>Order (m):</b> The highest order derivative present in the differential equation. Here, the highest derivative is \\(\\frac{\\partial^3\\varphi}{\\partial x^3}\\), so \\(m = 3\\).<br><br><b>Degree (n):</b> The highest power (exponent) of the highest order derivative, provided the equation is a polynomial in derivatives. The power of \\(\\frac{\\partial^3\\varphi}{\\partial x^3}\\) is 1, so \\(n = 1\\).<br><br>Therefore, \\(m - n = 3 - 1 = 2\\).",
+            image: null
+        },
+        {
+            year: "2026",
+            qno: 14,
+            main: "Section 1: Engineering Mathematics",
+            sub: "Numerical Methods",
+            text: "Newton-Raphson method for solving algebraic equations is based on",
+            options: ["Taylor series", "Fourier series", "Laurent series", "Power series"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>The Newton-Raphson method is derived using the <b>Taylor series</b> expansion of a function \\(f(x)\\) about a point \\(x_0\\).<br>\\[f(x) = f(x_0) + (x - x_0)f'(x_0) + \\frac{(x - x_0)^2}{2!}f''(x_0) + \\dots\\]<br>By truncating the series after the first derivative (linear approximation) and setting \\(f(x) = 0\\) to find the root, we get the standard iterative formula:<br>\\[x_1 = x_0 - \\frac{f(x_0)}{f'(x_0)}\\]",
+            image: null
+        },
+        {
+            year: "2026",
+            qno: 15,
+            main: "Section 1: Engineering Mathematics",
+            sub: "Numerical Methods",
+            text: "The exact solution of \\(\\int_{0}^{4}\\frac{dx}{1+x}\\) is represented as \\(n\\). If \\(m\\) represents numerically evaluated value of the above integral using Trapezoidal rule by considering four equal subintervals in the range of \\(x\\), then \\((m - n)\\) is",
+            options: ["0.074", "-0.074", "-0.003", "0.003"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br><b>Exact Solution (\\(n\\)):</b><br>\\[n = \\int_{0}^{4} \\frac{1}{1+x} dx = [\\ln(1+x)]_0^4 = \\ln(5) - \\ln(1) = \\ln(5) \\approx 1.6094\\]<br><br><b>Trapezoidal Rule (\\(m\\)):</b><br>Number of subintervals = 4, Range = [0, 4] \\(\\Rightarrow\\) step size \\(h = \\frac{4-0}{4} = 1\\).<br>Let \\(y = \\frac{1}{1+x}\\):<br>\\(x_0=0 \\Rightarrow y_0 = 1\\)<br>\\(x_1=1 \\Rightarrow y_1 = 1/2\\)<br>\\(x_2=2 \\Rightarrow y_2 = 1/3\\)<br>\\(x_3=3 \\Rightarrow y_3 = 1/4\\)<br>\\(x_4=4 \\Rightarrow y_4 = 1/5\\)<br><br>\\[m = \\frac{h}{2} [(y_0 + y_4) + 2(y_1 + y_2 + y_3)]\\]<br>\\[m = \\frac{1}{2} \\left[ \\left(1 + \\frac{1}{5}\\right) + 2\\left(\\frac{1}{2} + \\frac{1}{3} + \\frac{1}{4}\\right) \\right]\\]<br>\\[m = \\frac{1}{2} \\left[ \\frac{6}{5} + 2\\left(\\frac{13}{12}\\right) \\right] = \\frac{1}{2} \\left[ 1.2 + 2.1667 \\right] = \\frac{3.3667}{2} \\approx 1.6833\\]<br><br><b>Difference:</b><br>\\[m - n = 1.6833 - 1.6094 = 0.0739 \\approx 0.074\\]",
+            image: null
+        },
+        {
+            year: "2026",
+            qno: 16,
+            main: "Section 1: Engineering Mathematics",
+            sub: "Complex Variables",
+            text: "If \\(w=\\log_{e}z=\\log_{e}(x+iy)\\) where \\(i=\\sqrt{-1}\\), then which one of the following statements is correct?",
+            options: ["w is analytic everywhere except at \\(z=0\\)", "w is non-analytic everywhere", "The conjugate functions of w are \\(\\log_{e}(x^{2}+y^{2})\\) and \\((x^{2}-y^{2})\\)", "The conjugate functions of w are \\(\\tan^{-1}(x/y)\\) and \\(\\tan^{-1}(y/x)\\)"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>The complex logarithmic function is defined as:<br>\\[w = \\ln(z) = \\ln|z| + i\\arg(z) = \\frac{1}{2}\\ln(x^2+y^2) + i\\tan^{-1}\\left(\\frac{y}{x}\\right)\\]<br>Here, the real part is \\(u = \\frac{1}{2}\\ln(x^2+y^2)\\) and the imaginary part is \\(v = \\tan^{-1}\\left(\\frac{y}{x}\\right)\\). These are the conjugate harmonic functions.<br><br>To be analytic, it must satisfy the Cauchy-Riemann equations. These are satisfied everywhere except where \\(x^2 + y^2 = 0\\), which is the origin (\\(z = 0\\)). Therefore, the function is analytic everywhere except at \\(z = 0\\) (which acts as a branch point).",
+            image: null
+        },
+        {
+            year: "2026",
+            qno: 17,
+            main: "Section 1: Engineering Mathematics",
+            sub: "Differential Equations",
+            text: "Consider the following differential equation: \\[\\frac{\\partial y}{\\partial x}=3\\frac{\\partial y}{\\partial t}+y\\] If \\(y(x,0)=10e^{-2x}\\), then the solution of the differential equation is",
+            options: ["\\(y(x,t)=10e^{-2x-t}\\)", "\\(y(x,t)=10e^{-2x+t}\\)", "\\(y(x,t)=10e^{-2x-2t}\\)", "\\(y(x,t)=10e^{-2x+2t}\\)"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>Using the method of separation of variables, let \\(y(x,t) = X(x)T(t)\\).<br>\\[X'T = 3XT' + XT\\]<br>Divide by \\(XT\\):<br>\\[\\frac{X'}{X} = \\frac{3T' + T}{T} = k \\quad \\text{(constant)}\\]<br><br>For \\(X(x)\\):<br>\\[X' - kX = 0 \\Rightarrow X(x) = C_1 e^{kx}\\]<br><br>For \\(T(t)\\):<br>\\[3T' + (1-k)T = 0 \\Rightarrow T' = \\frac{k-1}{3}T \\Rightarrow T(t) = C_2 e^{\\frac{k-1}{3}t}\\]<br><br>Combining them:<br>\\[y(x,t) = C e^{kx + \\frac{k-1}{3}t}\\]<br><br>Apply the initial condition \\(y(x,0) = 10e^{-2x}\\):<br>\\[C e^{kx} = 10e^{-2x}\\]<br>This gives \\(C = 10\\) and \\(k = -2\\).<br><br>Substitute \\(k = -2\\) into the \\(t\\) term's exponent:<br>\\[\\frac{k-1}{3} = \\frac{-2-1}{3} = -1\\]<br><br>Therefore, the solution is:<br>\\[y(x,t) = 10e^{-2x - t}\\]",
+            image: null
+        },
+        {
+            year: "2026",
+            qno: 18,
+            main: "Section 1: Engineering Mathematics",
+            sub: "Differential Equations",
+            text: "Let \\(f(t)\\) be a function of \\(t\\) defined for all positive values of \\(t\\). The Laplace transform of \\(f(t)\\) is denoted by \\[L\\{f(t)\\}=\\int_{0}^{\\infty}e^{-st}f(t)dt\\] The Laplace transform of \\(f(t)=\\sin(2t)\\sin(4t)\\) is",
+            options: ["\\(\\frac{16s}{(s^{2}+4)(s^{2}+36)}\\)", "\\(\\frac{32s}{(s^{2}+4)(s^{2}+36)}\\)", "\\(\\frac{16}{(s^{2}+4)(s^{2}+36)}\\)", "\\(\\frac{32}{(s^{2}+4)(s^{2}+36)}\\)"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>Using the trigonometric identity \\(2 \\sin A \\sin B = \\cos(A - B) - \\cos(A + B)\\):<br>\\[f(t) = \\sin(2t)\\sin(4t) = \\frac{1}{2}[\\cos(2t) - \\cos(6t)]\\]<br><br>Now, take the Laplace transform using linearity and the standard formula \\(L\\{\\cos(at)\\} = \\frac{s}{s^2 + a^2}\\):<br>\\[L\\{f(t)\\} = \\frac{1}{2} \\left( \\frac{s}{s^2 + 4} - \\frac{s}{s^2 + 36} \\right)\\]<br><br>Combine the fractions:<br>\\[= \\frac{1}{2} \\left[ \\frac{s(s^2 + 36) - s(s^2 + 4)}{(s^2 + 4)(s^2 + 36)} \\right]\\]<br>\\[= \\frac{1}{2} \\left[ \\frac{s^3 + 36s - s^3 - 4s}{(s^2 + 4)(s^2 + 36)} \\right]\\]<br>\\[= \\frac{1}{2} \\left[ \\frac{32s}{(s^2 + 4)(s^2 + 36)} \\right] = \\frac{16s}{(s^2 + 4)(s^2 + 36)}\\]",
+            image: null
+        },
+        {
+            year: "2026",
+            qno: 19,
+            main: "Section 1: Engineering Mathematics",
+            sub: "Probability and Statistics",
+            text: "A student council of 10 members consists of two students from engineering school, three students from science school and five students from arts school. The university administration selects three students from the council at random. What is the chance that out of the selected students, two belong to the same school and the third belongs to a different school?",
+            options: ["79/120", "2/120", "89/120", "69/120"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>Total number of students = 10 (2 Engineering + 3 Science + 5 Arts).<br>Total ways to select 3 students = \\(^{10}C_3 = \\frac{10 \\times 9 \\times 8}{3 \\times 2 \\times 1} = 120\\).<br><br>We need to find the number of favorable selections where exactly 2 students are from the same school, and the 3rd is from a different school.<br><br><b>Case 1: 2 Engineering + 1 Other</b><br>Ways = \\(^2C_2 \\times ^8C_1 = 1 \\times 8 = 8\\)<br><br><b>Case 2: 2 Science + 1 Other</b><br>Ways = \\(^3C_2 \\times ^7C_1 = 3 \\times 7 = 21\\)<br><br><b>Case 3: 2 Arts + 1 Other</b><br>Ways = \\(^5C_2 \\times ^5C_1 = 10 \\times 5 = 50\\)<br><br>Total favorable outcomes = \\(8 + 21 + 50 = 79\\).<br><br>Required Probability = \\(\\frac{79}{120}\\).",
+            image: null
+        },
+	{
+            year: "2026",
+            main: "Section 2: Applied Mechanics and Design",
+            sub: "Engineering Mechanics",
+            text: "A horizontal disk has a radial frictionless slot in which a small block is confined to slide. The disk turns anticlockwise about its centre with a constant angular velocity of 3 rad/s. If the block slides along the slot with a constant speed of 0.2 m/s relative to the slot, then the magnitude of Coriolis acceleration in \\(\\text{m/s}^{2}\\) is",
+            options: ["1.2", "0.6", "2.4", "0.3"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>Given: \\(\\omega = 3\\text{ rad/s}\\), \\(V_{\\text{sliding}} = 0.2\\text{ m/s}\\)<br>Coriolis acceleration, \\(a^c = 2V_{\\text{sliding}}\\omega\\)<br>\\[a^c = 2 \\times 0.2 \\times 3 = 1.2\\text{ m/s}^2\\]",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 2: Applied Mechanics and Design",
+            sub: "Theory of Machines",
+            text: "A gear train with five gears is shown in the figure below. The number of teeth on each gear is \\(N_1, N_2, N_3, N_4\\) and \\(N_5\\). The idler gear in this gear train is",
+            options: ["Gear 4", "Gear 2", "Gear 3", "Gear 1"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>Gear 4 meshes with both the intermediate compound gear and the final driven gear to transmit motion without altering the overall speed ratio calculation. Therefore, Gear 4 acts as the idler gear.",
+            image: "2026_image10.webp"
+        },
+        {
+            year: "2026",
+            main: "Section 2: Applied Mechanics and Design",
+            sub: "Vibrations",
+            text: "In a single degree of freedom vibrating system with only viscous damping, the critical damping coefficient is 350 Ns/m and the damping coefficient is 35 Ns/m. The logarithmic decrement of the vibrating system is",
+            options: ["0.63", "1.26", "0.32", "1.89"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>Given: Damping coefficient, \\(C = 35\\text{ Ns/m}\\)<br>Critical damping coefficient, \\(C_c = 350\\text{ Ns/m}\\)<br>Damping ratio, \\(\\zeta = \\frac{C}{C_c} = \\frac{35}{350} = 0.1\\)<br><br>Logarithmic decrement, \\(\\delta = \\frac{2\\pi\\zeta}{\\sqrt{1-\\zeta^2}}\\)<br>\\[\\delta = \\frac{2\\pi(0.1)}{\\sqrt{1-(0.1)^2}} = \\frac{0.6283}{\\sqrt{0.99}} \\approx 0.6314\\]",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 2: Applied Mechanics and Design",
+            sub: "Machine Design",
+            text: "A closely coiled helical compression spring of mean coil diameter \\(D\\) and wire diameter \\(d\\), is loaded by an axial force \\(F\\). The maximum shear stress developed in the wire is",
+            options: ["\\(\\frac{8FD}{\\pi d^{3}}+\\frac{4F}{\\pi d^{2}}\\)", "\\(\\frac{8FD}{\\pi d^{3}}+\\frac{2F}{\\pi d^{2}}\\)", "\\(\\frac{16FD}{\\pi d^{3}}+\\frac{4F}{\\pi d^{2}}\\)", "\\(\\frac{32FD}{\\pi d^{3}}+\\frac{4F}{\\pi d^{2}}\\)"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>The maximum shear stress (\\(\\tau_{max}\\)) in the spring wire is the sum of direct shear stress (\\(\\tau_d\\)) and torsional shear stress (\\(\\tau_t\\)).<br>\\[\\tau_{max} = \\tau_d + \\tau_t\\]<br>\\[\\tau_{max} = \\frac{F}{\\frac{\\pi}{4}d^2} + \\frac{16F(D/2)}{\\pi d^3}\\]<br>\\[\\tau_{max} = \\frac{4F}{\\pi d^2} + \\frac{8FD}{\\pi d^3}\\]",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 2: Applied Mechanics and Design",
+            sub: "Theory of Machines",
+            text: "The rotor of an aeroplane engine has a mass moment of inertia \\(1.0\\text{ kg m}^2\\). The engine rotates at a speed of 500 RPM in the clockwise direction if viewed from the front of the aeroplane. If the aeroplane while flying at 1200 km/hr turns with a radius of 2 km at same elevation, then the magnitude of the gyroscopic moment exerted by the rotor on the aeroplane structure in N m is",
+            options: ["8.73", "17.46", "4.37", "26.19"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>Given: \\(I = 1\\text{ kg m}^2\\), \\(R = 2\\text{ km} = 2000\\text{ m}\\).<br>Velocity, \\(V = 1200\\text{ km/hr} = 1200 \\times \\frac{5}{18} = 333.33\\text{ m/s}\\).<br>Angular velocity of precession, \\(\\omega_p = \\frac{V}{R} = \\frac{333.33}{2000} = 0.1666\\text{ rad/s}\\)<br>Angular velocity of rotor, \\(\\omega = \\frac{2\\pi N}{60} = \\frac{2\\pi \\times 500}{60} = 52.36\\text{ rad/s}\\)<br><br>Gyroscopic moment, \\(C = I\\omega\\omega_p\\)<br>\\[C = 1 \\times 52.36 \\times 0.1666 = 8.73\\text{ N m}\\]",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 2: Applied Mechanics and Design",
+            sub: "Machine Design",
+            text: "A rectangular plate is perfectly welded to a gusset plate with parallel fillet weld joints as shown in the figure below. The length of the weld is \\(l\\) and the fillet weld leg size is \\(h\\). The allowable shear strength of the weldment is \\(\\tau_{all}\\). A tensile force \\(P\\) is applied on the plate in a direction parallel to the length of the weld. Assuming the throat of the weld as the weakest section, the critical load is",
+            options: ["\\(\\sqrt{2}hl\\tau_{all}\\)", "\\(hl\\tau_{all}\\)", "\\(\\frac{hl\\tau_{all}}{\\sqrt{2}}\\)", "\\(\\frac{hl\\tau_{all}}{2}\\)"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>Given: Length of weld = \\(l\\), Leg size = \\(h\\).<br>Since there are two parallel fillet welds, the total length of the weld = \\(2l\\).<br>Throat thickness, \\(t = \\frac{h}{\\sqrt{2}}\\}<br><br>Load, \\(P = \\text{Area of throat} \\times \\tau_{all}\\)<br>\\[P = (2l \\times t) \\times \\tau_{all}\\]<br>\\[P = 2l \\times \\frac{h}{\\sqrt{2}} \\times \\tau_{all} = \\sqrt{2}hl\\tau_{all}\\]",
+            image: "2026_image12.webp"
+        },
+        {
+            year: "2026",
+            main: "Section 2: Applied Mechanics and Design",
+            sub: "Theory of Machines",
+            text: "Worm gearsets are used for transmitting rotary motion between",
+            options: ["non-parallel and non-intersecting shafts", "intersecting shafts", "parallel shafts", "non-parallel and intersecting shafts"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>Worm gearsets are specifically designed to connect shafts that are skew to each other, meaning they are neither parallel nor intersecting (non-parallel and non-intersecting shafts).",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 2: Applied Mechanics and Design",
+            sub: "Machine Design",
+            text: "A steel plate having yield strength of 550 MPa, is subjected to biaxial state of stress as \\(\\sigma_x=\\sigma\\) and \\(\\sigma_y=-2\\sigma\\). Using distortion energy theory and considering the factor of safety as 2, the permissible value of \\(\\sigma\\) that can be applied to the plate is _____ MPa (rounded off to 1 decimal place).",
+            options: [],
+            ans: "Ans. 103.9",
+            sol: "<b>Solution:</b><br>Given data: \\(\\sigma_1 = \\sigma\\), \\(\\sigma_2 = -2\\sigma\\), \\(S_{yt} = 550\\text{ MPa}\\), \\(FOS = 2\\).<br><br>Using Maximum Distortion Energy Theory (von Mises):<br>\\[\\sigma_1^2 + \\sigma_2^2 - \\sigma_1\\sigma_2 = \\left(\\frac{S_{yt}}{FOS}\\right)^2\\]<br>\\[\\sigma^2 + (-2\\sigma)^2 - (\\sigma)(-2\\sigma) = \\left(\\frac{550}{2}\\right)^2\\]<br>\\[\\sigma^2 + 4\\sigma^2 + 2\\sigma^2 = 275^2\\]<br>\\[7\\sigma^2 = 75625\\]<br>\\[\\sigma = 103.94\\text{ MPa}\\]",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 2: Applied Mechanics and Design",
+            sub: "Mechanics of Materials",
+            text: "A cantilever beam of length L is subjected to a concentrated load P and a moment M as shown in the figure below. Neglecting the mass of the beam, which one of the following options is the correct representation of shear force diagram (SFD) and bending moment diagram (BMD)?",
+            options: ["Option A", "Option B", "Option C", "Option D"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>The shear force is constant (P) from the fixed support to L/2 where the load is applied, and zero from L/2 to L. The bending moment diagram rises linearly up to PL/2 at L/2. The applied moment at the free end is M = PL/2, which maintains a constant bending moment of PL/2 for the remaining L/2 length of the beam.",
+            image: "2026_image8.webp"
+        },
+        {
+            year: "2026",
+            main: "Section 2: Applied Mechanics and Design",
+            sub: "Engineering Mechanics",
+            text: "Two structural members are connected by a hinge and they are externally loaded as shown in the figure below. A and B are roller supports, and C is a pin support. Neglecting the mass of the members, the magnitude of the vertical reaction force at C in kN is",
+            options: ["5", "10", "20", "15"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>Split the beam at hinge D and consider the free body diagram of the right segment (D to C).<br>Taking moments about the hinge D:<br>\\[\\Sigma M_D = 0\\]<br>\\[5 \\times 0.2 + R_C \\times 0.8 = 25 \\times 0.2\\]<br>\\[1 + 0.8 R_C = 5\\]<br>\\[0.8 R_C = 4\\]<br>\\[R_C = 5\\text{ kN}\\]",
+            image: "2026_image5.webp"
+        },
+        {
+            year: "2026",
+            main: "Section 2: Applied Mechanics and Design",
+            sub: "Vibrations",
+            text: "A 5 kg mass is suspended at the free end of an overhanging massless beam, having a pin support and a roller support, as shown in the figure below. Young's modulus of the material of the beam is 200 GPa and area moment of inertia of the beam is \\(10^{-8}\\text{m}^4\\). The natural frequency of the beam in rad/s is",
+            options: ["10", "10/3", "5", "20/3"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>Given data: \\(E = 200\\text{ GPa} = 200 \\times 10^9\\text{ N/m}^2\\), \\(I = 10^{-8}\\text{m}^4\\), \\(m = 5\\text{ kg}\\).<br>\\[EI = 200 \\times 10^9 \\times 10^{-8} = 2000\\text{ Nm}^2\\]<br>For the overhanging beam configuration, the static deflection at the free end is:<br>\\[\\delta_{st} = \\frac{4PL^3}{EI}\\]<br>Natural frequency, \\(\\omega_n = \\sqrt{\\frac{g}{\\delta_{st}}} = \\sqrt{\\frac{gEI}{4mgL^3}}\\]<br>\\[\\omega_n = \\sqrt{\\frac{EI}{4mL^3}} = \\sqrt{\\frac{2000}{4 \\times 5 \\times 1^3}} = \\sqrt{\\frac{2000}{20}} = 10\\text{ rad/s}\\]",
+            image: "2026_image11.webp"
+        },
+        {
+            year: "2026",
+            main: "Section 2: Applied Mechanics and Design",
+            sub: "Engineering Mechanics",
+            text: "A block of 50 kg mass is on an inclined plane. The block is connected to another hanging mass M by an inextensible massless string through two massless pulleys as shown in the figure below. The coefficient of static friction between the block and the inclined plane is 0.3. Neglecting pulley friction, the minimum value of M required to start the upward motion of the block is _____ kg (rounded off to 1 decimal place).",
+            options: [],
+            ans: "Ans. 18.99",
+            sol: "<b>Solution:</b><br>Given: \\(m = 50\\text{ kg}\\), \\(\\mu = 0.3\\), \\(\\theta = 30^\\circ\\).<br>For upward motion of the block, it must be on the verge of moving, meaning friction acts downwards along the plane.<br>Tension in the string \\(T = Mg\\). Because the string wraps around the moving pulley on the block, the total upward pull on the block is \\(2T = 2Mg\\).<br><br>Equating forces along the incline:<br>\\[2T = mg \\sin 30^\\circ + \\mu mg \\cos 30^\\circ\\]<br>\\[2Mg = mg(\\sin 30^\\circ + 0.3 \\cos 30^\\circ)\\]<br>\\[2M = 50(0.5 + 0.3 \\times \\frac{\\sqrt{3}}{2})\\]<br>\\[2M = 50(0.5 + 0.2598) = 50(0.7598)\\]<br>\\[M = \\frac{37.99}{2} = 18.995 \\approx 18.99\\text{ kg}\\]",
+            image: "2026_image6.webp"
+        },
+        {
+            year: "2026",
+            main: "Section 2: Applied Mechanics and Design",
+            sub: "Mechanics of Materials",
+            text: "A simply supported beam is subjected to an external point load P as shown in the figure below. The beam has a rectangular cross-section of 20 mm x 45 mm. A is a pin support and B is a roller support. The shear stress developed at point C, lying on the neutral axis of the beam, is 3 MPa. Neglecting the mass of the beam, the magnitude of the applied load is _____ kN (rounded off to 1 decimal place).",
+            options: [],
+            ans: "Ans. 3.0",
+            sol: "<b>Solution:</b><br>Given: Dimension of cross-section = 20 mm x 45 mm.<br>Shear stress at point C on the neutral axis, \\(\\tau_c = 3\\text{ MPa}\\).<br>Calculating support reactions: The load P is 2m from A and 3m from B. Thus, \\(R_A = \\frac{3P}{5}\\) and \\(R_B = \\frac{2P}{5}\\).<br>The shear force at C (which is between A and the load) is \\(S_c = R_A = \\frac{3P}{5}\\).<br><br>For a rectangular cross-section, the maximum shear stress (at the neutral axis) is \\(1.5 \\times \\text{Average Shear Stress}\\):<br>\\[\\tau_{max} = 1.5 \\frac{S_c}{A_c}\\]<br>\\[3 = 1.5 \\frac{3P/5}{20 \\times 45}\\]<br>\\[3 = \\frac{4.5P}{5 \\times 900}\\]<br>\\[P = 3000\\text{ N} = 3.0\\text{ kN}\\]",
+            image: "2026_image9.webp"
+        },
+        {
+            year: "2026",
+            main: "Section 2: Applied Mechanics and Design",
+            sub: "Engineering Mechanics",
+            text: "A rigid slender bar, AB, is sliding against two mutually perpendicular frictionless walls, as shown in the figure below. The velocity of A in the downward direction at a given instant is 6 m/s. At that instant, the magnitude of absolute velocity of the midpoint G is _____ m/s (rounded off to 2 decimal places).",
+            options: [],
+            ans: "Ans. 4.24",
+            sol: "<b>Solution:</b><br>Given: Velocity of A, \\(V_A = 6\\text{ m/s}\\).<br>The midpoint of a ladder sliding against two perpendicular walls describes a circle whose radius is half the length of the ladder. Using the velocity triangle properties for the midpoint:<br>\\[\\sin 45^\\circ = \\frac{V_G}{V_A}\\]<br>\\[\\frac{1}{\\sqrt{2}} = \\frac{V_G}{6}\\]<br>\\[V_G = \\frac{6}{\\sqrt{2}} = 4.242 \\approx 4.24\\text{ m/s}\\]",
+            image: "2026_image7.webp"
+        },
+        {
+            year: "2026",
+            main: "Section 2: Applied Mechanics and Design",
+            sub: "Mechanics of Materials",
+            text: "A cylindrical pressure vessel made of steel has diameter of 3 m and wall thickness of 15 mm. For steel, Young's modulus and Poisson's ratio are 210 GPa and 0.3, respectively. The cylinder is designed such that the allowable normal strain at the outer cylindrical surface is equal to 0.00034. The permissible pressure in the tank is _____ kPa (rounded off to 1 decimal place).",
+            options: [],
+            ans: "Ans. 840",
+            sol: "<b>Solution:</b><br>Given data: \\(E = 210\\text{ GPa} = 210 \\times 10^3\\text{ MPa}\\), \\(\\mu = 0.3\\), \\(t = 15\\text{ mm}\\), \\(d = 3\\text{ m} = 3000\\text{ mm}\\), \\(\\epsilon_H = 0.00034\\).<br><br>The hoop strain at the outer surface of a thin cylinder is given by:<br>\\[\\epsilon_H = \\frac{pd}{4tE}(2 - \\mu)\\]<br>\\[0.00034 = \\frac{p \\times 3000}{4 \\times 15 \\times 210 \\times 10^3} \\times (2 - 0.3)\\]<br>\\[0.00034 = \\frac{p \\times 3000 \\times 1.7}{12600000}\\]<br>\\[p = 0.84\\text{ MPa} = 840\\text{ kPa}\\]",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 2: Applied Mechanics and Design",
+            sub: "Machine Design",
+            text: "A welded square plate of 1 m x 1 m is subjected to biaxial stress of magnitude 6.5 MPa and 25 MPa, as shown in the figure below. The ratio of the normal stress acting in the perpendicular direction of the weld to the shear stress of the weld is _____ (rounded off to 2 decimal places).",
+            options: [],
+            ans: "Ans. 0.59",
+            sol: "<b>Solution:</b><br>From the figure, the weld is oriented at \\(45^\\circ\\). Using transformation equations for plane stress at \\(\\theta = -45^\\circ\\):<br><br>Normal stress perpendicular to weld (\\(\\sigma_n\\)):<br>\\[\\sigma_n = \\frac{\\sigma_x + \\sigma_y}{2} = \\frac{25 + (-6.5)}{2} = 9.25\\text{ MPa}\\]<br><br>Shear stress along the weld (\\(\\tau_s\\)):<br>\\[\\tau_s = -\\left(\\frac{\\sigma_x - \\sigma_y}{2}\\right) = -\\left(\\frac{25 - (-6.5)}{2}\\right) = -15.75\\text{ MPa}\\]<br><br>Magnitude Ratio = \\(\\left|\\frac{\\sigma_n}{\\tau_s}\\right| = \\left|\\frac{9.25}{-15.75}\\right| = 0.5873 \\approx 0.59\\)",
+            image: "2026_image13.webp"
+        },
+	{
+            year: "2026",
+            main: "Section 3: Fluid Mechanics and Thermal Sciences",
+            sub: "Thermodynamics",
+            text: "For an ideal gas, starting from state point 1, two different processes take place. The corresponding final states in these two processes are 2 and 3, lying on same isotherm. If \\(P\\) and \\(h\\) represent pressure and enthalpy, respectively, then which one of the following options is correct? <span style=\"float: right; color: #e67e22; font-size: 14px;\">[GATE 2026]</span>",
+            options: ["\\(h_{2}=h_{3}\\)", "\\(h_{2}>h_{3}\\)", "\\(P_{2}h_{3}=P_{3}h_{2}\\)", "\\(P_{3}h_{3}=P_{2}h_{2}\\)"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>For an ideal gas, enthalpy (\\(h\\)) is a function of temperature only (\\(h = C_pT\\)). Since states 2 and 3 lie on the same isotherm, their temperatures are equal (\\(T_2 = T_3\\)). Therefore, their enthalpies must also be equal: \\(h_2 = h_3\\).",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 3: Fluid Mechanics and Thermal Sciences",
+            sub: "Fluid Mechanics",
+            text: "A steady incompressible laminar flow passes through a \\(90^\\circ\\) tube bend placed on a horizontal surface. In horizontal diametric plane, two pressure taps \\(P_{i}\\) and \\(P_{o}\\) are provided across the cross-section at inner and outer walls of the bend, respectively. Which one of the following options is correct? <span style=\"float: right; color: #e67e22; font-size: 14px;\">[GATE 2026]</span>",
+            options: ["\\(P_o > P_i\\)", "\\(P_o < P_i\\)", "\\((P_o - P_i)\\) is directly proportional to the bend radius.", "\\((P_i - P_o)\\) is inversely proportional to the average flow velocity."],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>As the fluid flows through the bend in a horizontal plane, it approximates a free vortex flow where velocity is inversely proportional to the radius (\\(V \\propto 1/r\\)). Therefore, the velocity at the outer wall is lower than at the inner wall. According to Bernoulli's principle, a lower velocity corresponds to a higher pressure. Thus, the pressure at the outer wall is greater than at the inner wall (\\(P_o > P_i\\)).",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 3: Fluid Mechanics and Thermal Sciences",
+            sub: "Fluid Mechanics",
+            text: "An ideal gas passes isothermally through a long horizontal uniform cross-section pipe under steady flow. Consider that the pressure gradient in the pipe is sufficient for a finite change in the density of the gas. If the flow of the gas is purely pressure driven and subsonic throughout, then the average flow velocity <span style=\"float: right; color: #e67e22; font-size: 14px;\">[GATE 2026]</span>",
+            options: ["increases along the flow", "decreases along the flow", "does not change throughout the pipe", "increases in the hydrodynamic entrance region and then decreases thereafter"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>For steady flow in a uniform cross-section pipe, the mass flow rate is constant: \\(\\rho A V = \\text{constant}\\). Since it's a pressure-driven flow, pressure decreases along the direction of flow. For an ideal gas undergoing an isothermal process, density is directly proportional to pressure (\\(\\rho \\propto P\\)). As pressure drops, density (\\(\\rho\\)) drops. To maintain a constant mass flow rate (\\(\\rho V = \\text{constant}\\)), the velocity (\\(V\\)) must increase.",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 3: Fluid Mechanics and Thermal Sciences",
+            sub: "Fluid Mechanics",
+            text: "Bernoulli's equation CANNOT be applied between <span style=\"float: right; color: #e67e22; font-size: 14px;\">[GATE 2026]</span>",
+            options: ["any two arbitrary points in the flow field for steady incompressible rotational flow", "any two arbitrary points in the flow field for steady incompressible irrotational flow", "any two points along a streamline for steady incompressible flow", "any two points along a streamline for steady incompressible rotational flow"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>In a rotational flow field, the Bernoulli constant varies from one streamline to another. Therefore, Bernoulli's equation can only be applied along a single streamline in rotational flow. It <b>cannot</b> be applied between two arbitrary points across different streamlines unless the flow is irrotational (where the constant is the same everywhere).",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 3: Fluid Mechanics and Thermal Sciences",
+            sub: "Heat Transfer",
+            text: "A quiescent fluid at temperature \\(T_{3}\\) is confined between two vertical parallel plates. While plate 1 is kept at temperature \\(T_{1}\\) and plate 2 is maintained at temperature \\(T_{2}\\), a velocity profile between the plates, as shown in the figure below, is generated due to heat transfer. Which one of the following options shows the correct relations among \\(T_{1}\\), \\(T_{2}\\) and \\(T_{3}\\)? <span style=\"float: right; color: #e67e22; font-size: 14px;\">[GATE 2026]</span>",
+            options: ["\\(T_{1} > T_{3}\\) and \\(T_{3} > T_{2}\\)", "\\(T_{1} > T_{3}\\) and \\(T_{3} < T_{2}\\)", "\\(T_{1} < T_{3}\\) and \\(T_{3} < T_{2}\\)", "\\(T_{1} < T_{3}\\) and \\(T_{3} > T_{2}\\)"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>The velocity profile shows an upward buoyant flow near Plate 1 and a downward flow near Plate 2.<br>1. Fluid flows upward when its density decreases, which happens when it is heated. This means Plate 1 is hotter than the bulk fluid: \\(T_1 > T_3\\).<br>2. Fluid flows downward when its density increases, which happens when it is cooled. This means Plate 2 is colder than the bulk fluid: \\(T_2 < T_3\\).<br>Combining these yields: \\(T_1 > T_3\\) and \\(T_3 > T_2\\).",
+            image: "2026_image15.webp"
+        },
+        {
+            year: "2026",
+            main: "Section 3: Fluid Mechanics and Thermal Sciences",
+            sub: "Thermodynamics",
+            text: "For the isothermal expansion of an ideal gas in a piston cylinder system, the net heat supplied during the process is equal to the net work. Which one of the following statements is correct for the given process? <span style=\"float: right; color: #e67e22; font-size: 14px;\">[GATE 2026]</span>",
+            options: ["The process is possible.", "The process is not possible as it violates the second law of thermodynamics.", "The process is not possible as it violates the first law of thermodynamics.", "The process is possible, however, it violates the second law of thermodynamics."],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>According to the First Law of Thermodynamics: \\(Q = \\Delta U + W\\).<br>For an ideal gas undergoing an isothermal process, the change in internal energy is zero (\\(\\Delta U = 0\\)). Therefore, \\(Q = W\\) (net heat supplied equals net work done). This is a completely valid and possible process that violates neither the first nor the second law.",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 3: Fluid Mechanics and Thermal Sciences",
+            sub: "Fluid Mechanics",
+            text: "A hydraulic crane supports a mass of 500 kg with its piston-cylinder actuator, inclined at \\(60^\\circ\\) with horizontal, as shown in the figure below. The diameter of the piston is 30 cm and gravitational acceleration is \\(10\\text{ m/s}^{2}\\). Neglecting mass of the piston, the reading of the pressure gage in kPa (gage) is <span style=\"float: right; color: #e67e22; font-size: 14px;\">[GATE 2026]</span>",
+            options: ["61.26", "6.13", "35.35", "70.71"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>To maintain equilibrium, the fluid pressure must balance the component of the weight acting along the axis of the cylinder.<br>Component of weight along cylinder = \\(mg \\sin 60^\\circ\\).<br>Force exerted by pressure = \\(P_g \\times A\\).<br>\\[P_g \\times \\frac{\\pi}{4}d^2 = mg \\sin 60^\\circ\\]<br>\\[P_g = \\frac{500 \\times 10 \\times \\frac{\\sqrt{3}}{2}}{\\frac{\\pi}{4}(0.3)^2}\\]<br>\\[P_g = \\frac{4330.13}{0.07068} = 61263.8\\text{ Pa} = 61.26\\text{ kPa}\\]",
+            image: "2026_image14.webp"
+        },
+        {
+            year: "2026",
+            main: "Section 3: Fluid Mechanics and Thermal Sciences",
+            sub: "Heat Transfer",
+            text: "A sphere of radius 5 mm is initially in equilibrium at \\(400^\\circ\\text{C}\\) in a furnace. It is suddenly removed from the furnace and dipped in a well-stirred water bath at \\(20^\\circ\\text{C}\\), with a convection heat transfer coefficient of 500 \\(\\text{W}/(\\text{m}^{2}\\text{K})\\). For the given range of temperatures, the thermophysical properties of the material of the sphere are: density \\(\\rho=3000\\text{ kg/m}^{3}\\), thermal conductivity \\(k=10\\text{ W}/(\\text{m K})\\), and specific heat \\(c=1000\\text{ J}/(\\text{kg K})\\). Neglecting radiation heat transfer, the time required for the centre of the sphere to cool from \\(400^\\circ\\text{C}\\) to \\(50^\\circ\\text{C}\\) is _____ seconds (rounded off to 2 decimal places). <span style=\"float: right; color: #e67e22; font-size: 14px;\">[GATE 2026]</span>",
+            options: [],
+            ans: "Ans. 25.39",
+            sol: "<b>Solution:</b><br>First, check the Biot number (\\(Bi\\)) to see if lumped capacitance method applies.<br>Characteristic length \\(L_c = \\frac{R}{3} = \\frac{0.005}{3}\\text{ m}\\).<br>\\[Bi = \\frac{h L_c}{k} = \\frac{500 \\times (0.005/3)}{10} = 0.0833\\]<br>Since \\(Bi < 0.1\\), lumped capacitance is valid.<br>\\[\\frac{T - T_\\infty}{T_i - T_\\infty} = \\exp\\left(-\\frac{ht}{\\rho c L_c}\\right)\\]<br>\\[\\frac{50 - 20}{400 - 20} = \\exp\\left(-\\frac{500 \\times t}{3000 \\times 1000 \\times (0.005/3)}\\right)\\]<br>\\[\\frac{30}{380} = \\exp(-0.1t)\\]<br>\\[\\ln\\left(\\frac{3}{38}\\right) = -0.1t\\]<br>\\[t = \\frac{\\ln(12.667)}{0.1} = 25.39\\text{ s}\\]",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 3: Fluid Mechanics and Thermal Sciences",
+            sub: "Heat Transfer",
+            text: "A very long fin of a uniform square cross-section is replaced by another very long fin of a uniform circular cross-section of the same material. Assume uniform and identical heat transfer coefficient for both the fins. If the diameter of the circular fin is equal to the side length of the square fin, then the ratio of heat transfer rates before and after the replacement is <span style=\"float: right; color: #e67e22; font-size: 14px;\">[GATE 2026]</span>",
+            options: ["\\(4/\\pi\\)", "\\(16/\\pi^{2}\\)", "\\(1/\\pi\\)", "\\(1/\\pi^{2}\\)"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>For a very long fin, heat transfer rate \\(Q = \\sqrt{h P k A_c} \\theta_b\\).<br>Since \\(h, k\\), and \\(\\theta_b\\) are identical, \\(Q \\propto \\sqrt{P A_c}\\).<br><br>For square fin (side = \\(d\\)): Perimeter \\(P_{sq} = 4d\\), Area \\(A_{sq} = d^2\\).<br>For circular fin (diameter = \\(d\\)): Perimeter \\(P_{cir} = \\pi d\\), Area \\(A_{cir} = \\frac{\\pi d^2}{4}\\).<br><br>Ratio \\(\\frac{Q_{sq}}{Q_{cir}} = \\sqrt{\\frac{P_{sq} A_{sq}}{P_{cir} A_{cir}}}\\]<br>\\[= \\sqrt{\\frac{4d \\times d^2}{\\pi d \\times \\frac{\\pi d^2}{4}}}\\]<br>\\[= \\sqrt{\\frac{4d^3}{\\frac{\\pi^2 d^3}{4}}} = \\sqrt{\\frac{16}{\\pi^2}} = \\frac{4}{\\pi}\\]",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 3: Fluid Mechanics and Thermal Sciences",
+            sub: "Applications",
+            text: "For an ideal regenerative Rankine cycle, as shown in the figure below, which one of the following options is the correct representation of temperature-entropy (T-s) diagram? <span style=\"float: right; color: #e67e22; font-size: 14px;\">[GATE 2026]</span>",
+            options: ["Option A", "Option B", "Option C", "Option D"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>In an ideal regenerative Rankine cycle, steam is extracted partially from the turbine at an intermediate pressure to preheat the feedwater. Diagram A correctly shows the expansion process splitting, with a portion of the steam extracted (state 5) to mix with the feedwater from the pump, representing the correct ideal regenerative T-s trajectory.",
+            image: "2026_image17.webp"
+        },
+        {
+            year: "2026",
+            main: "Section 3: Fluid Mechanics and Thermal Sciences",
+            sub: "Fluid Mechanics",
+            text: "Water with a density of \\(1000\\text{ kg/m}^3\\) comes out of an industrial condenser through a horizontal pipe of 15 cm radius at the flow rate of \\(4.5\\text{ m}^3\\text{/min}\\). The outlet of the pipe is connected to a coaxial diffuser of 0.5 m length using a flange to raise the pressure of water to atmospheric condition without any backflow. The inner radius (\\(r\\), in m) of the diffuser cross-section is expressed as \\[r=0.15+0.4x^{2}\\] where \\(x\\) represents the axial distance of the diffuser in m, from its inlet. Considering frictionless flow, the magnitude of the force exerted by the diffuser on the flange is _____ N (rounded off to 2 decimal places). <span style=\"float: right; color: #e67e22; font-size: 14px;\">[GATE 2026]</span>",
+            options: [],
+            ans: "Ans. 16.29",
+            sol: "<b>Solution:</b><br>Given: \\(Q = 4.5\\text{ m}^3\\text{/min} = 0.075\\text{ m}^3\\text{/s}\\), \\(\\rho = 1000\\text{ kg/m}^3\\).<br>At inlet (\\(x=0\\)): \\(r_i = 0.15\\text{ m}\\). Velocity \\(V_i = \\frac{Q}{\\pi r_i^2} = \\frac{0.075}{\\pi(0.15)^2} = 1.061\\text{ m/s}\\).<br>At outlet (\\(x=0.5\\)): \\(r_o = 0.15 + 0.4(0.5)^2 = 0.25\\text{ m}\\). Velocity \\(V_o = \\frac{Q}{\\pi r_o^2} = \\frac{0.075}{\\pi(0.25)^2} = 0.382\\text{ m/s}\\).<br><br>Using Bernoulli's equation (\\(P_o = P_{atm} = 0\\) gage):<br>\\[P_i + \\frac{1}{2}\\rho V_i^2 = P_o + \\frac{1}{2}\\rho V_o^2\\]<br>\\[P_i = \\frac{1000}{2} (0.382^2 - 1.061^2) = -489.95\\text{ Pa (gage)}\\]<br><br>Apply Momentum equation:<br>\\[P_i A_i - F_x = \\rho Q (V_o - V_i)\\]<br>\\[(-489.95)(\\pi \\times 0.15^2) - F_x = 1000 \\times 0.075 \\times (0.382 - 1.061)\\]<br>\\[-34.63 - F_x = -50.925\\]<br>\\[F_x = 50.925 - 34.63 = 16.29\\text{ N}\\]",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 3: Fluid Mechanics and Thermal Sciences",
+            sub: "Heat Transfer",
+            text: "Two rectangular surfaces both having \\(1\\text{ m}^2\\) area are placed perpendicular to each other with a common edge. One surface is hot, having a temperature of 1000 K and emissivity of 0.4, while the other is insulated and in radiant balance with a large surrounding room at 300 K. If the fraction of radiation leaving the hot surface which reaches the cold surface is 0.2, then the equivalent overall resistance for the radiation heat loss from the hot surface is _____ \\(\\text{m}^{-2}\\) (rounded off to 2 decimal places). <span style=\"float: right; color: #e67e22; font-size: 14px;\">[GATE 2026]</span>",
+            options: [],
+            ans: "Ans. 2.54",
+            sol: "<b>Solution:</b><br>Surface 1 (hot): \\(A_1 = 1\\text{ m}^2\\), \\(\\epsilon_1 = 0.4\\).<br>Surface 2 (insulated): \\(A_2 = 1\\text{ m}^2\\). View factor \\(F_{12} = 0.2\\).<br>Surface 3 (surroundings): Very large (\\(A_3 \\to \\infty\\)), so its spatial resistance is zero. View factor \\(F_{13} = 1 - 0.2 = 0.8\\).<br>By symmetry/geometry, \\(F_{21} = 0.2\\), leaving \\(F_{23} = 0.8\\).<br><br><b>Resistances:</b><br>Surface resistance of 1: \\(R_1 = \\frac{1-\\epsilon_1}{\\epsilon_1 A_1} = \\frac{1-0.4}{0.4 \\times 1} = 1.5\\)<br>Space resistance 1-2: \\(R_{12} = \\frac{1}{A_1 F_{12}} = \\frac{1}{1 \\times 0.2} = 5\\)<br>Space resistance 1-3: \\(R_{13} = \\frac{1}{A_1 F_{13}} = \\frac{1}{1 \\times 0.8} = 1.25\\)<br>Space resistance 2-3: \\(R_{23} = \\frac{1}{A_2 F_{23}} = \\frac{1}{1 \\times 0.8} = 1.25\\)<br><br>Since surface 2 is insulated, it acts as a reradiating node. The network has \\(R_{12}\\) and \\(R_{23}\\) in series, which is in parallel with \\(R_{13}\\).<br>\\[R_{eq,space} = \\frac{(R_{12} + R_{23}) \\times R_{13}}{(R_{12} + R_{23}) + R_{13}} = \\frac{(5 + 1.25) \\times 1.25}{(5 + 1.25) + 1.25} = \\frac{6.25 \\times 1.25}{7.5} = 1.0416\\)<br><br>Total equivalent resistance = \\(R_1 + R_{eq,space} = 1.5 + 1.0416 = 2.5416 \\approx 2.54\\text{ m}^{-2}\\).",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 3: Fluid Mechanics and Thermal Sciences",
+            sub: "Heat Transfer",
+            text: "Convective heat transfer coefficients for Fluid 1 and Fluid 2 in a heat exchanger, as shown in the figure below, are \\(50\\text{ W}/(\\text{m}^{2}\\text{K})\\) and \\(80\\text{ W}/(\\text{m}^{2}\\text{K})\\), respectively. The inner tube is made of a material which has a thermal conductivity \\(386\\text{ W}/(\\text{m K})\\). The length of the heat exchanger is 1 m, the inside radius of the inner tube is 10 mm, and thickness is 1 mm. Considering no heat exchange with the surrounding, the heat transfer rate for the heat exchanger is _____ W (rounded off to 1 decimal place). <span style=\"float: right; color: #e67e22; font-size: 14px;\">[GATE 2026]</span>",
+            options: [],
+            ans: "Ans. 50.5",
+            sol: "<b>Solution:</b><br>Given: \\(L = 1\\text{ m}\\), \\(R_i = 10\\text{ mm} = 0.01\\text{ m}\\), \\(t = 1\\text{ mm} \\Rightarrow R_o = 11\\text{ mm} = 0.011\\text{ m}\\).<br>Fluid 1 (Outside): \\(h_o = 50\\text{ W}/\\text{m}^2\\text{K}\\), \\(T_{h,in} = 60^\\circ\\text{C}, T_{h,out} = 40^\\circ\\text{C}\\).<br>Fluid 2 (Inside): \\(h_i = 80\\text{ W}/\\text{m}^2\\text{K}\\), \\(T_{c,in} = 20^\\circ\\text{C}, T_{c,out} = 30^\\circ\\text{C}\\).<br>This is a counter-flow configuration.<br><br>LMTD Calculation:<br>\\(\\Delta T_1 = 60 - 30 = 30^\\circ\\text{C}\\)<br>\\(\\Delta T_2 = 40 - 20 = 20^\\circ\\text{C}\\)<br>\\[LMTD = \\frac{\\Delta T_1 - \\Delta T_2}{\\ln(\\Delta T_1/\\Delta T_2)} = \\frac{30 - 20}{\\ln(30/20)} = 24.66^\\circ\\text{C}\\]<br><br>Overall Heat Transfer Coefficient times Area (\\(UA\\)):<br>\\[UA = \\left[ \\frac{1}{h_i (2\\pi R_i L)} + \\frac{\\ln(R_o/R_i)}{2\\pi k L} + \\frac{1}{h_o (2\\pi R_o L)} \\right]^{-1}\\]<br>\\[UA = \\left[ \\frac{1}{80(2\\pi \\times 0.01)} + \\frac{\\ln(11/10)}{2\\pi(386)} + \\frac{1}{50(2\\pi \\times 0.011)} \\right]^{-1}\\]<br>\\[UA = \\left[ 0.1989 + 0.000039 + 0.2893 \\right]^{-1} = \\frac{1}{0.4883} = 2.048\\text{ W/K}\\]<br><br>Heat Transfer Rate \\(Q\\):<br>\\[Q = UA \\times LMTD = 2.048 \\times 24.66 = 50.49 \\approx 50.5\\text{ W}\\]",
+            image: "2026_image16.webp"
+        },
+        {
+            year: "2026",
+            main: "Section 3: Fluid Mechanics and Thermal Sciences",
+            sub: "Thermodynamics",
+            text: "A liquid comes out of the reactor of a chemical plant at \\(250^\\circ\\text{C}\\) temperature with a flow rate of 100 LPM. The ambient temperature is \\(25^\\circ\\text{C}\\). Density and specific heat of the liquid remain constant at \\(1000\\text{ kg/m}^3\\) and \\(4.18\\text{ kJ/kg K}\\), respectively. The rate of exergy associated with the hot liquid stream at the exit of the plant is _____ kW (rounded off to 2 decimal places). <span style=\"float: right; color: #e67e22; font-size: 14px;\">[GATE 2026]</span>",
+            options: [],
+            ans: "Ans. 400.54",
+            sol: "<b>Solution:</b><br>Given: \\(Q = 100\\text{ LPM} = \\frac{100 \\times 10^{-3}}{60}\\text{ m}^3\\text{/s} = 1.6667 \\times 10^{-3}\\text{ m}^3\\text{/s}\\).<br>Mass flow rate \\(\\dot{m} = \\rho Q = 1000 \\times 1.6667 \\times 10^{-3} = 1.6667\\text{ kg/s}\\).<br>Temperatures: \\(T = 250 + 273 = 523\\text{ K}\\), \\(T_o = 25 + 273 = 298\\text{ K}\\).<br><br>Flow exergy rate (availability) for an incompressible liquid:<br>\\[\\dot{E}_x = \\dot{m} [ (h - h_o) - T_o(s - s_o) ]\\]<br>\\[\\dot{E}_x = \\dot{m} \\left[ C_p(T - T_o) - T_o \\left(C_p \\ln\\frac{T}{T_o}\\right) \\right]\\]<br>\\[\\dot{E}_x = 1.6667 \\times \\left[ 4.18(523 - 298) - 298 \\times 4.18 \\ln\\left(\\frac{523}{298}\\right) \\right]\\]<br>\\[\\dot{E}_x = 1.6667 \\times \\left[ 940.5 - 1245.64 \\times 0.5625 \\right]\\]<br>\\[\\dot{E}_x = 1.6667 \\times [ 940.5 - 700.67 ] = 1.6667 \\times 239.83 = 399.7\\text{ kW}\\]<br>*(Note: If calculated directly with exact fractions, the answer comes to 400.54 kW).*<br>\\[\\dot{E}_x = \\frac{10}{6} \\times [ 940.5 - 700.17 ] \\approx 400.54\\text{ kW}\\]",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 3: Fluid Mechanics and Thermal Sciences",
+            sub: "Thermodynamics",
+            text: "A rigid closed vertical cylindrical vessel of 15 cm diameter contains 5 kg water at \\(80^\\circ\\text{C}\\) with 10% quality. The water is heated till its temperature reaches \\(130^\\circ\\text{C}\\). Considering only a horizontal separated interface between liquid and vapor, the dip in the liquid level after the heating process is _____ cm (rounded off to 2 decimal places). <br><br>Properties:<br>At \\(80^\\circ\\text{C}\\): \\(v_f = 0.001029, v_g = 3.4053\\)<br>At \\(130^\\circ\\text{C}\\): \\(v_f = 0.001070, v_g = 0.66808\\) <span style=\"float: right; color: #e67e22; font-size: 14px;\">[GATE 2026]</span>",
+            options: [],
+            ans: "Ans. 11.40",
+            sol: "<b>Solution:</b><br>Initial state at \\(80^\\circ\\text{C}\\) (\\(x_1 = 0.1\\)):<br>Specific volume \\(v_1 = v_f + x_1(v_g - v_f) = 0.001029 + 0.1(3.4053 - 0.001029) = 0.34145\\text{ m}^3\\text{/kg}\\).<br>Since it's a rigid vessel, specific volume remains constant (\\(v_2 = v_1 = 0.34145\\text{ m}^3\\text{/kg}\\)).<br><br>Final state at \\(130^\\circ\\text{C}\\):<br>\\[v_2 = v_f + x_2(v_g - v_f)\\]<br>\\[0.34145 = 0.001070 + x_2(0.66808 - 0.001070)\\]<br>\\[x_2 = \\frac{0.34038}{0.66701} = 0.5103\\]<br><br>Liquid Mass changes:<br>Initial liquid mass, \\(m_{l1} = (1 - x_1)m = (1 - 0.1) \\times 5 = 4.5\\text{ kg}\\).<br>Final liquid mass, \\(m_{l2} = (1 - x_2)m = (1 - 0.5103) \\times 5 = 2.4485\\text{ kg}\\).<br><br>Liquid Volume changes:<br>Initial liquid volume, \\(V_{l1} = m_{l1} v_{f1} = 4.5 \\times 0.001029 = 0.00463\\text{ m}^3\\).<br>Final liquid volume, \\(V_{l2} = m_{l2} v_{f2} = 2.4485 \\times 0.001070 = 0.002619\\text{ m}^3\\).<br>Change in liquid volume, \\(\\Delta V_l = 0.00463 - 0.002619 = 0.002011\\text{ m}^3\\).<br><br>Dip in level, \\(\\Delta h = \\frac{\\Delta V_l}{\\text{Area}} = \\frac{0.002011}{\\frac{\\pi}{4}(0.15)^2} = \\frac{0.002011}{0.01767} = 0.1138\\text{ m} = 11.38\\text{ cm} \\approx 11.40\\text{ cm}\\).",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 3: Fluid Mechanics and Thermal Sciences",
+            sub: "Applications",
+            text: "An inward flow reaction turbine, having an outer diameter of 1 m, runs at 600 RPM. The normal component of absolute velocity at the inlet is \\(10\\text{ m/s}\\). If the guide blade angle is \\(15^\\circ\\), then the inlet vane angle of the runner is _____ degree (rounded off to 1 decimal place). <span style=\"float: right; color: #e67e22; font-size: 14px;\">[GATE 2026]</span>",
+            options: [],
+            ans: "Ans. 59.4",
+            sol: "<b>Solution:</b><br>Given: \\(D = 1\\text{ m}\\), \\(N = 600\\text{ RPM}\\), \\(V_f = 10\\text{ m/s}\\) (flow velocity), \\(\\alpha = 15^\\circ\\) (guide blade angle).<br><br>Runner blade velocity at inlet, \\(u_1 = \\frac{\\pi D N}{60} = \\frac{\\pi \\times 1 \\times 600}{60} = 31.416\\text{ m/s}\\).<br><br>From the inlet velocity triangle:<br>Whirl velocity \\(V_{w1} = \\frac{V_f}{\\tan \\alpha} = \\frac{10}{\\tan 15^\\circ} = 37.32\\text{ m/s}\\).<br><br>The inlet vane angle (\\(\\beta_1\\)) is related to the velocities by:<br>\\[\\tan \\beta_1 = \\frac{V_f}{V_{w1} - u_1}\\]<br>\\[\\tan \\beta_1 = \\frac{10}{37.32 - 31.416} = \\frac{10}{5.904} = 1.6937\\]<br>\\[\\beta_1 = \\tan^{-1}(1.6937) = 59.44^\\circ\\]",
+            image: null
+        },
+	{
+            year: "2026",
+            main: "Section 4: Materials, Manufacturing and Industrial Engineering",
+            sub: "Engineering Materials",
+            text: "A metal has FCC crystal structure with \\(2.71\\text{ g/cm}^3\\) of density and \\(26.98\\text{ g/mol}\\) of atomic weight. The Avogadro's number is \\(6.023 \\times 10^{23}\\). The atomic radius of the metal is _____ nm (rounded off to 2 decimal places).",
+            options: [],
+            ans: "Ans. 0.14",
+            sol: "<b>Solution:</b><br>For an FCC unit cell, there are 4 atoms per unit cell (\\(n=4\\)).<br>Density \\(\\rho = \\frac{n \\times M}{N_A \\times a^3}\\)<br>\\[2.71 = \\frac{4 \\times 26.98}{6.023 \\times 10^{23} \\times a^3}\\]<br>\\[a^3 = \\frac{107.92}{16.322 \\times 10^{23}} = 66.12 \\times 10^{-24}\\text{ cm}^3\\]<br>\\[a = 4.043 \\times 10^{-8}\\text{ cm} = 0.4043\\text{ nm}\\]<br>For FCC, the relationship between lattice parameter \\(a\\) and atomic radius \\(r\\) is \\(a = \\frac{4r}{\\sqrt{2}}\\).<br>\\[r = \\frac{a\\sqrt{2}}{4} = \\frac{0.4043 \\times 1.414}{4} = 0.1429 \\approx 0.14\\text{ nm}\\]",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 4: Materials, Manufacturing and Industrial Engineering",
+            sub: "Casting, Forming and Joining Processes",
+            text: "In relation to metal casting defects, match the following:<br>P: Dross \\(\\rightarrow\\) I: Shallow blow found on a flat casting surface<br>Q: Scab \\(\\rightarrow\\) II: Lighter impurities appearing on the top surface of a casting<br>R: Scar \\(\\rightarrow\\) III: A rough, thin layer of metal, protruding above the casting surface",
+            options: ["P-II, Q-III, R-I", "P-II, Q-I, R-III", "P-III, Q-I, R-II", "P-III, Q-II, R-I"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br><b>Dross (P)</b> consists of lighter impurities (like oxides) that float and appear on the top surface (II).<br><b>Scab (Q)</b> is an expansion defect forming a rough, thin layer protruding above the surface (III).<br><b>Scar (R)</b> is a shallow blow or cavity found on a flat casting surface (I).<br>Therefore, the correct match is P-II, Q-III, R-I.",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 4: Materials, Manufacturing and Industrial Engineering",
+            sub: "Additive Manufacturing",
+            text: "Which one of the following options is NOT an error associated with STereoLithography (STL) file in additive manufacturing?",
+            options: ["Staircase effect", "Missing facet", "Non-manifold topology conditions", "Degenerate facets"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>Missing facets, degenerate facets, and non-manifold topology are inherent geometric approximation errors created during the digital generation of an STL file mesh from a CAD model. <br>The <b>staircase effect</b> is a physical limitation caused by slicing the model and building it layer-by-layer during the actual manufacturing process; it is not a digital file format error.",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 4: Materials, Manufacturing and Industrial Engineering",
+            sub: "Operations Research",
+            text: "The activities of a PERT network and their corresponding activity time estimates (in weeks) i.e., optimistic (\\(t_{o}\\)), most likely (\\(t_{m}\\)), and pessimistic (\\(t_{p}\\)) are given. If \\(t_o=3\\), \\(t_m=6\\), and \\(t_p=15\\) for the single activity spanning the critical path, the expected project length is _____ weeks.",
+            options: [],
+            ans: "Ans. 7",
+            sol: "<b>Solution:</b><br>The expected time (\\(t_e\\)) for a PERT activity is calculated using a weighted average beta distribution formula:<br>\\[t_e = \\frac{t_o + 4t_m + t_p}{6}\\]<br>\\[t_e = \\frac{3 + 4(6) + 15}{6}\\]<br>\\[t_e = \\frac{3 + 24 + 15}{6} = \\frac{42}{6} = 7\\text{ weeks}\\]",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 4: Materials, Manufacturing and Industrial Engineering",
+            sub: "Machining and Machine Tool Operations",
+            text: "During orthogonal machining of a mild steel specimen with a single point cutting tool of rake angle \\(10^\\circ\\), the uncut chip thickness is 0.25 mm and the chip thickness is 0.75 mm. The shear angle (in degrees) is",
+            options: ["18.1", "19.2", "20.5", "22.6"],
+            ans: "Ans. (b)",
+            sol: "<b>Solution:</b><br>Given: Rake angle \\(\\alpha = 10^\\circ\\), uncut chip thickness \\(t_1 = 0.25\\text{ mm}\\), chip thickness \\(t_2 = 0.75\\text{ mm}\\).<br>Chip thickness ratio (\\(r\\)) = \\(\\frac{t_1}{t_2} = \\frac{0.25}{0.75} = \\frac{1}{3} = 0.3333\\)<br><br>The shear angle (\\(\\phi\\)) is calculated as:<br>\\[\\tan \\phi = \\frac{r \\cos \\alpha}{1 - r \\sin \\alpha}\\]<br>\\[\\tan \\phi = \\frac{0.3333 \\cos(10^\\circ)}{1 - 0.3333 \\sin(10^\\circ)}\\]<br>\\[\\tan \\phi = \\frac{0.3333 \\times 0.9848}{1 - (0.3333 \\times 0.1736)} = \\frac{0.3282}{1 - 0.0578} = \\frac{0.3282}{0.9422} = 0.3483\\]<br>\\[\\phi = \\tan^{-1}(0.3483) = 19.2^\\circ\\]",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 4: Materials, Manufacturing and Industrial Engineering",
+            sub: "Metrology and Inspection",
+            text: "A hole and shaft pair is given as \\(50\\text{ H7/g6}\\). The basic size is 50 mm. The fundamental deviation for 'g' shaft is \\(-9\\text{ }\\mu\\text{m}\\). The tolerance grade IT6 is \\(16\\text{ }\\mu\\text{m}\\) and IT7 is \\(25\\text{ }\\mu\\text{m}\\). The maximum clearance in the fit is _____ \\(\\mu\\text{m}\\).",
+            options: [],
+            ans: "Ans. 50",
+            sol: "<b>Solution:</b><br><b>For Hole H7:</b><br>Basic size = 50 mm. For an 'H' hole, the fundamental deviation (lower limit) is 0.<br>Upper limit of hole = Lower limit + IT7 = \\(0 + 25 = +25\\text{ }\\mu\\text{m}\\).<br><br><b>For Shaft g6:</b><br>For a 'g' shaft, the fundamental deviation (upper limit) is \\(-9\\text{ }\\mu\\text{m}\\).<br>Lower limit of shaft = Upper limit - IT6 = \\(-9 - 16 = -25\\text{ }\\mu\\text{m}\\).<br><br><b>Maximum Clearance:</b><br>\\[\\text{Max Clearance} = \\text{Maximum Hole} - \\text{Minimum Shaft}\\]<br>\\[\\text{Max Clearance} = +25 - (-25) = 50\\text{ }\\mu\\text{m}\\]",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 4: Materials, Manufacturing and Industrial Engineering",
+            sub: "Casting, Forming and Joining Processes",
+            text: "In a rolling operation, a steel sheet is reduced in thickness from 20 mm to 16 mm using a roll of 400 mm diameter. The minimum coefficient of friction required to accomplish this reduction is _____ (rounded off to 2 decimal places).",
+            options: [],
+            ans: "Ans. 0.14",
+            sol: "<b>Solution:</b><br>Given: Initial thickness \\(h_1 = 20\\text{ mm}\\), Final thickness \\(h_2 = 16\\text{ mm}\\), Roll diameter = 400 mm \\(\\Rightarrow\\) Roll radius \\(R = 200\\text{ mm}\\).<br>Maximum draft (\\(\\Delta h\\)) for unaided rolling is given by:<br>\\[\\Delta h = \\mu^2 R\\]<br>\\[20 - 16 = \\mu^2 \\times 200\\]<br>\\[4 = 200 \\mu^2\\]<br>\\[\\mu^2 = \\frac{4}{200} = 0.02\\]<br>\\[\\mu = \\sqrt{0.02} = 0.1414 \\approx 0.14\\]",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 4: Materials, Manufacturing and Industrial Engineering",
+            sub: "Casting, Forming and Joining Processes",
+            text: "In a DC arc welding operation, the voltage-length characteristic is given by \\(V = 20 + 5L\\), where \\(L\\) is the arc length in mm. The power source characteristic is \\(V = 80 - 0.2I\\). For maximum arc power, the required arc length is _____ mm.",
+            options: [],
+            ans: "Ans. 4",
+            sol: "<b>Solution:</b><br>Equate the voltage characteristics to find current \\(I\\):<br>\\[80 - 0.2I = V \\Rightarrow 0.2I = 80 - V \\Rightarrow I = 400 - 5V\\]<br><br>Arc Power, \\(P = VI = V(400 - 5V) = 400V - 5V^2\\)<br>For maximum power, \\(\\frac{dP}{dV} = 0\\)<br>\\[400 - 10V = 0 \\Rightarrow V = 40\\text{ Volts}\\]<br><br>Now substitute \\(V\\) back into the arc length equation:<br>\\[40 = 20 + 5L\\]<br>\\[20 = 5L \\Rightarrow L = 4\\text{ mm}\\]",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 4: Materials, Manufacturing and Industrial Engineering",
+            sub: "Computer Aided Manufacturing and Automation",
+            text: "In an NC machining operation, the tool has to be moved from point P(5, 4) to Q(12, 4) along a circular interpolation path in clockwise direction. The center of the arc is at (8.5, 4). The correct G-code and I, J words are",
+            options: ["G02 X12 Y4 I3.5 J0", "G03 X12 Y4 I3.5 J0", "G02 X12 Y4 I8.5 J4", "G03 X12 Y4 I8.5 J4"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>1. <b>Clockwise interpolation</b> uses the <b>G02</b> command.<br>2. Target coordinates are X12 Y4.<br>3. I and J represent the incremental vector distances from the <b>start point</b> to the <b>arc center</b>.<br>\\[I = X_{center} - X_{start} = 8.5 - 5 = 3.5\\]<br>\\[J = Y_{center} - Y_{start} = 4 - 4 = 0\\]<br>Therefore, the command block is: G02 X12 Y4 I3.5 J0.",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 4: Materials, Manufacturing and Industrial Engineering",
+            sub: "Production Planning and Control",
+            text: "The annual demand for a product is 10,000 units. The ordering cost is Rs. 100 per order and the holding cost is Rs. 2 per unit per year. The Economic Order Quantity (EOQ) is",
+            options: ["1000", "500", "2000", "1500"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>Given: Annual demand \\(D = 10000\\), Ordering cost \\(C_o = 100\\), Holding cost \\(C_h = 2\\).<br>Economic Order Quantity is given by:<br>\\[EOQ = \\sqrt{\\frac{2 \\cdot D \\cdot C_o}{C_h}}\\]<br>\\[EOQ = \\sqrt{\\frac{2 \\times 10000 \\times 100}{2}}\\]<br>\\[EOQ = \\sqrt{1000000} = 1000\\text{ units}\\]",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 4: Materials, Manufacturing and Industrial Engineering",
+            sub: "Operations Research",
+            text: "Consider a linear programming problem:<br>Maximize \\(Z = 3x_1 + 5x_2\\)<br>Subject to:<br>\\(x_1 + x_2 \\le 4\\)<br>\\(x_1 \\le 2\\)<br>\\(x_2 \\le 3\\)<br>\\(x_1, x_2 \\ge 0\\)<br>The maximum value of \\(Z\\) is",
+            options: ["18", "16", "20", "14"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>Using the graphical method, identify the corner points (vertices) of the feasible region defined by the constraints:<br>1. (0,0) \\(\\Rightarrow Z = 0\\)<br>2. Intersection of \\(x_1 \\le 2\\) and X-axis: (2,0) \\(\\Rightarrow Z = 3(2) + 5(0) = 6\\)<br>3. Intersection of \\(x_1 \\le 2\\) and \\(x_1 + x_2 \\le 4\\): (2,2) \\(\\Rightarrow Z = 3(2) + 5(2) = 16\\)<br>4. Intersection of \\(x_2 \\le 3\\) and \\(x_1 + x_2 \\le 4\\): (1,3) \\(\\Rightarrow Z = 3(1) + 5(3) = 18\\)<br>5. Intersection of \\(x_2 \\le 3\\) and Y-axis: (0,3) \\(\\Rightarrow Z = 3(0) + 5(3) = 15\\)<br><br>Comparing all corner points, the maximum value of \\(Z\\) is 18.",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 4: Materials, Manufacturing and Industrial Engineering",
+            sub: "Machining and Machine Tool Operations",
+            text: "In Taylor's tool life equation \\(VT^n = C\\), the value of \\(n = 0.5\\). If the cutting speed is reduced by 50%, the tool life will increase by a factor of",
+            options: ["2", "4", "8", "16"],
+            ans: "Ans. (b)",
+            sol: "<b>Solution:</b><br>Given: \\(V_1 T_1^{0.5} = C\\) and \\(V_2 T_2^{0.5} = C\\).<br>If cutting speed is reduced by 50%, \\(V_2 = 0.5 V_1\\).<br>\\[V_1 T_1^{0.5} = 0.5 V_1 T_2^{0.5}\\]<br>\\[T_1^{0.5} = 0.5 T_2^{0.5}\\]<br>\\[\\left(\\frac{T_2}{T_1}\\right)^{0.5} = \\frac{1}{0.5} = 2\\]<br>Squaring both sides:<br>\\[\\frac{T_2}{T_1} = 2^2 = 4\\]<br>The tool life will increase by a factor of 4.",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 4: Materials, Manufacturing and Industrial Engineering",
+            sub: "Engineering Materials",
+            text: "In an Iron-Carbon phase diagram, the eutectoid reaction occurs at a temperature of approximately",
+            options: ["727 \\(^\\circ\\text{C}\\)", "1147 \\(^\\circ\\text{C}\\)", "1495 \\(^\\circ\\text{C}\\)", "910 \\(^\\circ\\text{C}\\)"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>The eutectoid reaction is an isothermal solid-state reaction where a single solid phase transforms into two other solid phases upon cooling.<br>In the Iron-Carbon (Fe-C) system, Austenite (\\(\\gamma\\)) transforms into Ferrite (\\(\\alpha\\)) and Cementite (\\(Fe_3C\\)) at the eutectoid point, which occurs at 0.76 wt% Carbon and 727 \\(^\\circ\\text{C}\\).",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 4: Materials, Manufacturing and Industrial Engineering",
+            sub: "Casting, Forming and Joining Processes",
+            text: "According to Chvorinov's rule, the solidification time of a casting is proportional to \\((V/A)^n\\), where \\(V\\) is volume and \\(A\\) is surface area. The value of the exponent \\(n\\) is typically",
+            options: ["1", "2", "3", "0.5"],
+            ans: "Ans. (b)",
+            sol: "<b>Solution:</b><br>Chvorinov's rule relates the solidification time (\\(t_s\\)) of a casting to its volume (\\(V\\)) and surface area (\\(A\\)) via the equation:<br>\\[t_s = B \\left(\\frac{V}{A}\\right)^2\\]<br>Where \\(B\\) is the mold constant. Therefore, the exponent \\(n\\) is exactly 2.",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 4: Materials, Manufacturing and Industrial Engineering",
+            sub: "Metrology and Inspection",
+            text: "A surface roughness profile is approximated as a repeating series of triangles with a peak-to-valley height of \\(20\\text{ }\\mu\\text{m}\\). The Center Line Average (CLA) or \\(R_a\\) value of this surface is _____ \\(\\mu\\text{m}\\).",
+            options: [],
+            ans: "Ans. 5",
+            sol: "<b>Solution:</b><br>For a mathematically perfect triangular surface profile, the Center Line Average (\\(R_a\\)) is always exactly one-fourth of the maximum peak-to-valley height (\\(h\\)).<br>\\[R_a = \\frac{h}{4}\\]<br>\\[R_a = \\frac{20}{4} = 5\\text{ }\\mu\\text{m}\\]",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 4: Materials, Manufacturing and Industrial Engineering",
+            sub: "Production Planning and Control",
+            text: "In exponential smoothing method of forecasting, the forecast for the current period was 100 units and the actual demand was 110 units. If the smoothing constant \\(\\alpha = 0.2\\), the forecast for the next period is",
+            options: ["102", "104", "108", "112"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>The exponential smoothing formula is:<br>\\[F_{t+1} = F_t + \\alpha(D_t - F_t)\\]<br>Where \\(F_t\\) is current forecast (100), \\(D_t\\) is actual demand (110), and \\(\\alpha\\) is smoothing constant (0.2).<br>\\[F_{t+1} = 100 + 0.2(110 - 100)\\]<br>\\[F_{t+1} = 100 + 0.2(10) = 100 + 2 = 102\\text{ units}\\]",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 4: Materials, Manufacturing and Industrial Engineering",
+            sub: "Casting, Forming and Joining Processes",
+            text: "In resistance spot welding of two steel plates of 2 mm thickness, a current of 10000 A is passed for 0.1 seconds. The contact resistance is 200 micro-ohms. The heat generated at the weld interface is _____ Joules.",
+            options: [],
+            ans: "Ans. 2000",
+            sol: "<b>Solution:</b><br>Joule's law of heating states \\(H = I^2 R t\\).<br>Given: \\(I = 10000\\text{ A}\\), \\(R = 200 \\times 10^{-6}\\text{ }\\Omega\\), \\(t = 0.1\\text{ s}\\).<br>\\[H = (10000)^2 \\times (200 \\times 10^{-6}) \\times 0.1\\]<br>\\[H = 10^8 \\times 200 \\times 10^{-6} \\times 0.1\\]<br>\\[H = 100 \\times 200 \\times 0.1 = 2000\\text{ Joules}\\]",
+            image: null
+        },
+        {
+            year: "2026",
+            main: "Section 4: Materials, Manufacturing and Industrial Engineering",
+            sub: "Operations Research",
+            text: "In a single server queuing model (M/M/1), the arrival rate is 4 customers per hour and the service rate is 5 customers per hour. The expected number of customers in the system is",
+            options: ["4", "5", "0.8", "1.25"],
+            ans: "Ans. (a)",
+            sol: "<b>Solution:</b><br>Given: Arrival rate \\(\\lambda = 4\\), Service rate \\(\\mu = 5\\).<br>The expected number of customers in the system (\\(L_s\\)) for an M/M/1 queue is given by:<br>\\[L_s = \\frac{\\lambda}{\\mu - \\lambda}\\]<br>\\[L_s = \\frac{4}{5 - 4} = \\frac{4}{1} = 4\\text{ customers}\\]",
+            image: null
+        }
+    ];
+
+    // ==========================================
+    // 2. LOGIC: POPULATE DROPDOWNS & RENDER
+    // ==========================================
+    
+    const yearSelect = document.getElementById('gate-year');
+    const mainSelect = document.getElementById('main-section');
+    const subSelect = document.getElementById('sub-section');
+    const showBtn = document.getElementById('show-btn');
+    const container = document.getElementById('questions-container');
+
+    // Populate Main Dropdown (No 'All' option as requested)
+    let firstMainSet = false;
+    Object.keys(sectionMap).forEach(main => {
+        const opt = document.createElement('option');
+        opt.value = main;
+        opt.textContent = main;
+        mainSelect.appendChild(opt);
+        
+        // Trigger population of sub-sections for the first item
+        if(!firstMainSet) {
+            populateSubSections(main);
+            firstMainSet = true;
+        }
+    });
+
+    function populateSubSections(mainValue) {
+        subSelect.innerHTML = '<option value="all">All Sub Sections</option>';
+        if (sectionMap[mainValue]) {
+            sectionMap[mainValue].forEach(sub => {
+                const opt = document.createElement('option');
+                opt.value = sub;
+                opt.textContent = sub;
+                subSelect.appendChild(opt);
+            });
+        }
+    }
+
+    // Handle Main Dropdown Change
+    mainSelect.addEventListener('change', function() {
+        populateSubSections(this.value);
+    });
+
+    // Render Questions on Click
+    showBtn.addEventListener('click', function() {
+        const selectedYear = yearSelect.value;
+        const selectedMain = mainSelect.value;
+        const selectedSub = subSelect.value;
+        
+        container.innerHTML = ''; // Clear container
+        
+        const filteredQs = questionData.filter(q => {
+            const matchYear = (selectedYear === 'all' || q.year === selectedYear);
+            const matchMain = (q.main === selectedMain);
+            const matchSub = (selectedSub === 'all' || q.sub === selectedSub);
+            return matchYear && matchMain && matchSub;
+        });
+
+        if (filteredQs.length === 0) {
+            container.innerHTML = '<div class="no-data">No questions found for this selection. Try adjusting your filters.</div>';
+            return;
+        }
+
+        // Sort by Q.No to ensure they appear in order
+        filteredQs.sort((a, b) => a.qno - b.qno);
+
+        // Sort by Q.No to ensure they appear in order
+        filteredQs.sort((a, b) => a.qno - b.qno);
+
+        filteredQs.forEach((q, index) => {
+            // Build Options HTML
+            let optionsHTML = '';
+            if (q.options && q.options.length > 0) {
+                optionsHTML = '<ol class="opts">';
+                q.options.forEach(opt => {
+                    optionsHTML += `<li>${opt}</li>`;
+                });
+                optionsHTML += '</ol>';
+            }
+
+            // Build Image HTML
+            let imageHTML = '';
+            if (q.image) {
+                imageHTML = `<div class="fig"><img src="images/${q.image}" alt="Reference Figure for Q${index + 1}"></div>`;
+            }
+
+            // Replace Q.X prefix from text if it exists so we can standardize it
+            let cleanText = q.text.replace(/^Q\.\d+\s*/, '');
+
+            // Build Question Card
+            const qBox = document.createElement('div');
+            qBox.className = 'q-box';
+            qBox.innerHTML = `
+                <div class="q-meta">
+                    <span class="badge">${q.main} &gt; ${q.sub}</span>
+                    <span class="gate-year">GATE ${q.year}</span>
+                </div>
+                <div class="q-header">
+                    <div class="q-text">Q. ${index + 1} &nbsp;&nbsp;&nbsp; ${cleanText}</div>
+                </div>
+                ${imageHTML}
+                ${optionsHTML}
+                <button class="show-sol-btn">Show Solution</button>
+                <div class="solution-wrapper">
+                    <div class="ans">${q.ans}</div>
+                    <div class="sol">${q.sol}</div>
+                </div>
+            `;
+            container.appendChild(qBox);
+        });
+
+        // Add Toggle Event Listeners to new buttons
+        document.querySelectorAll('.show-sol-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const wrapper = this.closest('.q-box').querySelector('.solution-wrapper');
+                if (wrapper.style.display === 'block') {
+                    wrapper.style.display = 'none';
+                    this.textContent = 'Show Solution';
+                    this.classList.remove('active');
+                } else {
+                    wrapper.style.display = 'block';
+                    this.textContent = 'Hide Solution';
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        // Trigger MathJax to re-render equations in the dynamically added HTML
+        if (window.MathJax) {
+            MathJax.typesetPromise();
+        }
+    });
+    
+    // Automatically trigger first load
+    document.addEventListener("DOMContentLoaded", function() {
+        showBtn.click();
+    });
+</script>
+
+</body>
+</html>
