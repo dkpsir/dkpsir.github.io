@@ -91,9 +91,9 @@
             <div class="filter-group">
                 <label for="gate-year">Exam Year</label>
                 <select id="gate-year">
-                    <option value="all">All Years</option>
-                    <option value="2026" selected>GATE 2026</option>
-					<option value="2025" selected>GATE 2025</option>
+                    <option value="all" selected>All Years</option>
+                    <option value="2026">GATE 2026</option>
+					<option value="2025">GATE 2025</option>
                 </select>
             </div>
             
@@ -954,8 +954,6 @@
         // Sort by Q.No to ensure they appear in order
         filteredQs.sort((a, b) => a.qno - b.qno);
 
-        // Sort by Q.No to ensure they appear in order
-        filteredQs.sort((a, b) => a.qno - b.qno);
 
         filteredQs.forEach((q, index) => {
             // Build Options HTML
@@ -1021,10 +1019,7 @@
         }
     });
     
-    // Automatically trigger first load
-    document.addEventListener("DOMContentLoaded", function() {
-        showBtn.click();
-    });
+    
 </script>
 
 </body>
